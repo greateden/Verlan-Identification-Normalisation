@@ -1,0 +1,59 @@
+pair_id,variant,text,label,note
+1,verlan,Il sort avec une meuf sympa.,1,meuf→femme
+1,standard,Il sort avec une femme sympa.,0,meuf→femme
+2,verlan,Le keuf nous a arrêtés au feu.,1,keuf→flic
+2,standard,Le flic nous a arrêtés au feu.,0,keuf→flic
+3,verlan,C’était ouf hier soir à la teuf !,1,ouf→fou; teuf→fête
+3,standard,C’était fou hier soir à la fête !,0,ouf→fou; teuf→fête
+4,verlan,Ce mec est trop relou.,1,relou→lourd
+4,standard,Ce mec est trop lourd.,0,relou→lourd
+5,verlan,"Je trouve ça chelou, non ?",1,chelou→louche
+5,standard,"Je trouve ça louche, non ?",0,chelou→louche
+6,verlan,Il a mal à la teub.,1,teub→bite/pénis
+6,standard,Il a mal au pénis.,0,teub→bite/pénis
+7,verlan,On va pécho des billets au distributeur.,1,pécho→choper
+7,standard,On va choper des billets au distributeur.,0,pécho→choper
+8,verlan,Il est vénère aujourd’hui.,1,vénère→énervé
+8,standard,Il est énervé aujourd’hui.,0,vénère→énervé
+9,verlan,Ma reum cuisine ce soir.,1,reum→mère
+9,standard,Ma mère cuisine ce soir.,0,reum→mère
+10,verlan,Son reup bosse tard.,1,reup→père
+10,standard,Son père bosse tard.,0,reup→père
+11,verlan,Mon reuf arrive vers 20h.,1,reuf→frère
+11,standard,Mon frère arrive vers 20h.,0,reuf→frère
+12,verlan,C’est trop reuch ici.,1,reuch→cher
+12,standard,C’est trop cher ici.,0,reuch→cher
+13,verlan,Ce keum parle vite.,1,keum→mec
+13,standard,Ce mec parle vite.,0,keum→mec
+14,verlan,"Zarbi, cette histoire…",1,zarbi→bizarre
+14,standard,"Bizarre, cette histoire…",0,zarbi→bizarre
+15,verlan,Mets de la zicmu.,1,zicmu→musique
+15,standard,Mets de la musique.,0,zicmu→musique
+16,verlan,Cimer pour l’aide !,1,cimer→merci
+16,standard,Merci pour l’aide !,0,cimer→merci
+17,verlan,Il a crari qu’il était une star.,1,crari→croire (familier)
+17,standard,Il a cru qu’il était une star.,0,crari→croire (familier)
+18,verlan,Il est chanmé ce son.,1,chanmé→méchant (sens positif)
+18,standard,Il est méchant ce son. (génial),0,chanmé→méchant (sens positif)
+19,verlan,On bouge à Paname ce week-end.,1,Paname→Paris (argot)
+19,standard,On bouge à Paris ce week-end.,0,Paname→Paris (argot)
+20,verlan,Ce film est naze de ouf.,1,ouf (intensif)
+20,standard,Ce film est extrêmement nul.,0,ouf (intensif)
+21,verlan,J’ai croqué un grec avec la meuf.,1,"grec (argot), meuf"
+21,standard,J’ai mangé un sandwich grec avec la femme.,0,"grec (argot), meuf"
+22,verlan,Il fait le ouin-ouin.,1,ouin-ouin→pleurnicher
+22,standard,Il pleurniche.,0,ouin-ouin→pleurnicher
+23,verlan,On s’est kéné direct.,1,kéné→niqué
+23,standard,On s’est niqué direct. (vulgaire),0,kéné→niqué
+24,verlan,C’est ripou cette affaire.,1,ripou→pourri
+24,standard,Cette affaire est pourrie.,0,ripou→pourri
+25,verlan,"T’as capté ou pas, gros ?",1,capté→compris (argot)
+25,standard,Tu as compris ou pas ?,0,capté→compris (argot)
+26,verlan,On se capte après la fac.,1,capter→se retrouver (argot)
+26,standard,On se retrouve après la fac.,0,capter→se retrouver (argot)
+27,verlan,Il a tchoin dans la tête.,1,tchoin→fille facile (argot récent)
+27,standard,Il pense aux filles faciles.,0,tchoin→fille facile (argot récent)
+28,verlan,Il va se sape en noir.,1,"sape→habiller (argot, SAPE)"
+28,standard,Il va s’habiller en noir.,0,"sape→habiller (argot, SAPE)"
+29,verlan,On s’est pépouze tout le week-end.,1,pépouze→tranquille
+29,standard,On est restés tranquilles tout le week-end.,0,pépouze→tranquille
