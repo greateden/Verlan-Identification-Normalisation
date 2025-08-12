@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments
 from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer
 
-BASE_MODEL = "./Mistral-7B-Instruct-v0.2"
+BASE_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 NEW_TOK_FILE = "GazetteerEntries.xlsx"
 
 # 1) tokenizer
@@ -60,7 +60,13 @@ args = TrainingArguments(
 )
 
 print("Starting training … 🏎️")
-trainer = SFTTrainer(model=model, train_dataset=ds, tokenizer=tok, args=args)
+trainer = SFTTrainer(
+    model=model,
+    train_dataset=ds,
+    tokenizer=tok,
+    args=args,
+    dataset_text_field="text"
+)
 trainer.train()
 trainer.model.save_pretrained("mistral-verlan-conv")
 print("Convert model done.")
