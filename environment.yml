@@ -1,19 +1,26 @@
 name: verlan
 channels:
-  - defaults
+  - pytorch
+  - nvidia
   - conda-forge
+  - defaults
 dependencies:
   - python=3.10
+  # 用 conda 安裝 GPU 版 PyTorch（CUDA 11.8）
+  - pytorch=2.2.2
+  - pytorch-cuda=11.8
   - pip
   - pip:
-      - torch==2.2.2+cu118 --index-url https://download.pytorch.org/whl/cu118
       - transformers==4.40.2
       - datasets==2.19.0
       - peft==0.11.1
       - trl==0.8.6
       - bitsandbytes==0.43.1
+      - accelerate==0.30.1
       - pandas==2.2.2
       - numpy==1.26.4
       - scikit-learn==1.4.2
       - joblib==1.4.0
       - openpyxl==3.1.2
+      - sentencepiece==0.1.99
+      - huggingface_hub==0.23.2
