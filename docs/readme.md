@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 54 days, 05 hours, 40 minutes
+⏳ Time remaining: 54 days, 05 hours, 19 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -70,12 +70,13 @@ project-root/
 │   ├── convert/
 │   │   ├── 2025-08-20/
 │   │   │   └── mistral-verlan-conv/
-│   │   │       └── .gitkeep
-│   │   └── latest -> 2025-08-20
+│   │   └── latest/
+│   │       └── mistral-verlan-conv/
 │   └── detect/
 │       ├── 2025-08-24/
 │       │   └── lr_head.joblib
-│       └── latest -> 2025-08-24
+│       └── latest/
+│           └── lr_head.joblib
 ├── scripts/
 │   ├── ci_update_docs.py
 │   └── generate-tree.py
