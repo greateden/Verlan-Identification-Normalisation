@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Inference for Verlan → Standard French conversion (with resized vocab)
-- 與訓練保持一致：先擴充 tokenizer（讀 GazetteerEntries.xlsx），再 resize embeddings，再載入 LoRA
+- To match training: first expand the tokenizer (read GazetteerEntries.xlsx), then resize embeddings, then load the LoRA weights
 """
 
 import os, sys, argparse
@@ -46,7 +46,7 @@ def load_and_expand_tokenizer():
     return tok, added
 
 def build_model(adapter_dir: str = ADAPTER_DIR):
-    # 4-bit + BF16，與訓練一致
+    # 4-bit + BF16, same as training
     bnb_cfg = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_compute_dtype=torch.bfloat16,
@@ -54,10 +54,10 @@ def build_model(adapter_dir: str = ADAPTER_DIR):
         bnb_4bit_quant_type="nf4",
     )
 
-    # 先載 tokenizer 並擴充
+    # Load tokenizer first and expand
     tok, _ = load_and_expand_tokenizer()
 
-    # 載 base，再把 embeddings 調整到與 tokenizer 一致（重要：在載入 LoRA 前）
+    # Load base model, then adjust embeddings to match the tokenizer (important: before loading LoRA)
     try:
         base = AutoModelForCausalLM.from_pretrained(
             BASE_MODEL,
@@ -74,10 +74,10 @@ def build_model(adapter_dir: str = ADAPTER_DIR):
             torch_dtype=torch.bfloat16,
         )
 
-    # 將 base 的 embedding / lm_head resize 到 tokenizer 長度（pad_to_multiple_of=8 與訓練一致）
+    # Resize base model's embedding / lm_head to tokenizer length (pad_to_multiple_of=8 as in training)
     base.resize_token_embeddings(len(tok), pad_to_multiple_of=8)
 
-    # 載入 LoRA 權重（此時 shape 就能對上）
+    # Load LoRA weights (shapes will match now)
     model = PeftModel.from_pretrained(base, adapter_dir)
     model.eval()
     return model, tok
@@ -112,7 +112,7 @@ def main():
     model, tok = build_model(args.adapter)
 
     if args.text is None:
-        print("請用 --text 測一條句子，或擴充腳本支援批量。")
+        print("Please use --text to test a single sentence, or extend the script to support batches.")
         sys.exit(0)
 
     print(generate_once(model, tok, args.text))

@@ -199,7 +199,7 @@ def main():
     if args.text:
         pred_raw, p1 = predict_proba([args.text], args.threshold, args.max_len, args.batch_size)
         toks = tokenize_basic(args.text)
-        allow = has_fuzzy_verlan(toks, VSET)  # 若你想先只做精确匹配，把这行函数改成“只精确不模糊”，我也可以给你一版
+        allow = has_fuzzy_verlan(toks, VSET)  # If you want exact matching only, replace this with a version that skips fuzzy matching; I can provide one
         pred_final = int(pred_raw[0] == 1 and allow)
 
         if args.gate_debug:

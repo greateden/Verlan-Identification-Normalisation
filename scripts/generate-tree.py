@@ -1,4 +1,4 @@
-## 🐍 Python Script（自動生成目錄樹）
+## 🐍 Python Script (automatically generates directory tree)
 # generate-tree.py
 # Python 3.10+
 # Dependencies: none (built-in only)

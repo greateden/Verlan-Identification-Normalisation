@@ -208,7 +208,7 @@ def main():
     if len(cand):
         best_prec_row = cand.loc[cand["recall_1"].idxmax()]
     else:
-        # 若没有任何阈值达到目标 precision，则选择 precision 最高者
+        # If no threshold reaches the target precision, choose the one with the highest precision
         best_prec_row = df.loc[df["precision_1"].idxmax()]
 
     print("\nRecommended thresholds:")

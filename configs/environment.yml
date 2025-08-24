@@ -6,7 +6,7 @@ channels:
   - defaults
 dependencies:
   - python=3.10
-  # 用 conda 安裝 GPU 版 PyTorch（CUDA 11.8）
+  # Install the GPU version of PyTorch (CUDA 11.8) via conda
   - pytorch=2.2.2
   - pytorch-cuda=11.8
   - pip

@@ -6,7 +6,7 @@ Sentence-level Verlan detector
 - Pooling: mean over valid tokens (attention mask), then L2-normalize
 - Works on NVIDIA A4000 (16GB)
 
-依賴版本建議：
+Recommended dependency versions:
 - torch>=2.2
 - transformers>=4.41
 - bitsandbytes>=0.43
@@ -27,18 +27,18 @@ from sklearn.metrics import classification_report, f1_score
 
 from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
 
-# ------------------------ 可調參數 ------------------------
+# ------------------------ Tunable parameters ------------------------
 MODEL_ID = "Salesforce/SFR-Embedding-Mistral"
 SEED = 42
 
-# 預設 batch / 長度（可用命令列覆蓋）
+# Default batch size and length (can be overridden via CLI)
 DEF_BATCH = 32
 DEF_MAXLEN = 512
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
-# ------------------------ 穩定性/效率設置 ------------------------
+# ------------------------ Stability/efficiency settings ------------------------
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:128,garbage_collection_threshold:0.6")
 torch.backends.cuda.matmul.allow_tf32 = True
@@ -54,19 +54,19 @@ def load_data():
     sent_path = RAW_DIR / "Sentences.xlsx"
     gaz_path = RAW_DIR / "GazetteerEntries.xlsx"
 
-    # 友善的存在性檢查與除錯輸出（註解比例 >30%）
+    # Friendly existence check and debug output (comment ratio >30%)
     missing = [p for p in [sent_path, gaz_path] if not p.exists()]
     if missing:
         msg = (
-            "❌ 無法找到以下必要檔案：\n"
+            "❌ Could not find the following required files:\n"
             + "\n".join(f" - {p}" for p in missing)
-            + f"\n\n目前工作目錄（cwd）= {Path.cwd()}\n"
-            f"detect.py 解析的 PROJECT_ROOT = {PROJECT_ROOT}\n"
-            "請確認路徑或改用 `python -m src.detect` 從專案根執行。"
+            + f"\n\nCurrent working directory (cwd) = {Path.cwd()}\n"
+            f"PROJECT_ROOT resolved by detect.py = {PROJECT_ROOT}\n"
+            "Please check the paths or run `python -m src.detect` from the project root."
         )
         raise FileNotFoundError(msg)
 
-    # 真正讀檔
+    # Actual file reading
     sent_df = pd.read_excel(sent_path)          # Sentences.xlsx
     lex  = pd.read_excel(gaz_path)           # GazetteerEntries.xlsx
     if "label" not in sent_df.columns:
@@ -85,7 +85,7 @@ def load_data():
     return train_df.reset_index(drop=True), val_df.reset_index(drop=True), test_df.reset_index(drop=True)
 
 def load_encoder():
-    # 4-bit 推理 + BF16 計算；有裝 flash-attn2 就自動啟用，沒有則回退 SDPA
+    # 4-bit inference + BF16 compute; use flash-attn2 if installed, otherwise fall back to SDPA
     bnb_cfg = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_compute_dtype=torch.bfloat16,
@@ -116,7 +116,7 @@ def load_encoder():
 
 @torch.inference_mode()
 def embed_texts(texts: pd.Series, tok, model, batch_size=DEF_BATCH, max_len=DEF_MAXLEN):
-    """Mean-pool with attention mask, then L2-normalize. 全流程在 GPU 計算。"""
+    """Mean-pool with attention mask, then L2-normalize. Entire pipeline runs on GPU."""
     device = next(model.parameters()).device
     embs = []
     total = len(texts)
@@ -127,7 +127,7 @@ def embed_texts(texts: pd.Series, tok, model, batch_size=DEF_BATCH, max_len=DEF_
             return_tensors="pt"
         ).to(device)
 
-        # BF16 自動混合精度
+        # BF16 automatic mixed precision
         with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
             out = model(**enc)
             H = out.last_hidden_state                         # [B, T, D] (GPU)
@@ -160,7 +160,7 @@ def main():
     y_val = val_df["label"].values
 
     print("Training classifier …")
-    # class_weight 平衡，max_iter 拉高；lbfgs 對中小型樣本+連續特徵表現穩
+    # class_weight balanced with higher max_iter; lbfgs is stable for medium-sized samples with continuous features
     clf = LogisticRegression(
         max_iter=2000,
         class_weight="balanced",
