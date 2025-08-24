@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 54 days, 05 hours, 17 minutes
+⏳ Time remaining: 54 days, 04 hours, 56 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -65,7 +65,10 @@ project-root/
 │       ├── standard_only.txt
 │       └── verlan_only.txt
 ├── docs/
-│   └── readme.md
+│   ├── readme.md
+│   └── results/
+│       ├── prob_dist_post.png
+│       └── prob_dist_pre.png
 ├── models/
 │   ├── convert/
 │   │   ├── 2025-08-20/
