@@ -4,8 +4,9 @@ Evaluate thresholds on validation split for the current detector
 - Encoder: Salesforce/SFR-Embedding-Mistral (4-bit, BF16)
 - Classifier: verlan-detector/lr_head.joblib
 - Rebuilds train/val/test with SEED=42 to match training split
+- Supports optional score calibration (temperature, Platt, isotonic)
 - Saves CSV with metrics for each threshold, and prints two recommended thresholds:
-  (a) best F1 on class 1; (b) max recall with precision >= target
+  (a) best score by selected metric; (b) max recall with precision >= target
 
 Outputs:
   verlan-detector/threshold_eval.csv
@@ -28,6 +29,11 @@ from sklearn.metrics import (
     average_precision_score,
 )
 import joblib
+from calibration import (
+    temperature_scale,
+    platt_scale,
+    isotonic_calibration,
+)
 
 MODEL_ID   = "Salesforce/SFR-Embedding-Mistral"
 HEAD_PATH  = "verlan-detector/lr_head.joblib"
@@ -112,6 +118,18 @@ def main():
     ap.add_argument("--prec_target", type=float, default=0.80)
     ap.add_argument("--batch_size", type=int, default=DEF_BATCH)
     ap.add_argument("--max_len", type=int, default=DEF_MAXLEN)
+    ap.add_argument(
+        "--calibration",
+        choices=["none", "temperature", "platt", "isotonic"],
+        default="none",
+        help="Optional score calibration method.",
+    )
+    ap.add_argument(
+        "--opt_metric",
+        choices=["f1", "youden"],
+        default="f1",
+        help="Metric for selecting the best threshold.",
+    )
     args = ap.parse_args()
 
     train_df, val_df, _ = load_data()
@@ -123,6 +141,17 @@ def main():
     X_val = embed_texts(val_df["text"].tolist(), tok, enc, args.max_len, args.batch_size)
     y_val = val_df["label"].to_numpy()
     p1 = clf.predict_proba(X_val)[:, 1]
+
+    # Optional calibration on validation scores
+    if args.calibration == "temperature":
+        p1, temp = temperature_scale(p1, y_val)
+        print(f"Applied temperature scaling with T={temp:.4f}")
+    elif args.calibration == "platt":
+        p1 = platt_scale(p1, y_val)
+        print("Applied Platt scaling")
+    elif args.calibration == "isotonic":
+        p1 = isotonic_calibration(p1, y_val)
+        print("Applied isotonic calibration")
 
     # Global, threshold-free scores
     try:
@@ -137,18 +166,28 @@ def main():
     rows = []
     for th in thresholds:
         pred = (p1 >= th).astype(int)
-        prec, rec, f1, _ = precision_recall_fscore_support(y_val, pred, average=None, labels=[0,1])
+        prec, rec, f1, _ = precision_recall_fscore_support(
+            y_val, pred, average=None, labels=[0, 1]
+        )
         p_pos, r_pos, f_pos = float(prec[1]), float(rec[1]), float(f1[1])
         acc = (pred == y_val).mean()
-        tn, fp, fn, tp = confusion_matrix(y_val, pred, labels=[0,1]).ravel()
-        rows.append({
-            "threshold": th,
-            "precision_1": p_pos,
-            "recall_1": r_pos,
-            "f1_1": f_pos,
-            "accuracy": acc,
-            "tp": int(tp), "fp": int(fp), "tn": int(tn), "fn": int(fn),
-        })
+        tn, fp, fn, tp = confusion_matrix(y_val, pred, labels=[0, 1]).ravel()
+        tpr = tp / (tp + fn + 1e-12)
+        fpr = fp / (fp + tn + 1e-12)
+        rows.append(
+            {
+                "threshold": th,
+                "precision_1": p_pos,
+                "recall_1": r_pos,
+                "f1_1": f_pos,
+                "youden": tpr - fpr,
+                "accuracy": acc,
+                "tp": int(tp),
+                "fp": int(fp),
+                "tn": int(tn),
+                "fn": int(fn),
+            }
+        )
 
     df = pd.DataFrame(rows)
     out_csv = "verlan-detector/threshold_eval.csv"
@@ -156,7 +195,8 @@ def main():
     print(f"Saved: {out_csv}")
 
     # Recommendations
-    best_f1_row = df.loc[df["f1_1"].idxmax()]
+    metric_col = "f1_1" if args.opt_metric == "f1" else "youden"
+    best_row = df.loc[df[metric_col].idxmax()]
 
     cand = df[df["precision_1"] >= args.prec_target]
     if len(cand):
@@ -166,12 +206,17 @@ def main():
         best_prec_row = df.loc[df["precision_1"].idxmax()]
 
     print("\nRecommended thresholds:")
-    print(f"- Best F1 on class 1: threshold={best_f1_row['threshold']:.2f}  "
-          f"P={best_f1_row['precision_1']:.3f} R={best_f1_row['recall_1']:.3f} F1={best_f1_row['f1_1']:.3f}  "
-          f"Acc={best_f1_row['accuracy']:.3f}  TP/FP/TN/FN={int(best_f1_row['tp'])}/{int(best_f1_row['fp'])}/{int(best_f1_row['tn'])}/{int(best_f1_row['fn'])}")
-    print(f"- Max R with P≥{args.prec_target:.2f}: threshold={best_prec_row['threshold']:.2f}  "
-          f"P={best_prec_row['precision_1']:.3f} R={best_prec_row['recall_1']:.3f} F1={best_prec_row['f1_1']:.3f}  "
-          f"Acc={best_prec_row['accuracy']:.3f}  TP/FP/TN/FN={int(best_prec_row['tp'])}/{int(best_prec_row['fp'])}/{int(best_prec_row['tn'])}/{int(best_prec_row['fn'])}")
+    print(
+        f"- Best {args.opt_metric}: threshold={best_row['threshold']:.2f}  "
+        f"P={best_row['precision_1']:.3f} R={best_row['recall_1']:.3f} "
+        f"F1={best_row['f1_1']:.3f} Y={best_row['youden']:.3f}  "
+        f"Acc={best_row['accuracy']:.3f}  TP/FP/TN/FN={int(best_row['tp'])}/{int(best_row['fp'])}/{int(best_row['tn'])}/{int(best_row['fn'])}"
+    )
+    print(
+        f"- Max R with P≥{args.prec_target:.2f}: threshold={best_prec_row['threshold']:.2f}  "
+        f"P={best_prec_row['precision_1']:.3f} R={best_prec_row['recall_1']:.3f} F1={best_prec_row['f1_1']:.3f}  "
+        f"Acc={best_prec_row['accuracy']:.3f}  TP/FP/TN/FN={int(best_prec_row['tp'])}/{int(best_prec_row['fp'])}/{int(best_prec_row['tn'])}/{int(best_prec_row['fn'])}"
+    )
     print("\nTip: Use detect_infer.py with --threshold <value above>.")
 
 if __name__ == "__main__":
