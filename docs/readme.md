@@ -6,6 +6,16 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 ---
 
+## ⏳ Submission Countdown (NZT)
+
+<!-- DUE:START -->
+```text
+(countdown will be auto-inserted here)
+```
+<!-- DUE:END -->
+
+---
+
 ## 🎯 Project Goals
 
 1. **Automatic detection** of verlan tokens in contemporary French text.  
@@ -28,6 +38,8 @@ Target venues: **VarDial 2026 (ACL)** or **TALN 2025**.
 ---
 
 ## 📂 Repository Structure
+
+<!-- TREE:START -->
 
 ```text
 project-root/
@@ -63,8 +75,9 @@ project-root/
     ├── infer.py
     └── testing.py
 ```
+<!-- TREE:END -->
 
-To update:
+To update manually:
 ```text
 python generate-tree.py > repo_tree.txt
 ```

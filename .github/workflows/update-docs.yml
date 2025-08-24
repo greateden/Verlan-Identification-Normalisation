@@ -1,0 +1,42 @@
+name: Update README (Countdown + Repo Tree)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 */6 * * *"   # 每 6 小時跑一次，倒數會跟著刷新（UTC）
+
+permissions:
+  contents: write
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run updater (NZT countdown + tree)
+        run: |
+          python scripts/ci_update_docs.py --root docs/readme.md --base-dir .
+
+      - name: Commit changes if any
+        run: |
+          set -e
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/readme.md
+            git commit -m "chore(docs): auto-update countdown & repo tree [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
