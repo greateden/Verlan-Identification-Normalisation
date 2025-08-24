@@ -18,6 +18,8 @@ import os, random, joblib, argparse
 import pandas as pd
 import numpy as np
 import torch
+from pathlib import Path
+import sys
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -33,6 +35,9 @@ SEED = 42
 DEF_BATCH = 32
 DEF_MAXLEN = 512
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+RAW_DIR = PROJECT_ROOT / "data" / "raw"
+
 # ------------------------ 穩定性/效率設置 ------------------------
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:128,garbage_collection_threshold:0.6")
@@ -43,8 +48,27 @@ random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
 
 def load_data():
     print("Loading data …")
-    sent_df = pd.read_excel("data/raw/Sentences.xlsx")
-    lex = pd.read_excel("data/raw/GazetteerEntries.xlsx")
+    """
+    Load datasets from data/raw regardless of current working directory.
+    """
+    sent_path = RAW_DIR / "Sentences.xlsx"
+    gaz_path = RAW_DIR / "GazetteerEntries.xlsx"
+
+    # 友善的存在性檢查與除錯輸出（註解比例 >30%）
+    missing = [p for p in [sent_path, gaz_path] if not p.exists()]
+    if missing:
+        msg = (
+            "❌ 無法找到以下必要檔案：\n"
+            + "\n".join(f" - {p}" for p in missing)
+            + f"\n\n目前工作目錄（cwd）= {Path.cwd()}\n"
+            f"detect.py 解析的 PROJECT_ROOT = {PROJECT_ROOT}\n"
+            "請確認路徑或改用 `python -m src.detect` 從專案根執行。"
+        )
+        raise FileNotFoundError(msg)
+
+    # 真正讀檔
+    sent_df = pd.read_excel(sent_path)          # Sentences.xlsx
+    lex  = pd.read_excel(gaz_path)           # GazetteerEntries.xlsx
     if "label" not in sent_df.columns:
         vset = set(lex["verlan_form"].dropna().astype(str).str.lower().tolist())
         def has_verlan(s: str) -> int:
