@@ -1,5 +1,5 @@
 ## 🐍 Python Script（自動生成目錄樹）
-# update_tree.py
+# generate-tree.py
 # Python 3.10+
 # Dependencies: none (built-in only)
 
