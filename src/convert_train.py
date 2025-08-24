@@ -38,7 +38,7 @@ RAW_DIR = PROJECT_ROOT / "data" / "raw"
 PROC_DIR = PROJECT_ROOT / "data" / "processed"
 NEW_TOK_FILE = RAW_DIR / "GazetteerEntries.xlsx"   # your custom lexicon (verlan_form)
 CSV_FILE     = PROC_DIR / "verlan_pairs.csv"        # training alignment data (src, tgt)
-OUT_DIR      = PROJECT_ROOT / "mistral-verlan-conv"
+OUT_DIR      = PROJECT_ROOT / "models" / "convert" / "latest" / "mistral-verlan-conv"
 MAX_SEQ_LEN  = 768                       # For 16GB VRAM, 512~1024 is recommended; 768 is a compromise
 SEED         = 42
 

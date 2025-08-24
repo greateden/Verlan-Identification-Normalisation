@@ -223,7 +223,7 @@ def main():
         f"P={best_prec_row['precision_1']:.3f} R={best_prec_row['recall_1']:.3f} F1={best_prec_row['f1_1']:.3f}  "
         f"Acc={best_prec_row['accuracy']:.3f}  TP/FP/TN/FN={int(best_prec_row['tp'])}/{int(best_prec_row['fp'])}/{int(best_prec_row['tn'])}/{int(best_prec_row['fn'])}"
     )
-    print("\nTip: Use detect_infer.py with --threshold <value above>.")
+    print("\nTip: Update `threshold` in configs/detect.yaml for detect_infer.py.")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,5 @@
+threshold: 0.50
+use_lexicon_gate: true
+model_dir: models/detect/latest
+encoder_id: Salesforce/SFR-Embedding-Mistral
+batch_size: 32

@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Verlan sentence detector inference (with lexicon gate + higher default threshold)
+Verlan sentence detector inference (with optional lexicon gate)
 - Encoder: Salesforce/SFR-Embedding-Mistral (4-bit, BF16)
-- Classifier: verlan-detector/lr_head.joblib
+- Classifier: models/detect/latest/lr_head.joblib
 - Hybrid decision: (proba >= threshold) AND (lexicon/fuzzy match) -> 1, else 0
 - Batch outputs include gate_allow and pred_raw for auditing.
 
 Usage examples:
   # Single:
-  python detect_infer.py --text "il a fumé un bédo avec ses rebeus" --threshold 0.8
+  python detect_infer.py --text "il a fumé un bédo avec ses rebeus" --config configs/detect.yaml
 
   # Batch TXT (one per line):
-  python detect_infer.py --infile samples.txt --outfile preds.csv --threshold 0.8
+  python detect_infer.py --infile samples.txt --outfile preds.csv --config configs/detect.yaml
 
   # Batch XLSX/CSV (reads 'text' column by default):
-  python detect_infer.py --infile Sentences.xlsx --xlsx --threshold 0.8
+  python detect_infer.py --infile Sentences.xlsx --xlsx --config configs/detect.yaml
 """
 
 import os, sys, argparse, re
@@ -22,6 +22,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
+import yaml
 from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
 import joblib
 from unidecode import unidecode
@@ -29,10 +30,10 @@ import warnings
 warnings.filterwarnings("ignore", message="`resume_download` is deprecated")
 warnings.filterwarnings("ignore", message="The `use_auth_token` argument is deprecated")
 
-MODEL_ID  = "Salesforce/SFR-Embedding-Mistral"
+MODEL_ID = "Salesforce/SFR-Embedding-Mistral"
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
-MODEL_DIR = PROJECT_ROOT / "verlan-detector"
+MODEL_DIR = PROJECT_ROOT / "models" / "detect" / "latest"
 HEAD_PATH = MODEL_DIR / "lr_head.joblib"
 
 # --- Runtime knobs for stability/speed on A4000 ---
@@ -119,7 +120,7 @@ def has_fuzzy_verlan(tokens, vset: set, max_edit: int = 1) -> bool:
 VSET = load_verlan_set()
 
 # -------------- Encoder (4-bit + BF16) --------------
-def load_encoder():
+def load_encoder(model_id: str = MODEL_ID):
     """
     Load the embedding model in 4-bit with BF16 compute.
     If FlashAttention-2 is not available, it falls back to SDPA automatically.
@@ -130,18 +131,18 @@ def load_encoder():
         bnb_4bit_use_double_quant=True,
         bnb_4bit_quant_type="nf4",
     )
-    tok = AutoTokenizer.from_pretrained(MODEL_ID)
+    tok = AutoTokenizer.from_pretrained(model_id)
     tok.padding_side = "right"
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     try:
         model = AutoModel.from_pretrained(
-            MODEL_ID, quantization_config=bnb, device_map="auto",
+            model_id, quantization_config=bnb, device_map="auto",
             torch_dtype=torch.bfloat16, attn_implementation="flash_attention_2",
         )
     except Exception:
         model = AutoModel.from_pretrained(
-            MODEL_ID, quantization_config=bnb, device_map="auto",
+            model_id, quantization_config=bnb, device_map="auto",
             torch_dtype=torch.bfloat16,
         )
     model.eval()
@@ -169,13 +170,20 @@ def embed_texts(texts, tok, model, max_len=512, batch_size=64):
         out_list.append(pooled.detach().float().cpu().numpy())
     return np.vstack(out_list)
 
-def predict_proba(texts, threshold=0.8, max_len=512, batch_size=64):
+def predict_proba(
+    texts,
+    threshold=0.8,
+    max_len=512,
+    batch_size=64,
+    model_id: str = MODEL_ID,
+    head_path: Path = HEAD_PATH,
+):
     """
     Get probabilities and raw predictions (before lexicon gate).
     threshold: decision threshold for raw classifier (default 0.80 as per "B").
     """
-    tok, enc = load_encoder()
-    clf = joblib.load(HEAD_PATH)
+    tok, enc = load_encoder(model_id)
+    clf = joblib.load(head_path)
     X = embed_texts(texts, tok, enc, max_len=max_len, batch_size=batch_size)
     p1 = clf.predict_proba(X)[:, 1]
     pred_raw = (p1 >= threshold).astype(int)
@@ -186,20 +194,40 @@ def main():
     ap.add_argument("--text", default=None, help="Single input sentence")
     ap.add_argument("--infile", default=None, help="Batch file: .txt / .csv / .xlsx")
     ap.add_argument("--sheet", default=None, help="Sheet name for .xlsx (optional)")
-    ap.add_argument("--column", default="text", help="Text column name for CSV/XLSX (default: 'text')")
+    ap.add_argument(
+        "--column", default="text", help="Text column name for CSV/XLSX (default: 'text')"
+    )
     ap.add_argument("--outfile", default=None, help="Output file (.txt/.csv/.xlsx)")
-    ap.add_argument("--threshold", type=float, default=0.8, help="Classifier threshold (default: 0.80)")
+    ap.add_argument("--threshold", type=float, default=None, help="Override threshold")
     ap.add_argument("--max_len", type=int, default=512)
-    ap.add_argument("--batch_size", type=int, default=64)
+    ap.add_argument("--batch_size", type=int, default=None, help="Override batch size")
     ap.add_argument("--xlsx", action="store_true", help="Force Excel I/O")
-    ap.add_argument("--gate_debug", action="store_true", help="Print raw pred and lexicon gate decision in single-sentence mode")
+    ap.add_argument(
+        "--gate_debug",
+        action="store_true",
+        help="Print raw pred and lexicon gate decision in single-sentence mode",
+    )
+    ap.add_argument("--config", default=PROJECT_ROOT / "configs" / "detect.yaml")
+    ap.add_argument("--no_gate", action="store_true", help="Disable lexicon gate")
     args = ap.parse_args()
+
+    with open(args.config) as f:
+        cfg = yaml.safe_load(f)
+
+    threshold = args.threshold if args.threshold is not None else cfg.get("threshold", 0.5)
+    batch_size = args.batch_size if args.batch_size is not None else cfg.get("batch_size", 64)
+    encoder_id = cfg.get("encoder_id", MODEL_ID)
+    model_dir = Path(cfg.get("model_dir", MODEL_DIR))
+    head_path = model_dir / "lr_head.joblib"
+    use_gate = cfg.get("use_lexicon_gate", True) and not args.no_gate
 
     # ---- Single sentence path ----
     if args.text:
-        pred_raw, p1 = predict_proba([args.text], args.threshold, args.max_len, args.batch_size)
+        pred_raw, p1 = predict_proba(
+            [args.text], threshold, args.max_len, batch_size, encoder_id, head_path
+        )
         toks = tokenize_basic(args.text)
-        allow = has_fuzzy_verlan(toks, VSET)  # If you want exact matching only, replace this with a version that skips fuzzy matching; I can provide one
+        allow = has_fuzzy_verlan(toks, VSET) if use_gate else True
         pred_final = int(pred_raw[0] == 1 and allow)
 
         if args.gate_debug:
@@ -233,14 +261,14 @@ def main():
         sys.exit(1)
 
     texts = df[args.column].astype(str).tolist()
-    pred_raw, p1 = predict_proba(texts, args.threshold, args.max_len, args.batch_size)
+    pred_raw, p1 = predict_proba(texts, threshold, args.max_len, batch_size, encoder_id, head_path)
 
     # Apply lexicon gate per line
     gate_allow = []
     pred_final = []
     for s, r in zip(texts, pred_raw):
         toks = tokenize_basic(s)
-        allow = has_fuzzy_verlan(toks, VSET)
+        allow = has_fuzzy_verlan(toks, VSET) if use_gate else True
         gate_allow.append(int(bool(allow)))
         pred_final.append(int(r == 1 and allow))
 
