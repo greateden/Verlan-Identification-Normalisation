@@ -43,8 +43,8 @@ random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
 
 def load_data():
     print("Loading data …")
-    sent_df = pd.read_excel("Sentences.xlsx")
-    lex = pd.read_excel("GazetteerEntries.xlsx")
+    sent_df = pd.read_excel("data/raw/Sentences.xlsx")
+    lex = pd.read_excel("data/raw/GazetteerEntries.xlsx")
     if "label" not in sent_df.columns:
         vset = set(lex["verlan_form"].dropna().astype(str).str.lower().tolist())
         def has_verlan(s: str) -> int:

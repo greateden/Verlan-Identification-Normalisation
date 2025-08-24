@@ -37,7 +37,7 @@ torch.backends.cuda.matmul.allow_tf32 = True
 torch.set_float32_matmul_precision("high")
 
 # ---------------- Lexicon gate utilities ----------------
-def load_verlan_set(xlsx_path: str = "GazetteerEntries.xlsx") -> set:
+def load_verlan_set(xlsx_path: str = "data/raw/GazetteerEntries.xlsx") -> set:
     """
     Load verlan surface forms into a lowercase set.
     If the gazetteer is missing, return an empty set (gate will become stricter).
