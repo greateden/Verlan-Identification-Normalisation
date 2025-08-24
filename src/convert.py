@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 Verlan Conversion SFT on Mistral-7B (A4000 16GB Optimized)
-- 量化：4-bit NF4  (BitsAndBytesConfig)
-- LoRA：B 檔（含 q/k/v/o + gate_proj + up_proj + down_proj）
-- 訓練參數：A 檔（安全穩定）
-- 其他：packing=True、max_seq_length=768、TF32 開啟、右側 padding、pad_to_multiple_of=8
+- Quantization: 4-bit NF4 (BitsAndBytesConfig)
+- LoRA: file B (includes q/k/v/o + gate_proj + up_proj + down_proj)
+- Training args: file A (safe and stable)
+- Others: packing=True, max_seq_length=768, TF32 enabled, right-side padding, pad_to_multiple_of=8
 
-測過環境（參考）：transformers>=4.41, peft>=0.11, trl>=0.9, bitsandbytes>=0.43, torch>=2.2
+Tested environment (reference): transformers>=4.41, peft>=0.11, trl>=0.9, bitsandbytes>=0.43, torch>=2.2
 """
 
 import os
@@ -31,34 +31,34 @@ from peft import (
 
 from trl import SFTTrainer
 
-# ------------------------------ 固定超參/檔名 ------------------------------
+# ------------------------------ Fixed hyperparams/filenames ------------------------------
 BASE_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 PROC_DIR = PROJECT_ROOT / "data" / "processed"
-NEW_TOK_FILE = RAW_DIR / "GazetteerEntries.xlsx"   # 你的自定詞表（verlan_form）
-CSV_FILE     = PROC_DIR / "verlan_pairs.csv"        # 訓練對齊資料（src,tgt）
+NEW_TOK_FILE = RAW_DIR / "GazetteerEntries.xlsx"   # your custom lexicon (verlan_form)
+CSV_FILE     = PROC_DIR / "verlan_pairs.csv"        # training alignment data (src, tgt)
 OUT_DIR      = PROJECT_ROOT / "mistral-verlan-conv"
-MAX_SEQ_LEN  = 768                       # 16GB 顯存建議 512~1024；取 768 折衷
+MAX_SEQ_LEN  = 768                       # For 16GB VRAM, 512~1024 is recommended; 768 is a compromise
 SEED         = 42
 
-# ------------------------------ 基本環境優化 ------------------------------
-# 建議配置（減少碎片／提高吞吐）
+# ------------------------------ Basic environment optimizations ------------------------------
+# Recommended settings (reduce fragmentation/increase throughput)
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:128,garbage_collection_threshold:0.6"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-torch.backends.cuda.matmul.allow_tf32 = True         # Ampere（A4000）啟用 TF32
+torch.backends.cuda.matmul.allow_tf32 = True         # Enable TF32 on Ampere (A4000)
 torch.set_float32_matmul_precision("high")
-os.makedirs(PROJECT_ROOT / "logs", exist_ok=True)                   # 讓 `tee logs/*.log` 不再報不存在
+os.makedirs(PROJECT_ROOT / "logs", exist_ok=True)                   # Ensure `tee logs/*.log` doesn't complain about missing directory
 
 # ------------------------------ Tokenizer ------------------------------
 print("Loading tokenizer … GPU mode")
-# NOTE: use_auth_token 已棄用，這裡仍保留；若你已在 CLI 配置 HF_TOKEN 也可省略
+# NOTE: use_auth_token is deprecated but kept here; if HF_TOKEN is set via CLI you can omit it
 tok = AutoTokenizer.from_pretrained(BASE_MODEL, use_auth_token=True)
-tok.padding_side = "right"                            # 避免 fp16 下的溢位/遮罩異常
+tok.padding_side = "right"                            # Avoid overflow/mask issues in fp16
 if tok.pad_token is None:
     tok.pad_token = tok.eos_token
 
-# 自定義 Verlan 詞元加入
+# Add custom Verlan tokens
 added = 0
 if NEW_TOK_FILE.exists():
     vlist = (
@@ -69,7 +69,7 @@ if NEW_TOK_FILE.exists():
         .unique()
         .tolist()
     )
-    # 僅添加 tokenizer 裡沒有的詞
+    # Only add tokens not already in the tokenizer
     to_add = [v for v in vlist if v not in tok.get_vocab()]
     added = tok.add_tokens(to_add)
     print(f"Added {added} Verlan tokens to vocab.")
@@ -84,21 +84,21 @@ PROMPT_TMPL = (
     "### Response: {tgt}"
 )
 
-# 轉為單列 text，供 SFTTrainer 使用（packing 模式最省 padding）
+# Convert to single 'text' column for SFTTrainer (packing mode minimizes padding)
 ds = Dataset.from_pandas(df)
 ds = ds.map(
     lambda ex: {"text": PROMPT_TMPL.format(src=ex["src"], tgt=ex["tgt"])},
     remove_columns=list(df.columns),
 )
 
-# 防極端超長樣本（雙保險；SFT 仍會裁到 MAX_SEQ_LEN）
+# Guard against extremely long samples (double safety; SFT still truncates to MAX_SEQ_LEN)
 def clip_len(x, hard_max=2048):
     t = x["text"]
     return {"text": t[:hard_max]}
 
 ds = ds.map(clip_len)
 
-# ------------------------------ 模型：4-bit 量化 ------------------------------
+# ------------------------------ Model: 4-bit quantization ------------------------------
 bnb_cfg = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_compute_dtype=torch.bfloat16,
@@ -107,8 +107,8 @@ bnb_cfg = BitsAndBytesConfig(
 )
 
 print("Loading base model with 4-bit quantization …")
-# 如已安裝 flash-attn2，可把 attn_implementation 設為 "flash_attention_2"
-# 若未安裝，請移除該參數（會自動用 PyTorch SDPA）
+# If flash-attn2 is installed, set attn_implementation to "flash_attention_2"
+# If not installed, remove this parameter (PyTorch SDPA will be used)
 try:
     model = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL,
@@ -119,7 +119,7 @@ try:
         use_auth_token=True,
     )
 except Exception:
-    # 回退到 PyTorch SDPA
+    # Fallback to PyTorch SDPA
     model = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL,
         quantization_config=bnb_cfg,
@@ -128,17 +128,17 @@ except Exception:
         use_auth_token=True,
     )
 
-# 新 token -> 需要擴展 embedding / lm_head（對齊到 8，利於 kernel 對齊）
+# New tokens require expanding embedding / lm_head (align to multiples of 8 for kernel efficiency)
 if added > 0:
     model.resize_token_embeddings(len(tok), pad_to_multiple_of=8)
 
-# QLoRA 必備：對量化模型做訓練前準備（norm/cast/grad 設置）
+# QLoRA essential: prepare quantized model for training (norm/cast/grad settings)
 model = prepare_model_for_kbit_training(model)
-model.config.use_cache = False  # 訓練期關閉 KV cache
+model.config.use_cache = False  # Disable KV cache during training
 
-# ------------------------------ LoRA（B 檔：含 MLP） ------------------------------
-# A：q_proj,k_proj,v_proj,o_proj（輕量）
-# B：再加 gate_proj, up_proj, down_proj（效果↑，計算↑）
+# ------------------------------ LoRA (file B: includes MLP) ------------------------------
+# A: q_proj, k_proj, v_proj, o_proj (lightweight)
+# B: adds gate_proj, up_proj, down_proj (better performance, more compute)
 lora_cfg = LoraConfig(
     r=8,
     lora_alpha=16,
@@ -153,11 +153,11 @@ lora_cfg = LoraConfig(
 model = get_peft_model(model, lora_cfg)
 model.print_trainable_parameters()
 
-# ------------------------------ TrainingArguments（A 檔：安全穩定） ------------------------------
+# ------------------------------ TrainingArguments (file A: safe and stable) ------------------------------
 args = TrainingArguments(
     output_dir=OUT_DIR,
-    per_device_train_batch_size=2,     # 小批次 + 梯度累積，穩
-    gradient_accumulation_steps=8,     # 等效 batch ↑
+    per_device_train_batch_size=2,     # Small batch + gradient accumulation for stability
+    gradient_accumulation_steps=8,     # Increases effective batch size
     num_train_epochs=1,
     bf16=True,
     fp16=False,
@@ -165,15 +165,15 @@ args = TrainingArguments(
     logging_steps=10,
     save_strategy="epoch",
     save_total_limit=2,
-    report_to="none",                  # 先關掉 wandb
-    gradient_checkpointing=True,       # 省顯存（必開）
+    report_to="none",                  # Disable wandb for now
+    gradient_checkpointing=True,       # Save VRAM (must enable)
     gradient_checkpointing_kwargs={"use_reentrant": False},
-    optim="paged_adamw_32bit",         # 4-bit 配這個更穩
+    optim="paged_adamw_32bit",         # More stable with 4-bit
     dataloader_num_workers=2,
     seed=SEED,
 )
 
-# ------------------------------ 啟動 SFT（packing=True） ------------------------------
+# ------------------------------ Start SFT (packing=True) ------------------------------
 print("Starting training … 🏎️")
 trainer = SFTTrainer(
     model=model,
@@ -182,7 +182,7 @@ trainer = SFTTrainer(
     args=args,
     dataset_text_field="text",
     max_seq_length=MAX_SEQ_LEN,
-    packing=True,                      # 關鍵：把短樣本打包，padding 浪費大幅下降
+    packing=True,                      # Key: pack short samples to greatly reduce padding waste
 )
 
 trainer.train()
