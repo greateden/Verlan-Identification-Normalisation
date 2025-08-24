@@ -10,7 +10,9 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-(countdown will be auto-inserted here)
+⏳ Time remaining: 54 days, 06 hours, 44 minutes
+Deadline (NZT): 2025-10-18 00:00 NZDT
+Deadline (UTC): 2025-10-17 11:00 UTC
 ```
 <!-- DUE:END -->
 
@@ -40,34 +42,32 @@ Target venues: **VarDial 2026 (ACL)** or **TALN 2025**.
 ## 📂 Repository Structure
 
 <!-- TREE:START -->
-
 ```text
 project-root/
-├── configs
+├── configs/
 │   └── environment.yml
-├── data
-│   ├── predictions
+├── data/
+│   ├── predictions/
 │   │   ├── invented.csv
 │   │   ├── mixed_pred.csv
 │   │   ├── standard_only_pred.csv
 │   │   └── verlan_only_pred.csv
-│   ├── processed
+│   ├── processed/
 │   │   ├── verlan_pairs.csv
 │   │   └── verlan_test_set.csv
-│   └── raw
+│   └── raw/
 │       ├── GazetteerEntries.xlsx
 │       ├── Sentences.xlsx
 │       ├── invented_verlan.txt
 │       ├── mixed_shuffled.txt
 │       ├── standard_only.txt
 │       └── verlan_only.txt
-├── docs
-│   ├── generate-tree.py
-│   ├── readme.md
-│   └── repo_tree.txt
-├── experiments
-├── final report
-└── src
+├── docs/
+│   └── readme.md
+├── scripts/
+│   ├── ci_update_docs.py
+│   └── generate-tree.py
+└── src/
     ├── EvaluateThreshold.py
     ├── convert.py
     ├── detect.py
