@@ -31,11 +31,11 @@ Target venues: **VarDial 2026 (ACL)** or **TALN 2025**.
 
 ## 📆 Milestones
 
-- **May 2025 (done):** Crawled 1M tokens, VDL v0.1 (raw corpus, seed lexicon).  
-- **June 2025 (done):** 30k token annotation, rule+lexicon baseline.  
-- **July–Aug 2025 (ongoing):** CamemBERT+CRF fine-tuning, GPT-4o few-shot, Mistral-7B tokenizer test.  
-- **Sept–Oct 2025:** Final fine-tuning, full evaluation, fairness audit, draft writing.  
-- **Nov 2025:** Zenodo packaging (data+code), submission.
+- **May 2025 (done):** Crawled 1M tokens, VDL v0.1 (raw corpus, seed lexicon).
+- **June 2025 (done):** 30k token annotation, rule+lexicon baseline.
+- **July 2025 (done):** CamemBERT+CRF fine-tuning baseline.
+- **Aug 2025 (done):** Logistic regression detector + calibration utilities; improved probability distribution separation.
+- **Sept–Oct 2025:** Final fine-tuning, full evaluation, fairness audit, draft writing, submission.
 
 ---
 
@@ -150,13 +150,34 @@ Update the symlink to switch versions.
 ## 📊 Current Status
 - ✅ Data collection + annotation (Gold Corpus v1 ready).
 - ✅ Baseline (rules + dictionary).
+- ✅ Calibration & threshold optimization for verlan detector.
 - 🔄 CamemBERT+CRF fine-tuning (in progress).
 - 🔄 GPT-4o few-shot & Mistral-7B tokenizer (testing).
 - ⏳ Final evaluation + fairness audit (Sept–Oct 2025).
 - ⏳ Draft writing (Sept–Oct 2025).
+
+ 
+## 📈 Research Results
+
+- **Aug 2025:** Baseline detector (commit 4dacd82) produced overlapping probability distributions between verlan and standard French:
+
+  ![Probability Distribution for Verlan vs Standard French](results/prob_dist_pre.png)
+
+- **Aug 2025:** After introducing calibration utilities and threshold optimization (commit fcbfcb0), post-processing separated the classes:
+
+  ![Probability Distribution after post-processing](results/prob_dist_post.png)
 
 ---
 
 ## 📌 Notes
 	•	All results will be released on Zenodo with DOI.
 	•	Reproducibility ensured via conda environment + fixed random seeds.
+
+
+---
+
+## Reference
+
+- Dholakia, P. (2023). *Comparative analysis of transformer-based models for text-to-speech normalization* (Master's thesis, San José State University). https://doi.org/10.31979/etd.5dd6-k38w
+- Lertpiya, A. (2019). *Thai spelling correction and word normalization on social text using a two-stage pipeline with neural contextual attention* (Master's thesis, Chulalongkorn University). https://doi.org/10.58837/chula.the.2019.155
+- Tan, Y. L. (2024). *Improving transformer for scene text and handwritten text recognition* (Doctoral dissertation, Nanyang Technological University). https://doi.org/10.32657/10356/178284
