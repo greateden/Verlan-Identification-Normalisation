@@ -17,6 +17,7 @@ Usage:
 """
 
 import os, argparse, sys
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
@@ -36,12 +37,15 @@ from calibration import (
 )
 
 MODEL_ID   = "Salesforce/SFR-Embedding-Mistral"
-HEAD_PATH  = "verlan-detector/lr_head.joblib"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+RAW_DIR    = PROJECT_ROOT / "data" / "raw"
+MODEL_DIR  = PROJECT_ROOT / "verlan-detector"
+HEAD_PATH  = MODEL_DIR / "lr_head.joblib"
 SEED       = 42
 DEF_BATCH  = 64
 DEF_MAXLEN = 512
 
-os.makedirs("verlan-detector", exist_ok=True)
+os.makedirs(MODEL_DIR, exist_ok=True)
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.set_float32_matmul_precision("high")
@@ -51,8 +55,10 @@ def load_data():
     Build the same splits as training. If 'label' doesn't exist,
     auto-label with exact lexicon match to reduce noise.
     """
-    sent_df = pd.read_excel("Sentences.xlsx")
-    lex = pd.read_excel("GazetteerEntries.xlsx")
+    sent_path = RAW_DIR / "Sentences.xlsx"
+    gaz_path = RAW_DIR / "GazetteerEntries.xlsx"
+    sent_df = pd.read_excel(sent_path)
+    lex = pd.read_excel(gaz_path)
     if "label" not in sent_df.columns:
         vset = set(lex["verlan_form"].dropna().astype(str).str.lower().tolist())
         def is_verlan_sentence(s: str) -> int:

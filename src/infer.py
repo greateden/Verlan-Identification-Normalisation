@@ -5,14 +5,17 @@ Inference for Verlan → Standard French conversion (with resized vocab)
 """
 
 import os, sys, argparse
+from pathlib import Path
 import torch
 import pandas as pd
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
 
 BASE_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
-ADAPTER_DIR = "mistral-verlan-conv"
-NEW_TOK_FILE = "GazetteerEntries.xlsx"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+RAW_DIR = PROJECT_ROOT / "data" / "raw"
+ADAPTER_DIR = PROJECT_ROOT / "mistral-verlan-conv"
+NEW_TOK_FILE = RAW_DIR / "GazetteerEntries.xlsx"
 MAX_NEW_TOKENS = 96
 
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
@@ -30,7 +33,7 @@ def load_and_expand_tokenizer():
         tok.pad_token = tok.eos_token
 
     added = 0
-    if os.path.exists(NEW_TOK_FILE):
+    if NEW_TOK_FILE.exists():
         vlist = (
             pd.read_excel(NEW_TOK_FILE)["verlan_form"]
             .dropna().astype(str).str.lower().unique().tolist()
