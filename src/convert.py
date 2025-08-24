@@ -11,6 +11,7 @@ Verlan Conversion SFT on Mistral-7B (A4000 16GB Optimized)
 
 import os
 import random
+from pathlib import Path
 import pandas as pd
 import torch
 from datasets import Dataset
@@ -32,9 +33,12 @@ from trl import SFTTrainer
 
 # ------------------------------ 固定超參/檔名 ------------------------------
 BASE_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
-NEW_TOK_FILE = "GazetteerEntries.xlsx"   # 你的自定詞表（verlan_form）
-CSV_FILE     = "verlan_pairs.csv"        # 訓練對齊資料（src,tgt）
-OUT_DIR      = "mistral-verlan-conv"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+RAW_DIR = PROJECT_ROOT / "data" / "raw"
+PROC_DIR = PROJECT_ROOT / "data" / "processed"
+NEW_TOK_FILE = RAW_DIR / "GazetteerEntries.xlsx"   # 你的自定詞表（verlan_form）
+CSV_FILE     = PROC_DIR / "verlan_pairs.csv"        # 訓練對齊資料（src,tgt）
+OUT_DIR      = PROJECT_ROOT / "mistral-verlan-conv"
 MAX_SEQ_LEN  = 768                       # 16GB 顯存建議 512~1024；取 768 折衷
 SEED         = 42
 
@@ -44,7 +48,7 @@ os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:128,garbage_collectio
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 torch.backends.cuda.matmul.allow_tf32 = True         # Ampere（A4000）啟用 TF32
 torch.set_float32_matmul_precision("high")
-os.makedirs("logs", exist_ok=True)                   # 讓 `tee logs/*.log` 不再報不存在
+os.makedirs(PROJECT_ROOT / "logs", exist_ok=True)                   # 讓 `tee logs/*.log` 不再報不存在
 
 # ------------------------------ Tokenizer ------------------------------
 print("Loading tokenizer … GPU mode")
@@ -56,7 +60,7 @@ if tok.pad_token is None:
 
 # 自定義 Verlan 詞元加入
 added = 0
-if os.path.exists(NEW_TOK_FILE):
+if NEW_TOK_FILE.exists():
     vlist = (
         pd.read_excel(NEW_TOK_FILE)["verlan_form"]
         .dropna()

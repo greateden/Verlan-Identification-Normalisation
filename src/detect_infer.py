@@ -18,6 +18,7 @@ Usage examples:
 """
 
 import os, sys, argparse, re
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
@@ -29,7 +30,10 @@ warnings.filterwarnings("ignore", message="`resume_download` is deprecated")
 warnings.filterwarnings("ignore", message="The `use_auth_token` argument is deprecated")
 
 MODEL_ID  = "Salesforce/SFR-Embedding-Mistral"
-HEAD_PATH = "verlan-detector/lr_head.joblib"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+RAW_DIR = PROJECT_ROOT / "data" / "raw"
+MODEL_DIR = PROJECT_ROOT / "verlan-detector"
+HEAD_PATH = MODEL_DIR / "lr_head.joblib"
 
 # --- Runtime knobs for stability/speed on A4000 ---
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
@@ -37,12 +41,12 @@ torch.backends.cuda.matmul.allow_tf32 = True
 torch.set_float32_matmul_precision("high")
 
 # ---------------- Lexicon gate utilities ----------------
-def load_verlan_set(xlsx_path: str = "data/raw/GazetteerEntries.xlsx") -> set:
+def load_verlan_set(xlsx_path: Path = RAW_DIR / "GazetteerEntries.xlsx") -> set:
     """
     Load verlan surface forms into a lowercase set.
     If the gazetteer is missing, return an empty set (gate will become stricter).
     """
-    if not os.path.exists(xlsx_path):
+    if not xlsx_path.exists():
         print(f"[gate] WARNING: {xlsx_path} not found. Gate may block more positives.", file=sys.stderr)
         return set()
     df = pd.read_excel(xlsx_path)
