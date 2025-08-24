@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 54 days, 06 hours, 21 minutes
+⏳ Time remaining: 54 days, 06 hours, 11 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -69,6 +69,7 @@ project-root/
 │   └── generate-tree.py
 ├── src/
 │   ├── EvaluateThreshold.py
+│   ├── calibration.py
 │   ├── convert.py
 │   ├── detect.py
 │   ├── detect_infer.py
