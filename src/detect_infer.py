@@ -57,7 +57,7 @@ def tokenize_basic(s: str):
     Reason: lexicon entries are surface tokens; we want full-word matches.
     """
     s = unidecode(str(s).lower())
-    return re.findall(r"[a-z0-9]+(?:’[a-z0-9]+)?", s)
+    return re.findall(r"[a-z0-9]+(?:['’][a-z0-9]+)?", s)
 
 def one_edit_apart(a: str, b: str) -> bool:
     """
