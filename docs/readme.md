@@ -79,7 +79,7 @@ project-root/
 
 To update manually:
 ```text
-python generate-tree.py > repo_tree.txt
+python scripts/generate-tree.py > repo_tree.txt
 ```
 
 ---
