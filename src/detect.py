@@ -140,7 +140,6 @@ def main():
     clf = LogisticRegression(
         max_iter=2000,
         class_weight="balanced",
-        n_jobs=1,             # scikit LR 本身沒有 n_jobs 參數（避免報錯）
         solver="lbfgs",
         verbose=0,
     )
