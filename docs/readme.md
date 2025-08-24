@@ -45,6 +45,8 @@ Target venues: **VarDial 2026 (ACL)** or **TALN 2025**.
 ```text
 project-root/
 ├── configs/
+│   ├── convert.yaml
+│   ├── detect.yaml
 │   └── environment.yml
 ├── data/
 │   ├── predictions/
@@ -64,20 +66,29 @@ project-root/
 │       └── verlan_only.txt
 ├── docs/
 │   └── readme.md
+├── models/
+│   ├── convert/
+│   │   ├── 2025-08-20/
+│   │   │   └── mistral-verlan-conv/
+│   │   │       └── .gitkeep
+│   │   └── latest -> 2025-08-20
+│   └── detect/
+│       ├── 2025-08-24/
+│       │   └── lr_head.joblib
+│       └── latest -> 2025-08-24
 ├── scripts/
 │   ├── ci_update_docs.py
 │   └── generate-tree.py
 ├── src/
 │   ├── EvaluateThreshold.py
 │   ├── calibration.py
-│   ├── convert.py
-│   ├── detect.py
+│   ├── convert_infer.py
+│   ├── convert_train.py
 │   ├── detect_infer.py
-│   ├── infer.py
-│   └── trained-result-backup/
-│       └── verlan-detector-24082025/
-│           └── lr_head.joblib
+│   └── detect_train.py
 └── tests/
+    ├── test_convert_infer.py
+    ├── test_detect_infer.py
     └── test_tokenization.py
 ```
 <!-- TREE:END -->
@@ -104,17 +115,33 @@ conda activate verlan
 huggingface-cli login
 ```
 
-3. Run detection
+3. Run detector training
 
 ```bash
-python src/detect.py
+python src/detect_train.py
 ```
 
-4. Run inference
+4. Run detector inference
 
 ```bash
-python src/detect_infer.py --input data/raw/mixed_shuffled.txt --output data/predictions/mixed_pred.csv
+python src/detect_infer.py --infile data/raw/mixed_shuffled.txt --outfile data/predictions/mixed_pred.csv --config configs/detect.yaml
 ```
+
+5. Run conversion inference
+
+```bash
+python src/convert_infer.py --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml
+```
+
+### Script pairs
+
+- `convert_train.py` ↔ `convert_infer.py`
+- `detect_train.py` ↔ `detect_infer.py`
+
+### Model directory alias
+
+Models are stored under `models/<task>/<YYYY-MM-DD>/` with a `latest` symlink.
+Update the symlink to switch versions.
 
 
 ---

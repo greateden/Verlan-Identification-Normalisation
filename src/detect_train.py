@@ -61,8 +61,8 @@ def load_data():
             "❌ Could not find the following required files:\n"
             + "\n".join(f" - {p}" for p in missing)
             + f"\n\nCurrent working directory (cwd) = {Path.cwd()}\n"
-            f"PROJECT_ROOT resolved by detect.py = {PROJECT_ROOT}\n"
-            "Please check the paths or run `python -m src.detect` from the project root."
+            f"PROJECT_ROOT resolved by detect_train.py = {PROJECT_ROOT}\n"
+            "Please check the paths or run `python -m src.detect_train` from the project root."
         )
         raise FileNotFoundError(msg)
 
@@ -179,8 +179,9 @@ def main():
     yp = clf.predict(X_test)
     print("Test F1:", f1_score(y_test, yp))
 
-    os.makedirs("verlan-detector", exist_ok=True)
-    joblib.dump(clf, "verlan-detector/lr_head.joblib")
+    out_dir = PROJECT_ROOT / "models" / "detect" / "latest"
+    os.makedirs(out_dir, exist_ok=True)
+    joblib.dump(clf, out_dir / "lr_head.joblib")
     print("Detect model saved.")
 
 if __name__ == "__main__":

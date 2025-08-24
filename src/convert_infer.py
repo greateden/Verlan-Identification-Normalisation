@@ -8,13 +8,14 @@ import os, sys, argparse
 from pathlib import Path
 import torch
 import pandas as pd
+import yaml
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
 
 BASE_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
-ADAPTER_DIR = PROJECT_ROOT / "mistral-verlan-conv"
+ADAPTER_DIR = PROJECT_ROOT / "models" / "convert" / "latest" / "mistral-verlan-conv"
 NEW_TOK_FILE = RAW_DIR / "GazetteerEntries.xlsx"
 MAX_NEW_TOKENS = 96
 
@@ -105,17 +106,30 @@ def generate_once(model, tok, src_text: str,
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--adapter", default=ADAPTER_DIR)
-    ap.add_argument("--text", default=None)
+    ap.add_argument("--config", default=PROJECT_ROOT / "configs" / "convert.yaml")
+    ap.add_argument("--text", required=True)
     args = ap.parse_args()
 
-    model, tok = build_model(args.adapter)
+    with open(args.config) as f:
+        cfg = yaml.safe_load(f)
 
-    if args.text is None:
-        print("Please use --text to test a single sentence, or extend the script to support batches.")
-        sys.exit(0)
+    adapter_dir = cfg.get("adapter_dir", ADAPTER_DIR)
+    max_new_tokens = cfg.get("max_new_tokens", MAX_NEW_TOKENS)
+    temperature = cfg.get("temperature", 0.0)
+    top_p = cfg.get("top_p", 1.0)
 
-    print(generate_once(model, tok, args.text))
+    model, tok = build_model(adapter_dir)
+
+    print(
+        generate_once(
+            model,
+            tok,
+            args.text,
+            temperature=temperature,
+            top_p=top_p,
+            max_new_tokens=max_new_tokens,
+        )
+    )
 
 if __name__ == "__main__":
     main()
