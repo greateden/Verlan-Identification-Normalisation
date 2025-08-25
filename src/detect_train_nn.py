@@ -356,27 +356,42 @@ def main():
     ap.add_argument("--max_len", type=int, default=128)
     ap.add_argument("--train_encoder", action="store_true",
                     help="Fine-tune the transformer encoder instead of freezing it")
+    ap.add_argument("--quant", type=int, default=4, choices=[4, 8, 16],
+                    help="Quantisation bits: 4/8 or 16 (no quantisation)")
     args = ap.parse_args()
 
     device = get_device()
 
-    bnb_cfg = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_compute_dtype=torch.bfloat16,
-        bnb_4bit_use_double_quant=True,
-        bnb_4bit_quant_type="nf4",
-    )
     tok = AutoTokenizer.from_pretrained(MODEL_ID)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
 
     if device == "cuda":
-        enc = AutoModel.from_pretrained(
-            MODEL_ID,
-            quantization_config=bnb_cfg,
-            device_map="auto",
-            torch_dtype=torch.bfloat16,
-        )
+        if args.quant in (4, 8):
+            if args.quant == 4:
+                bnb_cfg = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_compute_dtype=torch.bfloat16,
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_quant_type="nf4",
+                )
+            else:
+                bnb_cfg = BitsAndBytesConfig(
+                    load_in_8bit=True,
+                    bnb_8bit_compute_dtype=torch.bfloat16,
+                )
+            enc = AutoModel.from_pretrained(
+                MODEL_ID,
+                quantization_config=bnb_cfg,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+            )
+        else:
+            enc = AutoModel.from_pretrained(
+                MODEL_ID,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+            )
     else:
         enc = AutoModel.from_pretrained(MODEL_ID).to(device)
 
