@@ -463,7 +463,13 @@ def main():
 
     # Decide threshold on VAL (calibrated)
     val_logits, val_labels = collect_logits(model, val_loader, device)
-    val_probs = torch.sigmoid(scaler(val_logits.to(device))).cpu().numpy().ravel()
+    val_probs = (
+        torch.sigmoid(scaler(val_logits.to(device)))
+        .detach()
+        .cpu()
+        .numpy()
+        .ravel()
+    )
     ts = np.linspace(0, 1, 501)
     f1s = [f1_score(val_labels.numpy().ravel(), (val_probs >= t).astype(int), zero_division=0) for t in ts]
     t_star = float(ts[int(np.argmax(f1s))])
@@ -471,7 +477,13 @@ def main():
 
     # Final test report
     test_logits, test_labels = collect_logits(model, test_loader, device)
-    test_probs = torch.sigmoid(scaler(test_logits.to(device))).cpu().numpy().ravel()
+    test_probs = (
+        torch.sigmoid(scaler(test_logits.to(device)))
+        .detach()
+        .cpu()
+        .numpy()
+        .ravel()
+    )
     test_ap = average_precision_score(test_labels.numpy().ravel(), test_probs)
     test_auc = roc_auc_score(test_labels.numpy().ravel(), test_probs)
     test_preds = (test_probs >= t_star).astype(int)
