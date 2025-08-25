@@ -264,8 +264,14 @@ class Detector(nn.Module):
         self.char_cnn = char_cnn
         self.arc = ArcFace(encoder.config.hidden_size + char_cnn.output_dim)
 
-    def forward(self, input_ids, attention_mask, char_ids, labels=None, inference: bool=False):
-        out = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
+    def forward(self, input_ids, attention_mask, char_ids, labels=None, inference: bool = False):
+        # If the encoder is frozen we can run it in no_grad mode to save memory
+        enc_requires_grad = any(p.requires_grad for p in self.encoder.parameters())
+        if enc_requires_grad:
+            out = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
+        else:
+            with torch.no_grad():
+                out = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
         cls = out.last_hidden_state[:, 0]
         char_feat = self.char_cnn(char_ids)
         feat = torch.cat([cls, char_feat], dim=1)
@@ -340,10 +346,13 @@ def load_data():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--batch", type=int, default=32)
+    ap.add_argument("--batch", type=int, default=8,
+                    help="Training batch size (default: 8 to reduce GPU memory use)")
     ap.add_argument("--epochs", type=int, default=3)
     ap.add_argument("--lr", type=float, default=2e-5)
     ap.add_argument("--max_len", type=int, default=128)
+    ap.add_argument("--train_encoder", action="store_true",
+                    help="Fine-tune the transformer encoder instead of freezing it")
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -360,6 +369,12 @@ def main():
     enc = AutoModel.from_pretrained(
         MODEL_ID, quantization_config=bnb_cfg, device_map="auto", torch_dtype=torch.bfloat16
     )
+
+    if not args.train_encoder:
+        for p in enc.parameters():
+            p.requires_grad_(False)
+        enc.eval()
+
     char_cnn = CharCNN()
     model = Detector(enc, char_cnn).to(device)
 
