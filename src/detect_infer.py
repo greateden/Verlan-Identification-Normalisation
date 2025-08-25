@@ -19,15 +19,35 @@ Usage examples:
 
 import os, sys, argparse, re
 from pathlib import Path
-import numpy as np
-import pandas as pd
-import torch
-from torch import nn
-import yaml
-from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
-import joblib
+try:
+    import yaml
+except Exception:  # pragma: no cover
+    yaml = None
 from unidecode import unidecode
 import warnings
+
+try:
+    import numpy as np
+except Exception:  # pragma: no cover - optional dependency
+    np = None
+try:
+    import pandas as pd
+except Exception:  # pragma: no cover
+    pd = None
+try:
+    import torch
+    from torch import nn
+except Exception:  # pragma: no cover
+    torch = None
+    nn = None
+try:
+    from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
+except Exception:  # pragma: no cover
+    AutoTokenizer = AutoModel = BitsAndBytesConfig = None
+try:
+    import joblib
+except Exception:  # pragma: no cover
+    joblib = None
 warnings.filterwarnings("ignore", message="`resume_download` is deprecated")
 warnings.filterwarnings("ignore", message="The `use_auth_token` argument is deprecated")
 
@@ -39,8 +59,9 @@ HEAD_PATH = MODEL_DIR / "lr_head.joblib"
 
 # --- Runtime knobs for stability/speed on A4000 ---
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-torch.backends.cuda.matmul.allow_tf32 = True
-torch.set_float32_matmul_precision("high")
+if torch is not None:
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.set_float32_matmul_precision("high")
 
 # ---------------- Lexicon gate utilities ----------------
 def load_verlan_set(xlsx_path: Path = RAW_DIR / "GazetteerEntries.xlsx") -> set:
@@ -149,7 +170,6 @@ def load_encoder(model_id: str = MODEL_ID):
     model.eval()
     return tok, model
 
-@torch.inference_mode()
 def embed_texts(texts, tok, model, max_len=512, batch_size=64):
     """
     Mean-pool over valid tokens with attention mask, then L2-normalize.
@@ -162,7 +182,7 @@ def embed_texts(texts, tok, model, max_len=512, batch_size=64):
         batch = [str(x) for x in texts[i:i+batch_size]]
         enc = tok(batch, padding=True, truncation=True, max_length=max_len,
                   return_tensors="pt").to(device)
-        with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+        with torch.inference_mode(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
             hs = model(**enc).last_hidden_state              # [B,T,D]
             mask = enc["attention_mask"].unsqueeze(-1).to(hs.dtype)
             denom = mask.sum(dim=1).clamp(min=1)
@@ -190,48 +210,49 @@ def predict_proba(
     pred_raw = (p1 >= threshold).astype(int)
     return pred_raw, p1
 
-class ArcFace(nn.Module):
-    def __init__(self, in_features, s=30.0, m=0.20):
-        super().__init__()
-        self.W = nn.Parameter(torch.randn(in_features, 1))
-        nn.init.xavier_uniform_(self.W); self.s, self.m = s, m
-    @torch.no_grad()
-    def infer(self, x):
-        w = nn.functional.normalize(self.W, dim=0)
-        x = nn.functional.normalize(x, dim=1)
-        cos = (x @ w).squeeze(1)
-        return (self.s * cos).unsqueeze(1)
+if torch is not None:
+    class ArcFace(nn.Module):
+        def __init__(self, in_features, s=30.0, m=0.20):
+            super().__init__()
+            self.W = nn.Parameter(torch.randn(in_features, 1))
+            nn.init.xavier_uniform_(self.W); self.s, self.m = s, m
+        @torch.no_grad()
+        def infer(self, x):
+            w = nn.functional.normalize(self.W, dim=0)
+            x = nn.functional.normalize(x, dim=1)
+            cos = (x @ w).squeeze(1)
+            return (self.s * cos).unsqueeze(1)
 
-class CharCNN(nn.Module):
-    def __init__(self, vocab_size=256, emb_dim=32, kernels=(2,3,4), channels=64):
-        super().__init__()
-        self.emb = nn.Embedding(vocab_size, emb_dim, padding_idx=0)
-        self.convs = nn.ModuleList([nn.Conv1d(emb_dim, channels, k) for k in kernels])
-        self.out_dim = channels * len(kernels)
-    def forward(self, char_ids):
-        x = self.emb(char_ids).transpose(1,2)
-        feats = [nn.functional.max_pool1d(nn.functional.relu(c(x)), x.size(2)).squeeze(2) for c in self.convs]
-        return torch.cat(feats, 1)
+    class CharCNN(nn.Module):
+        def __init__(self, vocab_size=256, emb_dim=32, kernels=(2,3,4), channels=64):
+            super().__init__()
+            self.emb = nn.Embedding(vocab_size, emb_dim, padding_idx=0)
+            self.convs = nn.ModuleList([nn.Conv1d(emb_dim, channels, k) for k in kernels])
+            self.out_dim = channels * len(kernels)
+        def forward(self, char_ids):
+            x = self.emb(char_ids).transpose(1,2)
+            feats = [nn.functional.max_pool1d(nn.functional.relu(c(x)), x.size(2)).squeeze(2) for c in self.convs]
+            return torch.cat(feats, 1)
 
-class Detector(nn.Module):
-    def __init__(self, encoder, char_cnn):
-        super().__init__()
-        self.encoder = encoder; self.char = char_cnn
-        self.arc = ArcFace(encoder.config.hidden_size + char_cnn.out_dim)
-    def infer_logits(self, input_ids, attention_mask, char_ids):
-        out = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
-        cls = out.last_hidden_state[:,0]
-        ch  = self.char(char_ids)
-        feat = torch.cat([cls, ch], 1)
-        return self.arc.infer(feat)  # [B,1]
+    class Detector(nn.Module):
+        def __init__(self, encoder, char_cnn):
+            super().__init__()
+            self.encoder = encoder; self.char = char_cnn
+            self.arc = ArcFace(encoder.config.hidden_size + char_cnn.out_dim)
+        def infer_logits(self, input_ids, attention_mask, char_ids):
+            out = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
+            cls = out.last_hidden_state[:,0]
+            ch  = self.char(char_ids)
+            feat = torch.cat([cls, ch], 1)
+            return self.arc.infer(feat)  # [B,1]
 
-class TemperatureScaler(nn.Module):
-    def __init__(self, T=1.0):
-        super().__init__()
-        self.log_T = nn.Parameter(torch.tensor(float(np.log(T)), dtype=torch.float32))
-    def forward(self, logits): return logits / torch.exp(self.log_T)
-    @torch.no_grad()
-    def set_T(self, T): self.log_T.data = torch.tensor(float(np.log(T)))
+    class TemperatureScaler(nn.Module):
+        def __init__(self, T=1.0):
+            super().__init__()
+            self.log_T = nn.Parameter(torch.tensor(float(np.log(T)), dtype=torch.float32))
+        def forward(self, logits): return logits / torch.exp(self.log_T)
+        @torch.no_grad()
+        def set_T(self, T): self.log_T.data = torch.tensor(float(np.log(T)))
 
 def make_char_ids(batch, max_char_len=200):
     arr = torch.zeros(len(batch), max_char_len, dtype=torch.long)

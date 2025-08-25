@@ -6,11 +6,6 @@ Inference for Verlan → Standard French conversion (with resized vocab)
 
 import os, sys, argparse
 from pathlib import Path
-import torch
-import pandas as pd
-import yaml
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
-from peft import PeftModel
 
 BASE_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +23,9 @@ PROMPT_TMPL = (
 )
 
 def load_and_expand_tokenizer():
+    from transformers import AutoTokenizer
+    import pandas as pd
+
     tok = AutoTokenizer.from_pretrained(BASE_MODEL)
     tok.padding_side = "right"
     if tok.pad_token is None:
@@ -47,6 +45,10 @@ def load_and_expand_tokenizer():
     return tok, added
 
 def build_model(adapter_dir: str = ADAPTER_DIR):
+    import torch
+    from transformers import AutoModelForCausalLM, BitsAndBytesConfig
+    from peft import PeftModel
+
     # 4-bit + BF16, same as training
     bnb_cfg = BitsAndBytesConfig(
         load_in_4bit=True,
@@ -83,28 +85,32 @@ def build_model(adapter_dir: str = ADAPTER_DIR):
     model.eval()
     return model, tok
 
-@torch.inference_mode()
 def generate_once(model, tok, src_text: str,
                   temperature: float = 0.0, top_p: float = 1.0,
                   max_new_tokens: int = MAX_NEW_TOKENS) -> str:
+    import torch
+
     prompt = PROMPT_TMPL.format(src=src_text.strip())
     inputs = tok(prompt, return_tensors="pt").to(model.device)
-    out = model.generate(
-        **inputs,
-        do_sample=(temperature > 0),
-        temperature=temperature,
-        top_p=top_p,
-        max_new_tokens=max_new_tokens,
-        repetition_penalty=1.05,
-        pad_token_id=tok.pad_token_id,
-        eos_token_id=tok.eos_token_id,
-    )
+    with torch.inference_mode():
+        out = model.generate(
+            **inputs,
+            do_sample=(temperature > 0),
+            temperature=temperature,
+            top_p=top_p,
+            max_new_tokens=max_new_tokens,
+            repetition_penalty=1.05,
+            pad_token_id=tok.pad_token_id,
+            eos_token_id=tok.eos_token_id,
+        )
     text = tok.decode(out[0], skip_special_tokens=True)
     if "### Response:" in text:
         text = text.split("### Response:", 1)[1]
     return text.strip()
 
 def main():
+    import yaml
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=PROJECT_ROOT / "configs" / "convert.yaml")
     ap.add_argument("--text", required=True)
