@@ -25,6 +25,7 @@ except Exception:  # pragma: no cover
     yaml = None
 from unidecode import unidecode
 import warnings
+from tqdm.auto import tqdm
 
 try:
     import numpy as np
@@ -178,17 +179,24 @@ def embed_texts(texts, tok, model, max_len=512, batch_size=64):
     device = next(model.parameters()).device
     out_list = []
     n = len(texts)
-    for i in range(0, n, batch_size):
-        batch = [str(x) for x in texts[i:i+batch_size]]
-        enc = tok(batch, padding=True, truncation=True, max_length=max_len,
-                  return_tensors="pt").to(device)
-        with torch.inference_mode(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-            hs = model(**enc).last_hidden_state              # [B,T,D]
-            mask = enc["attention_mask"].unsqueeze(-1).to(hs.dtype)
-            denom = mask.sum(dim=1).clamp(min=1)
-            pooled = (hs * mask).sum(dim=1) / denom         # [B,D]
-            pooled = torch.nn.functional.normalize(pooled, p=2, dim=1)
-        out_list.append(pooled.detach().float().cpu().numpy())
+    with tqdm(total=n, desc="Embedding", unit="text") as pbar:
+        for i in range(0, n, batch_size):
+            batch = [str(x) for x in texts[i:i+batch_size]]
+            enc = tok(
+                batch,
+                padding=True,
+                truncation=True,
+                max_length=max_len,
+                return_tensors="pt",
+            ).to(device)
+            with torch.inference_mode(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+                hs = model(**enc).last_hidden_state              # [B,T,D]
+                mask = enc["attention_mask"].unsqueeze(-1).to(hs.dtype)
+                denom = mask.sum(dim=1).clamp(min=1)
+                pooled = (hs * mask).sum(dim=1) / denom         # [B,D]
+                pooled = torch.nn.functional.normalize(pooled, p=2, dim=1)
+            out_list.append(pooled.detach().float().cpu().numpy())
+            pbar.update(len(batch))
     return np.vstack(out_list)
 
 def predict_proba(
@@ -274,15 +282,25 @@ def predict_proba_nn(texts, model_id, head_path, max_len=512, batch_size=64):
     thr = float(payload.get("threshold", 0.5))
     # Encode and score
     all_probs = []
-    for i in range(0, len(texts), batch_size):
-        batch = [str(x) for x in texts[i:i+batch_size]]
-        encd = tok(batch, padding=True, truncation=True, max_length=max_len, return_tensors="pt").to(device)
-        ch   = make_char_ids(batch).to(device)
-        with torch.no_grad(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-            logits = det.infer_logits(encd["input_ids"], encd["attention_mask"], ch)
-            logits = scaler(logits)
-            probs  = torch.sigmoid(logits).cpu().numpy().ravel()
-        all_probs.append(probs)
+    with tqdm(total=len(texts), desc="Scoring", unit="text") as pbar:
+        for i in range(0, len(texts), batch_size):
+            batch = [str(x) for x in texts[i:i+batch_size]]
+            encd = tok(
+                batch,
+                padding=True,
+                truncation=True,
+                max_length=max_len,
+                return_tensors="pt",
+            ).to(device)
+            ch = make_char_ids(batch).to(device)
+            with torch.no_grad(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+                logits = det.infer_logits(
+                    encd["input_ids"], encd["attention_mask"], ch
+                )
+                logits = scaler(logits)
+                probs = torch.sigmoid(logits).cpu().numpy().ravel()
+            all_probs.append(probs)
+            pbar.update(len(batch))
     p1 = np.concatenate(all_probs)
     pred_raw = (p1 >= thr).astype(int)
     return pred_raw, p1, thr
@@ -376,7 +394,7 @@ def main():
     # Apply lexicon gate per line
     gate_allow = []
     pred_final = []
-    for s, r in zip(texts, pred_raw):
+    for s, r in tqdm(zip(texts, pred_raw), total=len(texts), desc="Lexicon gate"):
         toks = tokenize_basic(s)
         allow = has_fuzzy_verlan(toks, VSET) if use_gate else True
         gate_allow.append(int(bool(allow)))
