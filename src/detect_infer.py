@@ -22,6 +22,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
+from torch import nn
 import yaml
 from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
 import joblib
@@ -189,6 +190,82 @@ def predict_proba(
     pred_raw = (p1 >= threshold).astype(int)
     return pred_raw, p1
 
+class ArcFace(nn.Module):
+    def __init__(self, in_features, s=30.0, m=0.20):
+        super().__init__()
+        self.W = nn.Parameter(torch.randn(in_features, 1))
+        nn.init.xavier_uniform_(self.W); self.s, self.m = s, m
+    @torch.no_grad()
+    def infer(self, x):
+        w = nn.functional.normalize(self.W, dim=0)
+        x = nn.functional.normalize(x, dim=1)
+        cos = (x @ w).squeeze(1)
+        return (self.s * cos).unsqueeze(1)
+
+class CharCNN(nn.Module):
+    def __init__(self, vocab_size=256, emb_dim=32, kernels=(2,3,4), channels=64):
+        super().__init__()
+        self.emb = nn.Embedding(vocab_size, emb_dim, padding_idx=0)
+        self.convs = nn.ModuleList([nn.Conv1d(emb_dim, channels, k) for k in kernels])
+        self.out_dim = channels * len(kernels)
+    def forward(self, char_ids):
+        x = self.emb(char_ids).transpose(1,2)
+        feats = [nn.functional.max_pool1d(nn.functional.relu(c(x)), x.size(2)).squeeze(2) for c in self.convs]
+        return torch.cat(feats, 1)
+
+class Detector(nn.Module):
+    def __init__(self, encoder, char_cnn):
+        super().__init__()
+        self.encoder = encoder; self.char = char_cnn
+        self.arc = ArcFace(encoder.config.hidden_size + char_cnn.out_dim)
+    def infer_logits(self, input_ids, attention_mask, char_ids):
+        out = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
+        cls = out.last_hidden_state[:,0]
+        ch  = self.char(char_ids)
+        feat = torch.cat([cls, ch], 1)
+        return self.arc.infer(feat)  # [B,1]
+
+class TemperatureScaler(nn.Module):
+    def __init__(self, T=1.0):
+        super().__init__()
+        self.log_T = nn.Parameter(torch.tensor(float(np.log(T)), dtype=torch.float32))
+    def forward(self, logits): return logits / torch.exp(self.log_T)
+    @torch.no_grad()
+    def set_T(self, T): self.log_T.data = torch.tensor(float(np.log(T)))
+
+def make_char_ids(batch, max_char_len=200):
+    arr = torch.zeros(len(batch), max_char_len, dtype=torch.long)
+    for i, s in enumerate(batch):
+        b = s.lower().encode("utf-8", errors="ignore")[:max_char_len]
+        if len(b): arr[i,:len(b)] = torch.tensor(list(b), dtype=torch.long)
+    return arr
+
+def predict_proba_nn(texts, model_id, head_path, max_len=512, batch_size=64):
+    tok, enc = load_encoder(model_id)
+    device = next(enc.parameters()).device
+    # Build NN modules & load weights/T/thr
+    payload = joblib.load(head_path.parent / "nn_head.joblib")
+    char = CharCNN().to(device)
+    det  = Detector(enc, char).to(device)
+    missing, unexpected = det.load_state_dict(payload["state_dict"], strict=False)
+    if unexpected: print(f"[warn] unexpected keys: {unexpected}")
+    scaler = TemperatureScaler().to(device); scaler.set_T(payload.get("temperature", 1.0))
+    thr = float(payload.get("threshold", 0.5))
+    # Encode and score
+    all_probs = []
+    for i in range(0, len(texts), batch_size):
+        batch = [str(x) for x in texts[i:i+batch_size]]
+        encd = tok(batch, padding=True, truncation=True, max_length=max_len, return_tensors="pt").to(device)
+        ch   = make_char_ids(batch).to(device)
+        with torch.no_grad(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+            logits = det.infer_logits(encd["input_ids"], encd["attention_mask"], ch)
+            logits = scaler(logits)
+            probs  = torch.sigmoid(logits).cpu().numpy().ravel()
+        all_probs.append(probs)
+    p1 = np.concatenate(all_probs)
+    pred_raw = (p1 >= thr).astype(int)
+    return pred_raw, p1, thr
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--text", default=None, help="Single input sentence")
@@ -209,6 +286,7 @@ def main():
     )
     ap.add_argument("--config", default=PROJECT_ROOT / "configs" / "detect.yaml")
     ap.add_argument("--no_gate", action="store_true", help="Disable lexicon gate")
+    ap.add_argument("--head", choices=["lr","nn"], default="lr", help="Which head to use for inference")
     args = ap.parse_args()
 
     with open(args.config) as f:
@@ -223,9 +301,16 @@ def main():
 
     # ---- Single sentence path ----
     if args.text:
-        pred_raw, p1 = predict_proba(
-            [args.text], threshold, args.max_len, batch_size, encoder_id, head_path
-        )
+        if args.head == "lr":
+            pred_raw, p1 = predict_proba(
+                [args.text], threshold, args.max_len, batch_size, encoder_id, head_path
+            )
+        else:  # nn
+            head_path = model_dir / "nn_head.joblib" 
+            pred_raw, p1, threshold = predict_proba_nn(
+                [args.text], encoder_id, head_path, args.max_len, batch_size
+            )
+
         toks = tokenize_basic(args.text)
         allow = has_fuzzy_verlan(toks, VSET) if use_gate else True
         pred_final = int(pred_raw[0] == 1 and allow)
@@ -261,7 +346,11 @@ def main():
         sys.exit(1)
 
     texts = df[args.column].astype(str).tolist()
-    pred_raw, p1 = predict_proba(texts, threshold, args.max_len, batch_size, encoder_id, head_path)
+    if args.head == "lr":
+        pred_raw, p1 = predict_proba(texts, threshold, args.max_len, batch_size, encoder_id, head_path)
+    else:  # nn
+        head_path = model_dir / "nn_head.joblib"  # 忽略 config threshold，使用 nn_head 內建 t*
+        pred_raw, p1, threshold = predict_proba_nn(texts, encoder_id, head_path, args.max_len, batch_size)
 
     # Apply lexicon gate per line
     gate_allow = []
