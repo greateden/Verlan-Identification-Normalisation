@@ -161,7 +161,35 @@ Update the symlink to switch versions.
 - ⏳ Final evaluation + fairness audit (Sept–Oct 2025).
 - ⏳ Draft writing (Sept–Oct 2025).
 
- 
+---
+
+## 📝 Project Log
+
+### July 11, 2025 – Initial repository setup
+- Created the project skeleton and added the license.
+
+### August 12, 2025 – Baseline data and scripts
+- Imported raw datasets and annotation resources.
+- Added initial `detect.py` and `convert.py` scripts along with environment setup and evaluation utilities.
+- Introduced test corpora and baseline predictions to enable early experimentation.
+
+### August 23, 2025 – Repository reorganisation
+- Moved test files into structured data directories to tidy the repository layout.
+
+### August 23–25, 2025 – Baseline evaluation and neural network experiments
+
+From August 23 to today (August 25, 2025), the project has progressed as follows:
+
+Baseline classifier established and evaluated: After completing model training on August 23, post-processing steps such as threshold tuning and calibration produced new metrics; however, performance on the validation set was poor, revealing clear overfitting and limited generalization.
+
+Code and experimental environment improvements: Added progress bars, device capability checks, and safeguards for heavy imports to make scripts more stable and user-friendly. Fixed CharCNN pooling kernel size and froze the encoder to reduce GPU memory usage, laying the groundwork for subsequent neural network training.
+
+Initial neural network training: The script detect_train_nn.py has now run for one epoch. First-round results were: AP = 0.3908, ROC-AUC = 0.8135, KS = 0.4990, optimal threshold t* = 0.87 with F1 = 0.2538. These are a feasible start but require more epochs and broader validation to assess whether NN truly outperforms the baseline.
+
+Why train neural networks? Although classical classifiers such as Logistic Regression already achieve reasonably strong results, neural networks offer several advantages: they can automatically learn richer contextual features beyond handcrafted inputs, potentially capturing patterns traditional models overlook; they provide more room for generalization and robustness, especially against the overfitting issues seen in post-processing; and they are more extensible for future directions such as multilingual adaptation, large-scale pretraining, or end-to-end training. Even if they do not immediately surpass the baseline, NNs serve as a valuable benchmark to confirm the ceiling of current approaches and ensure the project remains competitive and future-proof.
+
+---
+
 ## 📈 Research Results
 
 - **Aug 2025:** Baseline detector (commit 4dacd82) produced overlapping probability distributions between verlan and standard French:
