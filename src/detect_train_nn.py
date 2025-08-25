@@ -15,6 +15,7 @@ import argparse
 import os
 from pathlib import Path
 from typing import List
+from sklearn.model_selection import GroupShuffleSplit
 
 import joblib
 import numpy as np
@@ -67,6 +68,14 @@ class ArcFace(nn.Module):
         logits = torch.where(y.squeeze(1) > 0.5, cos_m, cos) * self.s
         return logits.unsqueeze(1)
 
+    @torch.no_grad()
+    def infer(self, x: torch.Tensor) -> torch.Tensor:
+        """Inference-time logits (NO label, NO margin)."""
+        w = nn.functional.normalize(self.W, dim=0)
+        x = nn.functional.normalize(x, dim=1)
+        cos = (x @ w).squeeze(1)
+        return (self.s * cos).unsqueeze(1)
+
 
 class CharCNN(nn.Module):
     """Simple character-level CNN branch."""
@@ -97,6 +106,8 @@ def supcon_loss(features: torch.Tensor, labels: torch.Tensor, temperature: float
     features = nn.functional.normalize(features, dim=1)
     labels = labels.squeeze(1)
     mask = torch.eq(labels.unsqueeze(0), labels.unsqueeze(1)).float()
+    # remove self-pairs
+    mask = mask - torch.eye(features.size(0), device=features.device)
     logits = features @ features.T / temperature
     logits = logits - torch.max(logits, dim=1, keepdim=True)[0]
     exp_logits = torch.exp(logits) * (1 - torch.eye(features.size(0), device=features.device))
@@ -104,6 +115,21 @@ def supcon_loss(features: torch.Tensor, labels: torch.Tensor, temperature: float
     mean_log_prob_pos = (mask * log_prob).sum(1) / (mask.sum(1) + 1e-9)
     loss = -mean_log_prob_pos.mean()
     return loss
+
+
+class TemperatureScaler(nn.Module):
+    """Single-parameter temperature scaling for logits."""
+    def __init__(self, T: float = 1.0):
+        super().__init__()
+        self.log_T = nn.Parameter(torch.tensor(float(np.log(T)), dtype=torch.float32))
+
+    def forward(self, logits: torch.Tensor) -> torch.Tensor:
+        T = torch.exp(self.log_T)
+        return logits / T
+
+    @torch.no_grad()
+    def temperature(self) -> float:
+        return float(torch.exp(self.log_T).cpu().item())
 
 
 # ---------------------------------------------------------------
@@ -186,7 +212,8 @@ def evaluate(model, loader, device):
                 batch["input_ids"].to(device),
                 batch["attention_mask"].to(device),
                 batch["char_ids"].to(device),
-                labels,
+                labels=None,
+                inference=True,
             )
             probs = torch.sigmoid(logits).cpu().numpy().ravel()
             y_score.append(probs)
@@ -203,7 +230,27 @@ def evaluate(model, loader, device):
         "ks": ks,
         "t_star": t_star,
         "f1_at_t": f1_star,
+        "scores": y_score,
+        "labels": y_true,
     }
+
+
+def collect_logits(model, loader, device):
+    model.eval()
+    logits_all, labels_all = [], []
+    with torch.no_grad():
+        for batch in loader:
+            labels = batch["label"].to(device)
+            logits, _ = model(
+                batch["input_ids"].to(device),
+                batch["attention_mask"].to(device),
+                batch["char_ids"].to(device),
+                labels=None,
+                inference=True,
+            )
+            logits_all.append(logits.cpu())
+            labels_all.append(labels.cpu())
+    return torch.cat(logits_all, dim=0), torch.cat(labels_all, dim=0)
 
 
 # ---------------------------------------------------------------
@@ -217,12 +264,15 @@ class Detector(nn.Module):
         self.char_cnn = char_cnn
         self.arc = ArcFace(encoder.config.hidden_size + char_cnn.output_dim)
 
-    def forward(self, input_ids, attention_mask, char_ids, labels):
+    def forward(self, input_ids, attention_mask, char_ids, labels=None, inference: bool=False):
         out = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
         cls = out.last_hidden_state[:, 0]
         char_feat = self.char_cnn(char_ids)
         feat = torch.cat([cls, char_feat], dim=1)
-        logits = self.arc(feat, labels)
+        if inference or labels is None:
+            logits = self.arc.infer(feat)
+        else:
+            logits = self.arc(feat, labels)
         return logits, feat
 
 
@@ -252,11 +302,36 @@ def load_data():
             lambda s: int(any(t in vset_surface for t in str(s).lower().split()))
         )
     sent_df["p_dict"] = sent_df["text"].apply(rule_score)
-    train_df, val_df, test_df = np.split(
-        sent_df.sample(frac=1, random_state=42),
-        [int(0.7 * len(sent_df)), int(0.85 * len(sent_df))],
-    )
-    return train_df.reset_index(drop=True), val_df.reset_index(drop=True), test_df.reset_index(drop=True)
+    # Optional group-aware split if 'pair_id' column exists (avoid leakage across pairs)
+    if "pair_id" in sent_df.columns:
+        gss = GroupShuffleSplit(n_splits=1, train_size=0.7, random_state=42)
+        tr_idx, held_idx = next(gss.split(sent_df, groups=sent_df["pair_id"]))
+        train_df = sent_df.iloc[tr_idx]
+        held_df = sent_df.iloc[held_idx]
+        gss2 = GroupShuffleSplit(n_splits=1, train_size=0.5, random_state=43)
+        val_idx, rest_idx = next(gss2.split(held_df, groups=held_df["pair_id"]))
+        val_df = held_df.iloc[val_idx]
+        rest_df = held_df.iloc[rest_idx]
+        gss3 = GroupShuffleSplit(n_splits=1, train_size=0.5, random_state=44)
+        calib_idx, test_idx = next(gss3.split(rest_df, groups=rest_df["pair_id"]))
+        calib_df = rest_df.iloc[calib_idx]
+        test_df = rest_df.iloc[test_idx]
+    else:
+        all_df = sent_df.sample(frac=1, random_state=42)
+        n = len(all_df)
+        n_train = int(0.70 * n)
+        n_val = int(0.15 * n)
+        train_df = all_df.iloc[:n_train]
+        val_df = all_df.iloc[n_train:n_train + n_val]
+        rest_df = all_df.iloc[n_train + n_val:]
+        n_rest = len(rest_df)
+        n_calib = n_rest // 2
+        calib_df = rest_df.iloc[:n_calib]
+        test_df = rest_df.iloc[n_calib:]
+    return (train_df.reset_index(drop=True),
+            val_df.reset_index(drop=True),
+            calib_df.reset_index(drop=True),
+            test_df.reset_index(drop=True))
 
 
 # ---------------------------------------------------------------
@@ -288,9 +363,10 @@ def main():
     char_cnn = CharCNN()
     model = Detector(enc, char_cnn).to(device)
 
-    train_df, val_df, test_df = load_data()
+    train_df, val_df, calib_df, test_df = load_data()
     train_ds = VerlanDataset(train_df, tok, max_len=args.max_len)
     val_ds = VerlanDataset(val_df, tok, max_len=args.max_len)
+    calib_ds = VerlanDataset(calib_df, tok, max_len=args.max_len)
 
     labels_np = train_df["label"].values
     n_pos = np.sum(labels_np == 1)
@@ -319,17 +395,56 @@ def main():
             loss_cls = criterion(logits, labels)
             loss_sup = supcon_loss(feat, labels)
             p_dict = batch["p_dict"].to(device)
-            kd = nn.functional.mse_loss(torch.sigmoid(logits), p_dict)
+            kd = nn.functional.mse_loss(torch.sigmoid(logits), p_dict.detach())
             loss = loss_cls + 0.2 * loss_sup + 0.2 * kd
             loss.backward()
             optimizer.step()
         metrics = evaluate(model, val_loader, device)
         print(f"Epoch {epoch}: {metrics}")
+    # ---------- Calibration on calib split ----------
+    val_loader = DataLoader(val_ds, batch_size=args.batch, shuffle=False, collate_fn=collate_fn)
+    calib_loader = DataLoader(calib_ds, batch_size=args.batch, shuffle=False, collate_fn=collate_fn)
+    test_loader = DataLoader(VerlanDataset(test_df, tok, max_len=args.max_len),
+                             batch_size=args.batch, shuffle=False, collate_fn=collate_fn)
 
-    # final evaluation on validation set only, model save as example
+    scaler = TemperatureScaler().to(device)
+    scaler.train()
+    calib_logits, calib_labels = collect_logits(model, calib_loader, device)
+    optim_T = torch.optim.LBFGS([scaler.log_T], lr=0.1, max_iter=50)
+    bce = nn.BCEWithLogitsLoss()
+    def _closure():
+        optim_T.zero_grad()
+        loss = bce(scaler(calib_logits.to(device)), calib_labels.to(device))
+        loss.backward()
+        return loss
+    optim_T.step(_closure)
+    T_opt = scaler.temperature()
+    print(f"[Calibration] Optimal temperature T = {T_opt:.3f}")
+
+    # Decide threshold on VAL (calibrated)
+    val_logits, val_labels = collect_logits(model, val_loader, device)
+    val_probs = torch.sigmoid(scaler(val_logits.to(device))).cpu().numpy().ravel()
+    ts = np.linspace(0, 1, 501)
+    f1s = [f1_score(val_labels.numpy().ravel(), (val_probs >= t).astype(int), zero_division=0) for t in ts]
+    t_star = float(ts[int(np.argmax(f1s))])
+    print(f"[VAL] Chosen threshold t* = {t_star:.3f} (F1={max(f1s):.3f})")
+
+    # Final test report
+    test_logits, test_labels = collect_logits(model, test_loader, device)
+    test_probs = torch.sigmoid(scaler(test_logits.to(device))).cpu().numpy().ravel()
+    test_ap = average_precision_score(test_labels.numpy().ravel(), test_probs)
+    test_auc = roc_auc_score(test_labels.numpy().ravel(), test_probs)
+    test_preds = (test_probs >= t_star).astype(int)
+    test_f1 = f1_score(test_labels.numpy().ravel(), test_preds, zero_division=0)
+    fpr, tpr, _ = roc_curve(test_labels.numpy().ravel(), test_probs)
+    ks = float(np.max(tpr - fpr))
+    print(f"[TEST] AUC={test_auc:.3f} | AP={test_ap:.3f} | KS={ks:.3f} | F1@t*={test_f1:.3f}")
+
     out_dir = PROJECT_ROOT / "models" / "detect" / "latest"
     os.makedirs(out_dir, exist_ok=True)
-    joblib.dump({"state_dict": model.state_dict()}, out_dir / "nn_head.joblib")
+    joblib.dump({"state_dict": model.state_dict(),
+                 "temperature": T_opt,
+                 "threshold": t_star}, out_dir / "nn_head.joblib")
 
 
 if __name__ == "__main__":
