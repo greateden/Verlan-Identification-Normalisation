@@ -167,6 +167,9 @@ Update the symlink to switch versions.
   ![Probability Distribution for Verlan vs Standard French](results/prob_dist_pre.png)
 
 - **Aug 2025:** After introducing calibration utilities and threshold optimization (commit fcbfcb0), post-processing separated the classes:
+  - Scanned validation thresholds to maximize F1 or Youden's J.
+  - Applied temperature scaling to logits so confidence spreads without altering ranking.
+  - Used Platt or isotonic calibration to trim the 0.5–0.7 “gray zone” before final thresholding.
 
   ![Probability Distribution after post-processing](results/prob_dist_post.png)
 
