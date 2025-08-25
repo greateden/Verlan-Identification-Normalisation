@@ -27,6 +27,7 @@ from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
 from transformers import AutoModel, AutoTokenizer, BitsAndBytesConfig
 
 from detect_infer import load_verlan_set, tokenize_basic, has_fuzzy_verlan
+from utils import get_device
 
 # ---------------------------------------------------------------
 # Losses and heads
@@ -357,7 +358,7 @@ def main():
                     help="Fine-tune the transformer encoder instead of freezing it")
     args = ap.parse_args()
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = get_device()
 
     bnb_cfg = BitsAndBytesConfig(
         load_in_4bit=True,
@@ -368,9 +369,16 @@ def main():
     tok = AutoTokenizer.from_pretrained(MODEL_ID)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    enc = AutoModel.from_pretrained(
-        MODEL_ID, quantization_config=bnb_cfg, device_map="auto", torch_dtype=torch.bfloat16
-    )
+
+    if device == "cuda":
+        enc = AutoModel.from_pretrained(
+            MODEL_ID,
+            quantization_config=bnb_cfg,
+            device_map="auto",
+            torch_dtype=torch.bfloat16,
+        )
+    else:
+        enc = AutoModel.from_pretrained(MODEL_ID).to(device)
 
     if not args.train_encoder:
         for p in enc.parameters():
