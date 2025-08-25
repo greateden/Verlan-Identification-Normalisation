@@ -92,10 +92,12 @@ class CharCNN(nn.Module):
     def forward(self, char_ids: torch.Tensor) -> torch.Tensor:
         # char_ids: [B, T]
         x = self.emb(char_ids).transpose(1, 2)  # [B, emb_dim, T]
-        feats = [
-            nn.functional.max_pool1d(nn.functional.relu(conv(x)), kernel_size=x.size(2)).squeeze(2)
-            for conv in self.convs
-        ]
+        feats = []
+        for conv in self.convs:
+            h = nn.functional.relu(conv(x))
+            # Global max pooling over the temporal dimension
+            pooled = h.max(dim=2)[0]
+            feats.append(pooled)
         return torch.cat(feats, dim=1)
 
 
