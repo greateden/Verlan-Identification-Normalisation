@@ -8,6 +8,23 @@
 
 set -euo pipefail
 
+# ---------------------------------------------------------------------------
+# Fresh virtual environment setup
+# ---------------------------------------------------------------------------
+VENV_DIR=".venv"
+if [ -d "$VENV_DIR" ]; then
+  rm -rf "$VENV_DIR"
+fi
+python3 -m venv "$VENV_DIR"
+source "$VENV_DIR/bin/activate"
+pip install --upgrade pip
+# Install required packages for training
+pip install \
+  torch torchvision torchaudio \
+  transformers datasets peft trl bitsandbytes accelerate \
+  pandas numpy scikit-learn joblib openpyxl sentencepiece \
+  huggingface_hub tqdm pyyaml unidecode
+
 # Detect GPU resources
 GPU_MEM=$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | head -n1)
 GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -n1)
