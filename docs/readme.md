@@ -249,7 +249,7 @@ Update the symlink to switch versions.
 
       %% Post-processing chain added only at inference time
       E --> P1[Calibration<br/><sub>Temperature / Platt / Isotonic</sub>]
-      P1 --> P2[Threshold tuning<br/><sub>Select t* on validation (e.g., F1 / Youden's J)</sub>]
+      P1 --> P2[Threshold tuning<br/><sub>Select t&ast; on validation (e.g., F1 / Youden&#39;s J)</sub>]
       P2 --> G{Gazetteer Gate<br/><sub>Lexicon / fuzzy match required to pass</sub>}
 
       G -- allow --> H[Final prediction: Verlan]
