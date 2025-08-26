@@ -233,33 +233,33 @@ Update the symlink to switch versions.
 
   ```mermaid
   flowchart TB
-      %% Erroneous pipeline (Aug 2025) – kept as a cautionary example
+    %% Fixed pipeline (Aug 2025) – HTML removed, ASCII only
 
-      subgraph "Dataset split (stratified)"
-        direction TB
-        S1[Train ≈ 72.25%]
-        S2[Validation ≈ 12.75%]
-        S3[Test = 15%]
-      end
+    subgraph Dataset_split_stratified
+      direction TB
+      S1[Train ~72.25%]
+      S2[Validation ~12.75%]
+      S3[Test = 15%]
+    end
 
-      A[Input text or file] --> B[Basic tokenisation]
-      B --> C[LLM Encoder<br/>Salesforce/SFR-Embedding-Mistral]
-      C --> D[Mean Pooling + L2 Norm<br/><sub>Average tokens → unit sentence vector</sub>]
-      D --> E[Logistic Regression<br/><sub>Linear classifier</sub>]
+    A[Input text or file] --> B[Basic tokenisation]
+    B --> C[LLM Encoder: Salesforce/SFR-Embedding-Mistral]
+    C --> D[Mean Pooling + L2 Norm\nAverage tokens -> unit sentence vector]
+    D --> E[Logistic Regression\nLinear classifier]
 
-      %% Post-processing chain added only at inference time
-      E --> P1[Calibration<br/><sub>Temperature / Platt / Isotonic</sub>]
-	  P1 --> P2[Threshold tuning<br/><sub>Select t\* on validation (e.g., F1 / Youden's J)</sub>]
-      P2 --> G{Gazetteer Gate<br/><sub>Lexicon / fuzzy match required to pass</sub>}
+    %% Post-processing chain added only at inference time
+    E --> P1[Calibration: Temperature / Platt / Isotonic]
+    P1 --> P2[Threshold tuning: select t* on validation, e.g., F1 or Youden J]
+    P2 --> G{Gazetteer Gate\nLexicon or fuzzy match required to pass}
 
-      G -- allow --> H[Final prediction: Verlan]
-      G -- block --> I[Final prediction: Standard]
+    G -- allow --> H[Final prediction: Verlan]
+    G -- block --> I[Final prediction: Standard]
 
-      %% Evaluation linkage and warning
-      S2 -- used for --> P2
-      S3 -- evaluated with --> G
-      W[[⚠️ Leakage risk<br/><sub>Test set mostly lexicon-covered verlan; few OOV/novel forms</sub><br/><sub>Gate hid classifier errors → deceptively high scores</sub>]]
-      G -- bias introduced --> W
+    %% Evaluation linkage and warning
+    S2 -. used for .-> P2
+    S3 -. evaluated with .-> G
+    W[[WARNING: Leakage risk\nTest set mostly lexicon-covered verlan; few OOV/novel forms\nGate hid classifier errors -> deceptively high scores]]
+    G -. bias introduced .-> W
   ```
 
   - **Aug 2025:** After introducing calibration utilities and threshold optimization (commit fcbfcb0), post-processing separated the classes:
