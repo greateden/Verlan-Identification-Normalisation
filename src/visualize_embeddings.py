@@ -12,9 +12,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.manifold import TSNE
 
 try:
-    import umap
+    from umap import UMAP
 except Exception:  # pragma: no cover - optional dependency
-    umap = None
+    UMAP = None
 
 from .detect_train import load_data, load_encoder, embed_texts
 
@@ -57,9 +57,9 @@ def main(num_points: int = 200, outfile: Path = DEFAULT_OUTFILE, reducer: str = 
     elif reducer == "tsne":
         reducer_model = TSNE(n_components=2, init="pca", random_state=42)
     else:  # reducer == "umap"
-        if umap is None:
+        if UMAP is None:
             raise ImportError("umap-learn is required for UMAP; install with 'pip install umap-learn'")
-        reducer_model = umap.UMAP(n_components=2, random_state=42)
+        reducer_model = UMAP(n_components=2, random_state=42)
     reduced = reducer_model.fit_transform(embeds)
 
     # Compute decision boundary in the reduced space
