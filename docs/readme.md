@@ -64,7 +64,7 @@ project-root/
 ├── docs/
 │   ├── readme.md
 │   └── results/
-│       ├── embedding_space.png
+│       ├── embedding_space_pca.png
 │       ├── embedding_space_tsne.png
 │       ├── prob_dist_post.png
 │       └── prob_dist_pre.png
