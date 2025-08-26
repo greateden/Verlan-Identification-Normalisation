@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 52 days, 05 hours, 10 minutes
+⏳ Time remaining: 52 days, 04 hours, 52 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
