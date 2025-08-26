@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 52 days, 09 hours, 23 minutes
+⏳ Time remaining: 52 days, 09 hours, 07 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -91,7 +91,8 @@ project-root/
 │   ├── detect_infer.py
 │   ├── detect_train.py
 │   ├── detect_train_nn.py
-│   └── utils.py
+│   ├── utils.py
+│   └── visualize_embeddings.py
 └── tests/
     ├── test_convert_infer.py
     ├── test_detect_infer.py
