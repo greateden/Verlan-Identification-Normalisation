@@ -184,11 +184,11 @@ python src/convert_infer.py --text "il a fumé un bédo avec ses rebeus" --confi
 
 Plot sentence embeddings in 2‑D and overlay the logistic regression boundary.
 Choose the dimensionality reducer (`pca`, `tsne`, or `umap`) and how many
-examples to sample.
+examples to sample. UMAP requires the optional dependency `umap-learn`.
 
 ```bash
-python -m src.visualize_embeddings --reducer tsne --num-points 500 \
-    --outfile docs/results/embedding_space_tsne.png
+python -m src.visualize_embeddings --reducer umap --num-points 500 \
+    --outfile docs/results/embedding_space_umap.png
 ```
 
 ### Script pairs
