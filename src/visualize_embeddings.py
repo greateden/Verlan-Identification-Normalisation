@@ -53,7 +53,6 @@ def main(num_points: int = 200, outfile: Path = DEFAULT_OUTFILE) -> None:
     plt.title("Embeddings with Logistic Regression decision boundary")
     plt.legend()
     plt.tight_layout()
-
     # Save figure instead of displaying it
     outfile.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(outfile)

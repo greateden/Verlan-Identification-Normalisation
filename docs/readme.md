@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 52 days, 09 hours, 23 minutes
+⏳ Time remaining: 52 days, 08 hours, 55 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -23,9 +23,6 @@ Deadline (UTC): 2025-10-17 11:00 UTC
 1. **Automatic detection** of verlan tokens in contemporary French text.  
 2. **Standardisation** of detected verlan forms into canonical French equivalents.  
 3. Build a **reproducible open pipeline** with dataset, models, and evaluation reports.  
-4. Conduct a **sociolinguistic analysis** of verlan usage patterns.
-
-Target venues: **VarDial 2026 (ACL)** or **TALN 2025**.
 
 ---
 
@@ -91,7 +88,8 @@ project-root/
 │   ├── detect_infer.py
 │   ├── detect_train.py
 │   ├── detect_train_nn.py
-│   └── utils.py
+│   ├── utils.py
+│   └── visualize_embeddings.py
 └── tests/
     ├── test_convert_infer.py
     ├── test_detect_infer.py
@@ -103,6 +101,47 @@ To update manually:
 ```text
 python scripts/generate-tree.py > repo_tree.txt
 ```
+
+---
+
+## 🔍 Detection Pipelines
+
+### LLM + Logistic Regression
+
+```mermaid
+flowchart TB
+    A[Input text or file] --> B[Basic tokenisation]
+    B --> C[LLM Encoder\nSalesforce/SFR-Embedding-Mistral]
+    C --> D[Mean Pooling + L2 Norm]
+    D --> E[Logistic Regression]
+    E --> F{Gazetteer Gate}
+    F -- allow --> G[Final prediction: Verlan]
+    F -- block --> H[Final prediction: Standard]
+```
+
+### Neural Network
+
+```mermaid
+flowchart TB
+    A[Input text or file] --> B1[Tokenizer]
+    A --> B2[UTF-8 byte IDs]
+    B1 --> C1[LLM Encoder]
+    B2 --> C2[CharCNN]
+    C1 --> D[Concatenate]
+    C2 --> D
+    D --> E[ArcFace Classifier]
+    E --> F[Temperature Scaling]
+    F --> G{Gazetteer Gate}
+    G -- allow --> H[Final prediction: Verlan]
+    G -- block --> I[Final prediction: Standard]
+```
+
+#### Why does the LLM + LR pipeline perform so well?
+
+- **The encoder does the heavy lifting.** The Mistral embedding is trained on billions of sentences and already separates verlan and non-verlan contexts in vector space.
+- **The task is nearly linear.** Verlan tokens occupy distinct regions in the embedding space, allowing a simple linear boundary to distinguish them.
+- **Dictionary gating adds robustness.** The lexicon-based post-processing corrects many potential misclassifications from the classifier.
+- **LR only cuts the final boundary.** With rich embeddings and a binary objective, a linear classifier achieves high accuracy with minimal complexity.
 
 ---
 
