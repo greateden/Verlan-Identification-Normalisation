@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 52 days, 02 hours, 30 minutes
+⏳ Time remaining: 52 days, 02 hours, 26 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -57,6 +57,7 @@ project-root/
 │   └── raw/
 │       ├── GazetteerEntries.xlsx
 │       ├── Sentences.xlsx
+│       ├── Sentences_balanced.xlsx
 │       ├── invented_verlan.txt
 │       ├── mixed_shuffled.txt
 │       ├── standard_only.txt
