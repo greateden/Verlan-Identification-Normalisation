@@ -107,20 +107,27 @@ python scripts/generate-tree.py > repo_tree.txt
 
 ---
 
+## 📚 Lexicon
+
+- **AP** – Average Precision; area under the precision–recall curve.
+- **CRF** – Conditional Random Field; probabilistic model for sequence labelling.
+- **F1** – F1 score; harmonic mean of precision and recall.
+- **KS** – Kolmogorov–Smirnov statistic; measures distance between distributions.
+- **LR** – Logistic Regression; linear classifier for binary tasks.
+- **PCA** – Principal Component Analysis; linear dimensionality reduction method.
+- **ROC-AUC** – Receiver Operating Characteristic – Area Under the Curve; classification performance metric.
+- **t-SNE** – t-distributed Stochastic Neighbor Embedding; non-linear dimensionality reduction for visualisation.
+- **UMAP** – Uniform Manifold Approximation and Projection; manifold-learning approach for dimensionality reduction.
+- **VDL** – Verlan Dataset Lexicon; project corpus and seed lexicon.
+
+---
+
+
 ## 🔍 Detection Pipelines
 
 ### LLM + Logistic Regression
 
-```mermaid
-flowchart TB
-    A[Input text or file] --> B[Basic tokenisation]
-    B --> C[LLM Encoder\nSalesforce/SFR-Embedding-Mistral]
-    C --> D[Mean Pooling + L2 Norm]
-    D --> E[Logistic Regression]
-    E --> F{Gazetteer Gate}
-    F -- allow --> G[Final prediction: Verlan]
-    F -- block --> H[Final prediction: Standard]
-```
+Working on the new one!
 
 ### Neural Network
 
@@ -221,6 +228,55 @@ Update the symlink to switch versions.
 <details>
 <summary>Click to expand</summary>
 
+### August 26, 2025 – Reflection after supervisor meeting
+- After deeper analysis, discovered that the main issue was not overfitting but a post-processing (gate) induced data leakage bias. The flowchart diagram of the LLM as below + Logistic Regression pipeline clearly illustrates how the Gazetteer Gate can introduce this bias by filtering predictions post-classification which leads to the results as below.
+
+  ```mermaid
+  flowchart TB
+      %% Erroneous pipeline (Aug 2025) – kept as a cautionary example
+
+      subgraph "Dataset split (stratified)"
+        direction TB
+        S1[Train ≈ 72.25%]
+        S2[Validation ≈ 12.75%]
+        S3[Test = 15%]
+      end
+
+      A[Input text or file] --> B[Basic tokenisation]
+      B --> C[LLM Encoder<br/>Salesforce/SFR-Embedding-Mistral]
+      C --> D[Mean Pooling + L2 Norm<br/><sub>Average tokens → unit sentence vector</sub>]
+      D --> E[Logistic Regression<br/><sub>Linear classifier</sub>]
+
+      %% Post-processing chain added only at inference time
+      E --> P1[Calibration<br/><sub>Temperature / Platt / Isotonic</sub>]
+      P1 --> P2[Threshold tuning<br/><sub>Select t* on validation (e.g., F1 / Youden's J)</sub>]
+      P2 --> G{Gazetteer Gate<br/><sub>Lexicon / fuzzy match required to pass</sub>}
+
+      G -- allow --> H[Final prediction: Verlan]
+      G -- block --> I[Final prediction: Standard]
+
+      %% Evaluation linkage and warning
+      S2 -- used for --> P2
+      S3 -- evaluated with --> G
+      W[[⚠️ Leakage risk<br/><sub>Test set mostly lexicon-covered verlan; few OOV/novel forms</sub><br/><sub>Gate hid classifier errors → deceptively high scores</sub>]]
+      G -- bias introduced --> W
+  ```
+
+  - **Aug 2025:** After introducing calibration utilities and threshold optimization (commit fcbfcb0), post-processing separated the classes:
+    - Scanned validation thresholds to maximize F1 or Youden's J.
+    - Applied temperature scaling to logits so confidence spreads without altering ranking.
+    - Used Platt or isotonic calibration to trim the 0.5–0.7 “gray zone” before final thresholding.
+
+    ![Probability Distribution after post-processing](results/prob_dist_post.png)
+  
+- Recognized the need to optimize the test set by categorizing examples systematically, such as separating existing vs invented verlan, and other relevant categories, to better evaluate model performance.
+- Refer to the updated flowchart diagram below and the embedding visualizations linked below for insights into the data distribution and model behavior.
+- The embedding visualizations using PCA, t-SNE, and UMAP show distinct clusters of verlan and standard tokens, with UMAP providing clearer separation while t-SNE appears more mixed.
+- Noted the limitations of the logistic regression boundary in capturing complex patterns in the embedding space; this motivates plans to experiment with more advanced models.
+- Emphasized the importance of rebalancing the dataset to reduce bias and improve generalization.
+
+[Embedding Space PCA](results/embedding_space_pca.png) | [Embedding Space t-SNE](results/embedding_space_tsne.png) | [Embedding Space UMAP](results/embedding_space_umap.png)
+
 ### August 26, 2025 – Supervisor meeting
 - Emphasised balancing the dataset and using cross-validation to avoid overfitting and randomness.
 - Acknowledged limitations of the current pipeline (Mistral embeddings + Logistic Regression) and the risk of calibration overfitting.
@@ -228,6 +284,7 @@ Update the symlink to switch versions.
 - Planned to visualise sentence embeddings with t-SNE/UMAP to assess separability of verlan vs. non-verlan examples.
 - Highlighted the importance of systematic experimentation and consulting supervisors rather than relying solely on AI tools.
 - Action items: balance data, add visualisation, benchmark multiple models, and document the full pipeline for review.
+
 
 ### August 23–25, 2025 – Baseline evaluation and neural network experiments
 
@@ -256,20 +313,13 @@ Why train neural networks? Although classical classifiers such as Logistic Regre
 
 ---
 
-## 📈 Research Results
+## 📈 Valid Research Results
 
 - **Aug 2025:** Baseline detector (commit 4dacd82) produced overlapping probability distributions between verlan and standard French:
 
   ![Probability Distribution for Verlan vs Standard French](results/prob_dist_pre.png)
 
-- **Aug 2025:** After introducing calibration utilities and threshold optimization (commit fcbfcb0), post-processing separated the classes:
-  - Scanned validation thresholds to maximize F1 or Youden's J.
-  - Applied temperature scaling to logits so confidence spreads without altering ranking.
-  - Used Platt or isotonic calibration to trim the 0.5–0.7 “gray zone” before final thresholding.
-
-  ![Probability Distribution after post-processing](results/prob_dist_post.png)
-
----
+<!-- ---
 
 ## 📌 Notes
 	•	All results will be released on Zenodo with DOI.
@@ -282,4 +332,4 @@ Why train neural networks? Although classical classifiers such as Logistic Regre
 
 - Dholakia, P. (2023). *Comparative analysis of transformer-based models for text-to-speech normalization* (Master's thesis, San José State University). https://doi.org/10.31979/etd.5dd6-k38w
 - Lertpiya, A. (2019). *Thai spelling correction and word normalization on social text using a two-stage pipeline with neural contextual attention* (Master's thesis, Chulalongkorn University). https://doi.org/10.58837/chula.the.2019.155
-- Tan, Y. L. (2024). *Improving transformer for scene text and handwritten text recognition* (Doctoral dissertation, Nanyang Technological University). https://doi.org/10.32657/10356/178284
+- Tan, Y. L. (2024). *Improving transformer for scene text and handwritten text recognition* (Doctoral dissertation, Nanyang Technological University). https://doi.org/10.32657/10356/178284 -->
