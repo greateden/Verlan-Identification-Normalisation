@@ -48,7 +48,6 @@ def main(num_points: int = 200, outfile: Path = DEFAULT_OUTFILE, reducer: str = 
     # Encode sentences into dense vectors
     tok, model = load_encoder()
     embeds = embed_texts(df["text"], tok, model)
-
     # Load trained Logistic Regression head for colouring / PCA projection
     lr = joblib.load(MODEL_PATH)
 
