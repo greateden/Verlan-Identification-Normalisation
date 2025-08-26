@@ -139,6 +139,17 @@ python src/detect_infer.py --infile data/raw/mixed_shuffled.txt --outfile data/p
 python src/convert_infer.py --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml
 ```
 
+6. Visualise embedding space
+
+Plot sentence embeddings in 2‑D and overlay the logistic regression boundary.
+Choose the dimensionality reducer (`pca`, `tsne`, or `umap`) and how many
+examples to sample.
+
+```bash
+python src/visualize_embeddings.py --reducer tsne --num-points 500 \
+    --outfile docs/results/embedding_space_tsne.png
+```
+
 ### Script pairs
 
 - `convert_train.py` ↔ `convert_infer.py`
