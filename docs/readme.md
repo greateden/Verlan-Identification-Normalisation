@@ -244,13 +244,13 @@ Update the symlink to switch versions.
 
     A[Input text or file] --> B[Basic tokenisation]
     B --> C[LLM Encoder: Salesforce/SFR-Embedding-Mistral]
-    C --> D[Mean Pooling + L2 Norm\nAverage tokens -> unit sentence vector]
-    D --> E[Logistic Regression\nLinear classifier]
+    C --> D[Mean Pooling + L2 Norm<br/><sub>Average tokens -> unit sentence vector</sub>]
+    D --> E[Logistic Regression<br/><sub>Linear classifier</sub>]
 
     %% Post-processing chain added only at inference time
     E --> P1[Calibration: Temperature / Platt / Isotonic]
     P1 --> P2[Threshold tuning: select t* on validation, e.g., F1 or Youden J]
-    P2 --> G{Gazetteer Gate\nLexicon or fuzzy match required to pass}
+    P2 --> G{Gazetteer Gate<br/><sub>Lexicon or fuzzy match required to pass</sub>}
 
     G -- allow --> H[Final prediction: Verlan]
     G -- block --> I[Final prediction: Standard]
@@ -258,7 +258,7 @@ Update the symlink to switch versions.
     %% Evaluation linkage and warning
     S2 -. used for .-> P2
     S3 -. evaluated with .-> G
-    W[[WARNING: Leakage risk\nTest set mostly lexicon-covered verlan; few OOV/novel forms\nGate hid classifier errors -> deceptively high scores]]
+    W[[WARNING: Leakage risk<br/><sub>Test set mostly lexicon-covered verlan; few OOV/novel forms</sub><br/><sub>Gate hid classifier errors -> deceptively high scores</sub>]]
     G -. bias introduced .-> W
   ```
 
