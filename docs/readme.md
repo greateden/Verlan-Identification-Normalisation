@@ -187,7 +187,7 @@ Choose the dimensionality reducer (`pca`, `tsne`, or `umap`) and how many
 examples to sample.
 
 ```bash
-python src/visualize_embeddings.py --reducer tsne --num-points 500 \
+python -m src.visualize_embeddings --reducer tsne --num-points 500 \
     --outfile docs/results/embedding_space_tsne.png
 ```
 
