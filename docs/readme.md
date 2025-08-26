@@ -217,16 +217,16 @@ Update the symlink to switch versions.
 
 ## 📝 Project Log
 
-### July 11, 2025 – Initial repository setup
-- Created the project skeleton and added the license.
+<details>
+<summary>Click to expand</summary>
 
-### August 12, 2025 – Baseline data and scripts
-- Imported raw datasets and annotation resources.
-- Added initial `detect.py` and `convert.py` scripts along with environment setup and evaluation utilities.
-- Introduced test corpora and baseline predictions to enable early experimentation.
-
-### August 23, 2025 – Repository reorganisation
-- Moved test files into structured data directories to tidy the repository layout.
+### August 26, 2025 – Supervisor meeting
+- Emphasised balancing the dataset and using cross-validation to avoid overfitting and randomness.
+- Acknowledged limitations of the current pipeline (Mistral embeddings + Logistic Regression) and the risk of calibration overfitting.
+- Agreed to explore more advanced models (e.g., CamemBERT, mT5, fine-tuned Mistral) and compare their performance.
+- Planned to visualise sentence embeddings with t-SNE/UMAP to assess separability of verlan vs. non-verlan examples.
+- Highlighted the importance of systematic experimentation and consulting supervisors rather than relying solely on AI tools.
+- Action items: balance data, add visualisation, benchmark multiple models, and document the full pipeline for review.
 
 ### August 23–25, 2025 – Baseline evaluation and neural network experiments
 
@@ -240,13 +240,18 @@ Initial neural network training: The script detect_train_nn.py has now run for o
 
 Why train neural networks? Although classical classifiers such as Logistic Regression already achieve reasonably strong results, neural networks offer several advantages: they can automatically learn richer contextual features beyond handcrafted inputs, potentially capturing patterns traditional models overlook; they provide more room for generalization and robustness, especially against the overfitting issues seen in post-processing; and they are more extensible for future directions such as multilingual adaptation, large-scale pretraining, or end-to-end training. Even if they do not immediately surpass the baseline, NNs serve as a valuable benchmark to confirm the ceiling of current approaches and ensure the project remains competitive and future-proof.
 
-### August 26, 2025 – Supervisor meeting
-- Emphasised balancing the dataset and using cross-validation to avoid overfitting and randomness.
-- Acknowledged limitations of the current pipeline (Mistral embeddings + Logistic Regression) and the risk of calibration overfitting.
-- Agreed to explore more advanced models (e.g., CamemBERT, mT5, fine-tuned Mistral) and compare their performance.
-- Planned to visualise sentence embeddings with t-SNE/UMAP to assess separability of verlan vs. non-verlan examples.
-- Highlighted the importance of systematic experimentation and consulting supervisors rather than relying solely on AI tools.
-- Action items: balance data, add visualisation, benchmark multiple models, and document the full pipeline for review.
+### August 23, 2025 – Repository reorganisation
+- Moved test files into structured data directories to tidy the repository layout.
+
+### August 12, 2025 – Baseline data and scripts
+- Imported raw datasets and annotation resources.
+- Added initial `detect.py` and `convert.py` scripts along with environment setup and evaluation utilities.
+- Introduced test corpora and baseline predictions to enable early experimentation.
+
+### July 11, 2025 – Initial repository setup
+- Created the project skeleton and added the license.
+
+</details>
 
 ---
 
