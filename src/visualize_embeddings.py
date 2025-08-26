@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Plot sentence embeddings and the Logistic Regression decision boundary."""
+"""Plot sentence embeddings and save the Logistic Regression decision boundary."""
 
 import argparse
 from pathlib import Path
@@ -11,12 +11,14 @@ from sklearn.decomposition import PCA
 
 from .detect_train import load_data, load_encoder, embed_texts
 
-# Path to the saved logistic regression head
-MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "detect" / "latest" / "lr_head.joblib"
+# Repository root and model path
+ROOT = Path(__file__).resolve().parents[1]
+MODEL_PATH = ROOT / "models" / "detect" / "latest" / "lr_head.joblib"
+DEFAULT_OUTFILE = ROOT / "docs" / "results" / "embedding_space.png"
 
 
-def main(num_points: int = 200) -> None:
-    """Visualise embedding space and LR boundary."""
+def main(num_points: int = 200, outfile: Path = DEFAULT_OUTFILE) -> None:
+    """Visualise embedding space and LR boundary, saving the plot to ``outfile``."""
     # Load a small subset of the training data
     train_df, _, _ = load_data()
     df = train_df.sample(n=min(num_points, len(train_df)), random_state=42)
@@ -51,11 +53,21 @@ def main(num_points: int = 200) -> None:
     plt.title("Embeddings with Logistic Regression decision boundary")
     plt.legend()
     plt.tight_layout()
-    plt.show()
+    # Save figure instead of displaying it
+    outfile.parent.mkdir(parents=True, exist_ok=True)
+    plt.savefig(outfile)
+    plt.close()
+    print(f"Plot saved to {outfile}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Visualise embedding space and LR boundary")
     parser.add_argument("--num-points", type=int, default=200, help="Number of points to sample")
+    parser.add_argument(
+        "--outfile",
+        type=Path,
+        default=DEFAULT_OUTFILE,
+        help="Path to save the generated plot",
+    )
     args = parser.parse_args()
-    main(args.num_points)
+    main(args.num_points, args.outfile)

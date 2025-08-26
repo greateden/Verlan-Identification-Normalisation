@@ -178,6 +178,14 @@ python src/detect_infer.py --infile data/raw/mixed_shuffled.txt --outfile data/p
 python src/convert_infer.py --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml
 ```
 
+6. Visualise embedding space
+
+Save the logistic regression boundary plotted over sentence embeddings.
+
+```bash
+python src/visualize_embeddings.py --outfile docs/results/embedding_space.png
+```
+
 ### Script pairs
 
 - `convert_train.py` ↔ `convert_infer.py`
