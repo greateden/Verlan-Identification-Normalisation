@@ -23,9 +23,6 @@ Deadline (UTC): 2025-10-17 11:00 UTC
 1. **Automatic detection** of verlan tokens in contemporary French text.  
 2. **Standardisation** of detected verlan forms into canonical French equivalents.  
 3. Build a **reproducible open pipeline** with dataset, models, and evaluation reports.  
-4. Conduct a **sociolinguistic analysis** of verlan usage patterns.
-
-Target venues: **VarDial 2026 (ACL)** or **TALN 2025**.
 
 ---
 
