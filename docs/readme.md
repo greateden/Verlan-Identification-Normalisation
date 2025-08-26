@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 52 days, 04 hours, 31 minutes
+⏳ Time remaining: 52 days, 04 hours, 26 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -66,6 +66,7 @@ project-root/
 │   └── results/
 │       ├── embedding_space_pca.png
 │       ├── embedding_space_tsne.png
+│       ├── embedding_space_umap.png
 │       ├── prob_dist_post.png
 │       └── prob_dist_pre.png
 ├── models/
