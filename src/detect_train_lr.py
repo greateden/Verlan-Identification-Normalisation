@@ -25,11 +25,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, f1_score
 
-from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig, CamembertTokenizer
+from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
 
 # ------------------------ Tunable parameters ------------------------
 MODEL_ID = "Salesforce/SFR-Embedding-Mistral"
-CAM_TOK_ID = "camembert-base"
 SEED = 42
 
 # Default batch size and length (can be overridden via CLI)
@@ -143,17 +142,6 @@ def embed_texts(texts: pd.Series, tok, model, batch_size=DEF_BATCH, max_len=DEF_
         print(f"Embedded {i + len(chunk)}/{total} texts")
     return np.vstack(embs)
 
-def sentence_has_verlan(text: str, cam_tok: CamembertTokenizer) -> int:
-    """Heuristic: flag if any token is not recognised by Camembert but its reversal is."""
-    words = str(text).split()
-    for w in words:
-        toks = cam_tok.tokenize(w)
-        if len(toks) > 1:
-            rev_toks = cam_tok.tokenize(w[::-1])
-            if len(rev_toks) == 1:
-                return 1
-    return 0
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--batch_size", type=int, default=DEF_BATCH)
@@ -162,21 +150,16 @@ def main():
 
     train_df, val_df, test_df = load_data()
     tok, model = load_encoder()
-    cam_tok = CamembertTokenizer.from_pretrained(CAM_TOK_ID)
 
     print("Embedding train set …")
     X_train = embed_texts(train_df["text"], tok, model, args.batch_size, args.max_length)
     y_train = train_df["label"].values
-    v_train = train_df["text"].apply(lambda s: sentence_has_verlan(s, cam_tok)).values.reshape(-1,1)
 
     print("Embedding val set …")
     X_val = embed_texts(val_df["text"], tok, model, args.batch_size, args.max_length)
     y_val = val_df["label"].values
-    v_val = val_df["text"].apply(lambda s: sentence_has_verlan(s, cam_tok)).values.reshape(-1,1)
 
     print("Training classifier …")
-    X_train = np.hstack([X_train, v_train])
-    X_val = np.hstack([X_val, v_val])
     # class_weight balanced with higher max_iter; lbfgs is stable for medium-sized samples with continuous features
     clf = LogisticRegression(
         max_iter=2000,
@@ -193,8 +176,6 @@ def main():
     print("Embedding test set …")
     X_test = embed_texts(test_df["text"], tok, model, args.batch_size, args.max_length)
     y_test = test_df["label"].values
-    v_test = test_df["text"].apply(lambda s: sentence_has_verlan(s, cam_tok)).values.reshape(-1,1)
-    X_test = np.hstack([X_test, v_test])
     yp = clf.predict(X_test)
     print("Test F1:", f1_score(y_test, yp))
 
