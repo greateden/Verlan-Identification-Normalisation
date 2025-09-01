@@ -1,3 +1,15 @@
+## ⏳ Submission Countdown (NZT)
+
+<!-- DUE:START -->
+```text
+⏳ Time remaining: 45 days, 23 hours, 55 minutes
+Deadline (NZT): 2025-10-18 00:00 NZDT
+Deadline (UTC): 2025-10-17 11:00 UTC
+```
+<!-- DUE:END -->
+
+---
+
 # VERLAИ: Automatic Recognition & Standardisation of French Verlan
 
 This repository contains the data, code, and experiments for the project
@@ -6,7 +18,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 - Create env: `conda env create -f configs/environment.yml && conda activate verlan`
 - Train detector: `python -m src.detect.detect_train_lr_bert`
@@ -27,17 +39,7 @@ Notes
 
 ---
 
-## Submission Countdown (NZT)
-
-```text
-⏳ Time remaining: 45 days, 23 hours, 55 minutes
-Deadline (NZT): 2025-10-18 00:00 NZDT
-Deadline (UTC): 2025-10-17 11:00 UTC
-```
-
----
-
-## Project Goals
+## 🎯 Project Goals
 
 1. Automatic detection of verlan tokens in contemporary French text.
 2. Standardisation of detected verlan forms into canonical French equivalents.
@@ -45,8 +47,9 @@ Deadline (UTC): 2025-10-17 11:00 UTC
 
 ---
 
-## Repository Structure
+## 📂 Repository Structure
 
+<!-- TREE:START -->
 ```text
 project-root/
 ├── configs/
@@ -119,6 +122,7 @@ project-root/
     ├── test_detect_infer.py
     └── test_tokenization.py
 ```
+<!-- TREE:END -->
 
 To update manually:
 
@@ -128,7 +132,7 @@ python scripts/generate-tree.py > repo_tree.txt
 
 ---
 
-## Lexicon
+## 📚 Lexicon
 
 - AP – Average Precision; area under the precision–recall curve.
 - CRF – Conditional Random Field; probabilistic model for sequence labelling.
@@ -143,7 +147,7 @@ python scripts/generate-tree.py > repo_tree.txt
 
 ---
 
-## Detection Pipelines
+## 🔍 Detection Pipelines
 
 ### LLM + Logistic Regression
 
@@ -175,7 +179,7 @@ flowchart TB
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 1. Setup environment
 
@@ -211,6 +215,11 @@ python -m src.detect.detect_infer \
 python -m src.convert.convert_infer --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml
 ```
 
+```bash
+python -m src.detect.detect_infer --infile data/processed/verlan_test_set.csv
+ --outfile data/raw/mixed_shuffled_pred.csv --config configs/detect.yaml --no_gate
+```
+
 6. Visualise embedding space
 
 Plot sentence embeddings in 2‑D and overlay the logistic regression boundary.
@@ -243,18 +252,18 @@ Update the symlink to switch versions.
 
 ---
 
-## Current Status
-- Data collection + annotation (Gold Corpus v1 ready).
-- Baseline (rules + dictionary).
-- Calibration & threshold optimization for verlan detector.
-- CamemBERT+CRF fine-tuning (in progress).
-- GPT-4o few-shot & Mistral-7B tokenizer (testing).
-- Final evaluation + fairness audit (Sept–Oct 2025).
-- Draft writing (Sept–Oct 2025).
+## 📊 Current Status
+- ✅ Data collection + annotation (Gold Corpus v1 ready).
+- ✅ Baseline (rules + dictionary).
+- ✅ Calibration & threshold optimization for verlan detector.
+- 🔄 CamemBERT+CRF fine-tuning (in progress).
+- 🔄 GPT-4o few-shot & Mistral-7B tokenizer (testing).
+- ⏳ Final evaluation + fairness audit (Sept–Oct 2025).
+- ⏳ Draft writing (Sept–Oct 2025).
 
 ---
 
-## Project Log
+## 📝 Project Log
 
 <details>
 <summary>Click to expand</summary>
@@ -344,7 +353,7 @@ Why train neural networks? Although classical classifiers such as Logistic Regre
 
 ---
 
-## Valid Research Results
+## 📈 Valid Research Results
 
 - Aug 2025: Baseline detector (commit 4dacd82) produced overlapping probability distributions between verlan and standard French:
 

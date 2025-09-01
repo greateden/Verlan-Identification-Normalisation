@@ -33,7 +33,7 @@ from ..detect.detect_train_lr_bert import (
 )
 
 # Repository root and model path
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 HEAD_DEFAULT = ROOT / "models" / "detect" / "latest" / "lr_head.joblib"
 DEFAULT_OUTFILE = ROOT / "docs" / "results" / "embedding_space.png"
 REDUCERS = {"pca", "tsne", "umap"}
@@ -96,6 +96,7 @@ def main(
 
     # Load trained Logistic Regression head for colouring / PCA projection
     head_path = _resolve_head_path(head)
+    print(f"Loading LR head from: {head_path}")
     lr = joblib.load(head_path)
 
     # Align features: some heads are trained with an extra heuristic feature

@@ -36,7 +36,7 @@ SEED = 42
 DEF_BATCH = 32
 DEF_MAXLEN = 512
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
 # ------------------------ Stability/efficiency settings ------------------------
@@ -52,7 +52,8 @@ def load_data():
     """
     Load datasets from data/raw regardless of current working directory.
     """
-    sent_path = RAW_DIR / "Sentences_balanced.xlsx"
+    # sent_path = RAW_DIR / "Sentences_balanced.xlsx"
+    sent_path = RAW_DIR / "Sentences.xlsx"
     gaz_path = RAW_DIR / "GazetteerEntries.xlsx"
 
     # Friendly existence check and debug output (comment ratio >30%)
@@ -198,10 +199,45 @@ def main():
     yp = clf.predict(X_test)
     print("Test F1:", f1_score(y_test, yp))
 
-    out_dir = PROJECT_ROOT / "models" / "detect" / "latest"
-    os.makedirs(out_dir, exist_ok=True)
-    joblib.dump(clf, out_dir / "lr_head.joblib")
-    print("Detect model saved.")
+    # Save strategy:
+    # - Save under models/detect/YYYY-MM-DD/lr_head.joblib
+    # - If today's file already exists, rename the existing one to <name>new before writing
+    # - Copy the newly saved head to models/detect/latest/lr_head.joblib
+    from datetime import datetime
+    import shutil
+
+    base_dir = PROJECT_ROOT / "models" / "detect"
+    today = datetime.now().strftime("%Y-%m-%d")
+    date_dir = base_dir / today
+    latest_dir = base_dir / "latest"
+    os.makedirs(date_dir, exist_ok=True)
+    os.makedirs(latest_dir, exist_ok=True)
+
+    head_name = "lr_head.joblib"
+    head_path = date_dir / head_name
+
+    # If a head already exists for today, rename it by appending 'new' to the stem
+    if head_path.exists():
+        stem = head_path.stem  # e.g., 'lr_head'
+        suffix = "".join(head_path.suffixes)  # e.g., '.joblib'
+        renamed_path = head_path.with_name(f"{stem}new{suffix}")
+        try:
+            head_path.rename(renamed_path)
+            print(f"Existing head found for today. Renamed to: {renamed_path}")
+        except Exception as e:
+            print(f"Warning: could not rename existing head: {e}")
+
+    # Dump the newly trained head to today's directory
+    joblib.dump(clf, head_path)
+    print(f"Detect model saved to: {head_path}")
+
+    # Update latest copy
+    latest_path = latest_dir / head_name
+    try:
+        shutil.copy2(head_path, latest_path)
+        print(f"Latest head updated at: {latest_path}")
+    except Exception as e:
+        print(f"Warning: could not update latest head: {e}")
 
 if __name__ == "__main__":
     main()

@@ -53,7 +53,7 @@ warnings.filterwarnings("ignore", message="`resume_download` is deprecated")
 warnings.filterwarnings("ignore", message="The `use_auth_token` argument is deprecated")
 
 MODEL_ID = "Salesforce/SFR-Embedding-Mistral"
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 MODEL_DIR = PROJECT_ROOT / "models" / "detect" / "latest"
 HEAD_PATH = MODEL_DIR / "lr_head.joblib"
