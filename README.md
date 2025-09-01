@@ -149,11 +149,39 @@ python scripts/generate-tree.py > repo_tree.txt
 
 ## 🔍 Detection Pipelines
 
-### LLM + Logistic Regression
+### BERT
+```mermaid
+  flowchart TB
+    %% Fixed pipeline (2 Sept) 
 
-Working on the new one!
+    subgraph Dataset_split_stratified
+      direction TB
+      S1[Train ~72.25%]
+      S2[Validation ~12.75%]
+      S3[Test = 15%]
+    end
 
-### Neural Network
+    A[Input text or file] --> B[Basic tokenisation]
+    B --> C[LLM Encoder: Salesforce/SFR-Embedding-Mistral]
+    C --> D[Mean Pooling + L2 Norm\nAverage tokens -> unit sentence vector]
+    D --> E[Logistic Regression\nLinear classifier]
+
+    %% Post-processing chain added only at inference time
+    E --> P1[Calibration: Temperature / Platt / Isotonic]
+    P1 --> P2[Threshold tuning: select t* on validation, e.g., F1 or Youden J]
+    P2 --> G{Gazetteer Gate\nLexicon or fuzzy match required to pass}
+
+    G -- allow --> H[Final prediction: Verlan]
+    G -- block --> I[Final prediction: Standard]
+
+    %% Evaluation linkage and warning
+    S2 -. used for .-> P2
+    S3 -. evaluated with .-> G
+    W[[WARNING: Leakage risk\nTest set mostly lexicon-covered verlan; few OOV/novel forms\nGate hid classifier errors -> deceptively high scores]]
+    G -. bias introduced .-> W
+  ```
+
+### Neural Network (ignore this for now)
 
 ```mermaid
 flowchart TB
