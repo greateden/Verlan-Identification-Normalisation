@@ -3,3 +3,12 @@ logs/
 verlan-detector/
 mistral-verlan-conv/
 .DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+.vscode/
+.idea/
+dist/
+build/

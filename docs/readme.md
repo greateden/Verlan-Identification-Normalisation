@@ -175,19 +175,22 @@ huggingface-cli login
 3. Run detector training
 
 ```bash
-python src/detect_train_lr_bert.py
+python -m src.detect.detect_train_lr_bert
 ```
 
 4. Run detector inference
 
 ```bash
-python src/detect_infer.py --infile data/raw/mixed_shuffled.txt --outfile data/predictions/mixed_pred.csv --config configs/detect.yaml
+python -m src.detect.detect_infer \
+  --infile data/raw/mixed_shuffled.txt \
+  --outfile data/predictions/mixed_pred.csv \
+  --config configs/detect.yaml
 ```
 
 5. Run conversion inference
 
 ```bash
-python src/convert_infer.py --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml
+python -m src.convert.convert_infer --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml
 ```
 
 6. Visualise embedding space
@@ -197,14 +200,23 @@ Choose the dimensionality reducer (`pca`, `tsne`, or `umap`) and how many
 examples to sample. UMAP requires the optional dependency `umap-learn`.
 
 ```bash
-python -m src.visualize_embeddings --reducer umap --num-points 500 \
-    --outfile docs/results/embedding_space_umap.png
+python -m src.plot.visualize_embeddings --reducer umap --num-points 500 \
+  --outfile docs/results/embedding_space_umap.png
 ```
+
+7. Plot probability distribution (histogram)
+
+```bash
+python src/plot/plot_probability_histogram.py \
+  --csv data/predictions/2025-08-29/mixed_shuffled_pred.csv \
+  --out docs/results/lr_with_bert_ds_balanced/prob_dist.png
+```
+Options: `--prob-col` and `--label-col` override auto-detection; `--bins` controls bin count.
 
 ### Script pairs
 
-- `convert_train.py` ↔ `convert_infer.py`
-- `detect_train_lr_bert.py` ↔ `detect_infer.py`
+- `convert/convert_train.py` ↔ `convert/convert_infer.py`
+- `detect/detect_train_lr_bert.py` ↔ `detect/detect_infer.py`
 
 ### Model directory alias
 

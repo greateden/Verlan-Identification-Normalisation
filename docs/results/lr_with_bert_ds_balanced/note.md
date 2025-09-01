@@ -1,0 +1,1 @@
+This is fucking tragic, weird that after balancing the dataset the performance dropped so damn much.

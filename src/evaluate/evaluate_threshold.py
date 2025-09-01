@@ -2,18 +2,18 @@
 """
 Evaluate thresholds on validation split for the current detector
 - Encoder: Salesforce/SFR-Embedding-Mistral (4-bit, BF16)
-- Classifier: verlan-detector/lr_head.joblib
+- Classifier: models/detect/latest/lr_head.joblib
 - Rebuilds train/val/test with SEED=42 to match training split
 - Supports optional score calibration (temperature, Platt, isotonic)
 - Saves CSV with metrics for each threshold, and prints two recommended thresholds:
   (a) best score by selected metric; (b) max recall with precision >= target
 
 Outputs:
-  verlan-detector/threshold_eval.csv
+  models/detect/latest/threshold_eval.csv
 
 Usage:
-  python EvaluateThreshold.py
-  python EvaluateThreshold.py --tmin 0.05 --tmax 0.95 --tstep 0.02 --prec_target 0.85
+  python -m src.evaluate.evaluate_threshold
+  python -m src.evaluate.evaluate_threshold --tmin 0.05 --tmax 0.95 --tstep 0.02 --prec_target 0.85
 """
 
 import os, argparse, sys
@@ -39,7 +39,7 @@ from calibration import (
 MODEL_ID   = "Salesforce/SFR-Embedding-Mistral"
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR    = PROJECT_ROOT / "data" / "raw"
-MODEL_DIR  = PROJECT_ROOT / "verlan-detector"
+MODEL_DIR  = PROJECT_ROOT / "models" / "detect" / "latest"
 HEAD_PATH  = MODEL_DIR / "lr_head.joblib"
 SEED       = 42
 DEF_BATCH  = 64
@@ -196,7 +196,7 @@ def main():
         )
 
     df = pd.DataFrame(rows)
-    out_csv = "verlan-detector/threshold_eval.csv"
+    out_csv = str(MODEL_DIR / "threshold_eval.csv")
     df.to_csv(out_csv, index=False)
     print(f"Saved: {out_csv}")
 

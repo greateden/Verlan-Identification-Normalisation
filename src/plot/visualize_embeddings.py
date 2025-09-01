@@ -25,7 +25,7 @@ try:
 except Exception:  # pragma: no cover - optional dependency
     UMAP = None
 
-from .detect_train_lr_bert import (
+from ..detect.detect_train_lr_bert import (
     load_data,
     load_encoder,
     embed_texts,
