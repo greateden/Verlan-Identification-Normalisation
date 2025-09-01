@@ -42,9 +42,9 @@ except Exception:  # pragma: no cover
     torch = None
     nn = None
 try:
-    from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
+    from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig, CamembertTokenizer
 except Exception:  # pragma: no cover
-    AutoTokenizer = AutoModel = BitsAndBytesConfig = None
+    AutoTokenizer = AutoModel = BitsAndBytesConfig = CamembertTokenizer = None
 try:
     import joblib
 except Exception:  # pragma: no cover
@@ -57,6 +57,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 MODEL_DIR = PROJECT_ROOT / "models" / "detect" / "latest"
 HEAD_PATH = MODEL_DIR / "lr_head.joblib"
+CAM_TOK_ID = "camembert-base"
 
 # --- Runtime knobs for stability/speed on A4000 ---
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
@@ -199,6 +200,19 @@ def embed_texts(texts, tok, model, max_len=512, batch_size=64):
             pbar.update(len(batch))
     return np.vstack(out_list)
 
+def sentence_has_verlan(text: str, cam_tok: "CamembertTokenizer") -> int:
+    """Heuristic used in training (detect_train.py):
+    flag if any token is not recognised by CamemBERT but its reversal is.
+    """
+    words = str(text).split()
+    for w in words:
+        toks = cam_tok.tokenize(w)
+        if len(toks) > 1:
+            rev_toks = cam_tok.tokenize(w[::-1])
+            if len(rev_toks) == 1:
+                return 1
+    return 0
+
 def predict_proba(
     texts,
     threshold=0.8,
@@ -214,6 +228,30 @@ def predict_proba(
     tok, enc = load_encoder(model_id)
     clf = joblib.load(head_path)
     X = embed_texts(texts, tok, enc, max_len=max_len, batch_size=batch_size)
+
+    # Align features with the trained LR head. If the LR expects one extra
+    # feature (the CamemBERT heuristic used in detect_train.py), compute and
+    # append it. Otherwise, use embeddings as-is.
+    try:
+        expected = int(getattr(clf, "n_features_in_", clf.coef_.shape[1]))
+    except Exception:
+        expected = X.shape[1]
+
+    if expected == X.shape[1] + 1:
+        if CamembertTokenizer is None:
+            raise RuntimeError(
+                f"Loaded LR expects {expected} features but only {X.shape[1]} embedding dims are available, "
+                "and CamembertTokenizer is unavailable to compute the extra heuristic feature."
+            )
+        cam_tok = CamembertTokenizer.from_pretrained(CAM_TOK_ID)
+        v = np.array([sentence_has_verlan(t, cam_tok) for t in texts], dtype=np.float32).reshape(-1, 1)
+        X = np.hstack([X, v])
+    elif expected != X.shape[1]:
+        raise ValueError(
+            f"Feature mismatch: embeddings have {X.shape[1]} dims but LR expects {expected}. "
+            "If the LR was trained with an extra heuristic feature, rerun with this patched script."
+        )
+
     p1 = clf.predict_proba(X)[:, 1]
     pred_raw = (p1 >= threshold).astype(int)
     return pred_raw, p1

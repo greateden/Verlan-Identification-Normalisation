@@ -90,7 +90,7 @@ project-root/
 │   ├── convert_infer.py
 │   ├── convert_train.py
 │   ├── detect_infer.py
-│   ├── detect_train.py
+│   ├── detect_train_lr_bert.py
 │   ├── detect_train_lr.py
 │   ├── detect_train_nn.py
 │   ├── utils.py
@@ -175,7 +175,7 @@ huggingface-cli login
 3. Run detector training
 
 ```bash
-python src/detect_train.py
+python src/detect_train_lr_bert.py
 ```
 
 4. Run detector inference
@@ -204,7 +204,7 @@ python -m src.visualize_embeddings --reducer umap --num-points 500 \
 ### Script pairs
 
 - `convert_train.py` ↔ `convert_infer.py`
-- `detect_train.py` ↔ `detect_infer.py`
+- `detect_train_lr_bert.py` ↔ `detect_infer.py`
 
 ### Model directory alias
 

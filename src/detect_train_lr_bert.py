@@ -62,8 +62,8 @@ def load_data():
             "❌ Could not find the following required files:\n"
             + "\n".join(f" - {p}" for p in missing)
             + f"\n\nCurrent working directory (cwd) = {Path.cwd()}\n"
-            f"PROJECT_ROOT resolved by detect_train.py = {PROJECT_ROOT}\n"
-            "Please check the paths or run `python -m src.detect_train` from the project root."
+            f"PROJECT_ROOT resolved by detect_train_lr_bert.py = {PROJECT_ROOT}\n"
+            "Please check the paths or run `python -m src.detect_train_lr_bert` from the project root."
         )
         raise FileNotFoundError(msg)
 
