@@ -268,6 +268,20 @@ Update the symlink to switch versions.
 <details>
 <summary>Click to expand</summary>
 
+### September 2, 2025 – LR vs BERT+LR, dataset balance, and plots
+- Implemented a BERT+LR variant: `src/detect/detect_train_lr_bert.py` trains a CPU `LogisticRegression` head on top of sentence embeddings from `Salesforce/SFR-Embedding-Mistral` (4‑bit, BF16). For each sentence, I:
+  - Tokenize and run the encoder, then mean‑pool token vectors using the attention mask and L2‑normalize to get a unit‑length sentence embedding.
+  - Compute one extra, simple binary feature with a CamemBERT heuristic: if a token is split into multiple pieces by CamemBERT but its reverse becomes a single token, flag as 1; else 0.
+  - Concatenate `[embedding, heuristic]` and fit `LogisticRegression(class_weight="balanced", max_iter=2000)`.
+  - Save the head to `models/detect/YYYY‑MM‑DD/lr_head.joblib` and update `models/detect/latest/`.
+- Refactored inference: `src/detect/detect_infer.py` now handles batching, configurable threshold, and an optional gazetteer/fuzzy gate; `src/detect_infer.py` remains as a thin wrapper for backward compatibility.
+- Updated embedding visualisation: replaced `src/visualize_embeddings.py` with `src/plot/visualize_embeddings.py`. It now aligns features with the chosen LR head (adds the heuristic feature when the head expects D+1 inputs) before projecting, so the PCA boundary matches the trained head.
+- Added probability histogram tool: `src/plot/plot_probability_histogram.py` to compare score distributions. Generated two charts for balanced vs imbalanced datasets (see Valid Research Results).
+- Findings so far:
+  - BERT+LR underperforms LR‑only in my runs. The extra 1‑D heuristic seems to add noise and slightly hurts validation/test metrics compared to using only the sentence embedding with LR.
+  - Possible bug to investigate: my “BERT” path is actually a general LLM embedding (SFR‑Embedding‑Mistral) with manual mean‑pooling over `last_hidden_state`. If that model expects a specific pooling pipeline or `trust_remote_code=True`, the custom pooling may not be optimal. Also, concatenating a binary heuristic to a unit‑norm vector changes feature scaling; although LR can learn weights, the mismatch might make the single bit overly influential or simply unhelpful.
+  - Balanced vs imbalanced: distributions look similar overall. Balancing slightly improves the “is verlan” side (more mass at high probabilities) but tends to reduce specificity for “is not verlan” (blue histogram shifts right → more false positives).
+
 ### August 26, 2025 – Reflection after supervisor meeting
 - After deeper analysis, discovered that the main issue was not overfitting but a post-processing (gate) induced data leakage bias. The flowchart diagram of the LLM as below + Logistic Regression pipeline clearly illustrates how the Gazetteer Gate can introduce this bias by filtering predictions post-classification which leads to the results as below.
 
@@ -358,3 +372,11 @@ Why train neural networks? Although classical classifiers such as Logistic Regre
 - Aug 2025: Baseline detector (commit 4dacd82) produced overlapping probability distributions between verlan and standard French:
 
   ![Probability Distribution for Verlan vs Standard French](docs/results/only_lr_no_bert_ds_imbalance/prob_dist_pre.png)
+
+- Sept 2025: BERT+LR on imbalanced dataset — probability distribution of predicted “verlan” scores for verlan vs standard sentences. Red shifts right but overlaps remain substantial.
+
+  ![BERT+LR – Imbalanced dataset (probability distribution)](docs/results/lr_with_bert_ds_imbalanced/prob_dist.png)
+
+- Sept 2025: BERT+LR on balanced dataset — verlan (red) concentrates more at high scores (better sensitivity), but standard (blue) also moves right (lower specificity). Overall separation is only modestly improved.
+
+  ![BERT+LR – Balanced dataset (probability distribution)](docs/results/lr_with_bert_ds_balanced/prob_dist.png)
