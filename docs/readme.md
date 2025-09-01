@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 45 days, 23 hours, 07 minutes
+⏳ Time remaining: 45 days, 22 hours, 41 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -24,6 +24,8 @@ project-root/
 │   ├── predictions/
 │   │   ├── 2025-08-29/
 │   │   │   └── mixed_shuffled_pred.csv
+│   │   ├── 2025-09-02/
+│   │   │   └── mixed_shuffled_pred.csv
 │   │   └── very_old/
 │   │       ├── invented.csv
 │   │       ├── mixed_pred.csv
@@ -41,11 +43,15 @@ project-root/
 │       ├── standard_only.txt
 │       └── verlan_only.txt
 ├── docs/
+│   ├── readme.md
 │   └── results/
 │       ├── lr_with_bert_ds_balanced/
 │       │   ├── embedding_space_tsne_old.png
 │       │   ├── embedding_space_umap_old.png
 │       │   ├── note.md
+│       │   └── prob_dist.png
+│       ├── lr_with_bert_ds_imbalanced/
+│       │   ├── embedding_space_umap.png
 │       │   └── prob_dist.png
 │       └── only_lr_no_bert_ds_imbalance/
 │           ├── embedding_space_pca.png
@@ -63,6 +69,8 @@ project-root/
 │       ├── 2025-08-24 LR/
 │       │   └── lr_head.joblib
 │       ├── 2025-08-29/
+│       │   └── lr_head.joblib
+│       ├── 2025-09-02/
 │       │   └── lr_head.joblib
 │       └── latest/
 │           └── lr_head.joblib
