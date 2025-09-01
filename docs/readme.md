@@ -10,7 +10,7 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 46 days, 04 hours, 21 minutes
+⏳ Time remaining: 45 days, 23 hours, 55 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -58,18 +58,23 @@ project-root/
 │       ├── GazetteerEntries.xlsx
 │       ├── Sentences.xlsx
 │       ├── Sentences_balanced.xlsx
-│       ├── invented_verlan.txt
+│       ├── invented_verlan_mixed_paired.txt
 │       ├── mixed_shuffled.txt
+│       ├── mixed_shuffled_pred.csv
 │       ├── standard_only.txt
 │       └── verlan_only.txt
 ├── docs/
 │   ├── readme.md
 │   └── results/
-│       ├── embedding_space_pca.png
-│       ├── embedding_space_tsne.png
-│       ├── embedding_space_umap.png
-│       ├── prob_dist_post.png
-│       └── prob_dist_pre.png
+│       ├── lr_with_bert/
+│       │   ├── embedding_space_tsne.png
+│       │   └── embedding_space_umap.png
+│       └── only_lr_no_bert_ds_imbalance/
+│           ├── embedding_space_pca.png
+│           ├── embedding_space_tsne.png
+│           ├── embedding_space_umap.png
+│           ├── prob_dist_post.png
+│           └── prob_dist_pre.png
 ├── models/
 │   ├── convert/
 │   │   ├── 2025-08-20/
@@ -77,7 +82,9 @@ project-root/
 │   │   └── latest/
 │   │       └── mistral-verlan-conv/
 │   └── detect/
-│       ├── 2025-08-24/
+│       ├── 2025-08-24 LR/
+│       │   └── lr_head.joblib
+│       ├── 2025-08-29/
 │       │   └── lr_head.joblib
 │       └── latest/
 │           └── lr_head.joblib
@@ -90,8 +97,8 @@ project-root/
 │   ├── convert_infer.py
 │   ├── convert_train.py
 │   ├── detect_infer.py
-│   ├── detect_train_lr_bert.py
 │   ├── detect_train_lr.py
+│   ├── detect_train_lr_bert.py
 │   ├── detect_train_nn.py
 │   ├── utils.py
 │   └── visualize_embeddings.py
