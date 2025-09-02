@@ -24,6 +24,9 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 - Train detector: `python -m src.detect.detect_train_lr_bert`
 - Detect (batch): `python -m src.detect.detect_infer --infile data/raw/mixed_shuffled.txt --outfile data/predictions/mixed_pred.csv --config configs/detect.yaml`
 - Convert (single): `python -m src.convert.convert_infer --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml`
+- Detect (BERT fine-tuned): `python -m src.detect.frtect_infer_bert --text "il a fumé un bédo avec ses rebeus"`
+  - Batch: `python -m src.detect.frtect_infer_bert --infile data/raw/mixed_shuffled.txt --outfile data/predictions/mixed_pred.csv`
+  - Uses model at `models/detect/latest/camembert` by default; override with `--model_dir`.
 
 ### Plot Probability Histogram
 - Draw overlapping histograms for Verlan vs Standard probabilities from a predictions CSV.
