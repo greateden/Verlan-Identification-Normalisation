@@ -151,34 +151,37 @@ python scripts/generate-tree.py > repo_tree.txt
 
 ### BERT
 ```mermaid
-  flowchart TB
-    %% Fixed pipeline (2 Sept) 
+flowchart TB
+  %% ===== Stratified split (fixed on 2 Sept) =====
+  subgraph Dataset_split_stratified
+    direction TB
+    S1["Train 72.25%"]
+    S2["Validation 12.75%"]
+    S3["Test 15%"]
+  end
 
-    subgraph Dataset_split_stratified
-      direction TB
-      S1[Train ~72.25%]
-      S2[Validation ~12.75%]
-      S3[Test = 15%]
-    end
+  %% ===== Ingestion & normalization =====
+  A["Input text or file"] --> N["Basic normalization for better results: Unicode NFC; strip control; keep accents"]
 
-    A[Input text or file] --> B[Basic tokenisation]
-    B --> C[LLM Encoder: Salesforce/SFR-Embedding-Mistral]
-    C --> D[Mean Pooling + L2 Norm\nAverage tokens -> unit sentence vector]
-    D --> E[Logistic Regression\nLinear classifier]
+  %% ===== Tokenize once for both branches =====
+  N --> T["CamemBERT tokenizer (SentencePiece/BPE)"]
 
-    %% Post-processing chain added only at inference time
-    E --> P1[Calibration: Temperature / Platt / Isotonic]
-    P1 --> P2[Threshold tuning: select t* on validation, e.g., F1 or Youden J]
-    P2 --> G{Gazetteer Gate\nLexicon or fuzzy match required to pass}
+  %% ===== Branch 1: Diagnostic UMAP (frozen encoder; not used for training) =====
+  T --> ENC_FZ["CamemBERT encoder (frozen) → sentence vector (mean-pool or [CLS])"]
+  ENC_FZ --> MAP["UMAP (dataset separability check)"]
 
-    G -- allow --> H[Final prediction: Verlan]
-    G -- block --> I[Final prediction: Standard]
+  %% ===== Branch 2: Classifier (fine-tune) =====
+  T --> ENC["CamemBERT encoder (fine-tuned) + linear head (1-logit)"]
+  ENC --> P["Sigmoid (logit → probability)"]
+  P --> TH["Fixed threshold t = 0.5 (for now)"]
+  TH --> V1["Final: Verlan"]
+  TH --> V0["Final: Standard"]
 
-    %% Evaluation linkage and warning
-    S2 -. used for .-> P2
-    S3 -. evaluated with .-> G
-    W[[WARNING: Leakage risk\nTest set mostly lexicon-covered verlan; few OOV/novel forms\nGate hid classifier errors -> deceptively high scores]]
-    G -. bias introduced .-> W
+  %% ===== Split linkage =====
+  S1 -. "train" .-> ENC
+  S2 -. "monitor / early stop" .-> ENC
+  S3 -. "evaluate" .-> TH
+
   ```
 
 ### Neural Network (ignore this for now)
