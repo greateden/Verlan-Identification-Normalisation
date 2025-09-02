@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 44 days, 16 hours, 28 minutes
+⏳ Time remaining: 44 days, 12 hours, 00 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -45,6 +45,7 @@ project-root/
 ├── docs/
 │   ├── readme.md
 │   └── results/
+│       ├── frtect_umap.png
 │       ├── lr_with_bert_ds_balanced/
 │       │   ├── embedding_space_tsne_old.png
 │       │   ├── embedding_space_umap_old.png
@@ -86,10 +87,11 @@ project-root/
 │   ├── convert_infer.py
 │   ├── detect/
 │   │   ├── __init__.py
-│   │   ├── detect_infer.py
 │   │   ├── detect_train_lr.py
 │   │   ├── detect_train_lr_bert.py
-│   │   └── detect_train_nn.py
+│   │   ├── detect_train_nn.py
+│   │   ├── frtect_infer_bert.py
+│   │   └── frtect_train_bert.py
 │   ├── detect_infer.py
 │   ├── evaluate/
 │   │   ├── EvaluateThreshold.py
