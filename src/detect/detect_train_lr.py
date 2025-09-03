@@ -51,7 +51,7 @@ def load_data():
     """
     Load datasets from data/raw regardless of current working directory.
     """
-    sent_path = RAW_DIR / "Sentences.xlsx"
+    sent_path = RAW_DIR / "Sentences_balanced.xlsx"
     gaz_path = RAW_DIR / "GazetteerEntries.xlsx"
 
     # Friendly existence check and debug output (comment ratio >30%)

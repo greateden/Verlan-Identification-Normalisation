@@ -24,7 +24,7 @@ from typing import Iterable, List, Set, Tuple
 
 import numpy as np
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
 
@@ -107,35 +107,45 @@ def _embed_sfr_mistral(texts: List[str], max_len: int, batch_size: int) -> np.nd
 
 # ------------------------ I/O helpers ------------------------
 def _read_texts(infile: Path) -> List[str]:
+    """Legacy helper kept for backward compatibility (TXT path).
+
+    Returns just the list of texts. Used when the input is a plain .txt file.
+    """
+    return [line.strip() for line in infile.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def _read_dataframe(infile: Path):  # aligned with detect_benchmark_mistral_bert._read_dataframe
     import pandas as pd
 
-    if infile.suffix.lower() == ".txt":
-        return [line.strip() for line in infile.read_text(encoding="utf-8").splitlines() if line.strip()]
-    # CSV/XLSX support
-    if infile.suffix.lower() in {".csv", ".tsv"}:
-        sep = "," if infile.suffix.lower() == ".csv" else "\t"
+    suf = infile.suffix.lower()
+    if suf == ".txt":
+        texts = _read_texts(infile)
+        return pd.DataFrame({"text": texts})
+    if suf in {".csv", ".tsv"}:
+        sep = "," if suf == ".csv" else "\t"
         df = pd.read_csv(infile, sep=sep)
-    elif infile.suffix.lower() in {".xlsx", ".xls"}:
+    elif suf in {".xlsx", ".xls"}:
         df = pd.read_excel(infile)
     else:
-        # Fallback: try csv
+        # Try CSV first, otherwise fall back to treating as TXT
         try:
             df = pd.read_csv(infile)
         except Exception:
-            # treat as txt
-            return [line.strip() for line in infile.read_text(encoding="utf-8").splitlines() if line.strip()]
-    if "text" in df.columns:
-        return df["text"].astype(str).tolist()
-    # fallback to first column
-    return df.iloc[:, 0].astype(str).tolist()
+            texts = _read_texts(infile)
+            return pd.DataFrame({"text": texts})
+    # Ensure 'text' column exists
+    if "text" not in df.columns:
+        df = df.copy()
+        df["text"] = df.iloc[:, 0].astype(str)
+    else:
+        df = df.copy()
+        df["text"] = df["text"].astype(str)
+    return df
 
 
-def _write_predictions(outfile: Path, texts: List[str], probs: np.ndarray, preds: np.ndarray) -> None:
-    import pandas as pd
-
-    df = pd.DataFrame({"text": texts, "prob": probs, "pred": preds})
+def _write_predictions(outfile: Path, df_out) -> None:
     outfile.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(outfile, index=False)
+    df_out.to_csv(outfile, index=False)
 
 
 def _read_threshold(config_path: Path | None, default: float = 0.50) -> float:
@@ -194,13 +204,18 @@ def main(argv: List[str] | None = None) -> int:
         raise FileNotFoundError(f"Head not found: {head_path}")
     clf = joblib.load(head_path)
 
-    texts = _read_texts(infile)
+    # Read full dataframe to preserve original columns (mirrors benchmark infer behavior)
+    df_in = _read_dataframe(infile)
+    texts = df_in["text"].astype(str).tolist()
     X = _embed_sfr_mistral(texts, max_len=args.max_length, batch_size=args.batch_size)
 
-    # predict probabilities and threshold
     probs = clf.predict_proba(X)[:, 1]
     preds = (probs >= threshold).astype(int)
-    _write_predictions(outfile, texts, probs, preds)
+
+    df_out = df_in.copy()
+    df_out["prob"] = probs
+    df_out["pred"] = preds
+    _write_predictions(outfile, df_out)
     print(f"Saved predictions to: {outfile}")
     return 0
 
