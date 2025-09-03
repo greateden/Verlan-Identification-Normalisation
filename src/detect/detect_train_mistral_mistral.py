@@ -93,6 +93,13 @@ def build_argparser() -> argparse.ArgumentParser:
                    help="Path to save UMAP PNG (Branch 1)")
     p.add_argument("--seed", type=int, default=42, help="Random seed for splits/UMAP")
     p.add_argument("--no_show", action="store_true", help="Don't show UMAP window (headless nodes)")
+    # UMAP memory / efficiency controls
+    p.add_argument("--umap_dtype", choices=["float16", "bfloat16", "float32"], default="float16",
+                   help="Precision for UMAP embedding extraction (default: float16 for memory saving)")
+    p.add_argument("--umap_batch_size", type=int, default=32,
+                   help="Batch size for embedding extraction during UMAP (auto-reduces on OOM)")
+    p.add_argument("--umap_device_map_auto", action="store_true",
+                   help="Use accelerate/transformers device_map='auto' when loading the encoder for UMAP (helps fit on limited VRAM)")
 
     # Training controls (Branch 2)
     p.add_argument("--epochs", type=int, default=3)
@@ -204,10 +211,23 @@ def mean_pool(last_hidden_state, attention_mask):
     return summed / counts
 
 
-def encode_umap_embeddings(texts: List[str], tok_id: str, enc_id: str, max_length: int, device: str) -> np.ndarray:
+def encode_umap_embeddings(
+    texts: List[str],
+    tok_id: str,
+    enc_id: str,
+    max_length: int,
+    device: str,
+    dtype: str = "float16",
+    batch_size: int = 32,
+    device_map_auto: bool = False,
+) -> np.ndarray:
     """Tokenize with SFR-Embedding-Mistral, pass through a *frozen* encoder, and return sentence vectors.
 
-    This implements Branch 1 in the flowchart. We only care about embeddings here, not labels.
+    Strategies applied to mitigate CUDA OOM:
+      1. Load model in reduced precision (float16/bfloat16) when on CUDA.
+      2. Optionally leverage device_map='auto' (HF accelerate) for model sharding.
+      3. Adaptive batch size: on runtime OOM, halve batch size and retry.
+      4. Final fallback: run entirely on CPU if GPU load fails.
     """
     import torch
     from transformers import AutoTokenizer, AutoModel
@@ -215,32 +235,95 @@ def encode_umap_embeddings(texts: List[str], tok_id: str, enc_id: str, max_lengt
     tok = AutoTokenizer.from_pretrained(tok_id)
     tok.padding_side = "right"
     if tok.pad_token is None:
-        # Decoder-style models often use eos as pad; this keeps attention masks clean.
         tok.pad_token = tok.eos_token
 
-    enc = AutoModel.from_pretrained(enc_id).to(device)
-    enc.eval()  # keep frozen
+    # Select torch dtype
+    if dtype == "float16":
+        torch_dtype = torch.float16
+    elif dtype == "bfloat16":
+        torch_dtype = torch.bfloat16
+    else:
+        torch_dtype = torch.float32
+
+    def _try_load(target_device: str, use_auto: bool):
+        load_kwargs = {"torch_dtype": torch_dtype} if torch_dtype != torch.float32 else {}
+        if use_auto:
+            # device_map auto ignores explicit .to(device) call
+            return AutoModel.from_pretrained(enc_id, device_map="auto", **load_kwargs)
+        m = AutoModel.from_pretrained(enc_id, **load_kwargs)
+        return m.to(target_device)
+
+    enc = None
+    tried = []
+    # Attempt order: (requested device, maybe auto map) -> (requested device, no auto) -> CPU
+    for (dev, auto_map) in [
+        (device, device_map_auto),
+        (device, False) if device_map_auto else (device, False),
+        ("cpu", False),
+    ]:
+        key = f"dev={dev},auto={auto_map}"
+        if key in tried:
+            continue
+        tried.append(key)
+        try:
+            enc = _try_load(dev, auto_map)
+            break
+        except torch.cuda.OutOfMemoryError:
+            print(f"⚠️ OOM while loading model with {key}; trying next fallback…")
+            torch.cuda.empty_cache()
+        except Exception as e:
+            print(f"⚠️ Failed loading model with {key}: {e}")
+    if enc is None:
+        raise RuntimeError("Could not load model on any device (GPU/CPU)")
+
+    enc.eval()
+
+    # Hidden size (robust even if sharded)
+    hidden_size = int(getattr(enc.config, "hidden_size", 1024))
     all_vecs: List[np.ndarray] = []
 
-    # Mini-batch to avoid OOM on longer texts
-    bs = 64
-    for i in range(0, len(texts), bs):
-        batch = texts[i:i+bs]
-        enc_in = tok(batch, padding=True, truncation=True, max_length=max_length, return_tensors="pt")
-        input_ids = enc_in["input_ids"].to(device)
-        attn      = enc_in["attention_mask"].to(device)
-
-        with torch.no_grad():
-            out = enc(input_ids=input_ids, attention_mask=attn, return_dict=True)
-            pooled = mean_pool(out.last_hidden_state, attn).detach().cpu().numpy()
-        all_vecs.append(pooled)
-
-        # free up memory per batch
-        del enc_in, input_ids, attn, out, pooled
-        if device.startswith("cuda"):
+    # When using auto device_map, inputs can stay on CPU; HF dispatch handles device placement.
+    run_on_cpu_inputs = isinstance(getattr(enc, "hf_device_map", None), dict)
+    current_bs = max(1, batch_size)
+    i = 0
+    while i < len(texts):
+        batch = texts[i:i+current_bs]
+        try:
+            enc_in = tok(batch, padding=True, truncation=True, max_length=max_length, return_tensors="pt")
+            input_ids = enc_in["input_ids"]
+            attn      = enc_in["attention_mask"]
+            if not run_on_cpu_inputs:
+                input_ids = input_ids.to(device)
+                attn = attn.to(device)
+            with torch.no_grad():
+                with torch.autocast(device_type="cuda", dtype=torch_dtype, enabled=(torch_dtype!=torch.float32 and (not run_on_cpu_inputs) and device.startswith("cuda"))):
+                    out = enc(input_ids=input_ids, attention_mask=attn, return_dict=True)
+                pooled = mean_pool(out.last_hidden_state, attn).detach().cpu().numpy()
+            all_vecs.append(pooled)
+            i += current_bs
+            del enc_in, input_ids, attn, out, pooled
+            if device.startswith("cuda"):
+                torch.cuda.empty_cache()
+        except torch.cuda.OutOfMemoryError:
+            # Reduce batch size
+            if current_bs == 1:
+                print("❌ OOM even at batch_size=1; aborting embedding extraction. Consider --umap_dtype float16 and/or CPU mode.")
+                break
+            new_bs = max(1, current_bs // 2)
+            print(f"⚠️ OOM at batch_size={current_bs}; retrying with batch_size={new_bs} …")
+            current_bs = new_bs
             torch.cuda.empty_cache()
+        except RuntimeError as e:
+            # Some mixed precision issues on older GPUs; retry in float32 if needed
+            if "attempting to use dtype half" in str(e).lower() and torch_dtype != torch.float32:
+                print("⚠️ Mixed precision not supported on this GPU for this op; switching to float32 and continuing…")
+                torch_dtype = torch.float32
+                continue
+            raise
 
-    return np.vstack(all_vecs) if all_vecs else np.zeros((0, int(enc.config.hidden_size)), dtype=np.float32)
+    if not all_vecs:
+        return np.zeros((0, hidden_size), dtype=np.float32)
+    return np.vstack(all_vecs)
 
 
 def plot_umap(embeddings: np.ndarray, labels: Optional[List[int]], save_path: str, seed: int, show: bool):
