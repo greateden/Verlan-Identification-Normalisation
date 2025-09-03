@@ -494,21 +494,43 @@ class MistralBinary:
                 dev = torch.device("cpu")
             ids = input_ids.to(dev, non_blocking=True)
             attn = attention_mask.to(dev, non_blocking=True)
-        try:
-            out = self.encoder(input_ids=ids, attention_mask=attn, return_dict=True)
-        except RuntimeError as e:
-            # If SDPA path produced a dtype overflow (common message contains 'Half without overflow'),
-            # switch to eager attention and retry once.
-            if "without overflow" in str(e) or "Half" in str(e):
-                try:
+        # Some GPUs (or PyTorch/Transformers versions) can OOM/overflow constructing causal masks
+        # in half/bfloat16 (torch.finfo(dtype).min). We defensively retry in safer settings.
+        attempted_upcast = False
+        while True:
+            try:
+                out = self.encoder(input_ids=ids, attention_mask=attn, return_dict=True)
+                break
+            except RuntimeError as e:
+                msg = str(e)
+                mask_overflow = (
+                    "finfo" in msg and "min" in msg and ("Half" in msg or "half" in msg or "bfloat16" in msg)
+                ) or ("without overflow" in msg)
+                if mask_overflow and not attempted_upcast:
+                    # 1) Force eager attention impl (already default, but ensure).
                     if hasattr(self.encoder, "config"):
                         self.encoder.config.attn_implementation = "eager"
-                    out = self.encoder(input_ids=ids, attention_mask=attn, return_dict=True)
-                except Exception:
-                    raise
-            else:
+                    # 2) Upcast attention mask to float32 (sometimes path relies on dtype(attn))
+                    attn = attn.to(torch.float32)
+                    # 3) If model loaded in reduced precision & not sharded, temporarily cast blocks to float32.
+                    try:
+                        for p in self.encoder.parameters():
+                            if p.dtype != torch.float32:
+                                p.data = p.data.float()
+                    except Exception:
+                        pass
+                    attempted_upcast = True
+                    print("⚠️ Mask dtype overflow in half precision; retried with float32 mask/model.")
+                    continue
                 raise
         pooled = mean_pool(out.last_hidden_state, attn)
+        # Ensure pooled tensor is on same device as head parameters (device_map auto may leave it on CPU)
+        try:
+            head_dev = next(self.head.parameters()).device
+            if pooled.device != head_dev:
+                pooled = pooled.to(head_dev)
+        except StopIteration:
+            pass
         return self.head(pooled)
 
 
@@ -619,6 +641,7 @@ def train_classifier(
     tmp_dir.mkdir(parents=True, exist_ok=True)
     ckpt_path = tmp_dir / "model.pt"
 
+    step = 0  # ensure defined even if train_loader empty
     for epoch in range(1, cfg.epochs + 1):
         model.encoder.train(); model.head.train()
         train_loss = 0.0
@@ -630,6 +653,8 @@ def train_classifier(
             yb   = batch["label"]
             with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
                 logits = model.forward_logits(ids, attn)
+                if yb.device != logits.device:
+                    yb = yb.to(logits.device)
                 loss = loss_fn(logits, yb) / accum
             loss.backward()
             train_loss += float(loss.item()) * accum
@@ -640,9 +665,8 @@ def train_classifier(
             if device.startswith("cuda"):
                 torch.cuda.empty_cache()
         # Final optimizer step if steps not divisible by accum
-        if (step % accum) != 0:
-            opt.step()
-            opt.zero_grad(set_to_none=True)
+        if step and (step % accum) != 0:
+            opt.step(); opt.zero_grad(set_to_none=True)
 
         # Validation pass
         model.encoder.eval(); model.head.eval()
@@ -654,6 +678,8 @@ def train_classifier(
                 yb   = batch["label"]
                 with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
                     logits = model.forward_logits(ids, attn)
+                    if yb.device != logits.device:
+                        yb = yb.to(logits.device)
                 loss = loss_fn(logits, yb)
                 val_loss += float(loss.item())
                 del ids, attn, yb, logits, loss
@@ -666,12 +692,10 @@ def train_classifier(
         if val_loss + 1e-9 < best_val:
             best_val = val_loss
             epochs_no_improve = 0
-            # Save best checkpoint
-            torch.save(
-                {"encoder_state": model.encoder.state_dict(),
-                 "head_state": model.head.state_dict()},
-                ckpt_path,
-            )
+            torch.save({
+                "encoder_state": model.encoder.state_dict(),
+                "head_state": model.head.state_dict(),
+            }, ckpt_path)
         else:
             epochs_no_improve += 1
             if epochs_no_improve >= cfg.patience:
@@ -694,6 +718,8 @@ def train_classifier(
             yb   = batch["label"]
             with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
                 logits = model.forward_logits(ids, attn)
+                if yb.device != logits.device:
+                    yb = yb.to(logits.device)
             p = torch.sigmoid(logits).cpu().numpy().ravel()
             probs.append(p); gold.append(yb.cpu().numpy().ravel())
             del ids, attn, yb, logits
@@ -713,7 +739,8 @@ def train_classifier(
         __import__("json").dumps(asdict(cfg), ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
-    return {"test_f1@0.5": f1, "test_ap": ap, "test_auc": auc, "model_dir": str(out_subdir)}
+    # Only float metrics per declared return type
+    return {"test_f1@0.5": f1, "test_ap": ap, "test_auc": auc}
 
 
 def finalize_save(out_subdir: Path) -> Path:
