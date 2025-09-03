@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 44 days, 05 hours, 07 minutes
+⏳ Time remaining: 44 days, 04 hours, 44 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -58,6 +58,8 @@ project-root/
 │       ├── mistral_bert_ds_balanced/
 │       │   ├── mistral_bert_umap.png
 │       │   └── prob_dist.png
+│       ├── mistral_mistral_ds_balanced/
+│       │   └── mistral_mistral_umap.png
 │       └── only_lr_no_bert_ds_imbalance/
 │           ├── embedding_space_pca.png
 │           ├── embedding_space_tsne.png
