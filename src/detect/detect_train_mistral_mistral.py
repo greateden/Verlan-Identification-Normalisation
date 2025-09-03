@@ -60,6 +60,7 @@ MODELS_DIR   = PROJECT_ROOT / "models" / "detect"
 DEFAULT_UMAP_PNG = RESULTS_DIR / "mistral_mistral_umap.png"
 
 
+
 def _lazy_imports():
     """Import heavy libs on demand so that --help is fast and CI doesn't choke."""
     try:
@@ -69,6 +70,15 @@ def _lazy_imports():
         import matplotlib  # noqa: F401
     except Exception as e:
         raise SystemExit(f"Missing a dependency? {e}")
+
+
+# Helper to check for FlashAttention2 availability
+def _has_flash_attn() -> bool:
+    try:
+        import flash_attn  # noqa: F401
+        return True
+    except Exception:
+        return False
 
 
 # ------------------------------ CLI ---------------------------------
@@ -115,7 +125,7 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--device_map_auto", action="store_true", help="Use device_map='auto' when loading the encoder (model sharding).")
     p.add_argument("--grad_checkpointing", action="store_true", help="Enable gradient checkpointing to cut activation memory.")
     p.add_argument("--grad_accum_steps", type=int, default=1, help="Gradient accumulation steps to simulate larger batch size.")
-    p.add_argument("--attn_flash", action="store_true", help="Try FlashAttention2 if available for this model.")
+    p.add_argument("--attn_flash", action="store_true", help="Try FlashAttention2 if available for this model (auto-disables if not installed).")
 
     # Mode toggles
     p.add_argument("--freeze_for_umap", action="store_true",
@@ -390,27 +400,36 @@ class MistralBinary:
 
         load_kwargs = {}
         # Optional FlashAttention2 for speed/memory if supported by this model type
-        if getattr(self, "attn_flash", False):
+        if getattr(self, "attn_flash", False) and _has_flash_attn():
             load_kwargs["attn_implementation"] = "flash_attention_2"
+        elif getattr(self, "attn_flash", False) and not _has_flash_attn():
+            print("⚠️ --attn_flash requested but flash_attn not installed; continuing without FlashAttention2.")
 
-        # bitsandbytes 4-bit loading
+        # bitsandbytes 4-bit loading using BitsAndBytesConfig
+        from transformers import BitsAndBytesConfig
         if getattr(self, "load_in_4bit", False):
             try:
-                load_kwargs.update({
-                    "load_in_4bit": True,
-                    "bnb_4bit_quant_type": getattr(self, "bnb_quant_type", "nf4"),
-                    "bnb_4bit_compute_dtype": compute_dtype,
-                    "device_map": "auto" if getattr(self, "device_map_auto", False) else None,
-                })
+                bnb_conf = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type=getattr(self, "bnb_quant_type", "nf4"),
+                    bnb_4bit_compute_dtype=compute_dtype,
+                )
+                if getattr(self, "device_map_auto", False):
+                    load_kwargs["device_map"] = "auto"
+                load_kwargs["quantization_config"] = bnb_conf
                 self.encoder = AutoModel.from_pretrained(model_id, **load_kwargs)
             except Exception as e:
                 print(f"⚠️ 4-bit load failed ({e}); falling back to standard load.")
-                load_kwargs.pop("load_in_4bit", None)
-                load_kwargs.pop("bnb_4bit_quant_type", None)
-                load_kwargs.pop("bnb_4bit_compute_dtype", None)
-                self.encoder = AutoModel.from_pretrained(model_id, torch_dtype=compute_dtype, **load_kwargs).to(device)
+                # Clean quantization/flash flags before fallback
+                for k in ["quantization_config", "attn_implementation", "device_map"]:
+                    if k in load_kwargs: load_kwargs.pop(k)
+                self.encoder = AutoModel.from_pretrained(model_id, torch_dtype=compute_dtype)
+                if not getattr(self, "device_map_auto", False):
+                    self.encoder = self.encoder.to(device)
         else:
             # Standard half/bfloat16/full precision load
+            if getattr(self, "device_map_auto", False):
+                load_kwargs["device_map"] = "auto"
             self.encoder = AutoModel.from_pretrained(model_id, torch_dtype=compute_dtype, **load_kwargs)
             if not getattr(self, "device_map_auto", False):
                 self.encoder = self.encoder.to(device)
