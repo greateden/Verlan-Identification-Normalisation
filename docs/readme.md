@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 44 days, 09 hours, 11 minutes
+⏳ Time remaining: 44 days, 08 hours, 30 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -26,6 +26,8 @@ project-root/
 │   │   │   └── mixed_shuffled_pred.csv
 │   │   ├── 2025-09-02/
 │   │   │   └── mixed_shuffled_pred.csv
+│   │   ├── 2025-09-03/
+│   │   │   └── mixed_mistral_camembert.csv
 │   │   └── very_old/
 │   │       ├── invented.csv
 │   │       ├── mixed_pred.csv
@@ -45,7 +47,6 @@ project-root/
 ├── docs/
 │   ├── readme.md
 │   └── results/
-│       ├── frtect_umap.png
 │       ├── lr_with_bert_ds_balanced/
 │       │   ├── embedding_space_tsne_old.png
 │       │   ├── embedding_space_umap_old.png
@@ -53,6 +54,9 @@ project-root/
 │       │   └── prob_dist.png
 │       ├── lr_with_bert_ds_imbalanced/
 │       │   ├── embedding_space_umap.png
+│       │   └── prob_dist.png
+│       ├── mistral_bert_ds_balanced/
+│       │   ├── mistral_bert_umap.png
 │       │   └── prob_dist.png
 │       └── only_lr_no_bert_ds_imbalance/
 │           ├── embedding_space_pca.png
@@ -87,11 +91,12 @@ project-root/
 │   ├── convert_infer.py
 │   ├── detect/
 │   │   ├── __init__.py
+│   │   ├── detect_benchmark_mistral_bert.py
+│   │   ├── detect_infer.py
 │   │   ├── detect_train_lr.py
 │   │   ├── detect_train_lr_bert.py
-│   │   ├── detect_train_nn.py
-│   │   ├── frtect_infer_bert.py
-│   │   └── frtect_train_bert.py
+│   │   ├── detect_train_mistral_bert.py
+│   │   └── detect_train_nn.py
 │   ├── detect_infer.py
 │   ├── evaluate/
 │   │   ├── EvaluateThreshold.py
