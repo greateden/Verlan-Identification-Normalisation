@@ -8,8 +8,35 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 .venv/
+.env
+.env.*
+venv/
+env/
 .vscode/
 .idea/
 dist/
 build/
 models/latest/camembert/
+
+# Model artifacts (heavy / generated)
+models/detect/_work/
+models/detect/**/camembert_mistral/
+models/convert/**/mistral-verlan-conv/
+models/detect/latest/threshold_eval.csv
+
+# Caches and tooling
+.cache/
+.mypy_cache/
+.ruff_cache/
+.pylint.d/
+.coverage
+coverage.xml
+htmlcov/
+
+# Packaging metadata
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Generated helper file
+repo_tree.txt
