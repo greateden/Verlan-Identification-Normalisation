@@ -405,6 +405,11 @@ class MistralBinary:
         elif getattr(self, "attn_flash", False) and not _has_flash_attn():
             print("⚠️ --attn_flash requested but flash_attn not installed; continuing without FlashAttention2.")
 
+        # If not using FlashAttention2, prefer 'eager' attention to avoid SDPA mask dtype overflows in fp16/bf16.
+        # (HF's SDPA path may construct causal masks with finfo(dtype).min which can overflow in Half on some setups.)
+        if "attn_implementation" not in load_kwargs:
+            load_kwargs["attn_implementation"] = "eager"
+
         # bitsandbytes 4-bit loading using BitsAndBytesConfig
         from transformers import BitsAndBytesConfig
         if getattr(self, "load_in_4bit", False):
@@ -433,6 +438,13 @@ class MistralBinary:
             self.encoder = AutoModel.from_pretrained(model_id, torch_dtype=compute_dtype, **load_kwargs)
             if not getattr(self, "device_map_auto", False):
                 self.encoder = self.encoder.to(device)
+
+        # Runtime SDPA safety: prefer math kernel to avoid fp16/bf16 overflow issues on some GPUs
+        try:
+            from torch.backends.cuda import sdp_kernel
+            sdp_kernel(enable_flash=False, enable_mem_efficient=False, enable_math=True)
+        except Exception:
+            pass
 
         # If model is dispatched with device_map (sharded across devices/CPU), keep inputs on CPU.
         self.run_on_cpu_inputs = isinstance(getattr(self.encoder, "hf_device_map", None), dict)
@@ -482,7 +494,20 @@ class MistralBinary:
                 dev = torch.device("cpu")
             ids = input_ids.to(dev, non_blocking=True)
             attn = attention_mask.to(dev, non_blocking=True)
-        out = self.encoder(input_ids=ids, attention_mask=attn, return_dict=True)
+        try:
+            out = self.encoder(input_ids=ids, attention_mask=attn, return_dict=True)
+        except RuntimeError as e:
+            # If SDPA path produced a dtype overflow (common message contains 'Half without overflow'),
+            # switch to eager attention and retry once.
+            if "without overflow" in str(e) or "Half" in str(e):
+                try:
+                    if hasattr(self.encoder, "config"):
+                        self.encoder.config.attn_implementation = "eager"
+                    out = self.encoder(input_ids=ids, attention_mask=attn, return_dict=True)
+                except Exception:
+                    raise
+            else:
+                raise
         pooled = mean_pool(out.last_hidden_state, attn)
         return self.head(pooled)
 
