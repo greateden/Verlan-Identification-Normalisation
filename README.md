@@ -152,7 +152,42 @@ python scripts/generate-tree.py > repo_tree.txt
 
 ## 🔍 Detection Pipelines
 
-### BERT
+### Mistral-7B
+```mermaid
+flowchart TB
+%% ===== Fixed split (no stratification) =====
+subgraph Dataset_split_random
+direction TB
+S1["Train 72.25%"]
+S2["Validation 12.75%"]
+S3["Test 15%"]
+end
+
+%% ===== Ingestion & normalization =====
+A["Input text or file"] --> N["Basic normalization for better results: Unicode NFC; strip control; keep accents"]
+
+%% ===== Tokenize once for both branches =====
+N --> T["SFR-Embedding-Mistral tokenizer"]
+
+%% ===== Branch 1: Diagnostic UMAP (frozen encoder; not used for training) =====
+T --> ENC_FZ["SFR-Embedding-Mistral encoder (frozen) → sentence vector (mean-pool)"]
+ENC_FZ --> MAP["UMAP (dataset separability check)"]
+
+%% ===== Branch 2: Classifier (fine-tune) =====
+T --> ENC["SFR-Embedding-Mistral encoder (fine-tuned) + linear head (1-logit)"]
+ENC --> P["Sigmoid (logit → probability)"]
+P --> TH["Fixed threshold t = 0.5"]
+TH --> V1["Final: Verlan"]
+TH --> V0["Final: Standard"]
+
+%% ===== Split linkage =====
+S1 -. "train" .-> ENC
+S2 -. "monitor / early stop" .-> ENC
+S3 -. "evaluate" .-> TH
+```
+
+### Mistral-7B + BERT
+
 ```mermaid
 flowchart TB
   %% ===== Stratified split (fixed on 2 Sept) =====
@@ -167,7 +202,7 @@ flowchart TB
   A["Input text or file"] --> N["Basic normalization for better results: Unicode NFC; strip control; keep accents"]
 
   %% ===== Tokenize once for both branches =====
-  N --> T["CamemBERT tokenizer (SentencePiece/BPE)"]
+  N --> T["Mistral 7B tokenizer"]
 
   %% ===== Branch 1: Diagnostic UMAP (frozen encoder; not used for training) =====
   T --> ENC_FZ["CamemBERT encoder (frozen) → sentence vector (mean-pool or [CLS])"]
