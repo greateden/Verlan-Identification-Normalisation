@@ -50,7 +50,7 @@ import numpy as np
 
 # ---------- Environment knobs to reduce tokenizer thread storms & CUDA OOM ----------
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:128,garbage_collection_threshold:0.6")
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:64,garbage_collection_threshold:0.6,expandable_segments:true")
 
 # ---------- Project-relative paths (match existing scripts) ----------
 PROJECT_ROOT = Path(__file__).resolve().parents[2]  # expect src/detect/<this_file>.py
@@ -81,7 +81,7 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--mistral_model", default="Salesforce/SFR-Embedding-Mistral",
                    help="HF repo id/path for encoder (defaults to SFR-Embedding-Mistral)")
     p.add_argument("--max_length", type=int, default=128, help="Max sequence length for tokenization")
-    p.add_argument("--batch_size", type=int, default=16, help="Batch size")
+    p.add_argument("--batch_size", type=int, default=8, help="Batch size")
     p.add_argument("--device", default=None, help="Torch device, e.g., cuda or cpu (auto by default)")
 
     # UMAP controls (Branch 1)
@@ -107,6 +107,15 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--weight_decay", type=float, default=0.01)
     p.add_argument("--patience", type=int, default=2, help="Early-stop patience on val loss")
     p.add_argument("--out_name", default="mistral_mistral", help="Subdir under models/detect/<YYYY-MM-DD>/")
+
+    # Memory-saving and PEFT options
+    p.add_argument("--load_in_4bit", action="store_true", help="Load encoder in 4-bit NF4 via bitsandbytes (huge VRAM savings).")
+    p.add_argument("--bnb_quant_type", choices=["nf4","fp4"], default="nf4", help="bitsandbytes 4-bit quant type (default: nf4).")
+    p.add_argument("--compute_dtype", choices=["float16","bfloat16","float32"], default="bfloat16", help="Compute dtype; bfloat16 is robust on Ampere+.")
+    p.add_argument("--device_map_auto", action="store_true", help="Use device_map='auto' when loading the encoder (model sharding).")
+    p.add_argument("--grad_checkpointing", action="store_true", help="Enable gradient checkpointing to cut activation memory.")
+    p.add_argument("--grad_accum_steps", type=int, default=1, help="Gradient accumulation steps to simulate larger batch size.")
+    p.add_argument("--attn_flash", action="store_true", help="Try FlashAttention2 if available for this model.")
 
     # Mode toggles
     p.add_argument("--freeze_for_umap", action="store_true",
@@ -364,9 +373,59 @@ class MistralBinary:
         import torch
         from transformers import AutoModel
 
+        # These attributes will be set by the training function right after construction
+        self.load_in_4bit = getattr(self, "load_in_4bit", False)
+        self.bnb_quant_type = getattr(self, "bnb_quant_type", "nf4")
+        self.compute_dtype = getattr(self, "compute_dtype", "bfloat16")
+        self.device_map_auto = getattr(self, "device_map_auto", False)
+        self.grad_checkpointing = getattr(self, "grad_checkpointing", False)
+        self.attn_flash = getattr(self, "attn_flash", False)
+
         self.device = device
-        self.encoder = AutoModel.from_pretrained(model_id).to(device)
-        hidden = int(self.encoder.config.hidden_size)
+
+        # Decide compute dtype
+        compute_dtype = getattr(self, "compute_dtype", torch.bfloat16)
+        if isinstance(compute_dtype, str):
+            compute_dtype = {"float16": torch.float16, "bfloat16": torch.bfloat16, "float32": torch.float32}[compute_dtype]
+
+        load_kwargs = {}
+        # Optional FlashAttention2 for speed/memory if supported by this model type
+        if getattr(self, "attn_flash", False):
+            load_kwargs["attn_implementation"] = "flash_attention_2"
+
+        # bitsandbytes 4-bit loading
+        if getattr(self, "load_in_4bit", False):
+            try:
+                load_kwargs.update({
+                    "load_in_4bit": True,
+                    "bnb_4bit_quant_type": getattr(self, "bnb_quant_type", "nf4"),
+                    "bnb_4bit_compute_dtype": compute_dtype,
+                    "device_map": "auto" if getattr(self, "device_map_auto", False) else None,
+                })
+                self.encoder = AutoModel.from_pretrained(model_id, **load_kwargs)
+            except Exception as e:
+                print(f"⚠️ 4-bit load failed ({e}); falling back to standard load.")
+                load_kwargs.pop("load_in_4bit", None)
+                load_kwargs.pop("bnb_4bit_quant_type", None)
+                load_kwargs.pop("bnb_4bit_compute_dtype", None)
+                self.encoder = AutoModel.from_pretrained(model_id, torch_dtype=compute_dtype, **load_kwargs).to(device)
+        else:
+            # Standard half/bfloat16/full precision load
+            self.encoder = AutoModel.from_pretrained(model_id, torch_dtype=compute_dtype, **load_kwargs)
+            if not getattr(self, "device_map_auto", False):
+                self.encoder = self.encoder.to(device)
+
+        # Enable grad checkpointing to trade compute for memory
+        if getattr(self, "grad_checkpointing", False) and hasattr(self.encoder, "gradient_checkpointing_enable"):
+            try:
+                # use_cache must be disabled for checkpointing on decoder models
+                if hasattr(self.encoder.config, "use_cache"):
+                    self.encoder.config.use_cache = False
+                self.encoder.gradient_checkpointing_enable()
+            except Exception as e:
+                print(f"⚠️ Could not enable gradient checkpointing: {e}")
+
+        hidden = int(getattr(self.encoder.config, "hidden_size", 1024))
 
         import torch.nn as nn
         self.head = nn.Linear(hidden, 1).to(device)
@@ -396,11 +455,18 @@ class TrainConfig:
     mistral_model: str
     max_length: int
     threshold: float = 0.5
-    batch_size: int = 16
+    batch_size: int = 8
     epochs: int = 3
     lr: float = 2e-5
     weight_decay: float = 0.01
     patience: int = 2
+    load_in_4bit: bool = False
+    bnb_quant_type: str = "nf4"
+    compute_dtype: str = "bfloat16"
+    device_map_auto: bool = False
+    grad_checkpointing: bool = False
+    grad_accum_steps: int = 1
+    attn_flash: bool = False
 
 
 def _tokenizer_for_id(tok_id: str):
@@ -426,24 +492,43 @@ def train_classifier(
     from sklearn.metrics import f1_score, average_precision_score, roc_auc_score
     from sklearn.model_selection import train_test_split
 
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.backends.cudnn.allow_tf32 = True
+
     class TokDataset(Dataset):
-        """On-the-fly tokenization dataset to keep RAM low."""
-        def __init__(self, X: List[str], y: List[int], tok, max_length: int):
-            self.X = X; self.y = y; self.tok = tok; self.max_length = max_length
+        """Stores raw texts/labels; tokenization happens in the collate_fn (dynamic padding)."""
+        def __init__(self, X: List[str], y: List[int]):
+            self.X = X; self.y = y
         def __len__(self): return len(self.X)
         def __getitem__(self, i: int):
-            enc = self.tok(self.X[i], truncation=True, max_length=self.max_length, padding="max_length", return_tensors="pt")
-            return {
-                "input_ids": enc["input_ids"].squeeze(0).long(),
-                "attention_mask": enc["attention_mask"].squeeze(0).long(),
-                "label": torch.tensor([float(self.y[i])], dtype=torch.float32),
-            }
+            return {"text": self.X[i], "label": float(self.y[i])}
 
     # Tokenizer (shared across splits)
     tok = _tokenizer_for_id(cfg.mistral_tokenizer)
 
+    def collate_fn(samples):
+        texts = [s["text"] for s in samples]
+        labels = [s["label"] for s in samples]
+        enc = tok(texts, truncation=True, max_length=cfg.max_length, padding=True, return_tensors="pt")
+        batch = {
+            "input_ids": enc["input_ids"].long(),
+            "attention_mask": enc["attention_mask"].long(),
+            "label": torch.tensor(labels, dtype=torch.float32).unsqueeze(1),
+        }
+        return batch
+
     # Create model
     model = MistralBinary(cfg.mistral_model, device)
+    # Pass memory knobs into the model instance
+    model.load_in_4bit = cfg.load_in_4bit
+    model.bnb_quant_type = cfg.bnb_quant_type
+    model.compute_dtype = cfg.compute_dtype
+    model.device_map_auto = cfg.device_map_auto
+    model.grad_checkpointing = cfg.grad_checkpointing
+    model.attn_flash = cfg.attn_flash
+    # Reinitialize encoder with these settings
+    # (Reload with the intended precision/quantization)
+    model.__init__(cfg.mistral_model, device)
 
     # Deterministic fixed random split (NO stratification)
     y_arr = np.asarray(labels)
@@ -452,13 +537,13 @@ def train_classifier(
     X_test,  y_test = X_tmp, y_tmp
 
     # Datasets & loaders
-    train_ds = TokDataset(X_train, y_train.tolist(), tok, cfg.max_length)
-    val_ds   = TokDataset(X_val,   y_val.tolist(),   tok, cfg.max_length)
-    test_ds  = TokDataset(X_test,  y_test.tolist(),  tok, cfg.max_length)
+    train_ds = TokDataset(X_train, y_train.tolist())
+    val_ds   = TokDataset(X_val,   y_val.tolist())
+    test_ds  = TokDataset(X_test,  y_test.tolist())
 
-    train_loader = DataLoader(train_ds, batch_size=cfg.batch_size, shuffle=True)
-    val_loader   = DataLoader(val_ds,   batch_size=cfg.batch_size)
-    test_loader  = DataLoader(test_ds,  batch_size=cfg.batch_size)
+    train_loader = DataLoader(train_ds, batch_size=cfg.batch_size, shuffle=True, collate_fn=collate_fn)
+    val_loader   = DataLoader(val_ds,   batch_size=max(1, cfg.batch_size*2), collate_fn=collate_fn)
+    test_loader  = DataLoader(test_ds,  batch_size=max(1, cfg.batch_size*2), collate_fn=collate_fn)
 
     # Optimizer & loss
     opt = torch.optim.AdamW(model.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
@@ -474,21 +559,27 @@ def train_classifier(
     for epoch in range(1, cfg.epochs + 1):
         model.encoder.train(); model.head.train()
         train_loss = 0.0
-        for batch in train_loader:
-            ids  = batch["input_ids"].to(device)
-            attn = batch["attention_mask"].to(device)
-            yb   = batch["label"].to(device)
-            logits = model.forward_logits(ids, attn)
-            loss = loss_fn(logits, yb)
-            opt.zero_grad(set_to_none=True)
+        opt.zero_grad(set_to_none=True)
+        accum = max(1, cfg.grad_accum_steps)
+        for step, batch in enumerate(train_loader, start=1):
+            ids  = batch["input_ids"].to(device, non_blocking=True)
+            attn = batch["attention_mask"].to(device, non_blocking=True)
+            yb   = batch["label"].to(device, non_blocking=True)
+            with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
+                logits = model.forward_logits(ids, attn)
+                loss = loss_fn(logits, yb) / accum
             loss.backward()
-            opt.step()
-            train_loss += float(loss.item())
-
-            # free batch tensors to keep memory tidy
+            train_loss += float(loss.item()) * accum
+            if step % accum == 0:
+                opt.step()
+                opt.zero_grad(set_to_none=True)
             del ids, attn, yb, logits, loss
             if device.startswith("cuda"):
                 torch.cuda.empty_cache()
+        # Final optimizer step if steps not divisible by accum
+        if (step % accum) != 0:
+            opt.step()
+            opt.zero_grad(set_to_none=True)
 
         # Validation pass
         model.encoder.eval(); model.head.eval()
@@ -498,7 +589,8 @@ def train_classifier(
                 ids  = batch["input_ids"].to(device)
                 attn = batch["attention_mask"].to(device)
                 yb   = batch["label"].to(device)
-                logits = model.forward_logits(ids, attn)
+                with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
+                    logits = model.forward_logits(ids, attn)
                 loss = loss_fn(logits, yb)
                 val_loss += float(loss.item())
                 del ids, attn, yb, logits, loss
@@ -537,7 +629,8 @@ def train_classifier(
             ids  = batch["input_ids"].to(device)
             attn = batch["attention_mask"].to(device)
             yb   = batch["label"].to(device)
-            logits = model.forward_logits(ids, attn)
+            with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
+                logits = model.forward_logits(ids, attn)
             p = torch.sigmoid(logits).cpu().numpy().ravel()
             probs.append(p); gold.append(yb.cpu().numpy().ravel())
             del ids, attn, yb, logits
@@ -621,8 +714,16 @@ def main(argv: List[str] | None = None) -> int:
         lr=args.lr,
         weight_decay=args.weight_decay,
         patience=args.patience,
+        load_in_4bit=args.load_in_4bit,
+        bnb_quant_type=args.bnb_quant_type,
+        compute_dtype=args.compute_dtype,
+        device_map_auto=args.device_map_auto,
+        grad_checkpointing=args.grad_checkpointing,
+        grad_accum_steps=args.grad_accum_steps,
+        attn_flash=args.attn_flash,
     )
 
+    print(f"Memory mode → 4bit={cfg.load_in_4bit} ({cfg.bnb_quant_type}), dtype={cfg.compute_dtype}, grad_ckpt={cfg.grad_checkpointing}, accum={cfg.grad_accum_steps}, device_map_auto={cfg.device_map_auto}, flash_attn={cfg.attn_flash}")
     print("Training SFR-Embedding-Mistral + linear head (no LR) …")
     work_dir = MODELS_DIR / "_work" / args.out_name
     work_dir.mkdir(parents=True, exist_ok=True)
