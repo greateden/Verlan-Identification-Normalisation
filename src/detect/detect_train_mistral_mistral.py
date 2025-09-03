@@ -50,7 +50,7 @@ import numpy as np
 
 # ---------- Environment knobs to reduce tokenizer thread storms & CUDA OOM ----------
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:64,garbage_collection_threshold:0.6,expandable_segments:true")
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:64,garbage_collection_threshold:0.6,expandable_segments:True")
 
 # ---------- Project-relative paths (match existing scripts) ----------
 PROJECT_ROOT = Path(__file__).resolve().parents[2]  # expect src/detect/<this_file>.py
