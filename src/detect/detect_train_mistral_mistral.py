@@ -434,6 +434,9 @@ class MistralBinary:
             if not getattr(self, "device_map_auto", False):
                 self.encoder = self.encoder.to(device)
 
+        # If model is dispatched with device_map (sharded across devices/CPU), keep inputs on CPU.
+        self.run_on_cpu_inputs = isinstance(getattr(self.encoder, "hf_device_map", None), dict)
+
         # Enable grad checkpointing to trade compute for memory
         if getattr(self, "grad_checkpointing", False) and hasattr(self.encoder, "gradient_checkpointing_enable"):
             try:
@@ -462,9 +465,25 @@ class MistralBinary:
         self.head.zero_grad(set_to_none=True)
 
     def forward_logits(self, input_ids, attention_mask):
-        """Forward pass to logits (pre-sigmoid)."""
-        out = self.encoder(input_ids=input_ids, attention_mask=attention_mask, return_dict=True)
-        pooled = mean_pool(out.last_hidden_state, attention_mask)
+        """Forward pass to logits (pre-sigmoid), handling device_map='auto' vs single-device cases.
+
+        - If the encoder is sharded (hf_device_map present), keep inputs on CPU; HF will dispatch.
+        - Otherwise, move inputs to the encoder's parameter device.
+        """
+        import torch
+        if getattr(self, "run_on_cpu_inputs", False):
+            ids = input_ids
+            attn = attention_mask
+        else:
+            # Single-device case: move to the encoder's first parameter device
+            try:
+                dev = next(self.encoder.parameters()).device
+            except StopIteration:
+                dev = torch.device("cpu")
+            ids = input_ids.to(dev, non_blocking=True)
+            attn = attention_mask.to(dev, non_blocking=True)
+        out = self.encoder(input_ids=ids, attention_mask=attn, return_dict=True)
+        pooled = mean_pool(out.last_hidden_state, attn)
         return self.head(pooled)
 
 
@@ -581,9 +600,9 @@ def train_classifier(
         opt.zero_grad(set_to_none=True)
         accum = max(1, cfg.grad_accum_steps)
         for step, batch in enumerate(train_loader, start=1):
-            ids  = batch["input_ids"].to(device, non_blocking=True)
-            attn = batch["attention_mask"].to(device, non_blocking=True)
-            yb   = batch["label"].to(device, non_blocking=True)
+            ids  = batch["input_ids"]
+            attn = batch["attention_mask"]
+            yb   = batch["label"]
             with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
                 logits = model.forward_logits(ids, attn)
                 loss = loss_fn(logits, yb) / accum
@@ -605,9 +624,9 @@ def train_classifier(
         val_loss = 0.0
         with torch.no_grad():
             for batch in val_loader:
-                ids  = batch["input_ids"].to(device)
-                attn = batch["attention_mask"].to(device)
-                yb   = batch["label"].to(device)
+                ids  = batch["input_ids"]
+                attn = batch["attention_mask"]
+                yb   = batch["label"]
                 with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
                     logits = model.forward_logits(ids, attn)
                 loss = loss_fn(logits, yb)
@@ -645,9 +664,9 @@ def train_classifier(
     with torch.no_grad():
         probs, gold = [], []
         for batch in test_loader:
-            ids  = batch["input_ids"].to(device)
-            attn = batch["attention_mask"].to(device)
-            yb   = batch["label"].to(device)
+            ids  = batch["input_ids"]
+            attn = batch["attention_mask"]
+            yb   = batch["label"]
             with torch.autocast(device_type="cuda", dtype=getattr(torch, cfg.compute_dtype) if cfg.compute_dtype in ["float16","bfloat16"] else torch.float32, enabled=device.startswith("cuda")):
                 logits = model.forward_logits(ids, attn)
             p = torch.sigmoid(logits).cpu().numpy().ravel()
