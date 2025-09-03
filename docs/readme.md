@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 44 days, 02 hours, 06 minutes
+⏳ Time remaining: 44 days, 01 hours, 50 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -99,7 +99,7 @@ project-root/
 │   │   ├── detect_train_lr.py
 │   │   ├── detect_train_lr_bert.py
 │   │   ├── detect_train_mistral_bert.py
-│   │   ├── detect_train_mistral_mistral.py
+│   │   ├── detect_train_mistral_mistral_labmachine.py
 │   │   └── detect_train_nn.py
 │   ├── detect_infer.py
 │   ├── evaluate/
