@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 44 days, 01 hours, 50 minutes
+⏳ Time remaining: 43 days, 23 hours, 48 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -27,7 +27,8 @@ project-root/
 │   │   ├── 2025-09-02/
 │   │   │   └── mixed_shuffled_pred.csv
 │   │   ├── 2025-09-03/
-│   │   │   └── mixed_mistral_camembert.csv
+│   │   │   ├── mixed_mistral_camembert.csv
+│   │   │   └── mixed_shuffled_pred_lr_simple.csv
 │   │   └── very_old/
 │   │       ├── invented.csv
 │   │       ├── mixed_pred.csv
@@ -47,6 +48,8 @@ project-root/
 ├── docs/
 │   ├── readme.md
 │   └── results/
+│       ├── lr_ds_balanced_simple/
+│       │   └── prob_dist.png
 │       ├── lr_with_bert_ds_balanced/
 │       │   ├── embedding_space_tsne_old.png
 │       │   ├── embedding_space_umap_old.png
@@ -79,6 +82,8 @@ project-root/
 │       │   └── lr_head.joblib
 │       ├── 2025-09-02/
 │       │   └── lr_head.joblib
+│       ├── 2025-09-03/
+│       │   └── lr_head.joblib
 │       └── latest/
 │           └── lr_head.joblib
 ├── scripts/
@@ -98,6 +103,7 @@ project-root/
 │   │   ├── detect_infer.py
 │   │   ├── detect_train_lr.py
 │   │   ├── detect_train_lr_bert.py
+│   │   ├── detect_train_lr_simple.py
 │   │   ├── detect_train_mistral_bert.py
 │   │   ├── detect_train_mistral_mistral_labmachine.py
 │   │   └── detect_train_nn.py
