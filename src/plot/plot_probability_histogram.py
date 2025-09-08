@@ -10,9 +10,7 @@ categorical). It draws overlapping histograms for the two classes.
 Examples
 --------
 Basic usage with auto-detected columns:
-    python src/plot/plot_probability_histogram.py \
-        --csv data/predictions/2025-08-29/mixed_shuffled_pred.csv \
-        --out docs/results/lr_with_bert_ds_balanced/prob_dist.png
+    
 
 Specify explicit column names:
     python src/plot/plot_probability_histogram.py \

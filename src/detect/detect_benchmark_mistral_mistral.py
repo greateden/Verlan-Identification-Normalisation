@@ -7,6 +7,14 @@ Loads the fine-tuned model saved by detect_train_mistral_mistral.py and either:
  - Benchmarks on the canonical *random (non-stratified)* test split (72.25/12.75/15), or
  - Runs inference on an input file and saves predictions.
 
+example
+
+python -m src.detect.detect_benchmark_mistral_mistral \
+    --model_dir models/mistral_mistral --mode infer \
+    --infile data/processed/verlan_test_set_invented.csv \
+    --outfile data/predictions/invented_shuffled_pred.csv
+
+
 Tokenization uses the SFR-Embedding-Mistral tokenizer specified in config.json,
 matching the training pipeline. No id remapping is needed here.
 """
@@ -180,6 +188,20 @@ def main(argv: List[str] | None = None) -> int:
     if not cfg_path.exists():
         raise FileNotFoundError(f"Missing config: {cfg_path}")
     cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+
+    # Validate config keys and provide actionable guidance if mismatched
+    if "mistral_model" not in cfg:
+        # If this looks like a CamemBERT+Mistral config, point to the right script
+        if "camembert_model" in cfg:
+            raise SystemExit(
+                "This config looks like CamemBERT+Mistral (has 'camembert_model').\n"
+                "Use: python -m src.detect.detect_benchmark_mistral_bert --model_dir <camembert_mistral_dir> ..."
+            )
+        missing = [k for k in ("mistral_model", "mistral_tokenizer", "max_length") if k not in cfg]
+        raise SystemExit(
+            "config.json missing required keys: " + ", ".join(missing) +
+            ". Expected a model saved by detect_train_mistral_mistral.py"
+        )
 
     model = MistralBinary(cfg["mistral_model"], device)
     model.load_state(ckpt_path)

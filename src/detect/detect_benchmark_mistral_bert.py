@@ -5,6 +5,11 @@ Benchmark/Inference for the Mistral-tokenizer → CamemBERT+Linear detector.
 Loads the fine-tuned model saved by src/detect/detect_train_mistral_bert.py and either:
  - Benchmarks on the canonical test split (72.25/12.75/15), or
  - Runs inference on an input file and saves predictions.
+ 
+ python -m src.detect.detect_benchmark_mistral_bert\
+    --model_dir models/detect/latest/camembert_mistral/ \
+    --mode infer --infile data/processed/verlan_test_set_invented.csv \
+    --outfile data/predictions/invented_shuffled_pred_NN_mistral_bert.csv
 
 Tokenization uses the Mistral tokenizer specified in the saved config, with ids
 remapped into CamemBERT's vocab range, matching the training pipeline.

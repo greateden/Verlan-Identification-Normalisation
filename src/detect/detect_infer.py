@@ -10,9 +10,7 @@ Also exposes helper functions used by other modules/tests:
 - has_fuzzy_verlan(tokens, vset) -> bool
 
 Usage examples:
-  python -m src.detect.detect_infer \
-    --infile data/raw/mixed_shuffled.txt \
-    --outfile data/predictions/mixed_shuffled_pred.csv
+
 """
 
 from __future__ import annotations
