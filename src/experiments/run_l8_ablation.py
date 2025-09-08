@@ -67,6 +67,7 @@ import numpy as np
 import pandas as pd
 import torch
 from tqdm import tqdm
+import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -291,10 +292,16 @@ class SentenceEmbedder:
         all_vecs: List[np.ndarray] = []
         bs = self.cfg.batch_size
         autocast_dtype = torch.bfloat16 if torch.cuda.is_available() else None
+        def get_autocast_context():
+            if torch.cuda.is_available() and autocast_dtype:
+                return torch.autocast(device_type='cuda', dtype=autocast_dtype)
+            else:
+                return contextlib_null()
+
         for i in tqdm(range(0, len(texts), bs), desc=f"Embedding ({pooling},L2={int(l2)})", ncols=100):
             batch_texts = texts[i:i+bs]
             enc = tokenizer(batch_texts, padding=True, truncation=True, max_length=self.cfg.max_len, return_tensors='pt').to(device)
-            with torch.autocast(device_type='cuda', dtype=autocast_dtype) if (torch.cuda.is_available() and autocast_dtype) else contextlib_null():
+            with get_autocast_context():
                 outputs = model(**enc)
                 hidden = outputs.last_hidden_state  # [B,T,D]
                 if pooling == 'CLS':
@@ -312,10 +319,10 @@ class SentenceEmbedder:
         logging.info(f"Saved embeddings cache: {cache_file.name}")
         return arr
 
-# Simple context manager yielding no-op (used when autocast disabled)
-class contextlib_null:
-    def __enter__(self): return None
-    def __exit__(self, *args): return False
+import contextlib  # Add this import at the top if not present
+
+# Use contextlib.nullcontext for a no-op context manager (used when autocast disabled)
+contextlib_null = contextlib.nullcontext
 
 # --------------------------------------------------------------------------------------
 # Experiment routine per configuration
@@ -349,33 +356,35 @@ class RunResult:
     pair_win_rate: Optional[float] = None
 
 # Train + evaluate one config
-def run_single_config(cfg: RunConfig, embeds: np.ndarray, labels: np.ndarray, splits: Dict[str, List[int]], val_probs_cache: Dict[str, np.ndarray], test_probs_cache: Dict[str, np.ndarray]) -> RunResult:
+def run_single_config(cfg: RunConfig, embeds: np.ndarray, labels: np.ndarray, splits: Dict[str, List[int]], val_probs_cache: Dict[str, np.ndarray], test_probs_cache: Dict[str, np.ndarray], pretrained_lr: Optional[Any] = None) -> RunResult:
     train_idx, val_idx, test_idx = splits['train'], splits['val'], splits['test']
     X_train, y_train = embeds[train_idx], labels[train_idx]
     X_val, y_val = embeds[val_idx], labels[val_idx]
     X_test, y_test = embeds[test_idx], labels[test_idx]
 
-    # Base LR
-    lr = LogisticRegression(
-        max_iter=5000,
-        class_weight='balanced',
-        solver='lbfgs',
-        n_jobs=-1,
-        verbose=0,
-    )
-    lr.fit(X_train, y_train)
-
-    model_key = f"run{cfg.run_id}"  # used if storing calibrated probabilities
+    # Base LR: either load pretrained or fit on train
+    if pretrained_lr is not None:
+        base_model: Any = pretrained_lr
+    else:
+        lr = LogisticRegression(
+            max_iter=5000,
+            class_weight='balanced',
+            solver='lbfgs',
+            n_jobs=-1,
+            verbose=0,
+        )
+        lr.fit(X_train, y_train)
+        base_model = lr
 
     if cfg.calibration:
         # Calibrate using validation set only
-        calib = CalibratedClassifierCV(base_estimator=lr, cv='prefit', method='sigmoid')
+        calib = CalibratedClassifierCV(estimator=base_model, cv='prefit', method='sigmoid')
         calib.fit(X_val, y_val)
         prob_val = calib.predict_proba(X_val)[:,1]
         prob_test = calib.predict_proba(X_test)[:,1]
     else:
-        prob_val = lr.predict_proba(X_val)[:,1]
-        prob_test = lr.predict_proba(X_test)[:,1]
+        prob_val = base_model.predict_proba(X_val)[:,1]
+        prob_test = base_model.predict_proba(X_test)[:,1]
 
     # Threshold selection
     if cfg.threshold_mode == 'tune':
@@ -507,6 +516,7 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     p.add_argument('--device_map', type=str, default='auto')
     p.add_argument('--log_level', type=str, default='INFO')
     p.add_argument('--out_dir', type=str, default='.')
+    p.add_argument('--lr_head_path', type=str, default=None, help='Optional path to a pretrained LogisticRegression head (.joblib)')
     return p.parse_args(argv)
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -546,6 +556,16 @@ def main(argv: Optional[List[str]] = None) -> int:
     for pooling, l2 in pooling_l2_combos:
         embeddings_cache[(pooling,l2)] = embedder.encode(text_list, pooling=pooling, l2=l2)
 
+    # Optional pretrained LR head
+    pretrained_lr = None
+    lr_head_path: Optional[Path] = Path(args.lr_head_path) if args.lr_head_path else Path('models/detect/latest/lr_head.joblib')
+    try:
+        if lr_head_path and lr_head_path.exists():
+            pretrained_lr = joblib.load(lr_head_path)
+            logging.info(f"Loaded pretrained LR head from {lr_head_path}")
+    except Exception as e:
+        logging.warning(f"Failed to load pretrained LR head from {lr_head_path}: {e}")
+
     # Optional pairs
     pairs_df = load_pairs(Path(args.pairs_csv)) if args.pairs_csv else None
 
@@ -554,21 +574,26 @@ def main(argv: Optional[List[str]] = None) -> int:
     for rc in L8_MATRIX:
         logging.info(f"Running config: run_id={rc.run_id} pool={rc.pooling} l2={rc.l2} calib={rc.calibration} thr={rc.threshold_mode}")
         embeds = embeddings_cache[(rc.pooling, rc.l2)]
-        res = run_single_config(rc, embeds, labels, splits, {}, {})
+        res = run_single_config(rc, embeds, labels, splits, {}, {}, pretrained_lr=pretrained_lr)
 
         # Pair-win rate if requested: need probability fn (after calibration if any). Refit inside a closure.
         if pairs_df is not None:
             train_idx, val_idx, test_idx = splits['train'], splits['val'], splits['test']
             X_train, y_train = embeds[train_idx], labels[train_idx]
             X_val, y_val = embeds[val_idx], labels[val_idx]
-            # Fit again (could refactor to reuse; overhead minimal relative to encoding)
-            lr = LogisticRegression(max_iter=5000, class_weight='balanced', solver='lbfgs', n_jobs=-1, verbose=0)
-            lr.fit(X_train, y_train)
-            final_model: Any = lr
+            # Use pretrained head if available, otherwise fit again
+            if pretrained_lr is not None:
+                base_model: Any = pretrained_lr
+            else:
+                lr = LogisticRegression(max_iter=5000, class_weight='balanced', solver='lbfgs', n_jobs=-1, verbose=0)
+                lr.fit(X_train, y_train)
+                base_model = lr
             if rc.calibration:
-                calib = CalibratedClassifierCV(base_estimator=lr, cv='prefit', method='sigmoid')
+                calib = CalibratedClassifierCV(estimator=base_model, cv='prefit', method='sigmoid')
                 calib.fit(X_val, y_val)
-                final_model = calib
+                final_model: Any = calib
+            else:
+                final_model = base_model
             def clf_fn(x: np.ndarray, m=final_model):
                 return m.predict_proba(x)[:,1]
             res.pair_win_rate = compute_pair_win_rate(pairs_df, embedder, rc.pooling, rc.l2, clf_fn)

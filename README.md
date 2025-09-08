@@ -28,6 +28,11 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
   - Batch: `python -m src.detect.frtect_infer_bert --infile data/raw/mixed_shuffled.txt --outfile data/predictions/mixed_pred.csv`
   - Uses model at `models/detect/latest/camembert` by default; override with `--model_dir`.
 
+### Ablation (L8)
+- Run Taguchi L8 ablation of pooling/L2/calibration/threshold:
+  `python scripts/run_l8_ablation.py --data_path data/processed/verlan_test_set.csv --max_len 256 --batch_size 32 --load_in_4bit --bnb_quant_type nf4 --compute_dtype bfloat16 --device_map auto`
+- By default, it will try to load a pretrained LR head from `models/detect/latest/lr_head.joblib`. Override with `--lr_head_path` or omit the file to fit from scratch on the train split.
+
 ### Plot Probability Histogram
 - Draw overlapping histograms for Verlan vs Standard probabilities from a predictions CSV.
 - Example (produces `docs/results/lr_with_bert_ds_balanced/prob_dist.png`):
@@ -103,7 +108,8 @@ project-root/
 │           └── lr_head.joblib
 ├── scripts/
 │   ├── ci_update_docs.py
-│   └── generate-tree.py
+│   ├── generate-tree.py
+│   └── run_l8_ablation.py
 ├── src/
 │   ├── convert/
 │   │   ├── convert_infer.py
@@ -117,10 +123,13 @@ project-root/
 │   ├── plot/
 │   │   ├── plot_probability_histogram.py
 │   │   └── visualize_embeddings.py
+│   ├── experiments/
+│   │   └── run_l8_ablation.py
 │   ├── utils.py
-│   ├── detect_infer.py
-│   └── convert_infer.py
+│   ├── detect_infer.py        # wrapper → detect/detect_infer.py
+│   └── convert_infer.py       # wrapper → convert/convert_infer.py
 └── tests/
+    ├── run_l8_ablation.py     # wrapper → src/experiments/run_l8_ablation.py
     ├── test_convert_infer.py
     ├── test_detect_infer.py
     └── test_tokenization.py
