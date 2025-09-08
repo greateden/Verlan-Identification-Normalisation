@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 39 days, 02 hours, 34 minutes
+⏳ Time remaining: 39 days, 02 hours, 17 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -86,16 +86,16 @@ project-root/
 │       ├── 2025-09-02/
 │       │   └── lr_head.joblib
 │       ├── 2025-09-03/
-│       │   ├── lr_hard/
-│       │   │   └── lr_head.joblib
 │       │   └── lr_simple/
 │       │       └── lr_head.joblib
 │       └── latest/
 │           └── lr_head.joblib
-├── run_l8_ablation.py
+├── results_l8.csv
 ├── scripts/
 │   ├── ci_update_docs.py
-│   └── generate-tree.py
+│   ├── generate-tree.py
+│   └── run_l8_ablation.py
+├── split_indices.json
 ├── src/
 │   ├── __init__.py
 │   ├── convert/
@@ -121,12 +121,16 @@ project-root/
 │   │   ├── calibration.py
 │   │   ├── evaluate_threshold.py
 │   │   └── utils.py
+│   ├── experiments/
+│   │   ├── __init__.py
+│   │   └── run_l8_ablation.py
 │   └── plot/
 │       ├── __init__.py
 │       ├── plot_probability_histogram.py
 │       ├── plot_verlan_hist.py
 │       └── visualize_embeddings.py
 └── tests/
+    ├── run_l8_ablation.py
     ├── test_convert_infer.py
     ├── test_detect_infer.py
     └── test_tokenization.py
