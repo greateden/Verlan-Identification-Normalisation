@@ -149,6 +149,7 @@ python scripts/generate-tree.py > repo_tree.txt
 ## 📚 Lexicon
 
 - AP – Average Precision; area under the precision–recall curve.
+- CLS - classifications
 - CRF – Conditional Random Field; probabilistic model for sequence labelling.
 - F1 – F1 score; harmonic mean of precision and recall.
 - KS – Kolmogorov–Smirnov statistic; measures distance between distributions.
