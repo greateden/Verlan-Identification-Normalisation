@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 39 days, 01 hours, 42 minutes
+⏳ Time remaining: 39 days, 01 hours, 25 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -30,6 +30,9 @@ project-root/
 │   │   │   ├── mixed_mistral_camembert.csv
 │   │   │   ├── mixed_shuffled_pred_lr.csv
 │   │   │   └── mixed_shuffled_pred_lr_simple.csv
+│   │   ├── 2025-09-08/
+│   │   │   ├── invented_shuffled_pred.csv
+│   │   │   └── invented_shuffled_pred_NN_mistral_bert.csv
 │   │   └── very_old/
 │   │       ├── invented.csv
 │   │       ├── mixed_pred.csv
@@ -54,7 +57,8 @@ project-root/
 │       │   ├── invented.csv
 │       │   └── random.csv
 │       ├── lr_ds_balanced/
-│       │   └── prob_dist.png
+│       │   ├── prob_dist.png
+│       │   └── prob_dist_invented.png
 │       ├── lr_ds_balanced_simple/
 │       │   └── prob_dist.png
 │       ├── lr_with_bert_ds_balanced/
@@ -67,7 +71,8 @@ project-root/
 │       │   └── prob_dist.png
 │       ├── mistral_bert_ds_balanced/
 │       │   ├── mistral_bert_umap.png
-│       │   └── prob_dist.png
+│       │   ├── prob_dist.png
+│       │   └── prob_dist_invented.png
 │       ├── mistral_mistral_ds_balanced/
 │       │   └── mistral_mistral_umap.png
 │       └── only_lr_no_bert_ds_imbalance/
