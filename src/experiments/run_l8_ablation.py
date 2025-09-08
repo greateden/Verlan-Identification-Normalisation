@@ -183,11 +183,44 @@ def load_dataset(path: Path, text_col: str, label_col: str) -> pd.DataFrame:
 # --------------------------------------------------------------------------------------
 # Split management
 # --------------------------------------------------------------------------------------
+def _splits_valid(splits: Dict[str, List[int]], n: int) -> bool:
+    """Basic validation: all indices must be within [0, n-1]."""
+    try:
+        for key in ('train', 'val', 'test'):
+            idxs = splits.get(key, [])
+            if not isinstance(idxs, (list, tuple)):
+                return False
+            for i in idxs:
+                ii = int(i)
+                if ii < 0 or ii >= n:
+                    return False
+        return True
+    except Exception:
+        return False
+
 def make_or_load_splits(df: pd.DataFrame, seed: int, split_file: Path) -> Dict[str, List[int]]:
+    # Try to load existing splits and validate against current dataset size
     if split_file.exists():
-        with open(split_file, 'r', encoding='utf-8') as f:
-            splits = json.load(f)
-        return {k: list(map(int, v)) for k,v in splits.items()}
+        try:
+            with open(split_file, 'r', encoding='utf-8') as f:
+                raw = json.load(f)
+            # Support either top-level keys or nested under 'splits'
+            if all(k in raw for k in ('train', 'val', 'test')):
+                splits = {k: list(map(int, raw[k])) for k in ('train','val','test')}
+            elif 'splits' in raw and isinstance(raw['splits'], dict):
+                s = raw['splits']
+                splits = {k: list(map(int, s[k])) for k in ('train','val','test')}
+            else:
+                logging.warning(f"Split file {split_file} has unexpected structure; regenerating.")
+                splits = None  # type: ignore
+            if splits is not None and _splits_valid(splits, len(df)):
+                return splits
+            else:
+                logging.warning(
+                    f"Existing splits in {split_file} are invalid for dataset of size {len(df)}; regenerating."
+                )
+        except Exception as e:
+            logging.warning(f"Failed to load/validate {split_file}: {e}; regenerating.")
     labels = df['label']
     # First hold out test 15%
     idx = np.arange(len(df))
