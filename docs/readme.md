@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 39 days, 04 hours, 23 minutes
+⏳ Time remaining: 39 days, 02 hours, 34 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -92,6 +92,7 @@ project-root/
 │       │       └── lr_head.joblib
 │       └── latest/
 │           └── lr_head.joblib
+├── run_l8_ablation.py
 ├── scripts/
 │   ├── ci_update_docs.py
 │   └── generate-tree.py
