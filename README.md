@@ -17,6 +17,8 @@ This repository contains the data, code, and experiments for the project
 under the supervision of Lech Szymanski and Veronica Liesaputra.
 
 ---
+<details>
+<summary>Click to expand</summary>
 
 ## 🚀 Quick Start
 
@@ -141,7 +143,7 @@ To update manually:
 ```bash
 python scripts/generate-tree.py > repo_tree.txt
 ```
-
+</details>
 ---
 
 ## 📚 Lexicon
@@ -248,15 +250,18 @@ flowchart TB
     G -- block --> I[Final prediction: Standard]
 ```
 
-#### Why does the LLM + LR pipeline perform so well?
+<!-- #### Why does the LLM + LR pipeline perform so well?
 
 - The encoder does the heavy lifting. The Mistral embedding is trained on billions of sentences and already separates verlan and non-verlan contexts in vector space.
 - The task is nearly linear. Verlan tokens occupy distinct regions in the embedding space, allowing a simple linear boundary to distinguish them.
 - Dictionary gating adds robustness. The lexicon-based post-processing corrects many potential misclassifications from the classifier.
-- LR only cuts the final boundary. With rich embeddings and a binary objective, a linear classifier achieves high accuracy with minimal complexity.
+- LR only cuts the final boundary. With rich embeddings and a binary objective, a linear classifier achieves high accuracy with minimal complexity. 
+This is entirely chatgpt generated shit
+-->
 
 ---
-
+<details>
+<summary>Click to expand</summary>
 ## 🚀 Getting Started
 
 1. Setup environment
@@ -338,112 +343,228 @@ Update the symlink to switch versions.
 - 🔄 GPT-4o few-shot & Mistral-7B tokenizer (testing).
 - ⏳ Final evaluation + fairness audit (Sept–Oct 2025).
 - ⏳ Draft writing (Sept–Oct 2025).
-
+</details>
 ---
 
 ## 📝 Project Log
 
-<details>
-<summary>Click to expand</summary>
+<!-- <details>
+<summary>Click to expand</summary> -->
+
+
+### September 8, 2025 – Calibration and Pooling in Mistral+LR
+
+After Lech’s reminder that my Logistic Regression (LR) implementation might contain an error, I re-checked the code carefully and found no sign of label leakage. To verify, I stripped away all the “buffs” (mean pooling, L2 normalisation, calibration, threshold tuning, Gazetteer Gate) and ran plain LR. As expected, the model collapsed into near-random guessing, illustrated in ![docs/results/lr\_ds\_balanced\_simple/prob\_dist.png](docs/results/lr_ds_balanced_simple/prob_dist.png).
+
+This led me to suspect that calibration or pooling might be playing a crucial role. The embedding code is:
+
+```python
+H = out.last_hidden_state           # [B, T, D]
+mask = enc["attention_mask"].unsqueeze(-1).to(H.dtype)  # [B, T, 1]
+denom = mask.sum(dim=1).clamp(min=1) # [B, 1]
+pooled = (H * mask).sum(dim=1) / denom  # Mean pooling over valid tokens
+pooled = torch.nn.functional.normalize(pooled, p=2, dim=1)  # L2 norm
+```
+
+Here:
+
+* `H` is the hidden state of all tokens.
+* `mask` ensures padding tokens are ignored.
+* `pooled` averages only the valid tokens → **Mean Pooling**.
+* Normalisation projects the vector to unit length → **L2 Norm**.
+
+To isolate which factor matters most, I ran a compressed set of 8 controlled trials (Taguchi L8 design). Example results on the **balanced dataset** (randomised split) are:
+
+```
+Run 6 (MEAN, no-L2, Calib on, thr=0.5): AUC=1.0, F1=0.67
+Run 7 (MEAN, L2 on, no-Calib, thr=0.5): AUC=1.0, F1=0.86
+Run 8 (MEAN, L2 on, Calib on, thr=t*): AUC=1.0, F1=0.89
+CLS-only runs: AUC stuck at 0.25–0.5, F1 near 0
+```
+
+**Finding:** *Mean Pooling is the decisive factor*. Without it (CLS-only), the model fails completely. With Mean Pooling, adding either L2 or calibration further stabilises the separation.
+
+However, the AUC and F1 being 1.0 on this dataset raised concerns of overfitting. To check, I created a second test set containing only **invented verlan forms** (never seen in any lexicon but following verlan rules). Results dropped to **AUC ≈ 0.68, F1 ≈ 0.66**, showing the model can no longer achieve perfect separation. Since both datasets share the same structure and labels, this strongly suggests there is **no dataset leakage**—the difference comes from distribution difficulty.
+
+In short:
+
+* **Plain LR does not work** (random baseline).
+* **Mean Pooling + (L2 or calibration)** enables separation, even on unseen verlan.
+* Performance drops on invented OOD verlan, confirming no leakage but still showing promising generalisation.
+* Compared with the neural Mistral→CamemBERT pipeline (without calibration), LR+calibration is surprisingly strong (see the 2×2 plots below). I will next attempt to integrate calibration into the neural pipeline.
+
+Plots for comparison:
+
+* ![docs/results/mistral\_bert\_ds\_balanced/prob\_dist.png](docs/results/mistral_bert_ds_balanced/prob_dist.png)
+(the one above) Probability distribution for Mistral+CamemBERT (no calibration) on random test set
+
+* ![docs/results/mistral\_bert\_ds\_balanced/prob\_dist\_invented.png](docs/results/mistral_bert_ds_balanced/prob_dist_invented.png)
+(the one above) Probability distribution for Mistral+CamemBERT (no calibration) on invented verlan test set
+
+* ![docs/results/lr\_ds\_balanced/prob\_dist.png](docs/results/lr_ds_balanced/prob_dist.png)
+(the one above) Probability distribution for LR (with mean pooling + L2 + calibration) on random test set
+
+* ![docs/results/lr\_ds\_balanced/prob\_dist\_invented.png](docs/results/lr_ds_balanced/prob_dist_invented.png)
+(the one above) Probability distribution for LR (with mean pooling + L2 + calibration) on invented verlan test set
+
+**Conclusion:** Logistic Regression alone is ineffective, but with mean pooling and calibration it becomes a surprisingly competitive baseline—even outperforming the current neural pipeline without calibration.
+
+---
 
 ### September 2, 2025 – LR vs BERT+LR, dataset balance, and plots
-- Implemented a BERT+LR variant: `src/detect/detect_train_lr_bert.py` trains a CPU `LogisticRegression` head on top of sentence embeddings from `Salesforce/SFR-Embedding-Mistral` (4‑bit, BF16). For each sentence, I:
-  - Tokenize and run the encoder, then mean‑pool token vectors using the attention mask and L2‑normalize to get a unit‑length sentence embedding.
-  - Compute one extra, simple binary feature with a CamemBERT heuristic: if a token is split into multiple pieces by CamemBERT but its reverse becomes a single token, flag as 1; else 0.
-  - Concatenate `[embedding, heuristic]` and fit `LogisticRegression(class_weight="balanced", max_iter=2000)`.
-  - Save the head to `models/detect/YYYY‑MM‑DD/lr_head.joblib` and update `models/detect/latest/`.
-- Refactored inference: `src/detect/detect_infer.py` now handles batching, configurable threshold, and an optional gazetteer/fuzzy gate; `src/detect_infer.py` remains as a thin wrapper for backward compatibility.
-- Updated embedding visualisation: replaced `src/visualize_embeddings.py` with `src/plot/visualize_embeddings.py`. It now aligns features with the chosen LR head (adds the heuristic feature when the head expects D+1 inputs) before projecting, so the PCA boundary matches the trained head.
-- Added probability histogram tool: `src/plot/plot_probability_histogram.py` to compare score distributions. Generated two charts for balanced vs imbalanced datasets (see Valid Research Results).
-- Findings so far:
-  - BERT+LR underperforms LR‑only in my runs. The extra 1‑D heuristic seems to add noise and slightly hurts validation/test metrics compared to using only the sentence embedding with LR.
-  - Possible bug to investigate: my “BERT” path is actually a general LLM embedding (SFR‑Embedding‑Mistral) with manual mean‑pooling over `last_hidden_state`. If that model expects a specific pooling pipeline or `trust_remote_code=True`, the custom pooling may not be optimal. Also, concatenating a binary heuristic to a unit‑norm vector changes feature scaling; although LR can learn weights, the mismatch might make the single bit overly influential or simply unhelpful.
-  - Balanced vs imbalanced: distributions look similar overall. Balancing slightly improves the “is verlan” side (more mass at high probabilities) but tends to reduce specificity for “is not verlan” (blue histogram shifts right → more false positives).
+
+I implemented a **BERT+LR variant** (`src/detect/detect_train_lr_bert.py`). The idea was to train a CPU `LogisticRegression` head on top of sentence embeddings from **Salesforce/SFR-Embedding-Mistral** (4-bit, BF16).
+
+**Pipeline details:**
+
+* Tokenize and encode sentences.
+* Mean-pool token vectors using the attention mask → **unit sentence embedding** via L2 normalization.
+* Add one extra binary heuristic from CamemBERT: *if a token splits into multiple pieces but its reverse forms a single token, flag = 1*.
+* Concatenate `[embedding, heuristic]` and fit LR with `class_weight="balanced"`, `max_iter=2000`.
+* Save trained heads under `models/detect/YYYY-MM-DD/` and symlink to `models/detect/latest/`.
+
+**Supporting tools:**
+
+* Inference (`src/detect/detect_infer.py`) now supports batching, custom thresholds, and optional gazetteer/fuzzy gates.
+* Visualization (`src/plot/visualize_embeddings.py`) aligns embeddings with the trained LR head (including the heuristic dimension if present) before PCA/UMAP.
+* Added `src/plot/plot_probability_histogram.py` for probability distributions. Charts compare **balanced vs imbalanced** datasets.
+
+**Findings:**
+
+* **BERT+LR underperforms LR-only**: the 1-D heuristic tends to add noise. Likely reasons:
+
+  * Concatenating a binary feature to a unit-norm vector skews feature scaling; LR weights can adjust, but the mismatch may give the single bit disproportionate influence.
+  * I’m using SFR-Embedding-Mistral with manual pooling, not CamemBERT’s own embedding head. If the model expects a different pooling or `trust_remote_code=True`, my version may be suboptimal.
+* **Balanced vs imbalanced**: balancing improves recall for “is verlan” (more high-probability mass) but increases false positives (non-verlan distribution shifts right).
+
+---
 
 ### August 26, 2025 – Reflection after supervisor meeting
-- After deeper analysis, discovered that the main issue was not overfitting but a post-processing (gate) induced data leakage bias. The flowchart diagram of the LLM as below + Logistic Regression pipeline clearly illustrates how the Gazetteer Gate can introduce this bias by filtering predictions post-classification which leads to the results as below.
 
-  ```mermaid
-  flowchart TB
-    %% Fixed pipeline (Aug 2025) – HTML removed, ASCII only
+After discussion with Lech and Veronica, I realized the main issue was **not overfitting**, but **post-processing leakage via the Gazetteer Gate**.
 
-    subgraph Dataset_split_stratified
-      direction TB
-      S1[Train ~72.25%]
-      S2[Validation ~12.75%]
-      S3[Test = 15%]
-    end
+**Pipeline flowchart:**
 
-    A[Input text or file] --> B[Basic tokenisation]
-    B --> C[LLM Encoder: Salesforce/SFR-Embedding-Mistral]
-    C --> D[Mean Pooling + L2 Norm\nAverage tokens -> unit sentence vector]
-    D --> E[Logistic Regression\nLinear classifier]
+```mermaid
+flowchart TB
+  subgraph Dataset_split_stratified
+    direction TB
+    S1[Train ~72.25%]
+    S2[Validation ~12.75%]
+    S3[Test = 15%]
+  end
 
-    %% Post-processing chain added only at inference time
-    E --> P1[Calibration: Temperature / Platt / Isotonic]
-    P1 --> P2[Threshold tuning: select t* on validation, e.g., F1 or Youden J]
-    P2 --> G{Gazetteer Gate\nLexicon or fuzzy match required to pass}
+  A[Input text or file] --> B[Tokenisation]
+  B --> C[LLM Encoder: SFR-Embedding-Mistral]
+  C --> D[Mean Pooling + L2 Norm]
+  D --> E[Logistic Regression]
 
-    G -- allow --> H[Final prediction: Verlan]
-    G -- block --> I[Final prediction: Standard]
+  E --> P1[Calibration: Temp / Platt / Isotonic]
+  P1 --> P2["Threshold tuning: select t* (F1 / Youden J)"]
+  P2 --> G{Gazetteer Gate}
 
-    %% Evaluation linkage and warning
-    S2 -. used for .-> P2
-    S3 -. evaluated with .-> G
-    W[[WARNING: Leakage risk\nTest set mostly lexicon-covered verlan; few OOV/novel forms\nGate hid classifier errors -> deceptively high scores]]
-    G -. bias introduced .-> W
-  ```
+  G -- allow --> H[Predict: Verlan]
+  G -- block --> I[Predict: Standard]
 
-  - Aug 2025: After introducing calibration utilities and threshold optimization (commit fcbfcb0), post-processing separated the classes:
-    - Scanned validation thresholds to maximize F1 or Youden's J.
-    - Applied temperature scaling to logits so confidence spreads without altering ranking.
-    - Used Platt or isotonic calibration to trim the 0.5–0.7 “gray zone” before final thresholding.
+  S2 -. val for threshold .-> P2
+  S3 -. evaluated with .-> G
+  W[[WARNING: Gate masks classifier errors → deceptively high scores]]
+  G -. bias introduced .-> W
+```
 
-    ![Probability Distribution after post-processing](docs/results/only_lr_no_bert_ds_imbalance/prob_dist_post.png)
-  
-- Recognized the need to optimize the test set by categorizing examples systematically, such as separating existing vs invented verlan, and other relevant categories, to better evaluate model performance.
-- Refer to the updated flowchart diagram above and the embedding visualizations linked below for insights into the data distribution and model behavior.
-- The embedding visualizations using PCA, t-SNE, and UMAP show distinct clusters of verlan and standard tokens, with UMAP providing clearer separation while t-SNE appears more mixed.
-- Noted the limitations of the logistic regression boundary in capturing complex patterns in the embedding space; this motivates plans to experiment with more advanced models.
-- Emphasized the importance of rebalancing the dataset to reduce bias and improve generalization.
+**Observations:**
 
-[Embedding Space PCA](docs/results/only_lr_no_bert_ds_imbalance/embedding_space_pca.png) | [Embedding Space t-SNE](docs/results/only_lr_no_bert_ds_imbalance/embedding_space_tsne.png) | [Embedding Space UMAP](docs/results/lr_with_bert/embedding_space_umap.png)
+* Calibration + threshold tuning improved separation:
+
+  * Scanning validation thresholds gave F1/Youden J optima.
+  * Temperature scaling spread probabilities.
+  * Platt/isotonic calibration trimmed the “gray zone” near 0.5.
+* But the **Gate** introduced bias: if most test verlan are lexicon-covered, the gate can mask classifier errors and inflate scores.
+
+![Prob dist post-processing](docs/results/only_lr_no_bert_ds_imbalance/prob_dist_post.png)
+
+**Takeaways:**
+
+* The test set must separate **existing vs invented verlan** to evaluate generalization properly.
+* Visualizations (PCA, t-SNE, UMAP) show structure: UMAP provides clearer clusters, while t-SNE is more mixed.
+* Logistic Regression boundaries are too simple for complex embeddings → motivates stronger models.
+* Dataset rebalancing remains essential for fair evaluation.
+
+![Embedding Space PCA](docs/results/only_lr_no_bert_ds_imbalance/embedding_space_pca.png) | ![t-SNE](docs/results/only_lr_no_bert_ds_imbalance/embedding_space_tsne.png) | ![UMAP](docs/results/lr_with_bert/embedding_space_umap.png)
+
+---
 
 ### August 26, 2025 – Supervisor meeting
-- Emphasised balancing the dataset and using cross-validation to avoid overfitting and randomness.
-- Acknowledged limitations of the current pipeline (Mistral embeddings + Logistic Regression) and the risk of calibration overfitting.
-- Agreed to explore more advanced models (e.g., CamemBERT, mT5, fine-tuned Mistral) and compare their performance.
-- Planned to visualise sentence embeddings with t-SNE/UMAP to assess separability of verlan vs. non-verlan examples.
-- Highlighted the importance of systematic experimentation and consulting supervisors rather than relying solely on AI tools.
-- Action items: balance data, add visualisation, benchmark multiple models, and document the full pipeline for review.
 
+* Reinforced the need for **balanced datasets** and **cross-validation** to avoid spurious results.
+* Current pipeline (Mistral embeddings + LR) has limits and calibration risks.
+* Plan to benchmark advanced models (CamemBERT, mT5, fine-tuned Mistral).
+* Action items:
+
+  * Visualize sentence embeddings (t-SNE/UMAP).
+  * Balance data and re-run baselines.
+  * Systematically compare multiple models.
+  * Document the full pipeline clearly for review.
+
+---
 
 ### August 23–25, 2025 – Baseline evaluation and neural network experiments
 
-From August 23 to today (August 25, 2025), the project has progressed as follows:
+Between Aug 23–25, I evaluated baselines and began neural training.
 
-Baseline classifier established and evaluated: After completing model training on August 23, post-processing steps such as threshold tuning and calibration produced new metrics; however, performance on the validation set was poor, revealing clear overfitting and limited generalization.
+**Baseline (LR):**
 
-Code and experimental environment improvements: Added progress bars, device capability checks, and safeguards for heavy imports to make scripts more stable and user-friendly. Fixed CharCNN pooling kernel size and froze the encoder to reduce GPU memory usage, laying the groundwork for subsequent neural network training.
+* Threshold tuning + calibration improved metrics on training/val but exposed overfitting.
+* Validation remained weak → **generalization problem**.
 
-Initial neural network training: The script detect_train_nn.py has now run for one epoch. First-round results were: AP = 0.3908, ROC-AUC = 0.8135, KS = 0.4990, optimal threshold t* = 0.87 with F1 = 0.2538. These are a feasible start but require more epochs and broader validation to assess whether NN truly outperforms the baseline.
+**Code/infra improvements:**
 
-Why train neural networks? Although classical classifiers such as Logistic Regression already achieve reasonably strong results, neural networks offer several advantages: they can automatically learn richer contextual features beyond handcrafted inputs, potentially capturing patterns traditional models overlook; they provide more room for generalization and robustness, especially against the overfitting issues seen in post-processing; and they are more extensible for future directions such as multilingual adaptation, large-scale pretraining, or end-to-end training. Even if they do not immediately surpass the baseline, NNs serve as a valuable benchmark to confirm the ceiling of current approaches and ensure the project remains competitive and future-proof.
+* Added progress bars, GPU checks, import safeguards.
+* Fixed CharCNN pooling kernel bug.
+* Froze encoder to reduce GPU memory load.
 
-### August 23, 2025 – Repository reorganisation
-- Moved test files into structured data directories to tidy the repository layout.
+**Initial neural net run (`detect_train_nn.py`):**
 
-### August 12, 2025 – Baseline data and scripts
-- Imported raw datasets and annotation resources.
-- Added initial `detect.py` and `convert.py` scripts along with environment setup and evaluation utilities.
-- Introduced test corpora and baseline predictions to enable early experimentation.
+* After 1 epoch: **AP = 0.39, AUC = 0.81, KS = 0.50, t* = 0.87, F1 = 0.25*\*.
+* Promising AUC, but F1 still low → needs more epochs and systematic validation.
 
-### July 11, 2025 – Initial repository setup
-- Created the project skeleton and added the license.
+**Why try NNs?**
 
-</details>
+* LR is strong but limited. NNs can:
+
+  * Learn richer contextual features beyond handcrafted inputs.
+  * Potentially generalize better, especially against calibration overfitting.
+  * Offer extensibility for multilingual transfer or end-to-end pipelines.
+* Even if not superior immediately, NNs set an upper bound and keep the project future-proof.
 
 ---
+
+### August 23, 2025 – Repository reorganisation
+
+* Restructured data directories and tidied repository layout.
+
+---
+
+### August 12, 2025 – Baseline data and scripts
+
+* Imported raw datasets and annotation resources.
+* Added initial `detect.py` + `convert.py` scripts.
+* Set up environment and evaluation utils.
+* Created test corpora and baseline predictions.
+
+---
+
+### July 11, 2025 – Initial repository setup
+
+* Created project skeleton.
+* Added license.
+
+<!-- </details> -->
+
+---
+
+<details>
+<summary>Click to expand</summary>
 
 ## 📈 Valid Research Results
 
@@ -458,3 +579,5 @@ Why train neural networks? Although classical classifiers such as Logistic Regre
 - Sept 2025: BERT+LR on balanced dataset — verlan (red) concentrates more at high scores (better sensitivity), but standard (blue) also moves right (lower specificity). Overall separation is only modestly improved.
 
   ![BERT+LR – Balanced dataset (probability distribution)](docs/results/lr_with_bert_ds_balanced/prob_dist.png)
+
+</details>
