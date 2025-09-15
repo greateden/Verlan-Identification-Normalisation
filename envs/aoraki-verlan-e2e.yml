@@ -1,0 +1,24 @@
+name: aoraki-verlan-e2e
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch=2.4
+  - pytorch-cuda=12.1
+  - cudnn
+  - numpy
+  - pandas
+  - scikit-learn
+  - openpyxl
+  - pip:
+      - transformers>=4.41
+      - accelerate>=0.31
+      - sentencepiece
+      - bitsandbytes>=0.43
+      - huggingface-hub
+      - tqdm
+      - unidecode
+

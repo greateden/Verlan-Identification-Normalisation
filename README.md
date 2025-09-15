@@ -23,7 +23,9 @@ under the supervision of Lech Szymanski and Veronica Liesaputra.
 ## 🚀 Quick Start
 
 - Create env: `conda env create -f configs/environment.yml && conda activate verlan`
-- Train detector: `python -m src.detect.detect_train_lr_bert`
+- Train detector (frozen encoder + LR, Experiment A): `python -m src.detect.detect_train_lr`
+- Train detector (BERT+LR variant): `python -m src.detect.detect_train_lr_bert`
+- Train detector (end-to-end fine-tune, Experiment B): `python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5`
 - Detect (batch): `python -m src.detect.detect_infer --infile data/raw/mixed_shuffled.txt --outfile data/predictions/mixed_pred.csv --config configs/detect.yaml`
 - Convert (single): `python -m src.convert.convert_infer --text "il a fumé un bédo avec ses rebeus" --config configs/convert.yaml`
 - Detect (BERT fine-tuned): `python -m src.detect.frtect_infer_bert --text "il a fumé un bédo avec ses rebeus"`
@@ -143,7 +145,33 @@ To update manually:
 ```bash
 python scripts/generate-tree.py > repo_tree.txt
 ```
-</details>
+ </details>
+---
+
+## 🧵 Aoraki Cluster (GPU)
+
+- Account: request access via the RTIS Aoraki signup page and note your SLURM account name.
+- GPUs: Prefer `aoraki_gpu_H100` or `aoraki_gpu_A100_80GB` to finish E2E in ~3 hours.
+
+Setup on login node:
+- Install Miniforge if needed: `wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && bash Miniforge3-Linux-x86_64.sh -b -u`
+- Create env in-project: `bash scripts/aoraki/create_env.sh`
+
+Submit training (auto-picks best available GPU partition):
+- `export AORAKI_ACCOUNT=<your_slurm_account>`
+- Optional: force a partition, e.g. `export AORAKI_PARTITION=aoraki_gpu_H100`
+- `bash scripts/aoraki/submit_e2e.sh`
+
+Direct sbatch (no wrapper):
+- `sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm`
+- Tune via env: `EPOCHS=3 BATCH_SIZE=8 MAX_LEN=128 LR=2e-5 sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm`
+
+Notes
+- Logs: `logs/verlan-e2e-<jobid>.out|.err` on the cluster.
+- Caches: model weights cached under `.cache/huggingface` in the repo.
+- If the H100/A100_80GB queues are busy, wrapper falls back to `aoraki_gpu_A100_40GB`, then `aoraki_gpu_L40`, then `aoraki_gpu`.
+- If you see a Miniforge error, re-run `bash scripts/aoraki/create_env.sh` on the login node.
+
 ---
 
 ## 📚 Lexicon
@@ -197,6 +225,23 @@ S1 -. "train" .-> ENC
 S2 -. "monitor / early stop" .-> ENC
 S3 -. "evaluate" .-> TH
 ```
+
+### Experiment B (E2E Fine-tuning) – Usage
+
+- Baseline (Experiment A – Frozen encoder + LR):
+  - `python -m src.detect.detect_train_lr --batch_size 32 --max_length 512`
+- Experiment B (Unfrozen encoder, end-to-end fine-tune with mean pooling + linear head):
+  - Minimal GPU run: `python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5`
+  - With 4-bit loading (lower VRAM; training effectiveness may be limited without PEFT/LoRA):
+    `python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --load_in_4bit`
+
+Outputs
+- Saves the best checkpoint under `models/detect/latest/lr_e2e/model.pt` with `meta.json` (includes the chosen threshold on validation).
+- Prints validation AUC/AP and the scanned best F1 threshold; reports test AUC/AP/F1@t* for comparison to Experiment A.
+
+Interpretation Guide
+- If Experiment B ≈ Experiment A → suggests Mistral already encodes verlan patterns linearly.
+- If Experiment B » Experiment A → suggests fine-tuning is necessary to capture verlan knowledge.
 
 ### Mistral-7B + BERT
 
@@ -351,6 +396,15 @@ Update the symlink to switch versions.
 
 <!-- <details>
 <summary>Click to expand</summary> -->
+
+
+### September 15, 2025 – Added Experiment B (Unfrozen encoder)
+
+I added `src/detect/detect_train_lr_e2e.py`, which fine-tunes the Mistral encoder end-to-end with the same mean-pooling + L2 + linear head used by the LR baseline. This enables a clean comparison with the current frozen-encoder pipeline. The plan is to:
+
+- Train baseline (Experiment A): frozen encoder + CPU LR on sentence embeddings.
+- Train Experiment B: unfrozen encoder + linear head, end-to-end.
+- Compare on the same fixed splits. If E2E ≈ frozen, Mistral likely already encodes verlan; if E2E is clearly better, verlan was learned during fine-tuning.
 
 
 ### September 8, 2025 – Calibration and Pooling in Mistral+LR
