@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 32 days, 04 hours, 22 minutes
+⏳ Time remaining: 31 days, 02 hours, 55 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -81,6 +81,8 @@ project-root/
 │           ├── embedding_space_umap.png
 │           ├── prob_dist_post.png
 │           └── prob_dist_pre.png
+├── envs/
+│   └── aoraki-verlan-e2e.yml
 ├── models/
 │   ├── convert/
 │   │   ├── 2025-08-20/
@@ -100,6 +102,10 @@ project-root/
 │       └── latest/
 │           └── lr_head.joblib
 ├── scripts/
+│   ├── aoraki/
+│   │   ├── create_env.sh
+│   │   ├── submit_e2e.sh
+│   │   └── train_e2e.slurm
 │   ├── ci_update_docs.py
 │   ├── generate-tree.py
 │   └── run_l8_ablation.py
@@ -118,6 +124,7 @@ project-root/
 │   │   ├── detect_infer.py
 │   │   ├── detect_train_lr.py
 │   │   ├── detect_train_lr_bert.py
+│   │   ├── detect_train_lr_e2e.py
 │   │   ├── detect_train_lr_simple.py
 │   │   ├── detect_train_mistral_bert.py
 │   │   ├── detect_train_mistral_mistral_labmachine.py
