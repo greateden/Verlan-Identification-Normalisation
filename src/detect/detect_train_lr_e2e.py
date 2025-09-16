@@ -16,19 +16,16 @@ Model
 - Loss:    BCEWithLogitsLoss with optional positive-class weighting
 
 Notes
-- Full fine-tuning of a 7B encoder is memory-intensive. This script exposes
-  flags to try BF16 and bitsandbytes 4-bit loading. For real fine-tuning on
-  limited VRAM, LoRA/QLoRA is recommended (not included here to keep deps light).
+- Full fine-tuning of a 7B encoder is memory-intensive. This script matches the
+  baseline's quantization settings (4-bit NF4 + BF16 compute, device_map=auto).
+  For practical fine-tuning, LoRA/QLoRA is recommended (not included here).
 
 Usage (examples)
-  # Default small-batch run (GPU if available)
-  python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5
-
-  # Try 4-bit loading to reduce VRAM (training effectiveness may be limited without PEFT)
-  python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --load_in_4bit
+  # Default run (GPU if available)
+  python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 32 --max_length 512 --lr 2e-5
 
 Dependencies
-- torch>=2.2, transformers>=4.41, bitsandbytes>=0.43 (optional), scikit-learn, pandas, numpy, openpyxl
+- torch>=2.2, transformers>=4.41, bitsandbytes>=0.43, scikit-learn, pandas, numpy, openpyxl
 """
 
 from __future__ import annotations
@@ -42,26 +39,20 @@ from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 import torch
-from sklearn.metrics import average_precision_score, f1_score, roc_auc_score
+from sklearn.metrics import classification_report, f1_score, accuracy_score
 from sklearn.model_selection import train_test_split
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
-from transformers import AutoModel, AutoTokenizer
-
-try:  # optional
-    from transformers import BitsAndBytesConfig  # type: ignore
-    _HAS_BNB = True
-except Exception:
-    _HAS_BNB = False
+from transformers import AutoModel, AutoTokenizer, BitsAndBytesConfig
 
 
 # ------------------------ Tunable parameters ------------------------
 MODEL_ID = "Salesforce/SFR-Embedding-Mistral"
 SEED = 42
 
-# Default batch size and length
-DEF_BATCH = 8
-DEF_MAXLEN = 128
+# Default batch size and length (aligned with LR baseline)
+DEF_BATCH = 32
+DEF_MAXLEN = 512
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
@@ -71,6 +62,10 @@ os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:128,garbage_collection_threshold:0.6")
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
+torch.set_float32_matmul_precision("high")
+
+import random
+random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
 
 
 def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -107,54 +102,33 @@ def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     return train_df.reset_index(drop=True), val_df.reset_index(drop=True), test_df.reset_index(drop=True)
 
 
-def build_encoder(load_in_4bit: bool, device_map_auto: bool, use_flash_attn: bool, device: str):
+def load_encoder():
+    """Match LR baseline: 4-bit NF4 + BF16 compute, device_map=auto, flash-attn hint."""
+    bnb_cfg = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+        bnb_4bit_quant_type="nf4",
+    )
     tok = AutoTokenizer.from_pretrained(MODEL_ID)
     tok.padding_side = "right"
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-
-    load_kwargs = {}
-    if use_flash_attn:
-        load_kwargs["attn_implementation"] = "flash_attention_2"
-
-    if device == "cuda":
-        dtype = torch.bfloat16
-    else:
-        dtype = torch.float32
-
-    if load_in_4bit:
-        if not _HAS_BNB:
-            print("[WARN] bitsandbytes not available; falling back to standard load.")
-            load_in_4bit = False
-        else:
-            bnb_cfg = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_quant_type="nf4",
-            )
-            load_kwargs["quantization_config"] = bnb_cfg
-            if device_map_auto:
-                load_kwargs["device_map"] = "auto"
-
     try:
         enc = AutoModel.from_pretrained(
             MODEL_ID,
-            torch_dtype=dtype,
-            **load_kwargs,
+            quantization_config=bnb_cfg,
+            device_map="auto",
+            torch_dtype=torch.bfloat16,
+            attn_implementation="flash_attention_2",
         )
     except Exception:
-        # Retry without flash-attn hint
-        load_kwargs.pop("attn_implementation", None)
         enc = AutoModel.from_pretrained(
             MODEL_ID,
-            torch_dtype=dtype,
-            **load_kwargs,
+            quantization_config=bnb_cfg,
+            device_map="auto",
+            torch_dtype=torch.bfloat16,
         )
-
-    if not device_map_auto:
-        enc = enc.to(device)
-
     return tok, enc
 
 
@@ -214,20 +188,20 @@ def evaluate(model: E2ELinear, loader: DataLoader, device: str) -> Dict[str, flo
         ids = batch["input_ids"]
         attn = batch["attention_mask"]
         yb = batch["label"]
-        if device == "cuda":
-            ids = ids.cuda(non_blocking=True)
-            attn = attn.cuda(non_blocking=True)
+        # Align with device_map="auto": feed tensors to the encoder's first-param device
+        start_device = next(model.encoder.parameters()).device
+        ids = ids.to(start_device)
+        attn = attn.to(start_device)
         logits = model(ids, attn)
         p = torch.sigmoid(logits).cpu().numpy().ravel()
         probs.append(p)
         gold.append(yb.numpy().ravel())
     probs = np.concatenate(probs) if probs else np.zeros((0,))
     gold = np.concatenate(gold) if gold else np.zeros((0,))
-    res = {"ap": 0.0, "auc": 0.0, "f1@0.5": 0.0}
+    res = {"f1@0.5": 0.0, "acc@0.5": 0.0}
     if len(np.unique(gold)) > 1:
-        res["ap"] = float(average_precision_score(gold, probs))
-        res["auc"] = float(roc_auc_score(gold, probs))
         res["f1@0.5"] = float(f1_score(gold, (probs >= 0.5).astype(int), zero_division=0))
+        res["acc@0.5"] = float(accuracy_score(gold, (probs >= 0.5).astype(int)))
     # also return raw to enable threshold scan
     res["_probs"] = probs
     res["_gold"] = gold
@@ -235,6 +209,7 @@ def evaluate(model: E2ELinear, loader: DataLoader, device: str) -> Dict[str, flo
 
 
 def scan_best_threshold(y_true: np.ndarray, y_score: np.ndarray) -> Tuple[float, float]:
+    # Deprecated: not used when evaluating strictly at threshold 0.5
     ts = np.linspace(0, 1, 501)
     f1s = [f1_score(y_true, (y_score >= t).astype(int), zero_division=0) for t in ts]
     idx = int(np.argmax(f1s))
@@ -248,20 +223,16 @@ def main():
     ap.add_argument("--lr", type=float, default=2e-5)
     ap.add_argument("--weight_decay", type=float, default=0.01)
     ap.add_argument("--max_length", type=int, default=DEF_MAXLEN)
-    ap.add_argument("--load_in_4bit", action="store_true", help="Load encoder in 4-bit (bnb). Caution: for training, LoRA is usually preferred.")
-    ap.add_argument("--device_map_auto", action="store_true", help="Use device_map='auto' (may shard across CPU/GPU)")
-    ap.add_argument("--use_flash_attn", action="store_true", help="Hint FlashAttention2 if available")
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Device: {device}")
 
     train_df, val_df, test_df = load_data()
-    tok, enc = build_encoder(args.load_in_4bit, args.device_map_auto, args.use_flash_attn, device)
+    tok, enc = load_encoder()
 
     model = E2ELinear(enc)
-    if device == "cuda" and not args.device_map_auto:
-        model = model.cuda()
+    model.train()  # unfrozen encoder
 
     # Data
     train_ds = TextDataset(train_df["text"].tolist(), train_df["label"].astype(int).tolist())
@@ -278,8 +249,9 @@ def main():
     n_pos = max(1, int((y_np == 1).sum()))
     n_neg = max(1, int((y_np == 0).sum()))
     pos_weight = torch.tensor([n_neg / n_pos], dtype=torch.float32)
-    if device == "cuda":
-        pos_weight = pos_weight.cuda()
+    # Place pos_weight on the model's starting device
+    start_device = next(model.encoder.parameters()).device
+    pos_weight = pos_weight.to(start_device)
     bce = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
@@ -295,12 +267,12 @@ def main():
             ids = batch["input_ids"]
             attn = batch["attention_mask"]
             yb = batch["label"]
-            if device == "cuda":
-                ids = ids.cuda(non_blocking=True)
-                attn = attn.cuda(non_blocking=True)
-                yb = yb.cuda(non_blocking=True)
+            # Align inputs/labels to encoder's starting device (device_map="auto" compatible)
+            ids = ids.to(start_device)
+            attn = attn.to(start_device)
+            yb = yb.to(start_device)
             opt.zero_grad(set_to_none=True)
-            with torch.autocast(device_type="cuda", dtype=torch.bfloat16, enabled=(device == "cuda")):
+            with torch.autocast(device_type="cuda", dtype=torch.bfloat16, enabled=(start_device.type == "cuda")):
                 logits = model(ids, attn)
                 loss = bce(logits, yb)
             loss.backward()
@@ -308,24 +280,28 @@ def main():
             total_loss += float(loss.item())
         print(f"Epoch {epoch} train_loss={total_loss/ max(1,len(train_loader)):.4f}")
 
-        # Validation
+        # Validation @ fixed 0.5 threshold (mirrors LR baseline)
         val = evaluate(model, val_loader, device)
-        t_star, f1_star = scan_best_threshold(val["_gold"], val["_probs"])
-        print(f"Val: AUC={val['auc']:.3f} AP={val['ap']:.3f} F1@0.5={val['f1@0.5']:.3f} | best t*={t_star:.3f} F1={f1_star:.3f}")
+        yv_pred = (val["_probs"] >= 0.5).astype(int)
+        print(classification_report(val["_gold"], yv_pred, digits=3))
+        print(f"Val F1@0.5: {val['f1@0.5']:.3f}")
+        print(f"Val Accuracy@0.5: {val['acc@0.5']:.3f}")
+        f1_star = float(val["f1@0.5"]) if len(np.unique(val["_gold"])) > 1 else -1.0
         if f1_star > best_f1:
             best_f1 = f1_star
-            best_t = t_star
             # Save minimal state
             best_state = {
                 "encoder": {k: v.detach().cpu() for k, v in model.encoder.state_dict().items()},
                 "head": model.head.state_dict(),
             }
 
-    # Test with best threshold
+    # Test @ fixed 0.5 threshold
     test = evaluate(model, test_loader, device)
-    test_preds = (test["_probs"] >= best_t).astype(int)
+    test_preds = (test["_probs"] >= 0.5).astype(int)
     test_f1 = float(f1_score(test["_gold"], test_preds, zero_division=0)) if len(np.unique(test["_gold"])) > 1 else 0.0
-    print(f"Test: AUC={test['auc']:.3f} AP={test['ap']:.3f} F1@t*={test_f1:.3f} (t*={best_t:.3f})")
+    test_acc_05 = float(accuracy_score(test["_gold"], test_preds)) if len(np.unique(test["_gold"])) > 1 else 0.0
+    print(f"Test F1@0.5: {test_f1:.3f}")
+    print(f"Test Accuracy@0.5: {test_acc_05:.3f}")
 
     # Persist model + metadata
     out_dir = PROJECT_ROOT / "models" / "detect" / "latest" / "lr_e2e"
@@ -343,20 +319,21 @@ def main():
         }, ckpt_path)
     meta = {
         "model_id": MODEL_ID,
-        "threshold": best_t,
         "epochs": args.epochs,
         "batch_size": args.batch_size,
         "max_length": args.max_length,
         "lr": args.lr,
         "weight_decay": args.weight_decay,
-        "load_in_4bit": bool(args.load_in_4bit),
-        "device_map_auto": bool(args.device_map_auto),
-        "use_flash_attn": bool(args.use_flash_attn),
+        "quantization": {
+            "load_in_4bit": True,
+            "bnb_4bit_compute_dtype": "bfloat16",
+            "bnb_4bit_use_double_quant": True,
+            "bnb_4bit_quant_type": "nf4"
+        },
         "metrics": {
-            "val_best_f1": best_f1,
-            "test_auc": test.get("auc", 0.0),
-            "test_ap": test.get("ap", 0.0),
-            "test_f1_at_t": test_f1,
+            "val_best_f1@0.5": best_f1,
+            "test_f1@0.5": test_f1,
+            "test_acc@0.5": test_acc_05,
         },
     }
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -365,4 +342,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

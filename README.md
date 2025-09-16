@@ -154,8 +154,9 @@ python scripts/generate-tree.py > repo_tree.txt
 - GPUs: Prefer `aoraki_gpu_H100` or `aoraki_gpu_A100_80GB` to finish E2E in ~3 hours.
 
 Setup on login node:
-- Install Miniforge if needed: `wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && bash Miniforge3-Linux-x86_64.sh -b -u`
-- Create env in-project: `bash scripts/aoraki/create_env.sh`
+- Create env under project space (not $HOME): `bash scripts/aoraki/create_env.sh`
+  - By default installs Miniforge and the env under `/projects/sciences/computing/liyi5784/`.
+  - To override base path, set `AORAKI_BASE`, e.g.: `AORAKI_BASE=/projects/sciences/computing/<your_id> bash scripts/aoraki/create_env.sh`
 
 Submit training (auto-picks best available GPU partition):
 - `export AORAKI_ACCOUNT=<your_slurm_account>`
@@ -167,10 +168,10 @@ Direct sbatch (no wrapper):
 - Tune via env: `EPOCHS=3 BATCH_SIZE=8 MAX_LEN=128 LR=2e-5 sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm`
 
 Notes
-- Logs: `logs/verlan-e2e-<jobid>.out|.err` on the cluster.
-- Caches: model weights cached under `.cache/huggingface` in the repo.
+- Logs: `logs/verlan-e2e-<jobid>.out|.err` in the repo.
+- Caches: model weights cached under `$AORAKI_BASE/.cache/huggingface` (defaults to `/projects/sciences/computing/liyi5784/.cache/huggingface`).
 - If the H100/A100_80GB queues are busy, wrapper falls back to `aoraki_gpu_A100_40GB`, then `aoraki_gpu_L40`, then `aoraki_gpu`.
-- If you see a Miniforge error, re-run `bash scripts/aoraki/create_env.sh` on the login node.
+- If you see a Miniforge error, run `bash scripts/aoraki/create_env.sh` on the login node (it installs Miniforge into `$AORAKI_BASE/miniforge3`).
 
 ---
 

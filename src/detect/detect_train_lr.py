@@ -23,7 +23,7 @@ import sys
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report, f1_score
+from sklearn.metrics import classification_report, f1_score, accuracy_score
 
 from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
 
@@ -42,6 +42,7 @@ RAW_DIR = PROJECT_ROOT / "data" / "raw"
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:128,garbage_collection_threshold:0.6")
 torch.backends.cuda.matmul.allow_tf32 = True
+torch.backends.cudnn.allow_tf32 = True
 torch.set_float32_matmul_precision("high")
 
 random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
@@ -111,7 +112,7 @@ def load_encoder():
             device_map="auto",
             torch_dtype=torch.bfloat16,
         )
-    model.eval()
+    model.eval() # freeze
     return tok, model
 
 @torch.inference_mode()
@@ -170,14 +171,19 @@ def main():
     clf.fit(X_train, y_train)
 
     print("Val results:")
-    yv_pred = clf.predict(X_val)
+    # Use explicit 0.5 threshold for clarity
+    yv_prob = clf.predict_proba(X_val)[:, 1]
+    yv_pred = (yv_prob >= 0.5).astype(int)
     print(classification_report(y_val, yv_pred, digits=3))
+    print("Val Accuracy@0.5:", accuracy_score(y_val, yv_pred))
 
     print("Embedding test set …")
     X_test = embed_texts(test_df["text"], tok, model, args.batch_size, args.max_length)
     y_test = test_df["label"].values
-    yp = clf.predict(X_test)
-    print("Test F1:", f1_score(y_test, yp))
+    yp_prob = clf.predict_proba(X_test)[:, 1]
+    yp = (yp_prob >= 0.5).astype(int)
+    print("Test F1@0.5:", f1_score(y_test, yp))
+    print("Test Accuracy@0.5:", accuracy_score(y_test, yp))
 
     out_dir = PROJECT_ROOT / "models" / "detect" / "latest"
     os.makedirs(out_dir, exist_ok=True)

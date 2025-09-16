@@ -44,6 +44,7 @@ JOBID=$(sbatch \
   --parsable \
   --account="$AORAKI_ACCOUNT" \
   --partition="$TARGET" \
+  --export=ALL \
   scripts/aoraki/train_e2e.slurm)
 
 echo "Submitted as job $JOBID"
@@ -52,4 +53,3 @@ LOGERR="logs/verlan-e2e-${JOBID}.err"
 echo "Tailing $LOGOUT and $LOGERR"
 while [[ ! -f "$LOGOUT" || ! -f "$LOGERR" ]]; do sleep 1; done
 tail -n0 -f "$LOGOUT" "$LOGERR"
-
