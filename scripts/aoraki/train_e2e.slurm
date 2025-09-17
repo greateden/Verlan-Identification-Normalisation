@@ -54,13 +54,58 @@ BATCH_SIZE="${BATCH_SIZE:-8}"
 EPOCHS="${EPOCHS:-3}"
 MAX_LEN="${MAX_LEN:-128}"
 LR="${LR:-2e-5}"
+TRIALS="${TRIALS:-20}"
+SEED_START="${SEED_START:-1}"
+
+OUT_BASE="models/detect/latest/lr_e2e"
+mkdir -p "$OUT_BASE"
 
 set -x
-python -m src.detect.detect_train_lr_e2e \
-  --epochs "$EPOCHS" \
-  --batch_size "$BATCH_SIZE" \
-  --max_length "$MAX_LEN" \
-  --lr "$LR"
+for ((i=0; i<TRIALS; i++)); do
+  SEED=$((SEED_START + i))
+  RUN_ID="seed-${SEED}"
+  python -m src.detect.detect_train_lr_e2e \
+    --epochs "$EPOCHS" \
+    --batch_size "$BATCH_SIZE" \
+    --max_length "$MAX_LEN" \
+    --lr "$LR" \
+    --seed "$SEED" \
+    --run_id "$RUN_ID"
+done
 set +x
 
-echo "[OK] Training finished. Artifacts under models/detect/latest/lr_e2e"
+# Aggregate results into CSV and JSON summaries
+python - << 'PY'
+import json, csv
+from pathlib import Path
+base = Path('models/detect/latest/lr_e2e')
+rows = []
+for p in sorted(base.glob('seed-*/meta.json')):
+    try:
+        meta = json.loads(p.read_text())
+        m = meta.get('metrics', {})
+        rows.append({
+            'run_dir': str(p.parent),
+            'seed': meta.get('seed'),
+            'run_id': meta.get('run_id'),
+            'val_best_f1@0.5': m.get('val_best_f1@0.5'),
+            'test_f1@0.5': m.get('test_f1@0.5'),
+            'test_acc@0.5': m.get('test_acc@0.5'),
+        })
+    except Exception as e:
+        print(f"[WARN] Failed to read {p}: {e}")
+
+rows.sort(key=lambda r: (r.get('seed') is None, r.get('seed')))
+
+out_json = base / 'trials_summary.json'
+out_json.write_text(json.dumps(rows, ensure_ascii=False, indent=2))
+
+out_csv = base / 'trials_summary.csv'
+with out_csv.open('w', newline='') as f:
+    w = csv.DictWriter(f, fieldnames=['seed','run_id','run_dir','val_best_f1@0.5','test_f1@0.5','test_acc@0.5'])
+    w.writeheader(); w.writerows(rows)
+
+print(f"[OK] Wrote {out_json} and {out_csv}")
+PY
+
+echo "[OK] Trials finished. Artifacts under models/detect/latest/lr_e2e; summaries saved."

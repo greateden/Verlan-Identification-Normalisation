@@ -166,6 +166,7 @@ Submit training (auto-picks best available GPU partition):
 Direct sbatch (no wrapper):
 - `sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm`
 - Tune via env: `EPOCHS=3 BATCH_SIZE=8 MAX_LEN=128 LR=2e-5 sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm`
+ - Multiple trials + aggregation: `TRIALS=20 SEED_START=1 sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm` (per-trial outputs under `models/detect/latest/lr_e2e/seed-*/`, summaries saved to `trials_summary.{json,csv}`)
 
 Notes
 - Logs: `logs/verlan-e2e-<jobid>.out|.err` in the repo.
@@ -243,6 +244,19 @@ Outputs
 Interpretation Guide
 - If Experiment B ≈ Experiment A → suggests Mistral already encodes verlan patterns linearly.
 - If Experiment B » Experiment A → suggests fine-tuning is necessary to capture verlan knowledge.
+
+#### Initial Results (fixed threshold = 0.5)
+
+- Conclusion first: end-to-end fine-tuning outperforms the frozen-encoder+LR baseline on the held-out test set, while scoring slightly lower on the validation set. Overall, this indicates the fine-tuning is beneficial; the validation dip likely reflects threshold choice at 0.5, mild class imbalance, and variance from a short 3‑epoch run.
+
+```
+Setting                               Val Acc   Val F1    Test Acc  Test F1
+Frozen encoder + LogisticRegression    0.812     0.805     0.800     0.750
+E2E fine-tune (3 epochs)               0.790     0.741     0.822     0.778
+```
+
+- Delta (E2E − Frozen): Test +2.2% Acc, +2.9 pt F1; Val −2.2% Acc, −6.4 pt F1.
+- Read: prioritize the unseen test set → E2E is better; improve stability by scanning thresholds on validation (instead of fixing 0.5), training for a few more epochs, and averaging over seeds.
 
 ### Mistral-7B + BERT
 
