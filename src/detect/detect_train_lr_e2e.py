@@ -68,7 +68,7 @@ import random
 random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
 
 
-def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def load_data(seed: int) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     print("Loading data …")
     sent_path = RAW_DIR / "Sentences_balanced.xlsx"
     gaz_path = RAW_DIR / "GazetteerEntries.xlsx"
@@ -93,10 +93,10 @@ def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 
     # Stratified 85/15, then 15% of the 85% as val -> 72.25/12.75/15
     train_df, test_df = train_test_split(
-        df, test_size=0.15, stratify=df["label"], random_state=SEED
+        df, test_size=0.15, stratify=df["label"], random_state=seed
     )
     train_df, val_df = train_test_split(
-        train_df, test_size=0.15, stratify=train_df["label"], random_state=SEED
+        train_df, test_size=0.15, stratify=train_df["label"], random_state=seed
     )
     print(f"Splits: train {len(train_df)}, val {len(val_df)}, test {len(test_df)}")
     return train_df.reset_index(drop=True), val_df.reset_index(drop=True), test_df.reset_index(drop=True)
@@ -223,12 +223,18 @@ def main():
     ap.add_argument("--lr", type=float, default=2e-5)
     ap.add_argument("--weight_decay", type=float, default=0.01)
     ap.add_argument("--max_length", type=int, default=DEF_MAXLEN)
+    ap.add_argument("--seed", type=int, default=SEED, help="Random seed for splits and training")
+    ap.add_argument("--run_id", type=str, default="", help="Optional run identifier for output directory")
+    ap.add_argument("--out_dir", type=str, default="", help="Optional custom output directory (absolute or relative to project root)")
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Device: {device}")
 
-    train_df, val_df, test_df = load_data()
+    # Re-seed with provided seed
+    random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed); torch.cuda.manual_seed_all(args.seed)
+
+    train_df, val_df, test_df = load_data(args.seed)
     tok, enc = load_encoder()
 
     model = E2ELinear(enc)
@@ -304,7 +310,14 @@ def main():
     print(f"Test Accuracy@0.5: {test_acc_05:.3f}")
 
     # Persist model + metadata
-    out_dir = PROJECT_ROOT / "models" / "detect" / "latest" / "lr_e2e"
+    # Determine output directory
+    if args.out_dir:
+        out_dir = Path(args.out_dir)
+        if not out_dir.is_absolute():
+            out_dir = PROJECT_ROOT / out_dir
+    else:
+        tag = (args.run_id.strip() or f"seed-{args.seed}")
+        out_dir = PROJECT_ROOT / "models" / "detect" / "latest" / "lr_e2e" / tag
     out_dir.mkdir(parents=True, exist_ok=True)
     ckpt_path = out_dir / "model.pt"
     meta_path = out_dir / "meta.json"
@@ -324,6 +337,9 @@ def main():
         "max_length": args.max_length,
         "lr": args.lr,
         "weight_decay": args.weight_decay,
+        "seed": args.seed,
+        "run_id": args.run_id,
+        "out_dir": str(out_dir.relative_to(PROJECT_ROOT) if str(out_dir).startswith(str(PROJECT_ROOT)) else out_dir),
         "quantization": {
             "load_in_4bit": True,
             "bnb_4bit_compute_dtype": "bfloat16",

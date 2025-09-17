@@ -166,6 +166,7 @@ Submit training (auto-picks best available GPU partition):
 Direct sbatch (no wrapper):
 - `sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm`
 - Tune via env: `EPOCHS=3 BATCH_SIZE=8 MAX_LEN=128 LR=2e-5 sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm`
+ - Multiple trials + aggregation: `TRIALS=20 SEED_START=1 sbatch --account=$AORAKI_ACCOUNT scripts/aoraki/train_e2e.slurm` (per-trial outputs under `models/detect/latest/lr_e2e/seed-*/`, summaries saved to `trials_summary.{json,csv}`)
 
 Notes
 - Logs: `logs/verlan-e2e-<jobid>.out|.err` in the repo.
