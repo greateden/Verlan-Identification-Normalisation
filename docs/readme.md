@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 30 days, 09 hours, 11 minutes
+⏳ Time remaining: 30 days, 04 hours, 41 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -108,6 +108,7 @@ project-root/
 │   │   └── train_e2e.slurm
 │   ├── ci_update_docs.py
 │   ├── generate-tree.py
+│   ├── run_detect_train_lr_batch.py
 │   └── run_l8_ablation.py
 ├── split_indices.json
 ├── src/
