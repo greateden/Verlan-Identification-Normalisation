@@ -8,11 +8,6 @@ if ! command -v sbatch >/dev/null 2>&1; then
   exit 1
 fi
 
-if [[ -z "${AORAKI_ACCOUNT:-}" ]]; then
-  echo "[ERROR] Please export AORAKI_ACCOUNT=your_slurm_account before running." >&2
-  exit 2
-fi
-
 mkdir -p logs
 
 # Allow user to force a partition via AORAKI_PARTITION; else pick best idle.
@@ -37,12 +32,11 @@ else
   done
 fi
 
-echo "→ Submitting to partition: $TARGET (account=$AORAKI_ACCOUNT)"
+echo "→ Submitting to partition: $TARGET"
 
 # Allow tuning via environment; e.g. EPOCHS=3 BATCH_SIZE=8 MAX_LEN=128 LR=2e-5
 JOBID=$(sbatch \
   --parsable \
-  --account="$AORAKI_ACCOUNT" \
   --partition="$TARGET" \
   --export=ALL \
   scripts/aoraki/train_e2e.slurm)
