@@ -1,0 +1,864 @@
+---- GPU info ----
+Wed Sep 17 13:10:38 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 555.42.06              Driver Version: 555.42.06      CUDA Version: 12.5     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:81:00.0 Off |                    0 |
+| N/A   30C    P0             31W /  250W |       1MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+------------------
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8652
+              precision    recall  f1-score   support
+
+         0.0      1.000     0.015     0.030       453
+         1.0      0.379     1.000     0.549       272
+
+    accuracy                          0.385       725
+   macro avg      0.689     0.508     0.290       725
+weighted avg      0.767     0.385     0.225       725
+
+Val F1@0.5: 0.549
+Val Accuracy@0.5: 0.385
+Epoch 2 train_loss=0.8500
+              precision    recall  f1-score   support
+
+         0.0      0.912     0.711     0.799       453
+         1.0      0.648     0.886     0.748       272
+
+    accuracy                          0.777       725
+   macro avg      0.780     0.798     0.774       725
+weighted avg      0.813     0.777     0.780       725
+
+Val F1@0.5: 0.748
+Val Accuracy@0.5: 0.777
+Epoch 3 train_loss=0.7969
+              precision    recall  f1-score   support
+
+         0.0      0.916     0.742     0.820       453
+         1.0      0.673     0.886     0.765       272
+
+    accuracy                          0.796       725
+   macro avg      0.794     0.814     0.792       725
+weighted avg      0.825     0.796     0.799       725
+
+Val F1@0.5: 0.765
+Val Accuracy@0.5: 0.796
+Test F1@0.5: 0.758
+Test Accuracy@0.5: 0.783
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-1/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8648
+              precision    recall  f1-score   support
+
+         0.0      0.973     0.320     0.482       453
+         1.0      0.465     0.985     0.632       272
+
+    accuracy                          0.570       725
+   macro avg      0.719     0.653     0.557       725
+weighted avg      0.783     0.570     0.538       725
+
+Val F1@0.5: 0.632
+Val Accuracy@0.5: 0.570
+Epoch 2 train_loss=0.8473
+              precision    recall  f1-score   support
+
+         0.0      0.969     0.614     0.751       453
+         1.0      0.600     0.967     0.741       272
+
+    accuracy                          0.746       725
+   macro avg      0.785     0.790     0.746       725
+weighted avg      0.831     0.746     0.747       725
+
+Val F1@0.5: 0.741
+Val Accuracy@0.5: 0.746
+Epoch 3 train_loss=0.7965
+              precision    recall  f1-score   support
+
+         0.0      0.924     0.751     0.828       453
+         1.0      0.683     0.897     0.776       272
+
+    accuracy                          0.806       725
+   macro avg      0.804     0.824     0.802       725
+weighted avg      0.834     0.806     0.809       725
+
+Val F1@0.5: 0.776
+Val Accuracy@0.5: 0.806
+Test F1@0.5: 0.758
+Test Accuracy@0.5: 0.790
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-2/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8647
+              precision    recall  f1-score   support
+
+         0.0      0.625     1.000     0.769       453
+         1.0      0.000     0.000     0.000       272
+
+    accuracy                          0.625       725
+   macro avg      0.312     0.500     0.385       725
+weighted avg      0.390     0.625     0.481       725
+
+Val F1@0.5: 0.000
+Val Accuracy@0.5: 0.625
+Epoch 2 train_loss=0.8670
+              precision    recall  f1-score   support
+
+         0.0      0.625     1.000     0.769       453
+         1.0      0.000     0.000     0.000       272
+
+    accuracy                          0.625       725
+   macro avg      0.312     0.500     0.385       725
+weighted avg      0.390     0.625     0.481       725
+
+Val F1@0.5: 0.000
+Val Accuracy@0.5: 0.625
+Epoch 3 train_loss=0.8666
+              precision    recall  f1-score   support
+
+         0.0      0.624     0.962     0.757       453
+         1.0      0.346     0.033     0.060       272
+
+    accuracy                          0.614       725
+   macro avg      0.485     0.498     0.409       725
+weighted avg      0.520     0.614     0.496       725
+
+Val F1@0.5: 0.060
+Val Accuracy@0.5: 0.614
+Test F1@0.5: 0.070
+Test Accuracy@0.5: 0.627
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-3/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8659
+              precision    recall  f1-score   support
+
+         0.0      0.711     0.642     0.675       453
+         1.0      0.487     0.566     0.524       272
+
+    accuracy                          0.614       725
+   macro avg      0.599     0.604     0.599       725
+weighted avg      0.627     0.614     0.618       725
+
+Val F1@0.5: 0.524
+Val Accuracy@0.5: 0.614
+Epoch 2 train_loss=0.8597
+              precision    recall  f1-score   support
+
+         0.0      0.810     0.706     0.755       453
+         1.0      0.597     0.724     0.654       272
+
+    accuracy                          0.713       725
+   macro avg      0.704     0.715     0.705       725
+weighted avg      0.730     0.713     0.717       725
+
+Val F1@0.5: 0.654
+Val Accuracy@0.5: 0.713
+Epoch 3 train_loss=0.8319
+              precision    recall  f1-score   support
+
+         0.0      0.870     0.722     0.789       453
+         1.0      0.639     0.820     0.718       272
+
+    accuracy                          0.759       725
+   macro avg      0.754     0.771     0.754       725
+weighted avg      0.783     0.759     0.762       725
+
+Val F1@0.5: 0.718
+Val Accuracy@0.5: 0.759
+Test F1@0.5: 0.717
+Test Accuracy@0.5: 0.761
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-4/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8657
+              precision    recall  f1-score   support
+
+         0.0      1.000     0.079     0.147       453
+         1.0      0.395     1.000     0.566       272
+
+    accuracy                          0.425       725
+   macro avg      0.697     0.540     0.357       725
+weighted avg      0.773     0.425     0.304       725
+
+Val F1@0.5: 0.566
+Val Accuracy@0.5: 0.425
+Epoch 2 train_loss=0.8513
+              precision    recall  f1-score   support
+
+         0.0      0.943     0.514     0.666       453
+         1.0      0.540     0.949     0.688       272
+
+    accuracy                          0.677       725
+   macro avg      0.742     0.731     0.677       725
+weighted avg      0.792     0.677     0.674       725
+
+Val F1@0.5: 0.688
+Val Accuracy@0.5: 0.677
+Epoch 3 train_loss=0.7974
+              precision    recall  f1-score   support
+
+         0.0      0.900     0.658     0.760       453
+         1.0      0.607     0.879     0.718       272
+
+    accuracy                          0.741       725
+   macro avg      0.753     0.768     0.739       725
+weighted avg      0.790     0.741     0.744       725
+
+Val F1@0.5: 0.718
+Val Accuracy@0.5: 0.741
+Test F1@0.5: 0.753
+Test Accuracy@0.5: 0.778
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-5/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8669
+              precision    recall  f1-score   support
+
+         0.0      0.699     0.709     0.704       453
+         1.0      0.504     0.493     0.498       272
+
+    accuracy                          0.628       725
+   macro avg      0.602     0.601     0.601       725
+weighted avg      0.626     0.628     0.627       725
+
+Val F1@0.5: 0.498
+Val Accuracy@0.5: 0.628
+Epoch 2 train_loss=0.8621
+              precision    recall  f1-score   support
+
+         0.0      0.851     0.490     0.622       453
+         1.0      0.502     0.857     0.633       272
+
+    accuracy                          0.628       725
+   macro avg      0.676     0.673     0.628       725
+weighted avg      0.720     0.628     0.626       725
+
+Val F1@0.5: 0.633
+Val Accuracy@0.5: 0.628
+Epoch 3 train_loss=0.8421
+              precision    recall  f1-score   support
+
+         0.0      0.843     0.664     0.743       453
+         1.0      0.587     0.794     0.675       272
+
+    accuracy                          0.713       725
+   macro avg      0.715     0.729     0.709       725
+weighted avg      0.747     0.713     0.718       725
+
+Val F1@0.5: 0.675
+Val Accuracy@0.5: 0.713
+Test F1@0.5: 0.695
+Test Accuracy@0.5: 0.722
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-6/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8651
+              precision    recall  f1-score   support
+
+         0.0      0.955     0.234     0.376       453
+         1.0      0.435     0.982     0.603       272
+
+    accuracy                          0.514       725
+   macro avg      0.695     0.608     0.489       725
+weighted avg      0.760     0.514     0.461       725
+
+Val F1@0.5: 0.603
+Val Accuracy@0.5: 0.514
+Epoch 2 train_loss=0.8496
+              precision    recall  f1-score   support
+
+         0.0      0.896     0.669     0.766       453
+         1.0      0.612     0.871     0.719       272
+
+    accuracy                          0.745       725
+   macro avg      0.754     0.770     0.743       725
+weighted avg      0.790     0.745     0.749       725
+
+Val F1@0.5: 0.719
+Val Accuracy@0.5: 0.745
+Epoch 3 train_loss=0.8003
+              precision    recall  f1-score   support
+
+         0.0      0.886     0.770     0.824       453
+         1.0      0.686     0.835     0.753       272
+
+    accuracy                          0.794       725
+   macro avg      0.786     0.802     0.788       725
+weighted avg      0.811     0.794     0.797       725
+
+Val F1@0.5: 0.753
+Val Accuracy@0.5: 0.794
+Test F1@0.5: 0.754
+Test Accuracy@0.5: 0.795
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-7/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8642
+              precision    recall  f1-score   support
+
+         0.0      0.966     0.316     0.476       453
+         1.0      0.463     0.982     0.629       272
+
+    accuracy                          0.566       725
+   macro avg      0.714     0.649     0.552       725
+weighted avg      0.777     0.566     0.533       725
+
+Val F1@0.5: 0.629
+Val Accuracy@0.5: 0.566
+Epoch 2 train_loss=0.8396
+              precision    recall  f1-score   support
+
+         0.0      0.917     0.733     0.815       453
+         1.0      0.667     0.890     0.762       272
+
+    accuracy                          0.792       725
+   macro avg      0.792     0.811     0.788       725
+weighted avg      0.823     0.792     0.795       725
+
+Val F1@0.5: 0.762
+Val Accuracy@0.5: 0.792
+Epoch 3 train_loss=0.7675
+              precision    recall  f1-score   support
+
+         0.0      0.919     0.728     0.813       453
+         1.0      0.664     0.893     0.762       272
+
+    accuracy                          0.790       725
+   macro avg      0.792     0.811     0.787       725
+weighted avg      0.823     0.790     0.794       725
+
+Val F1@0.5: 0.762
+Val Accuracy@0.5: 0.790
+Test F1@0.5: 0.777
+Test Accuracy@0.5: 0.804
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-8/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8648
+              precision    recall  f1-score   support
+
+         0.0      0.926     0.302     0.456       453
+         1.0      0.452     0.960     0.615       272
+
+    accuracy                          0.549       725
+   macro avg      0.689     0.631     0.535       725
+weighted avg      0.748     0.549     0.516       725
+
+Val F1@0.5: 0.615
+Val Accuracy@0.5: 0.549
+Epoch 2 train_loss=0.8499
+              precision    recall  f1-score   support
+
+         0.0      0.899     0.706     0.791       453
+         1.0      0.640     0.868     0.736       272
+
+    accuracy                          0.767       725
+   macro avg      0.769     0.787     0.764       725
+weighted avg      0.802     0.767     0.771       725
+
+Val F1@0.5: 0.736
+Val Accuracy@0.5: 0.767
+Epoch 3 train_loss=0.7990
+              precision    recall  f1-score   support
+
+         0.0      0.896     0.801     0.846       453
+         1.0      0.719     0.846     0.777       272
+
+    accuracy                          0.818       725
+   macro avg      0.808     0.823     0.812       725
+weighted avg      0.830     0.818     0.820       725
+
+Val F1@0.5: 0.777
+Val Accuracy@0.5: 0.818
+Test F1@0.5: 0.762
+Test Accuracy@0.5: 0.808
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-9/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8639
+              precision    recall  f1-score   support
+
+         0.0      0.975     0.351     0.516       453
+         1.0      0.477     0.985     0.643       272
+
+    accuracy                          0.589       725
+   macro avg      0.726     0.668     0.579       725
+weighted avg      0.788     0.589     0.564       725
+
+Val F1@0.5: 0.643
+Val Accuracy@0.5: 0.589
+Epoch 2 train_loss=0.8358
+              precision    recall  f1-score   support
+
+         0.0      0.894     0.728     0.803       453
+         1.0      0.654     0.857     0.742       272
+
+    accuracy                          0.777       725
+   macro avg      0.774     0.793     0.772       725
+weighted avg      0.804     0.777     0.780       725
+
+Val F1@0.5: 0.742
+Val Accuracy@0.5: 0.777
+Epoch 3 train_loss=0.7592
+              precision    recall  f1-score   support
+
+         0.0      0.925     0.757     0.833       453
+         1.0      0.689     0.897     0.780       272
+
+    accuracy                          0.810       725
+   macro avg      0.807     0.827     0.806       725
+weighted avg      0.836     0.810     0.813       725
+
+Val F1@0.5: 0.780
+Val Accuracy@0.5: 0.810
+Test F1@0.5: 0.811
+Test Accuracy@0.5: 0.839
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-10/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8639
+              precision    recall  f1-score   support
+
+         0.0      1.000     0.130     0.230       453
+         1.0      0.408     1.000     0.580       272
+
+    accuracy                          0.457       725
+   macro avg      0.704     0.565     0.405       725
+weighted avg      0.778     0.457     0.362       725
+
+Val F1@0.5: 0.580
+Val Accuracy@0.5: 0.457
+Epoch 2 train_loss=0.8399
+              precision    recall  f1-score   support
+
+         0.0      0.898     0.757     0.822       453
+         1.0      0.679     0.857     0.758       272
+
+    accuracy                          0.794       725
+   macro avg      0.789     0.807     0.790       725
+weighted avg      0.816     0.794     0.798       725
+
+Val F1@0.5: 0.758
+Val Accuracy@0.5: 0.794
+Epoch 3 train_loss=0.7727
+              precision    recall  f1-score   support
+
+         0.0      0.925     0.766     0.838       453
+         1.0      0.697     0.897     0.785       272
+
+    accuracy                          0.815       725
+   macro avg      0.811     0.832     0.811       725
+weighted avg      0.840     0.815     0.818       725
+
+Val F1@0.5: 0.785
+Val Accuracy@0.5: 0.815
+Test F1@0.5: 0.781
+Test Accuracy@0.5: 0.814
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-11/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8644
+              precision    recall  f1-score   support
+
+         0.0      0.956     0.338     0.499       453
+         1.0      0.469     0.974     0.633       272
+
+    accuracy                          0.577       725
+   macro avg      0.713     0.656     0.566       725
+weighted avg      0.773     0.577     0.549       725
+
+Val F1@0.5: 0.633
+Val Accuracy@0.5: 0.577
+Epoch 2 train_loss=0.8444
+              precision    recall  f1-score   support
+
+         0.0      0.922     0.627     0.746       453
+         1.0      0.595     0.912     0.720       272
+
+    accuracy                          0.734       725
+   macro avg      0.758     0.769     0.733       725
+weighted avg      0.799     0.734     0.736       725
+
+Val F1@0.5: 0.720
+Val Accuracy@0.5: 0.734
+Epoch 3 train_loss=0.7876
+              precision    recall  f1-score   support
+
+         0.0      0.904     0.766     0.829       453
+         1.0      0.689     0.864     0.767       272
+
+    accuracy                          0.803       725
+   macro avg      0.796     0.815     0.798       725
+weighted avg      0.823     0.803     0.806       725
+
+Val F1@0.5: 0.767
+Val Accuracy@0.5: 0.803
+Test F1@0.5: 0.768
+Test Accuracy@0.5: 0.804
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-12/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8623
+              precision    recall  f1-score   support
+
+         0.0      0.885     0.664     0.759       453
+         1.0      0.605     0.857     0.709       272
+
+    accuracy                          0.737       725
+   macro avg      0.745     0.761     0.734       725
+weighted avg      0.780     0.737     0.740       725
+
+Val F1@0.5: 0.709
+Val Accuracy@0.5: 0.737
+Epoch 2 train_loss=0.8353
+              precision    recall  f1-score   support
+
+         0.0      0.887     0.779     0.830       453
+         1.0      0.694     0.835     0.758       272
+
+    accuracy                          0.800       725
+   macro avg      0.791     0.807     0.794       725
+weighted avg      0.815     0.800     0.803       725
+
+Val F1@0.5: 0.758
+Val Accuracy@0.5: 0.800
+Epoch 3 train_loss=0.7737
+              precision    recall  f1-score   support
+
+         0.0      0.849     0.817     0.832       453
+         1.0      0.713     0.757     0.734       272
+
+    accuracy                          0.794       725
+   macro avg      0.781     0.787     0.783       725
+weighted avg      0.798     0.794     0.796       725
+
+Val F1@0.5: 0.734
+Val Accuracy@0.5: 0.794
+Test F1@0.5: 0.789
+Test Accuracy@0.5: 0.838
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-13/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8644
+              precision    recall  f1-score   support
+
+         0.0      0.882     0.530     0.662       453
+         1.0      0.530     0.882     0.662       272
+
+    accuracy                          0.662       725
+   macro avg      0.706     0.706     0.662       725
+weighted avg      0.750     0.662     0.662       725
+
+Val F1@0.5: 0.662
+Val Accuracy@0.5: 0.662
+Epoch 2 train_loss=0.8467
+              precision    recall  f1-score   support
+
+         0.0      0.909     0.748     0.821       453
+         1.0      0.676     0.875     0.763       272
+
+    accuracy                          0.796       725
+   macro avg      0.792     0.812     0.792       725
+weighted avg      0.822     0.796     0.799       725
+
+Val F1@0.5: 0.763
+Val Accuracy@0.5: 0.796
+Epoch 3 train_loss=0.7966
+              precision    recall  f1-score   support
+
+         0.0      0.918     0.815     0.863       453
+         1.0      0.740     0.879     0.803       272
+
+    accuracy                          0.839       725
+   macro avg      0.829     0.847     0.833       725
+weighted avg      0.851     0.839     0.841       725
+
+Val F1@0.5: 0.803
+Val Accuracy@0.5: 0.839
+Test F1@0.5: 0.762
+Test Accuracy@0.5: 0.800
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-14/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8638
+              precision    recall  f1-score   support
+
+         0.0      0.975     0.260     0.411       453
+         1.0      0.445     0.989     0.614       272
+
+    accuracy                          0.534       725
+   macro avg      0.710     0.625     0.513       725
+weighted avg      0.776     0.534     0.487       725
+
+Val F1@0.5: 0.614
+Val Accuracy@0.5: 0.534
+Epoch 2 train_loss=0.8420
+              precision    recall  f1-score   support
+
+         0.0      0.904     0.667     0.767       453
+         1.0      0.614     0.882     0.724       272
+
+    accuracy                          0.748       725
+   macro avg      0.759     0.775     0.746       725
+weighted avg      0.795     0.748     0.751       725
+
+Val F1@0.5: 0.724
+Val Accuracy@0.5: 0.748
+Epoch 3 train_loss=0.7769
+              precision    recall  f1-score   support
+
+         0.0      0.874     0.826     0.849       453
+         1.0      0.734     0.801     0.766       272
+
+    accuracy                          0.817       725
+   macro avg      0.804     0.814     0.808       725
+weighted avg      0.821     0.817     0.818       725
+
+Val F1@0.5: 0.766
+Val Accuracy@0.5: 0.817
+Test F1@0.5: 0.777
+Test Accuracy@0.5: 0.819
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-15/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8639
+              precision    recall  f1-score   support
+
+         0.0      0.901     0.545     0.680       453
+         1.0      0.543     0.901     0.678       272
+
+    accuracy                          0.679       725
+   macro avg      0.722     0.723     0.679       725
+weighted avg      0.767     0.679     0.679       725
+
+Val F1@0.5: 0.678
+Val Accuracy@0.5: 0.679
+Epoch 2 train_loss=0.8382
+              precision    recall  f1-score   support
+
+         0.0      0.926     0.773     0.842       453
+         1.0      0.703     0.897     0.788       272
+
+    accuracy                          0.819       725
+   macro avg      0.815     0.835     0.815       725
+weighted avg      0.842     0.819     0.822       725
+
+Val F1@0.5: 0.788
+Val Accuracy@0.5: 0.819
+Epoch 3 train_loss=0.7648
+              precision    recall  f1-score   support
+
+         0.0      0.924     0.775     0.843       453
+         1.0      0.704     0.893     0.788       272
+
+    accuracy                          0.819       725
+   macro avg      0.814     0.834     0.815       725
+weighted avg      0.841     0.819     0.822       725
+
+Val F1@0.5: 0.788
+Val Accuracy@0.5: 0.819
+Test F1@0.5: 0.770
+Test Accuracy@0.5: 0.805
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-16/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8651
+              precision    recall  f1-score   support
+
+         0.0      0.977     0.276     0.430       453
+         1.0      0.451     0.989     0.619       272
+
+    accuracy                          0.543       725
+   macro avg      0.714     0.632     0.525       725
+weighted avg      0.779     0.543     0.501       725
+
+Val F1@0.5: 0.619
+Val Accuracy@0.5: 0.543
+Epoch 2 train_loss=0.8490
+              precision    recall  f1-score   support
+
+         0.0      0.949     0.658     0.777       453
+         1.0      0.623     0.941     0.750       272
+
+    accuracy                          0.764       725
+   macro avg      0.786     0.800     0.763       725
+weighted avg      0.827     0.764     0.767       725
+
+Val F1@0.5: 0.750
+Val Accuracy@0.5: 0.764
+Epoch 3 train_loss=0.7997
+              precision    recall  f1-score   support
+
+         0.0      0.922     0.788     0.850       453
+         1.0      0.716     0.890     0.793       272
+
+    accuracy                          0.826       725
+   macro avg      0.819     0.839     0.822       725
+weighted avg      0.845     0.826     0.829       725
+
+Val F1@0.5: 0.793
+Val Accuracy@0.5: 0.826
+Test F1@0.5: 0.773
+Test Accuracy@0.5: 0.811
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-17/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8653
+              precision    recall  f1-score   support
+
+         0.0      0.901     0.565     0.695       453
+         1.0      0.553     0.897     0.684       272
+
+    accuracy                          0.690       725
+   macro avg      0.727     0.731     0.690       725
+weighted avg      0.771     0.690     0.691       725
+
+Val F1@0.5: 0.684
+Val Accuracy@0.5: 0.690
+Epoch 2 train_loss=0.8536
+              precision    recall  f1-score   support
+
+         0.0      0.900     0.717     0.799       453
+         1.0      0.648     0.868     0.742       272
+
+    accuracy                          0.774       725
+   macro avg      0.774     0.793     0.770       725
+weighted avg      0.806     0.774     0.777       725
+
+Val F1@0.5: 0.742
+Val Accuracy@0.5: 0.774
+Epoch 3 train_loss=0.8174
+              precision    recall  f1-score   support
+
+         0.0      0.919     0.673     0.777       453
+         1.0      0.623     0.901     0.737       272
+
+    accuracy                          0.759       725
+   macro avg      0.771     0.787     0.757       725
+weighted avg      0.808     0.759     0.762       725
+
+Val F1@0.5: 0.737
+Val Accuracy@0.5: 0.759
+Test F1@0.5: 0.743
+Test Accuracy@0.5: 0.766
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-18/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8652
+              precision    recall  f1-score   support
+
+         0.0      0.805     0.748     0.776       453
+         1.0      0.625     0.699     0.660       272
+
+    accuracy                          0.730       725
+   macro avg      0.715     0.723     0.718       725
+weighted avg      0.738     0.730     0.732       725
+
+Val F1@0.5: 0.660
+Val Accuracy@0.5: 0.730
+Epoch 2 train_loss=0.8500
+              precision    recall  f1-score   support
+
+         0.0      0.878     0.746     0.807       453
+         1.0      0.662     0.827     0.735       272
+
+    accuracy                          0.777       725
+   macro avg      0.770     0.787     0.771       725
+weighted avg      0.797     0.777     0.780       725
+
+Val F1@0.5: 0.735
+Val Accuracy@0.5: 0.777
+Epoch 3 train_loss=0.8008
+              precision    recall  f1-score   support
+
+         0.0      0.907     0.773     0.834       453
+         1.0      0.696     0.868     0.773       272
+
+    accuracy                          0.808       725
+   macro avg      0.801     0.820     0.803       725
+weighted avg      0.828     0.808     0.811       725
+
+Val F1@0.5: 0.773
+Val Accuracy@0.5: 0.808
+Test F1@0.5: 0.756
+Test Accuracy@0.5: 0.792
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-19/model.pt
+Device: cuda
+Loading data …
+Splits: train 4106, val 725, test 853
+Epoch 1 train_loss=0.8641
+              precision    recall  f1-score   support
+
+         0.0      0.833     0.660     0.736       453
+         1.0      0.579     0.779     0.665       272
+
+    accuracy                          0.705       725
+   macro avg      0.706     0.720     0.701       725
+weighted avg      0.738     0.705     0.709       725
+
+Val F1@0.5: 0.665
+Val Accuracy@0.5: 0.705
+Epoch 2 train_loss=0.8398
+              precision    recall  f1-score   support
+
+         0.0      0.900     0.698     0.786       453
+         1.0      0.634     0.871     0.734       272
+
+    accuracy                          0.763       725
+   macro avg      0.767     0.784     0.760       725
+weighted avg      0.800     0.763     0.766       725
+
+Val F1@0.5: 0.734
+Val Accuracy@0.5: 0.763
+Epoch 3 train_loss=0.7696
+              precision    recall  f1-score   support
+
+         0.0      0.906     0.768     0.832       453
+         1.0      0.692     0.868     0.770       272
+
+    accuracy                          0.806       725
+   macro avg      0.799     0.818     0.801       725
+weighted avg      0.826     0.806     0.808       725
+
+Val F1@0.5: 0.770
+Val Accuracy@0.5: 0.806
+Test F1@0.5: 0.783
+Test Accuracy@0.5: 0.822
+Saved E2E model to: /projects/sciences/computing/liyi5784/Verlan-Identification-Normalisation-main/models/detect/latest/lr_e2e/seed-20/model.pt
+[OK] Wrote models/detect/latest/lr_e2e/trials_summary.json and models/detect/latest/lr_e2e/trials_summary.csv
+[OK] Trials finished. Artifacts under models/detect/latest/lr_e2e; summaries saved.

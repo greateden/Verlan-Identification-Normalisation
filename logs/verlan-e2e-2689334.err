@@ -1,0 +1,195 @@
++ (( i=0 ))
++ (( i<TRIALS ))
++ SEED=1
++ RUN_ID=seed-1
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 1 --run_id seed-1
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.47s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.46s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.35s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.38s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=2
++ RUN_ID=seed-2
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 2 --run_id seed-2
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.49s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.47s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.35s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.38s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=3
++ RUN_ID=seed-3
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 3 --run_id seed-3
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.50s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.48s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.35s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.39s/it]
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=4
++ RUN_ID=seed-4
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 4 --run_id seed-4
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.48s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.46s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.34s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.37s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=5
++ RUN_ID=seed-5
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 5 --run_id seed-5
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.47s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.48s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.36s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.39s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=6
++ RUN_ID=seed-6
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 6 --run_id seed-6
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.46s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.46s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.33s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.37s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=7
++ RUN_ID=seed-7
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 7 --run_id seed-7
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.46s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.45s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.33s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.36s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=8
++ RUN_ID=seed-8
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 8 --run_id seed-8
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.46s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.45s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.33s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.36s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=9
++ RUN_ID=seed-9
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 9 --run_id seed-9
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.48s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.47s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.34s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.38s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=10
++ RUN_ID=seed-10
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 10 --run_id seed-10
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.45s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.44s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.32s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.35s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=11
++ RUN_ID=seed-11
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 11 --run_id seed-11
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.48s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.69s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.46s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.50s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=12
++ RUN_ID=seed-12
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 12 --run_id seed-12
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.54s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.53s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.40s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.44s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=13
++ RUN_ID=seed-13
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 13 --run_id seed-13
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.47s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.44s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.48s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.48s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=14
++ RUN_ID=seed-14
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 14 --run_id seed-14
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.94s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.96s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.83s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.86s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=15
++ RUN_ID=seed-15
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 15 --run_id seed-15
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.44s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.66s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.44s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.48s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=16
++ RUN_ID=seed-16
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 16 --run_id seed-16
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.47s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.46s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.33s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.37s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=17
++ RUN_ID=seed-17
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 17 --run_id seed-17
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.94s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.94s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.80s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.84s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=18
++ RUN_ID=seed-18
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 18 --run_id seed-18
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.45s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.46s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.50s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.49s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=19
++ RUN_ID=seed-19
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 19 --run_id seed-19
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.68s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.55s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.39s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.45s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ SEED=20
++ RUN_ID=seed-20
++ python -m src.detect.detect_train_lr_e2e --epochs 3 --batch_size 8 --max_length 128 --lr 2e-5 --seed 20 --run_id seed-20
+/projects/sciences/computing/liyi5784/.conda/aoraki-verlan-e2e/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:02<00:04,  2.10s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:04<00:02,  2.16s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:06<00:00,  2.00s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:06<00:00,  2.04s/it]
++ (( i++ ))
++ (( i<TRIALS ))
++ set +x
