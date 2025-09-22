@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 30 days, 04 hours, 41 minutes
+⏳ Time remaining: 24 days, 11 hours, 29 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -83,6 +83,11 @@ project-root/
 │           └── prob_dist_pre.png
 ├── envs/
 │   └── aoraki-verlan-e2e.yml
+├── logs/
+│   ├── dcgm-2689334.out
+│   ├── detect_train_lr_20250917_141908.out
+│   ├── verlan-e2e-2689334.err
+│   └── verlan-e2e-2689334.out
 ├── models/
 │   ├── convert/
 │   │   ├── 2025-08-20/
