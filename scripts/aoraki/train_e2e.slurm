@@ -10,6 +10,10 @@
 
 set -euo pipefail
 
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+REPO_ROOT=$(cd "$SCRIPT_DIR/../.." && pwd)
+cd "$REPO_ROOT"
+
 # Fail fast if account not provided via command line or environment wrapper.
 if [[ -z "${SLURM_JOB_ACCOUNT:-}" ]]; then
   echo "[WARN] No --account provided. Submit with: sbatch --account=YOUR_ACCOUNT scripts/aoraki/train_e2e.slurm" >&2
@@ -20,7 +24,8 @@ export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
 export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
 
 # Use project-space caches to avoid $HOME quotas
-AORAKI_BASE="${AORAKI_BASE:-/projects/sciences/computing/liyi5784}"
+DEFAULT_PROJECT_BASE=$(cd "$REPO_ROOT/.." && pwd)
+AORAKI_BASE="${AORAKI_BASE:-$DEFAULT_PROJECT_BASE}"
 AORAKI_CACHE_DIR="${AORAKI_CACHE_DIR:-$AORAKI_BASE/.cache}"
 export HF_HOME="$AORAKI_CACHE_DIR/huggingface"
 export TRANSFORMERS_CACHE="$HF_HOME/transformers"

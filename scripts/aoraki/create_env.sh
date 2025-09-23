@@ -3,8 +3,12 @@
 
 set -euo pipefail
 
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+REPO_ROOT=$(cd "$SCRIPT_DIR/../.." && pwd)
+
 # Where to install Miniforge and the env (defaults to project space, not $HOME)
-AORAKI_BASE="${AORAKI_BASE:-/projects/sciences/computing/liyi5784}"
+DEFAULT_PROJECT_BASE=$(cd "$REPO_ROOT/.." && pwd)
+AORAKI_BASE="${AORAKI_BASE:-$DEFAULT_PROJECT_BASE}"
 MINIFORGE_DIR="$AORAKI_BASE/miniforge3"
 
 mkdir -p "$AORAKI_BASE"
@@ -30,7 +34,12 @@ source "$MINIFORGE_DIR/etc/profile.d/conda.sh"
 
 # Place the env under project space as well
 ENV_PREFIX="$AORAKI_BASE/.conda/aoraki-verlan-e2e"
-ENV_YML="envs/aoraki-verlan-e2e.yml"
+ENV_YML="$REPO_ROOT/envs/aoraki-verlan-e2e.yml"
+
+if [[ ! -f "$ENV_YML" ]]; then
+  echo "[ERROR] Unable to locate env spec at $ENV_YML" >&2
+  exit 1
+fi
 
 mkdir -p "$(dirname "$ENV_PREFIX")"
 

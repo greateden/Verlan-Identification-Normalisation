@@ -3,12 +3,19 @@
 
 set -euo pipefail
 
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+REPO_ROOT=$(cd "$SCRIPT_DIR/../.." && pwd)
+LOG_DIR="$REPO_ROOT/logs"
+
 if ! command -v sbatch >/dev/null 2>&1; then
   echo "[ERROR] sbatch not found. Run on Aoraki login node." >&2
   exit 1
 fi
 
-mkdir -p logs
+mkdir -p "$LOG_DIR"
+
+pushd "$REPO_ROOT" >/dev/null
+trap 'popd >/dev/null' EXIT
 
 # Allow user to force a partition via AORAKI_PARTITION; else pick best idle.
 if [[ -n "${AORAKI_PARTITION:-}" ]]; then
@@ -42,8 +49,8 @@ JOBID=$(sbatch \
   scripts/aoraki/train_e2e.slurm)
 
 echo "Submitted as job $JOBID"
-LOGOUT="logs/verlan-e2e-${JOBID}.out"
-LOGERR="logs/verlan-e2e-${JOBID}.err"
+LOGOUT="$LOG_DIR/verlan-e2e-${JOBID}.out"
+LOGERR="$LOG_DIR/verlan-e2e-${JOBID}.err"
 echo "Tailing $LOGOUT and $LOGERR"
 while [[ ! -f "$LOGOUT" || ! -f "$LOGERR" ]]; do sleep 1; done
 tail -n0 -f "$LOGOUT" "$LOGERR"
