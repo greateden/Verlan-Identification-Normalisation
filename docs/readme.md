@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 24 days, 04 hours, 19 minutes
+⏳ Time remaining: 24 days, 04 hours, 10 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -109,7 +109,11 @@ project-root/
 ├── scripts/
 │   ├── aoraki/
 │   │   ├── create_env.sh
+│   │   ├── submit_bert.sh
+│   │   ├── submit_bert_e2e.sh
 │   │   ├── submit_e2e.sh
+│   │   ├── train_bert.slurm
+│   │   ├── train_bert_e2e.slurm
 │   │   └── train_e2e.slurm
 │   ├── ci_update_docs.py
 │   ├── generate-tree.py
