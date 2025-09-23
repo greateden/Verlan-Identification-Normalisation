@@ -45,6 +45,7 @@ echo "→ Submitting to partition: $TARGET"
 JOBID=$(sbatch \
   --parsable \
   --partition="$TARGET" \
+  --chdir="$REPO_ROOT" \
   --export=ALL \
   scripts/aoraki/train_e2e.slurm)
 
