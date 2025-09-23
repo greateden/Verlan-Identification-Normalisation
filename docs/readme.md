@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 24 days, 04 hours, 10 minutes
+⏳ Time remaining: 24 days, 00 hours, 16 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -83,11 +83,21 @@ project-root/
 │           └── prob_dist_pre.png
 ├── envs/
 │   └── aoraki-verlan-e2e.yml
+├── final report/
+│   ├── Accuracy_distribution_4settings.png
+│   ├── All_4settings_results.csv
+│   └── Summary_4settings.csv
 ├── logs/
+│   ├── 01frozen_mistral+lr_20250917_141908.out
+│   ├── 02e2e_mistral+lr_2689334.out
+│   ├── 03frozen_mistral+bert_2704327.out
+│   ├── 04e2e_mistral+bert_2704317.out
 │   ├── dcgm-2689334.out
-│   ├── detect_train_lr_20250917_141908.out
-│   ├── verlan-e2e-2689334.err
-│   └── verlan-e2e-2689334.out
+│   ├── dcgm-2704317.out
+│   ├── dcgm-2704327.out
+│   ├── e2e_mistral+bert_2704317.err
+│   ├── frozen_mistral+bert_2704327.err
+│   └── verlan-bert-e2e-2704317.err
 ├── models/
 │   ├── convert/
 │   │   ├── 2025-08-20/
