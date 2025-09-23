@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 24 days, 04 hours, 24 minutes
+⏳ Time remaining: 24 days, 04 hours, 19 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -125,16 +125,19 @@ project-root/
 │   ├── convert_infer.py
 │   ├── detect/
 │   │   ├── __init__.py
-│   │   ├── detect_benchmark_mistral_bert.py
-│   │   ├── detect_benchmark_mistral_mistral.py
 │   │   ├── detect_infer.py
+│   │   ├── detect_train_bert.py
+│   │   ├── detect_train_bert_e2e.py
 │   │   ├── detect_train_lr.py
-│   │   ├── detect_train_lr_bert.py
 │   │   ├── detect_train_lr_e2e.py
 │   │   ├── detect_train_lr_simple.py
-│   │   ├── detect_train_mistral_bert.py
-│   │   ├── detect_train_mistral_mistral_labmachine.py
-│   │   └── detect_train_nn.py
+│   │   └── old/
+│   │       ├── detect_benchmark_mistral_bert.py
+│   │       ├── detect_benchmark_mistral_mistral.py
+│   │       ├── detect_train_lr_bert.py
+│   │       ├── detect_train_mistral_bert.py
+│   │       ├── detect_train_mistral_mistral_labmachine.py
+│   │       └── detect_train_nn.py
 │   ├── detect_infer.py
 │   ├── evaluate/
 │   │   ├── EvaluateThreshold.py
