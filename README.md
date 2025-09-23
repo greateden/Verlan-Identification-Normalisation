@@ -412,6 +412,23 @@ Update the symlink to switch versions.
 <!-- <details>
 <summary>Click to expand</summary> -->
 
+### September 18, 2025 – Four-setting detector comparison
+
+![F1 and Accuracy distributions across four training regimes](final%20report/Accuracy_distribution_4settings.png)
+
+Figure notes:
+- Left panel plots F1 score distributions across the four configurations.
+- Right panel plots accuracy distributions.
+- Boxes span Q1–Q3, the horizontal line marks the median, and the triangle indicates the mean.
+- Dots denote outliers from individual runs.
+
+Key observations (20-trial summary in `final report/Summary_4settings.csv`):
+- Frozen+LR stays stable, clustering near accuracy ≈0.81.
+- E2E+LR oscillates widely and averages slightly lower than the frozen baseline.
+- Frozen+BERT yields a small but consistent lift over frozen+LR.
+- E2E+BERT jumps ahead, delivering the highest means (accuracy ≈0.85, F1 ≈0.80).
+
+Conclusion: End-to-end fine-tuning with a BERT head currently offers the best balance between stability and top-line metrics, so it is my preferred configuration for the next study phase.
 
 ### September 15, 2025 – Added Experiment B (Unfrozen encoder)
 
