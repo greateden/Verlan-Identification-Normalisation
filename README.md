@@ -2,9 +2,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 45 days, 23 hours, 55 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
-Deadline (UTC): 2025-10-17 11:00 UTC
 ```
 <!-- DUE:END -->
 
@@ -412,7 +410,7 @@ Update the symlink to switch versions.
 <!-- <details>
 <summary>Click to expand</summary> -->
 
-### September 18, 2025 – Four-setting detector comparison
+### September 23, 2025 – Four-setting detector comparison
 
 ![F1 and Accuracy distributions across four training regimes](final%20report/Accuracy_distribution_4settings.png)
 
@@ -429,6 +427,8 @@ Key observations (20-trial summary in `final report/Summary_4settings.csv`):
 - E2E+BERT jumps ahead, delivering the highest means (accuracy ≈0.85, F1 ≈0.80).
 
 Conclusion: End-to-end fine-tuning with a BERT head currently offers the best balance between stability and top-line metrics, so it is my preferred configuration for the next study phase.
+
+Although my supervisors suggested attaching Mistral embeddings to CamemBERT’s classifier, I avoided this since similar trials performed poorly and instead built a lightweight BERT-style head (Dropout→Linear→Tanh→Dropout→Linear), effectively mirroring CamemBERT’s structure; I will, however, test a linear projection (4096→768) into CamemBERT’s classifier in the coming days to confirm this point, while I consider full dual-encoder fusion unnecessary.
 
 ### September 15, 2025 – Added Experiment B (Unfrozen encoder)
 
