@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 23 days, 16 hours, 25 minutes
+⏳ Time remaining: 23 days, 06 hours, 59 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -86,7 +86,20 @@ project-root/
 ├── final report/
 │   ├── Accuracy_distribution_4settings.png
 │   ├── All_4settings_results.csv
-│   └── Summary_4settings.csv
+│   ├── Summary_4settings.csv
+│   ├── good example papers/
+│   │   └── Marxen_Master_Thesis_2023_08_18.pdf
+│   └── report folder/
+│       ├── cosc4x0style.sty
+│       ├── figures/
+│       │   ├── frog.jpg
+│       │   └── logo.png
+│       ├── myreport.aux
+│       ├── myreport.log
+│       ├── myreport.out
+│       ├── myreport.pdf
+│       ├── myreport.synctex.gz
+│       └── myreport.tex
 ├── logs/
 │   ├── 01frozen_mistral+lr_20250917_141908.out
 │   ├── 02e2e_mistral+lr_2689334.out
