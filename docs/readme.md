@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 20 days, 09 hours, 13 minutes
+⏳ Time remaining: 20 days, 06 hours, 00 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -92,9 +92,14 @@ project-root/
 │   └── report folder/
 │       ├── cosc4x0style.sty
 │       ├── figures/
+│       │   ├── deepl_alt_text.png
+│       │   ├── deepl_verlan.png
 │       │   ├── frog.jpg
+│       │   ├── google_verlan.png
 │       │   └── logo.png
 │       ├── myreport.aux
+│       ├── myreport.fdb_latexmk
+│       ├── myreport.fls
 │       ├── myreport.log
 │       ├── myreport.out
 │       ├── myreport.pdf
