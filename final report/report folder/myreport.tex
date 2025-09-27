@@ -19,6 +19,9 @@
 
 \documentclass[12pt]{article}
 \usepackage[draft]{cosc4x0style}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
 
 % To compile the final version of the report (which will remove all the todo content)
 %\usepackage{cosc4x0style}
@@ -46,20 +49,15 @@
 
 
 \maketitle
-%https://www.cambridge.org/core/journals/journal-of-french-language-studies/article/tracing-the-origins-of-verlan-in-an-early-nineteenth-century-text/C04B0862148D9B44B3C44E675C00CE55
+
 \begin{abstract}
 something.
 \end{abstract}
 
 \section{Introduction}
-
-Introduce the project, its major aims and summary of the findings (try not to just repeat the abstract). For example, the purpose of this document is to provide a template for your report with examples of commonly used \LaTeX{} commands and features. Naturally, your introduction should not be as brief as this.
- 
- 
 \subsection{Context and Motivation}
 
-Since the early 19th century, the French people have started to talk using verlan\;---\footnote{I like using em-dashes.} 
-an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word.\footnote{In fact, the word \textit{verlan} is a verlan from the word \textit{l'inver} (the inversion).}\cite{rajabov2025,bach2018} 
+Since the early 19th century, the French people have started to talk using verlan. Just like Pig Latin\footnote{\url{en.wikipedia.org/wiki/Pig_Latin}} exists in English culture, verlan is an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word.\footnote{In fact, the word \textit{verlan} is a verlan from the word \textit{l'inver} (the inversion).}\cite{rajabov2025,bach2018} 
 Time flies, verlan has become more and more popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.}\cite{evolutionverlan}.
 
 Examples of verlan can be as follows:
@@ -67,7 +65,7 @@ Examples of verlan can be as follows:
 \begin{equation}
 \text{bite} = \text{bi} + \text{te} 
 \;\;\longrightarrow\;\; \text{te} + \text{bi} 
-\;\;\longrightarrow\;\; \text{tébi} \; (\text{penis})
+\;\;\longrightarrow\;\; \text{tebie} \; (\text{penis})
 \end{equation}
 
 \begin{equation}
@@ -87,34 +85,80 @@ And in real-life conversations, such can be used as in the example sentences bel
 \begin{center}
 \textit{Le graff géant représente une tebie pixel art.} (The giant graffiti depicts a pixel art penis.) \\[6pt]
 \textit{Il a du bon teuchi du bled.} (He's got some good shit from the countryside.) \\[6pt]
-\textit{Un p’tit\footnote{Standard spelling: petit.} jourbon et tout le monde sourit.} (A quick hello and everyone smiles.)
+\textit{Un p'tit\footnote{Standard spelling: petit.} jourbon et tout le monde sourit.} (A quick hello and everyone smiles.)
 \end{center}
 
-Indeed, verlan can be formed with different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents(e.g., é, è) can be used from time to time\cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, verlan users tend to spell them differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting\cite{rua2005}.
+Indeed, verlan can be formed with different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents (e.g., é, è) can be used from time to time\cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, verlan users tend to spell them differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting\cite{rua2005}.
 
-Thinking internationally, when two people are communicating with translators, it is possible that slang in their mother language can be brought to the conversation, which could be tricky for translators to translate \cite{hajiyeva2025}. Using translators such as DeepL\footnote{\texttt{www.deepl.com}} and Google Translate\footnote{\texttt{translate.google.com}} to translate sentences that contain verlan from French to English can be a specific example to prove this. Furthermore, although both of the translators above are using Machine Learning (ML) for translation, their results of translating verlans are not ideal\cite{deepl2020, wu2016}. For example, when attempting to translate the sentence above, \textit{Le graff géant représente une tebie pixel art.}, both Google Translate\ref{fig:google_verlan} and DeepL\ref{fig:deepl_verlan} cannot translate the word \textit{tebie} correctly. Specifically, for DeepL, there is no desired translation as \textit{penis} in its alternative word list for \textit{tebie}\ref{fig:deepl_alt_text}.
+Thinking internationally, when people are communicating with translators, it is possible that slang in their mother language can be brought to the conversation, which could be tricky for translators to translate\cite{hajiyeva2025}. Using translators such as DeepL\footnote{\url{www.deepl.com}} and Google Translate\footnote{\url{translate.google.com}} to translate sentences that contain verlan from French to English can be a specific example to prove this. Furthermore, although both of the translators above are using Machine Learning (ML) for translation, their results of translating verlans are not ideal\cite{deepl2020, wu2016}. For example, when attempting to translate the sentence above, \textit{Le graff géant représente une tebie pixel art.}, both Google Translate\ref{fig:google_verlan} and DeepL\ref{fig:deepl_verlan} cannot translate the word \textit{tebie} correctly. Specifically, for DeepL, there is no desired translation as \textit{penis} in its alternative word list for \textit{tebie}\ref{fig:deepl_alt_text}.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/google_verlan.png}
-\caption{\label{fig:google_verlan}Google Transtale cannot translate the verlan \textit{tebie} correctly.}
+\caption{\label{fig:google_verlan}Google Translate cannot translate the verlan \textit{tebie} correctly.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/deepl_verlan.png}
 \caption{\label{fig:deepl_verlan}DeepL cannot translate the verlan \textit{tebie} correctly.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.3\textwidth]{figures/deepl_alt_text.png}
 \caption{\label{fig:deepl_alt_text}No desired translation for verlan \textit{tebie} in DeepL's alternative word list.}
 \end{figure}
 
+Thus, a question shall naturally arise: Can we improve translators' performance in translating slang by improving the ML model? The answer is undoubtedly `yes' in an era where artificial intelligence research is expanding rapidly. Researchers have been making progress in identifying slang using ML\cite{pei2019slang} and, moreover, in translating noisy text, of which slang is a part\cite{michel2018mtnt}. 
 
+But what about verlan? There is no known ongoing or completed research on identifying such slang or their translations\footnote{Until September 2025.}, nor does a proper dataset exist. The only work similar to this is an assignment published at the University of Toronto\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}, asking students to train a Neural Machine Translation (NMT) model to transform standard English into Pig Latin. It is not only the other way around, instead of identifying Pig Latin and transform them back to standard English, it is also more of an example for students to practice using NMT, than a discussion in its identification and translation. Shouldn't we do something?
 
-%TODO continue writing "what questions can be naturally raised", like using ML; pig latin
+This report aims to change that.
+
+\subsection{Objective}
+
+The purpose of the project is to create two verlan datasets: one functioning as a dictionary, containing the verlan words and their normalised standard French equivalents; the other a dataset of sentences that contain verlan, paired with the same sentences containing normalised words, with labels indicating whether a sentence contains verlan. After that, the project embeds and classifies verlan using Large Language Models (LLMs) and analyses the results.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=2.5cm,
+    auto,
+    block/.style={rectangle, draw, fill=blue!20, text width=2cm, text centered, rounded corners, minimum height=1cm},
+    arrow/.style={thick,->,>=stealth}
+]
+
+% Define nodes from left to right
+\node [block] (data) {Raw Data Collection};
+\node [block, right of=data] (dict) {Dictionary Creation};
+\node [block, right of=dict] (sentences) {Sentence Dataset Creation};
+\node [block, right of=sentences] (embedding) {LLM Embedding};
+\node [block, right of=embedding] (classification) {Verlan Classification};
+\node [block, right of=classification] (analysis) {Results Analysis};
+
+% Draw arrows
+\draw [arrow] (data) -- (dict);
+\draw [arrow] (dict) -- (sentences);
+\draw [arrow] (sentences) -- (embedding);
+\draw [arrow] (embedding) -- (classification);
+\draw [arrow] (classification) -- (analysis);
+
+% Add labels below nodes
+\node [below of=data, node distance=1.5cm, text width=2cm, text centered] {\small Verlan words \& standard equivalents};
+\node [below of=dict, node distance=1.5cm, text width=2cm, text centered] {\small Verlan-Standard pairs};
+\node [below of=sentences, node distance=1.5cm, text width=2cm, text centered] {\small Labelled sentences with verlan};
+\node [below of=embedding, node distance=1.5cm, text width=2cm, text centered] {\small Feature extraction};
+\node [below of=classification, node distance=1.5cm, text width=2cm, text centered] {\small Verlan detection};
+\node [below of=analysis, node distance=1.5cm, text width=2cm, text centered] {\small Performance evaluation};
+
+\end{tikzpicture}
+\caption{\label{fig:pipeline}A visulisation of the objectives.}
+\end{figure}
+
+With the purpose above, the report contributes to the linguistics and the AI researchers two verlan datasets, for dictionary making or LLMs training. The report also evaluates how good we can achieve the identification of verlan with ML, to benefit machine translation in the future.
+
+The code and the unannotated, un peer-reviewed dataset developed as part of the project are released under openlicences and aligns with open science best practices, with the usage of a version controlled software development platform (GitHub)\footnote{\url{github.com/greateden/Verlan-Identification-Normalisation}}. The annotated, peer-reviewed dataset will be published shortly after this report, aiming by the end of 2025.
 
 \section{Background}
 
@@ -234,6 +278,16 @@ DeepL. “DeepL Translator translates texts using artificial neural networks. Th
 \bibitem{wu2016} 
 Wu, Yonghui, et al. “Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.” 
 arXiv preprint arXiv:1609.08144, 2016. Available at: \url{https://arxiv.org/abs/1609.08144}.
+
+\bibitem{michel2018mtnt}
+Michel, Paul, and Graham Neubig. “MTNT: A Testbed for Machine Translation of Noisy Text.”
+\textit{Proceedings of EMNLP}, 2018. Available at: \url{https://aclanthology.org/D18-1050/}.
+
+\bibitem{pei2019slang} 
+Pei, Wenzheng, Lin Sun, and Baoxun Xu. 
+“Slang Detection and Identification.”  
+\textit{Proceedings of the 23rd Conference on Computational Natural Language Learning (CoNLL)}, 2019, pp. 881-889. 
+Association for Computational Linguistics. doi:10.18653/v1/K19-1082. Available at: \url{https://aclanthology.org/K19-1082}
 
 \end{thebibliography}
 
