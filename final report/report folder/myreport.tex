@@ -56,8 +56,65 @@ something.
 Introduce the project, its major aims and summary of the findings (try not to just repeat the abstract). For example, the purpose of this document is to provide a template for your report with examples of commonly used \LaTeX{} commands and features. Naturally, your introduction should not be as brief as this.
  
  
-\subsection {Context and Motivation}
-Since the early 19th century, the French people have started to talk using verlan ---\footnote{I like using em-dashes.} an unusual and creative form of \textit{argot}(slang) that is formed by flipping the syllables around in a word\footnote{In fact, the word \textit{verlan} is a verlan from the word \textit{l'inver}(the inversion).}\cite{rajabov2025,bach2018}.
+\subsection{Context and Motivation}
+
+Since the early 19th century, the French people have started to talk using verlan\;---\footnote{I like using em-dashes.} 
+an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word.\footnote{In fact, the word \textit{verlan} is a verlan from the word \textit{l'inver} (the inversion).}\cite{rajabov2025,bach2018} 
+Time flies, verlan has become more and more popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.}\cite{evolutionverlan}.
+
+Examples of verlan can be as follows:
+
+\begin{equation}
+\text{bite} = \text{bi} + \text{te} 
+\;\;\longrightarrow\;\; \text{te} + \text{bi} 
+\;\;\longrightarrow\;\; \text{tébi} \; (\text{penis})
+\end{equation}
+
+\begin{equation}
+\text{shit} = \text{shi} + \text{t} 
+\;\;\longrightarrow\;\; \text{t} + \text{shi} 
+\;\;\longrightarrow\;\; \text{teuchi}\cite{evolutionverlan}
+\end{equation}
+
+\begin{equation}
+\text{bonjour} = \text{bon} + \text{jour} 
+\;\;\longrightarrow\;\; \text{jour} + \text{bon} 
+\;\;\longrightarrow\;\; \text{jourbon} \; (\text{greetings})
+\end{equation}
+
+And in real-life conversations, such can be used as in the example sentences below:
+
+\begin{center}
+\textit{Le graff géant représente une tebie pixel art.} (The giant graffiti depicts a pixel art penis.) \\[6pt]
+\textit{Il a du bon teuchi du bled.} (He's got some good shit from the countryside.) \\[6pt]
+\textit{Un p’tit\footnote{Standard spelling: petit.} jourbon et tout le monde sourit.} (A quick hello and everyone smiles.)
+\end{center}
+
+Indeed, verlan can be formed with different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents(e.g., é, è) can be used from time to time\cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, verlan users tend to spell them differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting\cite{rua2005}.
+
+Thinking internationally, when two people are communicating with translators, it is possible that slang in their mother language can be brought to the conversation, which could be tricky for translators to translate \cite{hajiyeva2025}. Using translators such as DeepL\footnote{\texttt{www.deepl.com}} and Google Translate\footnote{\texttt{translate.google.com}} to translate sentences that contain verlan from French to English can be a specific example to prove this. Furthermore, although both of the translators above are using Machine Learning (ML) for translation, their results of translating verlans are not ideal\cite{deepl2020, wu2016}. For example, when attempting to translate the sentence above, \textit{Le graff géant représente une tebie pixel art.}, both Google Translate\ref{fig:google_verlan} and DeepL\ref{fig:deepl_verlan} cannot translate the word \textit{tebie} correctly. Specifically, for DeepL, there is no desired translation as \textit{penis} in its alternative word list for \textit{tebie}\ref{fig:deepl_alt_text}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{figures/google_verlan.png}
+\caption{\label{fig:google_verlan}Google Transtale cannot translate the verlan \textit{tebie} correctly.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{figures/deepl_verlan.png}
+\caption{\label{fig:deepl_verlan}DeepL cannot translate the verlan \textit{tebie} correctly.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figures/deepl_alt_text.png}
+\caption{\label{fig:deepl_alt_text}No desired translation for verlan \textit{tebie} in DeepL's alternative word list.}
+\end{figure}
+
+
+
+%TODO continue writing "what questions can be naturally raised", like using ML; pig latin
 
 \section{Background}
 
@@ -156,11 +213,27 @@ Bach, Xavier. \textit{Tracing the origins of verlan in an early nineteenth centu
 Journal of French Language Studies, vol. 28, no. 1, 2018, pp. 1–18. 
 Cambridge University Press. doi:10.1017/S0959269516000221.
 
-\bibitem{bettersift}
-Nabeel Khan, Brendan McCane, and Steven Mills. \textit{Better Than SIFT?}. Machine Vision and Applications, 26(6):819--836, 2015.
+\bibitem{evolutionverlan} 
+Olivier Sécardin. \textit{Évolution du verlan, marqueur social et identitaire, comme reflet de la langue et de la société françaises}. 
+Synergies Europe, no. 3, 2008, pp. 223–232. 
+Available at: \url{https://journal.lib.uoguelph.ca/index.php/synergies/article/download/1037/1859?inline=1}.
 
-\bibitem{sift}
-D. G. Lowe. \textit{Distinctive image features from scale invariant key-points}. International Journal of Computer Vision, 60, 91–-110, 2004.
+\bibitem{rua2005} 
+Rúa, Paula López. “Shortening Devices in Text Messaging.” 
+\textit{Journal of Computer-Mediated Communication}, vol. 10, no. 4, July 2005. 
+Wiley. doi:10.1111/j.1083-6101.2005.tb00268.x.
+
+\bibitem{hajiyeva2025}  
+Hajiyeva, Bulbul. “Translating Idioms and Slang: Problems, Strategies, and Cultural Implications.”  
+Acta Globalis Humanitatis et Linguarum, vol. 2, no. 2, 2025, pp. 284–293. doi:10.69760/aghel.025002123.  
+
+\bibitem{deepl2020} 
+DeepL. “DeepL Translator translates texts using artificial neural networks. These networks are trained on many millions of translated texts.” 
+\textit{DeepL Blog}, 2020. Available at: \url{https://www.deepl.com/en/blog/how-does-deepl-work}.
+
+\bibitem{wu2016} 
+Wu, Yonghui, et al. “Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.” 
+arXiv preprint arXiv:1609.08144, 2016. Available at: \url{https://arxiv.org/abs/1609.08144}.
 
 \end{thebibliography}
 

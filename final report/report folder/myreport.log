@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  27 SEP 2025 12:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  27 SEP 2025 13:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1169,41 +1169,72 @@ Package pdftex.def Info: figures/logo.png  used on input line 48.
 {/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./
 figures/logo.png>]
 
-LaTeX Warning: Citation `latexcompanion' on page 1 undefined on input line 70.
-
-
-
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.75 
-      [1]
-Overfull \hbox (1.01933pt too wide) in paragraph at lines 87--88
+l.91 \end{center}
+                  [1]
+<figures/google_verlan.png, id=107, 1093.08376pt x 252.945pt>
+File: figures/google_verlan.png Graphic file (type png)
+<use figures/google_verlan.png>
+Package pdftex.def Info: figures/google_verlan.png  used on input line 99.
+(pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
+<figures/deepl_verlan.png, id=108, 972.63374pt x 237.88875pt>
+File: figures/deepl_verlan.png Graphic file (type png)
+<use figures/deepl_verlan.png>
+Package pdftex.def Info: figures/deepl_verlan.png  used on input line 105.
+(pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
+<figures/deepl_alt_text.png, id=109, 303.1325pt x 396.48125pt>
+File: figures/deepl_alt_text.png Graphic file (type png)
+<use figures/deepl_alt_text.png>
+Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 111.
+(pdftex.def)             Requested size: 117.00119pt x 153.0299pt.
+
+
+[2 <./figures/google_verlan.png>]
+
+[3 <./figures/deepl_verlan.png> <./figures/deepl_alt_text.png>]
+
+LaTeX Warning: Citation `latexcompanion' on page 4 undefined on input line 125.
+
+
+
+LaTeX Warning: Citation `bettersift' on page 4 undefined on input line 125.
+
+
+LaTeX Warning: Citation `bettersift' on page 4 undefined on input line 125.
+
+
+LaTeX Warning: Citation `sift' on page 4 undefined on input line 125.
+
+
+
+[4]
+Overfull \hbox (1.01933pt too wide) in paragraph at lines 142--143
 \OT1/cmr/m/n/12 L[]T[]X han-dles all the for-mat-ting and num-ber-ing au-to-mat
 -i-cally. Use [][]\OT1/cmtt/m/n/12 \label{}
  []
 
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 91.
-
-
-[2]
-<figures/frog.jpg, id=105, 220.825pt x 168.63pt>
+ine 146.
+<figures/frog.jpg, id=143, 220.825pt x 168.63pt>
 File: figures/frog.jpg Graphic file (type jpg)
 <use figures/frog.jpg>
-Package pdftex.def Info: figures/frog.jpg  used on input line 102.
+Package pdftex.def Info: figures/frog.jpg  used on input line 157.
 (pdftex.def)             Requested size: 195.0pt x 148.91461pt.
 
 
-[3 <./figures/frog.jpg>]
-
-[4]
-
 [5]
 
-[6] (./myreport.aux)
+[6 <./figures/frog.jpg>]
+
+[7]
+
+[8]
+
+[9] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1216,13 +1247,13 @@ Package rerunfilecheck Info: File `myreport.out' has not changed.
 (rerunfilecheck)             Checksum: 3CCBD6D5B21F68278E5CFE8EF20DB969;1593.
  ) 
 Here is how much of TeX's memory you used:
- 21877 strings out of 474662
- 412489 string characters out of 5751110
- 796102 words of memory out of 5000000
- 44512 multiletter control sequences out of 15000+600000
- 569022 words of font info for 71 fonts, out of 8000000 for 9000
+ 21928 strings out of 474662
+ 413491 string characters out of 5751110
+ 796467 words of memory out of 5000000
+ 44546 multiletter control sequences out of 15000+600000
+ 569190 words of font info for 72 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 114i,9n,115p,832b,961s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 114i,9n,115p,1087b,961s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappe
 n/ec/tcrm1200.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/pu
@@ -1238,11 +1269,12 @@ ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025b
 asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
 025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texli
 ve/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/t
-exlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on myreport.pdf (7 pages, 345725 bytes).
+exlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/loc
+al/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on myreport.pdf (10 pages, 491362 bytes).
 PDF statistics:
- 219 PDF objects out of 1000 (max. 8388607)
- 176 compressed objects within 2 object streams
- 40 named destinations out of 1000 (max. 500000)
- 127 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 276 PDF objects out of 1000 (max. 8388607)
+ 221 compressed objects within 3 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 142 words of extra memory for PDF output out of 10000 (max. 10000000)
 
