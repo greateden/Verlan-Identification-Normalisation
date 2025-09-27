@@ -58,35 +58,27 @@ something.
 \subsection{Context and Motivation}
 
 Since the early 19th century, the French people have started to talk using verlan. Just like Pig Latin\footnote{\url{en.wikipedia.org/wiki/Pig_Latin}} exists in English culture, verlan is an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word.\footnote{In fact, the word \textit{verlan} is a verlan from the word \textit{l'inver} (the inversion).}\cite{rajabov2025,bach2018} 
-Time flies, verlan has become more and more popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.}\cite{evolutionverlan}.
+Time flies, verlan has become more and more popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.}\cite{evolutionverlan}. Examples of verlan can be as follows:
 
-Examples of verlan can be as follows:
+\begin{flushleft}
+\small
+\begin{itemize}
+  \item bite = bi + te \(\rightarrow\) te + bi \(\rightarrow\) tebie (penis)
+  \item shit = shi + t \(\rightarrow\) t + shi \(\rightarrow\) teuchi\cite{evolutionverlan}
+  \item bonjour = bon + jour \(\rightarrow\) jour + bon \(\rightarrow\) jourbon (greetings)
+\end{itemize}
+\end{flushleft}
 
-\begin{equation}
-\text{bite} = \text{bi} + \text{te} 
-\;\;\longrightarrow\;\; \text{te} + \text{bi} 
-\;\;\longrightarrow\;\; \text{tebie} \; (\text{penis})
-\end{equation}
+\noindent In real-life conversations, such can be used as in the example sentences below:
 
-\begin{equation}
-\text{shit} = \text{shi} + \text{t} 
-\;\;\longrightarrow\;\; \text{t} + \text{shi} 
-\;\;\longrightarrow\;\; \text{teuchi}\cite{evolutionverlan}
-\end{equation}
-
-\begin{equation}
-\text{bonjour} = \text{bon} + \text{jour} 
-\;\;\longrightarrow\;\; \text{jour} + \text{bon} 
-\;\;\longrightarrow\;\; \text{jourbon} \; (\text{greetings})
-\end{equation}
-
-And in real-life conversations, such can be used as in the example sentences below:
-
-\begin{center}
-\textit{Le graff géant représente une tebie pixel art.} (The giant graffiti depicts a pixel art penis.) \\[6pt]
-\textit{Il a du bon teuchi du bled.} (He's got some good shit from the countryside.) \\[6pt]
-\textit{Un p'tit\footnote{Standard spelling: petit.} jourbon et tout le monde sourit.} (A quick hello and everyone smiles.)
-\end{center}
+\begin{flushleft}
+\small
+\begin{itemize}
+  \item \textit{Le graff géant représente une tebie pixel art.}\\(The giant graffiti depicts a pixel art penis.)
+  \item \textit{Il a du bon teuchi du bled.}\\(He's got some good shit from the countryside.)
+  \item \textit{Un p'tit\footnote{Standard spelling: petit.}jourbon et tout le monde sourit.}\\(A quick hello and everyone smiles.)
+\end{itemize}
+\end{flushleft}
 
 Indeed, verlan can be formed with different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents (e.g., é, è) can be used from time to time\cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, verlan users tend to spell them differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting\cite{rua2005}.
 
@@ -112,7 +104,7 @@ Thinking internationally, when people are communicating with translators, it is 
 
 Thus, a question shall naturally arise: Can we improve translators' performance in translating slang by improving the ML model? The answer is undoubtedly `yes' in an era where artificial intelligence research is expanding rapidly. Researchers have been making progress in identifying slang using ML\cite{pei2019slang} and, moreover, in translating noisy text, of which slang is a part\cite{michel2018mtnt}. 
 
-But what about verlan? There is no known ongoing or completed research on identifying such slang or their translations\footnote{Until September 2025.}, nor does a proper dataset exist. The only work similar to this is an assignment published at the University of Toronto\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}, asking students to train a Neural Machine Translation (NMT) model to transform standard English into Pig Latin. It is not only the other way around, instead of identifying Pig Latin and transform them back to standard English, it is also more of an example for students to practice using NMT, than a discussion in its identification and translation. Shouldn't we do something?
+But what about verlan? There is no known ongoing or completed research on identifying such slang or their translations\footnote{Until September 2025.}, nor does a proper dataset exist. The only work similar to this is an assignment published at the University of Toronto\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}, asking students to train a Neural Machine Translation (NMT) model to transform standard English into Pig Latin. It is not only the other way around; instead of identifying Pig Latin and transforming it back to standard English, it is also more of an example for students to practice using NMT than a discussion on its identification and translation. Shouldn't we do something?
 
 This report aims to change that.
 
