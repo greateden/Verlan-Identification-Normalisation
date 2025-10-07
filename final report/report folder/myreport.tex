@@ -104,7 +104,7 @@ Thinking internationally, when people are communicating with translators, it is 
 
 Thus, a question shall naturally arise: Can we improve translators' performance in translating slang by improving the ML model? The answer is undoubtedly `yes' in an era where artificial intelligence research is expanding rapidly. Researchers have been making progress in identifying slang using ML\cite{pei2019slang} and, moreover, in translating noisy text, of which slang is a part\cite{michel2018mtnt}. 
 
-But what about verlan? There is no known ongoing or completed research on identifying such slang or their translations\footnote{Until September 2025.}, nor does a proper dataset exist. The only work similar to this is an assignment published at the University of Toronto\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}, asking students to train a Neural Machine Translation (NMT) model to transform standard English into Pig Latin. It is not only the other way around; instead of identifying Pig Latin and transforming it back to standard English, it is also more of an example for students to practice using NMT than a discussion on its identification and translation. Shouldn't we do something?
+But what about verlan? There is no known ongoing or completed research on identifying \textit{such} slang or their translations\footnote{Until September 2025.}, nor does a proper dataset exist. The only work similar to this is an assignment published at the University of Toronto\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}, asking students to train a Neural Machine Translation (NMT) model to transform standard English into Pig Latin. It is not only the other way around; instead of identifying Pig Latin and transforming it back to standard English, it is also more of an example for students to practice using NMT than a discussion on its identification and translation. Shouldn't we do something?
 
 This report aims to change that.
 
@@ -153,24 +153,22 @@ With the purpose above, the report contributes to the linguistics and the AI res
 The code and the unannotated, un peer-reviewed dataset developed as part of the project are released under openlicences and aligns with open science best practices, with the usage of a version controlled software development platform (GitHub)\footnote{\url{github.com/greateden/Verlan-Identification-Normalisation}}. The annotated, peer-reviewed dataset will be published shortly after this report, aiming by the end of 2025.
 
 \section{Background}
+\subsection{How Francophone People Use Verlan}
+This section is to help those readers who don't have a linguistic backgound in verlan to clean their fogs.
+TODO 
+ref the Paris VIII thesis.
+mention academie francaise.
 
-Typically, introduction will be followed with a section providing the background for the project. This often means a bit of literature review or explanation of the fundamental concepts/terminology. This section has a dual purpose: 
-\begin{itemize}
-\item to provide enough information for the readers, who might not be experts in your field, so that they can understand everything that follows - methods, results, etc.;
-\item to demonstrate that you have gained a sufficient level of competency in the topic.
-\end{itemize}
 
-Don't forget to cite the sources of your information. For instance, a reference for \LaTeX{} can be found here \cite{latexcompanion}. If you were, say, interested in Computer Vision you might want to take a look at this article \cite{bettersift}. If you want to cite two related document at once, you can do it like so \cite{bettersift,sift}.
+\subsection{How to Detect Verlan}
+Verlan, in fact, is a niche thing in slang detection research. Thus, regarding the history of verlan detection, this repord would generalise it as slang detection, and also not limited in French but other Indo-European languages\footnote{For example, English, German and Russian. For more information, please refer to: \url{https://en.wikipedia.org/wiki/Indo-European_languages}}, in order to give the readers a general yet useful background. There will be discussions related to theoratical ways to implement those methods for verlan detection.
 
-\section{How to compile \LaTeX{}}
+\subsubsection{Dictionary Search}
 
-The remaining sections should present what you have done in your project including the results and analysis. For this document, this will be a demonstration of how to use \LaTeX{} in order to create your report. 
 
-\LaTeX{} documents are prepared using markup language and need to be compiled to produce pdfs. 
 
-The easiest way is to use the \href{https://www.overleaf.com}{Overleaf service} - it's free for private projects. Create an account and once you login you can create different projects (essentially different documents). If you joined the ``COSC4x0 Report Template project" by following the link from Blackboard, you can \textit{Copy} and rename it to create a new project from your Overleaf \textit{Home} page. Alternately, you can click the ``New Project" button, select the ``Upload project" option and upload the \textit{cosc4x0report.zip} file where this pdf came from. The template will open on the website and you'll be able to edit the report in your browser, compile LaTeX to pdf online and have it saved on a remote server. Later you just download the final pdf and submit as your report.   
 
-Another option is to install a LaTeX compiler on your machine and compile the .tex file yourself. On macOS you need to download and install \href{http://www.tug.org/mactex/downloading.html}{MacTeX}. Then, using programs like \href{http://pages.uoregon.edu/koch/texshop/}{TexShop} (free), or VSCode (with appropriate extensions) (also free), or \href{https://www.texifier.com/}{Texifier} (awesome, but not free) you can edit and compile a .tex file into a .pdf.
+
 
 \section{\LaTeX{} markup examples}
 \label{sec:examples}
@@ -189,12 +187,6 @@ Comments might be useful during the writing process, as reminders or questions t
 
 Use the \verb$table{}$ and \verb$\tabular{}$ commands for basic tables --- see Table~\ref{tab:widgets}, for example. You can include a figure (JPEG, PNG or PDF) with the \verb$\includegraphics{}$ command as in the code for Figure~\ref{fig:frog} below.
 
-% Commands to include a figure:
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{figures/frog.jpg}
-\caption{\label{fig:frog}This is a figure caption.}
-\end{figure}
 
 \begin{table}
 \centering
