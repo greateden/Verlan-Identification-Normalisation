@@ -162,7 +162,7 @@ mention academie francaise.
 
 \subsection{How to Detect Verlan}
 
-To the best of our knowledge, there is no existing computational research\footnote{As of September 2025.} on the \textit{detection} of Verlan\;---\;this particular form of French slang. However, there are a few scholars who included Verlan in their research\cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}. Yet, these research commonly included Verlan as a type of slang in their dataset or corpus. Moreover, they did not extract and research on how to detect this specific type of slang, but in a broader way\;---\;they create slang datasets which contain Verlan, and some of them used computational approaches to detect those slang. 
+To the best of our knowledge, there is no existing computational research\footnote{As of September 2025.} on the \textit{detection} of Verlan\;---\;this particular form of French slang. However, there are a few scholars who included Verlan in their research\cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}. Yet, these studies commonly included Verlan as a type of slang in their dataset or corpus. Moreover, they did not extract and research on how to detect this specific type of slang, but in a broader way\;---\;they create slang datasets which contain Verlan, and some of them used computational approaches to detect those slang. 
 
 Luckily, there are quite a few papers related to computational slang detection, and their approaches could contribute to Verlan detection to a large extent\cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}, which are not limited to French, but also cover other Indo-European languages\footnote{For example, English, German, and Russian. For more information, please refer to: \url{https://en.wikipedia.org/wiki/Indo-European_languages}.}.
 
@@ -170,10 +170,17 @@ Therefore, regarding the history of Verlan detection, this report firstly genera
 
 
 \subsubsection{Dictionary Search}
-The easiest way we can think of is to use a dictionary, or a corpus --- just like how we look up a word that we don't know of. The pros and cons are just like using a dictionary. It is fast (if using a computer) and accurate. On the other hand, the resource is limited, and it only works with those words which already existed, thus it cannot identify newly invented words. The existing works for slang glossaries are, for example, This is
+The easiest way we can think of is to use a dictionary\;---\;just like how we look up a word that we don't know of. The pros and cons are highly similar to looking up a dictionary. It is fast (if using a digital dictionary) and accurate. On the other hand, because it is purely fixed data, it only works with existed words, thus it cannot identify newly invented words. 
+
+The examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY\cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur}\cite{dictionnaire2024chilleur}. Specifically for Verlan, the report can find several dictionaries online, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire\_Verlan}}.
+
+With these existing dictionaries, implementing a tool to identify Verlan should be easy. However, two major issues have limit the possibility of directly using these dictionaries to identify Verlan: they don't have rich contents, and some of them are fan-made, which neither covers the vastness of such a slang, nor is accurate. Requesting copyrights for certain dictionaries could also be a potential concern.
+
+Although dictionaries have the cons above, it is the essential data for implementing LLM-based approaches, as discussed later.
+
 
 \subsubsection{Traditional ML}
-
+% should be short
 
 
 % Besides, identifying the same word with different spelling or declensions is also a hurdle.
@@ -200,16 +207,6 @@ Comments might be useful during the writing process, as reminders or questions t
 
 Use the \verb$table{}$ and \verb$\tabular{}$ commands for basic tables --- see Table~\ref{tab:widgets}, for example. You can include a figure (JPEG, PNG or PDF) with the \verb$\includegraphics{}$ command as in the code for Figure~\ref{fig:frog} below.
 
-
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
 
 \subsection{Mathematics}
 
@@ -246,17 +243,17 @@ Concluding remarks. Send the pdf (not the \verb$*.tex$ file) to your supervisor 
 
 \bibitem{rajabov2025} 
 Radjabov, Ruslan Rajabmurodovich. \textit{Understanding "Verlan" in the French Language}. 
-Web of Scientist: International Scientific Research Journal, vol. 6, no. 3, 2025, pp. 368–372. 
+Web of Scientist: International Scientific Research Journal, vol. 6, no. 3, 2025, pp. 368-372. 
 Available at: \url{https://webofjournals.com/index.php/3/article/view/3264}.
 
 \bibitem{bach2018} 
 Bach, Xavier. \textit{Tracing the origins of Verlan in an early nineteenth century text}. 
-Journal of French Language Studies, vol. 28, no. 1, 2018, pp. 1–18. 
+Journal of French Language Studies, vol. 28, no. 1, 2018, pp. 1-18. 
 Cambridge University Press. doi:10.1017/S0959269516000221.
 
 \bibitem{evolutionVerlan} 
 Olivier Sécardin. \textit{Évolution du Verlan, marqueur social et identitaire, comme reflet de la langue et de la société françaises}. 
-Synergies Europe, no. 3, 2008, pp. 223–232. 
+Synergies Europe, no. 3, 2008, pp. 223-232. 
 Available at: \url{https://journal.lib.uoguelph.ca/index.php/synergies/article/download/1037/1859?inline=1}.
 
 \bibitem{rua2005} 
@@ -266,14 +263,14 @@ Wiley. doi:10.1111/j.1083-6101.2005.tb00268.x.
 
 \bibitem{hajiyeva2025}  
 Hajiyeva, Bulbul. “Translating Idioms and Slang: Problems, Strategies, and Cultural Implications.”  
-Acta Globalis Humanitatis et Linguarum, vol. 2, no. 2, 2025, pp. 284–293. doi:10.69760/aghel.025002123.  
+Acta Globalis Humanitatis et Linguarum, vol. 2, no. 2, 2025, pp. 284-293. doi:10.69760/aghel.025002123.  
 
 \bibitem{deepl2020} 
 DeepL. “DeepL Translator translates texts using artificial neural networks. These networks are trained on many millions of translated texts.” 
 \textit{DeepL Blog}, 2020. Available at: \url{https://www.deepl.com/en/blog/how-does-deepl-work}.
 
 \bibitem{wu2016} 
-Wu, Yonghui, et al. “Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.” 
+Wu, Yonghui, et al. “Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.” 
 arXiv preprint arXiv:1609.08144, 2016. Available at: \url{https://arxiv.org/abs/1609.08144}.
 
 \bibitem{michel2018mtnt}
@@ -283,34 +280,31 @@ Michel, Paul, and Graham Neubig. “MTNT: A Testbed for Machine Translation of N
 \bibitem{zurbuchen2024}
 Zurbuchen, Lucas, and Rob Voigt.  
 \textit{A Computational Analysis and Exploration of Linguistic Borrowings in French Rap Lyrics}.  
-In *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics — Student Research Workshop (ACL SRW 2024)*, 2024, pp. 200–208.  
+In *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics — Student Research Workshop (ACL SRW 2024)*, 2024, pp. 200-208.  
 DOI: 10.18653/v1/2024.acl-srw.27.  
-Available at: \url{https://aclanthology.org/2024.acl-srw.27/}.
 
 \bibitem{podhorna2020rapcor}
 Podhorná-Polická, Alena.  
 \textit{RapCor, Francophone Rap Songs Text Corpus}.  
-In *Proceedings of the Fourteenth Workshop on Recent Advances in Slavonic Natural Language Processing (RASLAN 2020)*, 2020, pp. 95–102.  
+In *Proceedings of the Fourteenth Workshop on Recent Advances in Slavonic Natural Language Processing (RASLAN 2020)*, 2020, pp. 95-102.  
 Available at: \url{https://nlp.fi.muni.cz/raslan/raslan20.pdf#page=95}.  % (no DOI found)
 
 \bibitem{mekki2021tremolo}
 Mekki, Jade; Lecorvé, Gwénolé; Battistelli, Delphine; Béchet, Nicolas.  
 \textit{TREMoLo-Tweets: A Multi-Label Corpus of French Tweets for Language Register Characterization}.  
-In *Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021)*, Held Online, INCOMA Ltd., Sep 1–3, 2021, pp. 950–958.  
+In *Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021)*, Held Online, INCOMA Ltd., Sep 1-3, 2021, pp. 950-958.  
 DOI: 10.26615/978-954-452-072-4\_108.  
-Available at: \url{https://aclanthology.org/2021.ranlp-1.108/}.
 
 \bibitem{panckhurst202088milsms}
 Panckhurst, Rachel; Lopez, Cédric; Roche, Mathieu.  
 \textit{A French text-message corpus: 88milSMS. Synthesis and usage}.  
 Corpus [En ligne], 20 | 2020 (mis en ligne le 28 janvier 2020).  
 DOI: 10.4000/corpus.4852.  
-Available at: \url{https://journals.openedition.org/corpus/4852}.
 
 \bibitem{pei2019slang}
 Pei, Zhengqi, Zhewei Sun, and Yang Xu.  
 \textit{Slang Detection and Identification}.  
-In *Proceedings of the 23rd Conference on Computational Natural Language Learning (CoNLL 2019)*, Hong Kong, China, 2019, pp. 881–889.  
+In *Proceedings of the 23rd Conference on Computational Natural Language Learning (CoNLL 2019)*, Hong Kong, China, 2019, pp. 881-889.  
 Available at: \url{https://aclanthology.org/K19-1082/}.  % (ACL Anthology entry — no DOI)
 
 \bibitem{sun2024informal}
@@ -318,7 +312,6 @@ Sun, Zhewei, Qian Hu, et al.
 \textit{Toward Informal Language Processing: Knowledge of Slang in Large Language Models}.  
 In *Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL 2024)*, 2024.  
 DOI: 10.18653/v1/2024.naacl-long.94.  
-Available at: \url{https://aclanthology.org/2024.naacl-long.94/}.
 
 \bibitem{slangornot2024}
 Anonymous.  
@@ -331,7 +324,33 @@ Wu, Tianyang; Morstatter, Fred; Liu, Huan; et al.
 \textit{SlangSD: Building, Expanding, and Using a Sentiment Dictionary of Slang Words for Short-Text Sentiment Classification}.  
 Language Resources and Evaluation (2018).  
 DOI: 10.1007/s10579-018-9416-0.  
-Available at: \url{https://link.springer.com/article/10.1007/s10579-018-9416-0}.
+
+\bibitem{dhuliawala2016slangnet}
+Dhuliawala, Shehzaad; Kanojia, Diptesh; Bhattacharyya, Pushpak.  
+\textit{SlangNet: A WordNet like Resource for Slang Words}.  
+In: Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC 2016).  
+Portorož, Slovenia (2016).  
+Available at: \url{https://www.cse.iitb.ac.in/~pb/papers/lrec16-slangnet.pdf}.
+
+\bibitem{wu2018slangsd}
+Wu, Tianyang; Morstatter, Fred; Liu, Huan; et al.  
+\textit{SlangSD: Building, Expanding, and Using a Sentiment Dictionary of Slang Words for Short-Text Sentiment Classification}.  
+Language Resources and Evaluation (2018).  
+DOI: 10.1007/s10579-018-9416-0.  
+
+\bibitem{gupta2019slangzy}
+Gupta, Vishal; Rani, Rekha; et al.  
+\textit{SLANGZY: A Slang Word Recognition System for Hindi-English Code-Mixed Social Media Text}.  
+In: Proceedings of the 6th Workshop on South and Southeast Asian Natural Language Processing (WSSANLP 2019).  
+Kolkata, India (2019).  
+Available at: \url{https://aclanthology.org/K19-1082.pdf}.
+
+\bibitem{dictionnaire2024chilleur}
+Parent, Philippe; Parent, André.  
+\textit{Dictionnaire du chilleur}.  
+Éditions Somme toute (2024).  
+ISBN: 9782925124351.  
+
 
 
 
