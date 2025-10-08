@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  7 OCT 2025 12:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  8 OCT 2025 16:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1021,7 +1021,7 @@ Package hyperref Info: Link coloring ON on input line 48.
 
 Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 48.
 
-<figures/logo.png, id=71, 566.115pt x 617.9085pt>
+<figures/logo.png, id=75, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
 Package pdftex.def Info: figures/logo.png  used on input line 51.
@@ -1038,17 +1038,17 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.85 T
       hinking internationally, when people are communicating with translator... [1]
-<figures/google_verlan.png, id=122, 1093.08376pt x 252.945pt>
-File: figures/google_verlan.png Graphic file (type png)
-<use figures/google_verlan.png>
-Package pdftex.def Info: figures/google_verlan.png  used on input line 89.
+<figures/google_Verlan.png, id=126, 1093.08376pt x 252.945pt>
+File: figures/google_Verlan.png Graphic file (type png)
+<use figures/google_Verlan.png>
+Package pdftex.def Info: figures/google_Verlan.png  used on input line 89.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_verlan.png, id=123, 972.63374pt x 237.88875pt>
-File: figures/deepl_verlan.png Graphic file (type png)
-<use figures/deepl_verlan.png>
-Package pdftex.def Info: figures/deepl_verlan.png  used on input line 95.
+<figures/deepl_Verlan.png, id=127, 972.63374pt x 237.88875pt>
+File: figures/deepl_Verlan.png Graphic file (type png)
+<use figures/deepl_Verlan.png>
+Package pdftex.def Info: figures/deepl_Verlan.png  used on input line 95.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
-<figures/deepl_alt_text.png, id=124, 303.1325pt x 396.48125pt>
+<figures/deepl_alt_text.png, id=128, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
 Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 101.
@@ -1065,7 +1065,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.104 
-       <./figures/google_verlan.png> <./figures/deepl_verlan.png>]
+       <./figures/google_Verlan.png> <./figures/deepl_Verlan.png>]
 
 [3
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
@@ -1088,32 +1088,43 @@ Overfull \hbox (30.79729pt too wide) in paragraph at lines 147--148
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.165 
+l.166 
       ]
-Overfull \hbox (1.01933pt too wide) in paragraph at lines 178--179
+Overfull \hbox (1.01933pt too wide) in paragraph at lines 191--192
 \OT1/cmr/m/n/12 L[]T[]X han-dles all the for-mat-ting and num-ber-ing au-to-mat-i-cally. Use [][]\OT1/cmtt/m/n/12 \label{}
  []
-
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 182.
-
-LaTeX Warning: Reference `fig:frog' on page 5 undefined on input line 188.
 
 
 
 [5]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 195.
+
+
+LaTeX Warning: Reference `fig:frog' on page 6 undefined on input line 201.
+
+
 
 [6
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.238 
+l.220 
       ]
 
 [7]
+Underfull \hbox (badness 1033) in paragraph at lines 291--295
+\OT1/cmr/m/it/12 pus\OT1/cmr/m/n/12 . In *Pro-ceed-ings of the Four-teenth Work-shop on Re-cent Ad-
+ []
+
+
 
 [8]
 
-[9] (./myreport.aux)
+[9]
+
+[10]
+
+[11] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1123,21 +1134,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: 5C66DAC1F3F34AD5CFA539573B0B4BBC;2101.
+(rerunfilecheck)             Checksum: 7D97F002BF8F5464E4629B0F38CC75CF;2242.
  ) 
 Here is how much of TeX's memory you used:
- 24433 strings out of 474662
- 485346 string characters out of 5751110
- 891190 words of memory out of 5000000
- 46993 multiletter control sequences out of 15000+600000
+ 24454 strings out of 474662
+ 485709 string characters out of 5751110
+ 892462 words of memory out of 5000000
+ 47003 multiletter control sequences out of 15000+600000
  570717 words of font info for 77 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  114i,9n,115p,1213b,970s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on myreport.pdf (10 pages, 499186 bytes).
+Output written on myreport.pdf (12 pages, 508201 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
- 251 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 293 compressed objects within 3 object streams
+ 73 named destinations out of 1000 (max. 500000)
+ 169 words of extra memory for PDF output out of 10000 (max. 10000000)
 
