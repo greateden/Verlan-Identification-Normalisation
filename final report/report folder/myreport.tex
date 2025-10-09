@@ -21,6 +21,7 @@
 \usepackage[draft]{cosc4x0style}
 \usepackage{float}
 \usepackage{tikz}
+\usepackage[edges]{forest}
 \usetikzlibrary{shapes,arrows,positioning}
 
 % To compile the final version of the report (which will remove all the todo content)
@@ -30,7 +31,7 @@
 \papercode{385}
 
 % Your project title
-\title{Talking in French Like an Academia\\\large Machine Learning Powered Verlan Identification}
+\title{Talking in French Like an Academia\\\large Machine Learning Powered verlan Identification}
 
 % Your name
 \author{Yitian \textsc{Li}}
@@ -57,14 +58,14 @@ something.
 \section{Introduction}
 \subsection{Context and Motivation}
 
-Since the early 19th century, the French people have started to talk using Verlan. Just like Pig Latin\footnote{\url{en.wikipedia.org/wiki/Pig_Latin}} exists in English culture, Verlan is an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word.\footnote{In fact, the word \textit{Verlan} is a Verlan from the word \textit{l'inver} (the inversion).}\cite{rajabov2025,bach2018} 
-Time flies, Verlan has become more and more popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.}\cite{evolutionVerlan}. Examples of Verlan can be as follows:
+Since the early 19th century, the French people have started to talk using verlan. Just like Pig Latin\footnote{\url{en.wikipedia.org/wiki/Pig_Latin}} exists in English culture, verlan is an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word.\footnote{In fact, the word \textit{verlan} is a verlan from the word \textit{l'inver} (the inversion).}\cite{rajabov2025,bach2018} 
+Time flies, verlan has become more and more popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.}\cite{evolutionverlan}. Examples of verlan can be as follows:
 
 \begin{flushleft}
 \small
 \begin{itemize}
   \item bite = bi + te \(\rightarrow\) te + bi \(\rightarrow\) tebie (penis)
-  \item shit = shi + t \(\rightarrow\) t + shi \(\rightarrow\) teuchi\cite{evolutionVerlan}
+  \item shit = shi + t \(\rightarrow\) t + shi \(\rightarrow\) teuchi\cite{evolutionverlan}
   \item bonjour = bon + jour \(\rightarrow\) jour + bon \(\rightarrow\) jourbon (greetings)
 \end{itemize}
 \end{flushleft}
@@ -80,37 +81,37 @@ Time flies, Verlan has become more and more popular, and it is now widely used a
 \end{itemize}
 \end{flushleft}
 
-Indeed, Verlan can be formed with different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents (e.g., é, è) can be used from time to time\cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, Verlan users tend to spell them differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting\cite{rua2005}.
+Indeed, verlan can be formed with different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents (e.g., é, è) can be used from time to time\cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, verlan users tend to spell them differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting\cite{rua2005}.
 
-Thinking internationally, when people are communicating with translators, it is possible that slang in their mother language can be brought to the conversation, which could be tricky for translators to translate\cite{hajiyeva2025}. Using translators such as DeepL\footnote{\url{www.deepl.com}} and Google Translate\footnote{\url{translate.google.com}} to translate sentences that contain Verlan from French to English can be a specific example to prove this. Furthermore, although both of the translators above are using Machine Learning (ML) for translation, their results of translating Verlans are not ideal\cite{deepl2020, wu2016}. For example, when attempting to translate the sentence above, \textit{Le graff géant représente une tebie pixel art.}, both Google Translate\ref{fig:google_Verlan} and DeepL\ref{fig:deepl_Verlan} cannot translate the word \textit{tebie} correctly. Specifically, for DeepL, there is no desired translation as \textit{penis} in its alternative word list for \textit{tebie}\ref{fig:deepl_alt_text}.
+Thinking internationally, when people are communicating with translators, it is possible that slang in their mother language can be brought to the conversation, which could be tricky for translators to translate\cite{hajiyeva2025}. Using translators such as DeepL\footnote{\url{www.deepl.com}} and Google Translate\footnote{\url{translate.google.com}} to translate sentences that contain verlan from French to English can be a specific example to prove this. Furthermore, although both of the translators above are using Machine Learning (ML) for translation, their results of translating verlans are not ideal\cite{deepl2020, wu2016}. For example, when attempting to translate the sentence above, \textit{Le graff géant représente une tebie pixel art.}, both Google Translate\ref{fig:google_verlan} and DeepL\ref{fig:deepl_verlan} cannot translate the word \textit{tebie} correctly. Specifically, for DeepL, there is no desired translation as \textit{penis} in its alternative word list for \textit{tebie}\ref{fig:deepl_alt_text}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/google_Verlan.png}
-\caption{\label{fig:google_Verlan}Google Translate cannot translate the Verlan \textit{tebie} correctly.}
+\includegraphics[width=0.8\textwidth]{figures/google_verlan.png}
+\caption{\label{fig:google_verlan}Google Translate cannot translate the verlan \textit{tebie} correctly.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/deepl_Verlan.png}
-\caption{\label{fig:deepl_Verlan}DeepL cannot translate the Verlan \textit{tebie} correctly.}
+\includegraphics[width=0.8\textwidth]{figures/deepl_verlan.png}
+\caption{\label{fig:deepl_verlan}DeepL cannot translate the verlan \textit{tebie} correctly.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.3\textwidth]{figures/deepl_alt_text.png}
-\caption{\label{fig:deepl_alt_text}No desired translation for Verlan \textit{tebie} in DeepL's alternative word list.}
+\caption{\label{fig:deepl_alt_text}No desired translation for verlan \textit{tebie} in DeepL's alternative word list.}
 \end{figure}
 
 Thus, a question shall naturally arise: Can we improve translators' performance in translating slang by improving the ML model? The answer is undoubtedly `yes' in an era where artificial intelligence research is expanding rapidly. Researchers have been making progress in identifying slang using ML\cite{pei2019slang} and, moreover, in translating noisy text, of which slang is a part\cite{michel2018mtnt}. 
 
-But what about Verlan? There is no known ongoing or completed research on identifying \textit{such} slang or their translations\footnote{Until September 2025.}, nor does a proper dataset exist. The only work similar to this is an assignment published at the University of Toronto\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}, asking students to train a Neural Machine Translation (NMT) model to transform standard English into Pig Latin. It is not only the other way around; instead of identifying Pig Latin and transforming it back to standard English, it is also more of an example for students to practice using NMT than a discussion on its identification and translation. Shouldn't we do something?
+But what about verlan? There is no known ongoing or completed research on identifying \textit{such} slang or their translations\footnote{Until September 2025.}, nor does a proper dataset exist. The only work similar to this is an assignment published at the University of Toronto\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}, asking students to train a Neural Machine Translation (NMT) model to transform standard English into Pig Latin. It is not only the other way around; instead of identifying Pig Latin and transforming it back to standard English, it is also more of an example for students to practice using NMT than a discussion on its identification and translation. Shouldn't we do something?
 
 This report aims to change that.
 
 \subsection{Objective}
 
-The purpose of the project is to create two Verlan datasets: one functioning as a dictionary, containing the Verlan words and their normalised standard French equivalents; the other a dataset of sentences that contain Verlan, paired with the same sentences containing normalised words, with labels indicating whether a sentence contains Verlan. After that, the project embeds and classifies Verlan using Large Language Models (LLMs) and analyses the results.
+The purpose of the project is to create two verlan datasets: one functioning as a dictionary, containing the verlan words and their normalised standard French equivalents; the other a dataset of sentences that contain verlan, paired with the same sentences containing normalised words, with labels indicating whether a sentence contains verlan. After that, the project embeds and classifies verlan using Large Language Models (LLMs) and analyses the results.
 
 \begin{figure}[H]
 \centering
@@ -126,7 +127,7 @@ The purpose of the project is to create two Verlan datasets: one functioning as 
 \node [block, right of=data] (dict) {Dictionary Creation};
 \node [block, right of=dict] (sentences) {Sentence Dataset Creation};
 \node [block, right of=sentences] (embedding) {LLM Embedding};
-\node [block, right of=embedding] (classification) {Verlan Classification};
+\node [block, right of=embedding] (classification) {verlan Classification};
 \node [block, right of=classification] (analysis) {Results Analysis};
 
 % Draw arrows
@@ -137,47 +138,140 @@ The purpose of the project is to create two Verlan datasets: one functioning as 
 \draw [arrow] (classification) -- (analysis);
 
 % Add labels below nodes
-\node [below of=data, node distance=1.5cm, text width=2cm, text centered] {\small Verlan words \& standard equivalents};
-\node [below of=dict, node distance=1.5cm, text width=2cm, text centered] {\small Verlan-Standard pairs};
-\node [below of=sentences, node distance=1.5cm, text width=2cm, text centered] {\small Labelled sentences with Verlan};
+\node [below of=data, node distance=1.5cm, text width=2cm, text centered] {\small verlan words \& standard equivalents};
+\node [below of=dict, node distance=1.5cm, text width=2cm, text centered] {\small verlan-Standard pairs};
+\node [below of=sentences, node distance=1.5cm, text width=2cm, text centered] {\small Labelled sentences with verlan};
 \node [below of=embedding, node distance=1.5cm, text width=2cm, text centered] {\small Feature extraction};
-\node [below of=classification, node distance=1.5cm, text width=2cm, text centered] {\small Verlan detection};
+\node [below of=classification, node distance=1.5cm, text width=2cm, text centered] {\small verlan detection};
 \node [below of=analysis, node distance=1.5cm, text width=2cm, text centered] {\small Performance evaluation};
 
 \end{tikzpicture}
 \caption{\label{fig:pipeline}A visulisation of the objectives.}
 \end{figure}
 
-With the purpose above, the report contributes to the linguistics and the AI researchers two Verlan datasets, for dictionary making or LLMs training. The report also evaluates how good we can achieve the identification of Verlan with ML, to benefit machine translation in the future.
+With the purpose above, the report contributes to the linguistics and the AI researchers two verlan datasets, for dictionary making or LLMs training. The report also evaluates how good we can achieve the identification of verlan with ML, to benefit machine translation in the future.
 
-The code and the unannotated, un peer-reviewed dataset developed as part of the project are released under openlicences and aligns with open science best practices, with the usage of a version controlled software development platform (GitHub)\footnote{\url{github.com/greateden/Verlan-Identification-Normalisation}}. The annotated, peer-reviewed dataset will be published shortly after this report, aiming by the end of 2025.
+The code and the unannotated, un peer-reviewed dataset developed as part of the project are released under openlicences and aligns with open science best practices, with the usage of a version controlled software development platform (GitHub)\footnote{\url{github.com/greateden/verlan-Identification-Normalisation}}. The annotated, peer-reviewed dataset will be published shortly after this report, aiming by the end of 2025.
 
 \section{Background}
-\subsection{How Francophone People Use Verlan}
-This section is to help those readers who don't have a linguistic backgound in Verlan to clean their fogs.
-TODO 
-ref the Paris VIII thesis.
-mention academie francaise.
+\subsection{A Living Verlan}
+
+Vivienne Véla, a former scholar from Université Paris 8, poetically captured one of Verlan's most important traits: it pursues confusion instead of clarity\cite{mela1991verlan}. One reason is that it is widely used among lower-class people, drug users, gangs, or those in jail. Thus, making the context unidentifiable is important\;---\;certain phenomena such as reverlanisation (flipping the Verlan again if it becomes too popular) and truncation are therefore applied. However, although Verlan is used for concealing meaning, it still follows certain rules. The most general rule is syllabic reversal, as mentioned in the introduction chapter of this report.
+
+Specifically, to delve into the linguistic rules, Véla pointed out that the analytic model proposed by Kaye and Lowenstamm provides the best description\cite{kaye1984syllabicite}. The syllable can be disassembled into \textit{attaque} (onset), \textit{rime} (rhyme), \textit{noyau} (nucleus), and \textit{coda}. For example, here is a representation of the word \textit{garder}, IPA\footnote{International Phonetic Alphabet, \url{https://en.wikipedia.org/wiki/International_Phonetic_Alphabet}} [garde].
+
+\begin{figure}[H]
+\centering
+\begin{forest}
+for tree={
+  grow=south,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  edge={-latex},
+  l sep=10pt,
+  s sep=18pt,
+  font=\itshape
+}
+[{\textbf{garder}}
+  [{$S_1$}
+    [attaque
+      [g, font=\normalfont]
+    ]
+    [rime
+      [noyau
+        [a, font=\normalfont]
+      ]
+      [coda
+        [r, font=\normalfont]
+      ]
+    ]
+  ]
+  [{$S_2$}
+    [attaque
+      [d, font=\normalfont]
+    ]
+    [rime
+      [noyau
+        [e, font=\normalfont]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\end{figure}
+
+It has two syllables, $S_1$ and $S_2$. To create the Verlan form, we follow the permutation equation below:
+
+\begin{equation}\label{eq:verlan-perm}
+  (S_1 S_2) \rightarrow (S_2 S_1)
+\end{equation}
+
+After the permutation, we obtain the Verlan form of \textit{garder} as \textit{degar}, represented below.
+
+\begin{figure}[H]
+\centering
+\begin{forest}
+for tree={
+  grow=south,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  edge={-latex},
+  l sep=10pt,
+  s sep=18pt,
+  font=\itshape
+}
+[{\textbf{degar}}
+  [{$S_2$}
+    [attaque
+      [d, font=\normalfont]
+    ]
+    [rime
+      [noyau
+        [e, font=\normalfont]
+      ]
+    ]
+  ]
+  [{$S_1$}
+    [attaque
+      [g, font=\normalfont]
+    ]
+    [rime
+      [noyau
+        [a, font=\normalfont]
+      ]
+      [coda
+        [r, font=\normalfont]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\end{figure}
+
+Notably, the permutation occurs only at the syllable level (i.e., between $S_1$ and $S_2$); it does not affect the internal structure of each syllable tree, although in some cases, certain consonants (such as \textit{e}) might be dropped after permutation. That said, the example above is not an exhaustive explanation of forming a Verlan. To avoid confusing the readers, this report believes that this example perfectly illustrates its regular rule. For further details, readers are advised to consult Véla's paper.
+
+With such a sub-word permutation, researchers can not only discuss it within the linguistic realm, but it is also intriguing for computer scientists to explore how machines, such as LLMs, perceive this kind of difference. Just as Véla describes Verlan\;---\;ambiguous, sometimes violent, sometimes amazing, and always vivid.
 
 
-\subsection{How to Detect Verlan}
+\subsection{Detecting Slang}
 
-To the best of our knowledge, there is no existing computational research\footnote{As of September 2025.} on the \textit{detection} of Verlan\;---\;this particular form of French slang. However, there are a few scholars who included Verlan in their research\cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}. Yet, these studies commonly included Verlan as a type of slang in their dataset or corpus. Moreover, they did not extract and research on how to detect this specific type of slang, but in a broader way\;---\;they create slang datasets which contain Verlan, and some of them used computational approaches to detect those slang. 
+To the best of our knowledge, there is no existing computational research\footnote{As of September 2025.} on the \textit{detection} of Verlan\;---\;this particular form of French slang. However, there are a few scholars who have included Verlan in their research\cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}. Yet, these studies commonly included Verlan as a type of slang in their dataset or corpus. Moreover, they did not specifically focus on how to detect this particular type of slang, but rather approached it in a broader sense\;---\;they created slang datasets that contain Verlan, and some of them employed computational approaches to detect such slang.
 
-Luckily, there are quite a few papers related to computational slang detection, and their approaches could contribute to Verlan detection to a large extent\cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}, which are not limited to French, but also cover other Indo-European languages\footnote{For example, English, German, and Russian. For more information, please refer to: \url{https://en.wikipedia.org/wiki/Indo-European_languages}.}.
+Fortunately, there are several papers related to computational slang detection, and their approaches could contribute to Verlan detection to a large extent\cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}. These studies are not limited to French but also cover other Indo-European languages\footnote{For example, English, German, and Russian. For more information, please refer to: \url{https://en.wikipedia.org/wiki/Indo-European_languages}.}.
 
-Therefore, regarding the history of Verlan detection, this report firstly generalises the task as slang detection, constructed based on a slang detection paper's background chapter\cite{pei2019slang}. After each key historical point, there will be discussions related to theoretical ways to implement those methods for Verlan detection, in order to provide the readers with a general and useful background.
-
+Therefore, regarding the history of Verlan detection, this report first generalises the task as slang detection, constructed based on the background chapter of a slang detection paper\cite{pei2019slang}. After each key historical point, there will be discussions related to theoretical ways to implement those methods for Verlan detection, in order to provide readers with a general and useful background.
 
 \subsubsection{Dictionary Search}
-The easiest way we can think of is to use a dictionary\;---\;just like how we look up a word that we don't know of. The pros and cons are highly similar to looking up a dictionary. It is fast (if using a digital dictionary) and accurate. On the other hand, because it is purely fixed data, it only works with existed words, thus it cannot identify newly invented words. 
 
-The examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY\cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur}\cite{dictionnaire2024chilleur}. Specifically for Verlan, the report can find several dictionaries online, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire\_Verlan}}.
+The easiest way we can think of is to use a dictionary\;---\;just like how we look up a word that we do not know. The pros and cons are highly similar to consulting a dictionary. It is fast (if using a digital one) and accurate. On the other hand, because it is purely fixed data, it only works with existing words, thus it cannot identify newly invented ones.
 
-With these existing dictionaries, implementing a tool to identify Verlan should be easy. However, two major issues have limit the possibility of directly using these dictionaries to identify Verlan: they don't have rich contents, and some of them are fan-made, which neither covers the vastness of such a slang, nor is accurate. Requesting copyrights for certain dictionaries could also be a potential concern.
+Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY\cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur}\cite{dictionnaire2024chilleur}. Specifically for Verlan, the report can find several dictionaries online, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
 
-Although dictionaries have the cons above, it is the essential data for implementing LLM-based approaches, as discussed later.
+With these existing dictionaries, implementing a tool to identify Verlan should be straightforward. However, two major issues limit the possibility of directly using these dictionaries for Verlan identification: they lack comprehensive coverage, and some of them are fan-made, which neither captures the full extent of this slang nor guarantees accuracy. Requesting copyrights for certain dictionaries could also be a potential concern.
 
+Although dictionaries have the drawbacks mentioned above, they remain essential resources for implementing LLM-based approaches, as discussed later.
 
 \subsubsection{Traditional ML}
 % should be short
@@ -242,17 +336,17 @@ Concluding remarks. Send the pdf (not the \verb$*.tex$ file) to your supervisor 
 \begin{thebibliography}{9}
 
 \bibitem{rajabov2025} 
-Radjabov, Ruslan Rajabmurodovich. \textit{Understanding "Verlan" in the French Language}. 
+Radjabov, Ruslan Rajabmurodovich. \textit{Understanding "verlan" in the French Language}. 
 Web of Scientist: International Scientific Research Journal, vol. 6, no. 3, 2025, pp. 368-372. 
 Available at: \url{https://webofjournals.com/index.php/3/article/view/3264}.
 
 \bibitem{bach2018} 
-Bach, Xavier. \textit{Tracing the origins of Verlan in an early nineteenth century text}. 
+Bach, Xavier. \textit{Tracing the origins of verlan in an early nineteenth century text}. 
 Journal of French Language Studies, vol. 28, no. 1, 2018, pp. 1-18. 
 Cambridge University Press. doi:10.1017/S0959269516000221.
 
-\bibitem{evolutionVerlan} 
-Olivier Sécardin. \textit{Évolution du Verlan, marqueur social et identitaire, comme reflet de la langue et de la société françaises}. 
+\bibitem{evolutionverlan} 
+Olivier Sécardin. \textit{Évolution du verlan, marqueur social et identitaire, comme reflet de la langue et de la société françaises}. 
 Synergies Europe, no. 3, 2008, pp. 223-232. 
 Available at: \url{https://journal.lib.uoguelph.ca/index.php/synergies/article/download/1037/1859?inline=1}.
 
@@ -351,6 +445,19 @@ Parent, Philippe; Parent, André.
 Éditions Somme toute (2024).  
 ISBN: 9782925124351.  
 
+\bibitem{mela1991verlan}
+Méla, Vivienne.  
+\textit{Le verlan ou le langage du miroir}.  
+Langages, No. 101, Les javanais (Mars 1991), pp. 73–94.  
+Published by Armand Colin.  
+Available at: \url{https://www.jstor.org/stable/23906698}.
+
+\bibitem{kaye1984syllabicite}
+Kaye, Jonathan D.; Lowenstamm, Jean.  
+\textit{De la syllabicité}.  
+In: Dell, François; Hirst, Daniel; Vergnaud, Jean-Roger (eds.), \textit{Forme sonore du langage}.  
+Hermann, Paris (1984), pp. 123–159.  
+Available at: \url{https://archive.org/details/formesonoredulangage}.
 
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  8 OCT 2025 18:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 OCT 2025 20:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -920,7 +920,9 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box66
 \@float@everytoks=\toks41
 \@floatcapt=\box67
-) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest.sty
+Package: forest 2017/07/14 v2.1.5 Drawing (linguistic) trees
+ (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex
 File: tikzlibraryshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
@@ -928,10 +930,10 @@ File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.misc.code.tex
 File: tikzlibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
- (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.tex
+
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.tex
 File: pgflibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
-))
-(/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.symbols.code.tex
+)) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.symbols.code.tex
 File: tikzlibraryshapes.symbols.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.symbols.code.tex
 File: pgflibraryshapes.symbols.code.tex 2023-01-15 v3.1.10 (3.1.10)
@@ -963,72 +965,145 @@ File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfnodepartsevenbox=\box85
 \pgfnodepartsixbox=\box86
 \pgfnodepartfivebox=\box87
-))) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+))) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
+File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
+\pgf@intersect@solutions=\count325
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgfopts/pgfopts.sty
+Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
+\pgfopts@list@add@a@toks=\toks42
+\pgfopts@list@add@b@toks=\toks43
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/elocalloc/elocalloc.sty
+Package: elocalloc 2016/12/15 v0.03 local allocation for LaTeX 2015+ (DPC)
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+)) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2025-01-18 L3 programming layer (loader) 
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count326
+\l__pdf_internal_box=\box88
+))
+Package: xparse 2024-08-16 L3 Experimental document command parser
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/inlinedef/inlinedef.sty
+Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
+\ID@toks=\toks44
+\ID@count=\count327
+)
+\ID@usercommands=\toks45
+\safeloop@depth=\count328
+\safeRKloop@depth=\count329
+\forest@temp@dimen=\dimen267
+\forest@temp@count=\count330
+\forest@n=\count331
+\forest@temp@global@count=\count332
+\forest@temp@toks=\toks46
+\forest@temparray@M=\count333
+\forest@temparray@N=\count334
+\forest@global@temparray@M=\count335
+\forest@global@temparray@N=\count336
+\forest@isnum@count=\count337
+\forest@isdim@nonintpart=\count338
+\forest@isdim@dimen=\dimen268
+\forest@sort@m=\count339
+\forest@sort@k=\count340
+\forest@sort@p=\count341
+\bracket@content=\toks47
+\bracket@afterthought=\toks48
+\forest@node@maxid=\count342
+\forest@process@left@M=\count343
+\forest@process@left@N=\count344
+\forest@process@right@M=\count345
+\forest@process@right@N=\count346
+\forest@process@saved@M=\count347
+\forest@process@saved@N=\count348
+\forest@process@result@M=\count349
+\forest@process@result@N=\count350
+\forest@process@n=\count351
+\forest@nodewalk@branch@toks=\toks49
+\forest@nodewalk@shortsteps@resolution=\toks50
+\forest@do@dynamics=\toks51
+\forest@box=\box89
+\forest@xg=\dimen269
+\forest@yg=\dimen270
+\forest@xs=\dimen271
+\forest@ys=\dimen272
+\forest@pi@toks=\toks52
+\forest@segment@toks=\toks53
+\forest@PIi@toks=\toks54
+\forest@PIii@toks=\toks55
+\forest@copy@in=\read4
+\forest@copy@out=\write4
+\forest@externalize@max@outer@n=\count352
+\forest@externalize@inner@n=\count353
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest-lib-edges.sty
+Package: forest-lib-edges 2016/12/05 v0.1.1
+) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\arrowsize=\dimen267
-)) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count325
-\l__pdf_internal_box=\box88
-) (./myreport.aux
+\arrowsize=\dimen273
+)) (./myreport.aux
 
 LaTeX Warning: Label `wu2018slangsd' multiply defined.
 
 )
 \openout1 = `myreport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
  (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count326
-\scratchdimen=\dimen268
-\scratchbox=\box89
-\nofMPsegments=\count327
-\nofMParguments=\count328
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count329
-\MPscratchDim=\dimen269
-\MPnumerator=\count330
-\makeMPintoPDFobject=\count331
-\everyMPtoPDFconversion=\toks43
+\scratchcounter=\count354
+\scratchdimen=\dimen274
+\scratchbox=\box90
+\nofMPsegments=\count355
+\nofMParguments=\count356
+\everyMPshowfont=\toks56
+\MPscratchCnt=\count357
+\MPscratchDim=\dimen275
+\MPnumerator=\count358
+\makeMPintoPDFobject=\count359
+\everyMPtoPDFconversion=\toks57
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 48.
+Package hyperref Info: Link coloring ON on input line 49.
  (./myreport.out) (./myreport.out)
-\@outlinefile=\write4
-\openout4 = `myreport.out'.
+\@outlinefile=\write5
+\openout5 = `myreport.out'.
 
 
 
-Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 48.
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 49.
 
 <figures/logo.png, id=75, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
-Package pdftex.def Info: figures/logo.png  used on input line 51.
+Package pdftex.def Info: figures/logo.png  used on input line 52.
 (pdftex.def)             Requested size: 99.58464pt x 108.69188pt.
 
 
@@ -1040,22 +1115,22 @@ Package pdftex.def Info: figures/logo.png  used on input line 51.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.85 T
+l.86 T
       hinking internationally, when people are communicating with translator... [1]
-<figures/google_Verlan.png, id=126, 1093.08376pt x 252.945pt>
-File: figures/google_Verlan.png Graphic file (type png)
-<use figures/google_Verlan.png>
-Package pdftex.def Info: figures/google_Verlan.png  used on input line 89.
+<figures/google_verlan.png, id=126, 1093.08376pt x 252.945pt>
+File: figures/google_verlan.png Graphic file (type png)
+<use figures/google_verlan.png>
+Package pdftex.def Info: figures/google_verlan.png  used on input line 90.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_Verlan.png, id=127, 972.63374pt x 237.88875pt>
-File: figures/deepl_Verlan.png Graphic file (type png)
-<use figures/deepl_Verlan.png>
-Package pdftex.def Info: figures/deepl_Verlan.png  used on input line 95.
+<figures/deepl_verlan.png, id=127, 972.63374pt x 237.88875pt>
+File: figures/deepl_verlan.png Graphic file (type png)
+<use figures/deepl_verlan.png>
+Package pdftex.def Info: figures/deepl_verlan.png  used on input line 96.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
 <figures/deepl_alt_text.png, id=128, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
-Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 101.
+Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 102.
 (pdftex.def)             Requested size: 117.00119pt x 153.0299pt.
 
 
@@ -1063,26 +1138,26 @@ Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 101.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.104 
+l.105 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.104 
-       <./figures/google_Verlan.png> <./figures/deepl_Verlan.png>]
+l.105 
+       <./figures/google_verlan.png> <./figures/deepl_verlan.png>]
 
 [3
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.114 
+l.115 
        <./figures/deepl_alt_text.png>]
-Overfull \hbox (2.92413pt too wide) in paragraph at lines 145--145
+Overfull \hbox (2.92413pt too wide) in paragraph at lines 146--146
  [][]\OT1/cmr/m/n/10.95 Performance 
  []
 
 
-Overfull \hbox (30.79729pt too wide) in paragraph at lines 147--148
+Overfull \hbox (30.79729pt too wide) in paragraph at lines 148--149
  [][] 
  []
 
@@ -1092,46 +1167,62 @@ Overfull \hbox (30.79729pt too wide) in paragraph at lines 147--148
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.166 
+l.160 
       ]
-Underfull \hbox (badness 10000) in paragraph at lines 175--175
-[][][][][]$\OT1/cmtt/m/n/10 https : / / ecoleng . com / verlan-[]comprendre-[]argot-[]francais-[]parler /
+Underfull \hbox (badness 10000) in paragraph at lines 161--161
+[][][]\OT1/cmr/m/n/10 International Pho-netic Al-pha-bet, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki /
+ []
+
+
+Overfull \hbox (24.01376pt too wide) in paragraph at lines 161--162
+\OT1/cmr/m/n/12 a-lytic model pro-posed by Kaye and Lowen-stamm pro-vides the best description[[]].
  []
 
 
 
 [5]
-Overfull \hbox (1.01933pt too wide) in paragraph at lines 198--199
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+[][][][][]$\OT1/cmtt/m/n/10 https : / / ecoleng . com / verlan-[]comprendre-[]argot-[]francais-[]parler /
+ []
+
+
+Overfull \hbox (1.01933pt too wide) in paragraph at lines 292--293
 \OT1/cmr/m/n/12 L[]T[]X han-dles all the for-mat-ting and num-ber-ing au-to-mat-i-cally. Use [][]\OT1/cmtt/m/n/12 \label{}
  []
 
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 202.
 
-LaTeX Warning: Reference `tab:widgets' on page 6 undefined on input line 208.
-
-
-LaTeX Warning: Reference `fig:frog' on page 6 undefined on input line 208.
-
-
-
-[6]
 
 [7]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 296.
+
+
+LaTeX Warning: Reference `tab:widgets' on page 8 undefined on input line 302.
+
+
+LaTeX Warning: Reference `fig:frog' on page 8 undefined on input line 302.
+
+
 
 [8]
 
 [9]
-pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.335 \bibitem{wu2018slangsd}
-                             
 
 [10]
 
-[11]
+[11
+pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.447 
+      ]
 
-[12] (./myreport.aux)
+[12]
+
+[13]
+
+[14] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1144,21 +1235,21 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: 7D97F002BF8F5464E4629B0F38CC75CF;2242.
+(rerunfilecheck)             Checksum: 7CAFF40D47833048A3FCBB9E2B1431B5;2115.
  ) 
 Here is how much of TeX's memory you used:
- 24458 strings out of 474662
- 485764 string characters out of 5751110
- 892595 words of memory out of 5000000
- 47001 multiletter control sequences out of 15000+600000
- 570717 words of font info for 77 fonts, out of 8000000 for 9000
+ 34690 strings out of 474662
+ 763104 string characters out of 5751110
+ 1145454 words of memory out of 5000000
+ 57181 multiletter control sequences out of 15000+600000
+ 571076 words of font info for 78 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 114i,9n,115p,1213b,970s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on myreport.pdf (13 pages, 512953 bytes).
+ 140i,12n,131p,1740b,2121s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on myreport.pdf (15 pages, 526599 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 307 compressed objects within 4 object streams
- 79 named destinations out of 1000 (max. 500000)
+ 392 PDF objects out of 1000 (max. 8388607)
+ 329 compressed objects within 4 object streams
+ 85 named destinations out of 1000 (max. 500000)
  169 words of extra memory for PDF output out of 10000 (max. 10000000)
 
