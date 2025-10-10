@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1759995576.50797 "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" "myreport.pdf" "myreport" 1759995582.00417 0
-  "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" 1759995576.51117 29264 99789e6455891319c9df36fbedb83b84 ""
+["pdflatex"] 1760074452.02741 "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" "myreport.pdf" "myreport" 1760074453.59895 0
+  "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" 1760074450.6984 29397 1f16f2ce0626a9049414defda86c5a5f ""
   "/Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1756285340.10932 12644 3aa70ec167618c60fd8a814c9f201847 ""
   "/Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1753150705.86168 14040 a884156545401fe0196fa79524d2bb7f ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -32,9 +32,7 @@
   "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb" 1248133631 36554 b67dc2cfa451409e100b3fcf5f506509 ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb" 1248133631 32001 6aeea3afe875097b1eb0da29acd61e28 ""
-  "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1248133631 36741 fa121aac0049305630cf160b86157ee4 ""
-  "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
@@ -213,9 +211,9 @@
   "figures/deepl_verlan.png" 1758937074.63134 69782 817deec7bd3d47424465f3542b0a92b1 ""
   "figures/google_verlan.png" 1758937068.176 105001 c8405ada063a6602b6a169682e363d96 ""
   "figures/logo.png" 1758642618 201719 3910a578148a1df42ed7d2e75ef62457 ""
-  "myreport.aux" 1759995581.88674 5725 277a8de3d1aef8761cca61c8d9e674c8 "pdflatex"
-  "myreport.out" 1759995581.88793 2115 7caff40d47833048a3fcbb9e2b1431b5 "pdflatex"
-  "myreport.tex" 1759995576.51117 29264 99789e6455891319c9df36fbedb83b84 ""
+  "myreport.aux" 1760074453.5079 4796 cbe06c98272ebb163cfef080c4c17599 "pdflatex"
+  "myreport.out" 1760074453.50887 1722 9f3478501b662fc2ed4c5357d97df905 "pdflatex"
+  "myreport.tex" 1760074450.6984 29397 1f16f2ce0626a9049414defda86c5a5f ""
   (generated)
   "myreport.aux"
   "myreport.log"
