@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 OCT 2025 18:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  11 OCT 2025 18:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1100,7 +1100,7 @@ Package hyperref Info: Link coloring ON on input line 49.
 
 Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 49.
 
-<figures/logo.png, id=51, 566.115pt x 617.9085pt>
+<figures/logo.png, id=67, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
 Package pdftex.def Info: figures/logo.png  used on input line 52.
@@ -1117,17 +1117,17 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.86 T
       hinking internationally, when people are communicating with translator... [1]
-<figures/google_verlan.png, id=102, 1093.08376pt x 252.945pt>
+<figures/google_verlan.png, id=118, 1093.08376pt x 252.945pt>
 File: figures/google_verlan.png Graphic file (type png)
 <use figures/google_verlan.png>
 Package pdftex.def Info: figures/google_verlan.png  used on input line 90.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_verlan.png, id=103, 972.63374pt x 237.88875pt>
+<figures/deepl_verlan.png, id=119, 972.63374pt x 237.88875pt>
 File: figures/deepl_verlan.png Graphic file (type png)
 <use figures/deepl_verlan.png>
 Package pdftex.def Info: figures/deepl_verlan.png  used on input line 96.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
-<figures/deepl_alt_text.png, id=104, 303.1325pt x 396.48125pt>
+<figures/deepl_alt_text.png, id=120, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
 Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 102.
@@ -1190,6 +1190,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 275--275
 
 
 [7]
+Underfull \hbox (badness 7291) in paragraph at lines 291--291
+[][][]\OT1/cmr/m/n/10 Support Vec-tor Ma-chine, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / Support _ vector _
+ []
+
+
 
 [8]
 
@@ -1197,28 +1202,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 275--275
 
 [10]
 
-[11
+[11]
+
+[12
 pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.438 
-      ]
-Underfull \hbox (badness 5203) in paragraph at lines 446--450
-[]\OT1/cmr/m/n/12 Zobel, Justin; Dart, Philip. \OT1/cmr/m/it/12 Find-ing ap-prox-i-mate matches in
+l.454 \bibitem{philips1990metaphone}
+                                    ]
+Underfull \hbox (badness 1048) in paragraph at lines 473--477
+\OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
  []
 
 
-Underfull \hbox (badness 5637) in paragraph at lines 446--450
-\OT1/cmr/m/it/12 large lex-i-cons\OT1/cmr/m/n/12 . Soft-ware: Prac-tice & Ex-pe-ri-ence (1995). DOI:
- []
-
-
-
-[12]
 
 [13]
 
-[14] (./myreport.aux)
+[14]
+
+[15]
+
+[16] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1228,21 +1232,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: 9F3478501B662FC2ED4C5357D97DF905;1722.
+(rerunfilecheck)             Checksum: E15770758AE35B045E063C29FE6EAD2C;2458.
  ) 
 Here is how much of TeX's memory you used:
- 34604 strings out of 474662
- 761393 string characters out of 5751110
- 1146338 words of memory out of 5000000
- 57102 multiletter control sequences out of 15000+600000
+ 34636 strings out of 474662
+ 761973 string characters out of 5751110
+ 1146671 words of memory out of 5000000
+ 57114 multiletter control sequences out of 15000+600000
  570237 words of font info for 75 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  140i,12n,131p,1740b,2121s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on myreport.pdf (15 pages, 506234 bytes).
+Output written on myreport.pdf (17 pages, 518198 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 302 compressed objects within 4 object streams
- 78 named destinations out of 1000 (max. 500000)
- 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 433 PDF objects out of 1000 (max. 8388607)
+ 372 compressed objects within 4 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 153 words of extra memory for PDF output out of 10000 (max. 10000000)
 

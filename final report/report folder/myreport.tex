@@ -257,35 +257,45 @@ With such a sub-word permutation, researchers can not only discuss it within the
 
 \subsection{Detecting Slang}
 
-To the best of our knowledge, there is no existing computational research\footnote{As of September 2025.} on the \textit{detection} of Verlan\;---\;this particular form of French slang. However, there are a few scholars who have included Verlan in their research\cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}. Yet, these studies commonly included Verlan as a type of slang in their dataset or corpus. Moreover, they did not specifically focus on how to detect this particular type of slang, but rather approached it in a broader sense\;---\;they created slang datasets that contain Verlan, and some of them employed computational approaches to detect such slang.
+To the best of our knowledge, there is no existing computational research\footnote{As of September 2025.} on the \textit{detection} of Verlan\;---\;this particular form of French slang. However, there are a few scholars who have included Verlan in their research\cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}. Yet, these studies commonly included Verlan as a type of slang in their datasets or corpora. Moreover, they did not specifically focus on how to detect this particular type of slang, but rather approached it in a broader sense\;---\;they created slang datasets that contain Verlan, and some of them employed computational approaches to detect such slang.
 
 Fortunately, there are several papers related to computational slang detection, and their approaches could contribute to Verlan detection to a large extent\cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}. These studies are not limited to French but also cover other Indo-European languages\footnote{For example, English, German, and Russian. For more information, please refer to: \url{https://en.wikipedia.org/wiki/Indo-European_languages}.}.
 
-Therefore, regarding the history of Verlan detection, this report first generalises the task as slang detection, constructed based on the background chapter of a slang detection paper\cite{pei2019slang}. After each key historical point, there will be discussions related to theoretical ways to implement those methods for Verlan detection, in order to provide readers with a general and useful background.
+Therefore, regarding the history of Verlan detection, this report first generalises the task as slang detection, and then discusses possible methods that could be implemented for Verlan identification, in order to provide readers with a general and useful background.
 
-\subsubsection{1910s-2000s: Super-condensed Pre-history of Slang Detection}
+\subsubsection{1910s-2016: A Super-Condensed History of Slang Detection}
 
-Slang detection is similar to a fuzzy search algorithm, or the first half of spelling correction. Back in the old days, people mainly were developing related algorithms, which founded the background of slang detection, this applied research realm. Two main theories are widely cited, one is the spelling correction method introduced by Levenshtein in 1966, and the other is a phonetic index system for names introduced by Russel in 1918\cite{levenshtein1966,russell1918soundex}. Whilst they are introduced in the early 20th century, a decent amount of papers in the late 90's have applied those methods for detecting and correcting spelling, etc\cite{zobel1995lexicon,kukich1992techniques}.
-
-
-\subsubsection{Early 1990s: Dictionary Search}
-
-The easiest way we can think of is to use a dictionary\;---\;just like how we look up a word that we do not know. The pros and cons are highly similar to consulting a dictionary. It is fast (if using a digital one) and accurate. On the other hand, because it is purely fixed data, it only works with existing words, thus it cannot identify newly invented ones.
-
-Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY\cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur}\cite{dictionnaire2024chilleur}. Specifically for Verlan, the report can find several dictionaries online, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
-
-With these existing dictionaries, implementing a tool to identify Verlan should be straightforward. However, two major issues limit the possibility of directly using these dictionaries for Verlan identification: they lack comprehensive coverage, and some of them are fan-made, which neither captures the full extent of this slang nor guarantees accuracy. Requesting copyrights for certain dictionaries could also be a potential concern.
-
-Although dictionaries have the drawbacks mentioned above, they remain essential resources for implementing LLM-based approaches, as discussed later. Thus, there are still new dictionaries being produced nowadays.
+The background of traditional slang detection often leverages fuzzy-matching methods. Two main methods were introduced and widely cited: Soundex, a phonetic indexing system for names introduced by Russell in 1918, and the edit-distance-based spelling-correction method introduced by Levenshtein in 1966\cite{russell1918soundex, levenshtein1966}. Afterwards, scholars introduced more algorithms, such as Philips's Metaphone and Double Metaphone, which improved on Russell's Soundex; Kukich's methods for detecting and correcting spelling; Sproat's normalisation of Non-Standard Words (NSW); and Aw et al.'s phrase-based Machine Translation (MT) approach for standardising SMS messages\cite{philips1990metaphone,philips2000doublemetaphone, kukich1992techniques,sproat2001normalization,aw2006phrase}. While these are not directly slang-detection research, over time their methodology became increasingly related to slang\;---\;some slang can be treated as misspelling or NSW, and people frequently use slang in text messages.
 
 
+\subsubsection{2016-2019: Dictionary Search}
 
+The easiest way we can think of dealing with slang is to use a dictionary\;---\;just like how we look up a word that we do not know. The pros and cons are highly similar to consulting a dictionary. It is fast (if using a digital one) and accurate. On the other hand, because it is purely fixed data, it only works with existing words and thus cannot identify newly invented ones.
 
+Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY\cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur}\cite{dictionnaire2024chilleur}. Specifically for Verlan, the report identifies several online dictionaries, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
 
-% should be short
+With these existing dictionaries, implementing a tool to identify Verlan should be straightforward. However, two major issues limit the possibility of directly using these dictionaries for Verlan identification: they lack comprehensive coverage, and some are fan-made, which neither captures the full extent of this slang nor guarantees accuracy. Licensing for certain dictionaries could also be a concern.
 
+Although dictionaries have the drawbacks mentioned above, they remain essential resources for implementing LLM-based approaches, as discussed later. Consequently, new dictionaries continue to be produced.
 
-% Besides, identifying the same word with different spelling or declensions is also a hurdle.
+\subsubsection{Meanwhile, for Fuzzy Search}
+
+The 2010s belonged to social media and research on user-generated text. Representative work includes Beaufort et al.'s hybrid finite-state framework for SMS normalisation, Han and Baldwin's lexical normalisation for Twitter, and the W-NUT shared tasks on Twitter message normalisation\cite{beaufort2010hybrid, han2011lexical, baldwin2015shared}.
+
+While these works are not directly about slang recognition, they provided immensely useful background for the research specifically on slang that followed.
+
+\subsubsection{2020-2025: Fuzzy Search + Slang Corpus = BOOM}
+
+In the 2020s, everyone tended to check what could be done with Machine Learning (ML) for this task, using Natural Language Processing (NLP). Researchers started to apply NLP to slang detection. Wilson's paper used two million entries from \textit{Urban Dictionary}, with terms, definitions, examples, and tags\cite{urban2020embeddings}. They pre-processed the dataset with techniques like lowercasing and removal of punctuation, followed by training a fastText\footnote{A library for learning of word embeddings and text classification created by Facebook's AI Research (FAIR) lab.} skip-gram for 10 epochs with a 300-dimensional vector space. Using a fastText classifier, they analysed properties such as sentiment and sarcasm. For evaluation, they used accuracy, precision, recall, and F1 score.
+
+Notably, the report has found two theses highly related to this project, \textit{Slang or not?} and \textit{Toward Informal Language Processing}\cite{sun2024informal,slangornot2024}. Both created their own datasets that were manually annotated and validated. The former compared the performance of traditional ML (SVM\footnote{Support Vector Machine, \url{https://en.wikipedia.org/wiki/Support_vector_machine}}-linear with TF-IDF\footnote{\url{https://en.wikipedia.org/wiki/Tf\%E2\%80\%93idf}} + n-grams), Convolutional Neural Network (CNN)\footnote{\url{https://en.wikipedia.org/wiki/Convolutional_neural_network}} / Bidirectional Long-Short Term Memory (BiLSTM)\footnote{\url{https://en.wikipedia.org/wiki/Long_short-term_memory}} with Bidirectional Encoder Representations from Transformers (BERT)\footnote{\url{https://en.wikipedia.org/wiki/BERT_(language_model)}} embeddings, Transformer models (e.g., BERT-large-uncased), and Large Language Models (LLMs) (GPT-4o and GPT-4o-mini), finding that a fine-tuned Transformer performed best. The latter compared traditional baselines, Language Models (LMs), and LLMs. 
+
+\subsubsection{Detecting Verlan?}
+The results from the last section provide this report with a clear guideline regarding Verlan identification. They have absorbed and adapted the historical development of slang detection into a modern, up-to-date framework. Building upon these insights, this report argues that BERT and contemporary LLMs represent the most effective tools for the Verlan detection task.
+
+\section{Dataset}
+
+% Besides, identifying the same word with different spelling or declensions is also a hurdle. although we do have those fuzzy search algorithms, the report is not sure whether 
 
 % mention that because we need to train LLMs, having verlans embedding in sentences is important, whilst the report wanna make good use of the benefits of dictionary search, so the report has made two datasets -- on just purly Verlan - Standard French mapping, the other is Verlan sentences.
 
@@ -296,7 +306,6 @@ Although dictionaries have the drawbacks mentioned above, they remain essential 
 \newpage
 \section{Conclusion}
 
-Concluding remarks. Send the pdf (not the \verb$*.tex$ file) to your supervisor for comments (as early as possible). Don't forget to change the\\ \verb$\usepackage[draft]{cosc4x0style}$ setting to\\ \verb$\usepackage{cosc4x0style}$ to produce the pdf in the format for the final submission.
 
 %The environment \thebibliography produces a list of references; such list will be titled "References". A parameter inside braces, 9 in the example, indicates the number of entries to be added; this parameter can not be greater than 99.
 
@@ -430,29 +439,79 @@ In: Dell, François; Hirst, Daniel; Vergnaud, Jean-Roger (eds.), \textit{Forme s
 Hermann, Paris (1984), pp. 123–159.  
 Available at: \url{https://archive.org/details/formesonoredulangage}.
 
-\bibitem{levenshtein1966}
-Levenshtein, Vladimir I.  
-\textit{Binary codes capable of correcting deletions, insertions, and reversals}.  
-Soviet Physics Doklady, vol. 10, no. 8, 1966, pp. 707-710.  
-Available at: \url{https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf}.
-
 \bibitem{russell1918soundex}
 Russell, Robert C.; Odell, Margaret K.  
 \textit{Soundex system of indexing names}.  
 U.S. Patent 1,261,167, filed June 3, 1918, and issued April 2, 1918.  
 Available at: \url{https://patents.google.com/patent/US1261167A/en}.
 
-\bibitem{zobel1995lexicon}
-Zobel, Justin; Dart, Philip.
-\textit{Finding approximate matches in large lexicons}.
-Software: Practice \& Experience (1995).
-DOI: 10.1002/spe.4380250303.
+\bibitem{levenshtein1966}
+Levenshtein, Vladimir I.  
+\textit{Binary codes capable of correcting deletions, insertions, and reversals}.  
+Soviet Physics Doklady, vol. 10, no. 8, 1966, pp. 707-710.  
+Available at: \url{https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf}.
+
+\bibitem{philips1990metaphone}
+Philips, Lawrence.
+\textit{Hanging on the Metaphone}.
+Computer Language (1990).
+Available at: \url{https://aspell.net/metaphone/}.
+
+\bibitem{philips2000doublemetaphone}
+Philips, Lawrence.
+\textit{The Double Metaphone Search Algorithm}.
+C/C++ Users Journal (June 2000).
+Available at: \url{https://xlinux.nist.gov/dads/HTML/doubleMetaphone.html}.
 
 \bibitem{kukich1992techniques}
 Kukich, Karen.
 \textit{Techniques for automatically correcting words in text}.
 ACM Computing Surveys (1992).
 DOI: 10.1145/146370.146380.
+
+\bibitem{sproat2001normalization}
+Sproat, Richard; Black, Alan W.; Chen, Stanley; Kumar, Shankar; Ostendorf, Mari; Richards, Christopher.
+\textit{Normalization of non-standard words}.
+Computer Speech \& Language, 15(3):287–333 (2001).
+DOI: 10.1006/csla.2001.0169.
+
+\bibitem{aw2006phrase}
+Aw, AiTi; Zhang, Min; Xiao, Juan; Su, Jian.
+\textit{A Phrase-Based Statistical Model for SMS Text Normalization}.
+Proceedings of the COLING/ACL 2006 Main Conference Poster Sessions (2006), pages 33–40.
+Available at: \url{https://aclanthology.org/P06-2005/}.
+
+\bibitem{beaufort2010hybrid}
+Beaufort, Richard; Roekhaut, Sophie; Cougnon, Louise-Amélie; Fairon, Cédrick.
+\textit{A Hybrid Rule/Model-Based Finite-State Framework for Normalizing SMS Messages}.
+Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics (ACL 2010).
+Available at: \url{https://aclanthology.org/P10-1079.pdf}.
+
+\bibitem{han2011lexical}
+Han, Bo; Baldwin, Timothy.
+\textit{Lexical Normalisation of Short Text Messages: Makn Sens a \#twitter}.
+Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies (ACL-HLT 2011), pages 368–378.
+Available at: \url{https://aclanthology.org/P11-1038/}
+
+\bibitem{baldwin2015shared}
+Baldwin, Timothy; de Marneffe, Marie Catherine; Han, Bo; Kim, Young-Bum; Ritter, Alan; Xu, Wei.
+\textit{Shared Tasks of the 2015 Workshop on Noisy User-generated Text: Twitter Lexical Normalization and Named Entity Recognition}.
+Proceedings of the Workshop on Noisy User-generated Text (W-NUT 2015).
+DOI: 10.18653/v1/W15-4319.
+
+\bibitem{urban2020embeddings}
+Urban Dictionary Embeddings.
+\textit{Urban Dictionary Embeddings for Slang NLP Applications}.
+LREC / ACL Anthology (2020).
+Available at: \url{https://aclanthology.org/2020.lrec-1.586/}.
+
+\bibitem{sun2024knowledge}
+Sun, X.; et al.
+\textit{Knowledge of Slang in Large Language Models}.
+Proceedings of the 2024 Annual Conference of the North American Chapter of the Association for Computational Linguistics (NAACL-Long 2024).
+Available at: \url{https://aclanthology.org/2024.naacl-long.94/}.
+
+
 
 
 \end{thebibliography}
