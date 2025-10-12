@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 14 days, 16 hours, 26 minutes
+⏳ Time remaining: 5 days, 07 hours, 23 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -88,7 +88,11 @@ project-root/
 │   ├── All_4settings_results.csv
 │   ├── Summary_4settings.csv
 │   ├── good example papers/
-│   │   └── Marxen_Master_Thesis_2023_08_18.pdf
+│   │   ├── 2024.acl-srw.27.pdf
+│   │   ├── K19-1082.pdf
+│   │   ├── Marxen_Master_Thesis_2023_08_18.pdf
+│   │   ├── translation.md
+│   │   └── verlanMla-LEVERLANOU-1991.pdf
 │   └── report folder/
 │       ├── cosc4x0style.sty
 │       ├── figures/
