@@ -400,7 +400,27 @@ As mentioned in Section~2.2.2, this report first checked and scraped sources tha
 \subsubsection{Sampling}
 Although there is no clear estimate of the overall quantity of Verlan, after searching, scraping, and combining, this report compiled a total of 1{,}086 Verlan items, though some are merely spelling variants of the same word. For example, \textit{foncédé} and \textit{foncedé}\footnote{Verlan of \textit{défoncé}, often translated as \textit{high (on drugs)} in English.} are counted separately as two entries; so are \textit{keus} and \textit{keuss}\footnote{Verlan of \textit{sec}, translated as \textit{dry} in English.}. Notably, there are around 150 entries for which the report did not find their standard form; thus they have been categorised as \textit{bronze} regarding their quality. To the best of our knowledge, the dictionary we have created contains the largest number of Verlan entries among the public dictionaries we could find.
 
-After creating the dictionary, the report searched for and scraped usage examples online to create the sentences corpus. The report also used Artificial Intelligence (AI) tools—specifically, ChatGPT Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}—for sentence scraping. The results for sentences with a verifiable reference have been marked as \textit{gold} quality; those without a verifiable reference have been marked as \textit{silver} quality. For items for which the report could not find example sentences, we prompted ChatGPT-o3\footnote{\url{https://en.wikipedia.org/wiki/OpenAI_o3}} to generate example sentences; these results have been marked as \textit{bronze} quality. All results have been reviewed by the author of this report and are intended to undergo annotation in the future.
+After creating the dictionary, the report searched for and scraped usage examples online to create the sentences corpus. The report also used Artificial Intelligence (AI) tools\;---\;specifically, ChatGPT Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}\;---\;for sentence scraping. The results for sentences with a verifiable reference have been marked as \textit{gold} quality; those without a verifiable reference have been marked as \textit{silver} quality. For items for which the report could not find example sentences, we prompted ChatGPT-o3\footnote{\url{https://en.wikipedia.org/wiki/OpenAI_o3}} to generate example sentences; these results have been marked as \textit{bronze} quality. All results have been reviewed by the author of this report and are intended to undergo annotation in the future.
+
+\subsubsection{Quality Tiers}
+
+To provide readers with a clearer understanding of the tier/quality schema introduced in this report, we have created a table for clarity:
+
+\begin{table}[H]
+\centering
+\caption{Quality tiers of the Verlan datasets.}
+\begin{tabular}{c|l|l}
+\hline
+\textbf{Tier} & \textbf{Definition} & \textbf{Source} \\
+\hline
+Gold   & Verified with public reference & Public reference (URL/citation) \\
+Silver & Plausible sentence without verifiable source & Scraped / semi-auto \\
+Bronze & LLM-generated and manually reviewed & ChatGPT-o3 \\
+\hline
+\end{tabular}
+\label{tab:verlan_tiers}
+\end{table}
+
 
 \subsection{Final Dataset}
 
@@ -408,6 +428,7 @@ At the time of writing, the datasets are not yet officially finalised. Although 
 
 The main reason is that these columns were not used in the implementations. In fact, this report only used \textit{gazetteer\_id}, \textit{verlan\_form}, and \textit{standard\_form} in the dictionary, and \textit{sentence\_id}, \textit{text}, and \textit{has\_verlan} in the sentences corpus. To us, the remaining columns are primarily for publishing the datasets and for potential advanced experiments in the future.
 
+\section{Experiments}
 
 
 % Besides, identifying the same word with different spelling or declensions is also a hurdle. although we do have those fuzzy search algorithms, the report is not sure whether 
