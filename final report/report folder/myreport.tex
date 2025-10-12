@@ -22,7 +22,7 @@
 \usepackage{float}
 \usepackage{tikz}
 \usepackage[edges]{forest}
-\usetikzlibrary{shapes,arrows,positioning}
+\usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds}
 
 % To compile the final version of the report (which will remove all the todo content)
 %\usepackage{cosc4x0style}
@@ -293,7 +293,122 @@ Notably, the report has found two theses highly related to this project, \textit
 \subsubsection{Detecting Verlan?}
 The results from the last section provide this report with a clear guideline regarding Verlan identification. They have absorbed and adapted the historical development of slang detection into a modern, up-to-date framework. Building upon these insights, this report argues that BERT and contemporary LLMs represent the most effective tools for the Verlan detection task.
 
-\section{Dataset}
+\section{Datasets}
+\subsection{The Separated Structures}
+As of the time of writing, there are no published Verlan datasets. Thus, this report has created two datasets: one is a lookup table mapping words in Verlan to their standard French forms, named \textit{GazetteerEntries} (hereafter \textit{the dictionary}); the other contains example sentences for the words appearing in the table, both in Verlan and in standard French, with three entries per form, named \textit{Sentences}. The general reasons for having two datasets are:
+
+\begin{enumerate}
+  \item To separate rules and learning signals. The dictionary works as a lookup and a baseline for rule-matching: it provides word mappings, word variants, etc., whilst the sentences dataset is for detection and evaluation and illustrates \textit{how} verlan appears in context. If mixed together, the model will not be able to distinguish tokens as dictionary knowledge or usage.
+  \item To improve reusability. The dictionary can be used independently on any corpus for rule-based verification, while the sentences dataset can be updated separately to add more community examples without modifying the dictionary, supporting modularisation of the pipeline.
+  \item For a cleaner evaluation. The dictionary can serve as a baseline while the sentences dataset can be split for training and testing, making results easier to interpret.
+\end{enumerate}
+
+Generally speaking, the separation of the datasets can potentially make the model and the experiments clearer, explainable, and easy to extend. They could also contribute to LLM training and corpus creation in the future.
+
+\subsection{Visualisation of the Datasets}
+
+Figure~\ref{fig:dataset-structure} presents the attributes in the datasets and highlights how they relate to each other.
+
+\begin{figure}[p]
+\centering
+\tikzset{
+  table/.style={
+    draw,
+    rounded corners=2pt,
+    thick,
+    align=left,
+    inner sep=5pt,
+    fill=white,
+    minimum width=7.8cm
+  },
+  header/.style={
+    fill=black!5,
+    text=black,
+    font=\bfseries,
+    inner xsep=8pt,
+    inner ysep=6pt,
+    rounded corners=2pt,
+    draw
+  },
+  field/.style={font=\ttfamily\small, align=left},
+  note/.style={font=\scriptsize, text=black!60},
+  legend/.style={
+    draw,
+    rounded corners=2pt,
+    align=left,
+    inner sep=5pt
+  },
+  connect/.style={-Latex, very thick, black!35}
+}
+\begin{tikzpicture}[node distance=0.8cm]
+
+\node[header, minimum width=7.8cm] (ghead) {GazetteerEntries};
+\node[table, below=0pt of ghead, anchor=north] (gtable) {%
+  \begin{tabular}{@{}l@{}}
+    {\bfseries Attributes (name: type)} \\[2pt]
+    \texttt{gazetteer\_id}: \textit{integer} \\
+    \texttt{verlan\_form}: \textit{text} \\
+    \texttt{standard\_form}: \textit{text} \\
+    \texttt{pos}: \textit{enum} (\texttt{noun}, \texttt{verb}, \texttt{adj}, \dots) \\
+    \texttt{is\_phrase}: \textit{boolean} \\
+    \texttt{tier}: \textit{enum} (\texttt{gold}|\texttt{silver}|\texttt{bronze}) \\
+    \texttt{origin\_lang}: \textit{text} \\
+    \texttt{notes}: \textit{text} \\[2pt]
+  \end{tabular}
+};
+
+\node[note, below=2pt of gtable.south] (gnote) {Lexicon \& mapping for rule-based match + normalisation.};
+
+\node[header, minimum width=9.2cm, below=0.8cm of gnote] (shead) {Sentences};
+\node[table, below=0pt of shead, anchor=north, minimum width=8.6cm] (stable) {%
+  \begin{tabular}{@{}l@{}}
+    {\bfseries Attributes (name: type)} \\[2pt]
+    \texttt{sentence\_id}: \textit{integer} \\
+    \texttt{text}: \textit{text} \\
+    \texttt{reference}: \textit{url/text} \\
+    \texttt{accessed\_on}: \textit{date} (ISO~8601) \\
+    \texttt{domain}: \textit{text} (e.g., \texttt{rap}, \texttt{sms}, \texttt{forum}, \dots) \\
+    \texttt{quality\_flag}: \textit{enum} (\texttt{gold}|\texttt{silver}|\texttt{bronze}) \\
+    \texttt{has\_verlan}: \textit{boolean} \\[2pt]
+  \end{tabular}
+};
+
+\node[note, below=2pt of stable.south] (snote) {Context corpus for detection \& evaluation.};
+
+\draw[connect] (gtable.south west) .. controls +(-0.6,-1.0) and +(-0.6,1.0) .. node[left, text=black!50, pos=.55]{\scriptsize lookup / match} (stable.north west);
+\draw[connect] (gtable.south east) .. controls +(0.6,-1.0) and +(0.6,1.0) .. node[right, text=black!50, pos=.45]{\scriptsize normalise to \texttt{standard\_form}} (stable.north east);
+
+\node[legend, below=0.8cm of snote] (legend) {%
+  \textbf{Legend}\\
+  \texttt{name}: \textit{type}\\
+  \textit{integer}=\#; \textit{text}=string; \textit{boolean}=\texttt{true|false}\\
+  \textit{enum}=fixed set of values; \textit{date}=YYYY-MM-DD
+};
+
+\begin{scope}[on background layer]
+  \node[draw=black!10, rounded corners=3pt, fit=(ghead) (gtable) (gnote) (shead) (stable) (snote) (legend), inner sep=6pt] {};
+\end{scope}
+\end{tikzpicture}
+\caption{\label{fig:dataset-structure}Overview of the GazetteerEntries lookup table and the Sentences corpus, including their key attributes.}
+\end{figure}
+
+
+\subsection{The Creations}
+
+As mentioned in Section~2.2.2, this report first checked and scraped sources that were available and had researcher-friendly copyright policies. Among those mentioned, \textit{Dictionnaire Verlan} and Wiktionary contributed the most in terms of quantity. However, as they are not curated or officially published, their quality is not guaranteed. Moreover, many entries do not provide example sentences, which makes the creation of the sentences corpus harder.
+
+\subsubsection{Sampling}
+Although there is no clear estimate of the overall quantity of Verlan, after searching, scraping, and combining, this report compiled a total of 1{,}086 Verlan items, though some are merely spelling variants of the same word. For example, \textit{foncédé} and \textit{foncedé}\footnote{Verlan of \textit{défoncé}, often translated as \textit{high (on drugs)} in English.} are counted separately as two entries; so are \textit{keus} and \textit{keuss}\footnote{Verlan of \textit{sec}, translated as \textit{dry} in English.}. Notably, there are around 150 entries for which the report did not find their standard form; thus they have been categorised as \textit{bronze} regarding their quality. To the best of our knowledge, the dictionary we have created contains the largest number of Verlan entries among the public dictionaries we could find.
+
+After creating the dictionary, the report searched for and scraped usage examples online to create the sentences corpus. The report also used Artificial Intelligence (AI) tools—specifically, ChatGPT Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}—for sentence scraping. The results for sentences with a verifiable reference have been marked as \textit{gold} quality; those without a verifiable reference have been marked as \textit{silver} quality. For items for which the report could not find example sentences, we prompted ChatGPT-o3\footnote{\url{https://en.wikipedia.org/wiki/OpenAI_o3}} to generate example sentences; these results have been marked as \textit{bronze} quality. All results have been reviewed by the author of this report and are intended to undergo annotation in the future.
+
+\subsection{Final Dataset}
+
+At the time of writing, the datasets are not yet officially finalised. Although the structure of the two datasets is as shown in Section~3.2, in the dictionary dataset this report did not invest much effort in annotating the original language of the Verlan items; the \textit{note} column is also scarcely used. In the sentences corpus, the \textit{accessed\_on} and \textit{domain} columns are also scarcely annotated. 
+
+The main reason is that these columns were not used in the implementations. In fact, this report only used \textit{gazetteer\_id}, \textit{verlan\_form}, and \textit{standard\_form} in the dictionary, and \textit{sentence\_id}, \textit{text}, and \textit{has\_verlan} in the sentences corpus. To us, the remaining columns are primarily for publishing the datasets and for potential advanced experiments in the future.
+
+
 
 % Besides, identifying the same word with different spelling or declensions is also a hurdle. although we do have those fuzzy search algorithms, the report is not sure whether 
 
