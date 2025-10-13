@@ -1,0 +1,14 @@
+[
+  {
+    "run_dir": "models/detect/latest/mistral_zeroshot/seed-42",
+    "seed": 42,
+    "run_id": "seed-42",
+    "test_f1@0.5": 0.6597131681877445,
+    "test_acc@0.5": 0.694021101992966,
+    "test_fp@0.5": 194,
+    "test_fn@0.5": 67,
+    "slang_fp@0.5": 17,
+    "slang_tn@0.5": 33,
+    "slang_accuracy@0.5": 0.66
+  }
+]

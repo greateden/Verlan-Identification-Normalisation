@@ -1,0 +1,854 @@
+sentence_id,text,reference,accessed_on,split,domain,quality_flag,has_verlan,normalised text,_has_verlan_norm,label,prob_1,pred_label
+174,Petit cimer discret mais sincère.,ChatGPT o3,,,,bronze,yes,,1,1,0.13983859,0
+531,Elle a un paquet de taf à finir avant minuit.,ChatGPT o3,,,,bronze,no,,0,0,0.03201941,0
+763,Il veut baiser le système et devenir riche en NFT.,ChatGPT o3,,,,bronze,no,,0,0,0.0056488975,0
+1510,"Le chat d’à côté a la gera, fais gaffe.",ChatGPT o3,,,,bronze,yes,,1,0,0.0258937,0
+1590,Il spam “les boules” à chaque 404.,ChatGPT o3,,,,bronze,no,,0,0,0.024441618,0
+723,Le voisin tospor me file toujours du bacalhau.,ChatGPT o3,,,,bronze,yes,,1,1,0.94747764,1
+576,Ton boss est un connard toxique.,ChatGPT o3,,,,bronze,no,,0,0,0.009188548,0
+127,Un coup de peupon dans ta cheutron… ,https://dvlf.uchicago.edu/mot/peupon,2025-07-02,,,gold,yes,,1,1,0.99833184,1
+0,La CGT du port de Marseille renvoyée en correctionnelle : elle aurait produit de fausses attestations,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.012013281,0
+538,"J’ai plus de fric, paye-moi un café stp.",ChatGPT o3,,,,bronze,no,,0,0,0.016610047,0
+0,Une application pour une médecine plus humaine et performante,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0058020265,0
+437,Il se sent cartri IRL à la soirée.,ChatGPT o3,,,,bronze,yes,,1,1,0.9910473,1
+749,Ton outfit est bien clean.,ChatGPT o3,,,,bronze,no,,0,0,0.012234272,0
+336,Paradise des celarvis…,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,0,0.8910874,1
+440,Tour de France en webcam 144 p.,ChatGPT o3,,,,bronze,no,,0,0,0.015144208,0
+999,"J’ai un keut à te dire, suspense.",ChatGPT o3,,,,bronze,yes,,1,1,0.95747423,1
+77,"Ce rap part keuss, pas de refrain.",ChatGPT o3,,,,bronze,yes,,1,0,0.455892,0
+1568,Je crois avoir pigé la blague meme.,ChatGPT o3,,,,bronze,no,,0,0,0.0076297983,0
+814,Il me fait yèche.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,0,0.968954,1
+0,Vaccin AstraZeneca : ce que l'on sait du vaccin censé accélérer la lutte contre le coronavirus,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0065450077,0
+0,"Russie : Vladimir Poutine a ""raté sa carrière d'espion"", estime un ancien collègue du KGB",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.00631637,0
+600,J’ai besoin d’une clope après ce partiel.,ChatGPT o3,,,,bronze,no,,0,0,0.031645875,0
+258,"La file d’attente, vraie galère.",ChatGPT o3,,,,bronze,no,,0,0,0.00569302,0
+1533,"Il manque chosekek dans ce UI, peut-être des chats.",ChatGPT o3,,,,bronze,yes,,1,1,0.84941274,1
+175,Il poste des photos de son cul en terrasse.,ChatGPT o3,,,,bronze,no,,0,0,0.01834345,0
+1003,Il va encore me carotter mon chargeur.,ChatGPT o3,,,,bronze,no,,0,0,0.011431642,0
+0,Les hôpitaux bruxellois demandent un transfert massif de malades du Covid-19 vers les autres provinces,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.005365176,0
+212,Son tee anti-raciste est stylé.,ChatGPT o3,,,,bronze,no,,0,0,0.017304223,0
+511,Le script gueuldé des erreurs rouges.,ChatGPT o3,,,,bronze,yes,,1,1,0.9988122,1
+447,Ça risque de chéclo sur mobile.,ChatGPT o3,,,,bronze,yes,,1,1,0.9774516,1
+696,Essaie de ne pas téplan au milieu du stream.,ChatGPT o3,,,,bronze,yes,,1,1,0.75470215,1
+6,"Poto ou teupo, frère, reufré ou reuf, gars, cousin ou sincou sont des termes utilisés pour des relations proches.",https://fr.wiktionary.org/wiki/reufr%C3%A9?,,,,gold,yes,,1,1,0.70724523,1
+571,Il a dû mirvo son café après ce prank.,ChatGPT o3,,,,bronze,yes,,1,1,0.9415966,1
+999,Ce petit keut booste le PC à fond.,ChatGPT o3,,,,bronze,yes,,1,1,0.9859648,1
+602,"J’veux pas toucher à la peudo, trop risqué.",ChatGPT o3,,,,bronze,yes,,1,0,0.09146096,0
+812,"Un cheveu rose dans mon café, stylé.",ChatGPT o3,,,,bronze,no,,0,0,0.9941552,1
+62,Ce casque est trop reuché pour mon budget.,ChatGPT o3,,,,bronze,yes,,1,1,0.9349082,1
+1571,Il cuisine un plat africain vegan.,ChatGPT o3,,,,bronze,no,,0,0,0.048435222,0
+1537,Je joue chéper sur 300 ms de ping.,ChatGPT o3,,,,bronze,yes,,1,1,0.99649954,1
+552,Elle arrête pas de légueu sur son chat.,ChatGPT o3,,,,bronze,yes,,1,1,0.8767265,1
+0,Banques : les géants de la Tech plus que jamais à l'offensive,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0036465637,0
+532,Ton skate slide mieux sur le képar du gymnase.,ChatGPT o3,,,,bronze,yes,,1,1,0.69674927,1
+705,Je me lève à huit heures pile.,ChatGPT o3,,,,bronze,no,,0,0,0.048302826,0
+146,Je traverse la téci en trottinette.,ChatGPT o3,,,,bronze,yes,,1,1,0.97700864,1
+125,La pause garetci se transforme en brainstorming.,ChatGPT o3,,,,bronze,yes,,1,1,0.99664754,1
+1754,Sa zonmai est cosy.,,,,,silver,yes,,1,1,0.99942625,1
+0,Kanye West et Kim Kardashian en plein divorce : ce geste peu élégant qui prouve que c’est vraiment fini,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.052790526,0
+225,… Est-ce que le euj en vaut vraiment la chandelle ?,https://www.dictionnairedelazone.fr/dictionary/definition/euj,2025-07-02,,,gold,yes,,1,1,0.94840723,1
+208,Arrête de cracher sur mon code.,ChatGPT o3,,,,bronze,no,,0,0,0.012565824,0
+33,Ton accent céfran est legit cute.,ChatGPT o3,,,,bronze,yes,,1,1,0.9990522,1
+438,"Fais ta dédicace audio, c’est hype.",ChatGPT o3,,,,bronze,no,,0,0,0.03545394,0
+101,"Il a la boca lui, il est golri !",https://monkkey.fr/argot/golri/,2025-07-02,,,gold,yes,,1,1,0.46311727,0
+342,Dès qu’on t’parle de flouze… tas d’dix-keusses,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,0,0.8207492,1
+213,Cette croma freeze au troisième loop.,ChatGPT o3,,,,bronze,yes,,1,1,0.99197817,1
+1662,Le film parle d’un hacker gitan.,ChatGPT o3,,,,bronze,no,,0,0,0.013248467,0
+0,"SNCF : découvrez la motrice du ""TGV du futur"" prévu pour 2024",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0043173847,0
+645,J’essaie d’être scrèd quand je pique une frite.,ChatGPT o3,,,,bronze,yes,,1,1,0.80629253,1
+652,"Après la soirée, la cuisine était en mode casse totale.",ChatGPT o3,,,,bronze,no,,0,0,0.047080293,0
+1619,"Le prof de chinois lit mes commits, help.",ChatGPT o3,,,,bronze,no,,0,0,0.037492786,0
+0,"Le retour de ""Caméra Café"" a-t-il encore du sens en 2021?",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0054728473,0
+792,"T’as raison, ce bug vient du cache.",ChatGPT o3,,,,bronze,no,,0,0,0.008993288,0
+55,"Ma batterie a tenu trois jours, c’est gueudin.",ChatGPT o3,,,,bronze,yes,,1,0,0.21444754,0
+716,"Les exams c’est tobien, panique.",ChatGPT o3,,,,bronze,yes,,1,0,0.21842116,0
+212,Un bot raciste s’est fait ban instant.,ChatGPT o3,,,,bronze,no,,0,0,0.025768666,0
+1761,Il a dit « zy va » puis il a raccroché.,,,,,silver,yes,,1,0,0.088731825,0
+1666,Il commande trois tefri à 2 h du mat.,ChatGPT o3,,,,bronze,yes,,1,1,0.98406166,1
+650,"Le code erreur est dix-sept, c’est rare.",ChatGPT o3,,,,bronze,no,,0,0,0.009783636,0
+1744,Ta tomo fait un bruit de ouf.,,,,,silver,yes,,1,1,0.9993992,1
+264,Sa mifa suit le live en pyjama.,ChatGPT o3,,,,bronze,yes,,1,1,0.9920632,1
+531,J’ai reçu un képa d’AirPods fake de Shein.,ChatGPT o3,,,,bronze,yes,,1,1,0.9894589,1
+54,T’es ouf de poster ça en story publique.,ChatGPT o3,,,,bronze,yes,,1,1,0.66432905,1
+308,"« … pas autour d’un bédo, ni autour d’une teillebou »",dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,1,0.30789855,0
+583,Faut économiser ta neutu pour les vacances.,ChatGPT o3,,,,bronze,yes,,1,1,0.8588365,1
+1625,“C’est n’importe quoi” = review de code.,ChatGPT o3,,,,bronze,no,,0,0,0.0052361535,0
+1673,"Le PC chauffe, un peu de teuflo fraîche please.",ChatGPT o3,,,,bronze,yes,,1,1,0.76590574,1
+1760,Elle s’est retrouvée à oilp à la piscine.,,,,,silver,yes,,1,0,0.029871836,0
+1564,Docu sur la garde à uv des hackers famous.,ChatGPT o3,,,,bronze,yes,,1,0,0.43511888,0
+1605,"Il va menra son chat au stand-up, pourquoi pas.",ChatGPT o3,,,,bronze,yes,,1,1,0.97926563,1
+39,Les guides traitent toujours le touriste toubab différemment.,ChatGPT o3,,,,bronze,no,,0,1,0.9821551,1
+50,Pareil si tu es trop ripou.,https://www.senscritique.com/film/agents_doubles/critique/163453102?,,,,gold,yes,,1,0,0.9941156,1
+67,et moi comme un tebé j'ai dit O.K. ,https://forum.wordreference.com/threads/teb%C3%A9.1877703/,,,,gold,yes,,1,1,0.8888147,1
+1631,Je veux pas quécla la prod à minuit.,ChatGPT o3,,,,bronze,yes,,1,1,0.99789375,1
+109,Ce beat va claquer dans le casque.,ChatGPT o3,,,,bronze,no,,0,0,0.014210798,0
+177,Tes veuch brillent sous la ring-light.,ChatGPT o3,,,,bronze,yes,,1,1,0.8466109,1
+0,La Voix du corps : Yseult ou le corps mis à nu,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.050403822,0
+438,Une petite casdédi au dev ops.,ChatGPT o3,,,,bronze,yes,,1,1,0.9943705,1
+1602,Le manéci d’art projette un anime rare.,ChatGPT o3,,,,bronze,yes,,1,1,0.99670935,1
+0,Harry Potter : Ce héros méconnu de la franchise qui n'est jamais apparu dans les films,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.36236754,0
+1535,Ce bug fix est juste un cachet placebo.,ChatGPT o3,,,,bronze,no,,0,0,0.9348912,1
+573,"Je déteste repasser une chemise, trop chiant.",ChatGPT o3,,,,bronze,no,,0,0,0.011930301,0
+1747,Va demander au trelo s’il vient.,,,,,silver,yes,,1,1,0.9829695,1
+365,Ce type est un nawache.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,0,0.2101078,0
+1513,Une idée barjot mais j’adore.,ChatGPT o3,,,,bronze,yes,,1,1,0.9300265,1
+595,Je vais couper mes cheveux.,ChatGPT o3,,,,bronze,no,,0,0,0.037134346,0
+116,"La voiture de Sam clignote arc-en-ciel, stylé.",ChatGPT o3,,,,bronze,no,,0,0,0.022551557,0
+1635,On va reaupoi ce boss final en une run.,ChatGPT o3,,,,bronze,yes,,1,1,0.9991726,1
+102,"Puis je me suis mis à goléri comme un débile, sans raison.",https://www.reddit.com/r/france/comments/1929ovg/et_vous_cest_quoi_votre_truc_rare/,2025-07-02,,,gold,yes,,1,1,0.9177651,1
+265,J’apprends le business sur TikTok U.,ChatGPT o3,,,,bronze,no,,0,0,0.10243254,0
+775,Ce laptop a quinze ans et tourne encore.,ChatGPT o3,,,,bronze,no,,0,0,0.027989104,0
+125,"Vas-y, tu prends pas mes garetci ? ",https://www.languefrancaise.net/Bob/29307,2025-07-02,,,gold,yes,,1,1,0.9641658,1
+696,On va téplan quelques plantes pour le décor.,ChatGPT o3,,,,bronze,yes,,1,1,0.99816483,1
+791,Rentrer à la zonmé après minuit = stealth mode.,ChatGPT o3,,,,bronze,yes,,1,1,0.91513413,1
+0,L'horoscope du 4 décembre 2020,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.052022643,0
+53,Ton idée est zarbe.C’est devenu zarbe d’un coup.Fais pas le zarbe avec lui.,,,,,silver,yes,,1,1,0.95657295,1
+0,COVID-19: le nombre de nouveaux cas ne descend pas au Québec,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.023785336,0
+445,Ce bug vient boucher le pipeline.,ChatGPT o3,,,,bronze,no,,0,0,0.030036062,0
+128,…te fout des coups de pepon si tu respectes pas les règles…,https://www.dictionnairedelazone.fr/dictionary/definition/pepon,2025-07-02,,,gold,yes,,1,1,0.9920399,1
+1719,"Même s’il vit ici depuis des années, il garde son accent debléman.",,,,,silver,yes,,1,0,0.3146672,0
+1724,Je rêve d’une GUI qui fond façon LSD art.,ChatGPT o3,,,,bronze,no,,0,0,0.02527107,0
+274,"Ça me fait flipper, ce bug fantôme.",ChatGPT o3,,,,bronze,no,,0,0,0.013500416,0
+283,Son fauteuil en cuir craque en live.,ChatGPT o3,,,,bronze,no,,0,0,0.9962179,1
+772,J’ai mangé douze nuggets en speed.,ChatGPT o3,,,,bronze,no,,0,0,0.10247933,0
+1751,Il teum la fille depuis tout à l’heure.,,,,,silver,yes,,1,1,0.9807163,1
+1583,Le policier m’a mute pour spam d’emotes.,ChatGPT o3,,,,bronze,no,,0,0,0.08688894,0
+590,Il a dit quoi ?!,ChatGPT o3,,,,bronze,no,,0,0,0.019046294,0
+577,Arrête de jouer la connasse sur Insta.,ChatGPT o3,,,,bronze,no,,0,0,0.012431609,0
+1516,"Je suis pas beurflant, juste broke.",ChatGPT o3,,,,bronze,yes,,1,0,0.481222,0
+0,Le double assassinat de Samuel Paty,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.014189451,0
+314,« … j’te coupe un zedou dans la foulée » (douze grammes de résine),dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,1,0.73506993,1
+594,On se retrouve à ouatre devant le ciné.,ChatGPT o3,,,,bronze,yes,,1,1,0.76292527,1
+1725,J’ai fait un rêve où Git merge tout seul.,ChatGPT o3,,,,bronze,no,,0,0,0.9333564,1
+649,Il essaye de me pincer pour voir si je dors.,ChatGPT o3,,,,bronze,no,,0,0,0.045016658,0
+54,"Ce jeu est ouf, j’y ai passé toute la nuit.",ChatGPT o3,,,,bronze,yes,,1,0,0.048903726,0
+530,"On va kéni ce boss en speedrun, easy.",ChatGPT o3,,,,bronze,yes,,1,1,0.9987429,1
+1508,"Quand le code compile pas, j’ai envie d’aller se faire baiser.",ChatGPT o3,,,,bronze,no,,0,0,0.02736045,0
+619,J’ai rantka onglets ouverts.,ChatGPT o3,,,,bronze,yes,,1,1,0.9955955,1
+190,Il sait bébar avec ses stories de gym.,ChatGPT o3,,,,bronze,yes,,1,1,0.99840504,1
+211,"Elle est cheuri en followers, pas en euros.",ChatGPT o3,,,,bronze,yes,,1,1,0.14007056,0
+0,Tour de France : l'errance tricolore risque de durer,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.006714528,0
+0,Mort à 85 ans du poète et chanteur belge Julos Beaucarne,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.027430443,0
+583,"J’ai plus de tune, payday pls.",ChatGPT o3,,,,bronze,no,,0,0,0.019504229,0
+391,Mon tepo arrive avec des LED pour le setup.,ChatGPT o3,,,,bronze,yes,,1,1,0.9980325,1
+715,J’adore les échantillons tisgra.,ChatGPT o3,,,,bronze,yes,,1,0,0.15870371,0
+796,"Le PC sans firewall, c’est à oilpé sur le net.",ChatGPT o3,,,,bronze,yes,,1,0,0.016945515,0
+290,"“C’est ta vie”, classique punchline.",ChatGPT o3,,,,bronze,no,,0,0,0.0036502904,0
+629,T’as vu ma rètba rose ?,ChatGPT o3,,,,bronze,yes,,1,1,0.8739525,1
+1623,Le mot secret du jour = “debug”.,ChatGPT o3,,,,bronze,no,,0,0,0.14942537,0
+141,J’ai le zen collé à l’écran depuis midi.,ChatGPT o3,,,,bronze,yes,,1,1,0.99087626,1
+385,La baston entre bots me tue de rire.,ChatGPT o3,,,,bronze,no,,0,0,0.02559237,0
+34,Ils ont essayé de niquer le système.,ChatGPT o3,,,,bronze,no,,0,0,0.0062465766,0
+0,Report en Bourse via le SRD : ce qu'il faut savoir avant de se lancer,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.00857796,0
+432,On apprend des insultes marocaines en rigolant.,ChatGPT o3,,,,bronze,no,,0,0,0.0107809305,0
+61,C'est trop auch !,https://www.researchgate.net/publication/307606263_C%27est_trop_auch_The_Translation_of_Contemporary_French_Literature_Featuring_Urban_Youth_Slang,,,,gold,yes,,1,1,0.8538878,1
+123,On improvise une teuf sur le toit ce soir.,ChatGPT o3,,,,bronze,yes,,1,1,0.99781406,1
+0,Justice : un juré d'assises de Bobigny poursuivi pour violation du secret de délibération,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.010494155,0
+1587,"Relax, laisse tomber ce bug pour ce soir.",ChatGPT o3,,,,bronze,no,,0,0,0.019459419,0
+1530,Tes sneakers blanches ont survécu à un festoche ? GG.,ChatGPT o3,,,,bronze,no,,0,0,0.15510681,0
+590,Il a dit ouak ?!,ChatGPT o3,,,,bronze,yes,,1,1,0.8079349,1
+541,"On se fait une planque derrière le kebab, discret.",ChatGPT o3,,,,bronze,no,,0,0,0.039623503,0
+25,Mes rempa sont généreux.Les rempa ont préparé un dîner.Elle visite ses rempa chaque année.,,,,,silver,yes,,1,1,0.9864781,1
+223,Ils ont monté un camp gitan près de la plage.,ChatGPT o3,,,,bronze,no,,0,0,0.061033826,0
+1546,J’ai dream d’être dèk de la bouffe.,ChatGPT o3,,,,bronze,yes,,1,1,0.98360103,1
+0,Les Bleus éliminés de l'Euro par la Suisse aux tirs au but,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.014689507,0
+1752,"Zebi, j’ai perdu mon portefeuille !",,,,,silver,yes,,1,0,0.084330805,0
+544,"Mets ton keuska, sinon t’es mort en skate.",ChatGPT o3,,,,bronze,yes,,1,0,0.18956313,0
+812,"Un veuche rose dans mon café, stylé.",ChatGPT o3,,,,bronze,yes,,1,1,0.99347126,1
+214,Un docu sur le sida a cartonné.,ChatGPT o3,,,,bronze,no,,0,0,0.9800126,1
+1560,Il spam comme un fonb dans le chat.,ChatGPT o3,,,,bronze,yes,,1,1,0.99699956,1
+1648,Emoji “casse-toi” quand les tests fail.,ChatGPT o3,,,,bronze,no,,0,0,0.014141668,0
+116,"La vago de Sam clignote arc-en-ciel, stylé.",ChatGPT o3,,,,bronze,yes,,1,1,0.9985159,1
+259,J’ai croisé un leurdi NFT sur Discord.,ChatGPT o3,,,,bronze,yes,,1,1,0.85928595,1
+321,« Personne n’est à l’abri de la zonpri… » (prison),dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,0,0.12213115,0
+38,Un bebon mystérieux est signalé ici.Le bebon a été désamorcé.Ce bebon est resté inoffensif.,,,,,silver,yes,,1,1,0.8782814,1
+1592,Tout est à l’envers depuis la MAJ.,ChatGPT o3,,,,bronze,no,,0,0,0.08242122,0
+1607,Même le bot est fumeur de logs.,ChatGPT o3,,,,bronze,no,,0,0,0.3780689,0
+404,J’ai képi la nemo du ainp à ma reum.,http://madamefrenglish.blogspot.com/2015/04/parlez-vous-cefran-jai-rencontre-une.html,2025-07-02,,,gold,yes,,1,1,0.99976474,1
+1548,On chill en bouldé sur Minecraft.,ChatGPT o3,,,,bronze,yes,,1,0,0.027758839,0
+1561,"Mon portefeuille crie famine, merci les skins.",ChatGPT o3,,,,bronze,no,,0,0,0.006197335,0
+718,Ils ont tourné le clip dans un ghetto futuriste.,ChatGPT o3,,,,bronze,no,,0,0,0.7554588,1
+1631,Il va te quécla ton ego avec ce patch.,ChatGPT o3,,,,bronze,yes,,1,1,0.99926347,1
+281,"Sans quesca, tu perds le spatial audio.",ChatGPT o3,,,,bronze,yes,,1,0,0.041013062,0
+1514,Un loubard a tagué le mur du campus.,ChatGPT o3,,,,bronze,no,,0,0,0.281222,0
+196,Ma jambe s’est endormie pendant le stream.,ChatGPT o3,,,,bronze,no,,0,0,0.11690962,0
+1598,Spam lusse pour l’algorithme.,ChatGPT o3,,,,bronze,yes,,1,1,0.9972921,1
+0,Selena Gomez de nouveau très malade ? La vérité sur son état de santé dévoilé,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0060868934,0
+0,Les cheminots prennent le train du pass en marche,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.024572836,0
+393,Un policier virtuel surveille le serveur RP.,ChatGPT o3,,,,bronze,no,,0,0,0.031195378,0
+177,"Il va chez le coiffeur, y’en a marre de ses veuch.",,2025-07-02,,,silver,yes,,1,0,0.058726627,0
+0,"Covid-19 : le couvre-feu à 18 heures, un outil aux effets limités",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0039408314,0
+396,Mon tiek lag niveau 5G.,ChatGPT o3,,,,bronze,yes,,1,1,0.99913126,1
+168,Arrête de dessiner des beuteus sur le tableau.,ChatGPT o3,,,,bronze,yes,,1,0,0.90909433,1
+1002,"Trop de néons, ça me ché-fla la rétine.",ChatGPT o3,,,,bronze,yes,,1,1,0.48886988,0
+1663,La route pleine de tarmos passe sous ma fenêtre.,ChatGPT o3,,,,bronze,yes,,1,1,0.9959418,1
+791,On transforme la maison en studio de stream.,ChatGPT o3,,,,bronze,no,,0,0,0.012071948,0
+619,J’ai quarante onglets ouverts.,ChatGPT o3,,,,bronze,no,,0,0,0.045164198,0
+599,Il va taper dans ses économies.,ChatGPT o3,,,,bronze,no,,0,0,0.024171188,0
+604,Sa sape est trop drip aujourd’hui.,ChatGPT o3,,,,bronze,no,,0,0,0.094622135,0
+1507,J’ai loupé le RER pour Montreuil.,ChatGPT o3,,,,bronze,no,,0,0,0.015164142,0
+993,On vise anss abonnés ce week-end.,ChatGPT o3,,,,bronze,yes,,1,1,0.9860421,1
+287,Le bug est parti de Paris 8.,ChatGPT o3,,,,bronze,no,,0,0,0.05471011,0
+1584,Il pige rien au crack in-app.,ChatGPT o3,,,,bronze,no,,0,0,0.67337584,1
+0,"F1: Verstappen s'impose à Monaco, théâtre d'une désillusion pour Leclerc",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.018171027,0
+1595,Ce lobout de refactor est huge.,ChatGPT o3,,,,bronze,yes,,1,1,0.999204,1
+0,Crise en Ukraine : les sanctions annoncées par l'Europe sont-elles trop légères ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0065425495,0
+1627,Stop de prendre la tetée à la team QA.,ChatGPT o3,,,,bronze,yes,,1,0,0.00996102,0
+561,"Dans le chat, quelqu’un a spam “lopsa” et s’est fait ban direct.",ChatGPT o3,,,,bronze,yes,,1,0,0.015978005,0
+1530,Tes sneakers cheube ont survécu à un festoche ? GG.,ChatGPT o3,,,,bronze,yes,,1,1,0.97124016,1
+1637,Il dessine une cigarette ASCII sur le README.,ChatGPT o3,,,,bronze,no,,0,0,0.06796801,0
+393,Le teshmi m’a arrêté.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.9967372,1
+602,Il vend de la dope au coin de la rue.,ChatGPT o3,,,,bronze,no,,0,0,0.022822592,0
+1642,Le café pourri me met KO.,ChatGPT o3,,,,bronze,no,,0,0,0.019794716,0
+1641,"Le bot appelle “hé rima” tout le monde, weird.",ChatGPT o3,,,,bronze,yes,,1,0,0.08364504,0
+677,Il a une moustache de hipster énorme.,ChatGPT o3,,,,bronze,no,,0,0,0.045185216,0
+0,Le géant de l’immobilier chinois Evergrande en défaut de paiement,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.014356214,0
+156,L’odeur de shit traverse la fenêtre.,ChatGPT o3,,,,bronze,no,,0,0,0.044007417,0
+424,Deux chiennes de guerre dans la même brech’… comme au chémar. ,"Kaaris, Dès le départ (2013) ",,,,gold,yes,,1,0,0.39513966,0
+1672,Mon voisin fêtard techno teste son subwoofer à 7 h.,ChatGPT o3,,,,bronze,no,,0,0,0.023168769,0
+573,"Il débarque en mizecheu hawaïenne, big mood.",ChatGPT o3,,,,bronze,yes,,1,1,0.9013766,1
+645,Son move discret sur Insta m’a fait rire.,ChatGPT o3,,,,bronze,no,,0,0,0.1900301,0
+535,"Il arrête kesmo dès demain, juré.",ChatGPT o3,,,,bronze,yes,,1,1,0.98202205,1
+0,"""Une approche très prudente"", ""Le deuxième contact rapproché peut avoir un impact énorme"" : des experts réagissent aux nouvelles mesures",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0037775624,0
+1553,"Il me propose de faire le guet IRL, nope.",ChatGPT o3,,,,bronze,no,,0,0,0.028793532,0
+663,Merci pour le Uber Eats à 3 h du mat.,ChatGPT o3,,,,bronze,no,,0,0,0.045697387,0
+84,J’ai peur que le serveur crash à nouveau.,ChatGPT o3,,,,bronze,no,,0,0,0.013852694,0
+696,"Le PC vient de planter pendant le rendu, rage.",ChatGPT o3,,,,bronze,no,,0,0,0.0073664775,0
+233,Un budget maigre suffit pour ce hack.,ChatGPT o3,,,,bronze,no,,0,0,0.18820068,0
+207,Le cevi se lit dans ses yeux.,ChatGPT o3,,,,bronze,yes,,1,1,0.99876606,1
+0,"La france, un pays de bisounours",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.033234112,0
+0,Que dit votre portrait chinois de vous ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.008243899,0
+1743,Son teushi sent fort le pin.,,,,,silver,yes,,1,1,0.99981374,1
+1585,"Je bois un café sec, mode hardcore.",ChatGPT o3,,,,bronze,no,,0,0,0.051371552,0
+203,Ils ont réussi à carna tout le serveur RP.,ChatGPT o3,,,,bronze,yes,,1,1,0.7841147,1
+582,Le docu parle d’un groupe skinhead punk.,ChatGPT o3,,,,bronze,no,,0,0,0.61002505,1
+1631,"Le linter punit, il vient frapper fort.",ChatGPT o3,,,,bronze,no,,0,0,0.7698585,1
+1642,"Un gif rip qui crash Discord, lol.",ChatGPT o3,,,,bronze,yes,,1,1,0.9917105,1
+158,J’ai fourré le cash dans mon keuss.,,2025-07-02,,,silver,yes,,1,0,0.21076079,0
+557,Il a posté un selfie full branlette d’ego.,ChatGPT o3,,,,bronze,no,,0,0,0.9569871,1
+720,J’ai déménagé trois toncar de livres.,ChatGPT o3,,,,bronze,yes,,1,1,0.6744056,1
+557,On a laissé tomber ces réunions lètbran inutiles.,ChatGPT o3,,,,bronze,yes,,1,1,0.9076317,1
+0,"Dans ""Les Chemins du possible"", Marie Robert dépoussière la philosophie",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.006616343,0
+1555,Le bug UI fait vraiment tiep.,ChatGPT o3,,,,bronze,yes,,1,0,0.1863272,0
+624,Mon refré est grand. Il est le plus grand de la famille.  ,,,,,silver,yes,,1,1,0.9984086,1
+1593,J’ai vraiment les lebous ce lundi.,ChatGPT o3,,,,bronze,yes,,1,0,0.2284995,0
+260,Ce thème manque de leust.,ChatGPT o3,,,,bronze,yes,,1,0,0.0481403,0
+430,Le filtre fait un sale cajtru sur ta tête.,ChatGPT o3,,,,bronze,yes,,1,1,0.96541524,1
+210,Ta tronche est partout sur les memes.,ChatGPT o3,,,,bronze,no,,0,0,0.026087778,0
+764,Elle porte une blouse tie-dye trop stylée.,ChatGPT o3,,,,bronze,no,,0,0,0.66682005,1
+575,"On commande du naouach ce soir, t’es chaud ?",ChatGPT o3,,,,bronze,yes,,1,1,0.98542714,1
+1528,"Il spam “chelaouam” en vocal, toxic.",ChatGPT o3,,,,bronze,yes,,1,0,0.21599,0
+286,Il se prend pour une star TikTok.,ChatGPT o3,,,,bronze,no,,0,0,0.14321525,0
+1719,Ambiance debléman vibes dans Animal Crossing.,ChatGPT o3,,,,bronze,yes,,1,1,0.9635792,1
+1761,"Zy va, on se capte plus tard.",,,,,silver,yes,,1,0,0.07850322,0
+31,Je suis feuj.,https://context.reverso.net/translation/french-english/la%2Bfeuj?,,,,gold,yes,,1,0,0.4341414,0
+516,C’est qui le boss de ce channel ?,ChatGPT o3,,,,bronze,no,,0,0,0.52576226,1
+770,Cette gonzesse code plus vite que toi.,ChatGPT o3,,,,bronze,no,,0,0,0.01364178,0
+1626,J’ai cliqué “buy” sans regarder mon portné.,ChatGPT o3,,,,bronze,yes,,1,0,0.032105587,0
+1605,Je dois menra snacks et hype à la LAN.,ChatGPT o3,,,,bronze,yes,,1,1,0.9879551,1
+145,Le rap francophone revient en force.,ChatGPT o3,,,,bronze,no,,0,0,0.021502793,0
+1659,"Je code en stevé polaire, chill.",ChatGPT o3,,,,bronze,yes,,1,1,0.96749866,1
+0,"Présidentielle américaine 2020 : Biden dénonce ""l'incroyable irresponsabilité"" de Trump",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0015046478,0
+650,J’ai sètdi notifications en 5 minutes.,ChatGPT o3,,,,bronze,yes,,1,1,0.9989016,1
+643,Le boss spawn toutes les soixante secondes.,ChatGPT o3,,,,bronze,no,,0,0,0.086033575,0
+0,Mesures anti-Covid : Echauffourées à Berlin dimanche,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0117592085,0
+384,Ton tweet est trop sticmi pour le mainstream.,ChatGPT o3,,,,bronze,yes,,1,1,0.8608645,1
+524,"Elle promet de vanger son chat volé, sérieux.",ChatGPT o3,,,,bronze,no,,0,0,0.042863734,0
+698,"La blague était raté, personne n’a ri.",ChatGPT o3,,,,bronze,no,,0,0,0.006906444,0
+235,Elle sait guédra en trois messages max.,ChatGPT o3,,,,bronze,yes,,1,1,0.9981787,1
+1512,"On fout rien ce dimanche, chill total.",ChatGPT o3,,,,bronze,no,,0,0,0.14225434,0
+796,c'est du Largonji à loilpé,,,,,silver,yes,,1,0,0.9980566,1
+1585,"Ton humour est trop keuse, bro.",ChatGPT o3,,,,bronze,yes,,1,0,0.01420442,0
+1601,On binge un vieux film au manès drive-in.,ChatGPT o3,,,,bronze,yes,,1,1,0.20237502,0
+0,"Nouveau record pour Arnaud Dely : ""Encore une sacrée expérience, de bon augure pour la suite""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.016226605,0
+143,On coupe la musique quand le prof pop.,ChatGPT o3,,,,bronze,no,,0,0,0.017361814,0
+426,Le patch a créé plus de grabuge que prévu.,ChatGPT o3,,,,bronze,no,,0,0,0.02096292,0
+1008,"C’est la deum complète, plus rien à manger. ",,2025-07-02,,,silver,yes,,1,1,0.41527095,0
+583,On dépense trop de neutu en apps useless.,ChatGPT o3,,,,bronze,yes,,1,1,0.72209424,1
+240,"J’ai grillé une merguez à 2 h du mat, vibe camping.",ChatGPT o3,,,,bronze,no,,0,0,0.107299194,0
+291,Un starco en lin pour coder ? pourquoi pas.,ChatGPT o3,,,,bronze,yes,,1,1,0.9985807,1
+159,J’ai plus de némo pour le café du coin.,ChatGPT o3,,,,bronze,yes,,1,1,0.46551624,0
+652,Y a de la seuca après ce crash test.,ChatGPT o3,,,,bronze,yes,,1,1,0.99892646,1
+1595,Je cherche un nouveau lobout dev memes.,ChatGPT o3,,,,bronze,yes,,1,1,0.6947585,1
+149,"Un smoothie à la beuh, pourquoi pas.",ChatGPT o3,,,,bronze,yes,,1,0,0.22456752,0
+610,Ce bug était tellement pidestu.,ChatGPT o3,,,,bronze,yes,,1,0,0.21273515,0
+638,"Il y met des chiens de poterie, des roblés, des loups. ",,,,,silver,yes,,1,0,0.031302042,0
+1593,Emoji “les boules” x100 dans le chat.,ChatGPT o3,,,,bronze,no,,0,0,0.015572803,0
+575,Ce film naouach est une pépite.,ChatGPT o3,,,,bronze,yes,,1,1,0.99876714,1
+438,Je drop une dédicace à tous les lurkers.,ChatGPT o3,,,,bronze,no,,0,0,0.041443918,0
+229,Il passe pour un bouffon avec ce filtre.,ChatGPT o3,,,,bronze,no,,0,0,0.068246685,0
+1539,Le mini-jeu c’est un braquage de frigo.,ChatGPT o3,,,,bronze,no,,0,0,0.32027608,0
+103,Son sourire peut flasher toute la room.,ChatGPT o3,,,,bronze,no,,0,0,0.02124229,0
+215,Le bled s’endort à 22 h.,ChatGPT o3,,,,bronze,no,,0,0,0.57968885,1
+1530,La page Git reste cheube quand ça plante.,ChatGPT o3,,,,bronze,yes,,1,1,0.056769546,0
+645,"Reste scrèd, on saute le cours.",ChatGPT o3,,,,bronze,yes,,1,0,0.5437666,1
+10,Ma reum est professeur.La reum de Julien est gentille.Sa reum lui a écrit une lettre.,,,,,silver,yes,,1,1,0.9994504,1
+1543,"Stats domb, mais le client applaudit.",ChatGPT o3,,,,bronze,yes,,1,0,0.0047654174,0
+811,Ils se vessau de la fête.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.04047412,0
+1738,Il s’est vésau par la fenêtre.,,,,,silver,yes,,1,0,0.12221225,0
+1519,"Il sort son pistolet Nerf en plein cours, tranquille.",ChatGPT o3,,,,bronze,no,,0,0,0.047473352,0
+542,La playlist est full punk des 90’s.,ChatGPT o3,,,,bronze,no,,0,0,0.019874852,0
+753,"J’ai pris une balle de ping dans la couille, douleur.",ChatGPT o3,,,,bronze,no,,0,0,0.015899213,0
+0,Beloeil : des Bulles de mémoire pour découvrir les villages,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.035963792,0
+130,Ce skeud est une tuerie du début à la fin.,,2025-07-02,,,silver,yes,,1,1,0.9994479,1
+627,Il est tombé face contre terre après avoir trébuché sur la repié.  ,,,,,silver,yes,,1,0,0.34490463,0
+1564,Docu sur la garde à vue des hackers famous.,ChatGPT o3,,,,bronze,no,,0,0,0.13437815,0
+567,"Dimanche il pleuvait, j’ai dormi comme un ours.",ChatGPT o3,,,,bronze,no,,0,0,0.14731224,0
+559,Son plan malin nous a sauvés.,ChatGPT o3,,,,bronze,no,,0,0,0.018943328,0
+189,T’es un vrai barjo de cliquer ce lien shady.,ChatGPT o3,,,,bronze,yes,,1,1,0.9485326,1
+0,Marseille : un mort et un blessé par balles en marge d'un tournoi de football,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.010677697,0
+770,Cette zèsgon code plus vite que toi.,ChatGPT o3,,,,bronze,yes,,1,1,0.99961853,1
+1663,La route pleine de motards passe sous ma fenêtre.,ChatGPT o3,,,,bronze,no,,0,0,0.86849165,1
+592,"Regarde ouam ça, trop stylé.",ChatGPT o3,,,,bronze,yes,,1,1,0.9985619,1
+1552,Twitter pousse à se prendre pour quelqu’un d’important.,ChatGPT o3,,,,bronze,no,,0,0,0.006817617,0
+263,Il vend sa meuca dev-ops au marché gris.,ChatGPT o3,,,,bronze,yes,,1,1,0.99843556,1
+0,Loi Séparatisme au Sénat : un vote qui fait mal,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.024065455,0
+412,Il vise la belpou comme Kobe.,ChatGPT o3,,,,bronze,yes,,1,1,0.9959105,1
+1570,Le bot drop un emoji gommechoui à chaque fail.,ChatGPT o3,,,,bronze,yes,,1,1,0.97580075,1
+204,Une garce m’a ghosté après le date.,ChatGPT o3,,,,bronze,no,,0,0,0.058762945,0
+390,Je vais jeter ce vieux code spaghetti.,ChatGPT o3,,,,bronze,no,,0,0,0.03832592,0
+441,Ma cepla favorite dans le chat est top-tier.,ChatGPT o3,,,,bronze,yes,,1,1,0.99969816,1
+527,Le film où ils kébra une banque en Crocs.,ChatGPT o3,,,,bronze,yes,,1,1,0.99603796,1
+215,Le deblé s’endort à 22 h.,ChatGPT o3,,,,bronze,yes,,1,1,0.99484044,1
+1749,Ils ont téflu à leurs parents.,,,,,silver,yes,,1,1,0.08555355,0
+229,Tout le monde l’a pris pour un fonbou.,ChatGPT o3,,,,bronze,yes,,1,0,0.40943375,0
+0,César 2021 : l'humoriste Fary oublie son texte en direct,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.08921087,0
+1517,Mon bilmo a plus de batterie.,ChatGPT o3,,,,bronze,yes,,1,1,0.99901724,1
+1624,Emoji pionchamp pour ton patch perfect.,ChatGPT o3,,,,bronze,yes,,1,1,0.9810563,1
+533,"Arrête de piquer mes memes, sérieux.",ChatGPT o3,,,,bronze,no,,0,0,0.014440101,0
+734,"Il bouffe tes frites, quel varcreu.",ChatGPT o3,,,,bronze,yes,,1,1,0.26198184,0
+265,J’apprends le nesbi sur TikTok U.,ChatGPT o3,,,,bronze,yes,,1,1,0.98029023,1
+610,Le meme est drôle parce qu’il est pidestu.,ChatGPT o3,,,,bronze,yes,,1,0,0.03456068,0
+1519,"Il sort son brelica Nerf en plein cours, tranquille.",ChatGPT o3,,,,bronze,yes,,1,1,0.99609,1
+416,"C’te naze, i m’a niqué la beuje. ",Wiktionnaire (exemple d’usage) ,,,,gold,yes,,1,0,0.6905215,1
+709,Il reste sept vies au boss.,ChatGPT o3,,,,bronze,no,,0,0,0.042124096,0
+0,""" Pieces of a woman "" brise le tabou du deuil périnatal",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.08794094,0
+561,"Elle balance un “salope” en rigolant, mais c’est pas cool.",ChatGPT o3,,,,bronze,no,,0,0,0.006262862,0
+0,"Prix du gaz, frais bancaires... Ce qui change au 1er novembre 2020",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.008458799,0
+138,"Il a la chebou pleine, parle pas la bouche pleine !",,2025-07-02,,,silver,yes,,1,1,0.9904698,1
+232,C’est un gossebo avec sa veste LED.,ChatGPT o3,,,,bronze,yes,,1,1,0.8374273,1
+709,"Teussé heures de cours, courage.",ChatGPT o3,,,,bronze,yes,,1,1,0.9996427,1
+765,Arrête de causer drama dans le chat.,ChatGPT o3,,,,bronze,no,,0,0,0.010769002,0
+1557,Le micro capte même quand je fermer sa cheub.,ChatGPT o3,,,,bronze,yes,,1,0,0.025322294,0
+576,Ton boss est un narco toxique.,ChatGPT o3,,,,bronze,yes,,1,1,0.049834624,0
+0,Bercy facilite les prêts participatifs pour les très petites entreprises,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.019264845,0
+633,Vous n’avez pas ce qu’il faut pour être mon reupé. ,,,,,silver,yes,,1,0,0.076572746,0
+0,"Clémentine Autain : "" La laïcité est un outil contre la guerre civile """,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.004466047,0
+0,Hugo Clément : sa belle déclaration d'amour à Alexandra Rosenfeld,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0037412858,0
+27,Mon pote reubeu a lancé un label de rap.,ChatGPT o3,,,,bronze,yes,,1,1,0.99922633,1
+279,"Mets une capote, même en VR.",ChatGPT o3,,,,bronze,no,,0,0,0.02691294,0
+239,Elle a un gueuta avec ton pseudo sur son sac.,ChatGPT o3,,,,bronze,yes,,1,1,0.9982299,1
+39,Ce babtou capte rien à la bouffe pimentée.,ChatGPT o3,,,,bronze,yes,,1,1,0.99927884,1
+1667,Le mod va expulser les spammeurs.,ChatGPT o3,,,,bronze,no,,0,0,0.030318052,0
+0,Les sites pour passer de bonnes vacances avec son animal,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.014101874,0
+699,La santé mentale c’est crucial.,ChatGPT o3,,,,bronze,no,,0,0,0.034225054,0
+0,Le plus grand Dhow du monde a pris la mer au départ de Dubaï,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.026757991,0
+162,"C’est de la merde, change de plan.",ChatGPT o3,,,,bronze,no,,0,0,0.0053981342,0
+1575,Faut gébou ce sprint backlog.,ChatGPT o3,,,,bronze,yes,,1,1,0.9969522,1
+0,Covid-19 : pourquoi les chiffres de réanimation sont à prendre avec précaution,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.004942162,0
+385,Y’a eu une stomba hier.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.9992993,1
+416,J’ai fais séance beuje aujourd’hui à la salle de sport. ,Wiktionnaire (exemple d’usage) ,,,,gold,yes,,1,1,0.98372597,1
+522,Ses vibes sont large open-minded.,ChatGPT o3,,,,bronze,no,,0,0,0.7678759,1
+643,"Il fait santsoi kills dans la partie, insane.",ChatGPT o3,,,,bronze,yes,,1,1,0.9985618,1
+32,J’adore l’humour noir de cette série.,ChatGPT o3,,,,bronze,no,,0,0,0.012493129,0
+54,"Ce jeu est fou, j’y ai passé toute la nuit.",ChatGPT o3,,,,bronze,no,,0,0,0.031991836,0
+611,Mon copain me hype pour le concert.,ChatGPT o3,,,,bronze,no,,0,0,0.013790933,0
+0,Des utilisateurs de Fractal perdent 150 000 dollars à la suite d'un hack du Discord de la plateforme de NFT,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.011049988,0
+524,On doit jévan cette défaite humiliante.,ChatGPT o3,,,,bronze,yes,,1,1,0.9971933,1
+0,Macron propose de nommer sa ministre Jacqueline Gourault au Conseil constitutionnel,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0063870107,0
+143,La zicmu lo-fi me sauve la concentration.,ChatGPT o3,,,,bronze,yes,,1,1,0.9993181,1
+230,– Wesh… arrête de parler comme un fonbou!,https://www.dictionnairedelazone.fr/dictionary/definition/fonbou,2025-07-02,,,gold,yes,,1,0,0.99853265,1
+141,Mon nez saigne quand je rush le code.,ChatGPT o3,,,,bronze,no,,0,0,0.05600702,0
+0,"Turquie : les propos d'Erdogan contre Macron sont ""diffamatoires"", juge Merkel",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0071791885,0
+639,"Au Rocma, qui fait partie des pays les plus touchés par le réchauffement climatique…  ",,,,,silver,yes,,1,0,0.00751663,0
+0,"Spineway : workshop en Thaïlande, contrat aux Etats-Unis",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.009962294,0
+0,Tu préfères ta Switch ou aller chercher des champignons ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.032926276,0
+743,"Now la bêta est yampé, rip wallet.",ChatGPT o3,,,,bronze,yes,,1,1,0.9989317,1
+1526,"Son seul ceuvi, c’est les snacks à 3 h.",ChatGPT o3,,,,bronze,yes,,1,1,0.9980123,1
+578,Je veux connaître tes secrets de productivité.,ChatGPT o3,,,,bronze,no,,0,0,0.024586933,0
+190,"Il laisse pousser son bébar, ça lui va bien.",,2025-07-02,,,silver,yes,,1,0,0.17938937,0
+1766,Il y avait gavé de monde.,,,,,silver,yes,,1,1,0.9927867,1
+180,Le client demande encore un dark mode.,ChatGPT o3,,,,bronze,no,,0,0,0.012068239,0
+0,GP du Brésil : Lewis Hamilton Mercedes domine les premiers essais libres,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.012203402,0
+39,Ce toubab capte rien à la bouffe pimentée.,ChatGPT o3,,,,bronze,no,,0,1,0.99154353,1
+700,"Il a dit “mon mot de passe c’est bite123”, sérieux ?",ChatGPT o3,,,,bronze,no,,0,0,0.009988435,0
+171,"Il aime trop la teuch, il parle que de ça.",,2025-07-02,,,silver,yes,,1,0,0.12263611,0
+790,Je hacke la tondeuse pour couper le gazon en logo.,ChatGPT o3,,,,bronze,no,,0,0,0.3108461,0
+16,Ouat,https://www.reddit.com/r/French/comments/11zfp1r/i_love_very_very_much_using_verlan_when_i_speak/?tl=fr&,,,,gold,yes,,1,1,0.66797644,1
+687,Sa playlist old-school “bad tcheb mode” tourne en boucle.,ChatGPT o3,,,,bronze,yes,,1,1,0.21015471,0
+286,La reusta du stream arrive.,ChatGPT o3,,,,bronze,yes,,1,1,0.999574,1
+1628,Emoji lunettes pour frimer le refactor.,ChatGPT o3,,,,bronze,no,,0,0,0.01790109,0
+3,"C’est l’histoire d’un keum qui a deux vies.Les keums, ils savent déjà avec qui ils vont partir.C’est un super acteur, un super keum et il a réussi.",,,,,silver,yes,,1,1,0.9864899,1
+0,Pourquoi la France a-t-elle rallumé ses centrales à charbon cette semaine ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0055058235,0
+688,Tu devrais tèc ses conseils pour une fois.,ChatGPT o3,,,,bronze,yes,,1,1,0.98067504,1
+1607,Un fumeur rage quand la vape est vide.,ChatGPT o3,,,,bronze,no,,0,0,0.02177927,0
+0,Laeticia Hallyday et Jalil Lespert déjà séparés ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.08771024,0
+518,On toaste au vin virtuel.,ChatGPT o3,,,,bronze,no,,0,0,0.8190898,1
+616,On se fait un resto rabzou ce soir.,ChatGPT o3,,,,bronze,yes,,1,1,0.98789024,1
+492,On fait le feuta et on chill après.,ChatGPT o3,,,,bronze,yes,,1,1,0.9979528,1
+521,"J’ai la dalle, on va jéman des tacos XXL.",ChatGPT o3,,,,bronze,yes,,1,1,0.79950583,1
+532,"Ils posent un nouveau képar dans le salon, vibe cosy.",ChatGPT o3,,,,bronze,yes,,1,1,0.9709297,1
+1602,J’ai squatté le cinéma pour la nuit des memes.,ChatGPT o3,,,,bronze,no,,0,0,0.62037265,1
+1664,Le graff géant représente une tebie pixel art.,ChatGPT o3,,,,bronze,yes,,1,1,0.21716127,0
+170,"Cette teucha stream sur mon clavier, help.",ChatGPT o3,,,,bronze,yes,,1,1,0.99922216,1
+0,"L'Arctic Coast Way : entre mythes, faune sauvage et lacs arctiques",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.03950932,0
+1556,Patch note : “ferme ta gueule et code”.,ChatGPT o3,,,,bronze,no,,0,0,0.96006685,1
+1599,Cache là-luice dans le dossier secrets.,ChatGPT o3,,,,bronze,yes,,1,1,0.16143307,0
+0,"L'épidémie ne sera pas une parenthèse, alors expérimentons une autre manière d’enseigner",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.013787985,0
+431,dropper dans le calbo : un service en particulier fournit un gros travail. ,"Jargon militaire (Air, 2017) ",,,,gold,yes,,1,1,0.9899143,1
+547,On goûte un resto africain ce soir.,ChatGPT o3,,,,bronze,no,,0,0,0.08966337,0
+629,Elle porte une rètba licorne trop cute.,ChatGPT o3,,,,bronze,yes,,1,1,0.99002075,1
+544,Son casque rose fluo claque grave.,ChatGPT o3,,,,bronze,no,,0,0,0.0059057334,0
+594,J’ai mangé ouatre pizzas.,ChatGPT o3,,,,bronze,yes,,1,1,0.97081137,1
+1741,"Passe le teush, j’ai le briquet.",,,,,silver,yes,,1,0,0.15963745,0
+306,« On a téfri des spliffs » (effrité du cannabis pour joints),dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,1,0.9986511,1
+0,GP de Bahreïn: chaud pour les accessits sur la fin de saison,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.010618633,0
+712,On bosse sur un gros tiéchan de refonte.,ChatGPT o3,,,,bronze,yes,,1,1,0.9819405,1
+152,La retba coûte cher au marché noir.,ChatGPT o3,,,,bronze,yes,,1,1,0.99742377,1
+362,J’vais en Meda ce week-end.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.9919985,1
+623,Je rentre recdi après le taf.,ChatGPT o3,,,,bronze,yes,,1,1,0.9957135,1
+1523,Cette police variable fait ultra cecla sur le CV.,ChatGPT o3,,,,bronze,yes,,1,1,0.42302036,0
+0,"Marchandises, mobilier, caisses, frigos: les supermarchés lourdement impactés par les intempéries",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.008339378,0
+525,Regarde ce pigeon qui marche comme un boss.,ChatGPT o3,,,,bronze,no,,0,0,0.077895276,0
+0,"Raphaël Enthoven : ""Mélenchon est passé de Clemenceau à Francis Lalanne. C'est sublime !""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.010585356,0
+436,Je vais au carrouf signifie : “je vais acheter des chaussettes”. ,La Street Cred (déf. contribut.) ,,,,gold,yes,,1,1,0.57169616,1
+1611,Je me sens molgon sans café.,ChatGPT o3,,,,bronze,yes,,1,1,0.97499555,1
+0,PRONOS PARIS RMC Le pari sûr du 24 mai WTA Strasbourg,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.039044768,0
+1748,Je prends le treum ligne 1.,,,,,silver,yes,,1,1,0.93221194,1
+1630,"Le boss peut bloquer le merge, beware.",ChatGPT o3,,,,bronze,no,,0,0,0.010006767,0
+172,Cette boutique attire toute la caillera hype.,ChatGPT o3,,,,bronze,yes,,1,1,0.05002867,0
+188,"Change de sape, tu brilles au radar.",ChatGPT o3,,,,bronze,no,,0,0,0.0040322803,0
+0,À quelle température le Covid-19 se propage-t-il le plus rapidement ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.018704033,0
+133,Il a roulé un oinj parfait en 30 s.,ChatGPT o3,,,,bronze,yes,,1,1,0.9910953,1
+228,Il a déchiré l’affiche par accident.,ChatGPT o3,,,,bronze,no,,0,0,0.6772853,1
+169,Elle a percé son sein en mode DIY.,ChatGPT o3,,,,bronze,no,,0,0,0.93925864,1
+0,L’effrayant taux de chômage de la jeunesse sud-africaine,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.055359907,0
+385,Une bonne baston de GIF pour régler ça.,ChatGPT o3,,,,bronze,no,,0,0,0.022667846,0
+0,Accueil des Afghans : l’Ofii a-t-il le droit de bloquer ses contradicteurs sur Twitter ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.029967345,0
+731,"J’ai trop de travail, j’en peux plus.",ChatGPT o3,,,,bronze,no,,0,0,0.05072093,0
+425,Un breuhar en low-poly trône sur la map.,ChatGPT o3,,,,bronze,yes,,1,1,0.9997454,1
+610,J’ai fait un move pidestu sur LoL.,ChatGPT o3,,,,bronze,yes,,1,1,0.90789366,1
+481,J’ai failli balancer enculé quand le build a freeze à 99 %.,ChatGPT o3,,,,bronze,no,,0,0,0.8730479,1
+349,Il a sniffé de la guedro.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,0,0.93204206,1
+733,Le bot Discord est carrément varba today.,ChatGPT o3,,,,bronze,yes,,1,1,0.13625291,0
+617,"Ce virage était serré, j’ai flippé.",ChatGPT o3,,,,bronze,no,,0,0,0.02881649,0
+108,Je vais kékra et acheter ce skin.,ChatGPT o3,,,,bronze,yes,,1,1,0.9880035,1
+508,"Lâche l’affaire, t’es complètement guélar dans cette histoire, sans déconner.",Rhinospike – Script La Haine,,,,gold,yes,,1,1,0.062795594,0
+1587,"Relax, laisse béton ce bug pour ce soir.",ChatGPT o3,,,,bronze,yes,,1,1,0.9861703,1
+104,Je sais pas pourquoi ça freeze.,ChatGPT o3,,,,bronze,no,,0,0,0.016794039,0
+1585,"Je bois un café keuse, mode hardcore.",ChatGPT o3,,,,bronze,yes,,1,0,0.25850725,0
+586,Son swing nouchma est ouf.,ChatGPT o3,,,,bronze,yes,,1,1,0.99617094,1
+229,"– Wesh, gros, arrête de parler comme un fonbou ! On se voit à midi. ",https://pure.rug.nl/ws/portalfiles/portal/232288719/ContentServer_1_.pdf,2025-07-02,,,gold,yes,,1,1,0.9981572,1
+1508,"Spam “aller se faire baiser” en vocal, il se fait ban.",ChatGPT o3,,,,bronze,no,,0,0,0.009025186,0
+563,J’écoute un beat zoulou trop entraînant.,ChatGPT o3,,,,bronze,no,,0,0,0.26402792,0
+134,Son ienche a plus de followers que moi.,ChatGPT o3,,,,bronze,yes,,1,1,0.96170616,1
+442,Le charmou CPU crie à l’aide.,ChatGPT o3,,,,bronze,yes,,1,1,0.99962044,1
+1008,"Oh merde, j’ai supprimé le repo.",ChatGPT o3,,,,bronze,no,,0,0,0.009146659,0
+279,"Mets une poteca, même en VR.",ChatGPT o3,,,,bronze,yes,,1,0,0.04630907,0
+0,Des chercheurs enregistrent l'activité cérébrale en Bluetooth : une première !,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0134322345,0
+65,Mon petit frère spam mes streams.,ChatGPT o3,,,,bronze,no,,0,0,0.1029071,0
+0,"Après le meurtre du père Olivier Maire, la justice face à l'expertise psychiatrique",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.007877918,0
+103,"G chéfla vegra, la tehon sur oim. ",https://lecanarddeboulonne.wordpress.com/petites-annonces/,2025-07-02,,,gold,yes,,1,1,0.9998492,1
+0,Handigaming : le Marseillais Philousports partage son expérience,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.29511648,0
+0,Tesla va remplacer les caméras de ses anciens modèles pour les rendre compatibles avec le Full Self Driving,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.021360302,0
+208,Arrête de chécra sur mon code.,ChatGPT o3,,,,bronze,yes,,1,1,0.99927634,1
+1592,"Il code en mode à l’envers, mais ça marche.",ChatGPT o3,,,,bronze,no,,0,0,0.025103975,0
+483,Je prends eude cafés et j’y retourne.,ChatGPT o3,,,,bronze,yes,,1,1,0.96131504,1
+221,Gagedé toi-même espèce de connard… ,https://lintervalle.blog/2020/07/11/la-justice-nique-sa-mere-par-mathieu-kassovitz-realisateur-scenariste-gilles-favier-photographe/,2025-07-02,,,gold,yes,,1,1,0.9993844,1
+642,"Leur collab c’est de l’roro pur, j’te jure.",ChatGPT o3,,,,bronze,yes,,1,0,0.054250404,0
+200,Mon pote kabyle cuisine de la folie.,ChatGPT o3,,,,bronze,no,,0,0,0.3009108,0
+1513,Une idée folle mais j’adore.,ChatGPT o3,,,,bronze,no,,0,0,0.85917133,1
+236,Ils ont trouvé un raton guédro au sucre.,ChatGPT o3,,,,bronze,yes,,1,1,0.9106125,1
+1619,"Je mixe le verlan en chinois, mind-bent.",ChatGPT o3,,,,bronze,no,,0,1,0.99705493,1
+680,Le bruit du stikmou tourne en boucle dans mes oreilles.,ChatGPT o3,,,,bronze,yes,,1,1,0.9920406,1
+763,"J’ai pas le temps de baiser, je grind mon code.",ChatGPT o3,,,,bronze,no,,0,0,0.018769925,0
+651,Elle mâche une sucette goût cola en cours.,ChatGPT o3,,,,bronze,no,,0,0,0.9316078,1
+0,Violences à Koungou à la suite d'interpellations au quartier de la Jamaïque,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.06711582,0
+577,Arrête de jouer la nasco sur Insta.,ChatGPT o3,,,,bronze,yes,,1,1,0.84527373,1
+0,Lutte anti-djihadiste : partition dissonante entre Paris et Bamako,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.008742743,0
+0,L’Union européenne divisée au sujet des restrictions aux frontières,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.007573742,0
+1571,Le dev africain a squash tous nos bugs.,ChatGPT o3,,,,bronze,no,,0,0,0.11368469,0
+598,Je me pessa pas comme eux.,ChatGPT o3,,,,bronze,yes,,1,1,0.9941356,1
+141,J’ai le nez collé à l’écran depuis midi.,ChatGPT o3,,,,bronze,no,,0,0,0.029751256,0
+1573,Le bot devient fatigué et slow-reply.,ChatGPT o3,,,,bronze,no,,0,0,0.048991103,0
+59,"Le design du site est cheum, change les couleurs.",ChatGPT o3,,,,bronze,yes,,1,0,0.0093811015,0
+623,Il a compris recdi le concept.,ChatGPT o3,,,,bronze,yes,,1,1,0.9849028,1
+59,La maison là est trop cheum!,https://www.superprof.com/blog/learn-french-slang-phrases/,,,,gold,yes,,1,1,0.85843635,1
+425,On a planté un arbre IRL pour fêter la release.,ChatGPT o3,,,,bronze,no,,0,0,0.3590335,0
+164,J’ai mal au ièp après le festival.,ChatGPT o3,,,,bronze,yes,,1,1,0.98675656,1
+588,Arrête d’être onc un peu.,ChatGPT o3,,,,bronze,yes,,1,1,0.9769629,1
+224,"Ce clip est feu, il tourne partout.",ChatGPT o3,,,,bronze,no,,0,0,0.013323624,0
+1625,Le prix du latte ? portenawak.,ChatGPT o3,,,,bronze,yes,,1,0,0.7275181,1
+0,"Sous pression du Congrès, Donald Trump ratifie enfin le nouveau plan de relance de l'économie américaine",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0068427995,0
+1763,Sa chambre est riquiqui.,,,,,silver,yes,,1,0,0.16182423,0
+1622,Je rêve en oinich après 10 leçons.,ChatGPT o3,,,,bronze,yes,,1,1,0.9631949,1
+714,"Tinpu, j’ai perdu ma clé !",ChatGPT o3,,,,bronze,yes,,1,0,0.3282971,0
+735,Il t’a mis une vatsa verbale.,ChatGPT o3,,,,bronze,yes,,1,1,0.8574348,1
+505,Elle est dégoûtée du nerf sur son perso.,ChatGPT o3,,,,bronze,no,,0,0,0.0063853255,0
+137,Il avait la bouche pleine de popcorn en call.,ChatGPT o3,,,,bronze,no,,0,0,0.31039974,0
+508,Faut guélar cette dépendance obsolète.,ChatGPT o3,,,,bronze,yes,,1,1,0.67233306,1
+550,Lass c’est le boss final le plus dur.,ChatGPT o3,,,,bronze,yes,,1,1,0.97955304,1
+573,"Je déteste repasser une mizecheu, trop chiant.",ChatGPT o3,,,,bronze,yes,,1,0,0.40122575,0
+193,Le chat a encore failli gerber sur le tapis.,ChatGPT o3,,,,bronze,no,,0,0,0.053023886,0
+223,Il joue de la guitare avec un style tanj incroyable.,ChatGPT o3,,,,bronze,yes,,1,1,0.3256308,0
+629,Une rètba de velours noir posée de travers lui donnait un air de page amoureux et poète.  ,,,,,silver,yes,,1,1,0.99312145,1
+729,Sa turve fait plus de bruit que mon PC en chauffe.,ChatGPT o3,,,,bronze,yes,,1,1,0.99247074,1
+0,Variant anglais du Covid-19 à Marseille : où en sont les vérifications sur les cas suspects ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.01019947,0
+221,Il a poussé le son à fond pendant le live.,ChatGPT o3,,,,bronze,no,,0,0,0.9713609,1
+0,"Pierre est parvenu à surmonter son bégaiement : ""On peut s’en sortir""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.03252686,0
+680,Je déclare la guerre à chaque stikmou dans ma chambre.,ChatGPT o3,,,,bronze,yes,,1,1,0.5703256,1
+301,"Je code seultout dans le noir, ambiance lo-fi.",ChatGPT o3,,,,bronze,yes,,1,1,0.9989869,1
+198,"On a un blèmepro à résoudre, reste concentré.",,2025-07-02,,,silver,yes,,1,1,0.9989648,1
+215,Je retourne au deblé cet été.,ChatGPT o3,,,,bronze,yes,,1,1,0.46497035,0
+234,"On parlait drague et conf call, combo weird.",ChatGPT o3,,,,bronze,no,,0,0,0.1650014,0
+84,On n’a même pas reup de push en prod direct.,ChatGPT o3,,,,bronze,yes,,1,1,0.9825633,1
+88,Je veux pécho un bout de pizza.,ChatGPT o3,,,,bronze,yes,,1,1,0.9621016,1
+792,Donne-moi une raison de pas dormir.,ChatGPT o3,,,,bronze,no,,0,0,0.011889484,0
+1736,Elle s’est réti discrètement.,,,,,silver,yes,,1,1,0.8707299,1
+207,J’ai un cevi pour le sucre rush.,ChatGPT o3,,,,bronze,yes,,1,1,0.9968394,1
+1627,Ce lag me fait prendre la tête.,ChatGPT o3,,,,bronze,no,,0,0,0.03706242,0
+1759,C’est un plan à la noc.,,,,,silver,yes,,1,0,0.055517986,0
+0,"""J'ai peur d'être comme ma mère"": sommes-nous prédestinés à ressembler à nos parents?",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.007202583,0
+0,Présidentielle : faut-il se passer des 500 signatures ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.004040938,0
+747,"Arrête de yèch sur mon code, bro.",ChatGPT o3,,,,bronze,yes,,1,1,0.9990238,1
+1648,Il m’a lâché un “casse-toi” gratuit.,ChatGPT o3,,,,bronze,no,,0,0,0.016009508,0
+423,La bouffe du hackathon : 100 % pizza.,ChatGPT o3,,,,bronze,yes,,1,1,0.013395867,0
+749,On dort bien après un marathon de memes.,ChatGPT o3,,,,bronze,no,,0,0,0.043431174,0
+500,Elle parle de ses gleuré sans tabou en live.,ChatGPT o3,,,,bronze,yes,,1,1,0.968369,1
+1586,Le NPC agit comme sous ecstasy.,ChatGPT o3,,,,bronze,no,,0,0,0.010879142,0
+0,100 avant l'Euro : les bulletins des élèves chez M. Martinez,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0107162045,0
+740,"Il joue à GTA en mode vilsi, trop sage.",ChatGPT o3,,,,bronze,yes,,1,0,0.031735413,0
+223,Son look gitan est trop stylé pour le festival.,ChatGPT o3,,,,bronze,no,,0,0,0.025642307,0
+806,On doit rentrer le vélo avant la pluie.,ChatGPT o3,,,,bronze,no,,0,0,0.35080883,0
+263,Il vend sa came dev-ops au marché gris.,ChatGPT o3,,,,bronze,no,,0,0,0.026850585,0
+1603,Emoji cœur pour ma mefa qui teste la beta.,ChatGPT o3,,,,bronze,yes,,1,1,0.98089063,1
+701,Il reste une croûte de pizza sur la table.,ChatGPT o3,,,,bronze,no,,0,0,0.02294632,0
+158,Ce sac gaming a des LEDs RGB.,ChatGPT o3,,,,bronze,no,,0,0,0.010204648,0
+290,"Pas de stress, c’est ta vie mec.",ChatGPT o3,,,,bronze,no,,0,0,0.081562996,0
+710,Faut cliquer vite pour le snipe.,ChatGPT o3,,,,bronze,no,,0,0,0.019845067,0
+1730,Le rap reun’s a beaucoup influencé la scène.,,,,,silver,yes,,1,1,0.9913123,1
+128,…la France est toujours à téco de ses pepons,https://www.dictionnairedelazone.fr/dictionary/definition/pepon,2025-07-02,,,gold,yes,,1,0,0.078092925,0
+110,Personne ne veut se faire carotte pour la livraison express.,ChatGPT o3,,,,bronze,no,,0,0,0.080521405,0
+1503,J’ai renommé mon bot “Géro”.,ChatGPT o3,,,,bronze,yes,,1,0,0.1050376,0
+793,Il dit “le bug m’a mis en zonzon mentale”.,ChatGPT o3,,,,bronze,yes,,1,1,0.36431158,0
+0,Une photographe se transforme en princesses Disney pour que les petites filles noires ne se sentent pas oubliées,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.09945245,0
+1583,Je code un bot kelfi anti-capslock.,ChatGPT o3,,,,bronze,yes,,1,1,0.98370105,1
+761,Ce voyou spam le chat vocal comme un troll.,ChatGPT o3,,,,bronze,no,,0,0,0.018661546,0
+722,"Mon matos photo pèse plus que moi, help.",ChatGPT o3,,,,bronze,no,,0,0,0.23558804,0
+1593,Emoji “les lebous” x100 dans le chat.,ChatGPT o3,,,,bronze,yes,,1,0,0.04112356,0
+704,Ce burger est du pure shit industriel.,ChatGPT o3,,,,bronze,no,,0,0,0.99618846,1
+713,J’aime le café du matin.,ChatGPT o3,,,,bronze,no,,0,0,0.014941048,0
+622,J’vais boire un litre de café pour survivre.,ChatGPT o3,,,,bronze,no,,0,0,0.28378817,0
+0,Déconfinement : en attendant les annonces de Jean Castex,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0035888506,0
+271,Apprends à jouer en low-poly.,ChatGPT o3,,,,bronze,no,,0,0,0.6228662,1
+681,Il imprime un truc en stikpla bio-sourcé.,ChatGPT o3,,,,bronze,yes,,1,1,0.955804,1
+0,Voie lactée : certaines de ses étoiles ne devraient pas e...,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.068228416,0
+1525,On va en cercon chiptune vendredi.,ChatGPT o3,,,,bronze,yes,,1,1,0.846429,1
+130,On attend son skeud depuis des mois.,,2025-07-02,,,silver,yes,,1,1,0.99747807,1
+176,"Coupe ton micro, on entend ton doigt taper.",ChatGPT o3,,,,bronze,no,,0,0,0.2886637,0
+1666,Il commande trois frites à 2 h du mat.,ChatGPT o3,,,,bronze,no,,0,0,0.020749042,0
+1733,"On s’en bat les yeuks, on sort quand même.",,,,,silver,yes,,1,0,0.012438139,0
+703,Ce week-end c’est la fête chez Lucas.,ChatGPT o3,,,,bronze,no,,0,0,0.80145556,1
+66,J’ai fait une erreur bête en prod.,ChatGPT o3,,,,bronze,no,,0,0,0.03489839,0
+1577,Il id “ship it” et on ship.,ChatGPT o3,,,,bronze,yes,,1,1,0.04712285,0
+792,Je code sans zonré à 3 h du mat.,ChatGPT o3,,,,bronze,yes,,1,1,0.98983127,1
+546,"Passe-moi ton stick USB, j’ai besoin du fichier.",ChatGPT o3,,,,bronze,no,,0,0,0.04968595,0
+0,"Séparatisme, Samuel Paty dans l’ombre des débats parlementaires",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.010134855,0
+1516,Ce beurflant mise tout sur Dogecoin.,ChatGPT o3,,,,bronze,yes,,1,1,0.99706894,1
+226,"Ils vendent de la fechnou coupée, fais gaffe.",ChatGPT o3,,,,bronze,yes,,1,1,0.99909174,1
+788,J’ai dix-neuf onglets VS Code ouverts.,ChatGPT o3,,,,bronze,no,,0,0,0.04523797,0
+232,Le gossebo de la classe joue à LoL.,ChatGPT o3,,,,bronze,yes,,1,1,0.81141007,1
+580,Il fait une bonne sieste après le taf.,ChatGPT o3,,,,bronze,no,,0,0,0.21305872,0
+484,"Si tu veux, on code en duo ce soir.",ChatGPT o3,,,,bronze,no,,0,0,0.01809186,0
+739,On va vesso la partie in extremis.,ChatGPT o3,,,,bronze,yes,,1,1,0.99680483,1
+564,J’ai failli me casser le cul à réviser toute la nuit.,ChatGPT o3,,,,bronze,no,,0,0,0.85994124,1
+528,Il collectionne les briquets vintage.,ChatGPT o3,,,,bronze,no,,0,0,0.16996324,0
+216,Je me suis déguisé pour la stream party.,ChatGPT o3,,,,bronze,no,,0,0,0.024607047,0
+556,Il avoue sa lètbou et rigole.,ChatGPT o3,,,,bronze,yes,,1,1,0.99548244,1
+267,"Reste jeune dans ta tête, bro.",ChatGPT o3,,,,bronze,no,,0,0,0.032097094,0
+318,« …la zeti est mon refuge » (l’alcool est mon refuge),dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,1,0.6317727,1
+615,Il gonfle une capote pour la blague.,ChatGPT o3,,,,bronze,no,,0,0,0.8843229,1
+229,Arrête de faire ton bouffon sur le serveur.,ChatGPT o3,,,,bronze,no,,0,0,0.019335242,0
+1767,Le ciel est nwar ce soir.,https://hinative.com/questions/15830844,,,,gold,yes,,1,1,0.97523683,1
+756,Son débit c’est un yeurtu de vibes.,ChatGPT o3,,,,bronze,yes,,1,1,0.9849658,1
+0,Reconfinement local : mesurez les dix ou trente kilomètres autour de votre domicile,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.01044037,0
+448,On va chécou l’API pour la nuit.,ChatGPT o3,,,,bronze,yes,,1,1,0.9856324,1
+663,Un gros merci à ceux qui hype ce stream.,ChatGPT o3,,,,bronze,no,,0,0,0.02266962,0
+0,Le gouvernement belge condamné pour sa politique climatique jugée négligente,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.009001587,0
+406,"Un emoji goutte de anss, parfait.",ChatGPT o3,,,,bronze,yes,,1,0,0.31222928,0
+116,On transforme la vago en studio mobile ce week-end.,ChatGPT o3,,,,bronze,yes,,1,1,0.98493147,1
+597,On va péoch des billets en prévente.,ChatGPT o3,,,,bronze,yes,,1,1,0.9965683,1
+546,J’ai un stick de labello parce que mes lèvres meurent.,ChatGPT o3,,,,bronze,no,,0,0,0.98975337,1
+120,Ce keutru bug sans raison depuis midi.,ChatGPT o3,,,,bronze,yes,,1,1,0.99958664,1
+261,"Tweet de salope spotted, signal.",ChatGPT o3,,,,bronze,no,,0,0,0.028233608,0
+1670,Je vais tépré mon compte Netflix à mamie.,ChatGPT o3,,,,bronze,yes,,1,1,0.9974056,1
+0,"Salma Hayek dévoile un tatouage sur son sein, les internautes sont choqués",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.032277465,0
+0,Immobilier : les vendeurs gardent le moral malgré la crainte d'une baisse des prix,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.008215608,0
+1640,"Ce patch m’inspire rien à faire, next.",ChatGPT o3,,,,bronze,no,,0,0,0.015703857,0
+1504,On prend un train pour Lontou demain.,ChatGPT o3,,,,bronze,yes,,1,1,0.7508451,1
+0,Dave Grohl rêve encore de Nirvana,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.029624604,0
+759,Ce bot répond comme un yoncou.,ChatGPT o3,,,,bronze,yes,,1,0,0.5632875,1
+669,Son skiwi à la cannelle pique le cerveau.,ChatGPT o3,,,,bronze,yes,,1,1,0.9925649,1
+134,"J’ai croisé un ienche qui skate, true story.",ChatGPT o3,,,,bronze,yes,,1,1,0.803012,1
+758,Tes yeuz brillent dans la LED.,ChatGPT o3,,,,bronze,yes,,1,1,0.99972063,1
+768,J’ai le zen collé à l’écran depuis 8 h.,ChatGPT o3,,,,bronze,yes,,1,1,0.9862656,1
+0,Test PCR et antigénique : combien coûteront-ils à partir du mois d’octobre ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.010448152,0
+1632,Le bot imprime un faux chèque “merci”.,ChatGPT o3,,,,bronze,no,,0,0,0.06890256,0
+685,Le drama Twitter commence par un “pétasse” balancé au hasard.,ChatGPT o3,,,,bronze,no,,0,0,0.011477596,0
+593,C’est toi le boss.,ChatGPT o3,,,,bronze,no,,0,0,0.044306275,0
+1741,Il vend du teush pas cher.,,,,,silver,yes,,1,1,0.99729675,1
+518,"Un verre de inve en debug, risky.",ChatGPT o3,,,,bronze,yes,,1,1,0.87244904,1
+0,Halo Infinite offre un bonus d'expérience aux joueurs,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.030529575,0
+683,"On a fini en pleine baston sur Fortnite, insane.",ChatGPT o3,,,,bronze,no,,0,0,0.9518733,1
+1535,"J’avale un chécat de vitamine, gamer fuel.",ChatGPT o3,,,,bronze,yes,,1,1,0.98769766,1
+176,Il s’est coupé l’oide en cuisinant.,,2025-07-02,,,silver,yes,,1,0,0.9473595,1
+137,Une bouche pâteuse après 6 cafés.,ChatGPT o3,,,,bronze,no,,0,0,0.052189402,0
+317,Laisse ces cons et leurs zessegons » (leurs gonzesses),dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,0,0.8181212,1
+0,"De la street food aux restaurants gastronomiques, la cuisine chinoise sort de chez le traiteur",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.04443787,0
+0,Des villages des Fidji rasés au passage du super cyclone Yasa,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.09989473,0
+182,Leur enfant sera métis et polyglotte.,ChatGPT o3,,,,bronze,no,,0,0,0.008180583,0
+778,"Cette soirée sans zeuti, c’est calme.",ChatGPT o3,,,,bronze,yes,,1,0,0.4475304,0
+547,On goûte un resto kinf ce soir.,ChatGPT o3,,,,bronze,yes,,1,1,0.94781315,1
+1660,Le bus virtuel bug dans le sim.,ChatGPT o3,,,,bronze,no,,0,0,0.056494426,0
+0,Les emballages alimentaires sont désormais les déchets les plus présents sur les plages,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.019848052,0
+787,On monte un zness de merch meme.,ChatGPT o3,,,,bronze,yes,,1,1,0.98652786,1
+742,Le yancli a rage-quit le chat support direct.,ChatGPT o3,,,,bronze,yes,,1,1,0.99966824,1
+223,L’horloge tourne… J’perds autant d’temps qu’un tanj pour un rond .,https://www.dictionnairedelazone.fr/dictionary/lexical/t/tanj,2025-07-02,,,gold,yes,,1,1,0.43054712,0
+531,"Balance le paquet de chips, j’ai grave faim.",ChatGPT o3,,,,bronze,no,,0,0,0.04505921,0
+339,c’est l’hérésie : c’est dar ici,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.12741037,0
+1658,Le stepo de radio spam des mixtapes 8-bit.,ChatGPT o3,,,,bronze,yes,,1,1,0.995414,1
+273,"Cette feature est pedo, validé.",ChatGPT o3,,,,bronze,yes,,1,0,0.05432312,0
+596,Je rate toujours un appel important.,ChatGPT o3,,,,bronze,no,,0,0,0.9436629,1
+1568,Je crois avoir gépi la blague meme.,ChatGPT o3,,,,bronze,yes,,1,1,0.4716554,0
+0,"Mathilde Tantot entièrement nue, sa communauté apprécie la vue",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.025987085,0
+666,Il fait du basket tous les soirs au playground.,ChatGPT o3,,,,bronze,no,,0,0,0.05270614,0
+236,La mascotte a l’air droguée avec ces yeux.,ChatGPT o3,,,,bronze,no,,0,0,0.197876,0
+403,"J’ai la main droite freeze, trop de café.",ChatGPT o3,,,,bronze,no,,0,0,0.017272731,0
+1510,Avoir la rage te donne un power-up bizarre.,ChatGPT o3,,,,bronze,no,,0,0,0.0038519478,0
+104,"Bah ché ap, essaye encore.",ChatGPT o3,,,,bronze,yes,,1,0,0.6088421,1
+668,J’ai gravé un skeudi juste pour le meme.,ChatGPT o3,,,,bronze,yes,,1,1,0.9973564,1
+0,Comment les Prairies sont-elles devenues l'épicentre de la pandémie ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.009548764,0
+1629,"Ma queban freeze = plus de coins, rip.",ChatGPT o3,,,,bronze,yes,,1,1,0.99766266,1
+1550,Un gros coup de vent a fermé la fenêtre.,ChatGPT o3,,,,bronze,no,,0,0,0.110259905,0
+613,Il brandit un drapeau arc-en-ciel à la Pride.,ChatGPT o3,,,,bronze,no,,0,0,0.35552043,0
+0,"Membre du CIO, Pierre-Olivier Beckers fait le point à 6 mois des JO: ""Les Jeux de Tokyo sont indispensables, je le pense réellement""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0039595934,0
+172,Y’a de la racaille qui fait du wheeling dehors.,ChatGPT o3,,,,bronze,no,,0,0,0.99543446,1
+414,"Tu veux de la beu ? – Non, c’est bon.",https://context.reverso.net/translation/french-english/la+beu,2025-07-02,,,gold,yes,,1,1,0.9941115,1
+1559,J’ai le nez qui sniff le café fraîchement moulu.,ChatGPT o3,,,,bronze,no,,0,0,0.19752556,0
+769,On vit la zèrmi quand le Wi-Fi tombe.,ChatGPT o3,,,,bronze,yes,,1,1,0.98086655,1
+1507,On se voit à Treuillmon pour le marché vintage.,ChatGPT o3,,,,bronze,yes,,1,1,0.96537817,1
+1765,Il n’a dégun pour l’aider.,,,,,silver,yes,,1,1,0.80477494,1
+0,"Eric-Emmanuel Schmitt: ""Le Goncourt ne fera pas un enfant dans le dos des librairies""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.007029663,0
+536,"Ce jeu est trop kétru, impossible de gagner.",ChatGPT o3,,,,bronze,yes,,1,0,0.5463877,1
+0,"Un cheikh du Qatar a-t-il refusé de saluer deux arbitres femmes? La Fifa parle de ""mensonges""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.05921779,0
+644,Elle se prend pour une lascar en Air Max.,ChatGPT o3,,,,bronze,no,,0,0,0.120138414,0
+1530,"J’ai renversé du coffee sur ma chemise blanche, rip.",ChatGPT o3,,,,bronze,no,,0,0,0.09012185,0
+85,Cette appli veut te baiser tes données perso.,ChatGPT o3,,,,bronze,no,,0,0,0.06219809,0
+88,Essaie de choper son @ Insta.,ChatGPT o3,,,,bronze,no,,0,0,0.04485859,0
+1615,"Il crie “salope” à chaque lag, toxic.",ChatGPT o3,,,,bronze,no,,0,0,0.0054173544,0
+723,Le voisin portos me file toujours du bacalhau.,ChatGPT o3,,,,bronze,no,,0,0,0.066571176,0
+1527,… vous me prenez pour un voleur ? Un charclo?,Languefrancaise.net (Bob – charclot) ,,,,gold,yes,,1,0,0.47072375,0
+40,Mon pote black a carry la team toute la nuit.,ChatGPT o3,,,,bronze,no,,0,0,0.096360326,0
+581,Elle se sent conne après le fail.,ChatGPT o3,,,,bronze,no,,0,0,0.22347187,0
+594,On se retrouve à trois devant le ciné.,ChatGPT o3,,,,bronze,no,,0,0,0.016336733,0
+1752,"Zebi, il pleut encore !",,,,,silver,yes,,1,0,0.24310048,0
+387,Le chat a vécu son tarmi sans emojis.,ChatGPT o3,,,,bronze,yes,,1,1,0.8775258,1
+1586,Le NPC agit comme sous kseu.,ChatGPT o3,,,,bronze,yes,,1,0,0.21563253,0
+1752,"Zebi, c’est pas possible.",,,,,silver,yes,,1,0,0.041281585,0
+1580,Tu peux pas faire mieux qu’un meme chat.,ChatGPT o3,,,,bronze,no,,0,0,0.08153946,0
+0,"Pompeo dans une colonie israélienne et au Golan, une première pour un secrétaire d'Etat",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.681849,1
+308,"« Poto j’suis faya, j’viens de descendre une teillebou d’sky… »",dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,1,0.9848282,1
+0,Bon Plan AirPods Pro : Désormais le meilleur prix pour les écouteurs connectés hauts de gamme,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0042515136,0
+481,"Arrête de spammer ce mot enlec, c’est cringe.",ChatGPT o3,,,,bronze,yes,,1,0,0.16608495,0
+134,Le ienche aboie sur l’aspirateur robot.,ChatGPT o3,,,,bronze,yes,,1,1,0.9985317,1
+1656,Stop de voler des GIFs sans credit.,ChatGPT o3,,,,bronze,no,,0,0,0.01053583,0
+741,On a rigolé mais la tache de ketchup sur le tee c’est une bavure grave.,ChatGPT o3,,,,bronze,no,,0,0,0.08019766,0
+255,"La pizza froide, c’est dégueulasse.",ChatGPT o3,,,,bronze,no,,0,0,0.009176782,0
+1742,Il a eu de la teusha au tirage.,,,,,silver,yes,,1,1,0.99631065,1
+516,Je sais pas qui a volé le cookie.,ChatGPT o3,,,,bronze,no,,0,0,0.08596203,0
+0,Laury Thilleman et Juan Arbelaez: la réussite d’un couple cathodique,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.019114356,0
+431,Le bocal code-review est plein de poissons rouges.,ChatGPT o3,,,,bronze,no,,0,0,0.030015362,0
+1518,Un event pour les bléca de TikTok.,ChatGPT o3,,,,bronze,yes,,1,1,0.9614906,1
+0,Ces galeries d’art qui cassent les codes à Bruxelles,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.02147315,0
+68,"Mon tel est fonsdé, écran tout pété.",ChatGPT o3,,,,bronze,yes,,1,0,0.12223211,0
+97,Il commence à triper dès qu’il code tard.,ChatGPT o3,,,,bronze,no,,0,0,0.0460121,0
+45,Ce chanmé vaut de l’or.Il a un style chanmé.Un chanmé l’a impressionné.,,,,,silver,yes,,1,1,0.9987815,1
+0,Montefiore Investment va investir et gérer le nouveau Fonds Nov Tourisme-Relance durable France,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.02233751,0
+735,Mes vieilles vatsa tiennent plus la route.,ChatGPT o3,,,,bronze,yes,,1,1,0.97232324,1
+1559,J’ai le nez qui feusni le café fraîchement moulu.,ChatGPT o3,,,,bronze,yes,,1,1,0.9488561,1
+1730,Il est fier d’être reun’s.,,,,,silver,yes,,1,0,0.8403601,1
+815,On s’en fout des yecou.,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,0,0.1266161,0
+396,On graffe le nom du quartier en pixel-art.,ChatGPT o3,,,,bronze,no,,0,0,0.0756192,0
+0,"Le requin-marteau halicorne, cet animal rare et menacé",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.027460152,0
+49,Il a un sourire leuch quand il bluffe.,ChatGPT o3,,,,bronze,yes,,1,1,0.93617463,1
+0,"Dordogne : un jeune tué lors d'une soirée sur le thème de la série ""Peaky Blinders""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.012665177,0
+177,J’ai les veuch arc-en-ciel pour le live.,ChatGPT o3,,,,bronze,yes,,1,1,0.9971643,1
+562,"Quel salaud, il a ghosté après avoir bouffé mon ramen.",ChatGPT o3,,,,bronze,no,,0,0,0.009647633,0
+565,Un p’tit luss au chat avant de lurker.,ChatGPT o3,,,,bronze,yes,,1,1,0.9859384,1
+291,Je loue un costard juste pour la photo.,ChatGPT o3,,,,bronze,no,,0,0,0.044162683,0
+1657,"Parle doucement, l’OBS capte tout.",ChatGPT o3,,,,bronze,no,,0,0,0.004571934,0
+617,Nouveau virage dans l’intrigue de la série.,ChatGPT o3,,,,bronze,no,,0,0,0.0075449343,0
+417,"Oui j’ai grandi parmi les zient, les bil-kas, les arabes… ","Wiktionnaire (Mac Tyer, Barillet plein, 2006) ",,,,gold,yes,,1,0,0.22663578,0
+1001,Le tabac ? Ça tombe bien. Faut que j’achète des garettecis.,https://www.languefrancaise.net/Bob/29307,2025-07-02,,,gold,yes,,1,0,0.022435876,0
+131,On a imprimé la tofo sur un tote bag.,ChatGPT o3,,,,bronze,yes,,1,1,0.97673583,1
+201,"Quand j’vois une mère cainfri, douze gosses tous polis, tous propres… J’suis guèze de ce que ma mère m’a donné ma dignité .",https://www.dictionnairedelazone.fr/dictionary/definition/cainfri,2025-07-02,,,gold,yes,,1,0,0.3010884,0
+1594,Gueule de bois après 24 h de code.,ChatGPT o3,,,,bronze,no,,0,0,0.023051392,0
+0,"Conséquences économiques de la pandémie, changement climatique : des thèmes qui inquiètent le monde de la finance",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.004059071,0
+570,J’ai envie de mirdo dix ans après ce partiel.,ChatGPT o3,,,,bronze,yes,,1,1,0.55482435,1
+0,"Arrestation du maire de Rio : sur la scène politique locale, il ne reste plus personne",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.011203675,0
+419,Mon laptop devient blarf quand je lance Blender.,ChatGPT o3,,,,bronze,yes,,1,1,0.9748446,1
+1643,Emoji ro quand ton patch passe first try.,ChatGPT o3,,,,bronze,yes,,1,1,0.99349314,1
+528,Besoin d’un kébri pour allumer cette bougie.,ChatGPT o3,,,,bronze,yes,,1,1,0.9910492,1
+601,Il s’est réveillé en plein bail avec une crampe au mollet.,ChatGPT o3,,,,bronze,no,,0,0,0.88925815,1
+0,"La France va traiter ""rapidement"" les demandes d'asile des Afghans évacués",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.011489812,0
+100,Snaptrox il est goleri et j’pense que sa reput de merde est la cause d’haineux.,https://www.jeuxvideo.com/forums/42-50-74521054-1-0-1-0-vous-en-pensez-quoi.htm,2025-07-02,,,gold,yes,,1,1,0.97992504,1
+253,Cette appli fait la balance entre dark et light.,ChatGPT o3,,,,bronze,no,,0,0,0.038338214,0
+377,On se voit ce résoi ?,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.96093875,1
+1640,"Ce patch m’inspire rien à séca, next.",ChatGPT o3,,,,bronze,yes,,1,0,0.054975998,0
+572,"On fait un repas de miyfa dimanche, ça va être full drama.",ChatGPT o3,,,,bronze,yes,,1,0,0.24956933,0
+0,Plan de relance : l’occasion d’en finir avec l’habitat indigne,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.006492657,0
+1757,Il a quitté cette michto sans regrets.,,,,,silver,yes,,1,1,0.06916226,0
+1524,"Arrête de faire ta celpu, push ce merge !",ChatGPT o3,,,,bronze,yes,,1,0,0.9246705,1
+1511,"Avant d’entrer, j’ai commencé à avoir peur.",ChatGPT o3,,,,bronze,no,,0,0,0.018623767,0
+44,Le rotteca est coloré.Cette rotteca est très douce.Je n’aime pas le goût du rotteca.,,,,,silver,yes,,1,1,0.99891925,1
+1576,Je peux manger du code au petit dej.,ChatGPT o3,,,,bronze,no,,0,0,0.05489116,0
+1532,Son edit met un effet puissant sur la vidéo.,ChatGPT o3,,,,bronze,no,,0,0,0.24503851,0
+0,"La BMW Série 8 Golden Thunder Edition, unique sur le marché",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.044774376,0
+560,J’ai vu la lispo fermer le bar à 2 h.,ChatGPT o3,,,,bronze,yes,,1,1,0.9847141,1
+633,Mon père m’a appris le drift.,ChatGPT o3,,,,bronze,no,,0,0,0.019414354,0
+508,Mon ping vient de me larguer.,ChatGPT o3,,,,bronze,no,,0,0,0.018324839,0
+1,"Les gars, ma meuf l'utilise pour me regarder comme ça.",https://context.reverso.net/translation/french-english/ma%2Bmeuf?,,,,gold,yes,,1,1,0.22766104,0
+1637,L’odeur de retsiga reste sur mes logs.,ChatGPT o3,,,,bronze,yes,,1,1,0.9865522,1
+359,Quel lauss celui-là !,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.16100116,0
+370,Remets ton peusli !,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.9758504,1
+1670,Je vais prêter mon compte Netflix à mamie.,ChatGPT o3,,,,bronze,no,,0,0,0.024992524,0
+654,Dans dix jours c’est les vacs.,ChatGPT o3,,,,bronze,no,,0,0,0.04039295,0
+1506,Il sort bientôt de Ryfleu.,ChatGPT o3,,,,bronze,yes,,1,0,0.19928856,0
+1549,Il a muté en screud le channel.,ChatGPT o3,,,,bronze,yes,,1,0,0.9938392,1
+1528,"Il spam “lâche-moi” en vocal, toxic.",ChatGPT o3,,,,bronze,no,,0,0,0.025009679,0
+1594,Leug de bois après 24 h de code.,ChatGPT o3,,,,bronze,yes,,1,1,0.98799676,1
+0,"10 comportements de votre chat qui signifient "" Je t'aime ""...",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.007430201,0
+619,La playlist dure quarante minutes.,ChatGPT o3,,,,bronze,no,,0,0,0.017368892,0
+1598,Un petit lusse au chat avant AFK.,ChatGPT o3,,,,bronze,yes,,1,1,0.9902014,1
+219,Le dev était sadique avec les puzzles.,ChatGPT o3,,,,bronze,no,,0,0,0.019444108,0
+1673,"Hydrate-toi, bois de l’eau au lieu de Monster.",ChatGPT o3,,,,bronze,no,,0,0,0.8671391,1
+402,Ton ach vient de rage-quit le stream.,ChatGPT o3,,,,bronze,yes,,1,1,0.17458375,0
+631,Mes compétences culinaires font pâle figure comparées à l’expertise de ma reumé.  ,,,,,silver,yes,,1,0,0.24410649,0
+195,"Sa beubar est rose fluo, legit.",ChatGPT o3,,,,bronze,yes,,1,1,0.99849296,1
+0,États-Unis : un an de prison ferme pour deux fêtes pendant le confinement,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.010946595,0
+1518,Les gens à la mode portent du vintage.,ChatGPT o3,,,,bronze,no,,0,0,0.012176771,0
+760,Un youca rare vaut plus que l’or parfois.,ChatGPT o3,,,,bronze,yes,,1,1,0.9996495,1
+806,Ils veulent plus tréren en cours après la pause café.,ChatGPT o3,,,,bronze,yes,,1,1,0.9925368,1
+739,Cette appli va sauver ta vie sociale.,ChatGPT o3,,,,bronze,no,,0,0,0.017472027,0
+0,"Blé de la Sainte Barbe ou blé de l’espérance, une tradition qui a du bon",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.76097405,1
+1629,"API “banque” renvoie 500, stress.",ChatGPT o3,,,,bronze,no,,0,0,0.0040351884,0
+214,Ils collectent pour lutter contre le sida.,ChatGPT o3,,,,bronze,no,,0,0,0.006085483,0
+68,"Le canapé est défoncé, on s’enfonce dedans.",ChatGPT o3,,,,bronze,no,,0,0,0.012093827,0
+236,"Il semble drogué à la caféine, jamais il dort.",ChatGPT o3,,,,bronze,no,,0,0,0.018855294,0
+54,C'est ouf ! ,https://allaboutfrench.com/cest-ouf?,,,,gold,yes,,1,1,0.9944587,1
+1021,"Fais pas ta pitié, lève-toi et code.",ChatGPT o3,,,,bronze,no,,0,0,0.017050168,0
+759,Ce bot répond comme un couillon.,ChatGPT o3,,,,bronze,no,,0,0,0.014006109,0
+1633,La feature manque de memes.,ChatGPT o3,,,,bronze,no,,0,0,0.011721981,0
+338,– Tiens ! – Cimère !,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.9977302,1
+531,"Balance le képa de chips, j’ai grave faim.",ChatGPT o3,,,,bronze,yes,,1,1,0.9845446,1
+573,"Il débarque en chemise hawaïenne, big mood.",ChatGPT o3,,,,bronze,no,,0,0,0.016341163,0
+510,Change la gueulan de l’interface en pirate.,ChatGPT o3,,,,bronze,yes,,1,1,0.99651873,1
+448,"Un dev qui chécou à 4 h du mat, normal.",ChatGPT o3,,,,bronze,yes,,1,1,0.99212587,1
+262,Il parle en argot zoulou.,ChatGPT o3,,,,bronze,no,,0,0,0.092510425,0
+1567,Le bot se fait passer pour un pigeon dans le lobby.,ChatGPT o3,,,,bronze,no,,0,0,0.02754977,0
+0,Libération de Sophie Pétronin : faire la guerre ou céder à l’émotion ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.008401676,0
+220,"Cette appli est donbi, full pubs.",ChatGPT o3,,,,bronze,yes,,1,0,0.659733,1
+0,""" Frankenstein "" : Du roman de Mary Shelley à la table du théâtre d’objet",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0039990777,0
+1651,Flex tes muscles quand le code compile.,ChatGPT o3,,,,bronze,no,,0,0,0.22071868,0
+1606,Un meug de bug suffit pour crasher tout.,ChatGPT o3,,,,bronze,yes,,1,1,0.9995592,1
+727,J’ai dormi dans le métro et raté mon stop.,ChatGPT o3,,,,bronze,no,,0,0,0.08315843,0
+629,J’ai perdu ma barrette dans le bus.,ChatGPT o3,,,,bronze,no,,0,0,0.013743517,0
+0,Les éoliennes sont-elles contestables ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.013010602,0
+344,Donne-moi une euk pour signer,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.9187496,1
+726,"J’ai dormi treuka heures, mode zombie.",ChatGPT o3,,,,bronze,yes,,1,1,0.9862773,1
+271,"On va jouer en LAN, old-school.",ChatGPT o3,,,,bronze,no,,0,0,0.008799236,0
+785,Une zine que j’adore vient ce week-end.,ChatGPT o3,,,,bronze,yes,,1,1,0.94818693,1
+211,Il se croit riche après un airdrop.,ChatGPT o3,,,,bronze,no,,0,0,0.036166128,0
+1623,Pas besoin de 1000 mots pour patch.,ChatGPT o3,,,,bronze,no,,0,0,0.12662105,0
+627,On dirait une repié précieuse dans cette bague.,ChatGPT o3,,,,bronze,yes,,1,1,0.6835658,1
+0,"""On peut encore changer les choses !"" : le message d'espoir et d'alerte de la glaciologue Heidi Sevestre",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.023166513,0
+0,Top 10 des meilleures assurances animaux : le classement !,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0066847373,0
+330,"« T’es tout chébran, mon vieux » (« t’es hyper branché »)",zlang.fandom.com,2025-07-02,,,gold,yes,,1,0,0.86019677,1
+572,"Ta miyfa est trop wholesome, j’avoue.",ChatGPT o3,,,,bronze,yes,,1,0,0.7206883,1
+1645,"Pas de seca dans la base de données, ouf.",ChatGPT o3,,,,bronze,yes,,1,1,0.99880624,1
+379,Direction Ripa !,dictionnairedelazone.fr,2025-07-06,,,gold,yes,,1,1,0.98710155,1
+618,On va chez tes rampe dimanche.,ChatGPT o3,,,,bronze,yes,,1,1,0.203366,0
+27,Ce resto arabe sert des tacos de fou.,ChatGPT o3,,,,bronze,no,,0,0,0.40860415,0
+1622,"Encore un resto oinich, jpp.",ChatGPT o3,,,,bronze,yes,,1,0,0.039265215,0
+0,Netflix France en novembre 2020 : quels sont les nouveaux films et séries à suivre ?,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0070951288,0
+239,Ce gueuta graffiti clignote en AR.,ChatGPT o3,,,,bronze,yes,,1,1,0.99976367,1
+4,C'est le keumé que j'te disais l'aut' jour ! ,https://fr.wiktionary.org/wiki/keum%C3%A9?,,,,gold,yes,,1,1,0.968744,1
+404,L’odeur de ainp frais dans le stream : 10/10.,ChatGPT o3,,,,bronze,yes,,1,1,0.9197665,1
+0,SUV : le guide complet pour faire le bon choix,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.0070076,0
+671,On avance doucement mais sûrement.,ChatGPT o3,,,,bronze,no,,0,0,0.013383471,0
+748,"Le toast est trop griller, charcoal mood.",ChatGPT o3,,,,bronze,no,,0,0,0.0089030145,0
+0,Elections présidentielles 2020 : les liens entre Kaboul et Washington devraient être renforcés selon le président afghan,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.006661749,0
+438,"Fais ta casdédi audio, c’est hype.",ChatGPT o3,,,,bronze,yes,,1,1,0.96617293,1
+713,"Pas de cours le tinma, chance.",ChatGPT o3,,,,bronze,yes,,1,0,0.08159178,0
+1640,Team “rien à séca” sur le drama Twitter.,ChatGPT o3,,,,bronze,yes,,1,0,0.062468708,0
+520,"J’arrive direct après le cours, chill.",ChatGPT o3,,,,bronze,no,,0,0,0.014500691,0
+226,Ils parlent tous… de feuchnou,https://www.dictionnairedelazone.fr/dictionary/definition/feuchnou,2025-07-02,,,gold,yes,,1,1,0.6838667,1
+48,Elle sort un beat vénère de sa chambre.,ChatGPT o3,,,,bronze,yes,,1,1,0.7843096,1
+707,La porte du frigo bip tout le temps.,ChatGPT o3,,,,bronze,no,,0,0,0.9892652,1
+993,"J’ai passé la barre des cent pompes, enfin.",ChatGPT o3,,,,bronze,no,,0,0,0.04770725,0
+772,"Il est minuit douze, je suis encore réveillé.",ChatGPT o3,,,,bronze,no,,0,0,0.016328366,0
+581,Arrête de faire la neuco au volant.,ChatGPT o3,,,,bronze,yes,,1,1,0.87339175,1
+0,Covid19 - La situation se détériore en Irlande,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.07247957,0
+0,"Brad Pitt, Aaron Taylor-Johnson... Le casting de Bullet Train, le prochain film d'action du réalisateur d'Hobbs Shaw, se dévoile",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.008471201,0
+0,Lorie Pester : pourquoi son retour dans Demain nous appartient n’est pas définitif,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.018332256,0
+493,Tes feuti brillent sous la ring-light.,ChatGPT o3,,,,bronze,yes,,1,1,0.9998024,1
+657,"Laisse tomber, ce boss est trop fort.",ChatGPT o3,,,,bronze,no,,0,0,0.44912136,0
+434,J’ai cantsin onglets VS Code ouverts.,ChatGPT o3,,,,bronze,yes,,1,1,0.9988902,1
+424,Il stream depuis une brechan d’hôtel capsule.,ChatGPT o3,,,,bronze,yes,,1,1,0.97297895,1
+0,"Savoie : la Grande Odyssée, une course de chiens de traîneaux, s'élance dans les Alpes",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.022436118,0
+0,La petite sirène ; les contes interdits,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.03989731,0
+390,Elle adore jeter des confettis en visio.,ChatGPT o3,,,,bronze,no,,0,0,0.04466756,0
+1724,Je rêve d’une GUI qui fond façon petri art.,ChatGPT o3,,,,bronze,yes,,1,1,0.23112884,0
+729,L’intérieur de ta turve sent la teuh.,ChatGPT o3,,,,bronze,yes,,1,1,0.961407,1
+279,"Une poteca licorne existe, check.",ChatGPT o3,,,,bronze,yes,,1,1,0.05722394,0
+1625,“C’est portenawak” = review de code.,ChatGPT o3,,,,bronze,yes,,1,0,0.9170375,1
+227,Un feukeu undercover traîne sur le chat.,ChatGPT o3,,,,bronze,yes,,1,1,0.99952316,1
+689,Pose ton sac à côté du mien.,ChatGPT o3,,,,bronze,no,,0,0,0.014041463,0
+1602,Ce nouveau cinéma 4DX secoue de ouf.,ChatGPT o3,,,,bronze,no,,0,0,0.47467482,0
+277,Ma copine carry sur Valorant.,ChatGPT o3,,,,bronze,no,,0,0,0.7430329,1
+1641,Elle ping son mari pour tester la beta.,ChatGPT o3,,,,bronze,no,,0,0,0.5366431,1
+1746,Ce toshi est doux.,,,,,silver,yes,,1,1,0.9996723,1
+1510,"Depuis le fail, il a grave la rage.",ChatGPT o3,,,,bronze,no,,0,0,0.016813442,0
+526,"Premier cours : un bonjour awkward, classique.",ChatGPT o3,,,,bronze,no,,0,0,0.024296662,0
+1003,Ils essayent de carotter des coins sur GTA.,ChatGPT o3,,,,bronze,no,,0,0,0.009109047,0
+0,Les indépendants veulent leur part du gâteau des aides,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.05509607,0
+0,État de droit : les eurodéputés veulent tester le mécanisme de protection du budget sur Prague,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.007601541,0
+37,La beubon a explosé trop tôt.Ce bebon tombé du camion a fait peur.Elle a évité la beubon par chance.,,,,,silver,yes,,1,1,0.9996111,1
+253,Arrête de lanceba tes dramas.,ChatGPT o3,,,,bronze,yes,,1,1,0.99755174,1
+108,Le code va craquer sous la charge.,ChatGPT o3,,,,bronze,no,,0,0,0.013332561,0
+1571,Il cuisine un plat greune vegan.,ChatGPT o3,,,,bronze,yes,,1,1,0.84548235,1
+538,Il gagne du keufri en streamant ses parties.,ChatGPT o3,,,,bronze,yes,,1,1,0.98595643,1
+606,"Balance la tape de ce freestyle, c’est lourd.",ChatGPT o3,,,,bronze,no,,0,0,0.11396914,0
+0,Jeu mathématique : le mystère étonnant des nombres,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.07770419,0
+807,Tes chaussures vont puer après la randonnée.,ChatGPT o3,,,,bronze,no,,0,0,0.9941719,1
+0,"Des colis alimentaires à la disposition des étudiants: ""Manger tous les jours c'est être riche et manger varié c'est inestimable""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.030072125,0
+0,La start-up Aircall lève 120 millions de dollars et devient une nouvelle licorne française,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.019997077,0
+0,Les salaires du mois de février n’ont pas été payés à Mouscron mais on se veut rassurant à l’Excel,HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.030603042,0
+507,Il va refourguer ses vieux skins.,ChatGPT o3,,,,bronze,no,,0,0,0.076016106,0
+273,Son café c’est de la pedo liquide.,ChatGPT o3,,,,bronze,yes,,1,1,0.939404,1
+1583,Un kelfi virtuel modère le Discord.,ChatGPT o3,,,,bronze,yes,,1,1,0.9998851,1
+684,J’ai croisé un marché tangi trop coloré.,ChatGPT o3,,,,bronze,yes,,1,1,0.84775853,1
+1562,"“Allez, gage dé”, a dit le bot mod.",ChatGPT o3,,,,bronze,yes,,1,0,0.0071863336,0
+757,Je me sens yeuv à 21 ans.,ChatGPT o3,,,,bronze,yes,,1,1,0.99877006,1
+775,J’ai zeukin DM non lus en une heure.,ChatGPT o3,,,,bronze,yes,,1,1,0.9988732,1
+65,J’ai pris un petit café rapide.,ChatGPT o3,,,,bronze,no,,0,0,0.15699203,0
+488,Le chat a tenté de me griffer pendant le live.,ChatGPT o3,,,,bronze,no,,0,0,0.6938218,1
+224,"Sa punchline est feu, j’en peux plus.",ChatGPT o3,,,,bronze,no,,0,0,0.016169189,0
+0,"La véritable histoire d’"" Oloturé "", le film choc de Netflix sur la prostitution nigériane",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.012072664,0
+0,"Petro Porochenko : ""Poutine veut détruire l'Union européenne""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.050935347,0
+221,Je suis donfe sur ce nouveau jeu.,ChatGPT o3,,,,bronze,yes,,1,1,0.99526405,1
+1567,"Je nourris un pigeon devant la fac, wholesome.",ChatGPT o3,,,,bronze,no,,0,0,0.07435549,0
+0,"Confinement : Barbara Pompili assure que les dérogations pour les chasseurs sont ""très encadrées""",HuggingFace: gustavecortal/diverse_french_news,,,,none,no,,0,0,0.006497562,0
+307,"« Sans faire semblant, elle sera la tehon de ses enfants » (honte familiale)",dictionnairedelazone.fr,2025-07-02,,,gold,yes,,1,1,0.89393735,1
+235,J’ai essayé de guédra avec des gifs de chat.,ChatGPT o3,,,,bronze,yes,,1,1,0.99789894,1
+1560,Il spam comme un bouffon dans le chat.,ChatGPT o3,,,,bronze,no,,0,0,0.13826542,0

@@ -1,0 +1,40 @@
+{
+  "model_id": "Salesforce/SFR-Embedding-Mistral",
+  "encoder_frozen": true,
+  "head": "LogisticRegression",
+  "batch_size": 8,
+  "max_length": 128,
+  "seed": 10,
+  "run_id": "seed-10",
+  "out_dir": "models/detect/latest/lr_frozen/seed-10",
+  "head_params": {
+    "max_iter": 2000,
+    "class_weight": "balanced",
+    "solver": "lbfgs"
+  },
+  "metrics": {
+    "val_f1@0.5": 0.7508305647840532,
+    "val_acc@0.5": 0.7931034482758621,
+    "test_f1@0.5": 0.7776183644189383,
+    "test_acc@0.5": 0.8182883939038686,
+    "test_confusion@0.5": {
+      "tn": 427,
+      "fp": 106,
+      "fn": 49,
+      "tp": 271
+    },
+    "slang_test_set@0.5": {
+      "tn": 40,
+      "fp": 10,
+      "fn": 0,
+      "tp": 0,
+      "accuracy": 0.8,
+      "f1": 0.0
+    }
+  },
+  "artifacts": {
+    "classifier": "models/detect/latest/lr_frozen/seed-10/lr_head.joblib",
+    "test_predictions": "models/detect/latest/lr_frozen/seed-10/test_predictions.csv",
+    "slang_predictions": "models/detect/latest/lr_frozen/seed-10/slang_predictions.csv"
+  }
+}

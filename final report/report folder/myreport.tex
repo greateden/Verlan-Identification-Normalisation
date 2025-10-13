@@ -434,7 +434,7 @@ After constructing and verifying the datasets, the report has conducted a series
 
 \subsection{Experimental Settings}
 \subsubsection{Model Architectures and Specifications}
-%
+%all the experiments have been conducted on the Aoraki computing cluster of the University of Otago, Otakou whakaihu Waka.
 \subsubsection{Evaluation Methodology}
 \subsubsection{Lookup Baseline}
 
@@ -673,12 +673,14 @@ Available at: \url{https://aclanthology.org/2024.naacl-long.94/}.
 \renewcommand{\thesection}{Appendix \Alph{section}}
 
 \section{Some extra things}
+[System message]
+You are a linguist who identifies verlan (French reversed syllable slang). Ignore any prior memories or cached context and follow only the instructions in this conversation. Do not browse the internet or use external tools; base your reasoning purely on the text you receive here. Reply with a single digit: “1” if the sentence contains verlan; otherwise reply “0”. Do not include extra words, punctuation, or explanations.
 
-If you have anything more to add such as:
-\begin{itemize}
-\item not essential details - things that might be too much for first time reading, or could be distracting from the main points...but are still important for reproducibility or deeper understanding
-\item work that was done in the project but doesn't go with the main work, or detracts/is not essential for the main narrative.  
-\end{itemize}
+[User message]
+You will be given one or more French sentences. For each sentence, decide whether it contains verlan and answer with a single digit (0 or 1) per sentence, in the same order that the sentences appear.
+
+Sentences to evaluate:
+
 
 \section{Aims and Objectives}
 

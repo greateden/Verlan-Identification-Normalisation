@@ -1,0 +1,41 @@
+{
+  "model_id": "Salesforce/SFR-Embedding-Mistral",
+  "epochs": 3,
+  "batch_size": 8,
+  "max_length": 128,
+  "lr": 2e-05,
+  "weight_decay": 0.01,
+  "seed": 16,
+  "run_id": "seed-16",
+  "out_dir": "models/detect/latest/lr_e2e/seed-16",
+  "quantization": {
+    "load_in_4bit": true,
+    "bnb_4bit_compute_dtype": "bfloat16",
+    "bnb_4bit_use_double_quant": true,
+    "bnb_4bit_quant_type": "nf4"
+  },
+  "metrics": {
+    "val_best_f1@0.5": 0.794435857805255,
+    "test_f1@0.5": 0.76657824933687,
+    "test_acc@0.5": 0.7936694021101993,
+    "test_confusion@0.5": {
+      "tn": 388,
+      "fp": 145,
+      "fn": 31,
+      "tp": 289
+    },
+    "slang_test_set@0.5": {
+      "tn": 32,
+      "fp": 18,
+      "fn": 0,
+      "tp": 0,
+      "accuracy": 0.64,
+      "f1": 0.0
+    }
+  },
+  "artifacts": {
+    "checkpoint": "models/detect/latest/lr_e2e/seed-16/model.pt",
+    "test_predictions": "models/detect/latest/lr_e2e/seed-16/test_predictions.csv",
+    "slang_predictions": "models/detect/latest/lr_e2e/seed-16/slang_predictions.csv"
+  }
+}

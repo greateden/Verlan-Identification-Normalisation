@@ -1,0 +1,54 @@
+{
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.2",
+  "zero_shot": true,
+  "max_new_tokens": 16,
+  "temperature": 0.0,
+  "top_p": 0.9,
+  "seed": 42,
+  "system_prompt": "You are a linguist who identifies verlan (French reversed syllable slang). Reply with a single digit: '1' if the sentence contains verlan; otherwise reply '0'. Do not include extra words.",
+  "run_id": "seed-42",
+  "out_dir": "models/detect/latest/mistral_zeroshot/seed-42",
+  "metrics": {
+    "test_f1@0.5": 0.6597131681877445,
+    "test_acc@0.5": 0.694021101992966,
+    "test_confusion@0.5": {
+      "tn": 339,
+      "fp": 194,
+      "fn": 67,
+      "tp": 253
+    },
+    "slang_test_set@0.5": {
+      "tn": 33,
+      "fp": 17,
+      "fn": 0,
+      "tp": 0,
+      "accuracy": 0.66,
+      "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "accuracy": 0.8275862068965517,
+        "f1": 0.8148148148148148,
+        "tn": 26,
+        "fp": 3,
+        "fn": 7,
+        "tp": 22
+      },
+      "verlan_test_set_invented": {
+        "accuracy": 0.78,
+        "f1": 0.7555555555555555,
+        "tn": 22,
+        "fp": 3,
+        "fn": 8,
+        "tp": 17
+      }
+    }
+  },
+  "artifacts": {
+    "test_predictions": "models/detect/latest/mistral_zeroshot/seed-42/test_predictions.csv",
+    "slang_predictions": "models/detect/latest/mistral_zeroshot/seed-42/slang_predictions.csv",
+    "extra_summary": "models/detect/latest/mistral_zeroshot/seed-42/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "models/detect/latest/mistral_zeroshot/seed-42/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "models/detect/latest/mistral_zeroshot/seed-42/verlan_test_set_invented_predictions.csv"
+  }
+}
