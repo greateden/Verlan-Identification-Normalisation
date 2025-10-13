@@ -5,6 +5,7 @@
 <!-- DUE:START -->
 ```text
 ⏳ Time remaining: 4 days, 09 hours, 01 minutes
+⏳ Time remaining: 4 days, 08 hours, 02 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -39,6 +40,7 @@ project-root/
 │   │       ├── standard_only_pred.csv
 │   │       └── verlan_only_pred.csv
 │   ├── processed/
+│   │   ├── slang_test_set.csv
 │   │   ├── verlan_pairs.csv
 │   │   ├── verlan_test_set.csv
 │   │   └── verlan_test_set_invented.csv
