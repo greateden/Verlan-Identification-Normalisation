@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 4 days, 02 hours, 08 minutes
+⏳ Time remaining: 4 days, 00 hours, 51 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -85,6 +85,370 @@ project-root/
 │           └── prob_dist_pre.png
 ├── envs/
 │   └── aoraki-verlan-e2e.yml
+├── experiment_results/
+│   ├── ChatGPT 5 Codex High.xlsx
+│   ├── E2E+BERT/
+│   │   ├── seed-1/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-10/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-11/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-12/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-13/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-14/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-15/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-16/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-17/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-18/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-19/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-2/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-20/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-3/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-4/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-5/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-6/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-7/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-8/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-9/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── trials_summary.csv
+│   │   └── trials_summary.json
+│   ├── E2E+LR/
+│   │   ├── seed-1/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-10/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-11/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-12/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-13/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-14/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-15/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-16/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-17/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-18/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-19/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-2/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-20/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-3/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-4/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-5/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-6/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-7/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-8/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-9/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── trials_summary.csv
+│   │   └── trials_summary.json
+│   ├── Frozen+BERT/
+│   │   ├── seed-1/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-10/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-11/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-12/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-13/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-14/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-15/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-16/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-17/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-18/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-19/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-2/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-20/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-3/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-4/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-5/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-6/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-7/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-8/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-9/
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── trials_summary.csv
+│   │   └── trials_summary.json
+│   ├── Frozen+LR/
+│   │   ├── seed-1/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-10/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-11/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-12/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-13/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-14/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-15/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-16/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-17/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-18/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-19/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-2/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-20/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-3/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-4/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-5/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-6/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-7/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-8/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── seed-9/
+│   │   │   ├── lr_head.joblib
+│   │   │   ├── meta.json
+│   │   │   ├── slang_predictions.csv
+│   │   │   └── test_predictions.csv
+│   │   ├── trials_summary.csv
+│   │   └── trials_summary.json
+│   └── mistral zeroshot/
+│       ├── seed-42/
+│       │   ├── extra_datasets_summary.csv
+│       │   ├── meta.json
+│       │   ├── slang_predictions.csv
+│       │   ├── test_predictions.csv
+│       │   ├── verlan_test_set_invented_predictions.csv
+│       │   └── verlan_test_set_predictions.csv
+│       ├── summary.csv
+│       └── summary.json
 ├── final report/
 │   ├── Accuracy_distribution_4settings.png
 │   ├── All_4settings_results.csv
