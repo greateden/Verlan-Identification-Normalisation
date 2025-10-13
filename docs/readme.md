@@ -4,8 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 4 days, 09 hours, 01 minutes
-⏳ Time remaining: 4 days, 08 hours, 02 minutes
+⏳ Time remaining: 4 days, 08 hours, 01 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
