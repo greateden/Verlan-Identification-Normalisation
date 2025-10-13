@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=verlan-bert-frozen
-#SBATCH --partition=aoraki_gpu_A100_80GB
+#SBATCH --partition=aoraki_gpu_L40
 #SBATCH --gpus-per-node=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
@@ -88,6 +88,8 @@ for p in sorted(base.glob('seed-*/meta.json')):
     try:
         meta = json.loads(p.read_text())
         m = meta.get('metrics', {})
+        test_conf = m.get('test_confusion@0.5', {})
+        slang = m.get('slang_test_set@0.5', {})
         rows.append({
             'run_dir': str(p.parent),
             'seed': meta.get('seed'),
@@ -95,6 +97,11 @@ for p in sorted(base.glob('seed-*/meta.json')):
             'val_best_f1@0.5': m.get('val_best_f1@0.5'),
             'test_f1@0.5': m.get('test_f1@0.5'),
             'test_acc@0.5': m.get('test_acc@0.5'),
+            'test_fp@0.5': test_conf.get('fp'),
+            'test_fn@0.5': test_conf.get('fn'),
+            'slang_fp@0.5': slang.get('fp'),
+            'slang_tn@0.5': slang.get('tn'),
+            'slang_accuracy@0.5': slang.get('accuracy'),
         })
     except Exception as e:
         print(f"[WARN] Failed to read {p}: {e}")
@@ -106,7 +113,7 @@ out_json.write_text(json.dumps(rows, ensure_ascii=False, indent=2))
 
 out_csv = base / 'trials_summary.csv'
 with out_csv.open('w', newline='') as f:
-    w = csv.DictWriter(f, fieldnames=['seed','run_id','run_dir','val_best_f1@0.5','test_f1@0.5','test_acc@0.5'])
+    w = csv.DictWriter(f, fieldnames=['seed','run_id','run_dir','val_best_f1@0.5','test_f1@0.5','test_acc@0.5','test_fp@0.5','test_fn@0.5','slang_tn@0.5','slang_fp@0.5','slang_accuracy@0.5'])
     w.writeheader()
     w.writerows(rows)
 

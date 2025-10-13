@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Submit frozen-head training to Aoraki with a suitable GPU and tail logs.
+# Submit frozen LR baseline training to Aoraki and tail logs.
 
 set -euo pipefail
 
@@ -8,7 +8,7 @@ REPO_ROOT=$(cd "$SCRIPT_DIR/../.." && pwd)
 LOG_DIR="$REPO_ROOT/logs"
 
 if ! command -v sbatch >/dev/null 2>&1; then
-  echo "[ERROR] sbatch not found. Run on Aoraki login node." >&2
+  echo "[ERROR] sbatch not found. Run on an Aoraki login node." >&2
   exit 1
 fi
 
@@ -44,11 +44,11 @@ JOBID=$(sbatch \
   --partition="$TARGET" \
   --chdir="$REPO_ROOT" \
   --export=ALL \
-  scripts/aoraki/train_bert.slurm)
+  scripts/aoraki/train_lr.slurm)
 
 echo "Submitted as job $JOBID"
-LOGOUT="$LOG_DIR/verlan-bert-frozen-${JOBID}.out"
-LOGERR="$LOG_DIR/verlan-bert-frozen-${JOBID}.err"
+LOGOUT="$LOG_DIR/verlan-lr-frozen-${JOBID}.out"
+LOGERR="$LOG_DIR/verlan-lr-frozen-${JOBID}.err"
 echo "Tailing $LOGOUT and $LOGERR"
 while [[ ! -f "$LOGOUT" || ! -f "$LOGERR" ]]; do
   sleep 1

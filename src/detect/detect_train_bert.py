@@ -15,16 +15,20 @@ import json
 import os
 import random
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 import numpy as np
-import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, classification_report, f1_score
-from sklearn.model_selection import train_test_split
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
 from transformers import AutoModel, AutoTokenizer, BitsAndBytesConfig
+from src.detect.data_utils import (
+    PROJECT_ROOT,
+    load_slang_test_set,
+    load_verlan_dataset,
+)
+from src.detect.eval_utils import confusion_from_arrays, save_predictions
 
 # ------------------------ Tunable parameters ------------------------
 MODEL_ID = "Salesforce/SFR-Embedding-Mistral"
@@ -34,9 +38,6 @@ HEAD_DROPOUT = 0.1
 # Default batch size and length (can be overridden via CLI)
 DEF_BATCH = 32
 DEF_MAXLEN = 512
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
 # ------------------------ Stability/efficiency settings ------------------------
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
@@ -50,38 +51,6 @@ def set_seed(seed: int) -> None:
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
-
-def load_data(seed: int) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    print("Loading data …")
-    sent_path = RAW_DIR / "Sentences_balanced.xlsx"
-    gaz_path = RAW_DIR / "GazetteerEntries.xlsx"
-
-    missing = [p for p in [sent_path, gaz_path] if not p.exists()]
-    if missing:
-        msg = (
-            "Could not find required files:\n"
-            + "\n".join(f" - {p}" for p in missing)
-            + f"\nCWD = {Path.cwd()}\nPROJECT_ROOT = {PROJECT_ROOT}"
-        )
-        raise FileNotFoundError(msg)
-
-    df = pd.read_excel(sent_path)
-    lex = pd.read_excel(gaz_path)
-    if "label" not in df.columns:
-        vset = set(lex["verlan_form"].dropna().astype(str).str.lower().tolist())
-        def has_verlan(s: str) -> int:
-            toks = str(s).lower().split()
-            return int(any(t in vset for t in toks))
-        df["label"] = df["text"].apply(has_verlan)
-
-    train_df, test_df = train_test_split(
-        df, test_size=0.15, stratify=df["label"], random_state=seed
-    )
-    train_df, val_df = train_test_split(
-        train_df, test_size=0.15, stratify=train_df["label"], random_state=seed
-    )
-    print(f"Splits: train {len(train_df)}, val {len(val_df)}, test {len(test_df)}")
-    return train_df.reset_index(drop=True), val_df.reset_index(drop=True), test_df.reset_index(drop=True)
 
 def load_encoder():
     bnb_cfg = BitsAndBytesConfig(
@@ -206,7 +175,8 @@ def main() -> None:
     device = "cuda"
 
     set_seed(args.seed)
-    train_df, val_df, test_df = load_data(args.seed)
+    train_df, val_df, test_df = load_verlan_dataset(args.seed)
+    slang_df = load_slang_test_set()
     tok, enc = load_encoder()
 
     hidden = int(getattr(enc.config, "hidden_size", 1024))
@@ -258,11 +228,26 @@ def main() -> None:
             best_state = {k: v.detach().cpu() for k, v in head.state_dict().items()}
 
     test = evaluate(head, enc, test_loader)
-    test_preds = (test["_probs"] >= 0.5).astype(int)
-    test_f1 = float(f1_score(test["_gold"], test_preds, zero_division=0)) if len(np.unique(test["_gold"])) > 1 else 0.0
-    test_acc_05 = float(accuracy_score(test["_gold"], test_preds)) if len(np.unique(test["_gold"])) > 1 else 0.0
+    test_probs = test["_probs"]
+    test_gold = test["_gold"]
+    test_preds = (test_probs >= 0.5).astype(int)
+    test_f1 = float(f1_score(test_gold, test_preds, zero_division=0)) if len(np.unique(test_gold)) > 1 else 0.0
+    test_acc_05 = float(accuracy_score(test_gold, test_preds)) if len(np.unique(test_gold)) > 1 else 0.0
+    test_conf = confusion_from_arrays(test_gold, test_preds)
     print(f"Test F1@0.5: {test_f1:.3f}")
     print(f"Test Accuracy@0.5: {test_acc_05:.3f}")
+
+    slang_ds = TextDataset(slang_df["text"].tolist(), slang_df["label"].astype(int).tolist())
+    slang_loader = DataLoader(slang_ds, batch_size=max(1, args.batch_size * 2), shuffle=False, collate_fn=collate)
+    slang_eval = evaluate(head, enc, slang_loader)
+    slang_probs = slang_eval["_probs"]
+    slang_gold = slang_eval["_gold"]
+    slang_preds = (slang_probs >= 0.5).astype(int)
+    slang_conf = confusion_from_arrays(slang_gold, slang_preds)
+    slang_acc = float(accuracy_score(slang_gold, slang_preds)) if len(slang_gold) else 0.0
+    slang_f1 = float(f1_score(slang_gold, slang_preds, zero_division=0)) if len(np.unique(slang_gold)) > 1 else 0.0
+    print(f"Slang test Accuracy@0.5: {slang_acc:.3f}")
+    print(f"Slang test F1@0.5: {slang_f1:.3f}")
 
     if args.out_dir:
         out_dir = Path(args.out_dir)
@@ -277,6 +262,10 @@ def main() -> None:
     meta_path = out_dir / "meta.json"
     state = best_state if best_state is not None else head.state_dict()
     torch.save(state, ckpt_path)
+    test_pred_path = out_dir / "test_predictions.csv"
+    slang_pred_path = out_dir / "slang_predictions.csv"
+    save_predictions(test_df, test_probs, test_preds, test_pred_path)
+    save_predictions(slang_df, slang_probs, slang_preds, slang_pred_path)
     meta = {
         "model_id": MODEL_ID,
         "encoder_frozen": True,
@@ -298,7 +287,18 @@ def main() -> None:
             "val_best_f1@0.5": best_f1,
             "test_f1@0.5": test_f1,
             "test_acc@0.5": test_acc_05,
+            "test_confusion@0.5": test_conf,
+            "slang_test_set@0.5": {
+                **slang_conf,
+                "accuracy": slang_acc,
+                "f1": slang_f1,
+            },
         },
+        "artifacts": {
+            "head_checkpoint": str(ckpt_path.relative_to(PROJECT_ROOT) if str(ckpt_path).startswith(str(PROJECT_ROOT)) else ckpt_path),
+            "test_predictions": str(test_pred_path.relative_to(PROJECT_ROOT) if str(test_pred_path).startswith(str(PROJECT_ROOT)) else test_pred_path),
+            "slang_predictions": str(slang_pred_path.relative_to(PROJECT_ROOT) if str(slang_pred_path).startswith(str(PROJECT_ROOT)) else slang_pred_path),
+        }
     }
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Saved frozen head to: {ckpt_path}")
