@@ -1,0 +1,59 @@
+pair_id,variant,text,label,note,prob_1,pred_label
+1,verlan,Il sort avec une meuf sympa.,1,meuf→femme,0.5248938578038413,1
+1,standard,Il sort avec une femme sympa.,0,meuf→femme,0.2610790332937394,0
+2,verlan,Le keuf nous a arrêtés au feu.,1,keuf→flic,0.8946328433114349,1
+2,standard,Le flic nous a arrêtés au feu.,0,keuf→flic,0.3492169360908587,0
+3,verlan,C’était ouf hier soir à la teuf !,1,ouf→fou; teuf→fête,0.5880093949131991,1
+3,standard,C’était fou hier soir à la fête !,0,ouf→fou; teuf→fête,0.17278530023370303,0
+4,verlan,Ce mec est trop relou.,1,relou→lourd,0.4589250318704532,0
+4,standard,Ce mec est trop lourd.,0,relou→lourd,0.25281356760510215,0
+5,verlan,"Je trouve ça chelou, non ?",1,chelou→louche,0.21752833752572534,0
+5,standard,"Je trouve ça louche, non ?",0,chelou→louche,0.09710669778694649,0
+6,verlan,Il a mal à la teub.,1,teub→bite/pénis,0.6923918967547978,1
+6,standard,Il a mal au pénis.,0,teub→bite/pénis,0.30092661155702966,0
+7,verlan,On va pécho des billets au distributeur.,1,pécho→choper,0.6976689268209697,1
+7,standard,On va choper des billets au distributeur.,0,pécho→choper,0.38721255875780014,0
+8,verlan,Il est vénère aujourd’hui.,1,vénère→énervé,0.5554377675166462,1
+8,standard,Il est énervé aujourd’hui.,0,vénère→énervé,0.1532919266849261,0
+9,verlan,Ma reum cuisine ce soir.,1,reum→mère,0.9082533338594548,1
+9,standard,Ma mère cuisine ce soir.,0,reum→mère,0.26318159841036287,0
+10,verlan,Son reup bosse tard.,1,reup→père,0.9609554647396377,1
+10,standard,Son père bosse tard.,0,reup→père,0.265033646978958,0
+11,verlan,Mon reuf arrive vers 20h.,1,reuf→frère,0.738525438082277,1
+11,standard,Mon frère arrive vers 20h.,0,reuf→frère,0.2343184236524968,0
+12,verlan,C’est trop reuch ici.,1,reuch→cher,0.4282822820275816,0
+12,standard,C’est trop cher ici.,0,reuch→cher,0.05019575734559644,0
+13,verlan,Ce keum parle vite.,1,keum→mec,0.9431547518178549,1
+13,standard,Ce mec parle vite.,0,keum→mec,0.4775648804924472,0
+14,verlan,"Zarbi, cette histoire…",1,zarbi→bizarre,0.3503618643781225,0
+14,standard,"Bizarre, cette histoire…",0,zarbi→bizarre,0.06908578101929207,0
+15,verlan,Mets de la zicmu.,1,zicmu→musique,0.8022179319083098,1
+15,standard,Mets de la musique.,0,zicmu→musique,0.21890193739932132,0
+16,verlan,Cimer pour l’aide !,1,cimer→merci,0.5897528841879528,1
+16,standard,Merci pour l’aide !,0,cimer→merci,0.21884383770041077,0
+17,verlan,Il a crari qu’il était une star.,1,crari→croire (familier),0.7252761041688615,1
+17,standard,Il a cru qu’il était une star.,0,crari→croire (familier),0.2975584572526278,0
+18,verlan,Il est chanmé ce son.,1,chanmé→méchant (sens positif),0.6268696702334463,1
+18,standard,Il est méchant ce son. (génial),0,chanmé→méchant (sens positif),0.16687919112742763,0
+19,verlan,On bouge à Paname ce week-end.,1,Paname→Paris (argot),0.2344562128430653,0
+19,standard,On bouge à Paris ce week-end.,0,Paname→Paris (argot),0.1792646847837837,0
+20,verlan,Ce film est naze de ouf.,1,ouf (intensif),0.7033353359104276,1
+20,standard,Ce film est extrêmement nul.,0,ouf (intensif),0.06802905452354803,0
+21,verlan,J’ai croqué un grec avec la meuf.,1,"grec (argot), meuf",0.47837983012955254,0
+21,standard,J’ai mangé un sandwich grec avec la femme.,0,"grec (argot), meuf",0.24757044302190756,0
+22,verlan,Il fait le ouin-ouin.,1,ouin-ouin→pleurnicher,0.7099628616433821,1
+22,standard,Il pleurniche.,0,ouin-ouin→pleurnicher,0.5801458684731702,1
+23,verlan,On s’est kéné direct.,1,kéné→niqué,0.8525706518128847,1
+23,standard,On s’est niqué direct. (vulgaire),0,kéné→niqué,0.40995826406507146,0
+24,verlan,C’est ripou cette affaire.,1,ripou→pourri,0.4871819005884847,0
+24,standard,Cette affaire est pourrie.,0,ripou→pourri,0.049071636168637876,0
+25,verlan,"T’as capté ou pas, gros ?",1,capté→compris (argot),0.4031403350226009,0
+25,standard,Tu as compris ou pas ?,0,capté→compris (argot),0.3144232085397901,0
+26,verlan,On se capte après la fac.,1,capter→se retrouver (argot),0.49006521377545936,0
+26,standard,On se retrouve après la fac.,0,capter→se retrouver (argot),0.37879085296456044,0
+27,verlan,Il a tchoin dans la tête.,1,tchoin→fille facile (argot récent),0.7695264265579304,1
+27,standard,Il pense aux filles faciles.,0,tchoin→fille facile (argot récent),0.09141364737999672,0
+28,verlan,Il va se sape en noir.,1,"sape→habiller (argot, SAPE)",0.8349481330071531,1
+28,standard,Il va s’habiller en noir.,0,"sape→habiller (argot, SAPE)",0.3383980625039408,0
+29,verlan,On s’est pépouze tout le week-end.,1,pépouze→tranquille,0.7004235916296708,1
+29,standard,On est restés tranquilles tout le week-end.,0,pépouze→tranquille,0.3321935253949722,0

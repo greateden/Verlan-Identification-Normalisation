@@ -7,7 +7,7 @@
   "weight_decay": 0.01,
   "seed": 9,
   "run_id": "seed-9",
-  "out_dir": "models/detect/latest/lr_e2e/seed-9",
+  "out_dir": "experiment_results/E2E+LR/seed-9",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -16,26 +16,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.7658227848101266,
-    "test_f1@0.5": 0.7643835616438356,
-    "test_acc@0.5": 0.798358733880422,
+    "test_f1@0.5": 0.7254623044096729,
+    "test_acc@0.5": 0.7737397420867527,
     "test_confusion@0.5": {
-      "tn": 402,
-      "fp": 131,
-      "fn": 41,
-      "tp": 279
+      "tn": 405,
+      "fp": 128,
+      "fn": 65,
+      "tp": 255
     },
     "slang_test_set@0.5": {
-      "tn": 23,
-      "fp": 27,
+      "tn": 31,
+      "fp": 19,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.46,
+      "accuracy": 0.62,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 23,
+        "fp": 6,
+        "fn": 7,
+        "tp": 22,
+        "accuracy": 0.7758620689655172,
+        "f1": 0.7719298245614035
+      },
+      "verlan_test_set_invented": {
+        "tn": 22,
+        "fp": 3,
+        "fn": 18,
+        "tp": 7,
+        "accuracy": 0.58,
+        "f1": 0.4
+      }
     }
   },
   "artifacts": {
-    "checkpoint": "models/detect/latest/lr_e2e/seed-9/model.pt",
-    "test_predictions": "models/detect/latest/lr_e2e/seed-9/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/lr_e2e/seed-9/slang_predictions.csv"
+    "test_predictions": "experiment_results/E2E+LR/seed-9/test_predictions.csv",
+    "slang_predictions": "experiment_results/E2E+LR/seed-9/slang_predictions.csv",
+    "extra_summary": "experiment_results/E2E+LR/seed-9/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/E2E+LR/seed-9/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/E2E+LR/seed-9/verlan_test_set_invented_predictions.csv"
   }
 }

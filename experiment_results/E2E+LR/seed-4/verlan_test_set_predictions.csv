@@ -1,0 +1,59 @@
+pair_id,variant,text,label,note,prob_1,pred_label
+1,verlan,Il sort avec une meuf sympa.,1,meuf→femme,0.5294028,1
+1,standard,Il sort avec une femme sympa.,0,meuf→femme,0.4898194,0
+2,verlan,Le keuf nous a arrêtés au feu.,1,keuf→flic,0.5172353,1
+2,standard,Le flic nous a arrêtés au feu.,0,keuf→flic,0.47994894,0
+3,verlan,C’était ouf hier soir à la teuf !,1,ouf→fou; teuf→fête,0.5398815,1
+3,standard,C’était fou hier soir à la fête !,0,ouf→fou; teuf→fête,0.51636505,1
+4,verlan,Ce mec est trop relou.,1,relou→lourd,0.5104866,1
+4,standard,Ce mec est trop lourd.,0,relou→lourd,0.5133256,1
+5,verlan,"Je trouve ça chelou, non ?",1,chelou→louche,0.52786595,1
+5,standard,"Je trouve ça louche, non ?",0,chelou→louche,0.50604594,1
+6,verlan,Il a mal à la teub.,1,teub→bite/pénis,0.53430706,1
+6,standard,Il a mal au pénis.,0,teub→bite/pénis,0.5367371,1
+7,verlan,On va pécho des billets au distributeur.,1,pécho→choper,0.55091447,1
+7,standard,On va choper des billets au distributeur.,0,pécho→choper,0.4778389,0
+8,verlan,Il est vénère aujourd’hui.,1,vénère→énervé,0.5175353,1
+8,standard,Il est énervé aujourd’hui.,0,vénère→énervé,0.47548872,0
+9,verlan,Ma reum cuisine ce soir.,1,reum→mère,0.5438382,1
+9,standard,Ma mère cuisine ce soir.,0,reum→mère,0.5275369,1
+10,verlan,Son reup bosse tard.,1,reup→père,0.5347995,1
+10,standard,Son père bosse tard.,0,reup→père,0.48039436,0
+11,verlan,Mon reuf arrive vers 20h.,1,reuf→frère,0.5031185,1
+11,standard,Mon frère arrive vers 20h.,0,reuf→frère,0.48419568,0
+12,verlan,C’est trop reuch ici.,1,reuch→cher,0.5442102,1
+12,standard,C’est trop cher ici.,0,reuch→cher,0.5408779,1
+13,verlan,Ce keum parle vite.,1,keum→mec,0.5481114,1
+13,standard,Ce mec parle vite.,0,keum→mec,0.5053827,1
+14,verlan,"Zarbi, cette histoire…",1,zarbi→bizarre,0.497296,0
+14,standard,"Bizarre, cette histoire…",0,zarbi→bizarre,0.4752798,0
+15,verlan,Mets de la zicmu.,1,zicmu→musique,0.5263142,1
+15,standard,Mets de la musique.,0,zicmu→musique,0.49351,0
+16,verlan,Cimer pour l’aide !,1,cimer→merci,0.5357457,1
+16,standard,Merci pour l’aide !,0,cimer→merci,0.48696306,0
+17,verlan,Il a crari qu’il était une star.,1,crari→croire (familier),0.52049196,1
+17,standard,Il a cru qu’il était une star.,0,crari→croire (familier),0.5267942,1
+18,verlan,Il est chanmé ce son.,1,chanmé→méchant (sens positif),0.50521237,1
+18,standard,Il est méchant ce son. (génial),0,chanmé→méchant (sens positif),0.4822721,0
+19,verlan,On bouge à Paname ce week-end.,1,Paname→Paris (argot),0.49681976,0
+19,standard,On bouge à Paris ce week-end.,0,Paname→Paris (argot),0.5121874,1
+20,verlan,Ce film est naze de ouf.,1,ouf (intensif),0.48904172,0
+20,standard,Ce film est extrêmement nul.,0,ouf (intensif),0.4822452,0
+21,verlan,J’ai croqué un grec avec la meuf.,1,"grec (argot), meuf",0.5309294,1
+21,standard,J’ai mangé un sandwich grec avec la femme.,0,"grec (argot), meuf",0.525666,1
+22,verlan,Il fait le ouin-ouin.,1,ouin-ouin→pleurnicher,0.5474213,1
+22,standard,Il pleurniche.,0,ouin-ouin→pleurnicher,0.51334655,1
+23,verlan,On s’est kéné direct.,1,kéné→niqué,0.53925186,1
+23,standard,On s’est niqué direct. (vulgaire),0,kéné→niqué,0.51165646,1
+24,verlan,C’est ripou cette affaire.,1,ripou→pourri,0.54586667,1
+24,standard,Cette affaire est pourrie.,0,ripou→pourri,0.4744048,0
+25,verlan,"T’as capté ou pas, gros ?",1,capté→compris (argot),0.52943015,1
+25,standard,Tu as compris ou pas ?,0,capté→compris (argot),0.527417,1
+26,verlan,On se capte après la fac.,1,capter→se retrouver (argot),0.4815465,0
+26,standard,On se retrouve après la fac.,0,capter→se retrouver (argot),0.47827026,0
+27,verlan,Il a tchoin dans la tête.,1,tchoin→fille facile (argot récent),0.52388346,1
+27,standard,Il pense aux filles faciles.,0,tchoin→fille facile (argot récent),0.48496437,0
+28,verlan,Il va se sape en noir.,1,"sape→habiller (argot, SAPE)",0.522982,1
+28,standard,Il va s’habiller en noir.,0,"sape→habiller (argot, SAPE)",0.48579493,0
+29,verlan,On s’est pépouze tout le week-end.,1,pépouze→tranquille,0.50327533,1
+29,standard,On est restés tranquilles tout le week-end.,0,pépouze→tranquille,0.47836813,0

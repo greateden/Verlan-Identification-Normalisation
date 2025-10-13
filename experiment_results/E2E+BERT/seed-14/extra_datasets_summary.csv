@@ -1,0 +1,3 @@
+dataset,tn,fp,fn,tp,accuracy,f1
+verlan_test_set,11,18,5,24,0.603448275862069,0.676056338028169
+verlan_test_set_invented,14,11,13,12,0.52,0.5

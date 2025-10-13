@@ -2,19 +2,19 @@
   "model_id": "Salesforce/SFR-Embedding-Mistral",
   "encoder_frozen": true,
   "head": "LogisticRegression",
-  "batch_size": 8,
-  "max_length": 128,
+  "batch_size": 32,
+  "max_length": 512,
   "seed": 8,
   "run_id": "seed-8",
-  "out_dir": "models/detect/latest/lr_frozen/seed-8",
+  "out_dir": "experiment_results/Frozen+LR/seed-8",
   "head_params": {
     "max_iter": 2000,
     "class_weight": "balanced",
     "solver": "lbfgs"
   },
   "metrics": {
-    "val_f1@0.5": 0.7456445993031359,
-    "val_acc@0.5": 0.7986206896551724,
+    "val_f1@0.5": 0.7469458987783595,
+    "val_acc@0.5": 0.8,
     "test_f1@0.5": 0.7644444444444445,
     "test_acc@0.5": 0.813599062133646,
     "test_confusion@0.5": {
@@ -30,11 +30,32 @@
       "tp": 0,
       "accuracy": 0.8,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 28,
+        "fp": 1,
+        "fn": 8,
+        "tp": 21,
+        "accuracy": 0.8448275862068966,
+        "f1": 0.8235294117647058
+      },
+      "verlan_test_set_invented": {
+        "tn": 25,
+        "fp": 0,
+        "fn": 17,
+        "tp": 8,
+        "accuracy": 0.66,
+        "f1": 0.48484848484848486
+      }
     }
   },
   "artifacts": {
-    "classifier": "models/detect/latest/lr_frozen/seed-8/lr_head.joblib",
-    "test_predictions": "models/detect/latest/lr_frozen/seed-8/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/lr_frozen/seed-8/slang_predictions.csv"
+    "classifier": "experiment_results/Frozen+LR/seed-8/lr_head.joblib",
+    "test_predictions": "experiment_results/Frozen+LR/seed-8/test_predictions.csv",
+    "slang_predictions": "experiment_results/Frozen+LR/seed-8/slang_predictions.csv",
+    "extra_summary": "experiment_results/Frozen+LR/seed-8/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/Frozen+LR/seed-8/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/Frozen+LR/seed-8/verlan_test_set_invented_predictions.csv"
   }
 }

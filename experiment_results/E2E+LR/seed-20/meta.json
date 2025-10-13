@@ -7,7 +7,7 @@
   "weight_decay": 0.01,
   "seed": 20,
   "run_id": "seed-20",
-  "out_dir": "models/detect/latest/lr_e2e/seed-20",
+  "out_dir": "experiment_results/E2E+LR/seed-20",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -16,26 +16,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.44680851063829785,
-    "test_f1@0.5": 0.4230769230769231,
-    "test_acc@0.5": 0.6834701055099648,
+    "test_f1@0.5": 0.5669291338582677,
+    "test_acc@0.5": 0.6131301289566237,
     "test_confusion@0.5": {
-      "tn": 484,
-      "fp": 49,
-      "fn": 221,
-      "tp": 99
+      "tn": 307,
+      "fp": 226,
+      "fn": 104,
+      "tp": 216
     },
     "slang_test_set@0.5": {
-      "tn": 47,
-      "fp": 3,
+      "tn": 35,
+      "fp": 15,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.94,
+      "accuracy": 0.7,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 10,
+        "fp": 19,
+        "fn": 5,
+        "tp": 24,
+        "accuracy": 0.5862068965517241,
+        "f1": 0.6666666666666666
+      },
+      "verlan_test_set_invented": {
+        "tn": 12,
+        "fp": 13,
+        "fn": 12,
+        "tp": 13,
+        "accuracy": 0.5,
+        "f1": 0.5098039215686274
+      }
     }
   },
   "artifacts": {
-    "checkpoint": "models/detect/latest/lr_e2e/seed-20/model.pt",
-    "test_predictions": "models/detect/latest/lr_e2e/seed-20/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/lr_e2e/seed-20/slang_predictions.csv"
+    "test_predictions": "experiment_results/E2E+LR/seed-20/test_predictions.csv",
+    "slang_predictions": "experiment_results/E2E+LR/seed-20/slang_predictions.csv",
+    "extra_summary": "experiment_results/E2E+LR/seed-20/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/E2E+LR/seed-20/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/E2E+LR/seed-20/verlan_test_set_invented_predictions.csv"
   }
 }

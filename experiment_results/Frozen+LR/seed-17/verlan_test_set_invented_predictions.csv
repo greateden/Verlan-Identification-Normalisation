@@ -1,0 +1,51 @@
+pair_id,variant,text,label,note,prob_1,pred_label
+1,verlan,J’ai mangé toutes les boisesframes!,1,boisesframes→framboises,0.3569071689977166,0
+1,standard,J’ai mangé toutes les framboises!,0,boisesframes→framboises,0.2202464383919672,0
+2,verlan,Le moussepample est délicieux.,1,moussepample→pamplemousse,0.6933272523935692,1
+2,standard,Le pamplemousse est délicieux.,0,moussepample→pamplemousse,0.19466211852206924,0
+3,verlan,Elle aime seulement les gens zélandaisnéos.,1,zélandaisnéos→néo-zélandais,0.4467125116552749,0
+3,standard,Elle aime seulement les gens néo-zélandais.,0,zélandaisnéos→néo-zélandais,0.318416018815437,0
+4,verlan,"Et dévoile aussi la distance, reusedoulour, survenue entre elle, étudiante…",1,reusedoulour→douloureuse,0.4290074009554176,0
+4,standard,"Et dévoile aussi la distance, douloureuse, survenue entre elle, étudiante…",0,reusedoulour→douloureuse,0.2178526435720056,0
+5,verlan,"Sans sesquipédaliophobippopotomonstro, je lui ai dit :” Je suis un chaton.”",1,sesquipédaliophobippopotomonstro→hippopotomonstrosesquipédaliophobie,0.6037697889248897,1
+5,standard,"Sans hippopotomonstrosesquipédaliophobie, je lui ai dit :” Je suis un chaton.”",0,sesquipédaliophobippopotomonstro→hippopotomonstrosesquipédaliophobie,0.39982904028982735,0
+6,verlan,Putain! C’est pedo.,1,pedo→dope,0.07911053318407203,0
+6,standard,Putain! C’est dope.,0,pedo→dope,0.06334520656885767,0
+7,verlan,Tout les garçons et les filles de mon âge vont à la plage pour les cherdou.,1,cherdou→douches,0.4978589319483062,0
+7,standard,Tous les garçons et les filles de mon âge vont à la plage pour les douches.,0,cherdou→douches,0.25460776944727825,0
+8,verlan,"Je te donne vous-rendrez, et personne ne parle de nous.",1,vous-rendrez→rendez-vous,0.19506598292803842,0
+8,standard,"Je te donne rendez-vous, et personne ne parle de nous.",0,vous-rendrez→rendez-vous,0.1538068285704123,0
+9,verlan,"Tu es la plus belle des étoiles , mipar les autres, je ne vois que toi.",1,mipar→parmi,0.4521595823803366,0
+9,standard,"Tu es la plus belle des étoiles, parmi les autres, je ne vois que toi.",0,mipar→parmi,0.19948705665098768,0
+10,verlan,Je voudrais pouvoir traperrat le temps.,1,traperrat→rattraper,0.7195228842768295,1
+10,standard,Je voudrais pouvoir rattraper le temps.,0,traperrat→rattraper,0.518948890430162,1
+11,verlan,"Je repense à toi chaque jour, j’aimerais ollerrec ce qui est cassé.",1,ollerrec→recoller,0.6342302801962189,1
+11,standard,"Je repense à toi chaque jour, j’aimerais recoller ce qui est cassé.",0,ollerrec→recoller,0.3811397552918406,0
+12,verlan,"Je braque ton petit cœur, ma chérie, tu es trop santesédui.",1,santesédui→séduisante,0.3162234934758878,0
+12,standard,"Je braque ton petit cœur, ma chérie, tu es trop séduisante.",0,santesédui→séduisante,0.23208133429487207,0
+13,verlan,"Elle fait ses valises et vole loin de moi, yeb yeb.",1,yeb yeb→bye bye,0.26413903355294044,0
+13,standard,"Elle fait ses valises et vole loin de moi, bye bye.",0,yeb yeb→bye bye,0.06307153088554912,0
+14,verlan,Le niver qui craque sur mes doigts sur les murs.,1,niver→vernis,0.599547129103738,1
+14,standard,"Le vernis qui craque sur mes doigts, sur les murs.",0,niver→vernis,0.16740095393774262,0
+15,verlan,La lune fait trembler la terre et je me sousdit.,1,sousdit→dissous,0.30301011921422416,0
+15,standard,La lune fait trembler la terre et je me dissous.,0,sousdit→dissous,0.31018927499742166,0
+16,verlan,"Lunatique sans équilibre émotionnel, mais ma manma dit que c’est ce qui me rend spéciale.",1,manma→maman,0.17248519942279544,0
+16,standard,"Lunatique sans équilibre émotionnel, mais ma maman dit que c’est ce qui me rend spéciale.",0,manma→maman,0.12592765335275996,0
+17,verlan,On va t’utiliser pour des tests-crash.,1,tests-crash→crash-tests,0.1811332528766373,0
+17,standard,On va t’utiliser pour des crash-tests.,0,tests-crash→crash-tests,0.15217809799518778,0
+18,verlan,On va te présenter à des derviches neurtours.,1,neurtours→tourneurs,0.39186178820781425,0
+18,standard,On va te présenter à des derviches tourneurs.,0,neurtours→tourneurs,0.2525885831955378,0
+19,verlan,On va t’occuper avec des comsits.,1,comsits→sitcoms,0.3920283888810762,0
+19,standard,On va t’occuper avec des sitcoms.,0,comsits→sitcoms,0.22054061364966016,0
+20,verlan,"Moi, je ris, je rêve et je me mêlem parfois.",1,mêlem→m’emmêle,0.2637599874769968,0
+20,standard,"Moi, je ris, je rêve et je m’emmêle parfois.",0,mêlem→m’emmêle,0.2398436314716178,0
+21,verlan,Sur un canvol je fondrais.,1,canvol→volcan,0.8783064045352408,1
+21,standard,Sur un volcan je fondrais.,0,canvol→volcan,0.38550936601517777,0
+22,verlan,On me dit que le temps qui glisse est un laudsal.,1,laudsal→salaud,0.3892116161918967,0
+22,standard,On me dit que le temps qui glisse est un salaud.,0,laudsal→salaud,0.2114529923181079,0
+23,verlan,"Je ne me viensous plus, c’était tard dans la nuit.",1,viensous→souviens,0.501982861994245,1
+23,standard,"Je ne me souviens plus, c’était tard dans la nuit.",0,viensous→souviens,0.28047674768957065,0
+24,verlan,C’est une belle néejour d’été.,1,néejour→journée,0.5555292445938377,1
+24,standard,C’est une belle journée d’été.,0,néejour→journée,0.27632164091010947,0
+25,verlan,Je compte les tonmous funèbres.,1,tonmous→moutons,0.5847005468386507,1
+25,standard,Je compte les moutons funèbres.,0,tonmous→moutons,0.30923965775671114,0

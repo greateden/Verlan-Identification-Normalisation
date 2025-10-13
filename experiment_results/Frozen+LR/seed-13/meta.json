@@ -2,39 +2,60 @@
   "model_id": "Salesforce/SFR-Embedding-Mistral",
   "encoder_frozen": true,
   "head": "LogisticRegression",
-  "batch_size": 8,
-  "max_length": 128,
+  "batch_size": 32,
+  "max_length": 512,
   "seed": 13,
   "run_id": "seed-13",
-  "out_dir": "models/detect/latest/lr_frozen/seed-13",
+  "out_dir": "experiment_results/Frozen+LR/seed-13",
   "head_params": {
     "max_iter": 2000,
     "class_weight": "balanced",
     "solver": "lbfgs"
   },
   "metrics": {
-    "val_f1@0.5": 0.7610921501706485,
-    "val_acc@0.5": 0.8068965517241379,
-    "test_f1@0.5": 0.7685589519650655,
-    "test_acc@0.5": 0.813599062133646,
+    "val_f1@0.5": 0.7666098807495741,
+    "val_acc@0.5": 0.8110344827586207,
+    "test_f1@0.5": 0.7739130434782608,
+    "test_acc@0.5": 0.8171160609613131,
     "test_confusion@0.5": {
       "tn": 430,
       "fp": 103,
-      "fn": 56,
-      "tp": 264
+      "fn": 53,
+      "tp": 267
     },
     "slang_test_set@0.5": {
-      "tn": 42,
-      "fp": 8,
+      "tn": 41,
+      "fp": 9,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.84,
+      "accuracy": 0.82,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 27,
+        "fp": 2,
+        "fn": 7,
+        "tp": 22,
+        "accuracy": 0.8448275862068966,
+        "f1": 0.8301886792452831
+      },
+      "verlan_test_set_invented": {
+        "tn": 25,
+        "fp": 0,
+        "fn": 17,
+        "tp": 8,
+        "accuracy": 0.66,
+        "f1": 0.48484848484848486
+      }
     }
   },
   "artifacts": {
-    "classifier": "models/detect/latest/lr_frozen/seed-13/lr_head.joblib",
-    "test_predictions": "models/detect/latest/lr_frozen/seed-13/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/lr_frozen/seed-13/slang_predictions.csv"
+    "classifier": "experiment_results/Frozen+LR/seed-13/lr_head.joblib",
+    "test_predictions": "experiment_results/Frozen+LR/seed-13/test_predictions.csv",
+    "slang_predictions": "experiment_results/Frozen+LR/seed-13/slang_predictions.csv",
+    "extra_summary": "experiment_results/Frozen+LR/seed-13/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/Frozen+LR/seed-13/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/Frozen+LR/seed-13/verlan_test_set_invented_predictions.csv"
   }
 }

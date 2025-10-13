@@ -1,51 +1,51 @@
 pair_id,variant,text,verlan_label,register_label,source,note,label,prob_1,pred_label
-1,slang,"Elle était dingue des fringues de créateur et ne kiffait pas trop mon style vestimentaire, tendance récupération.",0,SLANG,https://fr.wiktionary.org/wiki/kiffer,kiffer→aimer; fringues→vêtements; dingue→passionnée,0,0.21872379703402642,0
-1,standard,"Elle était passionnée par les vêtements de créateurs et n’aimait pas trop mon style vestimentaire, tendance récupération.",0,STANDARD,normalized,kiffer→aimer; fringues→vêtements; dingue→passionnée,0,0.10243252502427548,0
-2,slang,"Mais tu es trop drôle, meuf, tu viens de te décrire…",0,SLANG,https://fr.wiktionary.org/wiki/meuf,meuf→jeune femme,0,0.35482249097235047,0
-2,standard,"Mais tu es trop drôle, jeune femme, tu viens de te décrire…",0,STANDARD,normalized,meuf→jeune femme,0,0.26800137983327743,0
-3,slang,"Elle avait entendu quelqu'un venir, avait espéré un instant que ça ne soit pas un relou qui lui casserait les pieds en essayant de briser la glace, histoire de passer le temps.",0,SLANG,https://fr.wiktionary.org/wiki/relou,relou→personne pénible,0,0.22474374366386435,0
-3,standard,"Elle avait entendu quelqu’un venir, avait espéré un instant que ce ne soit pas quelqu’un de pénible qui lui casserait les pieds en essayant de briser la glace, histoire de passer le temps.",0,STANDARD,normalized,relou→personne pénible,0,0.1919630033397074,0
-4,slang,"… une ""petite fille chelou"" et même ""psychopathe"".",0,SLANG,https://fr.wiktionary.org/wiki/chelou,chelou→bizarre/louche,0,0.3739026673449899,0
-4,standard,… une petite fille bizarre et même psychopathe.,0,STANDARD,normalized,chelou→bizarre,0,0.15281253981253995,0
-5,slang,"— T’as eu ton bac alors ? — Ouais, tranquille.",0,SLANG,https://fr.wiktionary.org/wiki/ouais,ouais→oui; tranquille→sans problème,0,0.3555729749375925,0
-5,standard,"— Tu as eu ton bac alors ? — Oui, sans problème.",0,STANDARD,normalized,ouais→oui; tranquille→sans problème,0,0.6010300180934898,1
-6,slang,"Là, tous ceux qui fumaient ont allumé leurs clopes avec le mégot.",0,SLANG,https://fr.wiktionary.org/wiki/clope,clopes→cigarettes,0,0.2778199118076423,0
-6,standard,"Là, tous ceux qui fumaient ont allumé leurs cigarettes avec le mégot.",0,STANDARD,normalized,clopes→cigarettes,0,0.244118684752169,0
-7,slang,On s’en tape. C’est toujours la même histoire. Elle les traîne en justice parce qu’ils sont pétés de thunes.,0,SLANG,https://fr.wiktionary.org/wiki/p%C3%A9t%C3%A9_de_thunes,pétés de thunes→très riches,0,0.1807714931096255,0
-7,standard,On s’en moque. C’est toujours la même histoire. Elle les traîne en justice parce qu’ils sont très riches.,0,STANDARD,normalized,pétés de thunes→très riches,0,0.12841132761379775,0
-8,slang,Il picolait comme tout le monde.,0,SLANG,https://fr.wiktionary.org/wiki/picoler,picoler→boire de l’alcool,0,0.4926055874583515,0
-8,standard,Il buvait de l’alcool comme tout le monde.,0,STANDARD,normalized,picoler→boire de l’alcool,0,0.5872886571336028,1
-9,slang,"Wesh, il est où mon bif cousin ?",0,SLANG,https://fr.wiktionary.org/wiki/wesh,wesh→hé; bif→billet/argent,0,0.671413849588536,1
-9,standard,"Hé, il est où mon billet, cousin ?",0,STANDARD,normalized,wesh→hé; bif→billet,0,0.32215708434743306,0
-10,slang,Déconne pas… On avait les keufs au cul !,0,SLANG,https://fr.wiktionary.org/wiki/keuf,keufs→policiers; au cul→à nos trousses,0,0.5336540994420348,1
-10,standard,Ne déconne pas… On avait les policiers à nos trousses !,0,STANDARD,normalized,keufs→policiers,0,0.23340930638439344,0
-11,slang,"Avant tout, nos textes évoquent la teuf, la chouille entre potes, les virées, les grosses cuites, l'amour, la mort…",0,SLANG,https://fr.wiktionary.org/wiki/teuf,teuf/chouille→fête/soirée; potes→amis,0,0.49909557080740846,0
-11,standard,"Avant tout, nos textes évoquent la fête, la soirée entre amis, les virées, les grosses ivresses, l’amour, la mort…",0,STANDARD,normalized,teuf→fête; chouille→soirée; potes→amis,0,0.22160444924154163,0
-12,slang,"Correctement fringués, sans plus, ils donnaient l’impression d’être deux employés de bureau.",0,SLANG,https://fr.wiktionary.org/wiki/fringuer,fringués→habillés,0,0.3426941997409224,0
-12,standard,"Correctement habillés, sans plus, ils donnaient l’impression d’être deux employés de bureau.",0,STANDARD,normalized,fringués→habillés,0,0.11312200797097662,0
-13,slang,"— Allez, mon pote, du vent. Allez, du balai.",0,SLANG,https://fr.wiktionary.org/wiki/mon_pote,mon pote→monsieur,0,0.3016273684525719,0
-13,standard,"— Allez, monsieur, du vent. Allez, du balai.",0,STANDARD,normalized,mon pote→monsieur,0,0.2606047536065957,0
-14,slang,Les Français contiennent une terrible envie de se bouffer le nez qu'ils satisferont après la guerre.,0,SLANG,https://fr.wiktionary.org/wiki/se_bouffer_le_nez,se bouffer le nez→se quereller vivement,0,0.3631034177044807,0
-14,standard,Les Français retiennent une terrible envie de se quereller qu’ils satisferont après la guerre.,0,STANDARD,normalized,se bouffer le nez→se quereller,0,0.17566455400679623,0
-15,slang,"La picole te réussit pas, p’tit gars.",0,SLANG,https://fr.wiktionary.org/wiki/picole,picole→alcool,0,0.7113611204123561,1
-15,standard,"L’alcool ne te réussit pas, petit gars.",0,STANDARD,normalized,picole→alcool,0,0.2965740834775293,0
-16,slang,Il est blindé de thunes et il sait comment s’en servir.,0,SLANG,https://fr.wiktionary.org/wiki/blind%C3%A9_de_thunes,blindé de thunes→très riche,0,0.37767737037737437,0
-16,standard,Il est très riche et il sait comment s’en servir.,0,STANDARD,normalized,blindé de thunes→très riche,0,0.11080651900020765,0
-17,slang,Tu t’auto-kiffes pas trop c’est ça qu’est bien.,0,SLANG,https://fr.wiktionary.org/wiki/auto-kiffer,auto-kiffer→s’apprécier soi-même,0,0.7154092661320315,1
-17,standard,"Tu ne t’apprécies pas trop, c’est ça qui est bien.",0,STANDARD,normalized,auto-kiffer→s’apprécier,0,0.1691319610304799,0
-18,slang,… le rail a fait le boulot.,0,SLANG,https://fr.wiktionary.org/wiki/faire_le_boulot,boulot→travail,0,0.3746058846015138,0
-18,standard,… le rail a fait le travail.,0,STANDARD,normalized,boulot→travail,0,0.2882247198235331,0
-19,slang,… elle n’a pas rendu visite à son pote Ferdinand le taureau.,0,SLANG,https://fr.wiktionary.org/wiki/pote,pote→ami,0,0.26518455642787075,0
-19,standard,… elle n’a pas rendu visite à son ami Ferdinand le taureau.,0,STANDARD,normalized,pote→ami,0,0.25557877149346564,0
-20,slang,"« Moi j’ai quitté ma femme pour une femme moins chiante », disent les hommes.",0,SLANG,https://fr.wiktionary.org/wiki/chiant,chiant→pénible,0,0.16221031821581097,0
-20,standard,"« Moi, j’ai quitté ma femme pour une femme moins pénible », disent les hommes.",0,STANDARD,normalized,chiant→pénible,0,0.12447811094707037,0
-21,slang,… Mr Désir est toujours pro bagnolard …,0,SLANG,https://fr.wiktionary.org/wiki/bagnolard,bagnolard→automobiliste,0,0.29310774397596273,0
-21,standard,… M. Désir est toujours pro-automobiliste …,0,STANDARD,normalized,bagnolard→automobiliste,0,0.18501877314264195,0
-22,slang,L’eau potable ?… ouai !… ouai !…,0,SLANG,https://fr.wiktionary.org/wiki/ouai,ouai→oui,0,0.1151860324118578,0
-22,standard,L’eau potable ?… oui !… oui !…,0,STANDARD,normalized,ouai→oui,0,0.08191484992815541,0
-23,slang,"Les bourges, ils parlent le “wesh wesh”.",0,SLANG,https://fr.wiktionary.org/wiki/wesh-wesh,wesh wesh→parler de banlieue/argot des jeunes,0,0.5931281293314838,1
-23,standard,Les bourgeois parlent l’argot des jeunes.,0,STANDARD,normalized,wesh wesh→argot des jeunes,0,0.16098559478248492,0
-24,slang,"T’as peur d’un teckel ? Ma parole, t’es une vraie gonzesse !",0,SLANG,https://fr.wiktionary.org/wiki/gonzesse,gonzesse→peureux/peureuse (insulte); reformulation neutre,0,0.7178354016169466,1
-24,standard,"Tu as peur d’un teckel ? Ma parole, tu es vraiment un peureux !",0,STANDARD,normalized,gonzesse→peureux,0,0.7289066497488014,1
-25,slang,… des mecs pas mal friqués.,0,SLANG,https://fr.wiktionary.org/wiki/mecs,mecs→hommes; friqués→riches,0,0.36480802120258105,0
-25,standard,… des hommes assez riches.,0,STANDARD,normalized,mecs→hommes; friqués→riches,0,0.08399602716972576,0
+1,slang,"Elle était dingue des fringues de créateur et ne kiffait pas trop mon style vestimentaire, tendance récupération.",0,SLANG,https://fr.wiktionary.org/wiki/kiffer,kiffer→aimer; fringues→vêtements; dingue→passionnée,0,0.2181109767556659,0
+1,standard,"Elle était passionnée par les vêtements de créateurs et n’aimait pas trop mon style vestimentaire, tendance récupération.",0,STANDARD,normalized,kiffer→aimer; fringues→vêtements; dingue→passionnée,0,0.1021860552896219,0
+2,slang,"Mais tu es trop drôle, meuf, tu viens de te décrire…",0,SLANG,https://fr.wiktionary.org/wiki/meuf,meuf→jeune femme,0,0.3544932249462177,0
+2,standard,"Mais tu es trop drôle, jeune femme, tu viens de te décrire…",0,STANDARD,normalized,meuf→jeune femme,0,0.26932990868113693,0
+3,slang,"Elle avait entendu quelqu'un venir, avait espéré un instant que ça ne soit pas un relou qui lui casserait les pieds en essayant de briser la glace, histoire de passer le temps.",0,SLANG,https://fr.wiktionary.org/wiki/relou,relou→personne pénible,0,0.22500595337871096,0
+3,standard,"Elle avait entendu quelqu’un venir, avait espéré un instant que ce ne soit pas quelqu’un de pénible qui lui casserait les pieds en essayant de briser la glace, histoire de passer le temps.",0,STANDARD,normalized,relou→personne pénible,0,0.1919674083906506,0
+4,slang,"… une ""petite fille chelou"" et même ""psychopathe"".",0,SLANG,https://fr.wiktionary.org/wiki/chelou,chelou→bizarre/louche,0,0.375104557827533,0
+4,standard,… une petite fille bizarre et même psychopathe.,0,STANDARD,normalized,chelou→bizarre,0,0.1522791578652141,0
+5,slang,"— T’as eu ton bac alors ? — Ouais, tranquille.",0,SLANG,https://fr.wiktionary.org/wiki/ouais,ouais→oui; tranquille→sans problème,0,0.3582594323663826,0
+5,standard,"— Tu as eu ton bac alors ? — Oui, sans problème.",0,STANDARD,normalized,ouais→oui; tranquille→sans problème,0,0.6000076177319101,1
+6,slang,"Là, tous ceux qui fumaient ont allumé leurs clopes avec le mégot.",0,SLANG,https://fr.wiktionary.org/wiki/clope,clopes→cigarettes,0,0.2807594488625788,0
+6,standard,"Là, tous ceux qui fumaient ont allumé leurs cigarettes avec le mégot.",0,STANDARD,normalized,clopes→cigarettes,0,0.2463224471087625,0
+7,slang,On s’en tape. C’est toujours la même histoire. Elle les traîne en justice parce qu’ils sont pétés de thunes.,0,SLANG,https://fr.wiktionary.org/wiki/p%C3%A9t%C3%A9_de_thunes,pétés de thunes→très riches,0,0.17952261876997133,0
+7,standard,On s’en moque. C’est toujours la même histoire. Elle les traîne en justice parce qu’ils sont très riches.,0,STANDARD,normalized,pétés de thunes→très riches,0,0.12855646782192537,0
+8,slang,Il picolait comme tout le monde.,0,SLANG,https://fr.wiktionary.org/wiki/picoler,picoler→boire de l’alcool,0,0.4947898707224479,0
+8,standard,Il buvait de l’alcool comme tout le monde.,0,STANDARD,normalized,picoler→boire de l’alcool,0,0.5873441946110123,1
+9,slang,"Wesh, il est où mon bif cousin ?",0,SLANG,https://fr.wiktionary.org/wiki/wesh,wesh→hé; bif→billet/argent,0,0.6721391247099192,1
+9,standard,"Hé, il est où mon billet, cousin ?",0,STANDARD,normalized,wesh→hé; bif→billet,0,0.3206154326490279,0
+10,slang,Déconne pas… On avait les keufs au cul !,0,SLANG,https://fr.wiktionary.org/wiki/keuf,keufs→policiers; au cul→à nos trousses,0,0.5328175812452951,1
+10,standard,Ne déconne pas… On avait les policiers à nos trousses !,0,STANDARD,normalized,keufs→policiers,0,0.23378241126486665,0
+11,slang,"Avant tout, nos textes évoquent la teuf, la chouille entre potes, les virées, les grosses cuites, l'amour, la mort…",0,SLANG,https://fr.wiktionary.org/wiki/teuf,teuf/chouille→fête/soirée; potes→amis,0,0.5005002464423454,1
+11,standard,"Avant tout, nos textes évoquent la fête, la soirée entre amis, les virées, les grosses ivresses, l’amour, la mort…",0,STANDARD,normalized,teuf→fête; chouille→soirée; potes→amis,0,0.22291229008005584,0
+12,slang,"Correctement fringués, sans plus, ils donnaient l’impression d’être deux employés de bureau.",0,SLANG,https://fr.wiktionary.org/wiki/fringuer,fringués→habillés,0,0.33947527466110666,0
+12,standard,"Correctement habillés, sans plus, ils donnaient l’impression d’être deux employés de bureau.",0,STANDARD,normalized,fringués→habillés,0,0.11316280340105088,0
+13,slang,"— Allez, mon pote, du vent. Allez, du balai.",0,SLANG,https://fr.wiktionary.org/wiki/mon_pote,mon pote→monsieur,0,0.2997596243832877,0
+13,standard,"— Allez, monsieur, du vent. Allez, du balai.",0,STANDARD,normalized,mon pote→monsieur,0,0.2610270762595447,0
+14,slang,Les Français contiennent une terrible envie de se bouffer le nez qu'ils satisferont après la guerre.,0,SLANG,https://fr.wiktionary.org/wiki/se_bouffer_le_nez,se bouffer le nez→se quereller vivement,0,0.3627665651643073,0
+14,standard,Les Français retiennent une terrible envie de se quereller qu’ils satisferont après la guerre.,0,STANDARD,normalized,se bouffer le nez→se quereller,0,0.17670422183791704,0
+15,slang,"La picole te réussit pas, p’tit gars.",0,SLANG,https://fr.wiktionary.org/wiki/picole,picole→alcool,0,0.7076886082408596,1
+15,standard,"L’alcool ne te réussit pas, petit gars.",0,STANDARD,normalized,picole→alcool,0,0.29650743493323656,0
+16,slang,Il est blindé de thunes et il sait comment s’en servir.,0,SLANG,https://fr.wiktionary.org/wiki/blind%C3%A9_de_thunes,blindé de thunes→très riche,0,0.3782256138016266,0
+16,standard,Il est très riche et il sait comment s’en servir.,0,STANDARD,normalized,blindé de thunes→très riche,0,0.11027415097801077,0
+17,slang,Tu t’auto-kiffes pas trop c’est ça qu’est bien.,0,SLANG,https://fr.wiktionary.org/wiki/auto-kiffer,auto-kiffer→s’apprécier soi-même,0,0.7129237043793124,1
+17,standard,"Tu ne t’apprécies pas trop, c’est ça qui est bien.",0,STANDARD,normalized,auto-kiffer→s’apprécier,0,0.16865755568960136,0
+18,slang,… le rail a fait le boulot.,0,SLANG,https://fr.wiktionary.org/wiki/faire_le_boulot,boulot→travail,0,0.37249695596656124,0
+18,standard,… le rail a fait le travail.,0,STANDARD,normalized,boulot→travail,0,0.28476721115535686,0
+19,slang,… elle n’a pas rendu visite à son pote Ferdinand le taureau.,0,SLANG,https://fr.wiktionary.org/wiki/pote,pote→ami,0,0.26538131896077777,0
+19,standard,… elle n’a pas rendu visite à son ami Ferdinand le taureau.,0,STANDARD,normalized,pote→ami,0,0.25705133337515756,0
+20,slang,"« Moi j’ai quitté ma femme pour une femme moins chiante », disent les hommes.",0,SLANG,https://fr.wiktionary.org/wiki/chiant,chiant→pénible,0,0.16297096631356986,0
+20,standard,"« Moi, j’ai quitté ma femme pour une femme moins pénible », disent les hommes.",0,STANDARD,normalized,chiant→pénible,0,0.12456648519923486,0
+21,slang,… Mr Désir est toujours pro bagnolard …,0,SLANG,https://fr.wiktionary.org/wiki/bagnolard,bagnolard→automobiliste,0,0.2974733733243783,0
+21,standard,… M. Désir est toujours pro-automobiliste …,0,STANDARD,normalized,bagnolard→automobiliste,0,0.18705973764989,0
+22,slang,L’eau potable ?… ouai !… ouai !…,0,SLANG,https://fr.wiktionary.org/wiki/ouai,ouai→oui,0,0.11561681815868344,0
+22,standard,L’eau potable ?… oui !… oui !…,0,STANDARD,normalized,ouai→oui,0,0.08181765650610469,0
+23,slang,"Les bourges, ils parlent le “wesh wesh”.",0,SLANG,https://fr.wiktionary.org/wiki/wesh-wesh,wesh wesh→parler de banlieue/argot des jeunes,0,0.594643659045566,1
+23,standard,Les bourgeois parlent l’argot des jeunes.,0,STANDARD,normalized,wesh wesh→argot des jeunes,0,0.16307356648595425,0
+24,slang,"T’as peur d’un teckel ? Ma parole, t’es une vraie gonzesse !",0,SLANG,https://fr.wiktionary.org/wiki/gonzesse,gonzesse→peureux/peureuse (insulte); reformulation neutre,0,0.7183538042408087,1
+24,standard,"Tu as peur d’un teckel ? Ma parole, tu es vraiment un peureux !",0,STANDARD,normalized,gonzesse→peureux,0,0.728651372465959,1
+25,slang,… des mecs pas mal friqués.,0,SLANG,https://fr.wiktionary.org/wiki/mecs,mecs→hommes; friqués→riches,0,0.36196862550090064,0
+25,standard,… des hommes assez riches.,0,STANDARD,normalized,mecs→hommes; friqués→riches,0,0.08411667962237189,0

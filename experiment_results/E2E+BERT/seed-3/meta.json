@@ -8,7 +8,7 @@
   "weight_decay": 0.01,
   "seed": 3,
   "run_id": "seed-3",
-  "out_dir": "models/detect/latest/bert_head/e2e/seed-3",
+  "out_dir": "experiment_results/E2E+BERT/seed-3",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -17,26 +17,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.7992957746478874,
-    "test_f1@0.5": 0.8025682182985554,
-    "test_acc@0.5": 0.8558030480656507,
+    "test_f1@0.5": 0.8057324840764332,
+    "test_acc@0.5": 0.8569753810082064,
     "test_confusion@0.5": {
-      "tn": 480,
-      "fp": 53,
-      "fn": 70,
-      "tp": 250
+      "tn": 478,
+      "fp": 55,
+      "fn": 67,
+      "tp": 253
     },
     "slang_test_set@0.5": {
-      "tn": 43,
-      "fp": 7,
+      "tn": 40,
+      "fp": 10,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.86,
+      "accuracy": 0.8,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 27,
+        "fp": 2,
+        "fn": 10,
+        "tp": 19,
+        "accuracy": 0.7931034482758621,
+        "f1": 0.76
+      },
+      "verlan_test_set_invented": {
+        "tn": 25,
+        "fp": 0,
+        "fn": 23,
+        "tp": 2,
+        "accuracy": 0.54,
+        "f1": 0.14814814814814814
+      }
     }
   },
   "artifacts": {
-    "checkpoint": "models/detect/latest/bert_head/e2e/seed-3/model.pt",
-    "test_predictions": "models/detect/latest/bert_head/e2e/seed-3/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/bert_head/e2e/seed-3/slang_predictions.csv"
+    "test_predictions": "experiment_results/E2E+BERT/seed-3/test_predictions.csv",
+    "slang_predictions": "experiment_results/E2E+BERT/seed-3/slang_predictions.csv",
+    "extra_summary": "experiment_results/E2E+BERT/seed-3/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/E2E+BERT/seed-3/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/E2E+BERT/seed-3/verlan_test_set_invented_predictions.csv"
   }
 }

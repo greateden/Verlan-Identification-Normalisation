@@ -8,7 +8,7 @@
   "weight_decay": 0.01,
   "seed": 7,
   "run_id": "seed-7",
-  "out_dir": "models/detect/latest/bert_head/e2e/seed-7",
+  "out_dir": "experiment_results/E2E+BERT/seed-7",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -32,11 +32,31 @@
       "tp": 0,
       "accuracy": 0.92,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 26,
+        "fp": 3,
+        "fn": 9,
+        "tp": 20,
+        "accuracy": 0.7931034482758621,
+        "f1": 0.7692307692307693
+      },
+      "verlan_test_set_invented": {
+        "tn": 23,
+        "fp": 2,
+        "fn": 23,
+        "tp": 2,
+        "accuracy": 0.5,
+        "f1": 0.13793103448275862
+      }
     }
   },
   "artifacts": {
-    "checkpoint": "models/detect/latest/bert_head/e2e/seed-7/model.pt",
-    "test_predictions": "models/detect/latest/bert_head/e2e/seed-7/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/bert_head/e2e/seed-7/slang_predictions.csv"
+    "test_predictions": "experiment_results/E2E+BERT/seed-7/test_predictions.csv",
+    "slang_predictions": "experiment_results/E2E+BERT/seed-7/slang_predictions.csv",
+    "extra_summary": "experiment_results/E2E+BERT/seed-7/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/E2E+BERT/seed-7/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/E2E+BERT/seed-7/verlan_test_set_invented_predictions.csv"
   }
 }

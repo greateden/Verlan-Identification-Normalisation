@@ -8,7 +8,7 @@
   "weight_decay": 0.0,
   "seed": 16,
   "run_id": "seed-16",
-  "out_dir": "models/detect/latest/bert_head/frozen/seed-16",
+  "out_dir": "experiment_results/Frozen+BERT/seed-16",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -17,26 +17,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.7884615384615384,
-    "test_f1@0.5": 0.75,
-    "test_acc@0.5": 0.8264947245017585,
+    "test_f1@0.5": 0.7472527472527473,
+    "test_acc@0.5": 0.8112543962485346,
     "test_confusion@0.5": {
-      "tn": 483,
-      "fp": 50,
-      "fn": 98,
-      "tp": 222
+      "tn": 454,
+      "fp": 79,
+      "fn": 82,
+      "tp": 238
     },
     "slang_test_set@0.5": {
-      "tn": 46,
-      "fp": 4,
+      "tn": 45,
+      "fp": 5,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.92,
+      "accuracy": 0.9,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 29,
+        "fp": 0,
+        "fn": 9,
+        "tp": 20,
+        "accuracy": 0.8448275862068966,
+        "f1": 0.8163265306122449
+      },
+      "verlan_test_set_invented": {
+        "tn": 25,
+        "fp": 0,
+        "fn": 19,
+        "tp": 6,
+        "accuracy": 0.62,
+        "f1": 0.3870967741935484
+      }
     }
   },
   "artifacts": {
-    "head_checkpoint": "models/detect/latest/bert_head/frozen/seed-16/head.pt",
-    "test_predictions": "models/detect/latest/bert_head/frozen/seed-16/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/bert_head/frozen/seed-16/slang_predictions.csv"
+    "test_predictions": "experiment_results/Frozen+BERT/seed-16/test_predictions.csv",
+    "slang_predictions": "experiment_results/Frozen+BERT/seed-16/slang_predictions.csv",
+    "extra_summary": "experiment_results/Frozen+BERT/seed-16/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/Frozen+BERT/seed-16/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/Frozen+BERT/seed-16/verlan_test_set_invented_predictions.csv"
   }
 }

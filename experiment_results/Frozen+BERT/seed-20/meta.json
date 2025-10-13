@@ -8,7 +8,7 @@
   "weight_decay": 0.0,
   "seed": 20,
   "run_id": "seed-20",
-  "out_dir": "models/detect/latest/bert_head/frozen/seed-20",
+  "out_dir": "experiment_results/Frozen+BERT/seed-20",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -17,26 +17,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.7936507936507936,
-    "test_f1@0.5": 0.7506849315068493,
-    "test_acc@0.5": 0.7866354044548651,
+    "test_f1@0.5": 0.76,
+    "test_acc@0.5": 0.8171160609613131,
     "test_confusion@0.5": {
-      "tn": 397,
-      "fp": 136,
-      "fn": 46,
-      "tp": 274
+      "tn": 450,
+      "fp": 83,
+      "fn": 73,
+      "tp": 247
     },
     "slang_test_set@0.5": {
-      "tn": 35,
-      "fp": 15,
+      "tn": 41,
+      "fp": 9,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.7,
+      "accuracy": 0.82,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 28,
+        "fp": 1,
+        "fn": 6,
+        "tp": 23,
+        "accuracy": 0.8793103448275862,
+        "f1": 0.8679245283018868
+      },
+      "verlan_test_set_invented": {
+        "tn": 24,
+        "fp": 1,
+        "fn": 17,
+        "tp": 8,
+        "accuracy": 0.64,
+        "f1": 0.47058823529411764
+      }
     }
   },
   "artifacts": {
-    "head_checkpoint": "models/detect/latest/bert_head/frozen/seed-20/head.pt",
-    "test_predictions": "models/detect/latest/bert_head/frozen/seed-20/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/bert_head/frozen/seed-20/slang_predictions.csv"
+    "test_predictions": "experiment_results/Frozen+BERT/seed-20/test_predictions.csv",
+    "slang_predictions": "experiment_results/Frozen+BERT/seed-20/slang_predictions.csv",
+    "extra_summary": "experiment_results/Frozen+BERT/seed-20/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/Frozen+BERT/seed-20/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/Frozen+BERT/seed-20/verlan_test_set_invented_predictions.csv"
   }
 }

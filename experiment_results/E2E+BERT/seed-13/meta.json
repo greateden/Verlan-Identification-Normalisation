@@ -8,7 +8,7 @@
   "weight_decay": 0.01,
   "seed": 13,
   "run_id": "seed-13",
-  "out_dir": "models/detect/latest/bert_head/e2e/seed-13",
+  "out_dir": "experiment_results/E2E+BERT/seed-13",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -17,26 +17,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.7911275415896488,
-    "test_f1@0.5": 0.8436018957345972,
-    "test_acc@0.5": 0.8839390386869871,
+    "test_f1@0.5": 0.8173076923076923,
+    "test_acc@0.5": 0.8663540445486518,
     "test_confusion@0.5": {
-      "tn": 487,
-      "fp": 46,
-      "fn": 53,
-      "tp": 267
+      "tn": 484,
+      "fp": 49,
+      "fn": 65,
+      "tp": 255
     },
     "slang_test_set@0.5": {
-      "tn": 43,
-      "fp": 7,
+      "tn": 46,
+      "fp": 4,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.86,
+      "accuracy": 0.92,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 25,
+        "fp": 4,
+        "fn": 11,
+        "tp": 18,
+        "accuracy": 0.7413793103448276,
+        "f1": 0.7058823529411765
+      },
+      "verlan_test_set_invented": {
+        "tn": 25,
+        "fp": 0,
+        "fn": 23,
+        "tp": 2,
+        "accuracy": 0.54,
+        "f1": 0.14814814814814814
+      }
     }
   },
   "artifacts": {
-    "checkpoint": "models/detect/latest/bert_head/e2e/seed-13/model.pt",
-    "test_predictions": "models/detect/latest/bert_head/e2e/seed-13/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/bert_head/e2e/seed-13/slang_predictions.csv"
+    "test_predictions": "experiment_results/E2E+BERT/seed-13/test_predictions.csv",
+    "slang_predictions": "experiment_results/E2E+BERT/seed-13/slang_predictions.csv",
+    "extra_summary": "experiment_results/E2E+BERT/seed-13/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/E2E+BERT/seed-13/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/E2E+BERT/seed-13/verlan_test_set_invented_predictions.csv"
   }
 }

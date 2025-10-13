@@ -8,7 +8,7 @@
   "weight_decay": 0.01,
   "seed": 19,
   "run_id": "seed-19",
-  "out_dir": "models/detect/latest/bert_head/e2e/seed-19",
+  "out_dir": "experiment_results/E2E+BERT/seed-19",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -17,26 +17,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.8203266787658802,
-    "test_f1@0.5": 0.81875,
-    "test_acc@0.5": 0.8640093786635404,
+    "test_f1@0.5": 0.8132911392405063,
+    "test_acc@0.5": 0.861664712778429,
     "test_confusion@0.5": {
-      "tn": 475,
-      "fp": 58,
-      "fn": 58,
-      "tp": 262
+      "tn": 478,
+      "fp": 55,
+      "fn": 63,
+      "tp": 257
     },
     "slang_test_set@0.5": {
-      "tn": 42,
-      "fp": 8,
+      "tn": 41,
+      "fp": 9,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.84,
+      "accuracy": 0.82,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 25,
+        "fp": 4,
+        "fn": 9,
+        "tp": 20,
+        "accuracy": 0.7758620689655172,
+        "f1": 0.7547169811320755
+      },
+      "verlan_test_set_invented": {
+        "tn": 24,
+        "fp": 1,
+        "fn": 21,
+        "tp": 4,
+        "accuracy": 0.56,
+        "f1": 0.26666666666666666
+      }
     }
   },
   "artifacts": {
-    "checkpoint": "models/detect/latest/bert_head/e2e/seed-19/model.pt",
-    "test_predictions": "models/detect/latest/bert_head/e2e/seed-19/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/bert_head/e2e/seed-19/slang_predictions.csv"
+    "test_predictions": "experiment_results/E2E+BERT/seed-19/test_predictions.csv",
+    "slang_predictions": "experiment_results/E2E+BERT/seed-19/slang_predictions.csv",
+    "extra_summary": "experiment_results/E2E+BERT/seed-19/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/E2E+BERT/seed-19/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/E2E+BERT/seed-19/verlan_test_set_invented_predictions.csv"
   }
 }

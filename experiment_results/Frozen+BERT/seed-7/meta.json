@@ -8,7 +8,7 @@
   "weight_decay": 0.0,
   "seed": 7,
   "run_id": "seed-7",
-  "out_dir": "models/detect/latest/bert_head/frozen/seed-7",
+  "out_dir": "experiment_results/Frozen+BERT/seed-7",
   "quantization": {
     "load_in_4bit": true,
     "bnb_4bit_compute_dtype": "bfloat16",
@@ -17,26 +17,46 @@
   },
   "metrics": {
     "val_best_f1@0.5": 0.7597955706984668,
-    "test_f1@0.5": 0.774281805745554,
-    "test_acc@0.5": 0.8065650644783119,
+    "test_f1@0.5": 0.7707736389684814,
+    "test_acc@0.5": 0.8124267291910903,
     "test_confusion@0.5": {
-      "tn": 405,
-      "fp": 128,
-      "fn": 37,
-      "tp": 283
+      "tn": 424,
+      "fp": 109,
+      "fn": 51,
+      "tp": 269
     },
     "slang_test_set@0.5": {
-      "tn": 39,
-      "fp": 11,
+      "tn": 42,
+      "fp": 8,
       "fn": 0,
       "tp": 0,
-      "accuracy": 0.78,
+      "accuracy": 0.84,
       "f1": 0.0
+    },
+    "extra_datasets@0.5": {
+      "verlan_test_set": {
+        "tn": 28,
+        "fp": 1,
+        "fn": 8,
+        "tp": 21,
+        "accuracy": 0.8448275862068966,
+        "f1": 0.8235294117647058
+      },
+      "verlan_test_set_invented": {
+        "tn": 24,
+        "fp": 1,
+        "fn": 13,
+        "tp": 12,
+        "accuracy": 0.72,
+        "f1": 0.631578947368421
+      }
     }
   },
   "artifacts": {
-    "head_checkpoint": "models/detect/latest/bert_head/frozen/seed-7/head.pt",
-    "test_predictions": "models/detect/latest/bert_head/frozen/seed-7/test_predictions.csv",
-    "slang_predictions": "models/detect/latest/bert_head/frozen/seed-7/slang_predictions.csv"
+    "test_predictions": "experiment_results/Frozen+BERT/seed-7/test_predictions.csv",
+    "slang_predictions": "experiment_results/Frozen+BERT/seed-7/slang_predictions.csv",
+    "extra_summary": "experiment_results/Frozen+BERT/seed-7/extra_datasets_summary.csv",
+    "verlan_test_set_predictions": "experiment_results/Frozen+BERT/seed-7/verlan_test_set_predictions.csv",
+    "verlan_test_set_invented_predictions": "experiment_results/Frozen+BERT/seed-7/verlan_test_set_invented_predictions.csv"
   }
 }
