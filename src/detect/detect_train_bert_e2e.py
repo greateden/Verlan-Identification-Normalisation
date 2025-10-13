@@ -148,8 +148,9 @@ def evaluate(model: MistralBertClassifier, loader: DataLoader) -> Dict[str, floa
     for batch in loader:
         ids = batch["input_ids"].to(start_device)
         attn = batch["attention_mask"].to(start_device)
-        logits = model(ids, attn)
-        p = torch.sigmoid(logits).cpu().numpy().ravel()
+        with torch.no_grad():
+            logits = model(ids, attn)
+            p = torch.sigmoid(logits).cpu().numpy().ravel()
         probs.append(p)
         gold.append(batch["label"].numpy().ravel())
     probs = np.concatenate(probs) if probs else np.zeros((0,))
@@ -181,6 +182,8 @@ def main() -> None:
     tok, enc = load_encoder()
 
     model = MistralBertClassifier(enc)
+    start_device = next(model.encoder.parameters()).device
+    model.head.to(start_device)
     model.train()
 
     train_ds = TextDataset(train_df["text"].tolist(), train_df["label"].astype(int).tolist())
@@ -196,7 +199,6 @@ def main() -> None:
     n_pos = max(1, int((y_np == 1).sum()))
     n_neg = max(1, int((y_np == 0).sum()))
     pos_weight = torch.tensor([n_neg / n_pos], dtype=torch.float32)
-    start_device = next(model.encoder.parameters()).device
     pos_weight = pos_weight.to(start_device)
     bce = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 

@@ -147,9 +147,9 @@ def evaluate(head: BertStyleHead, encoder: AutoModel, loader: DataLoader) -> Dic
     for batch in loader:
         with torch.no_grad():
             pooled = forward_encoder(encoder, batch["input_ids"], batch["attention_mask"])
-        pooled = pooled.to(head_device)
-        logits = head(pooled)
-        p = torch.sigmoid(logits).cpu().numpy().ravel()
+            pooled = pooled.to(head_device)
+            logits = head(pooled)
+            p = torch.sigmoid(logits).cpu().numpy().ravel()
         probs.append(p)
         gold.append(batch["label"].numpy().ravel())
     probs = np.concatenate(probs) if probs else np.zeros((0,))

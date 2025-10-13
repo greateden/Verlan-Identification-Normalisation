@@ -151,16 +151,14 @@ class E2ELinear(nn.Module):
 def evaluate(model: E2ELinear, loader: DataLoader, device: str) -> Dict[str, float]:
     model.eval()
     probs, gold = [], []
+    start_device = next(model.encoder.parameters()).device
     for batch in loader:
-        ids = batch["input_ids"]
-        attn = batch["attention_mask"]
+        ids = batch["input_ids"].to(start_device)
+        attn = batch["attention_mask"].to(start_device)
         yb = batch["label"]
-        # Align with device_map="auto": feed tensors to the encoder's first-param device
-        start_device = next(model.encoder.parameters()).device
-        ids = ids.to(start_device)
-        attn = attn.to(start_device)
-        logits = model(ids, attn)
-        p = torch.sigmoid(logits).cpu().numpy().ravel()
+        with torch.no_grad():
+            logits = model(ids, attn)
+            p = torch.sigmoid(logits).cpu().numpy().ravel()
         probs.append(p)
         gold.append(yb.numpy().ravel())
     probs = np.concatenate(probs) if probs else np.zeros((0,))
@@ -206,6 +204,8 @@ def main():
     tok, enc = load_encoder()
 
     model = E2ELinear(enc)
+    start_device = next(model.encoder.parameters()).device
+    model.head.to(start_device)
     model.train()  # unfrozen encoder
 
     # Data
@@ -223,8 +223,6 @@ def main():
     n_pos = max(1, int((y_np == 1).sum()))
     n_neg = max(1, int((y_np == 0).sum()))
     pos_weight = torch.tensor([n_neg / n_pos], dtype=torch.float32)
-    # Place pos_weight on the model's starting device
-    start_device = next(model.encoder.parameters()).device
     pos_weight = pos_weight.to(start_device)
     bce = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
