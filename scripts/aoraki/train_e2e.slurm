@@ -35,7 +35,8 @@ AORAKI_BASE="${AORAKI_BASE:-$DEFAULT_PROJECT_BASE}"
 AORAKI_CACHE_DIR="${AORAKI_CACHE_DIR:-$AORAKI_BASE/.cache}"
 export HF_HOME="$AORAKI_CACHE_DIR/huggingface"
 export TRANSFORMERS_CACHE="$HF_HOME/transformers"
-export HF_HUB_ENABLE_HF_TRANSFER=1
+: "${HF_HUB_ENABLE_HF_TRANSFER:=0}"
+export HF_HUB_ENABLE_HF_TRANSFER
 mkdir -p "$HF_HOME" "$TRANSFORMERS_CACHE" logs
 
 # Load conda and activate project-local env (see scripts/aoraki/create_env.sh)
