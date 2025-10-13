@@ -26,6 +26,8 @@ fi
 # Threading hygiene
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
 export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+: "${MKL_INTERFACE_LAYER:=GNU,LP64}"
+export MKL_INTERFACE_LAYER
 
 # Use project-space caches to avoid $HOME quotas
 DEFAULT_PROJECT_BASE=$(cd "$REPO_ROOT/.." && pwd)

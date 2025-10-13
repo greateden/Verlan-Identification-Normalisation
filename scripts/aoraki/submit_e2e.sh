@@ -21,22 +21,7 @@ trap 'popd >/dev/null' EXIT
 if [[ -n "${AORAKI_PARTITION:-}" ]]; then
   TARGET="$AORAKI_PARTITION"
 else
-  # Prefer faster/bigger first, based on RTIS docs.
-  CANDIDATES=(
-    aoraki_gpu_L40
-    aoraki_gpu_H100
-    aoraki_gpu_A100_80GB
-    aoraki_gpu_A100_40GB
-    aoraki_gpu
-  )
   TARGET="aoraki_gpu_L40"
-  for P in "${CANDIDATES[@]}"; do
-    # Count idle nodes in partition P
-    idle=$(sinfo -h -p "$P" -t idle | awk '{print $4}' | paste -sd+ - 2>/dev/null | bc 2>/dev/null || echo 0)
-    if [[ "${idle:-0}" -ge 1 ]]; then
-      TARGET="$P"; break
-    fi
-  done
 fi
 
 echo "→ Submitting to partition: $TARGET"
