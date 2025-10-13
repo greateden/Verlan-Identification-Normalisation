@@ -143,6 +143,7 @@ class E2ELinear(nn.Module):
         denom = mask.sum(dim=1).clamp(min=1)
         pooled = (H * mask).sum(dim=1) / denom
         pooled = nn.functional.normalize(pooled, p=2, dim=1)
+        pooled = pooled.to(self.head.weight.dtype)
         logits = self.head(pooled)  # [B, 1]
         return logits
 

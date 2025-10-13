@@ -137,6 +137,7 @@ class MistralBertClassifier(nn.Module):
     def forward(self, input_ids: torch.Tensor, attention_mask: torch.Tensor) -> torch.Tensor:
         out = self.encoder(input_ids=input_ids, attention_mask=attention_mask, return_dict=True)
         pooled = mean_pool(out.last_hidden_state, attention_mask)
+        pooled = pooled.to(self.head.dense.weight.dtype)
         logits = self.head(pooled)
         return logits
 

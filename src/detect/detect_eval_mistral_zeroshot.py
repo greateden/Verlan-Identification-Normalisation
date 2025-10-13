@@ -14,9 +14,10 @@ import json
 import os
 import random
 from pathlib import Path
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 import numpy as np
+import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, classification_report, f1_score
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -139,6 +140,36 @@ def generate_predictions(
     return np.array(preds, dtype=np.int32), raw_outputs
 
 
+def load_processed_dataset(path: Path) -> pd.DataFrame:
+    df = pd.read_csv(path)
+    if "label" in df.columns:
+        df = df.copy()
+        df["label"] = df["label"].astype(int)
+        return df
+    if "verlan_label" in df.columns:
+        df = df.copy()
+        df["label"] = df["verlan_label"].astype(int)
+        return df
+    raise ValueError(f"Dataset {path} does not contain 'label' or 'verlan_label' columns.")
+
+
+def summarise_predictions(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
+    acc = float(accuracy_score(y_true, y_pred)) if len(y_true) else 0.0
+    if len(np.unique(y_true)) > 1:
+        f1 = float(f1_score(y_true, y_pred, zero_division=0))
+    else:
+        f1 = 0.0
+    conf = confusion_from_arrays(y_true, y_pred)
+    return {
+        "accuracy": acc,
+        "f1": f1,
+        "tn": conf["tn"],
+        "fp": conf["fp"],
+        "fn": conf["fn"],
+        "tp": conf["tp"],
+    }
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Zero-shot verlan detection with Mistral-7B")
     ap.add_argument("--model_id", type=str, default="mistralai/Mistral-7B-Instruct-v0.2")
@@ -155,6 +186,10 @@ def main() -> None:
 
     _, _, test_df = load_verlan_dataset(args.seed)
     slang_df = load_slang_test_set()
+    extra_dataset_paths: Dict[str, Path] = {
+        "verlan_test_set": PROJECT_ROOT / "data" / "processed" / "verlan_test_set.csv",
+        "verlan_test_set_invented": PROJECT_ROOT / "data" / "processed" / "verlan_test_set_invented.csv",
+    }
 
     tokenizer, model = load_model(args.model_id)
 
@@ -227,6 +262,45 @@ def main() -> None:
         extra={"raw_response": slang_responses},
     )
 
+    extra_metrics: Dict[str, Dict[str, float]] = {}
+    extra_summary_rows = []
+    for name, path in extra_dataset_paths.items():
+        if not path.exists():
+            print(f"[WARN] Skipping {name}: missing file {path}")
+            continue
+        extra_df = load_processed_dataset(path)
+        texts = extra_df["text"].astype(str).tolist()
+        print(f"Running zero-shot inference on {name} ({len(texts)} samples) …")
+        preds, responses = generate_predictions(
+            tokenizer,
+            model,
+            texts,
+            max_new_tokens=args.max_new_tokens,
+            temperature=args.temperature,
+            top_p=args.top_p,
+            system_prompt=args.system_prompt,
+        )
+        gold = extra_df["label"].astype(int).to_numpy()
+        metrics = summarise_predictions(gold, preds)
+        print(f"{name} Accuracy@0.5: {metrics['accuracy']:.3f}")
+        print(f"{name} F1@0.5: {metrics['f1']:.3f}")
+        csv_path = out_dir / f"{name}_predictions.csv"
+        save_predictions(
+            extra_df,
+            probs=preds.astype(float),
+            preds=preds,
+            out_path=csv_path,
+            extra={"raw_response": responses},
+        )
+        extra_metrics[name] = metrics
+        extra_summary_rows.append({"dataset": name, **metrics})
+
+    extra_summary_path = None
+    if extra_summary_rows:
+        extra_summary_path = out_dir / "extra_datasets_summary.csv"
+        pd.DataFrame(extra_summary_rows).to_csv(extra_summary_path, index=False)
+        print(f"[OK] Wrote {extra_summary_path}")
+
     meta = {
         "model_id": args.model_id,
         "zero_shot": True,
@@ -252,6 +326,17 @@ def main() -> None:
             "slang_predictions": str(slang_pred_path.relative_to(PROJECT_ROOT) if str(slang_pred_path).startswith(str(PROJECT_ROOT)) else slang_pred_path),
         },
     }
+    if extra_metrics:
+        meta["metrics"]["extra_datasets@0.5"] = extra_metrics
+    if extra_summary_path is not None:
+        meta.setdefault("artifacts", {})["extra_summary"] = str(
+            extra_summary_path.relative_to(PROJECT_ROOT) if str(extra_summary_path).startswith(str(PROJECT_ROOT)) else extra_summary_path
+        )
+    for name in extra_metrics.keys():
+        csv_path = out_dir / f"{name}_predictions.csv"
+        meta.setdefault("artifacts", {})[f"{name}_predictions"] = str(
+            csv_path.relative_to(PROJECT_ROOT) if str(csv_path).startswith(str(PROJECT_ROOT)) else csv_path
+        )
     meta_path = out_dir / "meta.json"
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[OK] Saved zero-shot outputs to {out_dir}")
