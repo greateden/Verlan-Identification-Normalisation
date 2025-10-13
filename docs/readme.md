@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 4 days, 08 hours, 01 minutes
+⏳ Time remaining: 4 days, 06 hours, 50 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -51,6 +51,7 @@ project-root/
 │       ├── mixed_shuffled.txt
 │       ├── standard_only.txt
 │       └── verlan_only.txt
+├── detect_train_lr_20250917_141908.out
 ├── docs/
 │   ├── readme.md
 │   └── results/
@@ -142,12 +143,16 @@ project-root/
 ├── scripts/
 │   ├── aoraki/
 │   │   ├── create_env.sh
+│   │   ├── mistral_zeroshot.slurm
 │   │   ├── submit_bert.sh
 │   │   ├── submit_bert_e2e.sh
 │   │   ├── submit_e2e.sh
+│   │   ├── submit_lr.sh
+│   │   ├── submit_mistral_zeroshot.sh
 │   │   ├── train_bert.slurm
 │   │   ├── train_bert_e2e.slurm
-│   │   └── train_e2e.slurm
+│   │   ├── train_e2e.slurm
+│   │   └── train_lr.slurm
 │   ├── ci_update_docs.py
 │   ├── generate-tree.py
 │   ├── run_detect_train_lr_batch.py
@@ -162,12 +167,15 @@ project-root/
 │   ├── convert_infer.py
 │   ├── detect/
 │   │   ├── __init__.py
+│   │   ├── data_utils.py
+│   │   ├── detect_eval_mistral_zeroshot.py
 │   │   ├── detect_infer.py
 │   │   ├── detect_train_bert.py
 │   │   ├── detect_train_bert_e2e.py
 │   │   ├── detect_train_lr.py
 │   │   ├── detect_train_lr_e2e.py
 │   │   ├── detect_train_lr_simple.py
+│   │   ├── eval_utils.py
 │   │   └── old/
 │   │       ├── detect_benchmark_mistral_bert.py
 │   │       ├── detect_benchmark_mistral_mistral.py
@@ -179,6 +187,7 @@ project-root/
 │   ├── evaluate/
 │   │   ├── EvaluateThreshold.py
 │   │   ├── __init__.py
+│   │   ├── aggregate_slang_confusion.py
 │   │   ├── calibration.py
 │   │   ├── evaluate_threshold.py
 │   │   └── utils.py
