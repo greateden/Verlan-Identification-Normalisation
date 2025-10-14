@@ -404,9 +404,25 @@ As mentioned in Section~2.2.2, this report first checked and scraped sources tha
 \subsubsection{Sampling}
 Although there is no clear estimate of the overall quantity of Verlan, after searching, scraping, and combining, this report compiled a total of 1{,}086 Verlan items, though some are merely spelling variants of the same word. For example, \textit{foncédé} and \textit{foncedé}\footnote{Verlan of \textit{défoncé}, often translated as \textit{high (on drugs)} in English.} are counted separately as two entries; so are \textit{keus} and \textit{keuss}\footnote{Verlan of \textit{sec}, translated as \textit{dry} in English.}. Notably, there are around 150 entries for which the report did not find their standard form; thus they have been categorised as \textit{bronze} regarding their quality. To the best of our knowledge, the dictionary we have created contains the largest number of Verlan entries among the public dictionaries we could find.
 
-After creating the dictionary, the report searched for and scraped usage examples online to create the sentences corpus. The report also used Artificial Intelligence (AI) tools\;---\;specifically, ChatGPT Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}\;---\;for sentence scraping. The results for sentences with a verifiable reference have been marked as \textit{gold} quality; those without a verifiable reference have been marked as \textit{silver} quality. For items for which the report could not find example sentences, we prompted ChatGPT-o3\footnote{\url{https://en.wikipedia.org/wiki/OpenAI_o3}} to generate example sentences; these results have been marked as \textit{bronze} quality. All results have been reviewed by the author of this report and are intended to undergo annotation in the future.
+After creating the dictionary, the report searched for and scraped usage examples online to create the sentences corpus. The report also used Artificial Intelligence (AI) tools\;---\;specifically, OpenAI Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}\;---\;for sentence scraping\footnote{Research has pointed out that this model gives better results in general\cite{du2025deepresearch}.}. The results for sentences with a verifiable reference have been marked as \textit{gold} quality; those without a verifiable reference have been marked as \textit{silver} quality. For items for which the report could not find example sentences, we prompted ChatGPT-o3\footnote{\url{https://en.wikipedia.org/wiki/OpenAI_o3}} to generate example sentences; these results have been marked as \textit{bronze} quality. All results have been reviewed by the author of this report and are intended to undergo annotation in the future.
 
-%TODO forgot to mention the non-verlan part -- to balance them out, I sed a huggingface french dataset
+\subsubsection{Balancing the Training Dataset}
+
+Because the sentence dataset will be used for LLM experiments, researchers have pointed out that an imbalanced dataset may affect the performance of trained LLMs. Therefore, balancing the number of sentences containing Verlan and those not containing Verlan becomes important\cite{dong2024imbalance}.
+
+To find an external, existing dataset that best balances ours, this report has summarised several traits of the current dataset:
+
+\begin{enumerate}
+  \item Each entry is short, around 5 to 20 words.
+  \item Entries are relatively recent.
+  \item Some entries are clips of longer sentences.
+  \item Entries include quotes and diverse annotation marks (e.g., !, ?, ...).
+  \item Entries are mostly informal and contain non-standard spellings other than Verlan.
+\end{enumerate}
+
+After consideration, this report has chosen to use the \textit{title} column of the \textit{Diverse French News} dataset published on HuggingFace\footnote{\url{https://huggingface.co/datasets/gustavecortal/diverse_french_news}}, created by scholar Gustave Cortal\footnote{\url{http://www.gustavecortal.com/}}. It matches our dataset in terms of short entry length and was published in March 2022. Some entries even include quotations from celebrities. Although this dataset does not fully meet our requirement for diverse annotation marks, this report plans to apply pre-processing before tokenisation to trim off all annotation marks. 
+
+One small concern is that the news dataset mostly contains formal language, which may potentially affect the performance. While this might be the best available choice at present, this report will discuss this limitation in detail in future chapters.
 
 \subsubsection{Quality Tiers}
 
@@ -799,6 +815,15 @@ Martin, Louis; Muller, Benjamin; Ortiz Suárez, Pedro Javier; Dupont, Yoann; Rom
 \textit{CamemBERT: a Tasty French Language Model}.  
 DOI: 10.48550/arXiv.1911.03894  
 
+\bibitem{du2025deepresearch}
+Du, Mingxuan; Xu, Benfeng; Zhu, Chiwei; Wang, Xiaorui; Mao, Zhendong.  
+\textit{DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents}.  
+DOI: 10.48550/arXiv.2506.11763  
+
+\bibitem{dong2024imbalance}
+Dong, Yuhui; Geng, Xin; Zhang, Jiayi; Song, Yue; Li, Xixin.
+\textit{Understanding the Effects of Language-specific Class Imbalance}.
+DOI: 10.48550/arXiv.2402.13016.
 
 \end{thebibliography}
 

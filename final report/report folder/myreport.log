@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  14 OCT 2025 23:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  15 OCT 2025 11:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1138,7 +1138,7 @@ Package todonotes Warning: The length marginparwidth is less than 2cm and will m
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<figures/logo.png, id=191, 566.115pt x 617.9085pt>
+<figures/logo.png, id=195, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
 Package pdftex.def Info: figures/logo.png  used on input line 54.
@@ -1155,17 +1155,17 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.90 T
       hinking internationally, when people are communicating with translator... [1]
-<figures/google_verlan.png, id=243, 1093.08376pt x 252.945pt>
+<figures/google_verlan.png, id=247, 1093.08376pt x 252.945pt>
 File: figures/google_verlan.png Graphic file (type png)
 <use figures/google_verlan.png>
 Package pdftex.def Info: figures/google_verlan.png  used on input line 94.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_verlan.png, id=244, 972.63374pt x 237.88875pt>
+<figures/deepl_verlan.png, id=248, 972.63374pt x 237.88875pt>
 File: figures/deepl_verlan.png Graphic file (type png)
 <use figures/deepl_verlan.png>
 Package pdftex.def Info: figures/deepl_verlan.png  used on input line 100.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
-<figures/deepl_alt_text.png, id=245, 303.1325pt x 396.48125pt>
+<figures/deepl_alt_text.png, id=249, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
 Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 106.
@@ -1226,88 +1226,95 @@ Overfull \hbox (54.3742pt too wide) in paragraph at lines 395--396
 [10]
 
 [11]
-Overfull \hbox (69.9929pt too wide) in paragraph at lines 418--428
- [][] 
- []
-
-
 
 [12]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 442.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 442.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 442.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 442.
-
-<figures/CamemBERT.png, id=428, 722.7pt x 722.7pt>
-File: figures/CamemBERT.png Graphic file (type png)
-<use figures/CamemBERT.png>
-Package pdftex.def Info: figures/CamemBERT.png  used on input line 448.
-(pdftex.def)             Requested size: 56.9055pt x 56.90189pt.
-<figures/mistral-logo.png, id=429, 191.71625pt x 135.50626pt>
-File: figures/mistral-logo.png Graphic file (type png)
-<use figures/mistral-logo.png>
-Package pdftex.def Info: figures/mistral-logo.png  used on input line 453.
-(pdftex.def)             Requested size: 56.9055pt x 40.22003pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 446--455
-
- []
-
-
-
-[13 <./figures/CamemBERT.png> <./figures/mistral-logo.png>]
-
-[14]
-
-[15]
-Overfull \hbox (116.76485pt too wide) in paragraph at lines 546--559
+Overfull \hbox (69.9929pt too wide) in paragraph at lines 434--444
  [][] 
  []
 
 
 
+[13]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 458.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 3.26288pt
+(hyperref)                removed on input line 458.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 458.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 3.26288pt
+(hyperref)                removed on input line 458.
+
+<figures/CamemBERT.png, id=453, 722.7pt x 722.7pt>
+File: figures/CamemBERT.png Graphic file (type png)
+<use figures/CamemBERT.png>
+Package pdftex.def Info: figures/CamemBERT.png  used on input line 464.
+(pdftex.def)             Requested size: 56.9055pt x 56.90189pt.
+<figures/mistral-logo.png, id=454, 191.71625pt x 135.50626pt>
+File: figures/mistral-logo.png Graphic file (type png)
+<use figures/mistral-logo.png>
+Package pdftex.def Info: figures/mistral-logo.png  used on input line 469.
+(pdftex.def)             Requested size: 56.9055pt x 40.22003pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 462--471
+
+ []
+
+
+
+[14 <./figures/CamemBERT.png> <./figures/mistral-logo.png>]
+
+[15]
+
 [16]
+Overfull \hbox (116.76485pt too wide) in paragraph at lines 562--575
+ [][] 
+ []
+
+
 
 [17]
 
 [18]
 
 [19]
+
+[20]
 pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.677 \bibitem{wu2018slangsd}
+l.693 \bibitem{wu2018slangsd}
                              
 
-[20]
-Underfull \hbox (badness 1048) in paragraph at lines 741--745
+[21]
+Underfull \hbox (badness 1048) in paragraph at lines 757--761
 \OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
  []
 
 
 
-[21]
-
 [22]
 
 [23]
+Underfull \hbox (badness 1237) in paragraph at lines 824--827
+[]\OT1/cmr/m/n/12 Dong, Yuhui; Geng, Xin; Zhang, Ji-ayi; Song, Yue; Li, Xixin.
+ []
+
+
 
 [24]
 
-[25] (./myreport.aux)
+[25]
+
+[26] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1317,21 +1324,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: F2BD030E2F7A6CCA00CC9E8542A77AF8;8919.
+(rerunfilecheck)             Checksum: E29582376303ECCF3BB114F3A8FE6751;9146.
  ) 
 Here is how much of TeX's memory you used:
- 36676 strings out of 474662
- 804487 string characters out of 5751110
- 1174978 words of memory out of 5000000
- 59065 multiletter control sequences out of 15000+600000
+ 36691 strings out of 474662
+ 804687 string characters out of 5751110
+ 1175059 words of memory out of 5000000
+ 59068 multiletter control sequences out of 15000+600000
  570405 words of font info for 76 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  140i,12n,131p,1785b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on myreport.pdf (26 pages, 665069 bytes).
+Output written on myreport.pdf (27 pages, 668539 bytes).
 PDF statistics:
- 678 PDF objects out of 1000 (max. 8388607)
- 600 compressed objects within 6 object streams
- 169 named destinations out of 1000 (max. 500000)
- 411 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 707 PDF objects out of 1000 (max. 8388607)
+ 627 compressed objects within 7 object streams
+ 181 named destinations out of 1000 (max. 500000)
+ 419 words of extra memory for PDF output out of 10000 (max. 10000000)
 
