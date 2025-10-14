@@ -39,8 +39,8 @@
 
 % Names of your supervisors, separated by line break '\\'
 \supervisors{
-  Dr. Lech \textsc{Szymanski} \\
-  Dr. Veronica \textsc{Liesaputra}
+  Dr Lech \textsc{Szymanski} \\
+  Dr Veronica \textsc{Liesaputra}
 }
 
 % Date, change the \today to a set date if you want to be precise
@@ -54,6 +54,8 @@
 \begin{abstract}
 something.
 \end{abstract}
+% Need abstract in French!
+%need glossary and acknowledgements
 
 \section{Introduction}
 \subsection{Context and Motivation}
@@ -402,6 +404,8 @@ Although there is no clear estimate of the overall quantity of Verlan, after sea
 
 After creating the dictionary, the report searched for and scraped usage examples online to create the sentences corpus. The report also used Artificial Intelligence (AI) tools\;---\;specifically, ChatGPT Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}\;---\;for sentence scraping. The results for sentences with a verifiable reference have been marked as \textit{gold} quality; those without a verifiable reference have been marked as \textit{silver} quality. For items for which the report could not find example sentences, we prompted ChatGPT-o3\footnote{\url{https://en.wikipedia.org/wiki/OpenAI_o3}} to generate example sentences; these results have been marked as \textit{bronze} quality. All results have been reviewed by the author of this report and are intended to undergo annotation in the future.
 
+%TODO forgot to mention the non-verlan part -- to balance them out, I sed a huggingface french dataset
+
 \subsubsection{Quality Tiers}
 
 To provide readers with a clearer understanding of the tier/quality schema introduced in this report, we have created a table for clarity:
@@ -428,39 +432,100 @@ At the time of writing, the datasets are not yet officially finalised. Although 
 
 The main reason is that these columns were not used in the implementations. In fact, this report only used \textit{gazetteer\_id}, \textit{verlan\_form}, and \textit{standard\_form} in the dictionary, and \textit{sentence\_id}, \textit{text}, and \textit{has\_verlan} in the sentences corpus. To us, the remaining columns are primarily for publishing the datasets and for potential advanced experiments in the future.
 
-\section{Experiments}
 
-After constructing and verifying the datasets, the report has conducted a series of experiments to 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Experimental Settings}
-\subsubsection{Model Architectures and Specifications}
+\section{Building the Pipelines --- Model Architectures and Specifications}
+% chose Mistral and BERT
+\subsection{Zero-Shot Models}
+%Mistral and ChatGPT -- prompt engineering for baseline and reference
+%explain why chosen ChatGPT 5 Codex (High) as the reference -- cuz it is the best model in the world
+
+\subsection{Training Models}
+\subsubsection{General Pipeline}
+%Input; how to mask the label to prevent data leakage
+%Tokenisation
+%Embedding or Encoder; for embedding, need to show embedding space figures 
+%LR or BERT. for LR, explain the mean pooling before it; for BERT, explain it's a BERT-like layers instead of using BERT directly
+%Threshold = fixed, 0.5
+%a visulisation of the pipelines, the four different ones
+
+\subsubsection{The Usage of the Datasets}
+%how I split the dataset into train, validation and test
+%where and when to feed them into the pipeline
+
+\subsubsection{Environment and Hyperparameters}
 %all the experiments have been conducted on the Aoraki computing cluster of the University of Otago, Otakou whakaihu Waka.
-\subsubsection{Evaluation Methodology}
-\subsubsection{Lookup Baseline}
+% all used Nvidia L40
+%All 4-bit quantised
+%etc
 
-\subsection{Results and Analyses}
-\subsubsection{Embedding Space Visulisation}
-\subsubsection{Comparing Different Experiments}
-\subsubsection{}
+\subsection{Other Models}
+\subsubsection{Justifying for LR}
+% I'm not connecting LR head directly, if so, I've tested, I got NO separation.
+\subsubsection{Gazetteer Gate}
+% using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
+\subsubsection{Calibration: Temp / Platt / Isotonic / Threshold Tuning}
+%tested these, but to simplify the pipeline, we decided to use 0.5 hard limitation instead
 
-\subsection{Conclusions and Limitations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experiments, Results, and Analyses}
+%mention again, the experiments are run on Aoraki.
 
+\subsection{Evaluation Methodology}
+\subsubsection{Testing Datasets}
+%justify the testing dataset here is not the testing part in the training dataset
+%mixed modern verlans, invented verlans, slangs
+% especially explain why we need to test slangs
+\subsubsection{Testing Schema}
+% for zero-shot models, we only evaluated them based on the testing dataset, not the training dataset --- not necessary.
+%trained each case's model 20 times and tested 20 times with different seeds to reduce bias
+
+\subsection{Results}
+\textbf{Draft note.} Tables~\ref{tab:main-test-confusion-draft} and~\ref{tab:aux-test-confusion-draft} sketch the raw confusion counts gathered from the six shortlisted systems.  The learned verlan detectors (especially the end-to-end BERT variant) reach the best overall balance on the main held-out split, whereas both zero-shot models remain brittle on slang and invented verlan.  Invented forms are the hardest slice for every model, with even the strongest system missing more than half of the positives.
+
+
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{lrrrrrr}
+        \hline
+        Model & \multicolumn{2}{c}{Existed verlan (TP/FN)} & \multicolumn{2}{c}{Invented verlan (TP/FN)} & \multicolumn{2}{c}{French slang (TN/FP)} \\
+         & TP & FN & TP & FN & TN & FP \\
+        \hline
+        Frozen+LR & 20 & 9 & 8 & 17 & 18 & 7 \\
+        E2E+LR & 19 & 10 & 6 & 19 & 16 & 9 \\
+        Frozen+BERT & 24 & 5 & 12 & 13 & 20 & 5 \\
+        E2E+BERT & 19 & 10 & 4 & 21 & 19 & 6 \\
+        Mistral-7B Zero Shot & 22 & 7 & 17 & 8 & 11 & 14 \\
+        ChatGPT 5 Thinking Zero Shot & 23 & 6 & 23 & 2 & 20 & 5 \\
+        \hline
+    \end{tabular}
+    \caption{Draft confusion-count summary on the auxiliary targeted suites: curated historical verlan pairs (29 samples), self-created verlan forms (25 samples), and contemporary slang paraphrases (25 samples).  Only verlan variants are shown for the verlan suites, so TN/FP are omitted there.  ChatGPT operates on 158 prompt responses in total across both tables.}
+    \label{tab:aux-test-confusion-draft}
+\end{table}
+
+\subsection{Analyses}
+\subsubsection{Zero-Shot Mistral-7B Model}
+\subsubsection{Frozen Neurons Embedding with Linear Regression Head as Classifier}
+%we write this in detail, explaining everything we have in the pipeline
+\subsubsection{Frozen Neurons Embedding with BERT Head as Classifier}
+%less detail
+\subsubsection{Full Fine-Tune Neurons with Linear Regression Head as Classifier}
+%more detail on the E2E process
+\subsubsection{Full Fine-Tune Neurons with BERT Head as Classifier}
+\subsubsection{Zero-Shot ChatGPT 5 Codex (High)}
+
+
+\subsection{Conclusion and Limitation}
+
+\section{Discussion and Outlook}
+% for Mistral zero shot, shoulda run under different temps
 
 % Besides, identifying the same word with different spelling or declensions is also a hurdle. although we do have those fuzzy search algorithms, the report is not sure whether 
 
-% mention that because we need to train LLMs, having verlans embedding in sentences is important, whilst the report wanna make good use of the benefits of dictionary search, so the report has made two datasets -- on just purly Verlan - Standard French mapping, the other is Verlan sentences.
-
-
-\section{Discussion and Outlook}
-
-
 \newpage
-
-%The environment \thebibliography produces a list of references; such list will be titled "References". A parameter inside braces, 9 in the example, indicates the number of entries to be added; this parameter can not be greater than 99.
-
-%To create a bibliography entry the command \bibitem is used. A parameter inside braces is set to label this entry and can later be used as identifier for this reference. After the closing brace the text with the name of the author, the book title, publisher and so on is entered. 
-
-%Any choice of citation style is acceptable as long as you are consistent.
 
 \begin{thebibliography}{9}
 
@@ -680,6 +745,25 @@ You are a linguist who identifies verlan (French reversed syllable slang). Ignor
 You will be given one or more French sentences. For each sentence, decide whether it contains verlan and answer with a single digit (0 or 1) per sentence, in the same order that the sentences appear.
 
 Sentences to evaluate:
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{lrrrrrrrr}
+        \hline
+        Model & \multicolumn{4}{c}{Overall (main test)} & \multicolumn{4}{c}{Standard French subset} \\
+         & TN & FP & FN & TP & TN & FP & FN & TP \\
+        \hline
+        Frozen+LR & 434 & 99 & 49 & 271 & 393 & 40 & 2 & 0 \\
+        E2E+LR & 449 & 84 & 46 & 274 & 363 & 55 & 1 & 1 \\
+        Frozen+BERT & 449 & 84 & 43 & 277 & 399 & 35 & 1 & 1 \\
+        E2E+BERT & 468 & 65 & 35 & 285 & 387 & 42 & 0 & 3 \\
+        Mistral-7B Zero Shot & 339 & 194 & 67 & 253 & 325 & 108 & 2 & 2 \\
+        \hline
+    \end{tabular}
+    \caption{Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset.}
+    \label{tab:main-test-confusion-draft}
+\end{table}
 
 
 \section{Aims and Objectives}
