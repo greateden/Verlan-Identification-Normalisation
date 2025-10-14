@@ -21,6 +21,8 @@
 \usepackage[draft]{cosc4x0style}
 \usepackage{float}
 \usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{caption}
 \usepackage[edges]{forest}
 \usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds}
 
@@ -31,7 +33,7 @@
 \papercode{385}
 
 % Your project title
-\title{Talking in French Like Academia\\\large Machine Learning Powered Verlan Identification}
+\title{Talking in French Like Academia\\\large Mistral 7B Powered Verlan Identification}
 
 % Your name
 \author{Yitian \textsc{Li}}
@@ -437,7 +439,59 @@ The main reason is that these columns were not used in the implementations. In f
 
 \section{Building the Pipelines --- Model Architectures and Specifications}
 % chose Mistral and BERT
+\subsection{Mistral 7B\;---\;Why?}
+
+\begin{wrapfigure}[3]{r}{4.6cm}
+  \vspace{-30pt}
+  \begin{minipage}{0.49\linewidth}
+    \centering
+    \includegraphics[width=2cm]{figures/CamemBERT.png}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.49\linewidth}
+    \centering
+    \includegraphics[width=2cm]{figures/mistral-logo.png}
+  \end{minipage}\\[3pt]
+  {\captionsetup{font=scriptsize,skip=0pt}\caption*{CamemBERT and Mistral AI Logos}}
+\end{wrapfigure}
+The report has chosen Mistral 7B\footnote{\url{https://mistral.ai/news/announcing-mistral-7b}} developed by Mistral AI as the base model for the experimental design\cite{jiang2023mistral7b}. There are several reasons for this choice:
+\begin{enumerate}
+\item Mistral AI is a French company\footnote{\url{https://mistral.ai/about}}. The report argues that its training dataset is highly likely to contain more French slang contexts; therefore, its models may achieve better performance in French\;---\;especially in identifying Verlan.
+
+\item Mistral 7B is both powerful and relatively new. Verlan is a linguistic phenomenon that has been used daily online since the rise of social media. To identify Verlan, we need up-to-date training datasets and models to keep pace with contemporary language use. While CamemBERT was also considered, it was released in 2019, whereas Mistral 7B was announced in September 2023\textsuperscript{, see Footnote 26}\cite{martin2019camembert}. Mistral 7B outperforms LLaMA 1 33B\footnote{Although the original paper mentioned 34B, this report believes it was a typographical mistake. The evidence is that they referenced Meta's original paper, which did not include a 34B model.} and LLaMA 2 13B, two LLMs with larger parameter sizes\cite{touvron2023llama,touvron2023llama2}. 
+
+\item Scholars may argue that the Mistral 8B model in les Ministraux\footnote{Literal meaning in English: the Ministrals.} family would be a better choice, as it is the direct successor of the Mistral 7B model. However, the main reason we cannot use the newer model is that it is primarily designed for text generation rather than embedding. In fact, Mistral 8B does not support embeddings, unlike Mistral 7B\;---\;Salesforce AI\footnote{\url{https://www.salesforce.com}} has published an embedding version\footnote{\url{https://huggingface.co/Salesforce/SFR-Embedding-Mistral}} based on Mistral 7B. 
+
+\item Furthermore, to preserve full control and reproducibility, the report does not intend to use Application Programming Interface (API) calls, even though the Mistral Embed\footnote{\url{https://docs.mistral.ai/getting-started/models/models_overview/}} model is available via API. We also do not intend to use proprietary models (e.g., ChatGPT, Grok\footnote{\url{https://grok.com/}}) as our main research models, for the same reasons stated above.
+\end{enumerate}
+
 \subsection{Zero-Shot Models}
+\subsubsection{Mistral 7B Prompt Engineering with Vibe}
+Because we are experimenting the performance of Mistral 7B (thereforth Mistral), designing a zero-shot test thus becomes important\;---\;foremostly, we can determine whether Mistral already learnt how to identify Verlan, and to what extent can it identify correctly. Additionally, we can compare the performance of the zero-shot model with the trained models, to see to what extent our dataset augments the performance.
+
+To do so, the report has designed the pipeline as below, with prompt engineering:
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.5cm,
+        every node/.style={font=\small},
+        process/.style={rectangle, rounded corners, draw, fill=gray!5, align=center, minimum width=3.6cm, minimum height=1.05cm},
+        line/.style={-Latex}
+    ]
+        \node[process] (data) {Load zero-shot test datasets};
+        \node[process, below=of data] (model) {Load tokenizer \& Mistral model};
+        \node[process, below=of model] (loop) {Loop datasets $\rightarrow$ sentences \\ prompt LLM \& collect outputs};
+        \node[process, below=of loop] (csv) {Write prediction CSV files};
+        \draw[line] (data) -- (model);
+        \draw[line] (model) -- (loop);
+        \draw[line] (loop) -- (csv);
+    \end{tikzpicture}
+    \caption{Zero-shot pipeline for Mistral}
+    \label{fig:mistral-zeroshot-pipeline}
+\end{figure}
+
+
 %Mistral and ChatGPT -- prompt engineering for baseline and reference
 %explain why chosen ChatGPT 5 Codex (High) as the reference -- cuz it is the best model in the world
 
@@ -725,7 +779,25 @@ Sun, X.; et al.
 Proceedings of the 2024 Annual Conference of the North American Chapter of the Association for Computational Linguistics (NAACL-Long 2024).
 Available at: \url{https://aclanthology.org/2024.naacl-long.94/}.
 
+\bibitem{jiang2023mistral7b}
+Jiang, Albert Q.; Sablayrolles, Alexandre; Mensch, Arthur; Bamford, Chris; Chaplot, Devendra Singh; de las Casas, Diego; Bressand, Florian; Lengyel, Gianna; Lample, Guillaume; Saulnier, Lucile; Lavaud, Lélio Renard; Lachaux, Marie-Anne; Stock, Pierre; Le Scao, Teven; Lavril, Thibaut; Wang, Thomas; Lacroix, Timothée; El Sayed, William.
+\textit{Mistral 7B}.
+DOI: 10.48550/arXiv.2310.06825
 
+\bibitem{touvron2023llama}
+Touvron, Hugo; Lavril, Thibaut; Izacard, Gautier; Martinet, Xavier; Lachaux, Marie-Anne; Lacroix, Timothée; Rozière, Baptiste; Goyal, Naman; Hambro, Eric; Azhar, Faisal; Rodríguez, Aurélien; Joulin, Armand; Grave, Edouard; Lample, Guillaume.  
+\textit{LLaMA: Open and Efficient Foundation Language Models}.  
+DOI: 10.48550/arXiv.2302.13971  
+
+\bibitem{touvron2023llama2}
+Touvron, Hugo; Martin, Louis; Stone, Kevin; Albert, Peter; Almahairi, Amjad; Babaei, Yasmine; Bashlykov, Nikolay; Batra, Soumya; Bhargava, Prajjwal; Bhosale, Shruti; Bikel, Dan; Blecher, Lukas; Canton-Ferrer, Cristian; Chen, Moya; Cucurull, Guillem; Esiobu, David; Fernandes, Jude; Fu, Jeremy; Fu, Wenyin; Fuller, Brian; Gao, Cynthia; Goswami, Vedanuj; Goyal, Naman; Hartshorn, Anthony; Hosseini, Saghar; Hou, Rui; Inan, Hakan; Kardas, Marcin; Kerkez, Viktor; Khabsa, Madian; Kloumann, Isabel; Korenev, Artem; Koura, Punit; Lachaux, Marie-Anne; Lavril, Thibaut; Lee, Jenya; Liskovich, Diana; Lu, Yinghai; Mao, Yuning; Martinet, Xavier; Mihaylov, Todor; Mishra, Pushkar; Molybog, Igor; Nie, Yixin; Poulton, Andrew; Reizenstein, Jeremy; Rungta, Rashi; Saladi, Kalyan; Schelten, Alan; Silva, Ruan; Smith, Eric Michael; Subramanian, Ranjan; Tan, Xiaoqing Ellen; Tang, Binh; Taylor, Ross; Williams, Adina; Xiang, Jian; Xu, Puxin; Yan, Zheng; Zarov, Iliyan; Zhang, Yuchen; Fan, Angela; Kambadur, Melanie; Narang, Sharan; Rodríguez, Aurélien; Stojnić, Robert; Edunov, Sergey; Scialom, Thomas.  
+\textit{Llama 2: Open Foundation and Fine-Tuned Chat Models}.  
+DOI: 10.48550/arXiv.2307.09288  
+
+\bibitem{martin2019camembert}
+Martin, Louis; Muller, Benjamin; Ortiz Suárez, Pedro Javier; Dupont, Yoann; Romary, Laurent; Villemonte de la Clergerie, Éric; Seddah, Djamé; Sagot, Benoît.  
+\textit{CamemBERT: a Tasty French Language Model}.  
+DOI: 10.48550/arXiv.1911.03894  
 
 
 \end{thebibliography}

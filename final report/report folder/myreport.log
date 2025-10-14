@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  14 OCT 2025 16:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  14 OCT 2025 23:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -920,6 +920,32 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box66
 \@float@everytoks=\toks41
 \@floatcapt=\box67
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen267
+\WF@size=\dimen268
+\c@WF@wrappedlines=\count325
+\WF@box=\box68
+\WF@everypar=\toks42
+Package: wrapfig 2003/01/31  v 3.6
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen269
+\captionmargin=\dimen270
+\caption@leftmargin=\dimen271
+\caption@rightmargin=\dimen272
+\caption@width=\dimen273
+\caption@indent=\dimen274
+\caption@parindent=\dimen275
+\caption@hangindent=\dimen276
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count326
+\c@continuedfloat=\count327
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: wrapfig package is loaded.
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest.sty
 Package: forest 2017/07/14 v2.1.5 Drawing (linguistic) trees
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex
@@ -928,10 +954,10 @@ File: tikzlibraryshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
-)) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.misc.code.tex
+))
+(/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.misc.code.tex
 File: tikzlibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
-
-(/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.tex
+ (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.tex
 File: pgflibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.symbols.code.tex
 File: tikzlibraryshapes.symbols.code.tex 2023-01-15 v3.1.10 (3.1.10)
@@ -945,36 +971,36 @@ File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box68
-\pgfnodeparttwobox=\box69
-\pgfnodepartthreebox=\box70
-\pgfnodepartfourbox=\box71
-\pgfnodeparttwentybox=\box72
-\pgfnodepartnineteenbox=\box73
-\pgfnodeparteighteenbox=\box74
-\pgfnodepartseventeenbox=\box75
-\pgfnodepartsixteenbox=\box76
-\pgfnodepartfifteenbox=\box77
-\pgfnodepartfourteenbox=\box78
-\pgfnodepartthirteenbox=\box79
-\pgfnodeparttwelvebox=\box80
-\pgfnodepartelevenbox=\box81
-\pgfnodeparttenbox=\box82
-\pgfnodepartninebox=\box83
-\pgfnodeparteightbox=\box84
-\pgfnodepartsevenbox=\box85
-\pgfnodepartsixbox=\box86
-\pgfnodepartfivebox=\box87
+\pgfnodepartlowerbox=\box69
+\pgfnodeparttwobox=\box70
+\pgfnodepartthreebox=\box71
+\pgfnodepartfourbox=\box72
+\pgfnodeparttwentybox=\box73
+\pgfnodepartnineteenbox=\box74
+\pgfnodeparteighteenbox=\box75
+\pgfnodepartseventeenbox=\box76
+\pgfnodepartsixteenbox=\box77
+\pgfnodepartfifteenbox=\box78
+\pgfnodepartfourteenbox=\box79
+\pgfnodepartthirteenbox=\box80
+\pgfnodeparttwelvebox=\box81
+\pgfnodepartelevenbox=\box82
+\pgfnodeparttenbox=\box83
+\pgfnodepartninebox=\box84
+\pgfnodeparteightbox=\box85
+\pgfnodepartsevenbox=\box86
+\pgfnodepartsixbox=\box87
+\pgfnodepartfivebox=\box88
 ))) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
 File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
-\pgf@intersect@solutions=\count325
+\pgf@intersect@solutions=\count328
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgfopts/pgfopts.sty
 Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
-\pgfopts@list@add@a@toks=\toks42
-\pgfopts@list@add@b@toks=\toks43
+\pgfopts@list@add@a@toks=\toks43
+\pgfopts@list@add@b@toks=\toks44
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/elocalloc/elocalloc.sty
 Package: elocalloc 2016/12/15 v0.03 local allocation for LaTeX 2015+ (DPC)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/environ/environ.sty
@@ -985,78 +1011,78 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 Package: expl3 2025-01-18 L3 programming layer (loader) 
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count326
-\l__pdf_internal_box=\box88
+\l__color_backend_stack_int=\count329
+\l__pdf_internal_box=\box89
 ))
 Package: xparse 2024-08-16 L3 Experimental document command parser
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/inlinedef/inlinedef.sty
 Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
-\ID@toks=\toks44
-\ID@count=\count327
+\ID@toks=\toks45
+\ID@count=\count330
 )
-\ID@usercommands=\toks45
-\safeloop@depth=\count328
-\safeRKloop@depth=\count329
-\forest@temp@dimen=\dimen267
-\forest@temp@count=\count330
-\forest@n=\count331
-\forest@temp@global@count=\count332
-\forest@temp@toks=\toks46
-\forest@temparray@M=\count333
-\forest@temparray@N=\count334
-\forest@global@temparray@M=\count335
-\forest@global@temparray@N=\count336
-\forest@isnum@count=\count337
-\forest@isdim@nonintpart=\count338
-\forest@isdim@dimen=\dimen268
-\forest@sort@m=\count339
-\forest@sort@k=\count340
-\forest@sort@p=\count341
-\bracket@content=\toks47
-\bracket@afterthought=\toks48
-\forest@node@maxid=\count342
-\forest@process@left@M=\count343
-\forest@process@left@N=\count344
-\forest@process@right@M=\count345
-\forest@process@right@N=\count346
-\forest@process@saved@M=\count347
-\forest@process@saved@N=\count348
-\forest@process@result@M=\count349
-\forest@process@result@N=\count350
-\forest@process@n=\count351
-\forest@nodewalk@branch@toks=\toks49
-\forest@nodewalk@shortsteps@resolution=\toks50
-\forest@do@dynamics=\toks51
-\forest@box=\box89
-\forest@xg=\dimen269
-\forest@yg=\dimen270
-\forest@xs=\dimen271
-\forest@ys=\dimen272
-\forest@pi@toks=\toks52
-\forest@segment@toks=\toks53
-\forest@PIi@toks=\toks54
-\forest@PIii@toks=\toks55
+\ID@usercommands=\toks46
+\safeloop@depth=\count331
+\safeRKloop@depth=\count332
+\forest@temp@dimen=\dimen277
+\forest@temp@count=\count333
+\forest@n=\count334
+\forest@temp@global@count=\count335
+\forest@temp@toks=\toks47
+\forest@temparray@M=\count336
+\forest@temparray@N=\count337
+\forest@global@temparray@M=\count338
+\forest@global@temparray@N=\count339
+\forest@isnum@count=\count340
+\forest@isdim@nonintpart=\count341
+\forest@isdim@dimen=\dimen278
+\forest@sort@m=\count342
+\forest@sort@k=\count343
+\forest@sort@p=\count344
+\bracket@content=\toks48
+\bracket@afterthought=\toks49
+\forest@node@maxid=\count345
+\forest@process@left@M=\count346
+\forest@process@left@N=\count347
+\forest@process@right@M=\count348
+\forest@process@right@N=\count349
+\forest@process@saved@M=\count350
+\forest@process@saved@N=\count351
+\forest@process@result@M=\count352
+\forest@process@result@N=\count353
+\forest@process@n=\count354
+\forest@nodewalk@branch@toks=\toks50
+\forest@nodewalk@shortsteps@resolution=\toks51
+\forest@do@dynamics=\toks52
+\forest@box=\box90
+\forest@xg=\dimen279
+\forest@yg=\dimen280
+\forest@xs=\dimen281
+\forest@ys=\dimen282
+\forest@pi@toks=\toks53
+\forest@segment@toks=\toks54
+\forest@PIi@toks=\toks55
+\forest@PIii@toks=\toks56
 \forest@copy@in=\read4
 \forest@copy@out=\write4
-\forest@externalize@max@outer@n=\count352
-\forest@externalize@inner@n=\count353
+\forest@externalize@max@outer@n=\count355
+\forest@externalize@inner@n=\count356
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest-lib-edges.sty
 Package: forest-lib-edges 2016/12/05 v0.1.1
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\arrowsize=\dimen273
+\arrowsize=\dimen283
 )) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowinset=\dimen274
-\pgfarrowlength=\dimen275
-\pgfarrowwidth=\dimen276
-\pgfarrowlinewidth=\dimen277
+\pgfarrowinset=\dimen284
+\pgfarrowlength=\dimen285
+\pgfarrowwidth=\dimen286
+\pgfarrowlinewidth=\dimen287
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
 File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@layerbox@background=\box90
-\pgf@layerboxsaved@background=\box91
+\pgf@layerbox@background=\box91
+\pgf@layerboxsaved@background=\box92
 ) (./myreport.aux
 
 LaTeX Warning: Label `wu2018slangsd' multiply defined.
@@ -1064,56 +1090,58 @@ LaTeX Warning: Label `wu2018slangsd' multiply defined.
 )
 \openout1 = `myreport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
  (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count354
-\scratchdimen=\dimen278
-\scratchbox=\box92
-\nofMPsegments=\count355
-\nofMParguments=\count356
-\everyMPshowfont=\toks56
-\MPscratchCnt=\count357
-\MPscratchDim=\dimen279
-\MPnumerator=\count358
-\makeMPintoPDFobject=\count359
-\everyMPtoPDFconversion=\toks57
+\scratchcounter=\count357
+\scratchdimen=\dimen288
+\scratchbox=\box93
+\nofMPsegments=\count358
+\nofMParguments=\count359
+\everyMPshowfont=\toks57
+\MPscratchCnt=\count360
+\MPscratchDim=\dimen289
+\MPnumerator=\count361
+\makeMPintoPDFobject=\count362
+\everyMPtoPDFconversion=\toks58
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 49.
+Package hyperref Info: Link coloring ON on input line 51.
  (./myreport.out) (./myreport.out)
 \@outlinefile=\write5
 \openout5 = `myreport.out'.
 
 
 
-Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 49.
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 51.
 
-<figures/logo.png, id=183, 566.115pt x 617.9085pt>
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+<figures/logo.png, id=191, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
-Package pdftex.def Info: figures/logo.png  used on input line 52.
+Package pdftex.def Info: figures/logo.png  used on input line 54.
 (pdftex.def)             Requested size: 99.58464pt x 108.69188pt.
 
 
@@ -1125,66 +1153,46 @@ Package pdftex.def Info: figures/logo.png  used on input line 52.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.88 T
+l.90 T
       hinking internationally, when people are communicating with translator... [1]
-<figures/google_verlan.png, id=235, 1093.08376pt x 252.945pt>
+<figures/google_verlan.png, id=243, 1093.08376pt x 252.945pt>
 File: figures/google_verlan.png Graphic file (type png)
 <use figures/google_verlan.png>
-Package pdftex.def Info: figures/google_verlan.png  used on input line 92.
+Package pdftex.def Info: figures/google_verlan.png  used on input line 94.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_verlan.png, id=236, 972.63374pt x 237.88875pt>
+<figures/deepl_verlan.png, id=244, 972.63374pt x 237.88875pt>
 File: figures/deepl_verlan.png Graphic file (type png)
 <use figures/deepl_verlan.png>
-Package pdftex.def Info: figures/deepl_verlan.png  used on input line 98.
+Package pdftex.def Info: figures/deepl_verlan.png  used on input line 100.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
-<figures/deepl_alt_text.png, id=237, 303.1325pt x 396.48125pt>
+<figures/deepl_alt_text.png, id=245, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
-Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 104.
+Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 106.
 (pdftex.def)             Requested size: 117.00119pt x 153.0299pt.
 
 
-[2
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.107 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.107 
-       <./figures/google_verlan.png> <./figures/deepl_verlan.png>]
+[2 <./figures/google_verlan.png> <./figures/deepl_verlan.png>]
 
-[3
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.117 
-       <./figures/deepl_alt_text.png>]
-Overfull \hbox (2.92413pt too wide) in paragraph at lines 148--148
+[3 <./figures/deepl_alt_text.png>]
+Overfull \hbox (2.92413pt too wide) in paragraph at lines 150--150
  [][]\OT1/cmr/m/n/10.95 Performance 
  []
 
 
-Overfull \hbox (30.79729pt too wide) in paragraph at lines 150--151
+Overfull \hbox (30.79729pt too wide) in paragraph at lines 152--153
  [][] 
  []
 
 
 
-[4
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.162 
-      ]
-Underfull \hbox (badness 10000) in paragraph at lines 163--163
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 165--165
 [][][]\OT1/cmr/m/n/10 International Pho-netic Al-pha-bet, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki /
  []
 
 
-Overfull \hbox (24.01376pt too wide) in paragraph at lines 163--164
+Overfull \hbox (24.01376pt too wide) in paragraph at lines 165--166
 \OT1/cmr/m/n/12 a-lytic model pro-posed by Kaye and Lowen-stamm pro-vides the best description[[]].
  []
 
@@ -1193,14 +1201,14 @@ Overfull \hbox (24.01376pt too wide) in paragraph at lines 163--164
 [5]
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 277--277
+Underfull \hbox (badness 10000) in paragraph at lines 279--279
 [][][][][]$\OT1/cmtt/m/n/10 https : / / ecoleng . com / verlan-[]comprendre-[]argot-[]francais-[]parler /
  []
 
 
 
 [7]
-Underfull \hbox (badness 7291) in paragraph at lines 293--293
+Underfull \hbox (badness 7291) in paragraph at lines 295--295
 [][][]\OT1/cmr/m/n/10 Support Vec-tor Ma-chine, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / Support _ vector _
  []
 
@@ -1209,7 +1217,7 @@ Underfull \hbox (badness 7291) in paragraph at lines 293--293
 [8]
 
 [9]
-Overfull \hbox (54.3742pt too wide) in paragraph at lines 393--394
+Overfull \hbox (54.3742pt too wide) in paragraph at lines 395--396
  [][] 
  []
 
@@ -1217,67 +1225,89 @@ Overfull \hbox (54.3742pt too wide) in paragraph at lines 393--394
 
 [10]
 
-[11
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.404 
-      ]
-Overfull \hbox (69.9929pt too wide) in paragraph at lines 416--426
+[11]
+Overfull \hbox (69.9929pt too wide) in paragraph at lines 418--428
  [][] 
  []
 
 
 
-[12
-pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.433 T
-       he main reason is that these columns were not used in the implementat...]
+[12]
 
-[13]
-Overfull \hbox (116.76485pt too wide) in paragraph at lines 492--505
- [][] 
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 442.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 3.26288pt
+(hyperref)                removed on input line 442.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 442.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 3.26288pt
+(hyperref)                removed on input line 442.
+
+<figures/CamemBERT.png, id=428, 722.7pt x 722.7pt>
+File: figures/CamemBERT.png Graphic file (type png)
+<use figures/CamemBERT.png>
+Package pdftex.def Info: figures/CamemBERT.png  used on input line 448.
+(pdftex.def)             Requested size: 56.9055pt x 56.90189pt.
+<figures/mistral-logo.png, id=429, 191.71625pt x 135.50626pt>
+File: figures/mistral-logo.png Graphic file (type png)
+<use figures/mistral-logo.png>
+Package pdftex.def Info: figures/mistral-logo.png  used on input line 453.
+(pdftex.def)             Requested size: 56.9055pt x 40.22003pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 446--455
+
  []
 
 
 
-[14
-pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.528 \newpage
-              ]
+[13 <./figures/CamemBERT.png> <./figures/mistral-logo.png>]
+
+[14]
 
 [15]
+Overfull \hbox (116.76485pt too wide) in paragraph at lines 546--559
+ [][] 
+ []
+
+
 
 [16]
+
+[17]
+
+[18]
+
+[19]
 pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.623 \bibitem{wu2018slangsd}
+l.677 \bibitem{wu2018slangsd}
                              
 
-[17]
-Underfull \hbox (badness 1048) in paragraph at lines 687--691
+[20]
+Underfull \hbox (badness 1048) in paragraph at lines 741--745
 \OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
  []
 
 
 
-[18]
+[21]
 
-[19
-pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.777 
-      ]
+[22]
 
-[20]
+[23]
 
-[21] (./myreport.aux)
+[24]
+
+[25] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1287,21 +1317,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: 04006132999EC6D8346CA58C07EF3E84;8502.
+(rerunfilecheck)             Checksum: F2BD030E2F7A6CCA00CC9E8542A77AF8;8919.
  ) 
 Here is how much of TeX's memory you used:
- 35207 strings out of 474662
- 776176 string characters out of 5751110
- 1159456 words of memory out of 5000000
- 57632 multiletter control sequences out of 15000+600000
+ 36676 strings out of 474662
+ 804487 string characters out of 5751110
+ 1174978 words of memory out of 5000000
+ 59065 multiletter control sequences out of 15000+600000
  570405 words of font info for 76 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 140i,12n,131p,1785b,2117s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 140i,12n,131p,1785b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on myreport.pdf (22 pages, 548762 bytes).
+Output written on myreport.pdf (26 pages, 665069 bytes).
 PDF statistics:
- 605 PDF objects out of 1000 (max. 8388607)
- 535 compressed objects within 6 object streams
- 143 named destinations out of 1000 (max. 500000)
- 385 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 678 PDF objects out of 1000 (max. 8388607)
+ 600 compressed objects within 6 object streams
+ 169 named destinations out of 1000 (max. 500000)
+ 411 words of extra memory for PDF output out of 10000 (max. 10000000)
 
