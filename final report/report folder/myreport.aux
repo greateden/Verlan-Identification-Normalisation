@@ -92,32 +92,42 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Leaderboard of the Artificial Analysis Intelligence Index (retrieved on 14 October 2025).}}{17}{figure.caption.11}\protected@file@percent }
 \newlabel{fig:AI_Index}{{7}{17}{Leaderboard of the Artificial Analysis Intelligence Index (retrieved on 14 October 2025)}{figure.caption.11}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Training Models}{18}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}The Pipelines}{19}{subsubsection.4.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Unified view of the four detection pipelines. Shared preprocessing branches into frozen (Experiment~A, C) and trainable encoders (Experiment~B, D), then reconverges on mean pooling, L2 normalisation, their respective heads, and a common 0.5 sigmoid decision.}}{19}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:pipeline-overview}{{8}{19}{Unified view of the four detection pipelines. Shared preprocessing branches into frozen (Experiment~A, C) and trainable encoders (Experiment~B, D), then reconverges on mean pooling, L2 normalisation, their respective heads, and a common 0.5 sigmoid decision}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}The Pipelines}{18}{subsubsection.4.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces A compact view of the four Verlan identification pipelines.\footnotesize   Exp~A: Frozen Encoder + LogisticRegression Head Exp~B: End-to-End Encoder + Linear Head Exp~C: Frozen Encoder + BERT-Style Head Exp~D: End-to-End Encoder + BERT-Style Head (Experiment D}}{19}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:pipeline-overview}{{8}{19}{A compact view of the four Verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + LogisticRegression Head\\Exp~B: End-to-End Encoder + Linear Head\\Exp~C: Frozen Encoder + BERT-Style Head\\Exp~D: End-to-End Encoder + BERT-Style Head (Experiment D}{figure.caption.12}{}}
 \@writefile{toc}{\contentsline {paragraph}{Input}{19}{section*.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}The Usage of the Datasets}{20}{subsubsection.4.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Environment and Hyperparameters}{20}{subsubsection.4.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Other Models}{20}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Justifying for LR}{20}{subsubsection.4.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}Gazetteer Gate}{20}{subsubsection.4.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.3}Calibration: Temp / Platt / Isotonic / Threshold Tuning}{20}{subsubsection.4.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments, Results, and Analyses}{20}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{20}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Testing Datasets}{20}{subsubsection.5.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Testing Schema}{20}{subsubsection.5.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Results}{20}{subsection.5.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Draft confusion-count summary on the auxiliary targeted suites: curated historical verlan pairs (29 samples), self-created verlan forms (25 samples), and contemporary slang paraphrases (25 samples). Only verlan variants are shown for the verlan suites, so TN/FP are omitted there. ChatGPT operates on 158 prompt responses in total across both tables.}}{20}{table.caption.14}\protected@file@percent }
-\newlabel{tab:aux-test-confusion-draft}{{2}{20}{Draft confusion-count summary on the auxiliary targeted suites: curated historical verlan pairs (29 samples), self-created verlan forms (25 samples), and contemporary slang paraphrases (25 samples). Only verlan variants are shown for the verlan suites, so TN/FP are omitted there. ChatGPT operates on 158 prompt responses in total across both tables}{table.caption.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Analyses}{21}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Zero-Shot Mistral-7B Model}{21}{subsubsection.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Frozen Neurons Embedding with Linear Regression Head as Classifier}{21}{subsubsection.5.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Frozen Neurons Embedding with BERT Head as Classifier}{21}{subsubsection.5.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.4}Full Fine-Tune Neurons with Linear Regression Head as Classifier}{21}{subsubsection.5.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.5}Full Fine-Tune Neurons with BERT Head as Classifier}{21}{subsubsection.5.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.6}Zero-Shot ChatGPT 5 Codex (High)}{21}{subsubsection.5.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Conclusion and Limitation}{21}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion and Outlook}{21}{section.6}\protected@file@percent }
+\citation{alsharou2021noise}
+\@writefile{toc}{\contentsline {paragraph}{Normalise Text}{20}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Why Not Preserve Upper Cases and Annotation Marks}{20}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tokenisation}{20}{section*.16}\protected@file@percent }
+\citation{lodha2023surgical}
+\@writefile{toc}{\contentsline {paragraph}{Encoder}{21}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caliberations}{21}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Masking}{21}{section*.19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Visulisation of masking.}}{22}{figure.caption.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Mean Pooling}{23}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}The Usage of the Datasets}{23}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Environment and Hyperparameters}{23}{subsubsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Other Models}{23}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Justifying for LR}{23}{subsubsection.4.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}Calibration: Temp / Platt / Isotonic / Threshold Tuning}{23}{subsubsection.4.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.3}Gazetteer Gate}{23}{subsubsection.4.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments, Results, and Analyses}{23}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{23}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Testing Datasets}{23}{subsubsection.5.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Testing Schema}{23}{subsubsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Results}{23}{subsection.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Draft confusion-count summary on the auxiliary targeted suites: curated historical verlan pairs (29 samples), self-created verlan forms (25 samples), and contemporary slang paraphrases (25 samples). Only verlan variants are shown for the verlan suites, so TN/FP are omitted there. ChatGPT operates on 158 prompt responses in total across both tables.}}{24}{table.caption.22}\protected@file@percent }
+\newlabel{tab:aux-test-confusion-draft}{{2}{24}{Draft confusion-count summary on the auxiliary targeted suites: curated historical verlan pairs (29 samples), self-created verlan forms (25 samples), and contemporary slang paraphrases (25 samples). Only verlan variants are shown for the verlan suites, so TN/FP are omitted there. ChatGPT operates on 158 prompt responses in total across both tables}{table.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Analyses}{24}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Zero-Shot Mistral-7B Model}{24}{subsubsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Frozen Encoder + LogisticRegression Head (Experiment A)}{24}{subsubsection.5.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Frozen Encoder + BERT-Style Head (Experiment C)}{24}{subsubsection.5.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.4}End-to-End Encoder + Linear Head (Experiment B)}{24}{subsubsection.5.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.5}End-to-End Encoder + BERT-Style Head (Experiment D)}{24}{subsubsection.5.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.6}Zero-Shot ChatGPT 5 Codex (High)}{24}{subsubsection.5.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Conclusion and Limitation}{24}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion and Outlook}{24}{section.6}\protected@file@percent }
 \bibcite{rajabov2025}{1}
 \bibcite{bach2018}{2}
 \bibcite{evolutionverlan}{3}
@@ -158,12 +168,14 @@
 \bibcite{martin2019camembert}{38}
 \bibcite{du2025deepresearch}{39}
 \bibcite{dong2024imbalance}{40}
-\@writefile{toc}{\contentsline {section}{\numberline {Appendix A}Some extra things}{27}{appendix.A}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset.}}{27}{table.caption.16}\protected@file@percent }
-\newlabel{tab:main-test-confusion-draft}{{3}{27}{Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset}{table.caption.16}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {Appendix B}Aims and Objectives}{27}{appendix.B}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Aims}{27}{section*.18}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Objectives}{28}{section*.19}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Aims}{28}{section*.21}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Objectives}{28}{section*.22}\protected@file@percent }
-\gdef \@abspage@last{30}
+\bibcite{alsharou2021noise}{41}
+\bibcite{lodha2023surgical}{42}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix A}Some extra things}{30}{appendix.A}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset.}}{30}{table.caption.24}\protected@file@percent }
+\newlabel{tab:main-test-confusion-draft}{{3}{30}{Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset}{table.caption.24}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix B}Aims and Objectives}{30}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Aims}{31}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Objectives}{31}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Aims}{31}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Objectives}{32}{section*.30}\protected@file@percent }
+\gdef \@abspage@last{33}

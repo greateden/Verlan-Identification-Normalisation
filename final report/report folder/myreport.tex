@@ -28,6 +28,9 @@
 \usepackage{listings}
 \usepackage{caption}
 \usepackage[edges]{forest}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
 \usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds}
 
 % To compile the final version of the report (which will remove all the todo content)
@@ -533,7 +536,7 @@ User: Sentence:
 Does this sentence contain Verlan? Reply with one digit (0 or 1).
 \end{lstlisting}
 
-For each prompt, we start a new chat session to avoid the influence of the LLM’s memorisation\;---\;reusing previous results may interfere with later performance.
+For each prompt, we start a new chat session to avoid the influence of the LLM's memorisation\;---\;reusing previous results may interfere with later performance.
 
 A potential issue is that, from time to time, LLMs do not follow the system prompt and produce unexpected responses. The report has accounted for this\;---\;we use regular expressions to extract the numerical values mentioned in the response (i.e., 0 or 1) and store them in a separate column in the CSV file for easier post-processing. We also review the extracted labels manually to prevent inconsistencies or noise.
 
@@ -565,11 +568,10 @@ Sentences to evaluate:
 Notably, because GPT-5 Codex (High) is a reasoning-oriented model, its responses are typically slower, and it also has monthly usage limitations\footnote{The author of this report holds a ChatGPT Plus subscription.}. Therefore, instead of sending each sentence individually with the prompt, we chose to batch all sentences together in a single request. The maximum token size was taken into account, and the total length did not exceed the model's limit of approximately 400,000 tokens.
 
 \subsection{Training Models}
-This section will introduce the methodology behind the training models. It will first explain the pipeline from the start (input) to the end (output), and how we split and use the datasets in the pipeline. Then, it will justify the technical details of the specific hyperparameters and training platforms. In the end, it will introduce the other pipelines we have considered but did not implement in this experiment, and the reasons behind them.
-
-To not intend to confuse readers, the report has simplified the flowcharts in this section. The full flowcharts are in the appendix.
+This section introduces the methodology behind the training models. It first explains the pipeline from input to output and how the datasets are split and used within it. Then, it justifies the technical details of the specific hyperparameters and training platforms. Finally, it presents other pipelines that were considered but not implemented in this experiment, along with the rationale behind those decisions.
 
 \subsubsection{The Pipelines}
+To avoid confusing readers, the report simplifies the flowcharts to highlight only the key components in this section. The complete flowcharts are provided in the appendix.
 
 \begin{figure}[H]
   \begin{adjustwidth}{-2.0cm}{0cm}
@@ -619,13 +621,125 @@ To not intend to confuse readers, the report has simplified the flowcharts in th
     \draw[->, thick] (sig) -- (out);
   \end{tikzpicture}
   \end{adjustwidth}
-  \caption{\label{fig:pipeline-overview}Unified view of the four detection pipelines. Shared preprocessing branches into frozen (Experiment~A, C) and trainable encoders (Experiment~B, D), then reconverges on mean pooling, L2 normalisation, their respective heads, and a common 0.5 sigmoid decision.}
+  \caption{\label{fig:pipeline-overview}A compact view of the four Verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + LogisticRegression Head\\Exp~B: End-to-End Encoder + Linear Head\\Exp~C: Frozen Encoder + BERT-Style Head\\Exp~D: End-to-End Encoder + BERT-Style Head (Experiment D}
 \end{figure}
 
 \paragraph{Input}
-Let us start with the input.
-%Input; how to mask the label to prevent data leakage
-%Tokenisation
+The input is the \textit{Sentences} dataset we created. For editing and data management purposes, it is stored as an \texttt{.xlsx} table. It should be noted that the dataset was not converted into a special format before being fed into the pipeline. Therefore, the labels indicating whether a sentence contains a Verlan term remain in the input file when read by the program. However, we are confident that the sentence column was properly isolated, and that no visible data leakage occurred in the program code or during runtime.
+
+\paragraph{Normalise Text}
+\subparagraph{Why Not Preserve Upper Cases and Annotation Marks}
+As mentioned in Section~3.3.2, we have concerns that the diversity of annotation marks may affect the models' performance. Digging deeper, this is a good argument that even involves thinking about the role of Verlan in a sentence from the LLM's perspective\;---\;a Verlan might be an Out-Of-Vocabulary (OOV) word, or in other words, it might be treated as noise, like typographical mistakes. Indeed, scholars have pointed out that not only typographical mistakes but also annotation marks and the difference between upper and lower cases can all affect model performance\cite{alsharou2021noise}. 
+
+Besides, during a smoke test, the report found that annotation marks and upper/lower case differences can indeed affect model performance. The model mislabels sentences that contain Verlan as if they do not, when the sentence has not been normalised (i.e., trimmed off annotation marks and converted to lowercase). When it has been normalised, the model behaves normally and labels that sentence as containing Verlan.\footnote{Again, it was a non-official test run, so the report cannot claim that we have proven these changes would affect performance. But theoretically, it makes sense that if the LLM treats annotation marks, cases, and Verlan all as noise, normalising the text would reduce unwanted noise and therefore increase accuracy. Further experiments can be conducted if needed.} 
+
+This finding inspired the report to normalise the text before further experiments. Thus, we used regular expressions to trim off the annotation marks and convert the sentences to lowercase, while preserving the rest, including accented letters (e.g., é, à, ù).
+
+\paragraph{Tokenisation}
+Because all the encoders used in the four experiments originate from the same Mistral model, it is essential to ensure that the tokens received by the encoder match its expected input format. Therefore, we employ the tokenizer corresponding to Mistral, namely the one developed by Salesforce\;---\;\textit{SFR-Embedding-Mistral}\;---\;to guarantee optimal model performance.
+
+While it is indeed valuable to understand how this tokenizer segments each sentence, this tokenizer-encoder pair already represents the most appropriate configuration for our task. Hence, analysing its internal mechanisms in detail is considered unnecessary for this report.
+
+\paragraph{Encoder}
+As mentioned above, the encoders used in these experiments are identical, except that they are run in different modes: frozen or trainable. The reason for comparing a frozen encoder with a trainable one is, firstly, that we believe Verlan identification should be a relatively straightforward task for a large language model (LLM). 
+
+Moreover, given that our dataset contains a limited number of entries, and considering that scholars have pointed out that in many NLP tasks, keeping most of the encoder frozen while fine-tuning only a few layers can still yield strong performance\cite{lodha2023surgical}, a full fine-tuning approach may not be necessary. 
+
+Finally, taking into account both the time required and the expected outcome of partial fine-tuning to find the most optimal ratio between frozen and trainable layers, the report concludes that comparing the two bipolar cases\;---\;fully frozen and fully fine-tuned\;---\;is a more practical and representative approach.
+
+\paragraph{Caliberations}
+
+The report implements caliberations to the last hidden layer of the encoder, specifically, masking, mean pooling and L2 normalisation. 
+
+\subparagraph{Masking}
+The implementation of masking can be interpreted as below:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.9,
+    every node/.style={transform shape},
+    token/.style={rectangle, rounded corners, minimum width=1.2cm, minimum height=0.8cm, font=\footnotesize, align=center},
+    valid/.style={token, fill=blue!20, draw=blue!50!black},
+    pad/.style={token, fill=gray!20, draw=gray!60},
+    removed/.style={token, fill=red!10, draw=red!60, dashed},
+    masked/.style={token, fill=blue!12, draw=blue!40!black},
+    zeroed/.style={token, fill=white, draw=gray!50, dashed},
+    maskone/.style={token, fill=green!15, draw=green!40!black},
+    maskzero/.style={token, fill=gray!15, draw=gray!50},
+    legend/.style={minimum width=0.75cm, minimum height=0.45cm, inner sep=1.5pt},
+    arrow/.style={->, thick, >=stealth}
+]
+
+% Row 1: hidden states H = out.last_hidden_state
+\node[pad] (h1) {$P$};
+\node[valid, right=0.45cm of h1] (h2) {$V_1$};
+\node[removed, right=0.45cm of h2] (h3) {$R$};
+\node[valid, right=0.45cm of h3] (h4) {$V_2$};
+\node[removed, right=0.45cm of h4] (h5) {$R$};
+\node[pad, right=0.45cm of h5] (h6) {$P$};
+\node[above=0.55cm of h3, font=\small] {The last hidden state};
+
+% Row 2: attention mask (broadcast across hidden size)
+\node[maskzero, below=0.8cm of h1] (mask1) {0};
+\node[maskone, below=0.8cm of h2] (mask2) {1};
+\node[maskzero, below=0.8cm of h3] (mask3) {0};
+\node[maskone, below=0.8cm of h4] (mask4) {1};
+\node[maskzero, below=0.8cm of h5] (mask5) {0};
+\node[maskzero, below=0.8cm of h6] (mask6) {0};
+\node[left=1.1cm of mask1, align=right, font=\small] {attention\\mask};
+
+% Row 3: elementwise masked representations (H * mask)
+\node[zeroed, below=0.8cm of mask1] (masked1) {0};
+\node[masked, below=0.8cm of mask2] (masked2) {$V_1$};
+\node[zeroed, below=0.8cm of mask3] (masked3) {0};
+\node[masked, below=0.8cm of mask4] (masked4) {$V_2$};
+\node[zeroed, below=0.8cm of mask5] (masked5) {0};
+\node[zeroed, below=0.8cm of mask6] (masked6) {0};
+\node[left=1.1cm of masked1, align=right, font=\small] {$H \odot \text{mask}$};
+
+% Elementwise masking annotation
+\node[font=\tiny, align=center, below=0.15cm of mask3] (masknote) {elementwise masking};
+\draw[arrow] (mask3.south) -- (masknote.north);
+\draw[arrow] (masknote.south) -- (masked3.north);
+
+% ------------------ Legend ------------------
+\node[pad, legend, below=0.8cm of masked3, xshift=-3.6cm, label=right:{\footnotesize Padding token}] (legP) {};
+\node[valid, legend, below=0.35cm of legP, label=right:{\footnotesize Valid token}] (legV) {};
+\node[removed, legend, below=0.35cm of legV, label=right:{\footnotesize Invalid token (masked out)}] (legR) {};
+\node[maskone, legend, below=0.35cm of legR, label=right:{\footnotesize Mask value $1$}] (legMone) {};
+\node[maskzero, legend, below=0.35cm of legMone, label=right:{\footnotesize Mask value $0$}] (legMzero) {};
+\node[masked, legend, below=0.35cm of legMzero, label=right:{\footnotesize Contributes to mean}] (legMasked) {};
+\node[zeroed, legend, below=0.35cm of legMasked, label=right:{\footnotesize Zeroed by mask}] (legZeroed) {};
+
+\end{tikzpicture}
+\caption{Visulisation of masking.}
+\end{figure}
+
+The last hidden state is the final layer of the encoder, where each token has its own hidden representation. 
+It has the shape of a three-dimensional tensor, denoted as $\mathbf{H} \in \mathbb{R}^{B \times T \times D}$, 
+where $B$ stands for the batch size (the number of sentences in a batch), 
+$T$ stands for the sequence length (the number of tokens per sentence), 
+and $D$ represents the hidden dimension (the size of each token vector).
+
+Next, we apply the attention mask, which contains $1$s and $0$s. 
+A value of $1$ indicates a valid token, while $0$ marks a padding or invalid token that should be ignored. 
+However, this mask is \textit{flat}\;---\;it is a two-dimensional tensor, $[B, T]$. 
+To ensure it can be broadcast across all $D$ dimensions of each token vector, 
+we add an extra dimension at the end of the tensor, resulting in a new shape of $[B, T, 1]$. 
+This allows each 0/1 value to be applied consistently across the entire hidden vector of that token.
+
+In the third line of the implementation, the mask is summed along the $T$ dimension, 
+yielding the number of valid tokens in each sentence. 
+The resulting tensor has the shape $[B, 1]$.
+
+It is always important to handle edge cases. 
+If a hidden layer happens to be fully padded, the denominator in the subsequent division could become zero. 
+Therefore, we clamp the minimum denominator to $1$ to prevent division-by-zero errors.
+
+\subparagraph{Mean Pooling}
+
+
 %Embedding or Encoder; for embedding, need to show embedding space figures 
 %LR or BERT. for LR, explain the mean pooling before it; for BERT, explain it's a BERT-like layers instead of using BERT directly
 %Threshold = fixed, 0.5
@@ -644,10 +758,10 @@ Let us start with the input.
 \subsection{Other Models}
 \subsubsection{Justifying for LR}
 % I'm not connecting LR head directly, if so, I've tested, I got NO separation.
-\subsubsection{Gazetteer Gate}
-% using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
 \subsubsection{Calibration: Temp / Platt / Isotonic / Threshold Tuning}
 %tested these, but to simplify the pipeline, we decided to use 0.5 hard limitation instead
+\subsubsection{Gazetteer Gate}
+% using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments, Results, and Analyses}
@@ -689,13 +803,13 @@ Let us start with the input.
 
 \subsection{Analyses}
 \subsubsection{Zero-Shot Mistral-7B Model}
-\subsubsection{Frozen Neurons Embedding with Linear Regression Head as Classifier}
+\subsubsection{Frozen Encoder + LogisticRegression Head (Experiment A)}
 %we write this in detail, explaining everything we have in the pipeline
-\subsubsection{Frozen Neurons Embedding with BERT Head as Classifier}
+\subsubsection{Frozen Encoder + BERT-Style Head (Experiment C)}
 %less detail
-\subsubsection{Full Fine-Tune Neurons with Linear Regression Head as Classifier}
+\subsubsection{End-to-End Encoder + Linear Head (Experiment B)}
 %more detail on the E2E process
-\subsubsection{Full Fine-Tune Neurons with BERT Head as Classifier}
+\subsubsection{End-to-End Encoder + BERT-Style Head (Experiment D)}
 \subsubsection{Zero-Shot ChatGPT 5 Codex (High)}
 
 
@@ -935,6 +1049,19 @@ DOI: 10.48550/arXiv.2506.11763
 Dong, Yuhui; Geng, Xin; Zhang, Jiayi; Song, Yue; Li, Xixin.
 \textit{Understanding the Effects of Language-specific Class Imbalance}.
 DOI: 10.48550/arXiv.2402.13016.
+
+\bibitem{alsharou2021noise}
+Al Sharou, Khaled; Li, Zheng; Specia, Lucia.
+\textit{Towards a Better Understanding of Noise in Natural Language Processing}.
+Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021).
+DOI: 10.26615/978-954-452-072-4\_007
+
+\bibitem{lodha2023surgical}
+Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caiming.
+\textit{On Surgical Fine-tuning for Language Encoders}.
+Findings of the Association for Computational Linguistics: EMNLP 2023.
+DOI: 10.18653/v1/2023.findings-emnlp.204
+
 
 \end{thebibliography}
 %TC:endignore

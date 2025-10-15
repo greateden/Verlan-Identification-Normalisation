@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  15 OCT 2025 18:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  15 OCT 2025 22:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1100,7 +1100,16 @@ Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
 \forest@externalize@inner@n=\count366
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest-lib-edges.sty
 Package: forest-lib-edges 2016/12/05 v0.1.1
-) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
@@ -1122,24 +1131,24 @@ LaTeX Warning: Label `wu2018slangsd' multiply defined.
 )
 \openout1 = `myreport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
  (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count367
@@ -1159,22 +1168,30 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 55.
+Package hyperref Info: Link coloring ON on input line 58.
  (./myreport.out) (./myreport.out)
 \@outlinefile=\write5
 \openout5 = `myreport.out'.
 
 
 
-Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 55.
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 58.
 
 \c@lstlisting=\count373
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 <figures/logo.png, id=199, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
-Package pdftex.def Info: figures/logo.png  used on input line 58.
+Package pdftex.def Info: figures/logo.png  used on input line 61.
 (pdftex.def)             Requested size: 99.58464pt x 108.69188pt.
 
 
@@ -1186,46 +1203,46 @@ Package pdftex.def Info: figures/logo.png  used on input line 58.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.94 T
+l.97 T
       hinking internationally, when people are communicating with translator... [1]
 <figures/google_verlan.png, id=251, 1093.08376pt x 252.945pt>
 File: figures/google_verlan.png Graphic file (type png)
 <use figures/google_verlan.png>
-Package pdftex.def Info: figures/google_verlan.png  used on input line 98.
+Package pdftex.def Info: figures/google_verlan.png  used on input line 101.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
 <figures/deepl_verlan.png, id=252, 972.63374pt x 237.88875pt>
 File: figures/deepl_verlan.png Graphic file (type png)
 <use figures/deepl_verlan.png>
-Package pdftex.def Info: figures/deepl_verlan.png  used on input line 104.
+Package pdftex.def Info: figures/deepl_verlan.png  used on input line 107.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
 <figures/deepl_alt_text.png, id=253, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
-Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 110.
+Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 113.
 (pdftex.def)             Requested size: 117.00119pt x 153.0299pt.
 
 
 [2 <./figures/google_verlan.png> <./figures/deepl_verlan.png>]
 
 [3 <./figures/deepl_alt_text.png>]
-Overfull \hbox (2.92413pt too wide) in paragraph at lines 154--154
+Overfull \hbox (2.92413pt too wide) in paragraph at lines 157--157
  [][]\OT1/cmr/m/n/10.95 Performance 
  []
 
 
-Overfull \hbox (30.79729pt too wide) in paragraph at lines 156--157
+Overfull \hbox (30.79729pt too wide) in paragraph at lines 159--160
  [][] 
  []
 
 
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 169--169
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
 [][][]\OT1/cmr/m/n/10 International Pho-netic Al-pha-bet, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki /
  []
 
 
-Overfull \hbox (24.01376pt too wide) in paragraph at lines 169--170
+Overfull \hbox (24.01376pt too wide) in paragraph at lines 172--173
 \OT1/cmr/m/n/12 a-lytic model pro-posed by Kaye and Lowen-stamm pro-vides the best description[[]].
  []
 
@@ -1234,14 +1251,14 @@ Overfull \hbox (24.01376pt too wide) in paragraph at lines 169--170
 [5]
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 283--283
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
 [][][][][]$\OT1/cmtt/m/n/10 https : / / ecoleng . com / verlan-[]comprendre-[]argot-[]francais-[]parler /
  []
 
 
 
 [7]
-Underfull \hbox (badness 7291) in paragraph at lines 299--299
+Underfull \hbox (badness 7291) in paragraph at lines 302--302
 [][][]\OT1/cmr/m/n/10 Support Vec-tor Ma-chine, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / Support _ vector _
  []
 
@@ -1250,7 +1267,7 @@ Underfull \hbox (badness 7291) in paragraph at lines 299--299
 [8]
 
 [9]
-Overfull \hbox (54.3742pt too wide) in paragraph at lines 399--400
+Overfull \hbox (54.3742pt too wide) in paragraph at lines 402--403
  [][] 
  []
 
@@ -1261,7 +1278,7 @@ Overfull \hbox (54.3742pt too wide) in paragraph at lines 399--400
 [11]
 
 [12]
-Overfull \hbox (69.9929pt too wide) in paragraph at lines 438--448
+Overfull \hbox (69.9929pt too wide) in paragraph at lines 441--451
  [][] 
  []
 
@@ -1270,34 +1287,34 @@ Overfull \hbox (69.9929pt too wide) in paragraph at lines 438--448
 [13]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 462.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 465.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 462.
+(hyperref)                removed on input line 465.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 462.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 465.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 462.
+(hyperref)                removed on input line 465.
 
 <figures/CamemBERT.png, id=457, 722.7pt x 722.7pt>
 File: figures/CamemBERT.png Graphic file (type png)
 <use figures/CamemBERT.png>
-Package pdftex.def Info: figures/CamemBERT.png  used on input line 468.
+Package pdftex.def Info: figures/CamemBERT.png  used on input line 471.
 (pdftex.def)             Requested size: 56.9055pt x 56.90189pt.
 <figures/mistral-logo.png, id=458, 191.71625pt x 135.50626pt>
 File: figures/mistral-logo.png Graphic file (type png)
 <use figures/mistral-logo.png>
-Package pdftex.def Info: figures/mistral-logo.png  used on input line 473.
+Package pdftex.def Info: figures/mistral-logo.png  used on input line 476.
 (pdftex.def)             Requested size: 56.9055pt x 40.22003pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 466--475
+Underfull \hbox (badness 10000) in paragraph at lines 469--478
 
  []
 
@@ -1306,31 +1323,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 466--475
 [14 <./figures/CamemBERT.png> <./figures/mistral-logo.png>]
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 544--544
+Underfull \hbox (badness 10000) in paragraph at lines 547--547
 [][][][][]$\OT1/cmtt/m/n/10 https : / / artificialanalysis . ai / models / gpt-[]5-[]codex #
  []
 
 <figures/Artificial Analysis Intelligence Index (14 Oct '25) .png, id=511, 3336.465pt x 1706.375pt>
 File: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png Graphic file (type png)
 <use figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>
-Package pdftex.def Info: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png  used on input line 548.
+Package pdftex.def Info: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png  used on input line 551.
 (pdftex.def)             Requested size: 426.79134pt x 218.26944pt.
 
-Overfull \hbox (36.79134pt too wide) in paragraph at lines 548--549
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 551--552
  [][] 
  []
 
 
 
 [16]
-Overfull \hbox (5.15285pt too wide) in paragraph at lines 552--553
+Overfull \hbox (5.15285pt too wide) in paragraph at lines 555--556
 []\OT1/cmr/m/n/12 Following the prin-ci-ple of con-trolled ex-per-i-men-tal de-sign, we used a prompt
  []
 
 
 
 [17 <./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>]
-Overfull \hbox (64.24568pt too wide) in paragraph at lines 620--621
+Overfull \hbox (64.24568pt too wide) in paragraph at lines 622--623
  [] 
  []
 
@@ -1339,46 +1356,62 @@ Overfull \hbox (64.24568pt too wide) in paragraph at lines 620--621
 [18]
 
 [19]
-Overfull \hbox (116.76485pt too wide) in paragraph at lines 673--686
- [][] 
- []
-
-
 
 [20]
 
 [21]
 
 [22]
+Overfull \hbox (116.76485pt too wide) in paragraph at lines 787--800
+ [][] 
+ []
+
+
 
 [23]
+
+[24]
+
+[25]
+
+[26]
 pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.804 \bibitem{wu2018slangsd}
+l.918 \bibitem{wu2018slangsd}
                              
 
-[24]
-Underfull \hbox (badness 1048) in paragraph at lines 868--872
+[27]
+Underfull \hbox (badness 1048) in paragraph at lines 982--986
 \OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
  []
 
 
 
-[25]
+[28]
 
-[26]
-Underfull \hbox (badness 1237) in paragraph at lines 935--938
+[29]
+Underfull \hbox (badness 1237) in paragraph at lines 1049--1052
 []\OT1/cmr/m/n/12 Dong, Yuhui; Geng, Xin; Zhang, Ji-ayi; Song, Yue; Li, Xixin.
  []
 
 
+Underfull \hbox (badness 2809) in paragraph at lines 1060--1064
+[]\OT1/cmr/m/n/12 Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caim-
+ []
 
-[27]
 
-[28]
+Underfull \hbox (badness 1824) in paragraph at lines 1060--1064
+\OT1/cmr/m/n/12 ing. \OT1/cmr/m/it/12 On Sur-gi-cal Fine-tuning for Lan-guage En-coders\OT1/cmr/m/n/12 . Find-ings of
+ []
 
-[29] (./myreport.aux)
+
+
+[30]
+
+[31]
+
+[32] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1388,21 +1421,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: B714D0300847F169E4196F194704CA45;9559.
+(rerunfilecheck)             Checksum: 9FEF16E015254D043E3073572D1FE1DA;9395.
  ) 
 Here is how much of TeX's memory you used:
- 38534 strings out of 474662
- 830626 string characters out of 5751110
- 1326347 words of memory out of 5000000
- 60867 multiletter control sequences out of 15000+600000
- 570573 words of font info for 77 fonts, out of 8000000 for 9000
+ 39321 strings out of 474662
+ 840902 string characters out of 5751110
+ 1327076 words of memory out of 5000000
+ 61617 multiletter control sequences out of 15000+600000
+ 575009 words of font info for 96 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 140i,12n,131p,1785b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on myreport.pdf (30 pages, 994722 bytes).
+ 140i,12n,131p,1718b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on myreport.pdf (33 pages, 1047514 bytes).
 PDF statistics:
- 760 PDF objects out of 1000 (max. 8388607)
- 675 compressed objects within 7 object streams
- 209 named destinations out of 1000 (max. 500000)
+ 819 PDF objects out of 1000 (max. 8388607)
+ 720 compressed objects within 8 object streams
+ 223 named destinations out of 1000 (max. 500000)
  432 words of extra memory for PDF output out of 10000 (max. 10000000)
 
