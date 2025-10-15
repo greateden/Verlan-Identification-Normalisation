@@ -738,9 +738,62 @@ If a hidden layer happens to be fully padded, the denominator in the subsequent 
 Therefore, we clamp the minimum denominator to $1$ to prevent division-by-zero errors.
 
 \subparagraph{Mean Pooling}
+After obtaining the mask, we multiply it with the original hidden state $\mathbf{H}$. 
+Here, $\mathbf{H} \in \mathbb{R}^{B \times T \times D}$, while the mask has the shape $[B, T, 1]$. 
+By doing so, the mask's last dimension is broadcast to match the $D$ dimension. 
+As a result, the $D$-dimensional vectors at valid positions remain unchanged, whereas those at masked (i.e., padding or invalid) positions become zero. 
+This operation yields a state with the shape $[B, T, D]$\;---\;the same as the original hidden state, but with masking applied.
 
+Next, we collapse the $T$ dimension by summing all token vectors, resulting in a tensor of shape $[B, D]$. 
+We then divide it by the number of valid tokens to obtain the mean representation of the valid tokens. 
+The mathematical expression of mean pooling can be formulated as:
 
-%Embedding or Encoder; for embedding, need to show embedding space figures 
+\begin{equation}
+\text{pooled}[b, :] = 
+\frac{\displaystyle \sum_{t=1}^{T} \text{mask}[b, t, 1] \cdot H[b, t, :]}
+{\displaystyle \max \!\left( 1, \sum_{t=1}^{T} \text{mask}[b, t, 1] \right)}
+\quad \in \mathbb{R}^{D}
+\end{equation}
+
+In short, mean pooling computes the average along the $T$ dimension. 
+The resulting tensor contains one $D$-dimensional vector per sample in the batch, resulting in the overall shape $[B, D]$.
+
+\subparagraph{L2 Normalisation}
+Since we obtain different vectors across the batch, each with potentially varying magnitudes,
+
+\begin{equation}
+\mathbf{h}_{\text{pooled}}[b, :] \in \mathbb{R}^{D}
+\end{equation}
+
+\noindent their norms can differ. 
+However, in the subsequent steps, we care more about the \textit{direction} rather than the magnitude of these vectors. 
+Therefore, we apply L2 normalisation to project all vectors onto the unit hypersphere, unifying their magnitudes to $1$:
+
+\begin{equation}
+\|\mathbf{h}_{\text{norm}}[b, :]\|_2 = 1
+\end{equation}
+
+\noindent The normalised vectors are computed as:
+
+\begin{equation}
+\mathbf{h}_{\text{norm}}[b, :] =
+\frac{\mathbf{h}_{\text{pooled}}[b, :]}
+{\|\mathbf{h}_{\text{pooled}}[b, :]\|_2 + \epsilon}
+\quad \in \mathbb{R}^{D}
+\end{equation}
+
+\noindent where the L2 norm is defined as:
+
+\begin{equation}
+\|\mathbf{h}_{\text{pooled}}[b, :]\|_2
+= \sqrt{\sum_{i=1}^{D} \left(\mathbf{h}_{\text{pooled}}[b, i]\right)^2},
+\end{equation}
+
+\noindent and $\epsilon$ is a small constant added to prevent division by zero.
+
+By applying L2 normalisation, we ensure that the similarity between samples depends solely on the angular difference between their directions, which leads to more stable and comparable representations.
+
+\paragraph{Logistic Regression or BERT}
 %LR or BERT. for LR, explain the mean pooling before it; for BERT, explain it's a BERT-like layers instead of using BERT directly
 %Threshold = fixed, 0.5
 %a visulisation of the pipelines, the four different ones
@@ -767,6 +820,7 @@ Therefore, we clamp the minimum denominator to $1$ to prevent division-by-zero e
 \section{Experiments, Results, and Analyses}
 %mention again, the experiments are run on Aoraki.
 
+%Embedding or Encoder; for embedding, need to show embedding space figures 
 \subsection{Evaluation Methodology}
 \subsubsection{Testing Datasets}
 %justify the testing dataset here is not the testing part in the training dataset
