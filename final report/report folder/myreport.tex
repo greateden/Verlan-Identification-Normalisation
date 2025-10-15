@@ -17,6 +17,8 @@
 %
 % Modified for Eden's COSC385 report. (09/2025)
 
+% texcount -inc -sum -sub=section myreport.tex
+
 \documentclass[12pt]{article}
 \usepackage[draft]{cosc4x0style}
 \usepackage{float}
@@ -647,7 +649,7 @@ Notably, because GPT-5 Codex (High) is a reasoning-oriented model, its responses
 % Besides, identifying the same word with different spelling or declensions is also a hurdle. although we do have those fuzzy search algorithms, the report is not sure whether 
 
 \newpage
-
+%TC:ignore
 \begin{thebibliography}{9}
 
 \bibitem{rajabov2025} 
@@ -877,10 +879,12 @@ Dong, Yuhui; Geng, Xin; Zhang, Jiayi; Song, Yue; Li, Xixin.
 DOI: 10.48550/arXiv.2402.13016.
 
 \end{thebibliography}
+%TC:endignore
 
 
 % Activate the appendix
 % from now on sections are numerated with capital letters
+%TC:ignore
 \appendix
 
 \renewcommand{\thesection}{Appendix \Alph{section}}
@@ -942,5 +946,5 @@ Objectives list the milestones that you need to achieve in order to achieve the 
 \item trying method 2; recording the results.
 \end{itemize}
 
-
+%TC:endignore
 \end{document}
