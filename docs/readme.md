@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 4 days, 00 hours, 51 minutes
+⏳ Time remaining: 2 days, 09 hours, 28 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -89,354 +89,594 @@ project-root/
 │   ├── ChatGPT 5 Codex High.xlsx
 │   ├── E2E+BERT/
 │   │   ├── seed-1/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-10/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-11/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-12/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-13/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-14/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-15/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-16/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-17/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-18/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-19/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-2/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-20/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-3/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-4/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-5/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-6/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-7/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-8/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-9/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── trials_summary.csv
 │   │   └── trials_summary.json
 │   ├── E2E+LR/
 │   │   ├── seed-1/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-10/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-11/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-12/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-13/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-14/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-15/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-16/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-17/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-18/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-19/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-2/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-20/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-3/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-4/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-5/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-6/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-7/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-8/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-9/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── trials_summary.csv
 │   │   └── trials_summary.json
 │   ├── Frozen+BERT/
 │   │   ├── seed-1/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-10/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-11/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-12/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-13/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-14/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-15/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-16/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-17/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-18/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-19/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-2/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-20/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-3/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-4/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-5/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-6/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-7/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-8/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-9/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── trials_summary.csv
 │   │   └── trials_summary.json
 │   ├── Frozen+LR/
 │   │   ├── seed-1/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-10/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-11/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-12/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-13/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-14/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-15/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-16/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-17/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-18/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-19/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-2/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-20/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-3/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-4/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-5/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-6/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-7/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-8/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── seed-9/
+│   │   │   ├── extra_datasets_summary.csv
 │   │   │   ├── lr_head.joblib
 │   │   │   ├── meta.json
 │   │   │   ├── slang_predictions.csv
-│   │   │   └── test_predictions.csv
+│   │   │   ├── test_predictions.csv
+│   │   │   ├── verlan_test_set_invented_predictions.csv
+│   │   │   └── verlan_test_set_predictions.csv
 │   │   ├── trials_summary.csv
 │   │   └── trials_summary.json
 │   └── mistral zeroshot/
@@ -462,11 +702,14 @@ project-root/
 │   └── report folder/
 │       ├── cosc4x0style.sty
 │       ├── figures/
+│       │   ├── Artificial Analysis Intelligence Index (14 Oct '25) .png
+│       │   ├── CamemBERT.png
+│       │   ├── aoraki.png
 │       │   ├── deepl_alt_text.png
 │       │   ├── deepl_verlan.png
-│       │   ├── frog.jpg
 │       │   ├── google_verlan.png
-│       │   └── logo.png
+│       │   ├── logo.png
+│       │   └── mistral-logo.png
 │       ├── myreport.aux
 │       ├── myreport.fdb_latexmk
 │       ├── myreport.fls
