@@ -327,6 +327,13 @@ INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibra
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex
 INPUT ./myreport.aux
 INPUT ./myreport.aux
 INPUT myreport.aux

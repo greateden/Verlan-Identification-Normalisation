@@ -31,7 +31,35 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds}
+\usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds,arrows.meta,calc,decorations.pathreplacing}
+
+\tikzset{
+  >={Stealth[length=2mm,width=2mm]},
+  neuron/.style={circle,draw,minimum size=12mm,inner sep=0pt},
+  tanhNeuron/.style={
+    neuron,
+    path picture={
+      \begin{scope}
+        % Draw a symmetrical S-like tanh curve with visible flat ends
+        \clip (path picture bounding box.south west)
+              rectangle (path picture bounding box.north east);
+        \draw[line width=0.8pt, samples=40, domain=-1.2:1.2, smooth]
+          plot (\x*3mm, {1.8mm*tanh(1.6*\x)});
+      \end{scope}
+    }
+  },
+  linearNeuron/.style={
+    neuron,
+    path picture={
+      % straight line to denote linear logits
+      \draw[line width=0.8pt]
+        (path picture bounding box.south west)++(2mm,2mm)
+        -- (path picture bounding box.north east)++(-2mm,-2mm);
+    }
+  },
+  inDot/.style={circle,fill=black,minimum size=3mm,inner sep=0pt},
+  layerlabel/.style={font=\small,anchor=south},
+}
 
 % To compile the final version of the report (which will remove all the todo content)
 %\usepackage{cosc4x0style}
@@ -794,9 +822,73 @@ Therefore, we apply L2 normalisation to project all vectors onto the unit hypers
 By applying L2 normalisation, we ensure that the similarity between samples depends solely on the angular difference between their directions, which leads to more stable and comparable representations.
 
 \paragraph{Logistic Regression or BERT}
+The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and BERT, but also in the implementation framework, namely scikit-learn versus PyTorch.
+
+\subparagraph{Logistic Regression with scikit-learn}
+For the experiment using a frozen encoder with a \textit{Logistic Regression} head, we chose to employ scikit-learn (sklearn)\footnote{\url{https://scikit-learn.org}}. 
+It is simple to implement, and its \texttt{LogisticRegression} function internally handles both the loss computation and the optimiser. 
+In contrast, the other three experiments involve learning and therefore use PyTorch\footnote{\url{https://pytorch.org/}} instead. 
+Unlike scikit-learn, PyTorch does not provide built-in loss or optimiser functions for such cases, so these components are implemented explicitly, as illustrated in Figure~8. 
+For the latter three experiments, both BERT and Logistic Regression (the linear layer) act as \textit{heads}, whereas this experiment is referred to simply as \textit{Logistic Regression}.
+
+\subparagraph{BERT-Style Head}
+The figure below...
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.95\textwidth}
+\centering
+\begin{tikzpicture}[node distance=16mm and 22mm]
+
+% Column anchors
+\coordinate (C0) at (0,0);      % inputs
+\coordinate (C1) at (3.2,0);    % hidden tanh
+\coordinate (C2) at (6.4,0);    % output logit
+
+% ===== Input layer (6 dots representing 4096) =====
+\foreach [count=\i] \y in {30mm,18mm,6mm,-6mm,-18mm,-30mm} {
+  \node[inDot] (x\i) at ($(C0)+(0,\y)$) {};
+}
+\draw[decorate,decoration={brace,mirror,amplitude=5pt}]
+  ($(x1)+(-8mm,6mm)$) -- ($(x6)+(-8mm,-6mm)$)
+  node[midway,xshift=-9mm,align=center] {\small $D=4096$\\\small encoder features};
+\node at ($(x1)!1.4!(x5)$) {$\vdots$};
+\node[layerlabel] at ($(x1)+(0,18mm)$) {\textbf{Input}};
+
+% ===== Hidden (5 tanh; represent 4096) =====
+\foreach [count=\i] \y in {30mm,15mm,0mm,-15mm,-30mm} {
+  \node[tanhNeuron] (h\i) at ($(C1)+(0,\y)$) {};
+}
+\node at ($(h1)!1.15!(h5)$) {$\vdots$};
+\node[layerlabel] at ($(h1)+(0,18mm)$) {\textbf{Hidden}};
+\node[anchor=north, font=\small, align=center] at ($(h1)+(0,15mm)$) {Linear $4096\!\rightarrow\!4096$\\$\tanh$ activation};
+
+% ===== Output (single logit) =====
+\node[linearNeuron,label=right:{$\ell_{\text{detect}}$}] (o1) at ($(C2)+(0,0mm)$) {};
+\node[layerlabel] at ($(o1)+(0,18mm)$) {\textbf{Output}};
+\node[anchor=north, font=\small, align=center] at ($(o1)+(0,15mm)$) {Linear $4096\!\rightarrow\!1$};
+
+% ===== Dropout annotations =====
+\node[draw, dashed, rounded corners=1pt, font=\scriptsize, fill=white, minimum width=17mm, minimum height=42mm]
+  (dropBefore) at ($(C0)!0.55!(C1)$) {\shortstack{Dropout\\$p=0.1$}};
+\node[draw, dashed, rounded corners=1pt, font=\scriptsize, fill=white, minimum width=17mm, minimum height=42mm]
+  (dropBetween) at ($(C1)!0.55!(C2)$) {\shortstack{Dropout\\$p=0.1$}};
+
+% ===== Connections (fully connected) =====
+\foreach \a in {1,...,6} {\foreach \b in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (x\a) -- (h\b);}}
+\foreach \a in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (h\a) -- (o1);};
+
+\end{tikzpicture}
+\end{minipage}
+\caption{BERT-style detection head.}
+\label{fig:bert-detect-head}
+% --- END DETECTION HEAD FIGURE ---
+\end{figure}
+
+
 %LR or BERT. for LR, explain the mean pooling before it; for BERT, explain it's a BERT-like layers instead of using BERT directly
+
+\paragraph{The Sigmoid Threshold}
 %Threshold = fixed, 0.5
-%a visulisation of the pipelines, the four different ones
 
 \subsubsection{The Usage of the Datasets}
 %how I split the dataset into train, validation and test
