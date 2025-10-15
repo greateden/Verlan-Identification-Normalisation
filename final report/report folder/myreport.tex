@@ -565,7 +565,65 @@ Sentences to evaluate:
 Notably, because GPT-5 Codex (High) is a reasoning-oriented model, its responses are typically slower, and it also has monthly usage limitations\footnote{The author of this report holds a ChatGPT Plus subscription.}. Therefore, instead of sending each sentence individually with the prompt, we chose to batch all sentences together in a single request. The maximum token size was taken into account, and the total length did not exceed the model's limit of approximately 400,000 tokens.
 
 \subsection{Training Models}
-\subsubsection{General Pipeline}
+This section will introduce the methodology behind the training models. It will first explain the pipeline from the start (input) to the end (output), and how we split and use the datasets in the pipeline. Then, it will justify the technical details of the specific hyperparameters and training platforms. In the end, it will introduce the other pipelines we have considered but did not implement in this experiment, and the reasons behind them.
+
+To not intend to confuse readers, the report has simplified the flowcharts in this section. The full flowcharts are in the appendix.
+
+\subsubsection{The Pipelines}
+
+\begin{figure}[H]
+  \begin{adjustwidth}{-2.0cm}{0cm}
+  \centering
+  \begin{tikzpicture}[
+    >=Latex,
+    scale=0.9,
+    every node/.style={scale=0.9},
+    stage/.style={rectangle, rounded corners, draw=black, fill=blue!5, align=center, minimum width=3.2cm, minimum height=1.1cm},
+    head/.style={rectangle, rounded corners, draw=black, fill=blue!5, align=center, minimum width=4.0cm, minimum height=1.2cm},
+    node distance=0.5cm,
+    font=\normalsize
+  ]
+    \node[stage] (input) {Input text};
+    \node[stage, below=of input] (norm) {Normalise text};
+    \node[stage, below=of norm] (tok) {SFR-Embedding-Mistral tokenizer};
+
+    \node[stage, below left=0.6cm and -2.5cm of tok] (encF) {Frozen encoder\\(Exp~A \& C)};
+    \node[stage, below right=0.6cm and -2.5cm of tok] (encT) {Trainable encoder\\(Exp~B \& D)};
+
+    \node[stage, below=2.5cm of tok] (mean) {Mean pooling};
+    \node[stage, below=of mean] (l2) {L2 normalise};
+
+    \node[head, below left=0.9cm and 3.65cm of l2] (lr) {LogisticRegression\\(Exp~A)};
+    \node[head, below left=0.9cm and -1.3cm of l2] (lin) {Linear head\\(Exp~B; encoder trainable)};
+    \node[head, below right=0.9cm and -1.3 cm of l2] (bertF) {BERT-style head\\(Exp~C; encoder frozen)};
+    \node[head, below right=0.9cm and 3.15cm of l2] (bertT) {BERT-style head\\(Exp~D; encoder trainable)};
+
+    \node[stage, below=3cm of l2] (sig) {Sigmoid threshold 0.5};
+    \node[stage, below=of sig] (out) {Output label};
+
+    \draw[->, thick] (input) -- (norm);
+    \draw[->, thick] (norm) -- (tok);
+    \draw[->, thick] (tok) -- (encF);
+    \draw[->, thick] (tok) -- (encT);
+    \draw[->, thick] (encF) -- (mean);
+    \draw[->, thick] (encT) -- (mean);
+    \draw[->, thick] (mean) -- (l2);
+    \draw[->, thick] (l2) -- (lr);
+    \draw[->, thick] (l2) -- (lin);
+    \draw[->, thick] (l2) -- (bertF);
+    \draw[->, thick] (l2) -- (bertT);
+    \draw[->, thick] (lr) -- (sig);
+    \draw[->, thick] (lin) -- (sig);
+    \draw[->, thick] (bertF) -- (sig);
+    \draw[->, thick] (bertT) -- (sig);
+    \draw[->, thick] (sig) -- (out);
+  \end{tikzpicture}
+  \end{adjustwidth}
+  \caption{\label{fig:pipeline-overview}Unified view of the four detection pipelines. Shared preprocessing branches into frozen (Experiment~A, C) and trainable encoders (Experiment~B, D), then reconverges on mean pooling, L2 normalisation, their respective heads, and a common 0.5 sigmoid decision.}
+\end{figure}
+
+\paragraph{Input}
+Let us start with the input.
 %Input; how to mask the label to prevent data leakage
 %Tokenisation
 %Embedding or Encoder; for embedding, need to show embedding space figures 
