@@ -821,7 +821,7 @@ Therefore, we apply L2 normalisation to project all vectors onto the unit hypers
 
 By applying L2 normalisation, we ensure that the similarity between samples depends solely on the angular difference between their directions, which leads to more stable and comparable representations.
 
-\paragraph{Logistic Regression or BERT}
+\paragraph{The Classifiers\;---\;Logistic Regression or BERT}
 The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and BERT, but also in the implementation framework, namely scikit-learn versus PyTorch.
 
 \subparagraph{Logistic Regression with scikit-learn}
@@ -832,10 +832,74 @@ Unlike scikit-learn, PyTorch does not provide built-in loss or optimiser functio
 For the latter three experiments, both BERT and Logistic Regression (the linear layer) act as \textit{heads}, whereas this experiment is referred to simply as \textit{Logistic Regression}.
 
 \subparagraph{BERT-Style Head}
-The figure below...
+No matter it is Logistic Regression or BERT, they function as the classifier component\;---\;they comtinuously process the normalised vectors after normalisation to 
+
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.95\textwidth}
+\begin{minipage}{1\textwidth}
+\centering
+\begin{tikzpicture}[node distance=16mm and 22mm]
+
+% Column anchors
+\coordinate (C0) at (0,0);      % pooled input
+\coordinate (C1) at (3.2,0);    % hidden tanh
+\coordinate (C2) at (6.4,0);    % output logit
+
+% ===== Pooled encoder representation =====
+\foreach [count=\i] \y in {30mm,18mm,6mm,-6mm,-18mm,-30mm} {
+  \node[inDot] (x\i) at ($(C0)+(0,\y)$) {};
+}
+\draw[decorate,decoration={brace,mirror,amplitude=5pt}]
+  ($(x1)+(-8mm,6mm)$) -- ($(x6)+(-8mm,-6mm)$)
+  node[midway,xshift=-10mm,align=center] {\small $D=4096$\\\small pooled\\encoder\\output};
+\node at ($(x1)!1.4!(x5)$) {$\vdots$};
+\node[layerlabel] at ($(x1)+(0,18mm)$) {\textbf{Input}};
+
+% ===== Hidden (tanh) layer =====
+\foreach [count=\i] \y in {30mm,15mm,0mm,-15mm,-30mm} {
+  \node[tanhNeuron] (h\i) at ($(C1)+(0,\y)$) {};
+}
+\node at ($(h1)!1.15!(h5)$) {$\vdots$};
+\node[layerlabel] at ($(h1)+(0,18mm)$) {\textbf{Hidden}};
+\node[anchor=north, font=\small, align=center] at ($(h1)+(0,16mm)$) {Linear $4096\!\rightarrow\!4096$\\$\tanh$ activation};
+
+% ===== Dropout annotations =====
+\node[draw, dashed, rounded corners=1pt, fill=pink, minimum width=17mm, minimum height=65mm]
+  (dropBeforeCls) at ($(C0)!0.55!(C1)$) {};
+\node[font=\scriptsize, align=center, anchor=east]
+  at ($(dropBeforeCls.south)+(7mm,-5mm)$) {\shortstack{Dropout\\$p=0.1$}};
+\node[draw, dashed, rounded corners=1pt, font=\scriptsize, fill=pink, minimum width=17mm, minimum height=65mm]
+  (dropBetweenCls) at ($(C1)!0.55!(C2)$) {};
+\node[font=\scriptsize, align=center, anchor=east]
+  at ($(dropBetweenCls.south)+(7mm,-5mm)$)  {\shortstack{Dropout\\$p=0.1$}};
+
+% ===== Output (logit) =====
+\node[linearNeuron] (o1) at ($(C2)+(0,0mm)$) {};
+\node[layerlabel, anchor=south] at ($(o1.south)+(11mm,0mm)$) {$\ell_{\text{class}}$};
+\node[layerlabel] at ($(o1)+(0,12mm)$) {\textbf{Output}};
+\node[anchor=north, font=\small, align=center] at ($(o1)+(0,11mm)$) {Linear $4096\!\rightarrow\!1$};
+
+% ===== Connections (fully connected) =====
+\foreach \a in {1,...,6} {\foreach \b in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (x\a) -- (h\b);}}
+\foreach \a in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (h\a) -- (o1);};
+
+% ===== Softmax + loss =====
+\node[draw, circle, minimum size=11mm, font=\small, anchor=west] (softmaxClass) at ($(o1)+(18mm,0)$) {$\mathrm{softmax}$};
+\draw[->,shorten >=1pt,shorten <=1pt] (o1.east) -- (softmaxClass.west);
+\node[draw, rounded corners=1pt, minimum width=22mm, minimum height=11mm, font=\scriptsize, anchor=west]
+  (lossClass) at ($(softmaxClass)+(15mm,0)$) {\shortstack{Cross-entropy\\loss}};
+\draw[->,shorten >=1pt,shorten <=1pt] (softmaxClass.east) -- (lossClass.west);
+
+\end{tikzpicture}
+\end{minipage}
+\caption{Classic BERT classification head.}
+\label{fig:bert-classification-head}
+% --- END CLASSIFICATION HEAD FIGURE ---
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{1\textwidth}
 \centering
 \begin{tikzpicture}[node distance=16mm and 22mm]
 
@@ -850,7 +914,7 @@ The figure below...
 }
 \draw[decorate,decoration={brace,mirror,amplitude=5pt}]
   ($(x1)+(-8mm,6mm)$) -- ($(x6)+(-8mm,-6mm)$)
-  node[midway,xshift=-9mm,align=center] {\small $D=4096$\\\small encoder features};
+  node[midway,xshift=-10mm,align=center] {\small $D=4096$\\\small encoder\\features};
 \node at ($(x1)!1.4!(x5)$) {$\vdots$};
 \node[layerlabel] at ($(x1)+(0,18mm)$) {\textbf{Input}};
 
@@ -860,22 +924,35 @@ The figure below...
 }
 \node at ($(h1)!1.15!(h5)$) {$\vdots$};
 \node[layerlabel] at ($(h1)+(0,18mm)$) {\textbf{Hidden}};
-\node[anchor=north, font=\small, align=center] at ($(h1)+(0,15mm)$) {Linear $4096\!\rightarrow\!4096$\\$\tanh$ activation};
-
-% ===== Output (single logit) =====
-\node[linearNeuron,label=right:{$\ell_{\text{detect}}$}] (o1) at ($(C2)+(0,0mm)$) {};
-\node[layerlabel] at ($(o1)+(0,18mm)$) {\textbf{Output}};
-\node[anchor=north, font=\small, align=center] at ($(o1)+(0,15mm)$) {Linear $4096\!\rightarrow\!1$};
+\node[anchor=north, font=\small, align=center] at ($(h1)+(0,16mm)$) {Linear $4096\!\rightarrow\!4096$\\$\tanh$ activation};
 
 % ===== Dropout annotations =====
-\node[draw, dashed, rounded corners=1pt, font=\scriptsize, fill=white, minimum width=17mm, minimum height=42mm]
-  (dropBefore) at ($(C0)!0.55!(C1)$) {\shortstack{Dropout\\$p=0.1$}};
-\node[draw, dashed, rounded corners=1pt, font=\scriptsize, fill=white, minimum width=17mm, minimum height=42mm]
-  (dropBetween) at ($(C1)!0.55!(C2)$) {\shortstack{Dropout\\$p=0.1$}};
+\node[draw, dashed, rounded corners=1pt, fill=pink, minimum width=17mm, minimum height=65mm]
+  (dropBefore) at ($(C0)!0.55!(C1)$) {};
+\node[font=\scriptsize, align=center, anchor=east]
+  at ($(dropBefore.south)+(7mm,-5mm)$) {\shortstack{Dropout\\$p=0.1$}};
+\node[draw, dashed, rounded corners=1pt, fill=pink, minimum width=17mm, minimum height=65mm]
+  (dropBetween) at ($(C1)!0.55!(C2)$) {};
+\node[font=\scriptsize, align=center, anchor=east]
+  at ($(dropBetween.south)+(7mm,-5mm)$) {\shortstack{Dropout\\$p=0.1$}};
+
+  % ===== Output (single logit) =====
+\node[linearNeuron] (o1) at ($(C2)+(0,0mm)$) {};
+\node[layerlabel, anchor=south] at ($(o1.south)+(11mm,0mm)$) {$\ell_{\text{class}}$};
+\node[layerlabel] at ($(o1)+(0,12mm)$) {\textbf{Output}};
+\node[anchor=north, font=\small, align=center] at ($(o1)+(0,11mm)$) {Linear $4096\!\rightarrow\!1$};
 
 % ===== Connections (fully connected) =====
 \foreach \a in {1,...,6} {\foreach \b in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (x\a) -- (h\b);}}
 \foreach \a in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (h\a) -- (o1);};
+
+% ===== Sigmoid + threshold gate =====
+\node[draw, circle, minimum size=11mm, font=\small, anchor=west] (sigmoidDetect) at ($(o1)+(18mm,0)$) {$\sigma$};
+\draw[->,shorten >=1pt,shorten <=1pt] (o1.east) -- (sigmoidDetect.west);
+\node[draw, rounded corners=1pt, minimum width=18mm, minimum height=11mm, font=\scriptsize, anchor=west]
+  (thresholdDetect) at ($(sigmoidDetect)+(15mm,0)$) {\shortstack{Threshold\\$p>0.5$}};
+\draw[->,shorten >=1pt,shorten <=1pt] (sigmoidDetect.east) -- (thresholdDetect.west);
+\node[anchor=west, font=\small] at ($(thresholdDetect.east)+(2mm,0)$) {\shortstack{Verlan\\decision}};
 
 \end{tikzpicture}
 \end{minipage}
