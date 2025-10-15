@@ -22,6 +22,8 @@
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{wrapfig}
+\usepackage{changepage}
+\usepackage{listings}
 \usepackage{caption}
 \usepackage[edges]{forest}
 \usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds}
@@ -483,21 +485,22 @@ The report has chosen Mistral 7B\footnote{\url{https://mistral.ai/news/announcin
 
 \subsection{Zero-Shot Models}
 \subsubsection{Mistral 7B Prompt Engineering with Vibe}
-Because we are experimenting the performance of Mistral 7B (thereforth Mistral), designing a zero-shot test thus becomes important\;---\;foremostly, we can determine whether Mistral already learnt how to identify Verlan, and to what extent can it identify correctly. Additionally, we can compare the performance of the zero-shot model with the trained models, to see to what extent our dataset augments the performance.
 
-To do so, the report has designed the pipeline as below, with prompt engineering:
+Because we are experimenting with the performance of Mistral 7B (hereafter referred to as \textit{Mistral}), designing a zero-shot test becomes important\;---\;foremostly, to determine whether Mistral has already learned how to identify Verlan, and to what extent it can identify it correctly. Additionally, we can compare the performance of the zero-shot model with that of the trained models, to see to what extent our dataset augments the performance.
+
+To achieve this, the report has designed the following simplified pipeline using prompt engineering:
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
-        node distance=0.5cm,
+        node distance=0.3cm,
         every node/.style={font=\small},
-        process/.style={rectangle, rounded corners, draw, fill=gray!5, align=center, minimum width=3.6cm, minimum height=1.05cm},
+        process/.style={rectangle, rounded corners, draw, fill=gray!5, align=center, minimum width=3.6cm, minimum height=1cm},
         line/.style={-Latex}
     ]
         \node[process] (data) {Load zero-shot test datasets};
         \node[process, below=of data] (model) {Load tokenizer \& Mistral model};
-        \node[process, below=of model] (loop) {Loop datasets $\rightarrow$ sentences \\ prompt LLM \& collect outputs};
+        \node[process, below=of model] (loop) {Loop through dataset $\rightarrow$ sentences \\ prompt LLM \& collect outputs};
         \node[process, below=of loop] (csv) {Write prediction CSV files};
         \draw[line] (data) -- (model);
         \draw[line] (model) -- (loop);
@@ -507,9 +510,57 @@ To do so, the report has designed the pipeline as below, with prompt engineering
     \label{fig:mistral-zeroshot-pipeline}
 \end{figure}
 
+The prompt we used is as follows:
 
-%Mistral and ChatGPT -- prompt engineering for baseline and reference
-%explain why chosen ChatGPT 5 Codex (High) as the reference -- cuz it is the best model in the world
+\lstset{
+  basicstyle=\ttfamily\small,
+  frame=single,
+  xleftmargin=2em,
+  xrightmargin=2em,
+  breaklines=true
+}
+
+\begin{lstlisting}
+System: You are a linguist who identifies Verlan (French reversed-syllable slang).
+Reply with a single digit: '1' if the sentence contains Verlan; otherwise reply '0'.
+Do not include extra words.
+
+User: Sentence:
+{sentence}
+
+Does this sentence contain Verlan? Reply with one digit (0 or 1).
+\end{lstlisting}
+
+For each prompt, we start a new chat session to avoid the influence of the LLM’s memorisation\;---\;reusing previous results may interfere with later performance.
+
+A potential issue is that, from time to time, LLMs do not follow the system prompt and produce unexpected responses. The report has accounted for this\;---\;we use regular expressions to extract the numerical values mentioned in the response (i.e., 0 or 1) and store them in a separate column in the CSV file for easier post-processing. We also review the extracted labels manually to prevent inconsistencies or noise.
+
+By doing so, the report believes that the accuracy and reliability of this pipeline are solid.
+
+\subsubsection{Zero-shot of the Most Powerful non deep reasoning LLM as reference}
+
+Considering that both the zero-shot and training experiments above are based on Mistral, the report aims to evaluate performance beyond the Mistral AI ecosystem. After reviewing the \textit{Artificial Analysis Intelligence Index}\footnote{\url{https://artificialanalysis.ai/models/gpt-5-codex\#artificial-analysis-intelligence-index}}, as shown in Figure~\ref{fig:AI_Index}, the report has chosen OpenAI's GPT-5 Codex (High)\footnote{\url{https://openai.com/index/introducing-upgrades-to-codex/}} model as the zero-shot reference. As the top-ranked model, it serves as a strong representative of the current state-of-the-art capabilities in Verlan identification.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=15cm]{figures/Artificial Analysis Intelligence Index (14 Oct '25) .png}
+\caption{\label{fig:AI_Index}Leaderboard of the Artificial Analysis Intelligence Index (retrieved on 14 October 2025).}
+\end{figure}
+
+Following the principle of controlled experimental design, we used a prompt closely aligned with the one employed for Mistral:
+
+\begin{lstlisting}
+[System message]
+You are a linguist who identifies verlan (French reversed syllable slang). Ignore any prior memories or cached context and follow only the instructions in this conversation. Do not browse the internet or use external tools; base your reasoning purely on the text you receive here. Reply with a single digit: "1" if the sentence contains verlan; otherwise reply "0". Do not include extra words, punctuation, or explanations.
+
+[User message]
+You will be given one or more French sentences. For each sentence, decide whether it contains verlan and answer with a single digit (0 or 1) per sentence, in the same order that the sentences appear.
+
+Sentences to evaluate:
+{sentences}
+\end{lstlisting}
+
+Notably, because GPT-5 Codex (High) is a reasoning-oriented model, its responses are typically slower, and it also has monthly usage limitations\footnote{The author of this report holds a ChatGPT Plus subscription.}. Therefore, instead of sending each sentence individually with the prompt, we chose to batch all sentences together in a single request. The maximum token size was taken into account, and the total length did not exceed the model's limit of approximately 400,000 tokens.
 
 \subsection{Training Models}
 \subsubsection{General Pipeline}
@@ -835,13 +886,7 @@ DOI: 10.48550/arXiv.2402.13016.
 \renewcommand{\thesection}{Appendix \Alph{section}}
 
 \section{Some extra things}
-[System message]
-You are a linguist who identifies verlan (French reversed syllable slang). Ignore any prior memories or cached context and follow only the instructions in this conversation. Do not browse the internet or use external tools; base your reasoning purely on the text you receive here. Reply with a single digit: “1” if the sentence contains verlan; otherwise reply “0”. Do not include extra words, punctuation, or explanations.
 
-[User message]
-You will be given one or more French sentences. For each sentence, decide whether it contains verlan and answer with a single digit (0 or 1) per sentence, in the same order that the sentences appear.
-
-Sentences to evaluate:
 
 \begin{table}[H]
     \centering

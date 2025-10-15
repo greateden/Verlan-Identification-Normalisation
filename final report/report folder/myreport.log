@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  15 OCT 2025 11:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  15 OCT 2025 14:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -927,26 +927,59 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \WF@box=\box68
 \WF@everypar=\toks42
 Package: wrapfig 2003/01/31  v 3.6
-) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/caption/caption.sty
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/changepage/changepage.sty
+Package: changepage 2009/10/20 v1.0c check page and change page layout
+\c@cp@cntr=\count326
+\cp@tempcnt=\count327
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count328
+\lst@gtempboxa=\box69
+\lst@token=\toks43
+\lst@length=\count329
+\lst@currlwidth=\dimen269
+\lst@column=\count330
+\lst@pos=\count331
+\lst@lostspace=\dimen270
+\lst@width=\dimen271
+\lst@newlines=\count332
+\lst@lineno=\count333
+\lst@maxwidth=\dimen272
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count334
+\lst@skipnumbers=\count335
+\lst@framebox=\box70
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen269
-\captionmargin=\dimen270
-\caption@leftmargin=\dimen271
-\caption@rightmargin=\dimen272
-\caption@width=\dimen273
-\caption@indent=\dimen274
-\caption@parindent=\dimen275
-\caption@hangindent=\dimen276
+\caption@tempdima=\dimen273
+\captionmargin=\dimen274
+\caption@leftmargin=\dimen275
+\caption@rightmargin=\dimen276
+\caption@width=\dimen277
+\caption@indent=\dimen278
+\caption@parindent=\dimen279
+\caption@hangindent=\dimen280
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count326
-\c@continuedfloat=\count327
+\c@caption@flags=\count336
+\c@continuedfloat=\count337
+Package caption Info: changepage package is loaded.
+\caption@adjustwidth@hsize=\dimen281
+\caption@adjustwidth@linewidth=\dimen282
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
-) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest.sty
+)
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest.sty
 Package: forest 2017/07/14 v2.1.5 Drawing (linguistic) trees
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex
 File: tikzlibraryshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
@@ -954,8 +987,7 @@ File: tikzlibraryshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
-))
-(/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.misc.code.tex
+)) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.misc.code.tex
 File: tikzlibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.tex
 File: pgflibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
@@ -971,36 +1003,36 @@ File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box69
-\pgfnodeparttwobox=\box70
-\pgfnodepartthreebox=\box71
-\pgfnodepartfourbox=\box72
-\pgfnodeparttwentybox=\box73
-\pgfnodepartnineteenbox=\box74
-\pgfnodeparteighteenbox=\box75
-\pgfnodepartseventeenbox=\box76
-\pgfnodepartsixteenbox=\box77
-\pgfnodepartfifteenbox=\box78
-\pgfnodepartfourteenbox=\box79
-\pgfnodepartthirteenbox=\box80
-\pgfnodeparttwelvebox=\box81
-\pgfnodepartelevenbox=\box82
-\pgfnodeparttenbox=\box83
-\pgfnodepartninebox=\box84
-\pgfnodeparteightbox=\box85
-\pgfnodepartsevenbox=\box86
-\pgfnodepartsixbox=\box87
-\pgfnodepartfivebox=\box88
+\pgfnodepartlowerbox=\box71
+\pgfnodeparttwobox=\box72
+\pgfnodepartthreebox=\box73
+\pgfnodepartfourbox=\box74
+\pgfnodeparttwentybox=\box75
+\pgfnodepartnineteenbox=\box76
+\pgfnodeparteighteenbox=\box77
+\pgfnodepartseventeenbox=\box78
+\pgfnodepartsixteenbox=\box79
+\pgfnodepartfifteenbox=\box80
+\pgfnodepartfourteenbox=\box81
+\pgfnodepartthirteenbox=\box82
+\pgfnodeparttwelvebox=\box83
+\pgfnodepartelevenbox=\box84
+\pgfnodeparttenbox=\box85
+\pgfnodepartninebox=\box86
+\pgfnodeparteightbox=\box87
+\pgfnodepartsevenbox=\box88
+\pgfnodepartsixbox=\box89
+\pgfnodepartfivebox=\box90
 ))) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
 File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
-\pgf@intersect@solutions=\count328
+\pgf@intersect@solutions=\count338
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgfopts/pgfopts.sty
 Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
-\pgfopts@list@add@a@toks=\toks43
-\pgfopts@list@add@b@toks=\toks44
+\pgfopts@list@add@a@toks=\toks44
+\pgfopts@list@add@b@toks=\toks45
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/elocalloc/elocalloc.sty
 Package: elocalloc 2016/12/15 v0.03 local allocation for LaTeX 2015+ (DPC)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/environ/environ.sty
@@ -1011,78 +1043,78 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 Package: expl3 2025-01-18 L3 programming layer (loader) 
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count329
-\l__pdf_internal_box=\box89
+\l__color_backend_stack_int=\count339
+\l__pdf_internal_box=\box91
 ))
 Package: xparse 2024-08-16 L3 Experimental document command parser
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/inlinedef/inlinedef.sty
 Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
-\ID@toks=\toks45
-\ID@count=\count330
+\ID@toks=\toks46
+\ID@count=\count340
 )
-\ID@usercommands=\toks46
-\safeloop@depth=\count331
-\safeRKloop@depth=\count332
-\forest@temp@dimen=\dimen277
-\forest@temp@count=\count333
-\forest@n=\count334
-\forest@temp@global@count=\count335
-\forest@temp@toks=\toks47
-\forest@temparray@M=\count336
-\forest@temparray@N=\count337
-\forest@global@temparray@M=\count338
-\forest@global@temparray@N=\count339
-\forest@isnum@count=\count340
-\forest@isdim@nonintpart=\count341
-\forest@isdim@dimen=\dimen278
-\forest@sort@m=\count342
-\forest@sort@k=\count343
-\forest@sort@p=\count344
-\bracket@content=\toks48
-\bracket@afterthought=\toks49
-\forest@node@maxid=\count345
-\forest@process@left@M=\count346
-\forest@process@left@N=\count347
-\forest@process@right@M=\count348
-\forest@process@right@N=\count349
-\forest@process@saved@M=\count350
-\forest@process@saved@N=\count351
-\forest@process@result@M=\count352
-\forest@process@result@N=\count353
-\forest@process@n=\count354
-\forest@nodewalk@branch@toks=\toks50
-\forest@nodewalk@shortsteps@resolution=\toks51
-\forest@do@dynamics=\toks52
-\forest@box=\box90
-\forest@xg=\dimen279
-\forest@yg=\dimen280
-\forest@xs=\dimen281
-\forest@ys=\dimen282
-\forest@pi@toks=\toks53
-\forest@segment@toks=\toks54
-\forest@PIi@toks=\toks55
-\forest@PIii@toks=\toks56
+\ID@usercommands=\toks47
+\safeloop@depth=\count341
+\safeRKloop@depth=\count342
+\forest@temp@dimen=\dimen283
+\forest@temp@count=\count343
+\forest@n=\count344
+\forest@temp@global@count=\count345
+\forest@temp@toks=\toks48
+\forest@temparray@M=\count346
+\forest@temparray@N=\count347
+\forest@global@temparray@M=\count348
+\forest@global@temparray@N=\count349
+\forest@isnum@count=\count350
+\forest@isdim@nonintpart=\count351
+\forest@isdim@dimen=\dimen284
+\forest@sort@m=\count352
+\forest@sort@k=\count353
+\forest@sort@p=\count354
+\bracket@content=\toks49
+\bracket@afterthought=\toks50
+\forest@node@maxid=\count355
+\forest@process@left@M=\count356
+\forest@process@left@N=\count357
+\forest@process@right@M=\count358
+\forest@process@right@N=\count359
+\forest@process@saved@M=\count360
+\forest@process@saved@N=\count361
+\forest@process@result@M=\count362
+\forest@process@result@N=\count363
+\forest@process@n=\count364
+\forest@nodewalk@branch@toks=\toks51
+\forest@nodewalk@shortsteps@resolution=\toks52
+\forest@do@dynamics=\toks53
+\forest@box=\box92
+\forest@xg=\dimen285
+\forest@yg=\dimen286
+\forest@xs=\dimen287
+\forest@ys=\dimen288
+\forest@pi@toks=\toks54
+\forest@segment@toks=\toks55
+\forest@PIi@toks=\toks56
+\forest@PIii@toks=\toks57
 \forest@copy@in=\read4
 \forest@copy@out=\write4
-\forest@externalize@max@outer@n=\count355
-\forest@externalize@inner@n=\count356
+\forest@externalize@max@outer@n=\count365
+\forest@externalize@inner@n=\count366
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/forest/forest-lib-edges.sty
 Package: forest-lib-edges 2016/12/05 v0.1.1
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\arrowsize=\dimen283
+\arrowsize=\dimen289
 )) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowinset=\dimen284
-\pgfarrowlength=\dimen285
-\pgfarrowwidth=\dimen286
-\pgfarrowlinewidth=\dimen287
+\pgfarrowinset=\dimen290
+\pgfarrowlength=\dimen291
+\pgfarrowwidth=\dimen292
+\pgfarrowlinewidth=\dimen293
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
 File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@layerbox@background=\box91
-\pgf@layerboxsaved@background=\box92
+\pgf@layerbox@background=\box93
+\pgf@layerboxsaved@background=\box94
 ) (./myreport.aux
 
 LaTeX Warning: Label `wu2018slangsd' multiply defined.
@@ -1090,58 +1122,59 @@ LaTeX Warning: Label `wu2018slangsd' multiply defined.
 )
 \openout1 = `myreport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
  (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count357
-\scratchdimen=\dimen288
-\scratchbox=\box93
-\nofMPsegments=\count358
-\nofMParguments=\count359
-\everyMPshowfont=\toks57
-\MPscratchCnt=\count360
-\MPscratchDim=\dimen289
-\MPnumerator=\count361
-\makeMPintoPDFobject=\count362
-\everyMPtoPDFconversion=\toks58
+\scratchcounter=\count367
+\scratchdimen=\dimen294
+\scratchbox=\box95
+\nofMPsegments=\count368
+\nofMParguments=\count369
+\everyMPshowfont=\toks58
+\MPscratchCnt=\count370
+\MPscratchDim=\dimen295
+\MPnumerator=\count371
+\makeMPintoPDFobject=\count372
+\everyMPtoPDFconversion=\toks59
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 51.
+Package hyperref Info: Link coloring ON on input line 53.
  (./myreport.out) (./myreport.out)
 \@outlinefile=\write5
 \openout5 = `myreport.out'.
 
 
 
-Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 51.
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 53.
 
+\c@lstlisting=\count373
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<figures/logo.png, id=195, 566.115pt x 617.9085pt>
+<figures/logo.png, id=199, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
-Package pdftex.def Info: figures/logo.png  used on input line 54.
+Package pdftex.def Info: figures/logo.png  used on input line 56.
 (pdftex.def)             Requested size: 99.58464pt x 108.69188pt.
 
 
@@ -1153,46 +1186,46 @@ Package pdftex.def Info: figures/logo.png  used on input line 54.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.90 T
+l.92 T
       hinking internationally, when people are communicating with translator... [1]
-<figures/google_verlan.png, id=247, 1093.08376pt x 252.945pt>
+<figures/google_verlan.png, id=251, 1093.08376pt x 252.945pt>
 File: figures/google_verlan.png Graphic file (type png)
 <use figures/google_verlan.png>
-Package pdftex.def Info: figures/google_verlan.png  used on input line 94.
+Package pdftex.def Info: figures/google_verlan.png  used on input line 96.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_verlan.png, id=248, 972.63374pt x 237.88875pt>
+<figures/deepl_verlan.png, id=252, 972.63374pt x 237.88875pt>
 File: figures/deepl_verlan.png Graphic file (type png)
 <use figures/deepl_verlan.png>
-Package pdftex.def Info: figures/deepl_verlan.png  used on input line 100.
+Package pdftex.def Info: figures/deepl_verlan.png  used on input line 102.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
-<figures/deepl_alt_text.png, id=249, 303.1325pt x 396.48125pt>
+<figures/deepl_alt_text.png, id=253, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
-Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 106.
+Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 108.
 (pdftex.def)             Requested size: 117.00119pt x 153.0299pt.
 
 
 [2 <./figures/google_verlan.png> <./figures/deepl_verlan.png>]
 
 [3 <./figures/deepl_alt_text.png>]
-Overfull \hbox (2.92413pt too wide) in paragraph at lines 150--150
+Overfull \hbox (2.92413pt too wide) in paragraph at lines 152--152
  [][]\OT1/cmr/m/n/10.95 Performance 
  []
 
 
-Overfull \hbox (30.79729pt too wide) in paragraph at lines 152--153
+Overfull \hbox (30.79729pt too wide) in paragraph at lines 154--155
  [][] 
  []
 
 
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 165--165
+Underfull \hbox (badness 10000) in paragraph at lines 167--167
 [][][]\OT1/cmr/m/n/10 International Pho-netic Al-pha-bet, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki /
  []
 
 
-Overfull \hbox (24.01376pt too wide) in paragraph at lines 165--166
+Overfull \hbox (24.01376pt too wide) in paragraph at lines 167--168
 \OT1/cmr/m/n/12 a-lytic model pro-posed by Kaye and Lowen-stamm pro-vides the best description[[]].
  []
 
@@ -1201,14 +1234,14 @@ Overfull \hbox (24.01376pt too wide) in paragraph at lines 165--166
 [5]
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 279--279
+Underfull \hbox (badness 10000) in paragraph at lines 281--281
 [][][][][]$\OT1/cmtt/m/n/10 https : / / ecoleng . com / verlan-[]comprendre-[]argot-[]francais-[]parler /
  []
 
 
 
 [7]
-Underfull \hbox (badness 7291) in paragraph at lines 295--295
+Underfull \hbox (badness 7291) in paragraph at lines 297--297
 [][][]\OT1/cmr/m/n/10 Support Vec-tor Ma-chine, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / Support _ vector _
  []
 
@@ -1217,7 +1250,7 @@ Underfull \hbox (badness 7291) in paragraph at lines 295--295
 [8]
 
 [9]
-Overfull \hbox (54.3742pt too wide) in paragraph at lines 395--396
+Overfull \hbox (54.3742pt too wide) in paragraph at lines 397--398
  [][] 
  []
 
@@ -1228,7 +1261,7 @@ Overfull \hbox (54.3742pt too wide) in paragraph at lines 395--396
 [11]
 
 [12]
-Overfull \hbox (69.9929pt too wide) in paragraph at lines 434--444
+Overfull \hbox (69.9929pt too wide) in paragraph at lines 436--446
  [][] 
  []
 
@@ -1237,34 +1270,34 @@ Overfull \hbox (69.9929pt too wide) in paragraph at lines 434--444
 [13]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 458.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 460.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 458.
+(hyperref)                removed on input line 460.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 458.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 460.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 458.
+(hyperref)                removed on input line 460.
 
-<figures/CamemBERT.png, id=453, 722.7pt x 722.7pt>
+<figures/CamemBERT.png, id=457, 722.7pt x 722.7pt>
 File: figures/CamemBERT.png Graphic file (type png)
 <use figures/CamemBERT.png>
-Package pdftex.def Info: figures/CamemBERT.png  used on input line 464.
+Package pdftex.def Info: figures/CamemBERT.png  used on input line 466.
 (pdftex.def)             Requested size: 56.9055pt x 56.90189pt.
-<figures/mistral-logo.png, id=454, 191.71625pt x 135.50626pt>
+<figures/mistral-logo.png, id=458, 191.71625pt x 135.50626pt>
 File: figures/mistral-logo.png Graphic file (type png)
 <use figures/mistral-logo.png>
-Package pdftex.def Info: figures/mistral-logo.png  used on input line 469.
+Package pdftex.def Info: figures/mistral-logo.png  used on input line 471.
 (pdftex.def)             Requested size: 56.9055pt x 40.22003pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 462--471
+Underfull \hbox (badness 10000) in paragraph at lines 464--473
 
  []
 
@@ -1273,48 +1306,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 462--471
 [14 <./figures/CamemBERT.png> <./figures/mistral-logo.png>]
 
 [15]
+Underfull \hbox (badness 10000) in paragraph at lines 542--542
+[][][][][]$\OT1/cmtt/m/n/10 https : / / artificialanalysis . ai / models / gpt-[]5-[]codex #
+ []
 
-[16]
-Overfull \hbox (116.76485pt too wide) in paragraph at lines 562--575
+<figures/Artificial Analysis Intelligence Index (14 Oct '25) .png, id=511, 3336.465pt x 1706.375pt>
+File: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png Graphic file (type png)
+<use figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>
+Package pdftex.def Info: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png  used on input line 546.
+(pdftex.def)             Requested size: 426.79134pt x 218.26944pt.
+
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 546--547
  [][] 
  []
 
 
 
-[17]
+[16]
+Overfull \hbox (5.15285pt too wide) in paragraph at lines 550--551
+[]\OT1/cmr/m/n/12 Following the prin-ci-ple of con-trolled ex-per-i-men-tal de-sign, we used a prompt
+ []
+
+
+
+[17 <./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>]
 
 [18]
+Overfull \hbox (116.76485pt too wide) in paragraph at lines 613--626
+ [][] 
+ []
+
+
 
 [19]
 
 [20]
+
+[21]
 pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.693 \bibitem{wu2018slangsd}
+l.744 \bibitem{wu2018slangsd}
                              
 
-[21]
-Underfull \hbox (badness 1048) in paragraph at lines 757--761
+[22]
+Underfull \hbox (badness 1048) in paragraph at lines 808--812
 \OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
  []
 
 
 
-[22]
-
 [23]
-Underfull \hbox (badness 1237) in paragraph at lines 824--827
+
+[24]
+Underfull \hbox (badness 1237) in paragraph at lines 875--878
 []\OT1/cmr/m/n/12 Dong, Yuhui; Geng, Xin; Zhang, Ji-ayi; Song, Yue; Li, Xixin.
  []
 
 
 
-[24]
-
 [25]
 
-[26] (./myreport.aux)
+[26]
+
+[27] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1324,21 +1379,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: E29582376303ECCF3BB114F3A8FE6751;9146.
+(rerunfilecheck)             Checksum: C9B8B63189075E3336B763CB6F89037C;9574.
  ) 
 Here is how much of TeX's memory you used:
- 36691 strings out of 474662
- 804687 string characters out of 5751110
- 1175059 words of memory out of 5000000
- 59068 multiletter control sequences out of 15000+600000
- 570405 words of font info for 76 fonts, out of 8000000 for 9000
+ 38403 strings out of 474662
+ 828520 string characters out of 5751110
+ 1326058 words of memory out of 5000000
+ 60740 multiletter control sequences out of 15000+600000
+ 570573 words of font info for 77 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  140i,12n,131p,1785b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on myreport.pdf (27 pages, 668539 bytes).
+Output written on myreport.pdf (28 pages, 990483 bytes).
 PDF statistics:
- 707 PDF objects out of 1000 (max. 8388607)
- 627 compressed objects within 7 object streams
- 181 named destinations out of 1000 (max. 500000)
- 419 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 750 PDF objects out of 1000 (max. 8388607)
+ 667 compressed objects within 7 object streams
+ 205 named destinations out of 1000 (max. 500000)
+ 432 words of extra memory for PDF output out of 10000 (max. 10000000)
 
