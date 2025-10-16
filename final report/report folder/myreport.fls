@@ -456,6 +456,11 @@ INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
 INPUT myreport.aux
 INPUT ./myreport.out
 INPUT ./myreport.out

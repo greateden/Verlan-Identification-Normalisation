@@ -1093,10 +1093,40 @@ The reasons for adopting this particular split are as follows:
 
 
 \subsubsection{Environment and Hyperparameters}
-%all the experiments have been conducted on the Aoraki computing cluster of the University of Otago, Otakou whakaihu Waka.
-% all used Nvidia L40
-%All 4-bit quantised
-%etc
+
+\paragraph{Environment}
+\begin{wrapfigure}[2]{r}{2.6cm}
+  \vspace{-60pt}
+  \begin{minipage}{1\linewidth}
+    \centering
+    \includegraphics[width=1.5cm]{figures/aoraki.png}
+  \end{minipage}%
+\end{wrapfigure}
+Aoraki\footnote{\url{https://rtis.cspages.otago.ac.nz/research-computing/cluster/index.html\#}} 
+is the research computing cluster at the University of Otago, Otākou Whakaihu Waka. 
+All experiments presented in this report were conducted on Aoraki, specifically using the same Nvidia L40 GPU. 
+All models were implemented and fine-tuned under 4-bit quantisation to improve both efficiency and energy consumption. 
+Further details of the environment configuration can be found on the GitHub page of this project.
+
+\paragraph{Hyperparameters}
+
+\subparagraph{Seeds}
+We conducted 20 trials for each experiment to reduce bias. 
+The same set of random seeds, ranging from 1 to 20, was used across all four experiments.
+
+\subparagraph{Batch Size}
+We used a batch size of 32 for all experiments.
+
+\subparagraph{Maximum Length}
+The maximum sequence length was set to 512 for all experiments.
+
+\subparagraph{Quantisation}
+As mentioned above, the encoder was quantised to 4-bit NF4 with BF16 compute precision.
+
+\subparagraph{Epochs}
+For the trainable encoders, training was performed for three epochs.
+
+For detailed hyperparameter configurations, please refer to the GitHub page of this project.
 
 % \subsection{Other Models}
 % \subsubsection{Justifying for LR}
