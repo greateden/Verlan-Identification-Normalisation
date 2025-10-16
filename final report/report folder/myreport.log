@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  16 OCT 2025 14:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  16 OCT 2025 14:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1379,7 +1379,7 @@ Overfull \hbox (64.24568pt too wide) in paragraph at lines 650--651
 [24]
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (7.16568pt too wide) in paragraph at lines 897--898
+Overfull \hbox (7.16568pt too wide) in paragraph at lines 902--903
  [][] 
  []
 
@@ -1388,15 +1388,20 @@ Overfull \hbox (7.16568pt too wide) in paragraph at lines 897--898
 [25]
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (88.20529pt too wide) in paragraph at lines 986--987
+Overfull \hbox (88.20529pt too wide) in paragraph at lines 997--998
  [] 
  []
 
 
 
 [26]
-Overfull \hbox (116.76485pt too wide) in paragraph at lines 1040--1053
- [][] 
+Overfull \hbox (55.19637pt too wide) in paragraph at lines 1010--1011
+\OT1/cmr/m/n/12 af-ter the lin-ear out-put neu-ron, we use a dif-fer-ent loss func-tion---\OT1/cmtt/m/n/12 BCEWithLogitsLoss\OT1/cmr/m/n/12 ---
+ []
+
+
+Overfull \hbox (2.44592pt too wide) in paragraph at lines 1028--1029
+[]\OT1/cmr/m/n/12 This for-mu-la-tion pre-vents nu-mer-i-cal un-der-flow or over-flow when the model
  []
 
 
@@ -1404,38 +1409,28 @@ Overfull \hbox (116.76485pt too wide) in paragraph at lines 1040--1053
 [27]
 
 [28]
+Overfull \hbox (116.76485pt too wide) in paragraph at lines 1112--1125
+ [][] 
+ []
+
+
 
 [29]
 
 [30]
+
+[31]
+
+[32]
 pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1171 \bibitem{wu2018slangsd}
+l.1243 \bibitem{wu2018slangsd}
                               
 
-[31]
-Underfull \hbox (badness 1048) in paragraph at lines 1235--1239
-\OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
- []
-
-
-
-[32]
-
 [33]
-Underfull \hbox (badness 1237) in paragraph at lines 1302--1305
-[]\OT1/cmr/m/n/12 Dong, Yuhui; Geng, Xin; Zhang, Ji-ayi; Song, Yue; Li, Xixin.
- []
-
-
-Underfull \hbox (badness 2809) in paragraph at lines 1313--1317
-[]\OT1/cmr/m/n/12 Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caim-
- []
-
-
-Underfull \hbox (badness 1824) in paragraph at lines 1313--1317
-\OT1/cmr/m/n/12 ing. \OT1/cmr/m/it/12 On Sur-gi-cal Fine-tuning for Lan-guage En-coders\OT1/cmr/m/n/12 . Find-ings of
+Underfull \hbox (badness 1048) in paragraph at lines 1307--1311
+\OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
  []
 
 
@@ -1443,8 +1438,27 @@ Underfull \hbox (badness 1824) in paragraph at lines 1313--1317
 [34]
 
 [35]
+Underfull \hbox (badness 1237) in paragraph at lines 1374--1377
+[]\OT1/cmr/m/n/12 Dong, Yuhui; Geng, Xin; Zhang, Ji-ayi; Song, Yue; Li, Xixin.
+ []
 
-[36] (./myreport.aux)
+
+Underfull \hbox (badness 2809) in paragraph at lines 1385--1389
+[]\OT1/cmr/m/n/12 Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caim-
+ []
+
+
+Underfull \hbox (badness 1824) in paragraph at lines 1385--1389
+\OT1/cmr/m/n/12 ing. \OT1/cmr/m/it/12 On Sur-gi-cal Fine-tuning for Lan-guage En-coders\OT1/cmr/m/n/12 . Find-ings of
+ []
+
+
+
+[36]
+
+[37]
+
+[38] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1457,18 +1471,18 @@ Package rerunfilecheck Info: File `myreport.out' has not changed.
 (rerunfilecheck)             Checksum: 9FEF16E015254D043E3073572D1FE1DA;9395.
  ) 
 Here is how much of TeX's memory you used:
- 40218 strings out of 474662
- 865477 string characters out of 5751110
- 1349035 words of memory out of 5000000
- 62481 multiletter control sequences out of 15000+600000
+ 40235 strings out of 474662
+ 865745 string characters out of 5751110
+ 1349453 words of memory out of 5000000
+ 62486 multiletter control sequences out of 15000+600000
  575009 words of font info for 96 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  140i,14n,131p,1718b,2142s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on myreport.pdf (37 pages, 1105195 bytes).
+Output written on myreport.pdf (39 pages, 1118341 bytes).
 PDF statistics:
- 876 PDF objects out of 1000 (max. 8388607)
- 767 compressed objects within 8 object streams
- 243 named destinations out of 1000 (max. 500000)
+ 903 PDF objects out of 1000 (max. 8388607)
+ 792 compressed objects within 8 object streams
+ 255 named destinations out of 1000 (max. 500000)
  432 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -832,9 +832,14 @@ Unlike scikit-learn, PyTorch does not provide built-in loss or optimiser functio
 For the latter three experiments, both BERT and Logistic Regression (the linear layer) act as \textit{heads}, whereas this experiment is referred to simply as \textit{Logistic Regression}.
 
 \subparagraph{BERT-Style Head}
-No matter it is Logistic Regression or BERT, they function as the classifier component\;---\;they process the vectors after normalisation to give a result of the sentence contains a Velan or not. Logistic Regression is just a linear classifier, it cannot learn the potential patterns like how the Mistral encoder does, however, as we mentioned before CamemBERT is an alternative LLM to Mistral for this experiment. Considering combining them both to maximise their potential, we have decided to try out BERT as another type of classifier.
+Regardless of whether it is Logistic Regression or BERT, both function as the classifier component\;---\;they process the normalised sentence vectors to determine whether a sentence contains Verlan or not. 
+Logistic Regression is merely a linear classifier; it cannot learn potential semantic patterns in the same way as the Mistral encoder. 
+As mentioned earlier, CamemBERT serves as an alternative LLM to Mistral in this experiment. 
+To combine the advantages of both and maximise their potential, we therefore employ BERT as another type of classifier.
 
-However, BERT itself is just like the zero-shot Mistral we tested before, it is an entity of an LLM\;---\;it has everything we need for an LLM: tokeniser, encoder, classifier, etc., thus it is worthless in practice to connect the entire BERT after the Mistral encoder\;---\;it would become Mistral embedder, Mistral tokeniser, Mistral encoder, BERT tokeniser, BERT encoder, BERT classifier, etc. Therefore, we only need the classifier part from BERT. 
+However, BERT itself, much like the zero-shot Mistral tested earlier, is a complete LLM\;---\;it contains all the essential components such as a tokenizer, an encoder, and a classifier. 
+Thus, it would be impractical to connect an entire BERT model after the Mistral encoder, as this would result in a redundant pipeline: Mistral embedder, Mistral tokenizer, Mistral encoder, BERT tokenizer, BERT encoder, BERT classifier, and so on. 
+Therefore, we only utilise the \textit{classifier head} from BERT.
 
 %classical BERT
 \begin{figure}[H]
@@ -902,13 +907,19 @@ However, BERT itself is just like the zero-shot Mistral we tested before, it is 
 % --- END CLASSIFICATION HEAD FIGURE ---
 \end{figure}
 
-Figure 10 presents the underneath structure of the classic BERT classifier. It accepts the pooled output from the encoder witha dimension of 4096, then randomly dropout\;---\;set 10\% of the neurons to zero to prevent overfitting. Now the neurons are all linear, we need to transform them to tanh neurons for better performance in hidden layers. After that, we apply dropout again before casting 4096 neurons to 1 linear neuron\;---\;the output. In the end, we apply softmax function to transform the output to a probability distribution, and verify cross-entropy loss, then we get the answer.
+Figure~10 illustrates the internal structure of a standard BERT classifier. 
+It receives the pooled output from the encoder with a dimensionality of 4096, then applies dropout\;---\;randomly setting 10\% of the neurons to zero to prevent overfitting. 
+Since the neurons are linear, they are subsequently transformed with a \texttt{tanh} activation for improved non-linearity within the hidden layer. 
+After that, dropout is applied again before mapping the 4096 hidden neurons to a single linear output neuron. 
+Finally, a softmax function converts the output into a probability distribution, which is then passed to the cross-entropy loss for evaluation.
 
-However, because we are using model fusion techniques here, that is to blend the layers of two different LLMs, adaptation is thus needed.
+However, because we are performing model fusion\;---\;that is, blending layers from two different LLMs\;---\;certain adaptations are required:
 
 \begin{enumerate}
-  \item The output from the Mistral encoder has not only been pooled but also been normalised. While the original BERT uses only pooling, to maximise model fusion performance, we apply normalisation.
-  \item After the output logit neuron, the classic BERT has a softmax function and a loss caliberation. However, 
+  \item We have not only applied mean pooling but also normalisation to the output of the Mistral encoder. 
+  While the original BERT classifier uses only pooled features, we include normalisation to maximise fusion performance.
+  \item In the classic BERT classifier, the output logit is followed by a softmax function and a loss calibration step. 
+  In our case, we require a binary output (0 or 1), so we adopt a different loss function, calibration method, and thresholding strategy to produce binary results consistent with the design of the \textit{Logistic Regression with scikit-learn} experiment.
 \end{enumerate}
 
 %BERT-style
@@ -991,8 +1002,69 @@ However, because we are using model fusion techniques here, that is to blend the
 % --- END DETECTION HEAD FIGURE ---
 \end{figure}
 
+As shown in Figure~11, we modify the standard BERT classifier accordingly. 
+We continue to refer to it as \textit{BERT}, but use the term \textit{BERT-style} to emphasise that structural adjustments have been made for model fusion optimisation.
 
-%LR or BERT. for LR, explain the mean pooling before it; for BERT, explain it's a BERT-like layers instead of using BERT directly
+\subparagraph{The Different Loss Function and Calibration}
+
+As mentioned above, after the linear output neuron, we use a different loss function\;---\;\texttt{BCEWithLogitsLoss}\;---\;and a calibrator, AdamW\cite{paszke2019pytorch,loshchilov2019adamw}.
+
+The \textit{Binary Cross-Entropy (BCE)} loss is used in binary classification tasks. It measures the cross-entropy between the predicted probability distribution and the true label:
+\begin{equation}
+\mathcal{L}_{\mathrm{BCE}}(y, \hat{y}) = - \big[ y \cdot \log(\hat{y}) + (1 - y) \cdot \log(1 - \hat{y}) \big]
+\end{equation}
+where
+\begin{equation}
+y \in \{0, 1\}, \quad \hat{y} = \sigma(z) = \frac{1}{1 + e^{-z}}
+\end{equation}
+
+According to the formula, the essence of BCE is to minimise the cross-entropy between the predicted distribution and the true distribution.
+
+The \texttt{BCEWithLogitsLoss} function in PyTorch applies the sigmoid operation to the logits internally and then computes the BCE loss. Its numerically stable formulation is:
+\begin{equation}
+\mathcal{L}_{\mathrm{BCEWithLogits}}(y, z) = \max(z, 0) - z \cdot y + \log\big(1 + e^{-|z|}\big)
+\end{equation}
+
+This formulation prevents numerical underflow or overflow when the model becomes overconfident\;---\;that is, when the logit $z$ is very large or very small. In such cases, a direct computation of BCE might yield $0$ or $\infty$, causing the training to crash or the gradient to become \texttt{NaN}. Hence, \texttt{BCEWithLogitsLoss} is more numerically stable than the pure BCE function.
+
+\textit{Adaptive Moment Estimation (Adam)} is a self-adaptive learning rate optimisation algorithm\cite{kingma2014adam}. It elegantly integrates concepts from mathematics, physics, and computer science\;---\;it is based on the idea of momentum\footnote{\url{https://en.wikipedia.org/wiki/Momentum}} and takes into account both the first-order moment (the mean of gradients) and the second-order moment (the uncentred variance of gradients).
+
+For each iteration $t$, given the gradient $g_t = \nabla_\theta \mathcal{L}(\theta_t)$,  
+the Adam update rules are defined as follows:
+\begin{equation}
+\begin{aligned}
+m_t &= \beta_1 \, m_{t-1} + (1 - \beta_1) \, g_t \\
+v_t &= \beta_2 \, v_{t-1} + (1 - \beta_2) \, g_t^2 \\
+\hat{m}_t &= \frac{m_t}{1 - \beta_1^t} \\
+\hat{v}_t &= \frac{v_t}{1 - \beta_2^t} \\
+\theta_{t+1} &= \theta_t - \alpha \, \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
+\end{aligned}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\beta_1, \beta_2$ are the exponential decay rates for the first and second moment estimates (commonly 0.9 and 0.999);
+    \item $\epsilon$ is a small constant for numerical stability;
+    \item $\alpha$ is the learning rate;
+    \item $m_t$ is the first moment estimate;
+    \item $v_t$ is the second moment estimate.
+\end{itemize}
+
+\textit{Adam with Decoupled Weight Decay (AdamW)} further improves the optimisation process by decoupling the weight decay from the gradient update, thus correcting the regularisation deficiency in Adam\cite{loshchilov2019adamw}:
+\begin{equation}
+\begin{aligned}
+m_t &= \beta_1 \, m_{t-1} + (1 - \beta_1) \, g_t \\
+v_t &= \beta_2 \, v_{t-1} + (1 - \beta_2) \, g_t^2 \\
+\hat{m}_t &= \frac{m_t}{1 - \beta_1^t}, \quad
+\hat{v}_t = \frac{v_t}{1 - \beta_2^t} \\
+\theta_{t+1} &= \theta_t - \alpha \left( \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} + \lambda \theta_t \right)
+\end{aligned}
+\end{equation}
+
+where $\lambda$ is the weight decay coefficient.  
+Unlike Adam, AdamW does not add the L2 regularisation term directly to the loss function; instead, it applies the decay explicitly to the weights. This modification ensures a consistent regularisation effect and often leads to better generalisation performance.
+
+By applying these two techniques\;---\;a numerically stable loss function and a decoupled regularisation optimiser\;---\;the model is expected to achieve improved convergence stability and higher predictive accuracy.
 
 \paragraph{The Sigmoid Threshold}
 %Threshold = fixed, 0.5
@@ -1314,6 +1386,24 @@ Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caiming.
 \textit{On Surgical Fine-tuning for Language Encoders}.
 Findings of the Association for Computational Linguistics: EMNLP 2023.
 DOI: 10.18653/v1/2023.findings-emnlp.204
+
+\bibitem{paszke2019pytorch}
+Paszke, Adam; Gross, Sam; Massa, Francisco; Lerer, Adam; Bradbury, James; Chanan, Gregory; Killeen, Trevor; Lin, Zeming; Gimelshein, Natalia; Antiga, Luca; Desmaison, Alban; Köpf, Andreas; Yang, Edward; DeVito, Zachary; Raison, Martin; Tejani, Alykhan; Chilamkurthy, Sasank; Steiner, Benoit; Fang, Lu; Bai, Junjie; Chintala, Soumith.
+\textit{PyTorch: An Imperative Style, High-Performance Deep Learning Library}.
+NeurIPS 2019.
+DOI: 10.48550/arXiv.1912.01703
+
+\bibitem{loshchilov2019adamw}
+Loshchilov, Ilya; Hutter, Frank.
+\textit{Decoupled Weight Decay Regularization}.
+ICLR 2019.
+DOI: 10.48550/arXiv.1711.05101
+
+\bibitem{kingma2014adam}
+Kingma, Diederik P.; Ba, Jimmy.
+\textit{Adam: A Method for Stochastic Optimization}.
+ICLR 2015.
+DOI: 10.48550/arXiv.1412.6980
 
 
 \end{thebibliography}
