@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 2 days, 09 hours, 28 minutes
+⏳ Time remaining: 1 days, 08 hours, 15 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -53,6 +53,8 @@ project-root/
 │       └── verlan_only.txt
 ├── detect_train_lr_20250917_141908.out
 ├── docs/
+│   ├── detect_pipeline_flowchart.md
+│   ├── detect_pipeline_flowchart.pdf
 │   ├── readme.md
 │   └── results/
 │       ├── l8/
@@ -710,6 +712,7 @@ project-root/
 │       │   ├── google_verlan.png
 │       │   ├── logo.png
 │       │   └── mistral-logo.png
+│       ├── gkbib_unsrt.bst
 │       ├── myreport.aux
 │       ├── myreport.fdb_latexmk
 │       ├── myreport.fls
