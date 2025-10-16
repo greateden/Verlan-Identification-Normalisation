@@ -24,6 +24,10 @@
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{wrapfig}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{makecell}
 \usepackage{changepage}
 \usepackage{listings}
 \usepackage{caption}
@@ -1188,34 +1192,57 @@ For easy analysation purpose, the report stores the result of each sentence in e
 
 \subparagraph{Confusion Matrix}
 
+In the analyses, a 2x2 binary confusion matrix is being used. This is also essential for accuracy and F1 score calculation.
+
+\begin{figure}[H]
+    {\setlength{\tabcolsep}{7pt}
+        \renewcommand{\arraystretch}{1.3}%
+        \begin{tabular}{>{\centering\arraybackslash}p{2.8cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.1cm} >{\centering\arraybackslash}p{3.1cm}}
+            \cellcolor{blue!12}\makecell{\textbf{Total population}\\[-0.2em] $\boldsymbol{= P + N}$} & & \multicolumn{2}{c}{\cellcolor{cyan!22}\textbf{Predicted condition}} \\
+            \multirow{2}{*}{\rotatebox[origin=c]{90}{\cellcolor{yellow!28}\makecell{\textbf{Actual}\\\textbf{condition}}}} & \cellcolor{yellow!15}\textbf{Positive (P)} & \cellcolor{green!20}\textbf{True positive (TP)} & \cellcolor{blue!18}\textbf{False negative (FN)} \\
+             & \cellcolor{yellow!10}\textbf{Negative (N)} & \cellcolor{red!18}\textbf{False positive (FP)} & \cellcolor{green!30}\textbf{True negative (TN)} \\
+        \end{tabular}
+    }
+    \caption{Binary cofusion matrix.}
+    \label{fig:confusion-matrix-legend}
+\end{figure}
+
 
 \subparagraph{Accuracy}
-The accuracy evaluates the proportion of correctly predicted samples out of all samples:
+To evaluate the accuracy, we use the formula below:
 
 \begin{equation}
 \mathrm{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
 \end{equation}
 
-where $TP$, $TN$, $FP$, and $FN$ denote True Positives, True Negatives, False Positives, and False Negatives respectively.
-
 \subparagraph{F1 Score}
 
-The F1 score is the harmonic mean of Precision and Recall, defined as:
+The F1 score is the harmonic mean of Precision and Recall, the formula is as below:
 
 \begin{equation}
 \mathrm{F1} = 2 \times \frac{\mathrm{Precision} \times \mathrm{Recall}}{\mathrm{Precision} + \mathrm{Recall}}
 \end{equation}
 
-with Precision and Recall given by:
+where
 
 \begin{equation}
 \mathrm{Precision} = \frac{TP}{TP + FP}, \qquad
 \mathrm{Recall} = \frac{TP}{TP + FN}
 \end{equation}
-%F1 score, etc
 
-\subsection{Results}
+\subsection{Results and Analyses}
 
+\subsubsection{General F1-Score and Accuracy}
+
+
+\begin{figure}[H]
+  \begin{adjustwidth}{-2cm}{0cm}
+  \centering
+  \includegraphics[width=1.3\textwidth]{figures/Accuracy_distribution_4settings.png}
+  \caption{A general comparison of the F1 score and the accuracy of the models.}
+  \label{fig:total-comparison}
+  \end{adjustwidth}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -1266,16 +1293,6 @@ with Precision and Recall given by:
     \label{fig:slang-fp-correlation}
 \end{figure}
 
-\subsection{Analyses}
-\subsubsection{Zero-Shot Mistral-7B Model}
-\subsubsection{Frozen Encoder + LogisticRegression Head (Experiment A)}
-%we write this in detail, explaining everything we have in the pipeline
-\subsubsection{Frozen Encoder + BERT-Style Head (Experiment C)}
-%less detail
-\subsubsection{End-to-End Encoder + Linear Head (Experiment B)}
-%more detail on the E2E process
-\subsubsection{End-to-End Encoder + BERT-Style Head (Experiment D)}
-\subsubsection{Zero-Shot ChatGPT 5 Codex (High)}
 
 
 \subsection{Conclusion and Limitation}
