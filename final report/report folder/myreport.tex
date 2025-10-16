@@ -832,13 +832,17 @@ Unlike scikit-learn, PyTorch does not provide built-in loss or optimiser functio
 For the latter three experiments, both BERT and Logistic Regression (the linear layer) act as \textit{heads}, whereas this experiment is referred to simply as \textit{Logistic Regression}.
 
 \subparagraph{BERT-Style Head}
-No matter it is Logistic Regression or BERT, they function as the classifier component\;---\;they comtinuously process the normalised vectors after normalisation to 
+No matter it is Logistic Regression or BERT, they function as the classifier component\;---\;they process the vectors after normalisation to give a result of the sentence contains a Velan or not. Logistic Regression is just a linear classifier, it cannot learn the potential patterns like how the Mistral encoder does, however, as we mentioned before CamemBERT is an alternative LLM to Mistral for this experiment. Considering combining them both to maximise their potential, we have decided to try out BERT as another type of classifier.
 
+However, BERT itself is just like the zero-shot Mistral we tested before, it is an entity of an LLM\;---\;it has everything we need for an LLM: tokeniser, encoder, classifier, etc., thus it is worthless in practice to connect the entire BERT after the Mistral encoder\;---\;it would become Mistral embedder, Mistral tokeniser, Mistral encoder, BERT tokeniser, BERT encoder, BERT classifier, etc. Therefore, we only need the classifier part from BERT. 
+
+%classical BERT
 \begin{figure}[H]
 \centering
+\begin{adjustwidth}{-0.3cm}{0cm}
 \begin{minipage}{1\textwidth}
 \centering
-\begin{tikzpicture}[node distance=16mm and 22mm]
+\begin{tikzpicture}[node distance=16mm and 22mm, scale=0.9, every node/.style={transform shape}]
 
 % Column anchors
 \coordinate (C0) at (0,0);      % pooled input
@@ -892,31 +896,56 @@ No matter it is Logistic Regression or BERT, they function as the classifier com
 
 \end{tikzpicture}
 \end{minipage}
+\end{adjustwidth}
 \caption{Classic BERT classification head.}
 \label{fig:bert-classification-head}
 % --- END CLASSIFICATION HEAD FIGURE ---
 \end{figure}
 
+Figure 10 presents the underneath structure of the classic BERT classifier. It accepts the pooled output from the encoder witha dimension of 4096, then randomly dropout\;---\;set 10\% of the neurons to zero to prevent overfitting. Now the neurons are all linear, we need to transform them to tanh neurons for better performance in hidden layers. After that, we apply dropout again before casting 4096 neurons to 1 linear neuron\;---\;the output. In the end, we apply softmax function to transform the output to a probability distribution, and verify cross-entropy loss, then we get the answer.
+
+However, because we are using model fusion techniques here, that is to blend the layers of two different LLMs, adaptation is thus needed.
+
+\begin{enumerate}
+  \item The output from the Mistral encoder has not only been pooled but also been normalised. While the original BERT uses only pooling, to maximise model fusion performance, we apply normalisation.
+  \item After the output logit neuron, the classic BERT has a softmax function and a loss caliberation. However, 
+\end{enumerate}
+
+%BERT-style
 \begin{figure}[H]
 \centering
 \begin{minipage}{1\textwidth}
+\begin{adjustwidth}{-2.5cm}{0cm} % shift entire figure 1cm to the left
 \centering
-\begin{tikzpicture}[node distance=16mm and 22mm]
+\begin{tikzpicture}[node distance=16mm and 22mm, scale=0.9, every node/.style={transform shape}]
 
 % Column anchors
-\coordinate (C0) at (0,0);      % inputs
-\coordinate (C1) at (3.2,0);    % hidden tanh
-\coordinate (C2) at (6.4,0);    % output logit
+\coordinate (Cminus2) at (-6.4,0); % Mistral encoder output
+\coordinate (Cminus1) at (-3.2,0); % pooling + normalisation
+\coordinate (C0) at (0,0);        % pooled vector
+\coordinate (C1) at (3.2,0);      % hidden tanh
+\coordinate (C2) at (6.4,0);      % output logit
 
-% ===== Input layer (6 dots representing 4096) =====
-\foreach [count=\i] \y in {30mm,18mm,6mm,-6mm,-18mm,-30mm} {
-  \node[inDot] (x\i) at ($(C0)+(0,\y)$) {};
+% ===== Mistral encoder outputs =====
+\node[draw, rounded corners=2pt, fill=blue!10, minimum width=18mm, minimum height=65mm] (mistralLast) at (Cminus2) {};
+\foreach \y in {24mm,12mm,0mm,-12mm,-24mm} {
+  \node[rectangle, draw=blue!35, fill=blue!30, minimum width=12mm, minimum height=6mm] at ($(mistralLast.center)+(0,\y)$) {};
 }
-\draw[decorate,decoration={brace,mirror,amplitude=5pt}]
-  ($(x1)+(-8mm,6mm)$) -- ($(x6)+(-8mm,-6mm)$)
-  node[midway,xshift=-10mm,align=center] {\small $D=4096$\\\small encoder\\features};
-\node at ($(x1)!1.4!(x5)$) {$\vdots$};
-\node[layerlabel] at ($(x1)+(0,18mm)$) {\textbf{Input}};
+\node at ($(mistralLast.north)!0.5!(mistralLast.south)$) {$\vdots$};
+\node[layerlabel] at ($(mistralLast)+(5mm,36mm)$) {\textbf{Mistral encoder}};
+\node[font=\scriptsize, align=center, anchor=north] at ($(mistralLast.south)+(5mm,-6mm)$) {last layer $H \in \mathbb{R}^{L \times 4096}$};
+
+% ===== Mean pooling + normalisation =====
+\node[draw, rounded corners=2pt, fill=orange!15, minimum width=25mm, minimum height=18mm, font=\small, align=center] (meanPool) at (Cminus1) {\text{MeanPool}\\$+\ \ell_2$ norm};
+\node[layerlabel] at ($(meanPool)+(0,20mm)$) {\textbf{Pooling}};
+\node[font=\scriptsize, align=center, anchor=north] at ($(meanPool.south)+(0,-6mm)$) {$\text{MeanPool}(H) \rightarrow \bar{h}$};
+\draw[->,shorten >=1pt,shorten <=1pt] (mistralLast.east) -- (meanPool.west);
+
+% ===== Pooled representation =====
+\node[neuron] (hbar) at (C0) {$\bar{h}$};
+\node[layerlabel] at ($(hbar)+(0,18mm)$) {\textbf{Input}};
+\node[font=\scriptsize, align=center, anchor=north] at ($(hbar.south)+(0,-6mm)$) {$\bar{h} \in \mathbb{R}^{4096}$};
+\draw[->,shorten >=1pt,shorten <=1pt] (meanPool.east) -- (hbar.west);
 
 % ===== Hidden (5 tanh; represent 4096) =====
 \foreach [count=\i] \y in {30mm,15mm,0mm,-15mm,-30mm} {
@@ -943,7 +972,7 @@ No matter it is Logistic Regression or BERT, they function as the classifier com
 \node[anchor=north, font=\small, align=center] at ($(o1)+(0,11mm)$) {Linear $4096\!\rightarrow\!1$};
 
 % ===== Connections (fully connected) =====
-\foreach \a in {1,...,6} {\foreach \b in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (x\a) -- (h\b);}}
+\foreach \b in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (hbar) -- (h\b); }
 \foreach \a in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (h\a) -- (o1);};
 
 % ===== Sigmoid + threshold gate =====
@@ -955,6 +984,7 @@ No matter it is Logistic Regression or BERT, they function as the classifier com
 \node[anchor=west, font=\small] at ($(thresholdDetect.east)+(2mm,0)$) {\shortstack{Verlan\\decision}};
 
 \end{tikzpicture}
+\end{adjustwidth}
 \end{minipage}
 \caption{BERT-style detection head.}
 \label{fig:bert-detect-head}
