@@ -94,4 +94,142 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Training Models}{18}{subsection.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}The Pipelines}{18}{subsubsection.4.3.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces A compact view of the four Verlan identification pipelines.\footnotesize   Exp~A: Frozen Encoder + LogisticRegression Head Exp~B: End-to-End Encoder + Linear Head Exp~C: Frozen Encoder + BERT-Style Head Exp~D: End-to-End Encoder + BERT-Style Head (Experiment D}}{19}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:pipeline-overview}{{8}{19}{A compact view of the four Verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + LogisticRegression Head\\Exp~B: End-to-End Encoder + Linear Head\\Exp
+\newlabel{fig:pipeline-overview}{{8}{19}{A compact view of the four Verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + LogisticRegression Head\\Exp~B: End-to-End Encoder + Linear Head\\Exp~C: Frozen Encoder + BERT-Style Head\\Exp~D: End-to-End Encoder + BERT-Style Head (Experiment D}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {paragraph}{Input}{19}{section*.13}\protected@file@percent }
+\citation{alsharou2021noise}
+\@writefile{toc}{\contentsline {paragraph}{Normalise Text}{20}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Why Not Preserve Upper Cases and Annotation Marks}{20}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tokenisation}{20}{section*.16}\protected@file@percent }
+\citation{lodha2023surgical}
+\@writefile{toc}{\contentsline {paragraph}{Encoder}{21}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Calibrations}{21}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Masking}{21}{section*.19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Visulisation of masking.}}{22}{figure.caption.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Mean Pooling}{23}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{L2 Normalisation}{23}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The Classifiers\tmspace  +\thickmuskip {.2777em}---\tmspace  +\thickmuskip {.2777em}Logistic Regression or BERT}{24}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Logistic Regression with scikit-learn}{24}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{BERT-Style Head}{24}{section*.25}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Classic BERT classification head.}}{25}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:bert-classification-head}{{10}{25}{Classic BERT classification head}{figure.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces BERT-style detection head.}}{26}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:bert-detect-head}{{11}{26}{BERT-style detection head}{figure.caption.27}{}}
+\citation{paszke2019pytorch}
+\citation{loshchilov2019adamw}
+\citation{kingma2014adam}
+\@writefile{toc}{\contentsline {subparagraph}{The Different Loss Function and Calibration}{27}{section*.28}\protected@file@percent }
+\citation{loshchilov2019adamw}
+\@writefile{toc}{\contentsline {paragraph}{The Sigmoid Threshold}{29}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}The Usage of the Dataset}{29}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Environment and Hyperparameters}{29}{subsubsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Environment}{29}{figure.caption.31}\protected@file@percent }
+\citation{pearson1901pca}
+\citation{maaten2008tsne}
+\citation{mcinnes2018umap}
+\@writefile{toc}{\contentsline {paragraph}{Hyperparameters}{30}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Seeds}{30}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Batch Size}{30}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Maximum Length}{30}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Quantisation}{30}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Epochs}{30}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Evaluations, Results, and Analyses}{30}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{30}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Embedding Space}{30}{subsubsection.5.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces UMAP visualisations of the embedding space showing the distribution of Verlan and standard French tokens Class 1: Verlan tokens Class 0: normal tokens}}{31}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:umap_comparison}{{12}{31}{UMAP visualisations of the embedding space showing the distribution of Verlan and standard French tokens\\Class 1: Verlan tokens\\Class 0: normal tokens}{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Testing Datasets}{32}{subsubsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}Testing Schema}{32}{subsubsection.5.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Zero-shot Models}{32}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Number of Trials}{32}{section*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Storing the Results}{33}{section*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Analyse Methodology}{33}{section*.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Confusion Matrix}{33}{section*.43}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Binary cofusion matrix.}}{33}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:confusion-matrix-legend}{{13}{33}{Binary cofusion matrix}{figure.caption.44}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Accuracy}{33}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{F1 Score}{33}{section*.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Results and Analyses}{34}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}General F1-Score and Accuracy}{34}{subsubsection.5.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces A general comparison of the F1 score and accuracy across models.}}{34}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:total-comparison}{{14}{34}{A general comparison of the F1 score and accuracy across models}{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}}{36}{subsection.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Historical verlan recall across the six evaluated systems. Scores for trained detectors average over 20 random seeds; zero-shot runs use single-pass counts.}}{36}{figure.caption.48}\protected@file@percent }
+\newlabel{fig:historical-verlan-comparison}{{15}{36}{Historical verlan recall across the six evaluated systems. Scores for trained detectors average over 20 random seeds; zero-shot runs use single-pass counts}{figure.caption.48}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Invented verlan recall when models are confronted with self-created forms. Frozen+BERT is the only trained detector that breaks 45\%, while GPT-5 Codex (High) generalises to 92\% without fine-tuning.}}{36}{figure.caption.49}\protected@file@percent }
+\newlabel{fig:invented-verlan-comparison}{{16}{36}{Invented verlan recall when models are confronted with self-created forms. Frozen+BERT is the only trained detector that breaks 45\%, while GPT-5 Codex (High) generalises to 92\% without fine-tuning}{figure.caption.49}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Slang control accuracy (specificity). End-to-end training tends to over-trigger on slang, whereas GPT-5 Codex (High) retains 80\% rejection accuracy without any task-specific supervision.}}{37}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:slang-comparison}{{17}{37}{Slang control accuracy (specificity). End-to-end training tends to over-trigger on slang, whereas GPT-5 Codex (High) retains 80\% rejection accuracy without any task-specific supervision}{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Recall--specificity trade-off across models. Each marker reports historical verlan recall (x-axis) and slang specificity (y-axis) on the targeted suites.}}{38}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:tradeoff-scatter}{{18}{38}{Recall--specificity trade-off across models. Each marker reports historical verlan recall (x-axis) and slang specificity (y-axis) on the targeted suites}{figure.caption.51}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Invented verlan recall stability. Bars show mean recall with standard-deviation error bars over 20 seeds; diamonds/squares denote zero-shot runs.}}{39}{figure.caption.52}\protected@file@percent }
+\newlabel{fig:invented-variance}{{19}{39}{Invented verlan recall stability. Bars show mean recall with standard-deviation error bars over 20 seeds; diamonds/squares denote zero-shot runs}{figure.caption.52}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Zero-shot recall lift on invented verlan relative to the best trained detector (Frozen+BERT).}}{39}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:invented-lift}{{20}{39}{Zero-shot recall lift on invented verlan relative to the best trained detector (Frozen+BERT)}{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Link between slang false alarms and overall false positives. Models that over-trigger on slang also accrue more false positives on the main test split.}}{40}{figure.caption.54}\protected@file@percent }
+\newlabel{fig:slang-fp-correlation}{{21}{40}{Link between slang false alarms and overall false positives. Models that over-trigger on slang also accrue more false positives on the main test split}{figure.caption.54}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Conclusion and Limitation}{40}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion and Outlook}{40}{section.6}\protected@file@percent }
+\bibcite{rajabov2025}{1}
+\bibcite{bach2018}{2}
+\bibcite{evolutionverlan}{3}
+\bibcite{rua2005}{4}
+\bibcite{hajiyeva2025}{5}
+\bibcite{deepl2020}{6}
+\bibcite{wu2016}{7}
+\bibcite{michel2018mtnt}{8}
+\bibcite{zurbuchen2024}{9}
+\bibcite{podhorna2020rapcor}{10}
+\bibcite{mekki2021tremolo}{11}
+\bibcite{panckhurst202088milsms}{12}
+\bibcite{pei2019slang}{13}
+\bibcite{sun2024informal}{14}
+\bibcite{slangornot2024}{15}
+\bibcite{wu2018slangsd}{16}
+\bibcite{dhuliawala2016slangnet}{17}
+\bibcite{wu2018slangsd}{18}
+\bibcite{gupta2019slangzy}{19}
+\bibcite{dictionnaire2024chilleur}{20}
+\bibcite{mela1991verlan}{21}
+\bibcite{kaye1984syllabicite}{22}
+\bibcite{russell1918soundex}{23}
+\bibcite{levenshtein1966}{24}
+\bibcite{philips1990metaphone}{25}
+\bibcite{philips2000doublemetaphone}{26}
+\bibcite{kukich1992techniques}{27}
+\bibcite{sproat2001normalization}{28}
+\bibcite{aw2006phrase}{29}
+\bibcite{beaufort2010hybrid}{30}
+\bibcite{han2011lexical}{31}
+\bibcite{baldwin2015shared}{32}
+\bibcite{urban2020embeddings}{33}
+\bibcite{sun2024knowledge}{34}
+\bibcite{jiang2023mistral7b}{35}
+\bibcite{touvron2023llama}{36}
+\bibcite{touvron2023llama2}{37}
+\bibcite{martin2019camembert}{38}
+\bibcite{du2025deepresearch}{39}
+\bibcite{dong2024imbalance}{40}
+\bibcite{alsharou2021noise}{41}
+\bibcite{lodha2023surgical}{42}
+\bibcite{paszke2019pytorch}{43}
+\bibcite{loshchilov2019adamw}{44}
+\bibcite{kingma2014adam}{45}
+\bibcite{pearson1901pca}{46}
+\bibcite{maaten2008tsne}{47}
+\bibcite{mcinnes2018umap}{48}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix A}Some extra things}{47}{appendix.A}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset.}}{47}{table.caption.56}\protected@file@percent }
+\newlabel{tab:main-test-confusion-draft}{{2}{47}{Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset}{table.caption.56}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix B}Expanded Evaluation Artefacts}{47}{appendix.B}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Hold-out test aggregates (20 seeds) for trained detectors. Percentages report mean $\pm $ standard deviation across seeds; counts are means.}}{47}{table.caption.57}\protected@file@percent }
+\newlabel{tab:appendix-holdout-aggregates}{{3}{47}{Hold-out test aggregates (20 seeds) for trained detectors. Percentages report mean $\pm $ standard deviation across seeds; counts are means}{table.caption.57}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Targeted-slice comparison across 20 seeds. Historical and invented columns are verlan recalls; slang column measures rejection accuracy on contemporary slang controls.}}{48}{table.caption.58}\protected@file@percent }
+\newlabel{tab:appendix-targeted-metrics}{{4}{48}{Targeted-slice comparison across 20 seeds. Historical and invented columns are verlan recalls; slang column measures rejection accuracy on contemporary slang controls}{table.caption.58}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Zero-shot targeted breakdowns (single pass). Metrics computed on 29 historical verlan, 25 invented verlan, and 25 slang sentences respectively.}}{48}{table.caption.59}\protected@file@percent }
+\newlabel{tab:appendix-zeroshot-targeted}{{5}{48}{Zero-shot targeted breakdowns (single pass). Metrics computed on 29 historical verlan, 25 invented verlan, and 25 slang sentences respectively}{table.caption.59}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix C}Aims and Objectives}{48}{appendix.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Aims}{48}{section*.61}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Objectives}{48}{section*.62}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Aims}{49}{section*.64}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Objectives}{49}{section*.65}\protected@file@percent }
+\gdef \@abspage@last{50}

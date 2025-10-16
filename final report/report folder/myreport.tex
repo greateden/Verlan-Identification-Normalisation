@@ -1143,56 +1143,72 @@ For detailed hyperparameter configurations, please refer to the GitHub page of t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Evaluations, Results, and Analyses}
-In this exciting chapter, the report introduces the evaluation techniques and the testing datasets we have created. We then analyses the results in general, and in details. After that, we draw the conclusion of the model performance in this chapter.
 
-%Embedding or Encoder; for embedding, need to show embedding space figures 
+In this chapter, the report presents the evaluation techniques and the testing datasets that were created for this study. 
+We then analyse the results both in general and in detail, followed by a discussion of the model's overall performance.
+
 \subsection{Evaluation Methodology}
-\subsubsection{Embedding space}
-To evaluate whether the Verlan tokens show a difference position in the embedding space or not, we have decided to visulise the embedding space right after the tokens has been embedded (i.e., before training the encoder). After comparisons between Principal Component Analysis (PCA)\footnote{\url{https://en.wikipedia.org/wiki/Principal_component_analysis}}, t-Distributed Stochastic Neighbor Embedding (t-SNE)\footnote{\url{https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding}}, and Uniform Manifold Approximation and Projection (UMAP)\footnote{\url{https://umap-learn.readthedocs.io/en/latest/}}, we have found that UMAP generally has the best visulisation\cite{pearson1901pca,maaten2008tsne,mcinnes2018umap}.
+
+\subsubsection{Embedding Space}
+To evaluate whether Verlan tokens occupy distinct positions in the embedding space, 
+we visualise the embeddings immediately after tokenisation (i.e., before training the encoder). 
+After comparing Principal Component Analysis (PCA)\footnote{\url{https://en.wikipedia.org/wiki/Principal_component_analysis}}, 
+t-Distributed Stochastic Neighbor Embedding (t-SNE)\footnote{\url{https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding}}, 
+and Uniform Manifold Approximation and Projection (UMAP)\footnote{\url{https://umap-learn.readthedocs.io/en/latest/}}, 
+we found that UMAP generally produces the most effective visualisation\cite{pearson1901pca,maaten2008tsne,mcinnes2018umap}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/mistral_bert_umap.png}
-    \caption{UMAP visualizations of the embedding space showing the distribution of Verlan and standard French tokens\\Class 1: Verlan tokens\\Class 0: normal tokens}
+    \caption{UMAP visualisations of the embedding space showing the distribution of Verlan and standard French tokens\\Class 1: Verlan tokens\\Class 0: normal tokens}
     \label{fig:umap_comparison}
 \end{figure}
 
-Based on the result, the report is uncertain to say there is a distinguish of the positions between the Verlan tokens and other tokens in the embedding space. On the other hand, we highly agree that trditional linear classication methods, like logistic regression, should not perform well in this case, as the figure is presenting a non-linear pattern.
+Based on the results, the report cannot confidently conclude that there is a clear distinction between the positions of Verlan tokens and other tokens in the embedding space. 
+However, we strongly agree that traditional linear classification methods, such as Logistic Regression, are unlikely to perform well in this case, as the figure indicates a non-linear distribution pattern.
 
 \subsubsection{Testing Datasets}
-For testing the model performance, the report has created a couple of testing datasets. These datasets are not the sentence dataset, nor the dictionary dataset that we have created for training the models. We have created three datasets as below, inside each of them, there are pairs of sentences contain Verlan, and the same sentences that their Verlan has been normalised:
+To evaluate model performance, we created several testing datasets. 
+These datasets are neither the sentence dataset nor the dictionary dataset that were used for training. 
+We constructed three distinct datasets, each containing pairs of sentences: one version with Verlan and the other with the corresponding Verlan normalised into standard French.
+
 \begin{enumerate}
-  \item Daily Verlan --- 60 entries (30 pairs) of sentence that frequently been used by French speakers.
-  \item Invented Verlan --- 50 entries (25 pairs) of sentence that the report has created to mimick tasks to indetify newly invented Verlans.
-  \item Slang --- 50 entries (25 pairs) of sentence that contains slang and their normalised pair. All the sentences are labelled as not contains Verlan.
+  \item \textbf{Daily Verlan} --- 60 entries (30 pairs) of sentences that are frequently used by French speakers.
+  \item \textbf{Invented Verlan} --- 50 entries (25 pairs) of sentences that were newly created to simulate the task of identifying novel Verlan forms.
+  \item \textbf{Slang} --- 50 entries (25 pairs) of sentences containing French slang and their normalised counterparts. All sentences in this dataset are labelled as not containing Verlan.
 \end{enumerate}
 
-Interestingly, we have created the slang testing dataset, because of the reasons below:
+The \textit{Slang} testing dataset was included for the following reasons:
 \begin{enumerate}
-  \item Slang can also be treated as a type of noise in text, as Verlan does.
-  \item The model might be learning to identify slang in general instead of Verlan, the report would like to justify that by creating this dataset.
+  \item Slang can also be treated as a form of textual noise, much like Verlan.
+  \item The model might learn to identify slang in general instead of Verlan; therefore, this dataset allows us to verify whether such bias exists.
 \end{enumerate}
 
-All the sentences in these datasets have not been appeared in the training dataset.
+All sentences in these datasets do not appear in the training data.
 
-Readers might argue the quantity of the testing datasets being small. The report believes that this amount is enough for testing purposes.
+Readers may argue that the testing datasets are relatively small in quantity. 
+However, the report considers this scale sufficient for evaluation purposes.
 
 \subsubsection{Testing Schema}
 
 \paragraph{Zero-shot Models}
-For zero-shot models, in particular, GPT 5 Codex (High) and Mistral 7B, we only evaluate them based on the testing datasets instead of the training dataset. As its name, the purpose of the training dataset is for training, thus we believe it is unnecessary to conduct zero-shot experiments on them.
+For the zero-shot models, particularly GPT-5 Codex (High) and Mistral 7B, 
+we evaluated them only on the testing datasets rather than the training dataset. 
+As implied by their name, zero-shot experiments do not involve training; thus, applying them to the training set would be unnecessary.
 
 \paragraph{Number of Trials}
-As mentioned above, the report runs each model 20 times with 20 different seeds, in order to reduce bias.
+As mentioned above, each model was run 20 times with 20 different random seeds to reduce bias.
 
 \paragraph{Storing the Results}
-For easy analysation purpose, the report stores the result of each sentence in each trial, across all four training models and the zero-shot trial of Mistral 7B, in CSV format. For the results of GPT 5 Codex (High), we store them in a spreadsheet.
+For ease of analysis, the results of each sentence from each trial---across all four trained models and the zero-shot Mistral 7B---were stored in CSV format. 
+For GPT-5 Codex (High), the results were stored in a spreadsheet for convenience.
 
 \paragraph{Analyse Methodology}
 
 \subparagraph{Confusion Matrix}
 
-In the analyses, a 2x2 binary confusion matrix is being used. This is also essential for accuracy and F1 score calculation.
+In the analyses, a $2 \times 2$ binary confusion matrix is used. 
+It also serves as the basis for computing both accuracy and the F1 score.
 
 \begin{figure}[H]
     {\setlength{\tabcolsep}{7pt}
@@ -1207,17 +1223,15 @@ In the analyses, a 2x2 binary confusion matrix is being used. This is also essen
     \label{fig:confusion-matrix-legend}
 \end{figure}
 
-
 \subparagraph{Accuracy}
-To evaluate the accuracy, we use the formula below:
+To evaluate accuracy, we use the following formula:
 
 \begin{equation}
 \mathrm{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
 \end{equation}
 
 \subparagraph{F1 Score}
-
-The F1 score is the harmonic mean of Precision and Recall, the formula is as below:
+The F1 score is the harmonic mean of Precision and Recall, defined as:
 
 \begin{equation}
 \mathrm{F1} = 2 \times \frac{\mathrm{Precision} \times \mathrm{Recall}}{\mathrm{Precision} + \mathrm{Recall}}
@@ -1226,23 +1240,48 @@ The F1 score is the harmonic mean of Precision and Recall, the formula is as bel
 where
 
 \begin{equation}
-\mathrm{Precision} = \frac{TP}{TP + FP}, \qquad
-\mathrm{Recall} = \frac{TP}{TP + FN}
+\mathrm{Precision} = \frac{TP}{TP + FP}, 
+\qquad
+\mathrm{Recall} = \frac{TP}{TP + FN}.
 \end{equation}
 
 \subsection{Results and Analyses}
+In this section, the report first presents the general result of the accuracy and the F1-score of the models. Then, the report discusses in details with some interesting findings of the performance of the models.
 
 \subsubsection{General F1-Score and Accuracy}
 
+Overall, all models produce positive detections\;---\;the accuracy across all models is above 50\%.
 
 \begin{figure}[H]
   \begin{adjustwidth}{-2cm}{0cm}
   \centering
   \includegraphics[width=1.3\textwidth]{figures/Accuracy_distribution_4settings.png}
-  \caption{A general comparison of the F1 score and the accuracy of the models.}
+  \caption{A general comparison of the F1 score and accuracy across models.}
   \label{fig:total-comparison}
   \end{adjustwidth}
 \end{figure}
+
+For each individual model, before embedding and fine-tuning, Mistral 7B achieves an accuracy of around 69.4\%, which is already considered high from the report's perspective. 
+After training, all four experiments show an improvement of more than 10\%. 
+From left to right in Figure~14, the gains are 16.3\%, 18.5\%, 10.5\%, and 22.4\%, respectively. 
+This indicates that training generally improves model performance.
+
+The models that implement BERT as the classifier achieve higher accuracy and F1 scores than those using a Logistic Regression classifier. 
+This result was anticipated, as the embedding space did not show a linear trend; hence, BERT performs better than Logistic Regression in capturing non-linear patterns.
+
+Interestingly, the frozen models are not always the worst performers. 
+The E2E+LR model\;---\;whose encoder was fine-tuned and uses a Logistic Regression head\;---\;achieves the lowest accuracy and exhibits the largest variance. 
+The report suspects that this may be because fine-tuning with a limited dataset introduces additional noise, while the models with a BERT classifier can leverage their loss functions and optimisation mechanisms to mitigate this noise and achieve higher accuracy. 
+Further experiments would be worthwhile to confirm this hypothesis.
+
+Among the four trained models, the E2E+BERT model achieves the best overall performance. 
+This demonstrates that model fusion between Mistral 7B and CamemBERT can be effective when implemented correctly, and that full fine-tuning with a non-linear classifier may be the optimal approach for Verlan identification.
+
+The reference zero-shot model, GPT-5 Codex (High), maintains the highest accuracy of 91.8\% even without additional training, which is 32.2\% higher than that of the zero-shot Mistral 7B. 
+The F1 score demonstrates a similar trend. 
+Although it is a proprietary model, these results allow us to observe how a top-tier model performs on this task and to appreciate the remarkable progress of the AI industry.
+
+\subsection{}
 
 \begin{figure}[H]
     \centering

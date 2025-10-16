@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  16 OCT 2025 19:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  16 OCT 2025 20:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1231,7 +1231,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 94.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<figures/logo.png, id=167, 566.115pt x 617.9085pt>
+<figures/logo.png, id=171, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
 Package pdftex.def Info: figures/logo.png  used on input line 94.
@@ -1248,17 +1248,17 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.130 T
        hinking internationally, when people are communicating with translato... [1]
-<figures/google_verlan.png, id=219, 1093.08376pt x 252.945pt>
+<figures/google_verlan.png, id=223, 1093.08376pt x 252.945pt>
 File: figures/google_verlan.png Graphic file (type png)
 <use figures/google_verlan.png>
 Package pdftex.def Info: figures/google_verlan.png  used on input line 134.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_verlan.png, id=220, 972.63374pt x 237.88875pt>
+<figures/deepl_verlan.png, id=224, 972.63374pt x 237.88875pt>
 File: figures/deepl_verlan.png Graphic file (type png)
 <use figures/deepl_verlan.png>
 Package pdftex.def Info: figures/deepl_verlan.png  used on input line 140.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
-<figures/deepl_alt_text.png, id=221, 303.1325pt x 396.48125pt>
+<figures/deepl_alt_text.png, id=225, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
 Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 146.
@@ -1346,12 +1346,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 3.26288pt
 (hyperref)                removed on input line 498.
 
-<figures/CamemBERT.png, id=425, 722.7pt x 722.7pt>
+<figures/CamemBERT.png, id=429, 722.7pt x 722.7pt>
 File: figures/CamemBERT.png Graphic file (type png)
 <use figures/CamemBERT.png>
 Package pdftex.def Info: figures/CamemBERT.png  used on input line 504.
 (pdftex.def)             Requested size: 56.9055pt x 56.90189pt.
-<figures/mistral-logo.png, id=426, 191.71625pt x 135.50626pt>
+<figures/mistral-logo.png, id=430, 191.71625pt x 135.50626pt>
 File: figures/mistral-logo.png Graphic file (type png)
 <use figures/mistral-logo.png>
 Package pdftex.def Info: figures/mistral-logo.png  used on input line 509.
@@ -1370,7 +1370,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 580--580
 [][][][][]$\OT1/cmtt/m/n/10 https : / / artificialanalysis . ai / models / gpt-[]5-[]codex #
  []
 
-<figures/Artificial Analysis Intelligence Index (14 Oct '25) .png, id=479, 3336.465pt x 1706.375pt>
+<figures/Artificial Analysis Intelligence Index (14 Oct '25) .png, id=483, 3336.465pt x 1706.375pt>
 File: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png Graphic file (type png)
 <use figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>
 Package pdftex.def Info: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png  used on input line 584.
@@ -1430,4 +1430,225 @@ Overfull \hbox (88.20529pt too wide) in paragraph at lines 1002--1003
 Overfull \hbox (55.19637pt too wide) in paragraph at lines 1015--1016
 \OT1/cmr/m/n/12 af-ter the lin-ear out-put neu-ron, we use a dif-fer-ent loss func-tion---\OT1/cmtt/m/n/12 BCEWithLogitsLoss\OT1/cmr/m/n/12 ---
  []
+
+
+Overfull \hbox (2.44592pt too wide) in paragraph at lines 1033--1034
+[]\OT1/cmr/m/n/12 This for-mu-la-tion pre-vents nu-mer-i-cal un-der-flow or over-flow when the model
+ []
+
+
+
+[27]
+
+[28]
+<figures/aoraki.png, id=624, 1027.84pt x 1541.76pt>
+File: figures/aoraki.png Graphic file (type png)
+<use figures/aoraki.png>
+Package pdftex.def Info: figures/aoraki.png  used on input line 1107.
+(pdftex.def)             Requested size: 42.67912pt x 64.01242pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1110--1110
+[][][][][]$\OT1/cmtt/m/n/10 https : / / rtis . cspages . otago . ac . nz / research-[]computing / cluster / index .
+ []
+
+
+
+[29 <./figures/aoraki.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1156--1156
+[][][][][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / T-[]distributed _ stochastic _ neighbor _
+ []
+
+
+
+[30]
+<figures/mistral_bert_umap.png, id=657, 505.89pt x 433.62pt>
+File: figures/mistral_bert_umap.png Graphic file (type png)
+<use figures/mistral_bert_umap.png>
+Package pdftex.def Info: figures/mistral_bert_umap.png  used on input line 1162.
+(pdftex.def)             Requested size: 272.99881pt x 233.99913pt.
+
+
+[31 <./figures/mistral_bert_umap.png>]
+
+[32]
+Overfull \hbox (18.59607pt too wide) in paragraph at lines 1217--1217
+ [] 
+ []
+
+
+Overfull \vbox (17.04996pt too high) detected at line 1218
+ []
+
+
+Overfull \hbox (7.43347pt too wide) in paragraph at lines 1216--1222
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1216--1222
+
+ []
+
+
+
+[33]
+<figures/Accuracy_distribution_4settings.png, id=697, 867.24pt x 433.62pt>
+File: figures/Accuracy_distribution_4settings.png Graphic file (type png)
+<use figures/Accuracy_distribution_4settings.png>
+Package pdftex.def Info: figures/Accuracy_distribution_4settings.png  used on input line 1258.
+(pdftex.def)             Requested size: 507.00119pt x 253.50458pt.
+
+Overfull \hbox (60.09569pt too wide) in paragraph at lines 1258--1259
+ [] 
+ []
+
+
+
+[34 <./figures/Accuracy_distribution_4settings.png>]
+<figures/historical_verlan_comparison.png, id=704, 578.16pt x 325.215pt>
+File: figures/historical_verlan_comparison.png Graphic file (type png)
+<use figures/historical_verlan_comparison.png>
+Package pdftex.def Info: figures/historical_verlan_comparison.png  used on input line 1288.
+(pdftex.def)             Requested size: 331.50238pt x 186.46619pt.
+
+
+[35]
+<figures/invented_verlan_comparison.png, id=709, 578.16pt x 325.215pt>
+File: figures/invented_verlan_comparison.png Graphic file (type png)
+<use figures/invented_verlan_comparison.png>
+Package pdftex.def Info: figures/invented_verlan_comparison.png  used on input line 1295.
+(pdftex.def)             Requested size: 331.50238pt x 186.46619pt.
+<figures/slang_controls_comparison.png, id=710, 578.16pt x 325.215pt>
+File: figures/slang_controls_comparison.png Graphic file (type png)
+<use figures/slang_controls_comparison.png>
+Package pdftex.def Info: figures/slang_controls_comparison.png  used on input line 1302.
+(pdftex.def)             Requested size: 331.50238pt x 186.46619pt.
+
+
+[36 <./figures/historical_verlan_comparison.png> <./figures/invented_verlan_comparison.png>]
+<figures/historical_vs_slang_tradeoff.png, id=720, 462.528pt x 433.62pt>
+File: figures/historical_vs_slang_tradeoff.png Graphic file (type png)
+<use figures/historical_vs_slang_tradeoff.png>
+Package pdftex.def Info: figures/historical_vs_slang_tradeoff.png  used on input line 1309.
+(pdftex.def)             Requested size: 272.99881pt x 255.94606pt.
+
+
+[37 <./figures/slang_controls_comparison.png>]
+<figures/invented_recall_variance.png, id=727, 505.89pt x 325.215pt>
+File: figures/invented_recall_variance.png Graphic file (type png)
+<use figures/invented_recall_variance.png>
+Package pdftex.def Info: figures/invented_recall_variance.png  used on input line 1316.
+(pdftex.def)             Requested size: 331.50238pt x 213.11415pt.
+
+
+[38 <./figures/historical_vs_slang_tradeoff.png>]
+<figures/invented_relative_improvement.png, id=734, 469.755pt x 303.534pt>
+File: figures/invented_relative_improvement.png Graphic file (type png)
+<use figures/invented_relative_improvement.png>
+Package pdftex.def Info: figures/invented_relative_improvement.png  used on input line 1323.
+(pdftex.def)             Requested size: 272.99881pt x 176.3972pt.
+<figures/slang_fp_vs_main_fp.png, id=735, 469.755pt x 325.215pt>
+File: figures/slang_fp_vs_main_fp.png Graphic file (type png)
+<use figures/slang_fp_vs_main_fp.png>
+Package pdftex.def Info: figures/slang_fp_vs_main_fp.png  used on input line 1330.
+(pdftex.def)             Requested size: 292.5pt x 202.49962pt.
+
+
+[39 <./figures/invented_recall_variance.png> <./figures/invented_relative_improvement.png>]
+
+[40 <./figures/slang_fp_vs_main_fp.png>]
+
+[41]
+
+[42]
+pdfTeX warning (ext4): destination with the same identifier (name{cite.wu2018slangsd}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1439 \bibitem{wu2018slangsd}
+                              
+
+[43]
+Underfull \hbox (badness 1048) in paragraph at lines 1503--1507
+\OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
+ []
+
+
+
+[44]
+
+[45]
+Underfull \hbox (badness 1237) in paragraph at lines 1570--1573
+[]\OT1/cmr/m/n/12 Dong, Yuhui; Geng, Xin; Zhang, Ji-ayi; Song, Yue; Li, Xixin.
+ []
+
+
+Underfull \hbox (badness 2809) in paragraph at lines 1581--1585
+[]\OT1/cmr/m/n/12 Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caim-
+ []
+
+
+Underfull \hbox (badness 1824) in paragraph at lines 1581--1585
+\OT1/cmr/m/n/12 ing. \OT1/cmr/m/it/12 On Sur-gi-cal Fine-tuning for Lan-guage En-coders\OT1/cmr/m/n/12 . Find-ings of
+ []
+
+
+Underfull \hbox (badness 4454) in paragraph at lines 1605--1609
+[]\OT1/cmr/m/n/12 Pearson, Karl. \OT1/cmr/m/it/12 On Lines and Planes of Clos-est Fit to Sys-
+ []
+
+
+Underfull \hbox (badness 5490) in paragraph at lines 1605--1609
+\OT1/cmr/m/it/12 tems of Points in Space\OT1/cmr/m/n/12 . Philo-soph-i-cal Mag-a-zine, 1901. DOI:
+ []
+
+
+Underfull \hbox (badness 3471) in paragraph at lines 1611--1615
+\OT1/cmr/m/it/12 ing t-SNE\OT1/cmr/m/n/12 . Jour-nal of Ma-chine Learn-ing Re-search, 2008. DOI:
+ []
+
+
+
+[46]
+Overfull \hbox (145.52835pt too wide) in paragraph at lines 1661--1671
+ [][] 
+ []
+
+
+
+[47]
+Overfull \hbox (0.65338pt too wide) in paragraph at lines 1695--1703
+ [][] 
+ []
+
+
+
+[48]
+
+[49] (./myreport.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `myreport.out' has not changed.
+(rerunfilecheck)             Checksum: F806059A533DB3E1DC9E27334FFB1C1A;7371.
+ ) 
+Here is how much of TeX's memory you used:
+ 40868 strings out of 474662
+ 877096 string characters out of 5751110
+ 1358569 words of memory out of 5000000
+ 63051 multiletter control sequences out of 15000+600000
+ 576850 words of font info for 102 fonts, out of 8000000 for 9000
+ 319 hyphenation exceptions out of 8191
+ 140i,25n,131p,1718b,2144s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on myreport.pdf (50 pages, 4945157 bytes).
+PDF statistics:
+ 1009 PDF objects out of 1200 (max. 8388607)
+ 864 compressed objects within 9 object streams
+ 301 named destinations out of 1000 (max. 500000)
+ 426 words of extra memory for PDF output out of 10000 (max. 10000000)
 
