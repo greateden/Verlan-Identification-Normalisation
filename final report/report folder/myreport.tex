@@ -27,6 +27,7 @@
 \usepackage{changepage}
 \usepackage{listings}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage[edges]{forest}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -1137,43 +1138,133 @@ For detailed hyperparameter configurations, please refer to the GitHub page of t
 % % using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experiments, Results, and Analyses}
-%mention again, the experiments are run on Aoraki.
+\section{Evaluations, Results, and Analyses}
+In this exciting chapter, the report introduces the evaluation techniques and the testing datasets we have created. We then analyses the results in general, and in details. After that, we draw the conclusion of the model performance in this chapter.
 
 %Embedding or Encoder; for embedding, need to show embedding space figures 
 \subsection{Evaluation Methodology}
+\subsubsection{Embedding space}
+To evaluate whether the Verlan tokens show a difference position in the embedding space or not, we have decided to visulise the embedding space right after the tokens has been embedded (i.e., before training the encoder). After comparisons between Principal Component Analysis (PCA)\footnote{\url{https://en.wikipedia.org/wiki/Principal_component_analysis}}, t-Distributed Stochastic Neighbor Embedding (t-SNE)\footnote{\url{https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding}}, and Uniform Manifold Approximation and Projection (UMAP)\footnote{\url{https://umap-learn.readthedocs.io/en/latest/}}, we have found that UMAP generally has the best visulisation\cite{pearson1901pca,maaten2008tsne,mcinnes2018umap}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/mistral_bert_umap.png}
+    \caption{UMAP visualizations of the embedding space showing the distribution of Verlan and standard French tokens\\Class 1: Verlan tokens\\Class 0: normal tokens}
+    \label{fig:umap_comparison}
+\end{figure}
+
+Based on the result, the report is uncertain to say there is a distinguish of the positions between the Verlan tokens and other tokens in the embedding space. On the other hand, we highly agree that trditional linear classication methods, like logistic regression, should not perform well in this case, as the figure is presenting a non-linear pattern.
+
 \subsubsection{Testing Datasets}
-%justify the testing dataset here is not the testing part in the training dataset
-%mixed modern verlans, invented verlans, slangs
-% especially explain why we need to test slangs
+For testing the model performance, the report has created a couple of testing datasets. These datasets are not the sentence dataset, nor the dictionary dataset that we have created for training the models. We have created three datasets as below, inside each of them, there are pairs of sentences contain Verlan, and the same sentences that their Verlan has been normalised:
+\begin{enumerate}
+  \item Daily Verlan --- 60 entries (30 pairs) of sentence that frequently been used by French speakers.
+  \item Invented Verlan --- 50 entries (25 pairs) of sentence that the report has created to mimick tasks to indetify newly invented Verlans.
+  \item Slang --- 50 entries (25 pairs) of sentence that contains slang and their normalised pair. All the sentences are labelled as not contains Verlan.
+\end{enumerate}
+
+Interestingly, we have created the slang testing dataset, because of the reasons below:
+\begin{enumerate}
+  \item Slang can also be treated as a type of noise in text, as Verlan does.
+  \item The model might be learning to identify slang in general instead of Verlan, the report would like to justify that by creating this dataset.
+\end{enumerate}
+
+All the sentences in these datasets have not been appeared in the training dataset.
+
+Readers might argue the quantity of the testing datasets being small. The report believes that this amount is enough for testing purposes.
+
 \subsubsection{Testing Schema}
-% for zero-shot models, we only evaluated them based on the testing dataset, not the training dataset --- not necessary.
-%trained each case's model 20 times and tested 20 times with different seeds to reduce bias
+
+\paragraph{Zero-shot Models}
+For zero-shot models, in particular, GPT 5 Codex (High) and Mistral 7B, we only evaluate them based on the testing datasets instead of the training dataset. As its name, the purpose of the training dataset is for training, thus we believe it is unnecessary to conduct zero-shot experiments on them.
+
+\paragraph{Number of Trials}
+As mentioned above, the report runs each model 20 times with 20 different seeds, in order to reduce bias.
+
+\paragraph{Storing the Results}
+For easy analysation purpose, the report stores the result of each sentence in each trial, across all four training models and the zero-shot trial of Mistral 7B, in CSV format. For the results of GPT 5 Codex (High), we store them in a spreadsheet.
+
+\paragraph{Analyse Methodology}
+
+\subparagraph{Confusion Matrix}
+
+
+\subparagraph{Accuracy}
+The accuracy evaluates the proportion of correctly predicted samples out of all samples:
+
+\begin{equation}
+\mathrm{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\end{equation}
+
+where $TP$, $TN$, $FP$, and $FN$ denote True Positives, True Negatives, False Positives, and False Negatives respectively.
+
+\subparagraph{F1 Score}
+
+The F1 score is the harmonic mean of Precision and Recall, defined as:
+
+\begin{equation}
+\mathrm{F1} = 2 \times \frac{\mathrm{Precision} \times \mathrm{Recall}}{\mathrm{Precision} + \mathrm{Recall}}
+\end{equation}
+
+with Precision and Recall given by:
+
+\begin{equation}
+\mathrm{Precision} = \frac{TP}{TP + FP}, \qquad
+\mathrm{Recall} = \frac{TP}{TP + FN}
+\end{equation}
+%F1 score, etc
 
 \subsection{Results}
-\textbf{Draft note.} Tables~\ref{tab:main-test-confusion-draft} and~\ref{tab:aux-test-confusion-draft} sketch the raw confusion counts gathered from the six shortlisted systems.  The learned verlan detectors (especially the end-to-end BERT variant) reach the best overall balance on the main held-out split, whereas both zero-shot models remain brittle on slang and invented verlan.  Invented forms are the hardest slice for every model, with even the strongest system missing more than half of the positives.
 
 
-
-\begin{table}[H]
+\begin{figure}[H]
     \centering
-    \footnotesize
-    \begin{tabular}{lrrrrrr}
-        \hline
-        Model & \multicolumn{2}{c}{Existed verlan (TP/FN)} & \multicolumn{2}{c}{Invented verlan (TP/FN)} & \multicolumn{2}{c}{French slang (TN/FP)} \\
-         & TP & FN & TP & FN & TN & FP \\
-        \hline
-        Frozen+LR & 20 & 9 & 8 & 17 & 18 & 7 \\
-        E2E+LR & 19 & 10 & 6 & 19 & 16 & 9 \\
-        Frozen+BERT & 24 & 5 & 12 & 13 & 20 & 5 \\
-        E2E+BERT & 19 & 10 & 4 & 21 & 19 & 6 \\
-        Mistral-7B Zero Shot & 22 & 7 & 17 & 8 & 11 & 14 \\
-        ChatGPT 5 Thinking Zero Shot & 23 & 6 & 23 & 2 & 20 & 5 \\
-        \hline
-    \end{tabular}
-    \caption{Draft confusion-count summary on the auxiliary targeted suites: curated historical verlan pairs (29 samples), self-created verlan forms (25 samples), and contemporary slang paraphrases (25 samples).  Only verlan variants are shown for the verlan suites, so TN/FP are omitted there.  ChatGPT operates on 158 prompt responses in total across both tables.}
-    \label{tab:aux-test-confusion-draft}
-\end{table}
+    \includegraphics[width=0.85\textwidth]{figures/historical_verlan_comparison.png}
+    \caption{Historical verlan recall across the six evaluated systems.  Scores for trained detectors average over 20 random seeds; zero-shot runs use single-pass counts.}
+    \label{fig:historical-verlan-comparison}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/invented_verlan_comparison.png}
+    \caption{Invented verlan recall when models are confronted with self-created forms.  Frozen+BERT is the only trained detector that breaks 45\%, while GPT-5 Codex (High) generalises to 92\% without fine-tuning.}
+    \label{fig:invented-verlan-comparison}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/slang_controls_comparison.png}
+    \caption{Slang control accuracy (specificity).  End-to-end training tends to over-trigger on slang, whereas GPT-5 Codex (High) retains 80\% rejection accuracy without any task-specific supervision.}
+    \label{fig:slang-comparison}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/historical_vs_slang_tradeoff.png}
+    \caption{Recall--specificity trade-off across models.  Each marker reports historical verlan recall (x-axis) and slang specificity (y-axis) on the targeted suites.}
+    \label{fig:tradeoff-scatter}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/invented_recall_variance.png}
+    \caption{Invented verlan recall stability.  Bars show mean recall with standard-deviation error bars over 20 seeds; diamonds/squares denote zero-shot runs.}
+    \label{fig:invented-variance}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/invented_relative_improvement.png}
+    \caption{Zero-shot recall lift on invented verlan relative to the best trained detector (Frozen+BERT).}
+    \label{fig:invented-lift}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/slang_fp_vs_main_fp.png}
+    \caption{Link between slang false alarms and overall false positives.  Models that over-trigger on slang also accrue more false positives on the main test split.}
+    \label{fig:slang-fp-correlation}
+\end{figure}
 
 \subsection{Analyses}
 \subsubsection{Zero-Shot Mistral-7B Model}
@@ -1454,6 +1545,24 @@ Kingma, Diederik P.; Ba, Jimmy.
 ICLR 2015.
 DOI: 10.48550/arXiv.1412.6980
 
+\bibitem{pearson1901pca}
+Pearson, Karl.
+\textit{On Lines and Planes of Closest Fit to Systems of Points in Space}.
+Philosophical Magazine, 1901.
+DOI: 10.1080/14786440109462720
+
+\bibitem{maaten2008tsne}
+van der Maaten, Laurens; Hinton, Geoffrey.
+\textit{Visualizing Data using t-SNE}.
+Journal of Machine Learning Research, 2008.
+DOI: 10.48550/arXiv.1308.0719
+
+\bibitem{mcinnes2018umap}
+McInnes, Leland; Healy, John; Melville, James.
+\textit{UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction}.
+arXiv preprint, 2018.
+DOI: 10.48550/arXiv.1802.03426
+
 
 \end{thebibliography}
 %TC:endignore
@@ -1486,6 +1595,57 @@ DOI: 10.48550/arXiv.1412.6980
     \end{tabular}
     \caption{Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset.}
     \label{tab:main-test-confusion-draft}
+\end{table}
+
+\section{Expanded Evaluation Artefacts}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{lccccccccc}
+        \hline
+        Model & Test Acc & Test F1 & Test FP & Test FN & Slang Acc & Slang FP & Verlan Acc & Invented Acc \\
+        \hline
+        Frozen+LR & $80.7\%\pm0.9$ & $75.9\%\pm1.3$ & 104.5 & 60.2 & 80.6\% & 9.7 & 85.2\% & 65.2\% \\
+        Frozen+BERT & $82.2\%\pm1.8$ & $78.0\%\pm1.8$ & 101.3 & 50.5 & 81.8\% & 9.1 & 85.4\% & 70.8\% \\
+        E2E+LR & $76.7\%\pm7.1$ & $72.9\%\pm7.5$ & 144.9 & 54.1 & 62.6\% & 18.7 & 74.5\% & 54.7\% \\
+        E2E+BERT & $84.9\%\pm4.9$ & $80.5\%\pm5.1$ & 71.8 & 56.7 & 81.1\% & 9.4 & 77.0\% & 53.7\% \\
+        \hline
+    \end{tabular}
+    \caption{Hold-out test aggregates (20 seeds) for trained detectors. Percentages report mean $\pm$ standard deviation across seeds; counts are means.}
+    \label{tab:appendix-holdout-aggregates}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{lccc}
+        \hline
+        Model & Historical recall & Invented recall & Slang specificity \\
+        \hline
+        Frozen+LR & $75.0\%\pm3.3$ & $31.0\%\pm2.2$ & $73.2\%\pm2.3$ \\
+        Frozen+BERT & $75.0\%\pm6.7$ & $47.4\%\pm12.3$ & $72.4\%\pm11.5$ \\
+        E2E+LR & $79.7\%\pm6.4$ & $30.4\%\pm16.1$ & $58.8\%\pm13.0$ \\
+        E2E+BERT & $70.2\%\pm5.3$ & $14.0\%\pm9.6$ & $78.6\%\pm7.3$ \\
+        \hline
+    \end{tabular}
+    \caption{Targeted-slice comparison across 20 seeds. Historical and invented columns are verlan recalls; slang column measures rejection accuracy on contemporary slang controls.}
+    \label{tab:appendix-targeted-metrics}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{lccc}
+        \hline
+        Model & Historical recall & Invented recall & Slang specificity \\
+        \hline
+        Mistral-7B Zero Shot & 75.9\% & 68.0\% & 44.0\% \\
+        GPT-5 Codex (High) Zero Shot & 79.3\% & 92.0\% & 80.0\% \\
+        \hline
+    \end{tabular}
+    \caption{Zero-shot targeted breakdowns (single pass). Metrics computed on 29 historical verlan, 25 invented verlan, and 25 slang sentences respectively.}
+    \label{tab:appendix-zeroshot-targeted}
 \end{table}
 
 
