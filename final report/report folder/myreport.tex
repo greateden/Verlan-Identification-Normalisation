@@ -94,40 +94,53 @@
 \maketitle
 
 \begin{abstract}
-something.
+% \textbf{English.} 
+We propose a large language model-powered end-to-end pipeline for Verlan detection and normalisation.
+The project releases two additional datasets: a 1,086 Verlan--standard French lexicon and a sentence-level, balanced annotated corpus of 5,684 examples, as well as three specially constructed test sets (Daily Verlan, Invented Verlan, Slang).
+We pair the SFR-Embedding-Mistral 7B encoder with logistic and BERT-style heads in end-to-end and frozen training, testing each configuration on 20 random seeds with 4-bit quantization.
+The top-performing trained detector (E2E+BERT) achieves 84.9\% accuracy and 80.5\% F1(\(\pm 4.9\) and \(\pm 5.1\) percentage points) on an 853-sentence hold-out split, without closing the gap to the 91.8\% zero-shot baseline offered by GPT-5 Codex (High).
+Slice-by-slice comparisons show that zero-shot models continue to generalise primarily to invented Verlan, but supervised training improves considerably specificity against other slang.
+All code, unannotated data, and test scripts are released under open licences to enable further research into Verlan-aware detection and translation.
+
+% \medskip
+% \textbf{Français.} Cette étude présente une chaîne de traitement pour détecter et normaliser le verlan à l'aide de grands modèles de langage.
+% Nous constituons deux jeux de données complémentaires : un lexique de 1\,086 entrées verlan--français standard et un corpus équilibré de 5\,684 phrases annotées, complétés par trois jeux de test dédiés (Daily Verlan, Invented Verlan, Slang).
+% La pipeline d'entraînement fusionne l'encodeur SFR-Embedding-Mistral 7B avec des têtes logistiques ou de type BERT, évaluées sous quatre configurations figées ou entièrement ajustées, chacune répétée sur 20 graines avec quantification 4 bits.
+% Le meilleur détecteur entraîné (E2E+BERT) atteint 84.9~\% d'exactitude et 80.5~\% de F1 (\(\pm 4.9\)~pts et \(\pm 5.1\)~pts) sur un jeu de test de 853 phrases, dépassant les variantes linéaires tout en restant en deçà du repère zéro-shot GPT-5 Codex à 91.8~\%.
+% Les analyses fines montrent que la généralisation vers du verlan inventé demeure dominée par les modèles zéro-shot, alors que l'apprentissage améliore nettement la spécificité face à d'autres argots.
+% Nous publions le code, les jeux de données non annotés et les scripts d'évaluation sous licences ouvertes afin de soutenir des travaux futurs sur la traduction et la détection du verlan.
 \end{abstract}
-% Need abstract in French!
 %need glossary and acknowledgements
 
 \section{Introduction}
 \subsection{Context and Motivation}
 
-Since the early 19th century, the French people have started to talk using verlan. Just like Pig Latin\footnote{\url{en.wikipedia.org/wiki/Pig_Latin}} exists in English culture, verlan is an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word.\footnote{In fact, the word \textit{verlan} is a verlan from the word \textit{l'inver} (the inversion).}\cite{rajabov2025,bach2018} 
-Time flies, verlan has become more and more popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.}\cite{evolutionverlan}. Examples of verlan can be as follows:
+Since the early nineteenth century, French speakers have used verlan.\footnote{In fact, the word \textit{verlan} is itself a Verlan transformation of \textit{l'envers} (``the reverse'').} Just like Pig Latin\footnote{\url{https://en.wikipedia.org/wiki/Pig_Latin}} exists in English culture, verlan is an unusual and creative form of \textit{argot} (slang) that is formed by flipping the syllables around in a word \cite{rajabov2025,bach2018}.
+Over time, verlan has become increasingly popular, and it is now widely used amongst teens and young people in francophone societies\footnote{Such as France, Belgium, Switzerland, Luxembourg, and Canada.} \cite{evolutionverlan}. Examples of verlan include:
 
 \begin{flushleft}
 \small
 \begin{itemize}
   \item bite = bi + te \(\rightarrow\) te + bi \(\rightarrow\) tebie (penis)
-  \item shit = shi + t \(\rightarrow\) t + shi \(\rightarrow\) teuchi\cite{evolutionverlan}
+  \item shit = shi + t \(\rightarrow\) t + shi \(\rightarrow\) teuchi \cite{evolutionverlan}
   \item bonjour = bon + jour \(\rightarrow\) jour + bon \(\rightarrow\) jourbon (greetings)
 \end{itemize}
 \end{flushleft}
 
-\noindent In real-life conversations, such can be used as in the example sentences below:
+\noindent In real-life conversations, such forms appear in sentences like the following:
 
 \begin{flushleft}
 \small
 \begin{itemize}
   \item \textit{Le graff géant représente une tebie pixel art.}\\(The giant graffiti depicts a pixel art penis.)
   \item \textit{Il a du bon teuchi du bled.}\\(He's got some good shit from the countryside.)
-  \item \textit{Un p'tit\footnote{Standard spelling: petit.}jourbon et tout le monde sourit.}\\(A quick hello and everyone smiles.)
+  \item \textit{Un p'tit}\footnote{Standard spelling: petit.}\textit{ jourbon et tout le monde sourit.}\\(A quick hello and everyone smiles.)
 \end{itemize}
 \end{flushleft}
 
-Indeed, verlan can be formed with different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents (e.g., é, è) can be used from time to time\cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, verlan users tend to spell them differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting\cite{rua2005}.
+Indeed, verlan can be formed from different original languages, not only French, but also English and other languages. However, it always follows the same rule of flipping syllables, although, for better pronunciation reasons, certain minor amendments such as dropping unnecessary letters and applying accents (e.g., é, è) can be used from time to time \cite{rajabov2025}. Besides, due to the universal trait of slang being used more often phonetically instead of written, verlan users tend to spell the words differently when writing them down. As technology develops, this has been occurring more frequently than ever in daily texting \cite{rua2005}.
 
-Thinking internationally, when people are communicating with translators, it is possible that slang in their mother language can be brought to the conversation, which could be tricky for translators to translate\cite{hajiyeva2025}. Using translators such as DeepL\footnote{\url{www.deepl.com}} and Google Translate\footnote{\url{translate.google.com}} to translate sentences that contain verlan from French to English can be a specific example to prove this. Furthermore, although both of the translators above are using Machine Learning (ML) for translation, their results of translating verlans are not ideal\cite{deepl2020, wu2016}. For example, when attempting to translate the sentence above, \textit{Le graff géant représente une tebie pixel art.}, both Google Translate\ref{fig:google_verlan} and DeepL\ref{fig:deepl_verlan} cannot translate the word \textit{tebie} correctly. Specifically, for DeepL, there is no desired translation as \textit{penis} in its alternative word list for \textit{tebie}\ref{fig:deepl_alt_text}.
+Thinking internationally, when people are communicating with translators, it is possible that slang in their mother language can be brought to the conversation, which could be tricky for translators to render accurately \cite{hajiyeva2025}. Using translators such as DeepL\footnote{\url{https://www.deepl.com}} and Google Translate\footnote{\url{https://translate.google.com}} to translate sentences that contain verlan from French to English can be a specific example to prove this. Furthermore, although both of the translators above are using Machine Learning (ML) for translation, their results of translating verlan are not ideal \cite{deepl2020, wu2016}. For example, when attempting to translate the sentence above, \textit{Le graff géant représente une tebie pixel art.}, both Google Translate (Figure~\ref{fig:google_verlan}) and DeepL (Figure~\ref{fig:deepl_verlan}) cannot translate the word \textit{tebie} correctly. Specifically, for DeepL, there is no desired translation such as \textit{penis} in its alternative word list for \textit{tebie} (Figure~\ref{fig:deepl_alt_text}).
 
 \begin{figure}[H]
 \centering
@@ -190,12 +203,12 @@ The purpose of the project is to create two verlan datasets: one functioning as 
 \node [below of=analysis, node distance=1.5cm, text width=2cm, text centered] {\small Performance evaluation};
 
 \end{tikzpicture}
-\caption{\label{fig:pipeline}A visulisation of the objectives.}
+\caption{\label{fig:pipeline}A visualisation of the objectives.}
 \end{figure}
 
-With the purpose above, the report contributes to the linguistics and the AI researchers two verlan datasets, for dictionary making or LLMs training. The report also evaluates how good we can achieve the identification of verlan with ML, to benefit machine translation in the future.
+With this purpose, the report contributes two Verlan datasets to the linguistics and AI research communities: one that supports dictionary construction and another geared toward training and evaluating LLMs. The report also evaluates how effectively ML can identify Verlan, with the goal of benefiting future machine-translation systems.
 
-The code and the unannotated, un peer-reviewed dataset developed as part of the project are released under openlicences and aligns with open science best practices, with the usage of a version controlled software development platform (GitHub)\footnote{\url{github.com/greateden/verlan-Identification-Normalisation}}. The annotated, peer-reviewed dataset will be published shortly after this report, aiming by the end of 2025.
+The code and the unannotated, non-peer-reviewed dataset developed for the project are released under open licences and align with open science best practices, using a version-controlled software development platform (GitHub)\footnote{\url{https://github.com/greateden/Verlan-Identification-Normalisation}}. The annotated, peer-reviewed dataset will be published shortly after this report, by the end of 2025.
 
 \section{Background}
 \subsection{A Living Verlan}
@@ -654,7 +667,7 @@ To avoid confusing readers, the report simplifies the flowcharts to highlight on
     \draw[->, thick] (sig) -- (out);
   \end{tikzpicture}
   \end{adjustwidth}
-  \caption{\label{fig:pipeline-overview}A compact view of the four Verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + LogisticRegression Head\\Exp~B: End-to-End Encoder + Linear Head\\Exp~C: Frozen Encoder + BERT-Style Head\\Exp~D: End-to-End Encoder + BERT-Style Head (Experiment D}
+  \caption{\label{fig:pipeline-overview}A compact view of the four Verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + LogisticRegression Head\\Exp~B: End-to-End Encoder + Linear Head\\Exp~C: Frozen Encoder + BERT-Style Head\\Exp~D: End-to-End Encoder + BERT-Style Head}
 \end{figure}
 
 \paragraph{Input}
@@ -1142,6 +1155,7 @@ For detailed hyperparameter configurations, please refer to the GitHub page of t
 % % using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Evaluations, Results, and Analyses}
 
 In this chapter, the report presents the evaluation techniques and the testing datasets that were created for this study. 
@@ -1173,7 +1187,7 @@ These datasets are neither the sentence dataset nor the dictionary dataset that 
 We constructed three distinct datasets, each containing pairs of sentences: one version with Verlan and the other with the corresponding Verlan normalised into standard French.
 
 \begin{enumerate}
-  \item \textbf{Daily Verlan} --- 60 entries (30 pairs) of sentences that are frequently used by French speakers.
+\item \textbf{Daily Verlan} --- 58 entries (29 pairs) of sentences that are frequently used by French speakers.
   \item \textbf{Invented Verlan} --- 50 entries (25 pairs) of sentences that were newly created to simulate the task of identifying novel Verlan forms.
   \item \textbf{Slang} --- 50 entries (25 pairs) of sentences containing French slang and their normalised counterparts. All sentences in this dataset are labelled as not containing Verlan.
 \end{enumerate}
@@ -1219,7 +1233,7 @@ It also serves as the basis for computing both accuracy and the F1 score.
              & \cellcolor{yellow!10}\textbf{Negative (N)} & \cellcolor{red!18}\textbf{False positive (FP)} & \cellcolor{green!30}\textbf{True negative (TN)} \\
         \end{tabular}
     }
-    \caption{Binary cofusion matrix.}
+    \caption{Binary confusion matrix.}
     \label{fig:confusion-matrix-legend}
 \end{figure}
 
@@ -1246,7 +1260,7 @@ where
 \end{equation}
 
 \subsection{Results and Analyses}
-In this section, the report first presents the general result of the accuracy and the F1-score of the models. Then, the report discusses in details with some interesting findings of the performance of the models.
+In this section, the report first presents the general result of the accuracy and the F1-score of the models. Then, the report discusses in separate cases with some interesting findings of the performance of the models. All the performance tests on the training models and the Mistral 7B zero-shot model have been conducted 20 times. The reference GPT model's performance test has been conducted once.
 
 \subsubsection{General F1-Score and Accuracy}
 
@@ -1262,9 +1276,9 @@ Overall, all models produce positive detections\;---\;the accuracy across all mo
 \end{figure}
 
 For each individual model, before embedding and fine-tuning, Mistral 7B achieves an accuracy of around 69.4\%, which is already considered high from the report's perspective. 
-After training, all four experiments show an improvement of more than 10\%. 
-From left to right in Figure~14, the gains are 16.3\%, 18.5\%, 10.5\%, and 22.4\%, respectively. 
-This indicates that training generally improves model performance.
+Training boosted accuracy by approximately 11.3, 7.3, 12.8, and 15.5 percentage points for the Frozen+LR, E2E+LR, Frozen+BERT, and E2E+BERT configurations, respectively.
+The corresponding F1-score gains are around 9.9, 7.0, 12.1, and 14.6 points.
+These results demonstrate that training consistently improves model performance, even though the effect size is architecture-dependent.
 
 The models that implement BERT as the classifier achieve higher accuracy and F1 scores than those using a Logistic Regression classifier. 
 This result was anticipated, as the embedding space did not show a linear trend; hence, BERT performs better than Logistic Regression in capturing non-linear patterns.
@@ -1277,71 +1291,151 @@ Further experiments would be worthwhile to confirm this hypothesis.
 Among the four trained models, the E2E+BERT model achieves the best overall performance. 
 This demonstrates that model fusion between Mistral 7B and CamemBERT can be effective when implemented correctly, and that full fine-tuning with a non-linear classifier may be the optimal approach for Verlan identification.
 
-The reference zero-shot model, GPT-5 Codex (High), maintains the highest accuracy of 91.8\% even without additional training, which is 32.2\% higher than that of the zero-shot Mistral 7B. 
+The reference zero-shot model, GPT-5 Codex (High), maintains the highest accuracy of 91.8\% even without additional training, which is 22.4 percentage points higher than that of the zero-shot Mistral 7B. 
 The F1 score demonstrates a similar trend. 
 Although it is a proprietary model, these results allow us to observe how a top-tier model performs on this task and to appreciate the remarkable progress of the AI industry.
 
-\subsection{}
+\subsubsection{Common Verlan Performance by Model}
+
+The figure below illustrates the performance of the six models on the \textit{Daily Verlan} testing set\footnote{The legend of the figure should be \textit{common} Verlan performance.}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/historical_verlan_comparison.png}
-    \caption{Historical verlan recall across the six evaluated systems.  Scores for trained detectors average over 20 random seeds; zero-shot runs use single-pass counts.}
+    \caption{Models' performance in common Verlan identification.}
     \label{fig:historical-verlan-comparison}
 \end{figure}
+
+Interestingly, in this scenario, the results do not fully align with those presented in the previous section. 
+Although the evaluation dataset is similar to the \textit{Daily Verlan} testing set, it is not identical, and their outcomes are therefore expected to differ slightly. 
+The report argues that this discrepancy arises because the evaluation set contains 853 entries, whereas the \textit{Daily Verlan} testing set includes only 29 pairs. 
+The smaller sample size naturally increases metric variability\;---\;but this does not merely imply higher noise. 
+The testing set features shorter, high-frequency sentences, which tend to favour the frozen models. 
+Indeed, the two frozen models achieve accuracy levels comparable to the zero-shot Mistral model.
+
+For the fully fine-tuned models, we suggest that the evaluation split from the training dataset contains longer contexts, where these models recover precision. 
+In contrast, within the testing set, the precision decreases due to shorter contexts, introducing additional noise and bias. 
+Hence, although the E2E+LR model achieves a slightly higher accuracy than the zero-shot GPT-5 model, this difference is likely attributable to noise rather than genuine improvement.
+
+When comparing with the E2E+BERT model, an opposite effect may be observed. 
+The introduction of a trainable BERT classifier might have produced a contrary outcome compared to what was observed earlier. 
+We hypothesise that because both the encoder and classifier are trainable in this case, when precision is lost, it degrades more significantly. 
+Conversely, the model with a trainable encoder and a non-trainable linear head may preserve more precision, as the untrainable head provides stability. 
+Additionally, the loss function and optimisation strategy discussed in the previous chapter may have effectively smoothed out noise, allowing this configuration to outperform the two frozen-encoder models.
+
+Again, this remains an assumption derived from scientific deduction. 
+Further experiments would be valuable to validate these findings and strengthen the report's conclusions.
+
+\subsubsection{Invented Verlan Performance by Model}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/invented_verlan_comparison.png}
-    \caption{Invented verlan recall when models are confronted with self-created forms.  Frozen+BERT is the only trained detector that breaks 45\%, while GPT-5 Codex (High) generalises to 92\% without fine-tuning.}
+    \caption{Invented Verlan performance by model.}
     \label{fig:invented-verlan-comparison}
 \end{figure}
+
+An interesting phenomenon is also observed here\;---\;the two zero-shot models outperform the four trained models on invented Verlan recall by up to 78 percentage points (92\% for GPT-5 Codex (High) versus 14\% for E2E+BERT). 
+In terms of accuracy, the gap remains substantial at roughly 42 percentage points.
+On average, there is a clear performance gap between the zero-shot models and the trained ones, with the trained models performing even worse than the zero-shot Mistral model.
+
+The report would like to leave a hook here for readers to reflect on, before moving on to the next experiment.
+
+\subsubsection{Slang Controls Performance by Model}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/slang_controls_comparison.png}
-    \caption{Slang control accuracy (specificity).  End-to-end training tends to over-trigger on slang, whereas GPT-5 Codex (High) retains 80\% rejection accuracy without any task-specific supervision.}
+    \caption{Slang control accuracy.}
     \label{fig:slang-comparison}
 \end{figure}
+
+In this figure, everything seems to have flipped once again\;---\;the four trained models surpass their zero-shot counterparts by up to 34.6\% in slang specificity. 
+The report notes the low specificity (44\%) of the Mistral zero-shot model, which may indicate that the model did not fully understand the task\;---\;specifically, what Verlan is and its linguistic traits\;---\;thus performing close to random chance (50\%).
+
+After training, however, all four models appear to have resolved this issue. 
+The two models with frozen encoders produce similar results, the E2E+LR model performs slightly below them, while the one with the BERT classifier performs the best among the trained models. 
+This outcome closely resembles what we observed in the evaluation split dataset. 
+The GPT-5 zero-shot model continues to perform as the overall best model.
+
+\paragraph{A Discussion on the Hook}
+Returning to the hook, the results of these two analyses seem to suggest something intriguing\;---\;the models may have learned to distinguish sentences that \textit{do not} contain Verlan, yet they may not have fully learned to identify sentences that \textit{do}. 
+Since this is a binary classification task, model performance could appear to improve simply by recognising what is \textit{no} rather than what is \textit{yes}. 
+However, we argue that in cases where “not no” is not equivalent to “yes\;---\;for instance, in a three-way classification setting\;---\;the model's performance would likely deteriorate significantly compared to this binary task.
+
+\subsubsection{And Yet Something Advanced}
+
+The sections above discuss only what we can observe on the surface. 
+In this section, the report attempts something more advanced, aiming to explore the underlying characteristics of the models' performance in greater depth.
+
+\paragraph{Is E2E+BERT the Real King?}
+
+The figure below presents the specificity--recall distribution. 
+The closer a point lies to the top-right corner, the better the model performs.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/historical_vs_slang_tradeoff.png}
-    \caption{Recall--specificity trade-off across models.  Each marker reports historical verlan recall (x-axis) and slang specificity (y-axis) on the targeted suites.}
+    \caption{Recall--specificity trade-off across models.}
     \label{fig:tradeoff-scatter}
 \end{figure}
+
+Effectively, a model that achieves both high slang specificity and high daily Verlan recall can be considered top-tier. 
+Interestingly, according to this metric, GPT-5 Codex (High) performs the best, followed by the two models with frozen encoders. 
+This observation aligns with our earlier discussion: frozen embeddings often perform better on small datasets. 
+In contrast, the two E2E models appear to be more biased.
+
+\paragraph{Small Dataset Caused More Instability?}
+
+The figure below shows the stability of the four trained models and includes the two zero-shot models for reference. 
+The bars represent mean recall, with standard deviation error bars.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/invented_recall_variance.png}
-    \caption{Invented verlan recall stability.  Bars show mean recall with standard-deviation error bars over 20 seeds; diamonds/squares denote zero-shot runs.}
+    \caption{Invented Verlan recall stability.}
     \label{fig:invented-variance}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/invented_relative_improvement.png}
-    \caption{Zero-shot recall lift on invented verlan relative to the best trained detector (Frozen+BERT).}
-    \label{fig:invented-lift}
-\end{figure}
+Judging from the standard deviation bars, the three models that include trainable components exhibit higher variance than the fully frozen model. 
+Given that small datasets tend to yield better performance with frozen models, the report has reason to believe that making components trainable on a small dataset does lead to learning, but also introduces additional noise, resulting in higher standard deviation.
+
+\paragraph{Again: Is E2E+BERT the Real King?}
+
+The figure below depicts the link between slang false alarms and overall false positives.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{figures/slang_fp_vs_main_fp.png}
-    \caption{Link between slang false alarms and overall false positives.  Models that over-trigger on slang also accrue more false positives on the main test split.}
+    \caption{Link between slang false alarms and overall false positives.}
     \label{fig:slang-fp-correlation}
 \end{figure}
 
-
+The report has discovered that models which over-trigger on slang also tend to accumulate more false positives on the main test split. 
+Conversely, models that trigger fewer slang false positives also show fewer false positives overall\footnote{The GPT-5 model is not included, as the evaluation split dataset was not tested on it.}. 
+However, given that a $2 \times 2$ confusion matrix contains four attributes, this correlation does not necessarily imply that models closer to the bottom-left corner achieve more true positives\;---\;in other words, higher accuracy. 
+Type~I and Type~II errors may still occur here.
 
 \subsection{Conclusion and Limitation}
 
+We acknowledge that this series of experiments has several limitations, and we encourage future researchers to explore this area further. 
+In conclusion, the report finds that the proposed training dataset effectively improves the accuracy of Verlan identification. 
+In most cases, the model with a trainable encoder and a BERT-like classifier (E2E+BERT) outperforms the other trained models. 
+In certain cases, however, the frozen encoder models achieve higher accuracy in identifying Verlan sentences by selecting the correct ones. 
+The zero-shot GPT-5 Codex (High) model remains the most stable and reliable across all scenarios.
+
 \section{Discussion and Outlook}
-% for Mistral zero shot, shoulda run under different temps
 
-% Besides, identifying the same word with different spelling or declensions is also a hurdle. although we do have those fuzzy search algorithms, the report is not sure whether 
+Just as the purpose of creating Verlan was to conceal meaning behind words, Large Language Models (LLMs) tend to conceal themselves, turning into black boxes. 
+So does our brain, and perhaps our universe. 
+For now, scientific research is our only remedy\;---\;it forces us to think logically\;---\;yet we often regret: 
+regret that, for the Mistral zero-shot case, the experiments were not run under different temperatures; 
+regret that we did not find a better way to handle diverse spellings and declensions, as Russell and Levenshtein once did. 
+We even regret hiding ourselves behind pronouns like ``this report'' and ``we,'' when, in truth, we are always alone. 
 
-\newpage
+Yet we hope. 
+We hope that more people will join us---not to suffer the same regret, but to break this eternal curse by seeking to understand the unknown\;---\;just as we strive to understand how LLMs learn Out-Of-Vocabulary (OOV) words such as Verlan. 
+And so, we wait.
 %TC:ignore
 \begin{thebibliography}{9}
 
@@ -1422,12 +1516,6 @@ Anonymous.
 \textit{Slang or Not? Exploring NLP Techniques for Slang Detection Using the SlangTrack Dataset}.  
 ACL ARR (OpenReview) submission, December 2024 (ACL ARR 2024 December).  
 Available at: \url{https://openreview.net/forum?id=bISO3DD8sU}.
-
-\bibitem{wu2018slangsd}
-Wu, Tianyang; Morstatter, Fred; Liu, Huan; et al.  
-\textit{SlangSD: Building, Expanding, and Using a Sentiment Dictionary of Slang Words for Short-Text Sentiment Classification}.  
-Language Resources and Evaluation (2018).  
-DOI: 10.1007/s10579-018-9416-0.  
 
 \bibitem{dhuliawala2016slangnet}
 Dhuliawala, Shehzaad; Kanojia, Diptesh; Bhattacharyya, Pushpak.  
@@ -1624,34 +1712,11 @@ DOI: 10.48550/arXiv.1802.03426
 %TC:endignore
 
 
-% Activate the appendix
-% from now on sections are numerated with capital letters
+
 %TC:ignore
 \appendix
 
 \renewcommand{\thesection}{Appendix \Alph{section}}
-
-\section{Some extra things}
-
-
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \begin{tabular}{lrrrrrrrr}
-        \hline
-        Model & \multicolumn{4}{c}{Overall (main test)} & \multicolumn{4}{c}{Standard French subset} \\
-         & TN & FP & FN & TP & TN & FP & FN & TP \\
-        \hline
-        Frozen+LR & 434 & 99 & 49 & 271 & 393 & 40 & 2 & 0 \\
-        E2E+LR & 449 & 84 & 46 & 274 & 363 & 55 & 1 & 1 \\
-        Frozen+BERT & 449 & 84 & 43 & 277 & 399 & 35 & 1 & 1 \\
-        E2E+BERT & 468 & 65 & 35 & 285 & 387 & 42 & 0 & 3 \\
-        Mistral-7B Zero Shot & 339 & 194 & 67 & 253 & 325 & 108 & 2 & 2 \\
-        \hline
-    \end{tabular}
-    \caption{Draft confusion-count summary on the primary held-out test split (853 sentences) and its standard-French subset.}
-    \label{tab:main-test-confusion-draft}
-\end{table}
 
 \section{Expanded Evaluation Artefacts}
 
@@ -1704,40 +1769,13 @@ DOI: 10.48550/arXiv.1802.03426
     \label{tab:appendix-zeroshot-targeted}
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/invented_relative_improvement.png}
+    \caption{Zero-shot recall lift on invented verlan relative to the best trained detector (Frozen+BERT).}
+    \label{fig:invented-lift}
+\end{figure}
 
-\section{Aims and Objectives}
-
-\textbf{Interim report only!} -- you do not need to include this appendix in the final report.  However, in your interim the last appendix should include your original Aims and Objectives, and, if the things have changed, the revised Aims and Objectives. If you used the \LaTeX{} template provided for your Aims and objectives document, just copy the \verb$\paragraph{Aims}$ and \verb$\paragraph{Objectives}$ sections and paste them here.
-
-\subsection*{Original}
-
-\paragraph{Aims}
-Here you are describing the term goal of the project. What do you want to achieve by the end?  What is the ultimate goal of this work?  For example, the primary aim of this document is to have students produce suitable aims and objectives for their COSC480/490 project. While the aims and objectives document is not an assessed deliverable, a clear definition of what is to be done, and a bit of planning of how it is to be accomplished is paramount to the project's success. It is important to establish the scope of the project.
-
-\paragraph{Objectives}
-Objectives list the milestones that you need to achieve in order to achieve the projects aim(s). It's a rough plan for what needs to happen in what order. It's best to list the objectives in bullet point form. For many projects the structure to these objectives might follow the following pattern (objective names are just examples -- you can have different objective names):    
-\begin{itemize}[noitemsep]
-\item background reading; going through the literature; learning about the research field;
-\item setting up of some kind of system for the project; getting the environment for experiments working;
-\item conducting preliminary experiments; implementation of a basic/simple approach; producing base case results;
-\item trying method 1; recording the results;
-\item trying method 2; recording the results.
-\end{itemize}
-
-\subsection*{Revised}
-
-\paragraph{Aims}
-Here you are describing the term goal of the project. What do you want to achieve by the end?  What is the ultimate goal of this work?  For example, the primary aim of this document is to have students produce suitable aims and objectives for their COSC480/490 project. While the aims and objectives document is not an assessed deliverable, a clear definition of what is to be done, and a bit of planning of how it is to be accomplished is paramount to the project's success. It is important to establish the scope of the project.
-
-\paragraph{Objectives}
-Objectives list the milestones that you need to achieve in order to achieve the projects aim(s). It's a rough plan for what needs to happen in what order. It's best to list the objectives in bullet point form. For many projects the structure to these objectives might follow the following pattern (objective names are just examples -- you can have different objective names):    
-\begin{itemize}[noitemsep]
-\item background reading; going through the literature; learning about the research field;
-\item setting up of some kind of system for the project; getting the environment for experiments working;
-\item conducting preliminary experiments; implementation of a basic/simple approach; producing base case results;
-\item trying method 1; recording the results;
-\item trying method 2; recording the results.
-\end{itemize}
 
 %TC:endignore
 \end{document}
