@@ -1067,11 +1067,30 @@ Unlike Adam, AdamW does not add the L2 regularisation term directly to the loss 
 By applying these two techniques\;---\;a numerically stable loss function and a decoupled regularisation optimiser\;---\;the model is expected to achieve improved convergence stability and higher predictive accuracy.
 
 \paragraph{The Sigmoid Threshold}
-%Threshold = fixed, 0.5
 
-\subsubsection{The Usage of the Datasets}
-%how I split the dataset into train, validation and test
-%where and when to feed them into the pipeline
+All the computations above yield a probability between 0 and 1, yet this is ultimately a classification task. Therefore, a sigmoid function is applied at the output layer. While alternative calibration methods could be explored instead of using a fixed threshold, for simplicity we employ a hard threshold of 0.5 to distinguish between the two classes. Further experiments may extend this approach by investigating adaptive or learned thresholding strategies.
+
+\subsubsection{The Usage of the Dataset}
+
+We randomly split the dataset into three subsets:
+
+\begin{itemize}
+  \item Train --- 72.25\%
+  \item Validation --- 12.75\%
+  \item Test --- 15\%
+\end{itemize}
+
+The training set is used for the model to learn Verlan patterns from the data, 
+the validation set helps prevent overfitting and tune hyperparameters, 
+and the test set evaluates the model's performance on Verlan sentences that the model has not seen before.  
+The reasons for adopting this particular split are as follows:
+
+\begin{itemize}
+  \item The dataset is not large, so a relatively high proportion of Verlan sentences is required for training.
+  \item There are not many hyperparameters to tune, so a smaller portion of validation data is sufficient.
+  \item To obtain a more stable evaluation result, the test set is made slightly larger than the validation set.
+\end{itemize}
+
 
 \subsubsection{Environment and Hyperparameters}
 %all the experiments have been conducted on the Aoraki computing cluster of the University of Otago, Otakou whakaihu Waka.
@@ -1079,13 +1098,13 @@ By applying these two techniques\;---\;a numerically stable loss function and a 
 %All 4-bit quantised
 %etc
 
-\subsection{Other Models}
-\subsubsection{Justifying for LR}
-% I'm not connecting LR head directly, if so, I've tested, I got NO separation.
-\subsubsection{Calibration: Temp / Platt / Isotonic / Threshold Tuning}
-%tested these, but to simplify the pipeline, we decided to use 0.5 hard limitation instead
-\subsubsection{Gazetteer Gate}
-% using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
+% \subsection{Other Models}
+% \subsubsection{Justifying for LR}
+% % I'm not connecting LR head directly, if so, I've tested, I got NO separation.
+% \subsubsection{Calibration: Temp / Platt / Isotonic / Threshold Tuning}
+% %tested these, but to simplify the pipeline, we decided to use 0.5 hard limitation instead
+% \subsubsection{Gazetteer Gate}
+% % using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments, Results, and Analyses}
