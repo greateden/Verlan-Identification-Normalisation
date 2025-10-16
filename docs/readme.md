@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 1 days, 08 hours, 15 minutes
+⏳ Time remaining: 1 days, 04 hours, 23 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -710,8 +710,16 @@ project-root/
 │       │   ├── deepl_alt_text.png
 │       │   ├── deepl_verlan.png
 │       │   ├── google_verlan.png
+│       │   ├── historical_verlan_comparison.png
+│       │   ├── historical_vs_slang_tradeoff.png
+│       │   ├── invented_recall_variance.png
+│       │   ├── invented_relative_improvement.png
+│       │   ├── invented_verlan_comparison.png
 │       │   ├── logo.png
-│       │   └── mistral-logo.png
+│       │   ├── mistral-logo.png
+│       │   ├── mistral_bert_umap.png
+│       │   ├── slang_controls_comparison.png
+│       │   └── slang_fp_vs_main_fp.png
 │       ├── gkbib_unsrt.bst
 │       ├── myreport.aux
 │       ├── myreport.fdb_latexmk
