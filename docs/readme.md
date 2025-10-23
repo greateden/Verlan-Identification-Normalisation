@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-⏳ Time remaining: 1 days, 04 hours, 23 minutes
+✅ Deadline passed: -5 days, 22 hours, 23 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -692,7 +692,6 @@ project-root/
 │       ├── summary.csv
 │       └── summary.json
 ├── final report/
-│   ├── Accuracy_distribution_4settings.png
 │   ├── All_4settings_results.csv
 │   ├── Summary_4settings.csv
 │   ├── good example papers/
@@ -704,6 +703,7 @@ project-root/
 │   └── report folder/
 │       ├── cosc4x0style.sty
 │       ├── figures/
+│       │   ├── Accuracy_distribution_4settings.png
 │       │   ├── Artificial Analysis Intelligence Index (14 Oct '25) .png
 │       │   ├── CamemBERT.png
 │       │   ├── aoraki.png
@@ -721,6 +721,7 @@ project-root/
 │       │   ├── slang_controls_comparison.png
 │       │   └── slang_fp_vs_main_fp.png
 │       ├── gkbib_unsrt.bst
+│       ├── myreport V0.pdf
 │       ├── myreport.aux
 │       ├── myreport.fdb_latexmk
 │       ├── myreport.fls
@@ -728,7 +729,10 @@ project-root/
 │       ├── myreport.out
 │       ├── myreport.pdf
 │       ├── myreport.synctex.gz
-│       └── myreport.tex
+│       ├── myreport.tex
+│       ├── myreport.toc
+│       ├── myreport_LS.pdf
+│       └── myreport_VL.pdf
 ├── logs/
 │   ├── 01frozen_mistral+lr_20250917_141908.out
 │   ├── 02e2e_mistral+lr_2689334.out
@@ -758,6 +762,12 @@ project-root/
 │       │       └── lr_head.joblib
 │       └── latest/
 │           └── lr_head.joblib
+├── myreport.aux
+├── myreport.fdb_latexmk
+├── myreport.fls
+├── myreport.log
+├── myreport.toc
+├── myreport.xdv
 ├── scripts/
 │   ├── aoraki/
 │   │   ├── create_env.sh
@@ -773,6 +783,7 @@ project-root/
 │   │   └── train_lr.slurm
 │   ├── ci_update_docs.py
 │   ├── generate-tree.py
+│   ├── plot_report_figures.py
 │   ├── run_detect_train_lr_batch.py
 │   └── run_l8_ablation.py
 ├── split_indices.json
