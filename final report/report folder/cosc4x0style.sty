@@ -18,7 +18,10 @@
 \ProvidesPackage{cosc4x0style}[COSC480\/490 report style file]
 
 \usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+\fi
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{enumitem}
