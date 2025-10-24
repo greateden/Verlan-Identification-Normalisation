@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1761209480.70823 "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" "myreport.pdf" "myreport" 1761209486.41318 0
-  "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" 1761209470.44259 122340 63c377453d8ca66aa65972c10ea6dd9d ""
+["pdflatex"] 1761300318.97278 "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" "myreport.pdf" "myreport" 1761300327.92952 0
+  "/Users/liyitian/Documents/🧐COSC385/for github/Verlan-Identification-Normalisation/final report/report folder/myreport.tex" 1761300318.63953 129292 ed081507a8c7b27895c6c29ba6780627 ""
   "/Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1756285340.10932 12644 3aa70ec167618c60fd8a814c9f201847 ""
   "/Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1753150705.86168 14040 a884156545401fe0196fa79524d2bb7f ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -184,6 +184,8 @@
   "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/atveryend-ltx.sty" 1738182759 2378 14b657ee5031da98cf91648f19642694 ""
   "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/ifthen.sty" 1738182759 5525 9dced5929f36b19fa837947f5175b331 ""
   "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/inputenc.sty" 1738182759 5048 0270515b828149155424600fd2d58ac5 ""
+  "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/omlcmr.fd" 1738182759 2470 cbfd89aa18d2d104ec0041c9de14e544 ""
+  "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/omscmr.fd" 1738182759 2469 c75f72b1dc17277decdd842fa4a321a8 ""
   "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/size12.clo" 1738182759 8449 ffe4ba2166a344827c3a832d1d5e0a91 ""
   "/usr/local/texlive/2025basic/texmf-dist/tex/latex/caption/caption.sty" 1696191071 56128 c2ccf1a29d78c33bc553880402e4fb9a ""
   "/usr/local/texlive/2025basic/texmf-dist/tex/latex/caption/caption3.sty" 1696191071 72619 ee90b6612147680fd73c3b1406a74245 ""
@@ -270,10 +272,10 @@
   "figures/mistral_bert_umap.png" 1760585435.6561 754226 d179454da8391a92dc22869553b6a987 ""
   "figures/slang_controls_comparison.png" 1760595106.77715 179190 4661f79f6eaad734ce036688f85f4fb3 ""
   "figures/slang_fp_vs_main_fp.png" 1760595361.79599 115402 0cfb025a9e212cc1fb4700adbf1945d2 ""
-  "myreport.aux" 1761209486.29477 22086 2712bec6cbed90464d4dc39949cfa699 "pdflatex"
-  "myreport.out" 1761209486.2971 8338 c370d83a914cd687ce1ab623985dd350 "pdflatex"
-  "myreport.tex" 1761209470.44259 122340 63c377453d8ca66aa65972c10ea6dd9d ""
-  "myreport.toc" 1761209486.29737 6651 e7bb03e9a3614605acadb955297d6ce5 "pdflatex"
+  "myreport.aux" 1761300327.7168 23015 a06f114ead45345ee2f9c3614be81260 "pdflatex"
+  "myreport.out" 1761300327.72446 8772 4a48d3b9310165c749808f6f18ada73e "pdflatex"
+  "myreport.tex" 1761300318.63953 129292 ed081507a8c7b27895c6c29ba6780627 ""
+  "myreport.toc" 1761300327.72564 6779 8448700c81b83d0ecd3df1040b3fcfdc "pdflatex"
   (generated)
   "myreport.aux"
   "myreport.log"

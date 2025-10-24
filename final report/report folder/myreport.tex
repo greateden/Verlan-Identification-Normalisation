@@ -103,7 +103,7 @@
 % \textbf{English.} 
 I need to rewrite this fucking thing
 % We propose a large language model-powered end-to-end pipeline for Verlan detection and normalisation.
-% The project releases two additional datasets: a 1,086 Verlan--standard French lexicon and a sentence-level, balanced annotated corpus of 5,684 examples, as well as three specially constructed test sets (Daily Verlan, Invented Verlan, Slang).
+% The project releases a single dataset comprising a 1,086-entry Verlan--standard French lexicon and a sentence-level, balanced annotated corpus of 5,684 examples, as well as three specially constructed test sets (Daily Verlan, Invented Verlan, Slang).
 % We pair the SFR-Embedding-Mistral 7B encoder with logistic and BERT-style heads in end-to-end and frozen training, testing each configuration on 20 random seeds with 4-bit quantization.
 % The top-performing trained detector (E2E+BERT) achieves 84.9\% accuracy and 80.5\% F1(\(\pm 4.9\) and \(\pm 5.1\) percentage points) on an 853-sentence hold-out split, without closing the gap to the 91.8\% zero-shot baseline offered by GPT-5 Codex (High).
 % Slice-by-slice comparisons show that zero-shot models continue to generalise primarily to invented Verlan, but supervised training improves considerably specificity against other slang.
@@ -240,7 +240,7 @@ For verlan specifically, we are unaware of any publicly available, published com
 
 Because translators these days never seem to do verlan quite correctly, clearly there is a need for targeted research into how machine learning models can detect verlan (with normalisation reserved for future work).
 
-This document plugs that gap by developing datasets and models specifically aimed at verlan identification.
+This document plugs that gap by developing a dataset and models specifically aimed at verlan identification.
 
 \subsection{Objective}
 
@@ -251,7 +251,7 @@ To enable this evaluation, we created targeted verlan resources\;---\;a lexicon 
 \begin{enumerate}
   \item \textbf{Raw data collection} Gathering verlan terms and their standard French counterparts from online sources and existing dictionaries. This step focuses on scraping and compiling the raw linguistic material in advance of any processing.
   \item \textbf{Dictionary creation} Cleaning and standardising the collected data into a structured lookup table (GazetteerEntries) that maps verlan words to their standard French equivalents.
-  \item \textbf{Sentence dataset creation} Building a corpus of example sentences illustrating verlan usage in context.
+  \item \textbf{Sentence corpus creation} Building a table of example sentences illustrating verlan usage in context.
   \item \textbf{LLM embedding} Encoding sentences using large language models to obtain numerical representations.
   \item \textbf{Verlan classification} Training and evaluating classifiers on the embeddings to identify whether a sentence contains verlan.
   \item \textbf{Results analysis} Interpreting model performance and identifying patterns or errors.
@@ -259,7 +259,7 @@ To enable this evaluation, we created targeted verlan resources\;---\;a lexicon 
 
 These steps collectively constitute the methodology centre of this study, providing a systematic underpinning to the following experiments.
 
-The central aim of this report is to determine the degree to which machine learning models can pick up on verlan; the datasets were designed in order to be amenable to such assessment and provide a systematic test basis.
+The central aim of this report is to determine the degree to which machine learning models can pick up on verlan; the dataset was designed in order to be amenable to such assessment and provide a systematic test basis.
 
 All the code and unannotated dataset for this project are available on GitHub\footnote{\url{https://github.com/greateden/Verlan-Identification-Normalisation}}. The annotated, peer-reviewed dataset will be published shortly after this report, by the end of 2025.
 
@@ -442,158 +442,118 @@ The NAACL 2024 findings synthesise pitfalls and priorities for informal-language
 
 The above results show a straightforward avenue for verlan detection. Fine-tuned transformer encoders previously outperformed classic ML and CNN/BiLSTM at sentence-level slang detection (BERT-large-uncased: accuracy 0.87, macro-F1 0.80; slang F1 0.69) \cite{slangornot2024}; slang-aware embeddings also work on informal text but are domain-adaptive \cite{urban2020embeddings}. Building on such evidence, we employ contextualised transformer encoders as our supervised baselines and large LLMs as zero-shot reference points. We make this prediction for verlan in the following experiments. This progression, from fuzzy heuristics to contextual encoders, mirrors how language itself evolves\;---\;structured yet fluid, much like verlan.
 
-\section{Datasets}
+\section{Dataset}
 \subsection{The Separated Structures}
-As of the time of writing, there are no published verlan datasets. Thus, this report has created two datasets: one is a lookup table mapping words in verlan to their standard French forms, named \textit{GazetteerEntries} (hereafter \textit{the dictionary}); the other contains example sentences for the words appearing in the table, both in verlan and in standard French, with three entries per form, named \textit{Sentences}. The general reasons for having two datasets are:
+As of September 2025, there is no publicly available dataset built for verlan \textit{detection} purpose. Although several French slang resources include some verlan items, their verlan coverage is small compared to ours and is not sufficient to train transformer-based detectors at scale. In this project, we created a single dataset with two tables: a lookup table mapping verlan forms to their standard French equivalents (\textit{GazetteerEntries}, hereafter ``the dictionary''), and a sentence table that provides, for the same entries, example sentences in verlan and in standard French with three entries per form (\textit{Sentences}, hereafter ``the sentences''). 
 
-\begin{enumerate}
-  \item To separate rules and learning signals. The dictionary works as a lookup and a baseline for rule-matching: it provides word mappings, word variants, etc., whilst the sentences dataset is for detection and evaluation and illustrates \textit{how} verlan appears in context. If mixed together, the model will not be able to distinguish tokens as dictionary knowledge or usage.
-  \item To improve reusability. The dictionary can be used independently on any corpus for rule-based verification, while the sentences dataset can be updated separately to add more community examples without modifying the dictionary, supporting modularisation of the pipeline.
-  \item For a cleaner evaluation. The dictionary can serve as a baseline while the sentences dataset can be split for training and testing, making results easier to interpret.
-\end{enumerate}
+We keep the dictionary and the sentences in different tables. The dictionary is for rule-based lookup, whilst the sentences table is for context-level evaluation. This makes it easy to update and reuse them, and train/test splits remain clean. It also makes it easy to add normalisation labels or domain tags to either table without altering the training code.
 
-Generally speaking, the separation of the datasets can potentially make the model and the experiments clearer, explainable, and easy to extend. They could also contribute to LLM training and corpus creation in the future.
+\subsection{Visualising the Dataset}
 
-\subsection{Visualisation of the Datasets}
-
-Figure~\ref{fig:dataset-structure} presents the attributes in the datasets and highlights how they relate to each other.
-
-\begin{figure}[p]
-\centering
-\tikzset{
-  table/.style={
-    draw,
-    rounded corners=2pt,
-    thick,
-    align=left,
-    inner sep=5pt,
-    fill=white,
-    minimum width=7.8cm
-  },
-  header/.style={
-    fill=black!5,
-    text=black,
-    font=\bfseries,
-    inner xsep=8pt,
-    inner ysep=6pt,
-    rounded corners=2pt,
-    draw
-  },
-  field/.style={font=\ttfamily\small, align=left},
-  note/.style={font=\scriptsize, text=black!60},
-  legend/.style={
-    draw,
-    rounded corners=2pt,
-    align=left,
-    inner sep=5pt
-  },
-  connect/.style={-Latex, very thick, black!35}
-}
-\begin{tikzpicture}[node distance=0.8cm]
-
-\node[header, minimum width=7.8cm] (ghead) {GazetteerEntries};
-\node[table, below=0pt of ghead, anchor=north] (gtable) {%
-  \begin{tabular}{@{}l@{}}
-    {\bfseries Attributes (name: type)} \\[2pt]
-    \texttt{gazetteer\_id}: \textit{integer} \\
-    \texttt{verlan\_form}: \textit{text} \\
-    \texttt{standard\_form}: \textit{text} \\
-    \texttt{pos}: \textit{enum} (\texttt{noun}, \texttt{verb}, \texttt{adj}, \dots) \\
-    \texttt{is\_phrase}: \textit{boolean} \\
-    \texttt{tier}: \textit{enum} (\texttt{gold}|\texttt{silver}|\texttt{bronze}) \\
-    \texttt{origin\_lang}: \textit{text} \\
-    \texttt{notes}: \textit{text} \\[2pt]
-  \end{tabular}
-};
-
-\node[note, below=2pt of gtable.south] (gnote) {Lexicon \& mapping for rule-based match + normalisation.};
-
-\node[header, minimum width=9.2cm, below=0.8cm of gnote] (shead) {Sentences};
-\node[table, below=0pt of shead, anchor=north, minimum width=8.6cm] (stable) {%
-  \begin{tabular}{@{}l@{}}
-    {\bfseries Attributes (name: type)} \\[2pt]
-    \texttt{sentence\_id}: \textit{integer} \\
-    \texttt{text}: \textit{text} \\
-    \texttt{reference}: \textit{url/text} \\
-    \texttt{accessed\_on}: \textit{date} (ISO~8601) \\
-    \texttt{domain}: \textit{text} (e.g., \texttt{rap}, \texttt{sms}, \texttt{forum}, \dots) \\
-    \texttt{quality\_flag}: \textit{enum} (\texttt{gold}|\texttt{silver}|\texttt{bronze}) \\
-    \texttt{has\_verlan}: \textit{boolean} \\[2pt]
-  \end{tabular}
-};
-
-\node[note, below=2pt of stable.south] (snote) {Context corpus for detection \& evaluation.};
-
-\draw[connect] (gtable.south west) .. controls +(-0.6,-1.0) and +(-0.6,1.0) .. node[left, text=black!50, pos=.55]{\scriptsize lookup / match} (stable.north west);
-\draw[connect] (gtable.south east) .. controls +(0.6,-1.0) and +(0.6,1.0) .. node[right, text=black!50, pos=.45]{\scriptsize normalise to \texttt{standard\_form}} (stable.north east);
-
-\node[legend, below=0.8cm of snote] (legend) {%
-  \textbf{Legend}\\
-  \texttt{name}: \textit{type}\\
-  \textit{integer}=\#; \textit{text}=string; \textit{boolean}=\texttt{true|false}\\
-  \textit{enum}=fixed set of values; \textit{date}=YYYY-MM-DD
-};
-
-\begin{scope}[on background layer]
-  \node[draw=black!10, rounded corners=3pt, fit=(ghead) (gtable) (gnote) (shead) (stable) (snote) (legend), inner sep=6pt] {};
-\end{scope}
-\end{tikzpicture}
-\caption{\label{fig:dataset-structure}Overview of the GazetteerEntries lookup table and the Sentences corpus, including their key attributes.}
-\end{figure}
-
-
-\subsection{The Creations}
-
-As mentioned in Section~2.2.2, this report first checked and scraped sources that were available and had researcher-friendly copyright policies. Among those mentioned, \textit{Dictionnaire Verlan} and Wiktionary contributed the most in terms of quantity. However, as they are not curated or officially published, their quality is not guaranteed. Moreover, many entries do not provide example sentences, which makes the creation of the sentences corpus harder.
-
-\subsubsection{Sampling}
-Although there is no clear estimate of the overall quantity of verlan, after searching, scraping, and combining, this report compiled a total of 1{,}086 verlan items, though some are merely spelling variants of the same word. For example, \textit{foncédé} and \textit{foncedé}\footnote{Verlan of \textit{défoncé}, often translated as \textit{high (on drugs)} in English.} are counted separately as two entries; so are \textit{keus} and \textit{keuss}\footnote{Verlan of \textit{sec}, translated as \textit{dry} in English.}. Notably, there are around 150 entries for which the report did not find their standard form; thus they have been categorised as \textit{bronze} regarding their quality. To the best of our knowledge, the dictionary we have created contains the largest number of verlan entries among the public dictionaries we could find.
-
-After creating the dictionary, the report searched for and scraped usage examples online to create the sentences corpus. The report also used Artificial Intelligence (AI) tools\;---\;specifically, OpenAI Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}\;---\;for sentence scraping\footnote{Research has pointed out that this model gives better results in general\cite{du2025deepresearch}.}. The results for sentences with a verifiable reference have been marked as \textit{gold} quality; those without a verifiable reference have been marked as \textit{silver} quality. For items for which the report could not find example sentences, we prompted ChatGPT-o3\footnote{\url{https://en.wikipedia.org/wiki/OpenAI_o3}} to generate example sentences; these results have been marked as \textit{bronze} quality. All results have been reviewed by the author of this report and are intended to undergo annotation in the future.
-
-\subsubsection{Balancing the Training Dataset}
-
-Because the sentence dataset will be used for LLM experiments, researchers have pointed out that an imbalanced dataset may affect the performance of trained LLMs. Therefore, balancing the number of sentences containing verlan and those not containing verlan becomes important\cite{dong2024imbalance}.
-
-To find an external, existing dataset that best balances ours, this report has summarised several traits of the current dataset:
-
-\begin{enumerate}
-  \item Each entry is short, around 5 to 20 words.
-  \item Entries are relatively recent.
-  \item Some entries are clips of longer sentences.
-  \item Entries include quotes and diverse annotation marks (e.g., !, ?, ...).
-  \item Entries are mostly informal and contain non-standard spellings other than verlan.
-\end{enumerate}
-
-After consideration, this report has chosen to use the \textit{title} column of the \textit{Diverse French News} dataset published on HuggingFace\footnote{\url{https://huggingface.co/datasets/gustavecortal/diverse_french_news}}, created by scholar Gustave Cortal\footnote{\url{http://www.gustavecortal.com/}}. It matches our dataset in terms of short entry length and was published in March 2022. Some entries even include quotations from celebrities. Although this dataset does not fully meet our requirement for diverse annotation marks, this report plans to apply pre-processing before tokenisation to trim off all annotation marks. 
-
-One small concern is that the news dataset mostly contains formal language, which may potentially affect the performance. While this might be the best available choice at present, this report will discuss this limitation in detail in future chapters.
-
-\subsubsection{Quality Tiers}
-
-To provide readers with a clearer understanding of the tier/quality schema introduced in this report, we have created a table for clarity:
+We summarise the dataset content here; the column-level schema diagram is moved to Appendix~B for reference.
 
 \begin{table}[H]
 \centering
-\caption{Quality tiers of the verlan datasets.}
+\caption{Dataset at a glance (snapshot as of September 2025).}
+\begin{tabular}{p{3.6cm} p{7.2cm} p{3.6cm}}
+\hline
+\textbf{Component} & \textbf{Purpose / Fields (high level)} & \textbf{Size / Notes} \\
+\hline
+\textit{GazetteerEntries} (lexicon) & Verlan$\rightarrow$standard French mapping for rule-based lookup; includes POS, phrase flag, origin notes, and evidence tier (E1/E2/E3). & 1,086 entries; provenance tracked; E1/E2/E3 evidence levels. \\
+\textit{Sentences} (corpus) & Sentence-level examples with \texttt{has\_verlan} for detection; includes text, reference/date, domain, and quality tier. & Balanced split; current snapshot: 5,684 examples. \\
+\hline
+\end{tabular}
+\label{tab:dataset-glance}
+\end{table}
+
+
+\subsection{Data Collection and Curation}
+As discussed in the section 2.2.2, we first gathered sources under researcher-friendly licenses. We targeted the desired sources using keywords (e.g., ``verlan'', ``dictionnaire verlan'', ``lexique verlan'', ``argot'', ``parler verlan'', ``liste verlan'') and extracted entries from three types of sources, that is: 1. lexicographic articles and materials, 2. community-made dictionaries, and 3. attested user-generated content (lyrics, forums, news). The full list of sources and crawl logs are in Appendix~C. Per-entry provenance is recorded in the dataset's `reference`/`notes` fields (cf. Table~\ref{tab:verlan_tiers}).
+
+Among those mentioned, \textit{Dictionnaire Verlan} and Wiktionary contributed the most in terms of quantity. However, as they are not curated or officially published, their quality is not guaranteed. Moreover, many entries do not provide example sentences, which makes the creation of the sentence corpus harder.
+
+\subsubsection{Sampling}
+
+Because there is no widely accepted and comprehensive total count of verlan, we once again aggregated what we could find from public-facing sources. After going through searching, scraping, and deduplication, the lexicon we created has 1{,}086 total entries (including variants of orthography). About 150 of these do not have a confidently identifiable standard-French equivalent; we designate these as E3 (previously, which we referred to as ``Bronze''). In terms of overall coverage, this is larger than the public dictionaries we surveyed for, such as the ``Verlan'' section of Wiktionary, and \textit{Dictionnaire Verlan}; nevertheless, it may still not be exhaustive. The lexicon is reasonably representative of contemporary use in online settings (i.e., music, forum usage, news), but it quite likely under-represents older or regionally-specific forms.
+
+Once we had created a lexicon, we fashioned a corpus of sentences based on attested uses found online. For each of the verlan forms, we used fixed, reproducible queries: the bare form (e.g., \textit{teuchi}); the pair \textit{<verlan> + <standard>}; and French forms with site filters (e.g., \texttt{teuchi site:genius.com}, \texttt{teuchi site:forum}, \texttt{teuchi site:lemonde.fr}). The crawling window was 2--6 July 2025. We provide a complete list of the resulting URL's, along with possession dates, in Appendix~C.
+
+\textbf{Evidence criteria.} We tag provenance with three tiers, E1--E3 (see Table~\ref{tab:verlan_tiers}) and focus on E1 for training/evaluation—E2/E3 we reserve only for ablations.
+
+\textbf{How we searched.} A manual search was conducted and we also employed OpenAI Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}. On July 2, 2025, we issued the following (template) prompt:
+
+\begin{lstlisting}[breaklines=true, breakatwhitespace=false]
+Find current, attested French sentences containing the verlan form "{verlan_form}".
+
+Return only sentences featuring the precise string. For each sentence, also provide:
+- the sentence text in French,
+- the URL of the source,
+- the access date (YYYY-MM-DD), and,
+- a brief context (<=10 words).
+
+Do not return translations, explanations, or any created examples.
+\end{lstlisting}
+
+If we were unable to find an example of E1 in the previous budget, we used OpenAI o3 to construct the minimal sentence:
+
+\begin{lstlisting}[breaklines=true, breakatwhitespace=false]
+Write one short French sentence (<=12 words) that uses the verlan "{verlan_form}" naturally.
+
+Do not provide an explanation or include quotes. Provide only the sentence.
+\end{lstlisting}
+
+\textbf{Review.} The author (Yitian Li; French B2) confirmed all items for basic fluency and fit. We also consulted the feedback of one native speaker and had three native French speakers review a subset of original search entries. We will set up a larger native annotation pass.
+
+\subsubsection{Balancing the Training Dataset}
+
+As the sentence table is intended for supervised experiments, class imbalance can bias training loss and evaluation (e.g., precision/recall), and we therefore balance the counts of verlan-positive sentence entries and verlan-negative sentence entries.
+
+To locate a source to balance our external sentence table, we first described the characteristics of our sentence data:
+\begin{enumerate}
+  \item All entries are short (roughly 5--20 words); keeping sentences small reduces context effects and mimics typical text message brevity.
+  \item All entries are recent (July--September 2025).
+  \item Some entries are snippets from longer sentences that were trimmed just to the clause containing the candidate verlan (to reduce unrelated context).
+  \item Some entries include quotes and multiple forms of annotation (e.g., !, ?, \ldots).
+  \item Most entries are informal, and many include other non-standard spellings; furthermore, the label proportions were based on ``half-and-half'' (\texttt{has\_verlan} vs.\ none) by design.
+\end{enumerate}
+
+After weighing our options, we selected the \textit{title} column of the \textit{Diverse French News} dataset on HuggingFace\footnote{\url{https://huggingface.co/datasets/gustavecortal/diverse_french_news}} (Cortal, March 2022) as a length-consistent, clean-license complement for non-verlan negatives. It fits our sentence length and is easily reproducible; indeed, some titles contain quotes. For punctuation that does not suit our purpose, we preprocess before tokenising them, so as not to create an artificial cue.
+
+Why not simply use a dedicated social-media corpus? We do pull from forums or lyrics or news snippets we scraped (see above for informality), but for several of the public French social-media corpora we checked, we found access rules and redistribution rules in place. So, we use \textit{Diverse French News} just as a reproducible top-up when training the negatives—the majority of negatives are still drawn from user-generated text scraped as described above.
+
+One caveat we encountered is domain shift: news titles can be more formal and contextual than our target domain. In practice, this can lead to precision being overstated for consistently well-formed negatives, but can lead to depressed recall for inconsistently well-formed positives. To hedge against this, we capped \textit{Diverse French News} at \(<25\%\) of the negative class, and report slice results by source domain in Results.
+
+\subsubsection{Evidence Levels (Source)}
+
+Evidence levels utilized in this report:
+
+\begin{table}[H]
+\centering
+\caption{Evidence levels applied across the verlan dataset.}
 \begin{tabular}{c|l|l}
 \hline
-\textbf{Tier} & \textbf{Definition} & \textbf{Source} \\
+\textbf{Level} & \textbf{Definition} & \textbf{Source} \\
 \hline
-Gold   & Verified with public reference & Public reference (URL/citation) \\
-Silver & Plausible sentence without verifiable source & Scraped / semi-auto \\
-Bronze & LLM-generated and manually reviewed & ChatGPT-o3 \\
+E1 (Attested)   & Exact text from a public page; URL and date of access logged & Publicly available reference (URL/citation if available; archive/screenshot when possible) \\
+E2 (Unverified) & Credible web sentence with incomplete/unstable source authority & Web text with no available reference \\
+E3 (Synthetic)  & LLM-generated for competency when no E1 authorized under budget & OpenAI o3 (template prompt) \\
 \hline
 \end{tabular}
 \label{tab:verlan_tiers}
 \end{table}
 
+\noindent \textit{Terminology note.} Past drafts (and some tables/figures that leaked into the preceding report) used Gold/Silver/Bronze, which logically map to E1/E2/E3. We will delineate the terms where applicable for traceability.
 
-\subsection{Final Dataset}
 
-At the time of writing, the datasets are not yet officially finalised. Although the structure of the two datasets is as shown in Section~3.2, in the dictionary dataset this report did not invest much effort in annotating the original language of the verlan items; the \textit{note} column is also scarcely used. In the sentences corpus, the \textit{accessed\_on} and \textit{domain} columns are also scarcely annotated. 
 
-The main reason is that these columns were not used in the implementations. In fact, this report only used \textit{gazetteer\_id}, \textit{verlan\_form}, and \textit{standard\_form} in the dictionary, and \textit{sentence\_id}, \textit{text}, and \textit{has\_verlan} in the sentences corpus. To us, the remaining columns are primarily for publishing the datasets and for potential advanced experiments in the future.
+\subsection{Dataset used in this report}
+
+In all experiments reported here, we use one dataset consisting of two tables (see §3.2): \textit{GazetteerEntries} (lexicon) and \textit{Sentences} (corpus). We will freeze this schema for the purposes of this report and only use the fields necessary for the pipelines.
+
+\textbf{Fields actually used:} \textit{GazetteerEntries}: \texttt{gazetteer\_id}, \texttt{verlan\_form}, \texttt{standard\_form}. \; \textit{Sentences}: \texttt{sentence\_id}, \texttt{text}, \texttt{has\_verlan}.
+
+Other columns (e.g., \texttt{origin\_lang}, \texttt{note}, \texttt{accessed\_on}, \texttt{domain}) can be found in the public schema (Appendix~B), but they are not used in the following experiments. They will be kept to enable the dataset release and for potential follow-up analyses.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -706,7 +666,7 @@ Sentences to evaluate:
 Notably, because GPT-5 Codex (High) is a reasoning-oriented model, its responses are typically slower, and it also has monthly usage limitations\footnote{The author of this report holds a ChatGPT Plus subscription.}. Therefore, instead of sending each sentence individually with the prompt, we chose to batch all sentences together in a single request. The maximum token size was taken into account, and the total length did not exceed the model's limit of approximately 400,000 tokens.
 
 \subsection{Training Models}
-This section introduces the methodology behind the training models. It first explains the pipeline from input to output and how the datasets are split and used within it. Then, it justifies the technical details of the specific hyperparameters and training platforms. Finally, it presents other pipelines that were considered but not implemented in this experiment, along with the rationale behind those decisions.
+This section introduces the methodology behind the training models. It first explains the pipeline from input to output and how the dataset tables are split and used within it. Then, it justifies the technical details of the specific hyperparameters and training platforms. Finally, it presents other pipelines that were considered but not implemented in this experiment, along with the rationale behind those decisions.
 
 \subsubsection{The Pipelines}
 To avoid confusing readers, the report simplifies the flowcharts to highlight only the key components in this section. The complete flowcharts are provided in the appendix.
@@ -1244,7 +1204,7 @@ For detailed hyperparameter configurations, please refer to the GitHub page of t
 % \subsubsection{Calibration: Temp / Platt / Isotonic / Threshold Tuning}
 % %tested these, but to simplify the pipeline, we decided to use 0.5 hard limitation instead
 % \subsubsection{Gazetteer Gate}
-% % using the dictionary dataset for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
+% % using the dictionary table for this. Not using this in real experiment because it is too powerful and causing overfitting-like issues
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1275,7 +1235,7 @@ However, we strongly agree that traditional linear classification methods, such 
 
 \subsubsection{Testing Datasets}
 To evaluate model performance, we created several testing datasets. 
-These datasets are neither the sentence dataset nor the dictionary dataset that were used for training. 
+These test sets are separate from the training dataset's sentence table and dictionary table. 
 We constructed three distinct datasets, each containing pairs of sentences: one version with verlan and the other with the corresponding verlan normalised into standard French.
 
 \begin{enumerate}
@@ -1885,6 +1845,129 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
     \label{fig:invented-lift}
 \end{figure}
 
+
+
+
+% APPENDIX: Dataset schema figure
+
+\section{Appendix \thesection: Dataset schema (detailed)}
+
+\begin{figure}[H]
+\centering
+\tikzset{
+  table/.style={
+    draw,
+    rounded corners=2pt,
+    thick,
+    align=left,
+    inner sep=5pt,
+    fill=white,
+    minimum width=7.8cm
+  },
+  header/.style={
+    fill=black!5,
+    text=black,
+    font=\bfseries,
+    inner xsep=8pt,
+    inner ysep=6pt,
+    rounded corners=2pt,
+    draw
+  },
+  field/.style={font=\ttfamily\small, align=left},
+  note/.style={font=\scriptsize, text=black!60},
+  legend/.style={
+    draw,
+    rounded corners=2pt,
+    align=left,
+    inner sep=5pt
+  },
+  connect/.style={-Latex, very thick, black!35}
+}
+\begin{tikzpicture}[node distance=0.8cm]
+
+\node[header, minimum width=7.8cm] (ghead) {GazetteerEntries};
+\node[table, below=0pt of ghead, anchor=north] (gtable) {%
+  \begin{tabular}{@{}l@{}}
+    {\bfseries Attributes (name: type)} \\[2pt]
+    \texttt{gazetteer\_id}: \textit{integer} \\
+    \texttt{verlan\_form}: \textit{text} \\
+    \texttt{standard\_form}: \textit{text} \\
+    \texttt{pos}: \textit{enum} (\texttt{noun}, \texttt{verb}, \texttt{adj}, \dots) \\
+    \texttt{is\_phrase}: \textit{boolean} \\
+    \texttt{tier}: \textit{enum} (\texttt{gold}|\texttt{silver}|\texttt{bronze}) \\
+    \texttt{origin\_lang}: \textit{text} \\
+    \texttt{notes}: \textit{text} \\[2pt]
+  \end{tabular}
+};
+
+\node[note, below=2pt of gtable.south] (gnote) {Lexicon \& mapping for rule-based match + normalisation.};
+
+\node[header, minimum width=9.2cm, below=0.8cm of gnote] (shead) {Sentences};
+\node[table, below=0pt of shead, anchor=north, minimum width=8.6cm] (stable) {%
+  \begin{tabular}{@{}l@{}}
+    {\bfseries Attributes (name: type)} \\[2pt]
+    \texttt{sentence\_id}: \textit{integer} \\
+    \texttt{text}: \textit{text} \\
+    \texttt{reference}: \textit{url/text} \\
+    \texttt{accessed\_on}: \textit{date} (ISO~8601) \\
+    \texttt{domain}: \textit{text} (e.g., \texttt{rap}, \texttt{sms}, \texttt{forum}, \dots) \\
+    \texttt{quality\_flag}: \textit{enum} (\texttt{gold}|\texttt{silver}|\texttt{bronze}) \\
+    \texttt{has\_verlan}: \textit{boolean} \\[2pt]
+  \end{tabular}
+};
+
+\node[note, below=2pt of stable.south] (snote) {Context corpus for detection \& evaluation.};
+
+\draw[connect] (gtable.south west) .. controls +(-0.6,-1.0) and +(-0.6,1.0) .. node[left, text=black!50, pos=.55]{\scriptsize lookup / match} (stable.north west);
+\draw[connect] (gtable.south east) .. controls +(0.6,-1.0) and +(0.6,1.0) .. node[right, text=black!50, pos=.45]{\scriptsize normalise to \texttt{standard\_form}} (stable.north east);
+
+\node[legend, below=0.8cm of snote] (legend) {%
+  \textbf{Legend}\\
+  \texttt{name}: \textit{type}\\
+  \textit{integer}=\#; \textit{text}=string; \textit{boolean}=\texttt{true|false}\\
+  \textit{enum}=fixed set of values; \textit{date}=YYYY-MM-DD
+};
+
+\begin{scope}[on background layer]
+  \node[draw=black!10, rounded corners=3pt, fit=(ghead) (gtable) (gnote) (shead) (stable) (snote) (legend), inner sep=6pt] {};
+\end{scope}
+\end{tikzpicture}
+\caption{Detailed field-level schema for the dataset (columns, types, and relations between the lexicon and the sentence corpus).}
+\label{fig:dataset-schema-detailed}
+\end{figure}
+
+\clearpage
+\section*{Appendix \thesection: Source inventory and crawl logs}
+
+\noindent \textbf{GazetteerEntries (lexicon).} The current extract of \texttt{GazetteerEntries.xlsx} contains 1{,}086 rows (1{,}041 \texttt{gold}, 45 \texttt{bronze}). Entries were normalised from community verlan dictionaries, primarily Dictionnaire de la Zone, Wiktionary/Wiktionnaire, and the Zlang Fandom list. Per-entry URL provenance is still being backfilled; the shipped spreadsheet therefore exposes only the structural fields listed in Section~3.2, while the crawl log in this appendix documents the seed sources.
+
+\noindent \textbf{Sentence corpus.} The \texttt{Sentences\_balanced.xlsx} file records source evidence in the \texttt{reference} field for 5{,}339 of 5{,}684 rows. Two crawl sessions (2~Jul and 6~Jul~2025) are captured in \texttt{accessed\_on}. Table~\ref{tab:source-inventory} summarises the concrete sources that appear in the dataset.
+
+\begin{table}[H]
+\centering
+\caption{Source buckets referenced in \texttt{Sentences\_balanced.xlsx}. Counts come from the current spreadsheet (URLs and textual citations combined).}
+\begin{tabular}{p{4.4cm} p{2.8cm} p{5.8cm} p{1.8cm}}
+\hline
+\textbf{Source / bucket} & \textbf{Type / licence note} & \textbf{Evidence in dataset} & \textbf{Access window} \\
+\hline
+Dictionnaire de la Zone (\texttt{dictionnairedelazone.fr}) & Community dictionary (site terms reviewed) & 209 references (\(62\) full URLs, \(147\) bare domain notes) supporting lexicon entries and example sentences. & 2~Jul, 6~Jul \\
+Wiktionary / Wiktionnaire & Lexicographic (CC BY-SA) & 28 cites: 22 page URLs plus 6 labelled quotations stored as textual references. & 2~Jul \\
+LangueFrancaise.net & Forum/dictionary hybrid (site terms) & 12 URL citations used for sense confirmation and usage notes. & 2~Jul \\
+Linternaute lexique & Lexicographic portal (open access) & 7 URL citations cross-checking definitions and variants. & 2~Jul \\
+Zlang Fandom Verlan dictionary & Community-compiled (Fandom licence) & 5 URL citations for additional orthographic variants. & 2~Jul \\
+Reverso Context & Sentence aggregator (proprietary; citation use) & 6 URL citations providing attested usage examples. & 2~Jul \\
+User forums (Reddit, Jeuxvideo.com, HiNative) & User-generated text (public posts) & 17 references (8 Reddit, 5 Jeuxvideo.com, 4 HiNative) grounding informal usage. & 2~Jul \\
+Social media posts (Twitter/X, TikTok, YouTube) & User-generated text (platform ToS) & 9 references (5 Tweets, 3 TikTok clips, 1 YouTube video) backing contemporary usage. & 2~Jul \\
+Lyrics databases & Attested media (quotation for research) & 4 URL citations (Paroles.net and related sites) documenting song-based evidence. & 2~Jul \\
+Manual citations (songs, news articles, broadcast transcripts) & Offline / transcribed sources (fair dealing) & 5{,}042 textual references recorded directly in the spreadsheet for items without stable URLs (e.g.\ TF1 Info, Disiz la Peste 2000, Pub M6 Mobile 2011). & 2~Jul \\
+\hline
+\end{tabular}
+\label{tab:source-inventory}
+\end{table}
+
+\noindent \textbf{Search procedure.} We issued French/English queries (e.g., “verlan”, “dictionnaire verlan”, “lexique verlan”, “argot”, “parler verlan”, “liste verlan”) and followed category/namespace pages to expand coverage. Crawl scripts respected robots.txt and rate limits; raw pulls were deduplicated and normalised before manual review.
+
+\noindent \textbf{Credibility policy.} Entries attested by (a) two independent sources or (b) one dated public reference were treated as candidates; otherwise they were downgraded or excluded. Provenance is recorded per sentence via the \texttt{reference} column; lexicon entries inherit the bucket-level sources above and will expose per-entry URLs in the next release. Tiering follows Table~\ref{tab:verlan_tiers}; in the current snapshot the \texttt{gold} and \texttt{bronze} labels are populated.
 
 %TC:endignore
 \end{document}
