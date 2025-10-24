@@ -37,6 +37,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{etoolbox}
 \usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds,arrows.meta,calc,decorations.pathreplacing,external}
 \ifdefined\pdfshellescape
   \ifnum\pdfshellescape=1
@@ -79,7 +80,7 @@
 \papercode{385}
 
 % Your project title
-\title{The Art of Reversed French\\\large Large Language Models Powered Verlan Identification}
+\title{The Art of Reversed French\\\large Large Language Model-Powered Verlan Identification}
 
 % Your name
 \author{Yitian \textsc{Li}}
@@ -94,28 +95,20 @@
 % Date, change the \today to a set date if you want to be precise
 \reportdate{\today}
 
+\pretocmd{\section}{\clearpage}{}{} % force each section to start on a new page
+\makeatletter
+\@ifundefined{chapter}{}{
+  \pretocmd{\chapter}{\clearpage}{}{} % force each chapter (if defined) onto a new page
+}
+\makeatother
+
 \begin{document}
 
 
 \maketitle
 
 \begin{abstract}
-% \textbf{English.} 
-I need to rewrite this fucking thing
-% We propose a large language model-powered end-to-end pipeline for Verlan detection and normalisation.
-% The project releases a single dataset comprising a 1,086-entry Verlan--standard French lexicon and a sentence-level, balanced annotated corpus of 5,684 examples, as well as three specially constructed test sets (Daily Verlan, Invented Verlan, Slang).
-% We pair the SFR-Embedding-Mistral 7B encoder with logistic and BERT-style heads in end-to-end and frozen training, testing each configuration on 20 random seeds with 4-bit quantization.
-% The top-performing trained detector (E2E+BERT) achieves 84.9\% accuracy and 80.5\% F1(\(\pm 4.9\) and \(\pm 5.1\) percentage points) on an 853-sentence hold-out split, without closing the gap to the 91.8\% zero-shot baseline offered by GPT-5 Codex (High).
-% Slice-by-slice comparisons show that zero-shot models continue to generalise primarily to invented Verlan, but supervised training improves considerably specificity against other slang.
-% All code, unannotated data, and test scripts are released under open licences to enable further research into Verlan-aware detection and translation.
-
-% \medskip
-% \textbf{Français.} Cette étude présente une chaîne de traitement pour détecter et normaliser le verlan à l'aide de grands modèles de langage.
-% Nous constituons deux jeux de données complémentaires : un lexique de 1\,086 entrées verlan--français standard et un corpus équilibré de 5\,684 phrases annotées, complétés par trois jeux de test dédiés (Daily Verlan, Invented Verlan, Slang).
-% La pipeline d'entraînement fusionne l'encodeur SFR-Embedding-Mistral 7B avec des têtes logistiques ou de type BERT, évaluées sous quatre configurations figées ou entièrement ajustées, chacune répétée sur 20 graines avec quantification 4 bits.
-% Le meilleur détecteur entraîné (E2E+BERT) atteint 84.9~\% d'exactitude et 80.5~\% de F1 (\(\pm 4.9\)~pts et \(\pm 5.1\)~pts) sur un jeu de test de 853 phrases, dépassant les variantes linéaires tout en restant en deçà du repère zéro-shot GPT-5 Codex à 91.8~\%.
-% Les analyses fines montrent que la généralisation vers du verlan inventé demeure dominée par les modèles zéro-shot, alors que l'apprentissage améliore nettement la spécificité face à d'autres argots.
-% Nous publions le code, les jeux de données non annotés et les scripts d'évaluation sous licences ouvertes afin de soutenir des travaux futurs sur la traduction et la détection du verlan.
+We take on the challenge of the automated identification of verlan, a French back-slang, which, if left unidentified, is disruptive to moderation, retrieval, and sociolinguistic analysis. Prior work in the area still relies on ``check the dictionary'' approaches or generalised slang detectors, which do not make very strong claims about verlan-specific coverage and typically say little about evaluation validity. Building on these contributions, we utilise a French-tuned Mistral embedding encoder with fast logistic and BERT-like classifiers, as well as constructing companion lexicons and sentence resources to enable supervised training. Our best supervised system scores in the mid-80s for accuracy and F1 on held-out verlan identification tasks, while zero-shot GPT-5 Codex is still better on invented forms, indicating that there is still a gap. Overall, the pipeline, datasets and comparative analysis provide a reproducible baseline for future work on the computational treatment of verlan and other back-slang.
 \end{abstract}
 
 \clearpage
@@ -125,6 +118,29 @@ I need to rewrite this fucking thing
 \section*{Glossary of Abbreviations}
 \addcontentsline{toc}{section}{Glossary of Abbreviations}
 
+\begin{description}
+  \item[API] Application Programming Interface.
+  \item[BCE] Binary Cross-Entropy.
+  \item[BF16] Brain Floating Point 16-bit numerical format.
+  \item[BLEU] Bilingual Evaluation Understudy (machine translation metric).
+  \item[CLS] Classification token used in BERT-style architectures.
+  \item[CSV] Comma-Separated Values.
+  \item[E2E] End-to-End.
+  \item[GPU] Graphics Processing Unit.
+  \item[LLM] Large Language Model.
+  \item[LR] Logistic Regression.
+  \item[ML] Machine Learning.
+  \item[MT] Machine Translation.
+  \item[NF4] NormalFloat 4-bit quantisation format.
+  \item[NLP] Natural Language Processing.
+  \item[NMT] Neural Machine Translation.
+  \item[OOV] Out-of-Vocabulary.
+  \item[PCA] Principal Component Analysis.
+  \item[t-SNE] t-distributed Stochastic Neighbour Embedding.
+  \item[UD] Urban Dictionary.
+  \item[UMAP] Uniform Manifold Approximation and Projection.
+  \item[WER] Word Error Rate.
+\end{description}
 
 
 \clearpage
@@ -362,7 +378,7 @@ for tree={
 \end{forest}
 \end{figure}
 
-Notably, this stylised example swaps only the syllable labels (i.e., between $S_1$ and $S_2$). In attested verlan, the swap is frequently accompanied by resyllabification, vowel adjustments, or segment loss (such as dropping a final \textit{e}), so the internal structure of the syllables can change as well \cite{mela1991verlan}. The example above should therefore be seen as an illustration rather than an exhaustive explanation of forming a verlan. For further details, readers are advised to consult Méla's paper\cite{mela1991verlan}.
+Notably, this stylised example swaps only the syllable labels (i.e., between $S_1$ and $S_2$). In attested verlan, the swap is frequently accompanied by resyllabification, vowel adjustments, or segment loss (such as dropping a final \textit{e}), so the internal structure of the syllables can change as well \cite{mela1991verlan}. The example above should therefore be seen as an illustration rather than an exhaustive explanation of forming a verlan. For further details, readers are advised to consult Méla's paper \cite{mela1991verlan}.
 
 Because verlan combines syllable-level permutation with these structural adjustments, it is difficult even for human readers \cite{mela1991verlan}; therefore, it is sure to present challenges to current machine learning models. 
 In this report, we use verlan as a case study for how non-standard subword permutations challenge both linguistic intuition and computational understanding. Like a mirror folded within itself, verlan reflects the creative tension between order and chaos\;---\;an echo of how language reinvents its own boundaries.
@@ -371,7 +387,7 @@ In this report, we use verlan as a case study for how non-standard subword permu
 
 There is published work on verlan, but not much is specifically focused on detection. As of September 2025, we are not aware of published computational research specifically devoted to verlan detection. Available papers discuss verlan as part of larger slang datasets or corpora and do not focus on the detection task \cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}.
 
-Fortunately, there are several papers related to computational slang detection, and their approaches could contribute to verlan detection to a large extent\cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}. These studies address slang detection in general (not verlan specifically) and span multiple Indo-European languages (e.g., English, German, Russian).
+Fortunately, there are several papers related to computational slang detection, and their approaches could contribute to verlan detection to a large extent \cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}. These studies address slang detection in general (not verlan specifically) and span multiple Indo-European languages (e.g., English, German, Russian).
 
 Therefore, regarding the history of verlan detection, this report first generalises the task as slang detection, and then discusses possible methods that could be implemented for verlan identification, in order to provide readers with a general and useful background.
 
@@ -408,7 +424,7 @@ Afterwards, scholars introduced additional algorithms and surveys: Philips's Met
 
 The easiest way we can think of dealing with slang is to use a dictionary\;---\;just like how we look up a word that we do not know. The pros and cons are highly similar to consulting a dictionary. It is fast (if using a digital one) and accurate. On the other hand, because it is purely fixed data, it only works with existing words and thus cannot identify newly invented ones.
 
-Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY\cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur}\cite{dictionnaire2024chilleur}. Specifically for verlan, the report identifies several online dictionaries, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
+Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY \cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur} \cite{dictionnaire2024chilleur}. Specifically for verlan, we identify several online dictionaries, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
 
 With these dictionaries on hand, the reuse of a lookup-type verlan identifier is feasible. However, two factors prevent direct reuse: breakdowns in coverage and erratic entries, and the fact that most resources are community-composed, not formally edited\;---\;so accuracy, updating policies, and quality control vary. In addition, licensing on some sources may restrict redistribution. Our own dictionary, too, is researcher-compiled; to minimise risk of quality, we keep track of provenance and employ the gold/silver/bronze levels of quality (Table~\ref{tab:verlan_tiers}), and we use it primarily as a seed dictionary and rule-based baseline.
 
@@ -575,23 +591,25 @@ Other columns (e.g., \texttt{origin\_lang}, \texttt{note}, \texttt{accessed\_on}
   \end{minipage}\\[3pt]
   {\captionsetup{font=scriptsize,skip=0pt}\caption*{CamemBERT and Mistral AI Logos}}
 \end{wrapfigure}
-The report has chosen Mistral 7B\footnote{\url{https://mistral.ai/news/announcing-mistral-7b}} developed by Mistral AI as the base model for the experimental design\cite{jiang2023mistral7b}. There are several reasons for this choice:
+
+We chose \textbf{Mistral 7B}\footnote{\url{https://mistral.ai/news/announcing-mistral-7b}} (Mistral AI) as the base model for the experiments in this chapter \cite{jiang2023mistral7b}. In brief, we required a recent, open model that can be run end-to-end as an embedder on Aoraki without vendor APIs, so we selected Mistral 7B. (For our purposes, we treat a decoder-only transformer as a sentence encoder by mean-pooling the last-layer states.)
+
+There are three pragmatic reasons for this choice:
 \begin{enumerate}
-\item Mistral AI is a French company\footnote{\url{https://mistral.ai/about}}. The report argues that its training dataset is highly likely to contain more French slang contexts; therefore, its models may achieve better performance in French\;---\;especially in identifying verlan.
-
-\item Mistral 7B is both powerful and relatively new. Verlan is a linguistic phenomenon that has been used daily online since the rise of social media. To identify verlan, we need up-to-date training datasets and models to keep pace with contemporary language use. While CamemBERT was also considered, it was released in 2019, whereas Mistral 7B was announced in September 2023\textsuperscript{, see Footnote 26}\cite{martin2019camembert}. Mistral 7B outperforms LLaMA 1 33B\footnote{Although the original paper mentioned 34B, this report believes it was a typographical mistake. The evidence is that they referenced Meta's original paper, which did not include a 34B model.} and LLaMA 2 13B, two LLMs with larger parameter sizes\cite{touvron2023llama,touvron2023llama2}. 
-
-\item Scholars may argue that the Mistral 8B model in les Ministraux\footnote{Literal meaning in English: the Ministrals.} family would be a better choice, as it is the direct successor of the Mistral 7B model. However, the main reason we cannot use the newer model is that it is primarily designed for text generation rather than embedding. In fact, Mistral 8B does not support embeddings, unlike Mistral 7B\;---\;Salesforce AI\footnote{\url{https://www.salesforce.com}} has published an embedding version\footnote{\url{https://huggingface.co/Salesforce/SFR-Embedding-Mistral}} based on Mistral 7B. 
-
-\item Furthermore, to preserve full control and reproducibility, the report does not intend to use Application Programming Interface (API) calls, even though the Mistral Embed\footnote{\url{https://docs.mistral.ai/getting-started/models/models_overview/}} model is available via API. We also do not intend to use proprietary models (e.g., ChatGPT, Grok\footnote{\url{https://grok.com/}}) as our main research models, for the same reasons stated above.
+\item \textbf{Pragmatic fit (run it ourselves).} Mistral 7B is small enough to run locally (L40, 4-bit quantisation) yet modern enough to serve as a strong baseline. It avoids API or proprietary dependencies, and its behaviour can be reproduced locally without relying on vendor APIs or opaque provenance code\;---\;an important property for reproducibility.
+\item \textbf{Available embeddings (and compatibility).} Our experiments use embeddings rather than generation. There is a maintained open embedding variant of Mistral 7B—\emph{SFR-Embedding-Mistral}\footnote{\url{https://huggingface.co/Salesforce/SFR-Embedding-Mistral}}\;---\;which integrates cleanly with our pipeline. By contrast, to our knowledge the newer Mistral 8B line is focused on generation and does not ship a maintainably open embedding module suitable for this use.
+\item \textbf{Competitive reference.} The Mistral 7B paper reports performance competitive with or exceeding larger baselines (e.g., LLaMA-1 33B and LLaMA-2 13B) on several public benchmarks while being much smaller \cite{jiang2023mistral7b,touvron2023llama,touvron2023llama2}. Thus, we consider it an effective lightweight encoder for verlan detection.
 \end{enumerate}
+
+CamemBERT \cite{martin2019camembert} remains an important French encoder reference and is used for comparison elsewhere in this chapter.
+
 
 \subsection{Zero-Shot Models}
 \subsubsection{Mistral 7B Prompt Engineering with Vibe}
 
-Because we are experimenting with the performance of Mistral 7B (hereafter referred to as \textit{Mistral}), designing a zero-shot test becomes important\;---\;foremostly, to determine whether Mistral has already learned how to identify verlan, and to what extent it can identify it correctly. Additionally, we can compare the performance of the zero-shot model with that of the trained models, to see to what extent our dataset augments the performance.
+\textbf{What we mean by zero-shot.} In this report that follows, ``zero-shot'' has a particular meaning: we take a ``ready to go'' off-the-shelf model (i.e. not pretrained/fine-tuned on our dataset) and simply evaluate the model through a prompt (i.e. it won't be further updated through task-specific gradient updates; we will leave the weights fixed). We aim to observe these zero-shot predictions compared against the supervised baselines we trained from our sentence table. In our case, we have a straightforward zero-shot evaluation of Mistral 7B (which we will refer to as \textit{Mistral}): Is the off-the-shelf model good enough already to identify Verlan, and to what degree? To provide additional context for our evaluation, we will also present their zero-shot scores in comparison to our supervised baselines, indicating the impact of the dataset. 
 
-To achieve this, the report has designed the following simplified pipeline using prompt engineering:
+To achieve this, we established a simplification of our pipeline through prompt engineering to achieve the following:
 
 \begin{figure}[H]
     \centering
@@ -636,18 +654,19 @@ Does this sentence contain verlan? Reply with one digit (0 or 1).
 
 For each prompt, we start a new chat session to avoid the influence of the LLM's memorisation\;---\;reusing previous results may interfere with later performance.
 
-A potential issue is that, from time to time, LLMs do not follow the system prompt and produce unexpected responses. The report has accounted for this\;---\;we use regular expressions to extract the numerical values mentioned in the response (i.e., 0 or 1) and store them in a separate column in the CSV file for easier post-processing. We also review the extracted labels manually to prevent inconsistencies or noise.
+A potential issue is that, from time to time, LLMs do not follow the system prompt and produce unexpected responses. We handle this\;---\;we use regular expressions to extract the numerical values mentioned in the response (i.e., 0 or 1) and store them in a separate column in the CSV file for easier post-processing. We also review the extracted labels manually to prevent inconsistencies or noise.
 
-By doing so, the report believes that the accuracy and reliability of this pipeline are solid.
+This keeps the zero-shot pipeline simple and reliable.
 
-\subsubsection{Zero-shot of the Most Powerful non deep reasoning LLM as reference}
+%
+\subsubsection{Zero-shot reference model}
 
-Considering that both the zero-shot and training experiments above are based on Mistral, the report aims to evaluate performance beyond the Mistral AI ecosystem. After reviewing the \textit{Artificial Analysis Intelligence Index}\footnote{\url{https://artificialanalysis.ai/models/gpt-5-codex\#artificial-analysis-intelligence-index}}, as shown in Figure~\ref{fig:AI_Index}, the report has chosen OpenAI's GPT-5 Codex (High)\footnote{\url{https://openai.com/index/introducing-upgrades-to-codex/}} model as the zero-shot reference. As the top-ranked model, it serves as a strong representative of the current state-of-the-art capabilities in verlan identification.
+To provide a strong off-the-shelf reference beyond Mistral, we evaluate \textit{GPT-5 Codex (High)} in a zero-shot setting. We chose it because it is top-ranked on the Artificial Analysis Intelligence Index at our retrieval time (14 Oct 2025; Fig.~\ref{fig:AI_Index}), and it supports batching for our prompt format. The leaderboard is used only for context; all conclusions come from our own test sets.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=15cm]{figures/Artificial Analysis Intelligence Index (14 Oct '25) .png}
-\caption{\label{fig:AI_Index}Leaderboard of the Artificial Analysis Intelligence Index (retrieved on 14 October 2025).}
+\includegraphics[width=\textwidth]{figures/Artificial Analysis Intelligence Index (14 Oct '25) .png}
+\caption{\label{fig:AI_Index}Artificial Analysis Intelligence Index (retrieved 14 Oct 2025). Our zero-shot reference, \textit{GPT-5 Codex (High)}, is the model we evaluate.}
 \end{figure}
 
 Following the principle of controlled experimental design, we used a prompt closely aligned with the one employed for Mistral:
@@ -669,7 +688,7 @@ Notably, because GPT-5 Codex (High) is a reasoning-oriented model, its responses
 This section introduces the methodology behind the training models. It first explains the pipeline from input to output and how the dataset tables are split and used within it. Then, it justifies the technical details of the specific hyperparameters and training platforms. Finally, it presents other pipelines that were considered but not implemented in this experiment, along with the rationale behind those decisions.
 
 \subsubsection{The Pipelines}
-To avoid confusing readers, the report simplifies the flowcharts to highlight only the key components in this section. The complete flowcharts are provided in the appendix.
+Here is a high-level flowchart that highlights only the key components. The complete flowcharts are provided in the appendix.
 
 \begin{figure}[H]
   \begin{adjustwidth}{-2.0cm}{0cm}
@@ -684,7 +703,7 @@ To avoid confusing readers, the report simplifies the flowcharts to highlight on
     font=\normalsize
   ]
     \node[stage] (input) {Input text};
-    \node[stage, below=of input] (norm) {Normalise text};
+    \node[stage, below=of input] (norm) {Sanitise text};
     \node[stage, below=of norm] (tok) {SFR-Embedding-Mistral tokenizer};
 
     \node[stage, below left=0.6cm and -2.5cm of tok] (encF) {Frozen encoder\\(Exp~A \& C)};
@@ -693,10 +712,10 @@ To avoid confusing readers, the report simplifies the flowcharts to highlight on
     \node[stage, below=2.5cm of tok] (mean) {Mean pooling};
     \node[stage, below=of mean] (l2) {L2 normalise};
 
-    \node[head, below left=0.9cm and 3.65cm of l2] (lr) {LogisticRegression\\(Exp~A)};
-    \node[head, below left=0.9cm and -1.3cm of l2] (lin) {Linear head\\(Exp~B; encoder trainable)};
-    \node[head, below right=0.9cm and -1.3 cm of l2] (bertF) {BERT-style head\\(Exp~C; encoder frozen)};
-    \node[head, below right=0.9cm and 3.15cm of l2] (bertT) {BERT-style head\\(Exp~D; encoder trainable)};
+    \node[head, below left=0.9cm and 3.65cm of l2] (lr) {Logistic Regression\\classifier (Exp~A)};
+    \node[head, below left=0.9cm and -1.3cm of l2] (lin) {Linear classifier\\(Exp~B; encoder trainable)};
+    \node[head, below right=0.9cm and -1.3 cm of l2] (bertF) {BERT-inspired classifier\\(Exp~C; encoder frozen)};
+    \node[head, below right=0.9cm and 3.15cm of l2] (bertT) {BERT-inspired classifier\\(Exp~D; encoder trainable)};
 
     \node[stage, below=3cm of l2] (sig) {Sigmoid threshold 0.5};
     \node[stage, below=of sig] (out) {Output label};
@@ -719,197 +738,92 @@ To avoid confusing readers, the report simplifies the flowcharts to highlight on
     \draw[->, thick] (sig) -- (out);
   \end{tikzpicture}
   \end{adjustwidth}
-  \caption{\label{fig:pipeline-overview}A compact view of the four verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + LogisticRegression Head\\Exp~B: End-to-End Encoder + Linear Head\\Exp~C: Frozen Encoder + BERT-Style Head\\Exp~D: End-to-End Encoder + BERT-Style Head}
+  \caption{\label{fig:pipeline-overview}A compact view of the four verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + Logistic Regression classifier\\Exp~B: End-to-End Encoder + Linear classifier\\Exp~C: Frozen Encoder + BERT-inspired classifier\\Exp~D: End-to-End Encoder + BERT-inspired classifier}
 \end{figure}
+
+\noindent Before any classifier is applied in all variants (see Fig.~\ref{fig:pipeline-overview}), mean pooling and \(\ell_{2}\) normalization are performed on the pooled sentence representation. ``\textbf{Logistic Regression classifier}'' denotes a scikit-learn logistic regression trained on frozen encoder outputs (no gradients are backpropagated to the encoder). The ``\textbf{Linear classifier}'' refers to the same model (a single linear logit) implemented in PyTorch and trained end-to-end with \texttt{BCEWithLogitsLoss}. The ``\textbf{BERT-inspired classifier}'' is a small non-linear module derived from the standard CLS classifier that ships with BERT; its architecture is
+\[
+\text{Dropout} \;\to\; \text{Linear}(4096\!\to\!4096) \;\to\; \tanh \;\to\; \text{Dropout} \;\to\; \text{Linear}(4096\!\to\!1).
+\]
+The ``\texttt{Sigmoid 0.5}'' box is schematic: when using \texttt{BCEWithLogitsLoss}, a 0.5 decision boundary is implied at inference. We discuss frozen vs.\ trainable encoder settings later in this section; they are shown together here for compactness.
+
 
 \paragraph{Input}
 The input is the \textit{Sentences} dataset we created. For editing and data management purposes, it is stored as an \texttt{.xlsx} table. It should be noted that the dataset was not converted into a special format before being fed into the pipeline. Therefore, the labels indicating whether a sentence contains a verlan term remain in the input file when read by the program. However, we are confident that the sentence column was properly isolated, and that no visible data leakage occurred in the program code or during runtime.
 
-\paragraph{Normalise Text}
+\paragraph{Sanitise Text}
 \subparagraph{Why Not Preserve Upper Cases and Annotation Marks}
-As mentioned in Section~3.3.2, we have concerns that the diversity of annotation marks may affect the models' performance. Digging deeper, this is a good argument that even involves thinking about the role of verlan in a sentence from the LLM's perspective\;---\;a verlan might be an Out-Of-Vocabulary (OOV) word, or in other words, it might be treated as noise, like typographical mistakes. Indeed, scholars have pointed out that not only typographical mistakes but also annotation marks and the difference between upper and lower cases can all affect model performance\cite{alsharou2021noise}. 
+As mentioned in Section~3.3.2, we have concerns that the diversity of annotation marks may affect the models' performance. Digging deeper, this is a good argument that even involves thinking about the role of verlan in a sentence from the LLM's perspective\;---\;a verlan might be an Out-Of-Vocabulary (OOV) word, or in other words, it might be treated as noise, like typographical mistakes. Indeed, scholars have pointed out that not only typographical mistakes but also annotation marks and the difference between upper and lower cases can all affect model performance \cite{alsharou2021noise}. 
 
-Besides, during a smoke test, the report found that annotation marks and upper/lower case differences can indeed affect model performance. The model mislabels sentences that contain verlan as if they do not, when the sentence has not been normalised (i.e., trimmed off annotation marks and converted to lowercase). When it has been normalised, the model behaves normally and labels that sentence as containing verlan.\footnote{Again, it was a non-official test run, so the report cannot claim that we have proven these changes would affect performance. But theoretically, it makes sense that if the LLM treats annotation marks, cases, and verlan all as noise, normalising the text would reduce unwanted noise and therefore increase accuracy. Further experiments can be conducted if needed.} 
+Besides, in preliminary smoke tests we observed that annotation marks and case differences can affect model performance. With raw input (no sanitisation), the model mislabelled some sentences containing verlan; after sanitising (lowercasing and stripping annotation marks), it assigned the correct label (verlan present). Based on this observation, we apply sanitisation in all experiments; a controlled ablation is left for future work.
 
-This finding inspired the report to normalise the text before further experiments. Thus, we used regular expressions to trim off the annotation marks and convert the sentences to lowercase, while preserving the rest, including accented letters (e.g., é, à, ù).
+This motivated us to sanitise the text before further experiments. Concretely, we use regular expressions to strip annotation marks and lowercase the sentences, while preserving accents (e.g., é, à, ù).
 
 \paragraph{Tokenisation}
-Because all the encoders used in the four experiments originate from the same Mistral model, it is essential to ensure that the tokens received by the encoder match its expected input format. Therefore, we employ the tokenizer corresponding to Mistral, namely the one developed by Salesforce\;---\;\textit{SFR-Embedding-Mistral}\;---\;to guarantee optimal model performance.
+Because all four experiments use the same Mistral-based encoder, inputs must match its expected token format. We therefore use the tokenizer that ships with this encoder, Salesforce's \textit{SFR-Embedding-Mistral}.
 
-While it is indeed valuable to understand how this tokenizer segments each sentence, this tokenizer-encoder pair already represents the most appropriate configuration for our task. Hence, analysing its internal mechanisms in detail is considered unnecessary for this report.
+We keep tokenisation choices fixed in this report. Examining alternative schemes or segmentation effects is left for future work.
 
 \paragraph{Encoder}
-As mentioned above, the encoders used in these experiments are identical, except that they are run in different modes: frozen or trainable. The reason for comparing a frozen encoder with a trainable one is, firstly, that we believe verlan identification is hypothesised to be a relatively straightforward task for a large language model (LLM).
+We consider this to be \textit{transfer learning}: Mistral is the feature extractor, and the downstream classifier learns the task from those features. There are two fairly common variations in practice: (i) a \textbf{frozen feature extractor} (which means no encoder gradients), or (ii) a \textbf{fine-tuned feature extractor} (the encoder is adapted as training continues).
 
-Moreover, given that our dataset contains a limited number of entries, and considering that scholars have pointed out that in many NLP tasks, keeping most of the encoder frozen while fine-tuning only a few layers can still yield strong performance\cite{lodha2023surgical}, a full fine-tuning approach may not be necessary. 
+Given our dataset is small by large language model (LLMs) standards, the fully updated large encoder also has the potential to overfit to our data, and previous work has shown that a small subset of layers can do as well (\emph{surgical fine-tuning}) \cite{lodha2023surgical}. In this case, we consider Mistral to be primarily the frozen feature extractor (assuming otherwise will be indicated and referenced). 
 
-Finally, taking into account both the time required and the expected outcome of partial fine-tuning to find the most optimal ratio between frozen and trainable layers, the report concludes that comparing the two bipolar cases\;---\;fully frozen and fully fine-tuned\;---\;is a more practical and representative approach.
+We made two extremes for clarity: \emph{fully frozen} vs.\ \emph{end-to-end fine-tuned}. This allows us to avoid complicating with the intermediate conditions and continue to avoid complications at this time, while we can approach this later (intermediate layer-unfreezing).
 
-\paragraph{Calibrations}
+\paragraph{Post-encoder processing}
 
-The report implements calibrations to the last hidden layer of the encoder, specifically, masking, mean pooling and L2 normalisation. 
+We apply post-encoder processing to the last hidden layer: masking, mean pooling, and L2 normalisation.
 
+%
 \subparagraph{Masking}
-The implementation of masking can be interpreted as below:
+Before masking, a quick note on how a \emph{single sentence} becomes vectors. For one sentence of length $T$ (vocabulary size $V$), let its token indices be $(t_1,\ldots,t_T)$. Conceptually, define a one-hot matrix $X \in \{0,1\}^{T \times V}$ (we do \emph{not} materialise $X$ in code). With an embedding matrix $E \in \mathbb{R}^{V \times D}$ and positional encodings $P \in \mathbb{R}^{T \times D}$, the transformer input is
+\[
+Z_0 = X E + P \in \mathbb{R}^{T \times D}.
+\]
+After the stack, the last hidden state is $H \in \mathbb{R}^{T \times D}$, where each row is the $D$-dimensional vector for a token.
 
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[
-    scale=0.9,
-    every node/.style={transform shape},
-    token/.style={rectangle, rounded corners, minimum width=1.2cm, minimum height=0.8cm, font=\footnotesize, align=center},
-    valid/.style={token, fill=blue!20, draw=blue!50!black},
-    pad/.style={token, fill=gray!20, draw=gray!60},
-    removed/.style={token, fill=red!10, draw=red!60, dashed},
-    masked/.style={token, fill=blue!12, draw=blue!40!black},
-    zeroed/.style={token, fill=white, draw=gray!50, dashed},
-    maskone/.style={token, fill=green!15, draw=green!40!black},
-    maskzero/.style={token, fill=gray!15, draw=gray!50},
-    legend/.style={minimum width=0.75cm, minimum height=0.45cm, inner sep=1.5pt},
-    arrow/.style={->, thick, >=stealth}
-]
+Next we apply the attention mask $m \in \{0,1\}^{T}$ ($1$ = valid token; $0$ = padding/specials to ignore). For broadcasting across the $D$ features we reshape to $\tilde{m} \in \{0,1\}^{T \times 1}$ so that each 0/1 value multiplies the entire hidden vector of that token.
 
-% Row 1: hidden states H = out.last_hidden_state
-\node[pad] (h1) {$P$};
-\node[valid, right=0.45cm of h1] (h2) {$V_1$};
-\node[removed, right=0.45cm of h2] (h3) {$R$};
-\node[valid, right=0.45cm of h3] (h4) {$V_2$};
-\node[removed, right=0.45cm of h4] (h5) {$R$};
-\node[pad, right=0.45cm of h5] (h6) {$P$};
-\node[above=0.55cm of h3, font=\small] {The last hidden state};
+In the implementation, we also compute the number of valid tokens $n_{\mathrm{valid}} = \sum_{t=1}^{T} m[t]$ (a scalar). If no valid tokens appear, we clamp $n_{\mathrm{valid}} \leftarrow \max(1, n_{\mathrm{valid}})$ to avoid division by zero in later steps.
 
-% Row 2: attention mask (broadcast across hidden size)
-\node[maskzero, below=0.8cm of h1] (mask1) {0};
-\node[maskone, below=0.8cm of h2] (mask2) {1};
-\node[maskzero, below=0.8cm of h3] (mask3) {0};
-\node[maskone, below=0.8cm of h4] (mask4) {1};
-\node[maskzero, below=0.8cm of h5] (mask5) {0};
-\node[maskzero, below=0.8cm of h6] (mask6) {0};
-\node[left=1.1cm of mask1, align=right, font=\small] {attention\\mask};
-
-% Row 3: elementwise masked representations (H * mask)
-\node[zeroed, below=0.8cm of mask1] (masked1) {0};
-\node[masked, below=0.8cm of mask2] (masked2) {$V_1$};
-\node[zeroed, below=0.8cm of mask3] (masked3) {0};
-\node[masked, below=0.8cm of mask4] (masked4) {$V_2$};
-\node[zeroed, below=0.8cm of mask5] (masked5) {0};
-\node[zeroed, below=0.8cm of mask6] (masked6) {0};
-\node[left=1.1cm of masked1, align=right, font=\small] {$H \odot \text{mask}$};
-
-% Elementwise masking annotation
-\node[font=\tiny, align=center, below=0.15cm of mask3] (masknote) {elementwise masking};
-\draw[arrow] (mask3.south) -- (masknote.north);
-\draw[arrow] (masknote.south) -- (masked3.north);
-
-% ------------------ Legend ------------------
-\node[pad, legend, below=0.8cm of masked3, xshift=-3.6cm, label=right:{\footnotesize Padding token}] (legP) {};
-\node[valid, legend, below=0.35cm of legP, label=right:{\footnotesize Valid token}] (legV) {};
-\node[removed, legend, below=0.35cm of legV, label=right:{\footnotesize Invalid token (masked out)}] (legR) {};
-\node[maskone, legend, below=0.35cm of legR, label=right:{\footnotesize Mask value $1$}] (legMone) {};
-\node[maskzero, legend, below=0.35cm of legMone, label=right:{\footnotesize Mask value $0$}] (legMzero) {};
-\node[masked, legend, below=0.35cm of legMzero, label=right:{\footnotesize Contributes to mean}] (legMasked) {};
-\node[zeroed, legend, below=0.35cm of legMasked, label=right:{\footnotesize Zeroed by mask}] (legZeroed) {};
-
-\end{tikzpicture}
-\caption{Visulisation of masking.}
-\end{figure}
-
-The last hidden state is the final layer of the encoder, where each token has its own hidden representation. 
-It has the shape of a three-dimensional tensor, denoted as $\mathbf{H} \in \mathbb{R}^{B \times T \times D}$, 
-where $B$ stands for the batch size (the number of sentences in a batch), 
-$T$ stands for the sequence length (the number of tokens per sentence), 
-and $D$ represents the hidden dimension (the size of each token vector).
-
-Next, we apply the attention mask, which contains $1$s and $0$s. 
-A value of $1$ indicates a valid token, while $0$ marks a padding or invalid token that should be ignored. 
-However, this mask is \textit{flat}\;---\;it is a two-dimensional tensor, $[B, T]$. 
-To ensure it can be broadcast across all $D$ dimensions of each token vector, 
-we add an extra dimension at the end of the tensor, resulting in a new shape of $[B, T, 1]$. 
-This allows each 0/1 value to be applied consistently across the entire hidden vector of that token.
-
-In the third line of the implementation, the mask is summed along the $T$ dimension, 
-yielding the number of valid tokens in each sentence. 
-The resulting tensor has the shape $[B, 1]$.
-
-It is always important to handle edge cases. 
-If a hidden layer happens to be fully padded, the denominator in the subsequent division could become zero. 
-Therefore, we clamp the minimum denominator to $1$ to prevent division-by-zero errors.
-
+%
 \subparagraph{Mean Pooling}
-After obtaining the mask, we multiply it with the original hidden state $\mathbf{H}$. 
-Here, $\mathbf{H} \in \mathbb{R}^{B \times T \times D}$, while the mask has the shape $[B, T, 1]$. 
-By doing so, the mask's last dimension is broadcast to match the $D$ dimension. 
-As a result, the $D$-dimensional vectors at valid positions remain unchanged, whereas those at masked (i.e., padding or invalid) positions become zero. 
-This operation yields a state with the shape $[B, T, D]$\;---\;the same as the original hidden state, but with masking applied.
-
-Next, we collapse the $T$ dimension by summing all token vectors, resulting in a tensor of shape $[B, D]$. 
-We then divide it by the number of valid tokens to obtain the mean representation of the valid tokens. 
-The mathematical expression of mean pooling can be formulated as:
-
+After obtaining the mask, we multiply it with the hidden state $H \in \mathbb{R}^{T \times D}$:
+the reshaped mask $\tilde{m} \in \{0,1\}^{T \times 1}$ is broadcast across the $D$ features. Valid token rows remain; masked rows become zero. We then sum over the time axis and divide by the number of valid tokens to obtain a single vector:
 \begin{equation}
-\text{pooled}[b, :] = 
-\frac{\displaystyle \sum_{t=1}^{T} \text{mask}[b, t, 1] \cdot H[b, t, :]}
-{\displaystyle \max \!\left( 1, \sum_{t=1}^{T} \text{mask}[b, t, 1] \right)}
-\quad \in \mathbb{R}^{D}
+\bar{h}
+= \frac{\displaystyle \sum_{t=1}^{T} m[t] \cdot H[t,:]}
+{\displaystyle \max\!\left(1, \sum_{t=1}^{T} m[t]\right)}
+\;\in\; \mathbb{R}^{D}.
 \end{equation}
+In short, mean pooling computes the average along the $T$ dimension and yields one $D$-dimensional vector for the sentence; we refer to this averaged embedding as the sentence representation fed into the classifiers.
 
-In short, mean pooling computes the average along the $T$ dimension. 
-The resulting tensor contains one $D$-dimensional vector per sample in the batch, resulting in the overall shape $[B, D]$.
-
+%
 \subparagraph{L2 Normalisation}
-Since we obtain different vectors across the batch, each with potentially varying magnitudes,
+Token vectors may vary in magnitude. In our application, we are only concerned with the direction, not the magnitude, so we L2-normalise the pooled sentence vector to unit length (to project it onto the unit hypersphere). This standard step ensures stable behaviour of cosine-style comparisons and comparability of scores across sentences. This numeric normalisation is separate from the earlier text sanitisation step; here we operate on the 4096-dimensional embedding produced by the encoder.
 
-\begin{equation}
-\mathbf{h}_{\text{pooled}}[b, :] \in \mathbb{R}^{D}
-\end{equation}
+\paragraph{The Classifiers\;---\;Logistic Regression and BERT-inspired MLPs}
+The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and a shallow BERT-inspired multi-layer perceptron, but also in the implementation framework, namely scikit-learn versus PyTorch.
 
-\noindent their norms can differ. 
-However, in the subsequent steps, we care more about the \textit{direction} rather than the magnitude of these vectors. 
-Therefore, we apply L2 normalisation to project all vectors onto the unit hypersphere, unifying their magnitudes to $1$:
-
-\begin{equation}
-\|\mathbf{h}_{\text{norm}}[b, :]\|_2 = 1
-\end{equation}
-
-\noindent The normalised vectors are computed as:
-
-\begin{equation}
-\mathbf{h}_{\text{norm}}[b, :] =
-\frac{\mathbf{h}_{\text{pooled}}[b, :]}
-{\|\mathbf{h}_{\text{pooled}}[b, :]\|_2 + \epsilon}
-\quad \in \mathbb{R}^{D}
-\end{equation}
-
-\noindent where the L2 norm is defined as:
-
-\begin{equation}
-\|\mathbf{h}_{\text{pooled}}[b, :]\|_2
-= \sqrt{\sum_{i=1}^{D} \left(\mathbf{h}_{\text{pooled}}[b, i]\right)^2},
-\end{equation}
-
-\noindent and $\epsilon$ is a small constant added to prevent division by zero.
-
-By applying L2 normalisation, we ensure that the similarity between samples depends solely on the angular difference between their directions, which leads to more stable and comparable representations.
-
-\paragraph{The Classifiers\;---\;Logistic Regression or BERT}
-The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and BERT, but also in the implementation framework, namely scikit-learn versus PyTorch.
-
-\subparagraph{Logistic Regression with scikit-learn}
-For the experiment using a frozen encoder with a \textit{Logistic Regression} head, we chose to employ scikit-learn (sklearn)\footnote{\url{https://scikit-learn.org}}. 
+\subparagraph{Logistic Regression}
+For the experiment using a frozen encoder with a Logistic Regression classifier, we chose to employ scikit-learn (sklearn)\footnote{\url{https://scikit-learn.org}}. 
 It is simple to implement, and its \texttt{LogisticRegression} function internally handles both the loss computation and the optimiser. 
-In contrast, the other three experiments involve learning and therefore use PyTorch\footnote{\url{https://pytorch.org/}} instead. 
+In contrast, the other three experiments involve fine-tuning and therefore use PyTorch\footnote{\url{https://pytorch.org/}} instead. 
 Unlike scikit-learn, PyTorch does not provide built-in loss or optimiser functions for such cases, so these components are implemented explicitly, as illustrated in Figure~8. 
-For the latter three experiments, both BERT and Logistic Regression (the linear layer) act as \textit{heads}, whereas this experiment is referred to simply as \textit{Logistic Regression}.
+For completeness, when we refer to the \textit{Linear classifier} below, we mean the same single-logit model but implemented inside PyTorch and (optionally) trained end-to-end with \texttt{BCEWithLogitsLoss}.
 
-\subparagraph{BERT-Style Head}
-Regardless of whether it is Logistic Regression or BERT, both function as the classifier component\;---\;they process the normalised sentence vectors to determine whether a sentence contains verlan or not. 
-Logistic Regression is merely a linear classifier; it cannot learn potential semantic patterns in the same way as the Mistral encoder. 
+% 3) State mean pooling also applies to BERT
+\subparagraph{BERT-Inspired Classifier}
+In all variants—including the BERT-inspired classifier—we first mean-pool and $\ell_2$-normalise the encoder output.
+Regardless of whether it is Logistic Regression or the BERT-inspired MLP, both modules serve as the classifier component\;---\;they process the normalised sentence representations to determine whether a sentence contains verlan.
+Logistic Regression is merely a linear classifier; it cannot learn potential semantic patterns in the same way as the non-linear module. 
 As mentioned earlier, CamemBERT serves as an alternative LLM to Mistral in this experiment. 
-To combine the advantages of both and maximise their potential, we therefore employ BERT as another type of classifier.
+To combine the advantages of both and maximise their potential, we therefore employ a classifier that mirrors the architecture used on the pooled CLS embedding in BERT. Retaining the Mistral encoder keeps the feature extractor constant, allowing us to attribute differences in performance to the classifier rather than to wholesale architecture swaps.
 
 However, BERT itself, much like the zero-shot Mistral tested earlier, is a complete LLM\;---\;it contains all the essential components such as a tokenizer, an encoder, and a classifier. 
 Thus, it would be impractical to connect an entire BERT model after the Mistral encoder, as this would result in a redundant pipeline: Mistral embedder, Mistral tokenizer, Mistral encoder, BERT tokenizer, BERT encoder, BERT classifier, and so on. 
-Therefore, we only utilise the \textit{classifier head} from BERT.
+Therefore, we only reuse the compact CLS classifier architecture from BERT. This component is the familiar two-layer MLP that usually follows the \texttt{[CLS]} token in BERT, and in our setting it functions solely as a lightweight classifier on top of Mistral embeddings.
 
 %classical BERT
 \begin{figure}[H]
@@ -962,34 +876,38 @@ Therefore, we only utilise the \textit{classifier head} from BERT.
 \foreach \a in {1,...,6} {\foreach \b in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (x\a) -- (h\b);}}
 \foreach \a in {1,...,5} {\draw[->,shorten >=1pt,shorten <=1pt] (h\a) -- (o1);};
 
-% ===== Softmax + loss =====
-\node[draw, circle, minimum size=11mm, font=\small, anchor=west] (softmaxClass) at ($(o1)+(18mm,0)$) {$\mathrm{softmax}$};
-\draw[->,shorten >=1pt,shorten <=1pt] (o1.east) -- (softmaxClass.west);
-\node[draw, rounded corners=1pt, minimum width=22mm, minimum height=11mm, font=\scriptsize, anchor=west]
-  (lossClass) at ($(softmaxClass)+(15mm,0)$) {\shortstack{Cross-entropy\\loss}};
-\draw[->,shorten >=1pt,shorten <=1pt] (softmaxClass.east) -- (lossClass.west);
+% ===== Loss + eval =====
+\node[draw, rounded corners=1pt, minimum width=25mm, minimum height=11mm, font=\scriptsize, anchor=west]
+  (lossClass) at ($(o1)+(20mm,0)$) {\shortstack{\texttt{BCEWithLogitsLoss}\\(training)}};
+\draw[->,shorten >=1pt,shorten <=1pt] (o1.east) -- (lossClass.west);
+\node[draw, circle, dashed, minimum size=12mm, font=\scriptsize, anchor=west]
+  (sigmoidEval) at ($(lossClass)+(20mm,0)$) {$\sigma$ (eval)};
+\draw[dashed,->,shorten >=1pt,shorten <=1pt] (o1.east) -- (sigmoidEval.west);
 
 \end{tikzpicture}
 \end{minipage}
 \end{adjustwidth}
-\caption{Classic BERT classification head.}
-\label{fig:bert-classification-head}
+\caption{Classic BERT classifier module.}
+\label{fig:bert-classifier-module}
 % --- END CLASSIFICATION HEAD FIGURE ---
 \end{figure}
 
-Figure~10 illustrates the internal structure of a standard BERT classifier. 
+Figure~10 illustrates the internal structure of the standard BERT classifier module that we reuse in our experiments. 
+In the codebase this is the \texttt{BertStyleHead} module, which follows the canonical $\texttt{dropout} \rightarrow \texttt{linear} \rightarrow \tanh \rightarrow \texttt{dropout} \rightarrow \texttt{linear}$ pipeline used by BERT's classifier layer. 
+Consequently, while the diagram resembles a shallow multilayer perceptron, it is exactly the classifier shipped with vanilla BERT and operates on the pooled Mistral embeddings produced upstream.
 It receives the pooled output from the encoder with a dimensionality of 4096, then applies dropout\;---\;randomly setting 10\% of the neurons to zero to prevent overfitting. 
-Since the neurons are linear, they are subsequently transformed with a \texttt{tanh} activation for improved non-linearity within the hidden layer. 
+The hidden layer applies a \texttt{tanh} activation to introduce non-linearity. 
 After that, dropout is applied again before mapping the 4096 hidden neurons to a single linear output neuron. 
-Finally, a softmax function converts the output into a probability distribution, which is then passed to the cross-entropy loss for evaluation.
+During training, the raw logit is consumed directly by \texttt{BCEWithLogitsLoss}. 
+At evaluation time we apply a sigmoid and threshold at $0.5$ to obtain a binary decision, matching the logistic regression rule.
 
 However, because we are performing model fusion\;---\;that is, blending layers from two different LLMs\;---\;certain adaptations are required:
 
 \begin{enumerate}
   \item We have not only applied mean pooling but also normalisation to the output of the Mistral encoder. 
   While the original BERT classifier uses only pooled features, we include normalisation to maximise fusion performance.
-  \item In the classic BERT classifier, the output logit is followed by a softmax function and a loss calibration step. 
-  In our case, we require a binary output (0 or 1), so we adopt a different loss function, calibration method, and thresholding strategy to produce binary results consistent with the design of the \textit{Logistic Regression with scikit-learn} experiment.
+  \item In the classic BERT classifier, the output logit is followed by a softmax function when performing multi-class classification. 
+  Because our task is binary, we train with \texttt{BCEWithLogitsLoss} on the raw logit and apply \texttt{torch.sigmoid} only at inference, which is numerically more stable.
 \end{enumerate}
 
 %BERT-style
@@ -1067,37 +985,23 @@ However, because we are performing model fusion\;---\;that is, blending layers f
 \end{tikzpicture}
 \end{adjustwidth}
 \end{minipage}
-\caption{BERT-style detection head.}
-\label{fig:bert-detect-head}
+\caption{BERT-style detection classifier (two-layer MLP on pooled Mistral embeddings).}
+\label{fig:bert-detect-classifier}
 % --- END DETECTION HEAD FIGURE ---
 \end{figure}
 
 As shown in Figure~11, we modify the standard BERT classifier accordingly. 
+Both the frozen-encoder and end-to-end variants therefore use exactly the same shallow classifier module as Figure~10; the difference lies in how the pooled representations are produced, while the decision rule remains the same 0.5 sigmoid threshold.
 We continue to refer to it as \textit{BERT}, but use the term \textit{BERT-style} to emphasise that structural adjustments have been made for model fusion optimisation.
 
-\subparagraph{The Different Loss Function and Calibration}
+\subparagraph{Loss and optimisation}
 
-As mentioned above, after the linear output neuron, we use a different loss function\;---\;\texttt{BCEWithLogitsLoss}\;---\;and a calibrator, AdamW\cite{paszke2019pytorch,loshchilov2019adamw}.
-
-The \textit{Binary Cross-Entropy (BCE)} loss is used in binary classification tasks. It measures the cross-entropy between the predicted probability distribution and the true label:
-\begin{equation}
-\mathcal{L}_{\mathrm{BCE}}(y, \hat{y}) = - \big[ y \cdot \log(\hat{y}) + (1 - y) \cdot \log(1 - \hat{y}) \big]
-\end{equation}
-where
-\begin{equation}
-y \in \{0, 1\}, \quad \hat{y} = \sigma(z) = \frac{1}{1 + e^{-z}}
-\end{equation}
-
-According to the formula, the essence of BCE is to minimise the cross-entropy between the predicted distribution and the true distribution.
-
-The \texttt{BCEWithLogitsLoss} function in PyTorch applies the sigmoid operation to the logits internally and then computes the BCE loss. Its numerically stable formulation is:
-\begin{equation}
-\mathcal{L}_{\mathrm{BCEWithLogits}}(y, z) = \max(z, 0) - z \cdot y + \log\big(1 + e^{-|z|}\big)
-\end{equation}
+All PyTorch-trained classifiers (Linear and BERT-style) use \texttt{BCEWithLogitsLoss}, which combines the sigmoid activation and binary cross-entropy in a numerically stable form. 
+We optimise them with AdamW \cite{paszke2019pytorch,loshchilov2019adamw}; no additional calibration or auxiliary losses are applied.
 
 This formulation prevents numerical underflow or overflow when the model becomes overconfident\;---\;that is, when the logit $z$ is very large or very small. In such cases, a direct computation of BCE might yield $0$ or $\infty$, causing the training to crash or the gradient to become \texttt{NaN}. Hence, \texttt{BCEWithLogitsLoss} is more numerically stable than the pure BCE function.
 
-\textit{Adaptive Moment Estimation (Adam)} is a self-adaptive learning rate optimisation algorithm\cite{kingma2014adam}. It elegantly integrates concepts from mathematics, physics, and computer science\;---\;it is based on the idea of momentum\footnote{\url{https://en.wikipedia.org/wiki/Momentum}} and takes into account both the first-order moment (the mean of gradients) and the second-order moment (the uncentred variance of gradients).
+\textit{Adaptive Moment Estimation (Adam)} is a self-adaptive learning rate optimisation algorithm \cite{kingma2014adam}. It elegantly integrates concepts from mathematics, physics, and computer science\;---\;it is based on the idea of momentum\footnote{\url{https://en.wikipedia.org/wiki/Momentum}} and takes into account both the first-order moment (the mean of gradients) and the second-order moment (the uncentred variance of gradients).
 
 For each iteration $t$, given the gradient $g_t = \nabla_\theta \mathcal{L}(\theta_t)$,  
 the Adam update rules are defined as follows:
@@ -1120,7 +1024,9 @@ where:
     \item $v_t$ is the second moment estimate.
 \end{itemize}
 
-\textit{Adam with Decoupled Weight Decay (AdamW)} further improves the optimisation process by decoupling the weight decay from the gradient update, thus correcting the regularisation deficiency in Adam\cite{loshchilov2019adamw}:
+This split inevitably leaves the validation portion smaller than ideal; to mitigate that, each experiment runs with 20 independent seeds and we report aggregate metrics together with variance in the results discussion.
+
+\textit{Adam with Decoupled Weight Decay (AdamW)} further improves the optimisation process by decoupling the weight decay from the gradient update, thus correcting the regularisation deficiency in Adam \cite{loshchilov2019adamw}:
 \begin{equation}
 \begin{aligned}
 m_t &= \beta_1 \, m_{t-1} + (1 - \beta_1) \, g_t \\
@@ -1138,7 +1044,7 @@ By applying these two techniques\;---\;a numerically stable loss function and a 
 
 \paragraph{The Sigmoid Threshold}
 
-All the computations above yield a probability between 0 and 1, yet this is ultimately a classification task. Therefore, a sigmoid function is applied at the output layer. While alternative calibration methods could be explored instead of using a fixed threshold, for simplicity we employ a hard threshold of 0.5 to distinguish between the two classes. Further experiments may extend this approach by investigating adaptive or learned thresholding strategies.
+At inference we apply a 0.5 decision boundary implied by \texttt{BCEWithLogitsLoss} on a single logit; we do not otherwise calibrate probabilities in this report.
 
 \subsubsection{The Usage of the Dataset}
 
@@ -1157,7 +1063,7 @@ The reasons for adopting this particular split are as follows:
 
 \begin{itemize}
   \item The dataset is not large, so a relatively high proportion of verlan sentences is required for training.
-  \item There are not many hyperparameters to tune, so a smaller portion of validation data is sufficient.
+  \item There are not many hyperparameters to tune, and we average results over 20 seeds, so a compact validation split remains workable while we monitor the validation loss for drift.
   \item To obtain a more stable evaluation result, the test set is made slightly larger than the validation set.
 \end{itemize}
 
@@ -1191,10 +1097,10 @@ We used a batch size of 32 for all experiments.
 The maximum sequence length was set to 512 for all experiments.
 
 \subparagraph{Quantisation}
-As mentioned above, the encoder was quantised to 4-bit NF4 with BF16 compute precision.
+We quantised the weights of the encoder down to 4-bit NF4 using BF16 compute precision, allowing the 7B parameters model to comfortably fit within a single Nvidia L40 while still offering stable training throughput. This also conforms to the standard QLoRA-type setup and no modification to model architecture was required.
 
 \subparagraph{Epochs}
-For the trainable encoders, training was performed for three epochs.
+For the trainable encoders, training was conducted for 3 epochs. Every seed sweep already touch every sentence 20 times on each rotation and the validation loss had plateaued after the third epoch. The additional epochs resulted in minimal gain while further amplifying signs of overfitting..
 
 For detailed hyperparameter configurations, please refer to the GitHub page of this project.
 
@@ -1210,7 +1116,7 @@ For detailed hyperparameter configurations, please refer to the GitHub page of t
 
 \section{Evaluations, Results, and Analyses}
 
-In this chapter, the report presents the evaluation techniques and the testing datasets that were created for this study. 
+In this chapter, we present the evaluation techniques and the testing datasets that were created for this study. 
 We then analyse the results both in general and in detail, followed by a discussion of the model's overall performance.
 
 \subsection{Evaluation Methodology}
@@ -1221,17 +1127,18 @@ we visualise the embeddings immediately after tokenisation (i.e., before trainin
 After comparing Principal Component Analysis (PCA)\footnote{\url{https://en.wikipedia.org/wiki/Principal_component_analysis}}, 
 t-Distributed Stochastic Neighbor Embedding (t-SNE)\footnote{\url{https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding}}, 
 and Uniform Manifold Approximation and Projection (UMAP)\footnote{\url{https://umap-learn.readthedocs.io/en/latest/}}, 
-we found that UMAP generally produces the most effective visualisation\cite{pearson1901pca,maaten2008tsne,mcinnes2018umap}.
+we found that UMAP generally produces the most effective visualisation \cite{pearson1901pca,maaten2008tsne,mcinnes2018umap}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/mistral_bert_umap.png}
-    \caption{UMAP visualisations of the embedding space showing the distribution of verlan and standard French tokens\\Class 1: verlan tokens\\Class 0: normal tokens}
+    \caption{UMAP visualisations of the embedding space showing verlan tokens (orange) and standard French tokens (blue).}
     \label{fig:umap_comparison}
 \end{figure}
 
-Based on the results, the report cannot confidently conclude that there is a clear distinction between the positions of verlan tokens and other tokens in the embedding space. 
-However, we strongly agree that traditional linear classification methods, such as Logistic Regression, are unlikely to perform well in this case, as the figure indicates a non-linear distribution pattern.
+Given our findings, we can not say with certainty that there is a solid difference between the position of the verlan tokens and the position of the other tokens in the space of the embedding. 
+The two-dimensional image and subsequent scatterplot are a compression of thousands of dimensions for the sake of visualisation and should be fully understood as a qualitative indicator and not as definitive proof. 
+Nevertheless, it does suggest that traditional linear classification methods (e.g., Logistic Regression) would not be expected to perform well in this case, even after UMAP, because there are still no components that effectively separate the clusters.
 
 \subsubsection{Testing Datasets}
 To evaluate model performance, we created several testing datasets. 
@@ -1244,6 +1151,8 @@ We constructed three distinct datasets, each containing pairs of sentences: one 
   \item \textbf{Slang} --- 50 entries (25 pairs) of sentences containing French slang and their normalised counterparts. All sentences in this dataset are labelled as not containing verlan.
 \end{enumerate}
 
+The first two suites were carved from the same sentence collection process as the training data but set aside before any model was trained, letting us probe familiar versus novel verlan separately. The \textit{Slang} control set is entirely verlan-negative and checks whether models overfit to generic slang cues rather than the phenomenon of interest.
+
 The \textit{Slang} testing dataset was included for the following reasons:
 \begin{enumerate}
   \item Slang can also be treated as a form of textual noise, much like verlan.
@@ -1252,67 +1161,35 @@ The \textit{Slang} testing dataset was included for the following reasons:
 
 All sentences in these datasets do not appear in the training data.
  
-Although the testing datasets are relatively small, this scale is sufficient for preliminary evaluation.
-However, the report considers this scale sufficient for evaluation purposes.
+Although the testing datasets are relatively small, running 20 seeded trials per configuration gives us enough signal for preliminary evaluation.
 
 \subsubsection{Testing Schema}
 
 \paragraph{Zero-shot Models}
-For the zero-shot models, particularly GPT-5 Codex (High) and Mistral 7B, 
-we evaluated them only on the testing datasets rather than the training dataset. 
-As implied by their name, zero-shot experiments do not involve training; thus, applying them to the training set would be unnecessary.
+With respect to the zero-shot models, and specifically GPT-5 Codex (High) and Mistral 7B, we employ precisely the same held-out test suites without any gradient updates. This preserves continuity with the supervised models—each system is evaluated with the same inputs, but only the supervised models saw any training split.
 
 \paragraph{Number of Trials}
 As mentioned above, each model was run 20 times with 20 different random seeds to reduce bias.
 
-\paragraph{Storing the Results}
-For ease of analysis, the results of each sentence from each trial---across all four trained models and the zero-shot Mistral 7B---were stored in CSV format. 
-For GPT-5 Codex (High), the results were stored in a spreadsheet for convenience.
-
-\paragraph{Analyse Methodology}
-
-\subparagraph{Confusion Matrix}
-
-In the analyses, a $2 \times 2$ binary confusion matrix is used. 
-It also serves as the basis for computing both accuracy and the F1 score.
+\paragraph{Metrics}
+We report accuracy and F1 scores derived from a binary confusion matrix where the positive class corresponds to verlan-present sentences. Accuracy is computed as $(TP + TN)/(TP + TN + FP + FN)$, and F1 is the harmonic mean of precision and recall. The matrix is summarised in Figure~\ref{fig:confusion-matrix-legend}.
 
 \begin{figure}[H]
     {\setlength{\tabcolsep}{7pt}
         \renewcommand{\arraystretch}{1.3}%
         \begin{tabular}{>{\centering\arraybackslash}p{2.8cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.1cm} >{\centering\arraybackslash}p{3.1cm}}
-            \cellcolor{blue!12}\makecell{\textbf{Total population}\\[-0.2em] $\boldsymbol{= P + N}$} & & \multicolumn{2}{c}{\cellcolor{cyan!22}\textbf{Predicted condition}} \\
-            \multirow{2}{*}{\rotatebox[origin=c]{90}{\cellcolor{yellow!28}\makecell{\textbf{Actual}\\\textbf{condition}}}} & \cellcolor{yellow!15}\textbf{Positive (P)} & \cellcolor{green!20}\textbf{True positive (TP)} & \cellcolor{blue!18}\textbf{False negative (FN)} \\
-             & \cellcolor{yellow!10}\textbf{Negative (N)} & \cellcolor{red!18}\textbf{False positive (FP)} & \cellcolor{green!30}\textbf{True negative (TN)} \\
+            \cellcolor{blue!12}\makecell{\textbf{Total population}\\[-0.2em] $\boldsymbol{= P + N}$} & & \multicolumn{2}{c}{\cellcolor{cyan!22}\textbf{Predicted label}} \\
+            \multirow{2}{*}{\rotatebox[origin=c]{90}{\cellcolor{yellow!28}\makecell{\textbf{Actual}\\\textbf{label}}}} & \cellcolor{yellow!15}\textbf{Positive (P, verlan)} & \cellcolor{green!20}\textbf{True positive (TP)} & \cellcolor{blue!18}\textbf{False negative (FN)} \\
+             & \cellcolor{yellow!10}\textbf{Negative (N, standard)} & \cellcolor{red!18}\textbf{False positive (FP)} & \cellcolor{green!30}\textbf{True negative (TN)} \\
         \end{tabular}
     }
-    \caption{Binary confusion matrix.}
+    \caption{Binary confusion matrix (positive = verlan sentence, negative = standard sentence).}
     \label{fig:confusion-matrix-legend}
 \end{figure}
 
-\subparagraph{Accuracy}
-To evaluate accuracy, we use the following formula:
-
-\begin{equation}
-\mathrm{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
-\end{equation}
-
-\subparagraph{F1 Score}
-The F1 score is the harmonic mean of Precision and Recall, defined as:
-
-\begin{equation}
-\mathrm{F1} = 2 \times \frac{\mathrm{Precision} \times \mathrm{Recall}}{\mathrm{Precision} + \mathrm{Recall}}
-\end{equation}
-
-where
-
-\begin{equation}
-\mathrm{Precision} = \frac{TP}{TP + FP}, 
-\qquad
-\mathrm{Recall} = \frac{TP}{TP + FN}.
-\end{equation}
 
 \subsection{Results and Analyses}
-In this section, the report first presents the general result of the accuracy and the F1-score of the models. Then, the report discusses in separate cases with some interesting findings of the performance of the models. All the performance tests on the training models and the Mistral 7B zero-shot model have been conducted 20 times. The reference GPT model's performance test has been conducted once.
+In this section, we first present the general result of the accuracy and the F1-score of the models. Then, we discuss in separate cases with some interesting findings of the performance of the models. All the performance tests on the training models and the Mistral 7B zero-shot model have been conducted 20 times. The reference GPT model's performance test has been conducted once.
 
 \subsubsection{General F1-Score and Accuracy}
 
@@ -1321,35 +1198,19 @@ Overall, all models produce positive detections\;---\;the accuracy across all mo
 \begin{figure}[H]
   \begin{adjustwidth}{-2cm}{0cm}
   \centering
-  \includegraphics[width=1.3\textwidth]{figures/Accuracy_distribution_4settings.png}
+  \includegraphics[width=\textwidth]{figures/Accuracy_distribution_4settings.png}
   \caption{A general comparison of the F1 score and accuracy across models.}
   \label{fig:total-comparison}
   \end{adjustwidth}
 \end{figure}
 
-For each individual model, before embedding and fine-tuning, Mistral 7B achieves an accuracy of around 69.4\%, which is already considered high from the report's perspective. 
-Training boosted accuracy by approximately 11.3, 7.3, 12.8, and 15.5 percentage points for the Frozen+LR, E2E+LR, Frozen+BERT, and E2E+BERT configurations, respectively.
-The corresponding F1-score gains are around 9.9, 7.0, 12.1, and 14.6 points.
-These results demonstrate that training consistently improves model performance, even though the effect size is architecture-dependent.
+The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7-16 percentage points and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure.
 
-The models that implement BERT as the classifier achieve higher accuracy and F1 scores than those using a Logistic Regression classifier. 
-This result was anticipated, as the embedding space did not show a linear trend; hence, BERT performs better than Logistic Regression in capturing non-linear patterns.
-
-Interestingly, the frozen models are not always the worst performers. 
-The E2E+LR model\;---\;whose encoder was fine-tuned and uses a Logistic Regression head\;---\;achieves the lowest accuracy and exhibits the largest variance. 
-The report suspects that this may be because fine-tuning with a limited dataset introduces additional noise, while the models with a BERT classifier can leverage their loss functions and optimisation mechanisms to mitigate this noise and achieve higher accuracy. 
-Further experiments would be worthwhile to confirm this hypothesis.
-
-Among the four trained models, the E2E+BERT model achieves the best overall performance. 
-This demonstrates that model fusion between Mistral 7B and CamemBERT can be effective when implemented correctly, and that full fine-tuning with a non-linear classifier may be the optimal approach for verlan identification.
-
-The reference zero-shot model, GPT-5 Codex (High), maintains the highest accuracy of 91.8\% even without additional training, which is 22.4 percentage points higher than that of the zero-shot Mistral 7B. 
-The F1 score demonstrates a similar trend. 
-Although it is a proprietary model, these results allow us to observe how a top-tier model performs on this task and to appreciate the remarkable progress of the AI industry.
+The supervised system that performed the weakest was E2E+LR, as fine-tuning both the encoder, as well as a linear classifier, does introduce a level of variance to this small dataset that does not unlock any additional capacity compared to E2E, without the additional training. Conversely, E2E+BERT achieved the strongest supervised performance indicating access to the adapted encoder provides some benefit to the non-linear classifier. However, both BERT-based variants are still behind the zero-shot GPT-5 Codex (High) reference, which achieved 91.8\% accuracy without training on the task.
 
 \subsubsection{Common Verlan Performance by Model}
 
-The figure below illustrates the performance of the six models on the \textit{Daily Verlan} testing set\footnote{The legend of the figure should be \textit{common} verlan performance.}.
+The figure below illustrates the performance of the six models on the \textit{Daily Verlan} testing set.
 
 \begin{figure}[H]
     \centering
@@ -1360,7 +1221,7 @@ The figure below illustrates the performance of the six models on the \textit{Da
 
 Interestingly, in this scenario, the results do not fully align with those presented in the previous section. 
 Although the evaluation dataset is similar to the \textit{Daily Verlan} testing set, it is not identical, and their outcomes are therefore expected to differ slightly. 
-The report argues that this discrepancy arises because the evaluation set contains 853 entries, whereas the \textit{Daily Verlan} testing set includes only 29 pairs. 
+We argue that this discrepancy arises because the evaluation set contains 853 entries, whereas the \textit{Daily Verlan} testing set includes only 29 pairs. 
 The smaller sample size naturally increases metric variability\;---\;but this does not merely imply higher noise. 
 The testing set features shorter, high-frequency sentences, which tend to favour the frozen models. 
 Indeed, the two frozen models achieve accuracy levels comparable to the zero-shot Mistral model.
@@ -1372,11 +1233,11 @@ Hence, although the E2E+LR model achieves a slightly higher accuracy than the ze
 When comparing with the E2E+BERT model, an opposite effect may be observed. 
 The introduction of a trainable BERT classifier might have produced a contrary outcome compared to what was observed earlier. 
 We hypothesise that because both the encoder and classifier are trainable in this case, when precision is lost, it degrades more significantly. 
-Conversely, the model with a trainable encoder and a non-trainable linear head may preserve more precision, as the untrainable head provides stability. 
+Conversely, the model with a trainable encoder and a non-trainable linear classifier may preserve more precision, as the fixed classifier provides stability. 
 Additionally, the loss function and optimisation strategy discussed in the previous chapter may have effectively smoothed out noise, allowing this configuration to outperform the two frozen-encoder models.
 
 Again, this remains an assumption derived from scientific deduction. 
-Further experiments would be valuable to validate these findings and strengthen the report's conclusions.
+Further experiments would be valuable to validate these findings and strengthen our conclusions.
 
 \subsubsection{Invented Verlan Performance by Model}
 
@@ -1389,9 +1250,7 @@ Further experiments would be valuable to validate these findings and strengthen 
 
 An interesting phenomenon is also observed here\;---\;the two zero-shot models outperform the four trained models on invented verlan recall by up to 78 percentage points (92\% for GPT-5 Codex (High) versus 14\% for E2E+BERT). 
 In terms of accuracy, the gap remains substantial at roughly 42 percentage points.
-On average, there is a clear performance gap between the zero-shot models and the trained ones, with the trained models performing even worse than the zero-shot Mistral model.
-
-The report would like to leave a hook here for readers to reflect on, before moving on to the next experiment.
+On average, there is a clear performance gap between the zero-shot models and the trained ones, with the trained models performing even worse than the zero-shot Mistral model. This indicates that our current supervision signal does not yet capture invented verlan as effectively as the off-the-shelf references.
 
 \subsubsection{Slang Controls Performance by Model}
 
@@ -1403,7 +1262,7 @@ The report would like to leave a hook here for readers to reflect on, before mov
 \end{figure}
 
 In this figure, everything seems to have flipped once again\;---\;the four trained models surpass their zero-shot counterparts by up to 34.6\% in slang specificity. 
-The report notes the low specificity (44\%) of the Mistral zero-shot model, which may indicate that the model did not fully understand the task\;---\;specifically, what verlan is and its linguistic traits\;---\;thus performing close to random chance (50\%).
+We note the low specificity (44\%) of the Mistral zero-shot model, which may indicate that the model did not fully understand the task\;---\;specifically, what verlan is and its linguistic traits\;---\;thus performing close to random chance (50\%).
 
 After training, however, all four models appear to have resolved this issue. 
 The two models with frozen encoders produce similar results, the E2E+LR model performs slightly below them, while the one with the BERT classifier performs the best among the trained models. 
@@ -1418,7 +1277,7 @@ However, we argue that in cases where “not no” is not equivalent to “yes\;
 \subsubsection{And Yet Something Advanced}
 
 The sections above discuss only what we can observe on the surface. 
-In this section, the report attempts something more advanced, aiming to explore the underlying characteristics of the models' performance in greater depth.
+In this section, we attempt something more advanced, aiming to explore the underlying characteristics of the models' performance in greater depth.
 
 \paragraph{Is E2E+BERT the Real King?}
 
@@ -1435,7 +1294,7 @@ The closer a point lies to the top-right corner, the better the model performs.
 Effectively, a model that achieves both high slang specificity and high daily verlan recall can be considered top-tier. 
 Interestingly, according to this metric, GPT-5 Codex (High) performs the best, followed by the two models with frozen encoders. 
 This observation aligns with our earlier discussion: frozen embeddings often perform better on small datasets. 
-In contrast, the two E2E models appear to be more biased.
+In contrast, the two E2E models cluster toward higher specificity but noticeably lower recall, indicating a bias toward predicting ``no verlan'' on ambiguous sentences.
 
 \paragraph{Small Dataset Caused More Instability?}
 
@@ -1450,7 +1309,7 @@ The bars represent mean recall, with standard deviation error bars.
 \end{figure}
 
 Judging from the standard deviation bars, the three models that include trainable components exhibit higher variance than the fully frozen model. 
-Given that small datasets tend to yield better performance with frozen models, the report has reason to believe that making components trainable on a small dataset does lead to learning, but also introduces additional noise, resulting in higher standard deviation.
+Given that small datasets tend to yield better performance with frozen models, we have reason to believe that making components trainable on a small dataset does lead to learning, but also introduces additional noise, resulting in higher standard deviation.
 
 \paragraph{Again: Is E2E+BERT the Real King?}
 
@@ -1463,31 +1322,16 @@ The figure below depicts the link between slang false alarms and overall false p
     \label{fig:slang-fp-correlation}
 \end{figure}
 
-The report has discovered that models which over-trigger on slang also tend to accumulate more false positives on the main test split. 
+We have discovered that models which over-trigger on slang also tend to accumulate more false positives on the main test split. 
 Conversely, models that trigger fewer slang false positives also show fewer false positives overall\footnote{The GPT-5 model is not included, as the evaluation split dataset was not tested on it.}. 
 However, given that a $2 \times 2$ confusion matrix contains four attributes, this correlation does not necessarily imply that models closer to the bottom-left corner achieve more true positives\;---\;in other words, higher accuracy. 
 Type~I and Type~II errors may still occur here.
 
-\subsection{Conclusion and Limitation}
+\section{Conclusion and Limitation}
 
-We acknowledge that this series of experiments has several limitations, and we encourage future researchers to explore this area further. 
-In conclusion, the report finds that the proposed training dataset effectively improves the accuracy of verlan identification. 
-In most cases, the model with a trainable encoder and a BERT-like classifier (E2E+BERT) outperforms the other trained models. 
-In certain cases, however, the frozen encoder models achieve higher accuracy in identifying verlan sentences by selecting the correct ones. 
-The zero-shot GPT-5 Codex (High) model remains the most stable and reliable across all scenarios.
+Our research presents three key findings. First, all groups demonstrated an increase in accuracy following supervised fine-tuning on the carefully constructed verlan corpus, though there remains a considerable gap from the GPT-5 Codex (High) zero-shot reference. Second, BERT-like classifiers consistently outperformed logistic regression; this indicates that non-linear decision boundaries may be advantageous despite being a frozen encoder. Finally, invented verlan is potentially the most difficult slice as all supervised variants and the zero-shot Mistral baseline fall well short of the reference model.
 
-\section{Discussion and Outlook}
-
-Just as the purpose of creating verlan was to conceal meaning behind words, Large Language Models (LLMs) tend to conceal themselves, turning into black boxes. 
-So does our brain, and perhaps our universe. 
-For now, scientific research is our only remedy\;---\;it forces us to think logically\;---\;yet we often regret: 
-regret that, for the Mistral zero-shot case, the experiments were not run under different temperatures; 
-regret that we did not find a better way to handle diverse spellings and declensions, as Russell and Levenshtein once did. 
-We even regret hiding ourselves behind pronouns like ``this report'' and ``we,'' when, in truth, we are always alone. 
-
-Yet we hope. 
-We hope that more people will join us---not to suffer the same regret, but to break this eternal curse by seeking to understand the unknown\;---\;just as we strive to understand how LLMs learn Out-Of-Vocabulary (OOV) words such as verlan. 
-And so, we wait.
+There are many limitations to consider that drive these conclusions. First, the corpus is small and, by necessity, based on a manual data collection process. Therefore, there will be sparsity and annotation noise that informs what samples are included. Our training budget limited three epochs per run using a single 4-bit quantised encoder, and we intentionally limited the narrow range of hyperparameter sweeps (learning rate, temperature, prompt truncation). We attempted to reduce variance in validation by averaging over 20 seeds, but this will still create wide confidence intervals. The limitations outlined should all be noted in the interpretation of the reported improvements.
 %TC:ignore
 \begin{thebibliography}{9}
 

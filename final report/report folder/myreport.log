@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  24 OCT 2025 23:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  25 OCT 2025 03:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -727,24 +727,24 @@ File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/frontendlayer/libraries/tikzlibraryexternal.code.tex (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzexternalshared.code.tex)) (./myreport.aux)
 \openout1 = `myreport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 97.
-LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
  (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count373
@@ -764,30 +764,30 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 97.
+Package hyperref Info: Link coloring ON on input line 105.
  (./myreport.out) (./myreport.out)
 \@outlinefile=\write5
 \openout5 = `myreport.out'.
 
 
 
-Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 97.
+Package todonotes Warning: The length marginparwidth is less than 2cm and will most likely cause issues with the appearance of inserted todonotes. The issue can be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loading the todonotes package. on input line 105.
 
 \c@lstlisting=\count379
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 100.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 108.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 100.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 108.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<figures/logo.png, id=187, 566.115pt x 617.9085pt>
+<figures/logo.png, id=183, 566.115pt x 617.9085pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
-Package pdftex.def Info: figures/logo.png  used on input line 100.
+Package pdftex.def Info: figures/logo.png  used on input line 108.
 (pdftex.def)             Requested size: 99.58464pt x 108.69188pt.
 
 
@@ -799,10 +799,11 @@ Package pdftex.def Info: figures/logo.png  used on input line 100.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.121 \clearpage
+l.114 \clearpage
                  [1] (./myreport.toc
 
 [2
+
 
 ])
 \tf@toc=\write6
@@ -814,9 +815,11 @@ l.121 \clearpage
 
 [4
 
+
 ]
 
 [5
+
 
 ]
 
@@ -824,308 +827,324 @@ l.121 \clearpage
 
 [7]
 
-[8]
-<figures/google_verlan.png, id=317, 1093.08376pt x 252.945pt>
+[8
+
+]
+<figures/google_verlan.png, id=311, 1093.08376pt x 252.945pt>
 File: figures/google_verlan.png Graphic file (type png)
 <use figures/google_verlan.png>
-Package pdftex.def Info: figures/google_verlan.png  used on input line 221.
+Package pdftex.def Info: figures/google_verlan.png  used on input line 237.
 (pdftex.def)             Requested size: 312.00119pt x 72.19814pt.
-<figures/deepl_verlan.png, id=318, 972.63374pt x 237.88875pt>
+<figures/deepl_verlan.png, id=312, 972.63374pt x 237.88875pt>
 File: figures/deepl_verlan.png Graphic file (type png)
 <use figures/deepl_verlan.png>
-Package pdftex.def Info: figures/deepl_verlan.png  used on input line 227.
+Package pdftex.def Info: figures/deepl_verlan.png  used on input line 243.
 (pdftex.def)             Requested size: 312.00119pt x 76.30743pt.
-<figures/deepl_alt_text.png, id=319, 303.1325pt x 396.48125pt>
+<figures/deepl_alt_text.png, id=313, 303.1325pt x 396.48125pt>
 File: figures/deepl_alt_text.png Graphic file (type png)
 <use figures/deepl_alt_text.png>
-Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 233.
+Package pdftex.def Info: figures/deepl_alt_text.png  used on input line 249.
 (pdftex.def)             Requested size: 117.00119pt x 153.0299pt.
 
 
 [9 <./figures/google_verlan.png> <./figures/deepl_verlan.png>]
 
 [10 <./figures/deepl_alt_text.png>]
-Overfull \hbox (5.5846pt too wide) in paragraph at lines 252--253
+Overfull \hbox (5.5846pt too wide) in paragraph at lines 268--269
 []\OT1/cmr/bx/n/12 Raw data col-lec-tion \OT1/cmr/m/n/12 Gath-er-ing ver-lan terms and their stan-dard French
  []
 
 
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 273--273
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 289--289
 [][][]\OT1/cmr/m/n/10 International Pho-netic Al-pha-bet, [][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki /
  []
 
 
 
-[12]
+[13
 
-[13]
+]
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 414--414
 []|\OT1/cmr/bx/n/12 Limitations (for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 414--414
 []|\OT1/cmr/m/n/12 English-like names; mi-nor
  []
 
 
-Underfull \hbox (badness 5245) in paragraph at lines 398--398
+Underfull \hbox (badness 5245) in paragraph at lines 414--414
 \OT1/cmr/m/n/12 spelling vari-ants with sim-i-lar
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 414--414
 []|\OT1/cmr/m/n/12 Language-/name-centric;
  []
 
 
-Underfull \hbox (badness 3579) in paragraph at lines 398--398
+Underfull \hbox (badness 3579) in paragraph at lines 414--414
 \OT1/cmr/m/n/12 many key col-li-sions (lower
  []
 
 
-Underfull \hbox (badness 6016) in paragraph at lines 398--398
+Underfull \hbox (badness 6016) in paragraph at lines 414--414
 \OT1/cmr/m/n/12 pre-ci-sion); poor on short
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 414--414
 []|\OT1/cmr/m/n/12 Metaphone /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 414--414
 \OT1/cmr/m/n/12 Dou-ble Meta-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 414--414
 []|\OT1/cmr/m/n/12 Finer-grained pho-netic keys;
  []
 
 
-Underfull \hbox (badness 1584) in paragraph at lines 398--398
+Underfull \hbox (badness 1584) in paragraph at lines 414--414
 \OT1/cmr/m/n/12 cov-er-age for French phono-
  []
 
 
-Underfull \hbox (badness 4378) in paragraph at lines 398--398
+Underfull \hbox (badness 4378) in paragraph at lines 414--414
 []|\OT1/cmr/m/n/12 Typos, miss-ing let-ters, noisy
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 414--414
 []|\OT1/cmr/m/n/12 Hybrid (pho-
  []
 
 
-Overfull \hbox (12.06805pt too wide) in paragraph at lines 403--404
+Overfull \hbox (12.06805pt too wide) in paragraph at lines 419--420
 []\OT1/cmr/m/n/12 Afterwards, schol-ars in-tro-duced ad-di-tional al-go-rithms and sur-veys: Philips's
  []
 
 
-Overfull \hbox (5.12692pt too wide) in paragraph at lines 403--404
+Overfull \hbox (5.12692pt too wide) in paragraph at lines 419--420
 \OT1/cmr/m/n/12 in-tended for French phono-tac-tics; Ku-kich's (1992) sur-vey of spelling-correction
  []
 
 
 
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 411--411
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 427--427
 [][][][][]$\OT1/cmtt/m/n/10 https : / / ecoleng . com / verlan-[]comprendre-[]argot-[]francais-[]parler /
  []
 
 
 
-[16]
-Overfull \hbox (2.70703pt too wide) in paragraph at lines 429--430
+[17]
+Overfull \hbox (2.70703pt too wide) in paragraph at lines 445--446
 \OT1/cmr/m/n/12 Since 2020, it has been pro-gres-sively blended with crowd-sourced slang sources
  []
 
 
 
-[17]
-
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 462--462
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 478--478
 []|\OT1/cmr/m/it/12 GazetteerEntries
  []
 
 
-Underfull \hbox (badness 1147) in paragraph at lines 462--462
+Underfull \hbox (badness 1147) in paragraph at lines 478--478
 \OT1/cmr/m/n/12 flag, ori-gin notes, and ev-i-dence tier
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 462--463
+Underfull \hbox (badness 10000) in paragraph at lines 478--479
 \OT1/cmr/m/n/12 nance tracked;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 463--463
+Underfull \hbox (badness 10000) in paragraph at lines 479--479
 []|\OT1/cmr/m/n/12 Sentence-level ex-am-ples with
  []
 
 
-Underfull \hbox (badness 6526) in paragraph at lines 463--463
+Underfull \hbox (badness 6526) in paragraph at lines 479--479
 \OT1/cmtt/m/n/12 has[]verlan \OT1/cmr/m/n/12 for de-tec-tion; in-cludes
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 463--464
+Underfull \hbox (badness 10000) in paragraph at lines 479--480
 []|\OT1/cmr/m/n/12 Balanced split;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 463--464
+Underfull \hbox (badness 10000) in paragraph at lines 479--480
 \OT1/cmr/m/n/12 cur-rent snap-shot:
  []
 
 
-Overfull \hbox (55.71991pt too wide) in paragraph at lines 458--467
+Overfull \hbox (55.71991pt too wide) in paragraph at lines 474--483
  [][] 
  []
 
 
-Overfull \hbox (1.72992pt too wide) in paragraph at lines 473--474
+
+[20
+
+]
+Overfull \hbox (1.72992pt too wide) in paragraph at lines 489--490
 []\OT1/cmr/m/n/12 Among those men-tioned, \OT1/cmr/m/it/12 Dic-tio-n-naire Ver-lan \OT1/cmr/m/n/12 and Wik-tionary con-tributed
  []
 
 
 
-[19]
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 486.
+[21]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 502.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 486.
-
-
-[20]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 492.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 502.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 508.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 492.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 508.
 
 
-[21]
-Overfull \hbox (9.4264pt too wide) in paragraph at lines 517--518
+[22]
+Overfull \hbox (9.4264pt too wide) in paragraph at lines 533--534
 []\OT1/cmr/m/n/12 Most en-tries are in-for-mal, and many in-clude other non-standard spellings;
  []
 
 
-Overfull \hbox (31.57907pt too wide) in paragraph at lines 517--518
+Overfull \hbox (31.57907pt too wide) in paragraph at lines 533--534
 \OT1/cmr/m/n/12 fur-ther-more, the la-bel pro-por-tions were based on ``half-and-half'' (\OT1/cmtt/m/n/12 has[]verlan
  []
 
 
-Overfull \hbox (541.81992pt too wide) in paragraph at lines 533--543
+Overfull \hbox (541.81992pt too wide) in paragraph at lines 549--559
  [][] 
  []
 
 
-Overfull \hbox (4.67233pt too wide) in paragraph at lines 545--546
+
+[23]
+Overfull \hbox (4.67233pt too wide) in paragraph at lines 561--562
 \OT1/cmr/m/n/12 pre-ced-ing re-port) used Gold/Sil-ver/Bronze, which log-i-cally map to E1/E2/E3.
  []
 
 
 
-[22]
+[24]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 563.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 563.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 563.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 579.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 3.26288pt
-(hyperref)                removed on input line 563.
+(hyperref)                removed on input line 579.
 
-<figures/CamemBERT.png, id=529, 722.7pt x 722.7pt>
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 579.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 3.26288pt
+(hyperref)                removed on input line 579.
+
+<figures/CamemBERT.png, id=532, 722.7pt x 722.7pt>
 File: figures/CamemBERT.png Graphic file (type png)
 <use figures/CamemBERT.png>
-Package pdftex.def Info: figures/CamemBERT.png  used on input line 569.
+Package pdftex.def Info: figures/CamemBERT.png  used on input line 585.
 (pdftex.def)             Requested size: 56.9055pt x 56.90189pt.
-<figures/mistral-logo.png, id=530, 191.71625pt x 135.50626pt>
+<figures/mistral-logo.png, id=533, 191.71625pt x 135.50626pt>
 File: figures/mistral-logo.png Graphic file (type png)
 <use figures/mistral-logo.png>
-Package pdftex.def Info: figures/mistral-logo.png  used on input line 574.
+Package pdftex.def Info: figures/mistral-logo.png  used on input line 590.
 (pdftex.def)             Requested size: 56.9055pt x 40.22003pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 567--576
+Underfull \hbox (badness 10000) in paragraph at lines 583--592
 
  []
 
 
 
-[23 <./figures/CamemBERT.png> <./figures/mistral-logo.png>]
+[25
 
-[24]
-Underfull \hbox (badness 10000) in paragraph at lines 645--645
-[][][][][]$\OT1/cmtt/m/n/10 https : / / artificialanalysis . ai / models / gpt-[]5-[]codex #
- []
+ <./figures/CamemBERT.png> <./figures/mistral-logo.png>]
 
-
-
-[25]
-<figures/Artificial Analysis Intelligence Index (14 Oct '25) .png, id=597, 3336.465pt x 1706.375pt>
+[26]
+<figures/Artificial Analysis Intelligence Index (14 Oct '25) .png, id=570, 3336.465pt x 1706.375pt>
 File: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png Graphic file (type png)
 <use figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>
-Package pdftex.def Info: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png  used on input line 649.
-(pdftex.def)             Requested size: 426.79134pt x 218.26944pt.
-
-Overfull \hbox (36.79134pt too wide) in paragraph at lines 649--650
- [][] 
- []
+Package pdftex.def Info: figures/Artificial Analysis Intelligence Index (14 Oct '25) .png  used on input line 668.
+(pdftex.def)             Requested size: 390.0pt x 199.44458pt.
 
 
-Overfull \hbox (5.15285pt too wide) in paragraph at lines 653--654
+[27]
+Overfull \hbox (5.15285pt too wide) in paragraph at lines 672--673
 []\OT1/cmr/m/n/12 Following the prin-ci-ple of con-trolled ex-per-i-men-tal de-sign, we used a prompt
  []
 
 
 
-[26 <./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>]
-
-[27]
-Overfull \hbox (64.24568pt too wide) in paragraph at lines 720--721
+[28 <./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png>]
+Overfull \hbox (64.24568pt too wide) in paragraph at lines 739--740
  [] 
  []
 
 
 
-[28]
-
 [29]
+Overfull \hbox (18.67468pt too wide) in paragraph at lines 744--745
+\OT1/cmr/m/n/12 logit) im-ple-mented in Py-Torch and trained end-to-end with \OT1/cmtt/m/n/12 BCEWithLogitsLoss\OT1/cmr/m/n/12 .
+ []
+
+
 
 [30]
+Overfull \hbox (14.1687pt too wide) detected at line 747
+[]  \OMS/cmsy/m/n/12 !  []\OT1/cmr/m/n/12 (4096  \OMS/cmsy/m/n/12 !  \OT1/cmr/m/n/12 4096)  \OMS/cmsy/m/n/12 !  []  !  []  !  []\OT1/cmr/m/n/12 (4096  \OMS/cmsy/m/n/12 !  \OT1/cmr/m/n/12 1)\OML/cmm/m/it/12 :
+ []
+
+
 
 [31]
 
 [32]
 
 [33]
+Overfull \hbox (11.72104pt too wide) in paragraph at lines 818--823
+ []\OT1/cmr/bx/n/12 BERT-Inspired Clas-si-fier[] \OT1/cmr/m/n/12 In all vari-ants|including the BERT-inspired
+ []
 
-[34]
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (7.16568pt too wide) in paragraph at lines 972--973
+Overfull \hbox (19.11981pt too wide) in paragraph at lines 887--888
  [][] 
+ []
+
+
+
+[34]
+Overfull \hbox (4.8797pt too wide) in paragraph at lines 895--903
+\OT1/cmtt/m/n/12 BertStyleHead \OT1/cmr/m/n/12 mod-ule im-ple-mented in \OT1/cmtt/m/n/12 src/detect/detect[]train[]bert.py\OT1/cmr/m/n/12 ,
  []
 
 
@@ -1133,19 +1152,14 @@ Overfull \hbox (7.16568pt too wide) in paragraph at lines 972--973
 [35]
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (88.20529pt too wide) in paragraph at lines 1067--1068
+Overfull \hbox (88.20529pt too wide) in paragraph at lines 985--986
  [] 
  []
 
 
 
 [36]
-Overfull \hbox (55.19637pt too wide) in paragraph at lines 1080--1081
-\OT1/cmr/m/n/12 af-ter the lin-ear out-put neu-ron, we use a dif-fer-ent loss func-tion---\OT1/cmtt/m/n/12 BCEWithLogitsLoss\OT1/cmr/m/n/12 ---
- []
-
-
-Overfull \hbox (2.44592pt too wide) in paragraph at lines 1098--1099
+Overfull \hbox (2.44592pt too wide) in paragraph at lines 1002--1003
 []\OT1/cmr/m/n/12 This for-mu-la-tion pre-vents nu-mer-i-cal un-der-flow or over-flow when the model
  []
 
@@ -1154,116 +1168,117 @@ Overfull \hbox (2.44592pt too wide) in paragraph at lines 1098--1099
 [37]
 
 [38]
-<figures/aoraki.png, id=728, 1027.84pt x 1541.76pt>
+<figures/aoraki.png, id=691, 1027.84pt x 1541.76pt>
 File: figures/aoraki.png Graphic file (type png)
 <use figures/aoraki.png>
-Package pdftex.def Info: figures/aoraki.png  used on input line 1172.
+Package pdftex.def Info: figures/aoraki.png  used on input line 1078.
 (pdftex.def)             Requested size: 42.67912pt x 64.01242pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1175--1175
+Underfull \hbox (badness 10000) in paragraph at lines 1081--1081
 [][][][][]$\OT1/cmtt/m/n/10 https : / / rtis . cspages . otago . ac . nz / research-[]computing / cluster / index .
  []
 
 
 
 [39 <./figures/aoraki.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1222--1222
-[][][][][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / T-[]distributed _ stochastic _ neighbor _
+Overfull \hbox (0.85612pt too wide) in paragraph at lines 1103--1104
+ []\OT1/cmr/bx/n/12 Epochs[] \OT1/cmr/m/n/12 For the train-able en-coders, train-ing was con-ducted for 3 epochs.
  []
 
 
 
 [40]
-<figures/mistral_bert_umap.png, id=760, 505.89pt x 433.62pt>
+Underfull \hbox (badness 10000) in paragraph at lines 1128--1128
+[][][][][]$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / T-[]distributed _ stochastic _ neighbor _
+ []
+
+<figures/mistral_bert_umap.png, id=723, 505.89pt x 433.62pt>
 File: figures/mistral_bert_umap.png Graphic file (type png)
 <use figures/mistral_bert_umap.png>
-Package pdftex.def Info: figures/mistral_bert_umap.png  used on input line 1228.
+Package pdftex.def Info: figures/mistral_bert_umap.png  used on input line 1134.
 (pdftex.def)             Requested size: 272.99881pt x 233.99913pt.
 
 
-[41 <./figures/mistral_bert_umap.png>]
+[41
 
-[42]
-Overfull \hbox (18.59607pt too wide) in paragraph at lines 1283--1283
+]
+
+[42 <./figures/mistral_bert_umap.png>]
+Overfull \hbox (18.59607pt too wide) in paragraph at lines 1181--1181
  [] 
  []
 
 
-Overfull \vbox (17.04996pt too high) detected at line 1284
+Overfull \vbox (1.5569pt too high) detected at line 1182
  []
 
 
-Overfull \hbox (7.43347pt too wide) in paragraph at lines 1282--1288
+Overfull \hbox (7.43347pt too wide) in paragraph at lines 1180--1186
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1288
+Underfull \hbox (badness 10000) in paragraph at lines 1180--1186
 
  []
 
 
 
 [43]
-<figures/Accuracy_distribution_4settings.png, id=800, 867.24pt x 433.62pt>
+<figures/Accuracy_distribution_4settings.png, id=754, 867.24pt x 433.62pt>
 File: figures/Accuracy_distribution_4settings.png Graphic file (type png)
 <use figures/Accuracy_distribution_4settings.png>
-Package pdftex.def Info: figures/Accuracy_distribution_4settings.png  used on input line 1324.
-(pdftex.def)             Requested size: 507.00119pt x 253.50458pt.
-
-Overfull \hbox (60.09569pt too wide) in paragraph at lines 1324--1325
- [] 
- []
+Package pdftex.def Info: figures/Accuracy_distribution_4settings.png  used on input line 1201.
+(pdftex.def)             Requested size: 390.0pt x 195.00148pt.
 
 
-
-[44 <./figures/Accuracy_distribution_4settings.png>]
-<figures/historical_verlan_comparison.png, id=808, 578.16pt x 325.215pt>
+[44]
+<figures/historical_verlan_comparison.png, id=763, 578.16pt x 325.215pt>
 File: figures/historical_verlan_comparison.png Graphic file (type png)
 <use figures/historical_verlan_comparison.png>
-Package pdftex.def Info: figures/historical_verlan_comparison.png  used on input line 1356.
+Package pdftex.def Info: figures/historical_verlan_comparison.png  used on input line 1217.
 (pdftex.def)             Requested size: 331.50238pt x 186.46619pt.
 
 
-[45]
+[45 <./figures/Accuracy_distribution_4settings.png>]
 
 [46 <./figures/historical_verlan_comparison.png>]
-<figures/invented_verlan_comparison.png, id=821, 578.16pt x 325.215pt>
+<figures/invented_verlan_comparison.png, id=776, 578.16pt x 325.215pt>
 File: figures/invented_verlan_comparison.png Graphic file (type png)
 <use figures/invented_verlan_comparison.png>
-Package pdftex.def Info: figures/invented_verlan_comparison.png  used on input line 1385.
+Package pdftex.def Info: figures/invented_verlan_comparison.png  used on input line 1246.
 (pdftex.def)             Requested size: 331.50238pt x 186.46619pt.
-<figures/slang_controls_comparison.png, id=822, 578.16pt x 325.215pt>
+<figures/slang_controls_comparison.png, id=777, 578.16pt x 325.215pt>
 File: figures/slang_controls_comparison.png Graphic file (type png)
 <use figures/slang_controls_comparison.png>
-Package pdftex.def Info: figures/slang_controls_comparison.png  used on input line 1400.
+Package pdftex.def Info: figures/slang_controls_comparison.png  used on input line 1259.
 (pdftex.def)             Requested size: 331.50238pt x 186.46619pt.
 
 
 [47 <./figures/invented_verlan_comparison.png>]
 
 [48 <./figures/slang_controls_comparison.png>]
-Overfull \hbox (2.0796pt too wide) in paragraph at lines 1425--1427
+Overfull \hbox (2.0796pt too wide) in paragraph at lines 1284--1286
  []\OT1/cmr/bx/n/12 Is E2E+BERT the Real King?[] \OT1/cmr/m/n/12 The fig-ure be-low presents the specificity--
  []
 
-<figures/historical_vs_slang_tradeoff.png, id=837, 462.528pt x 433.62pt>
+<figures/historical_vs_slang_tradeoff.png, id=792, 462.528pt x 433.62pt>
 File: figures/historical_vs_slang_tradeoff.png Graphic file (type png)
 <use figures/historical_vs_slang_tradeoff.png>
-Package pdftex.def Info: figures/historical_vs_slang_tradeoff.png  used on input line 1430.
+Package pdftex.def Info: figures/historical_vs_slang_tradeoff.png  used on input line 1289.
 (pdftex.def)             Requested size: 272.99881pt x 255.94606pt.
 
 
 [49 <./figures/historical_vs_slang_tradeoff.png>]
-<figures/invented_recall_variance.png, id=845, 505.89pt x 325.215pt>
+<figures/invented_recall_variance.png, id=800, 505.89pt x 325.215pt>
 File: figures/invented_recall_variance.png Graphic file (type png)
 <use figures/invented_recall_variance.png>
-Package pdftex.def Info: figures/invented_recall_variance.png  used on input line 1447.
+Package pdftex.def Info: figures/invented_recall_variance.png  used on input line 1306.
 (pdftex.def)             Requested size: 331.50238pt x 213.11415pt.
-<figures/slang_fp_vs_main_fp.png, id=846, 469.755pt x 325.215pt>
+<figures/slang_fp_vs_main_fp.png, id=801, 469.755pt x 325.215pt>
 File: figures/slang_fp_vs_main_fp.png Graphic file (type png)
 <use figures/slang_fp_vs_main_fp.png>
-Package pdftex.def Info: figures/slang_fp_vs_main_fp.png  used on input line 1461.
+Package pdftex.def Info: figures/slang_fp_vs_main_fp.png  used on input line 1320.
 (pdftex.def)             Requested size: 292.5pt x 202.49962pt.
 
 
@@ -1271,12 +1286,16 @@ Package pdftex.def Info: figures/slang_fp_vs_main_fp.png  used on input line 146
 
 [51 <./figures/slang_fp_vs_main_fp.png>]
 
-[52]
+[52
 
-[53]
+]
+
+[53
+
+]
 
 [54]
-Underfull \hbox (badness 1048) in paragraph at lines 1643--1647
+Underfull \hbox (badness 1048) in paragraph at lines 1487--1491
 \OT1/cmr/m/it/12 words\OT1/cmr/m/n/12 . Com-puter Speech & Lan-guage, 15(3):287{333 (2001). DOI:
  []
 
@@ -1285,262 +1304,269 @@ Underfull \hbox (badness 1048) in paragraph at lines 1643--1647
 [55]
 
 [56]
-Underfull \hbox (badness 1237) in paragraph at lines 1710--1713
+Underfull \hbox (badness 1237) in paragraph at lines 1554--1557
 []\OT1/cmr/m/n/12 Dong, Yuhui; Geng, Xin; Zhang, Ji-ayi; Song, Yue; Li, Xixin.
- []
-
-
-Underfull \hbox (badness 2809) in paragraph at lines 1721--1725
-[]\OT1/cmr/m/n/12 Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caim-
- []
-
-
-Underfull \hbox (badness 1824) in paragraph at lines 1721--1725
-\OT1/cmr/m/n/12 ing. \OT1/cmr/m/it/12 On Sur-gi-cal Fine-tuning for Lan-guage En-coders\OT1/cmr/m/n/12 . Find-ings of
  []
 
 
 
 [57]
-Underfull \hbox (badness 4454) in paragraph at lines 1745--1749
+Underfull \hbox (badness 2809) in paragraph at lines 1565--1569
+[]\OT1/cmr/m/n/12 Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caim-
+ []
+
+
+Underfull \hbox (badness 1824) in paragraph at lines 1565--1569
+\OT1/cmr/m/n/12 ing. \OT1/cmr/m/it/12 On Sur-gi-cal Fine-tuning for Lan-guage En-coders\OT1/cmr/m/n/12 . Find-ings of
+ []
+
+
+Underfull \hbox (badness 4454) in paragraph at lines 1589--1593
 []\OT1/cmr/m/n/12 Pearson, Karl. \OT1/cmr/m/it/12 On Lines and Planes of Clos-est Fit to Sys-
  []
 
 
-Underfull \hbox (badness 5490) in paragraph at lines 1745--1749
+Underfull \hbox (badness 5490) in paragraph at lines 1589--1593
 \OT1/cmr/m/it/12 tems of Points in Space\OT1/cmr/m/n/12 . Philo-soph-i-cal Mag-a-zine, 1901. DOI:
  []
 
 
-Underfull \hbox (badness 3471) in paragraph at lines 1751--1755
+Underfull \hbox (badness 3471) in paragraph at lines 1595--1599
 \OT1/cmr/m/it/12 ing t-SNE\OT1/cmr/m/n/12 . Jour-nal of Ma-chine Learn-ing Re-search, 2008. DOI:
- []
-
-
-Overfull \hbox (145.52835pt too wide) in paragraph at lines 1795--1805
- [][] 
  []
 
 
 
 [58]
-Overfull \hbox (0.65338pt too wide) in paragraph at lines 1829--1837
+
+[59]
+Overfull \hbox (145.52835pt too wide) in paragraph at lines 1639--1649
  [][] 
  []
 
-<figures/invented_relative_improvement.png, id=929, 469.755pt x 303.534pt>
+
+Overfull \hbox (0.65338pt too wide) in paragraph at lines 1673--1681
+ [][] 
+ []
+
+<figures/invented_relative_improvement.png, id=889, 469.755pt x 303.534pt>
 File: figures/invented_relative_improvement.png Graphic file (type png)
 <use figures/invented_relative_improvement.png>
-Package pdftex.def Info: figures/invented_relative_improvement.png  used on input line 1843.
+Package pdftex.def Info: figures/invented_relative_improvement.png  used on input line 1687.
 (pdftex.def)             Requested size: 272.99881pt x 176.3972pt.
 
 
-[59]
-Overfull \hbox (54.3742pt too wide) in paragraph at lines 1934--1935
+[60
+
+]
+
+[61 <./figures/invented_relative_improvement.png>]
+Overfull \hbox (54.3742pt too wide) in paragraph at lines 1778--1779
  [][] 
  []
 
 
 
-[60 <./figures/invented_relative_improvement.png>]
+[62
 
-[61]
+]
 Overfull \vbox (5.30785pt too high) has occurred while \output is active []
 
 
 
-[62]
-Overfull \hbox (16.4907pt too wide) in paragraph at lines 1942--1943
+[63]
+Overfull \hbox (16.4907pt too wide) in paragraph at lines 1786--1787
 \OT1/cmr/bx/n/12 GazetteerEntries (lex-i-con). \OT1/cmr/m/n/12 The cur-rent ex-tract of \OT1/cmtt/m/n/12 GazetteerEntries.xlsx
  []
 
 
-Overfull \hbox (31.1248pt too wide) in paragraph at lines 1942--1943
+Overfull \hbox (31.1248pt too wide) in paragraph at lines 1786--1787
 \OT1/cmr/m/n/12 com-mu-nity ver-lan dic-tio-nar-ies, pri-mar-ily Dic-tio-n-naire de la Zone, Wik-tionary/Wik-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1951--1951
+Underfull \hbox (badness 10000) in paragraph at lines 1795--1795
 []|\OT1/cmr/bx/n/12 Type / li-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1951--1952
+Underfull \hbox (badness 10000) in paragraph at lines 1795--1796
 []|\OT1/cmr/bx/n/12 Access
  []
 
 
-Overfull \hbox (25.97192pt too wide) in paragraph at lines 1953--1953
+Overfull \hbox (25.97192pt too wide) in paragraph at lines 1797--1797
 \OT1/cmr/m/n/12 (\OT1/cmtt/m/n/12 dictionnairedelazone.fr\OT1/cmr/m/n/12 )| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1953--1953
+Underfull \hbox (badness 10000) in paragraph at lines 1797--1797
 []|\OT1/cmr/m/n/12 Community
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1953--1953
+Underfull \hbox (badness 10000) in paragraph at lines 1797--1797
 \OT1/cmr/m/n/12 dic-tio-nary
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1953--1953
+Underfull \hbox (badness 10000) in paragraph at lines 1797--1797
 \OT1/cmr/m/n/12 (site terms
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1953--1954
+Underfull \hbox (badness 10000) in paragraph at lines 1797--1798
 []|\OT1/cmr/m/n/12 2 Jul,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1954--1954
+Underfull \hbox (badness 10000) in paragraph at lines 1798--1798
 []|\OT1/cmr/m/n/12 Lexicographic
  []
 
 
-Overfull \hbox (11.55487pt too wide) in paragraph at lines 1955--1955
+Overfull \hbox (11.55487pt too wide) in paragraph at lines 1799--1799
 []|\OT1/cmr/m/n/12 Forum/dictionary
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1955--1955
+Underfull \hbox (badness 10000) in paragraph at lines 1799--1799
 \OT1/cmr/m/n/12 hy-brid (site
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1956--1956
+Underfull \hbox (badness 10000) in paragraph at lines 1800--1800
 []|\OT1/cmr/m/n/12 Lexicographic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1956--1956
+Underfull \hbox (badness 10000) in paragraph at lines 1800--1800
 \OT1/cmr/m/n/12 por-tal (open
  []
 
 
-Underfull \hbox (badness 4621) in paragraph at lines 1957--1957
+Underfull \hbox (badness 4621) in paragraph at lines 1801--1801
 []|\OT1/cmr/m/n/12 Zlang Fan-dom Ver-lan
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1957--1957
+Underfull \hbox (badness 10000) in paragraph at lines 1801--1801
 []|\OT1/cmr/m/n/12 Community-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1958--1958
+Underfull \hbox (badness 10000) in paragraph at lines 1802--1802
 []|\OT1/cmr/m/n/12 Sentence
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1958--1958
+Underfull \hbox (badness 10000) in paragraph at lines 1802--1802
 \OT1/cmr/m/n/12 ag-gre-ga-tor
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1958--1958
+Underfull \hbox (badness 10000) in paragraph at lines 1802--1802
 \OT1/cmr/m/n/12 (pro-pri-etary;
  []
 
 
-Underfull \hbox (badness 7522) in paragraph at lines 1959--1959
+Underfull \hbox (badness 7522) in paragraph at lines 1803--1803
 []|\OT1/cmr/m/n/12 User fo-rums (Red-dit,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1959--1959
+Underfull \hbox (badness 10000) in paragraph at lines 1803--1803
 \OT1/cmr/m/n/12 Jeuxvideo.com, Hi-Na-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1959--1959
+Underfull \hbox (badness 10000) in paragraph at lines 1803--1803
 []|\OT1/cmr/m/n/12 User-generated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1959--1959
+Underfull \hbox (badness 10000) in paragraph at lines 1803--1803
 \OT1/cmr/m/n/12 text (pub-lic
  []
 
 
-Underfull \hbox (badness 6380) in paragraph at lines 1959--1959
+Underfull \hbox (badness 6380) in paragraph at lines 1803--1803
 []|\OT1/cmr/m/n/12 17 ref-er-ences (8 Red-dit, 5
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1959--1959
+Underfull \hbox (badness 10000) in paragraph at lines 1803--1803
 \OT1/cmr/m/n/12 Jeuxvideo.com, 4 Hi-Na-tive)
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1960--1960
+Underfull \hbox (badness 10000) in paragraph at lines 1804--1804
 []|\OT1/cmr/m/n/12 Social me-dia posts
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1960--1960
+Underfull \hbox (badness 10000) in paragraph at lines 1804--1804
 \OT1/cmr/m/n/12 (Twit-ter/X, Tik-Tok,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1960--1960
+Underfull \hbox (badness 10000) in paragraph at lines 1804--1804
 []|\OT1/cmr/m/n/12 User-generated
  []
 
 
-Underfull \hbox (badness 3746) in paragraph at lines 1960--1960
+Underfull \hbox (badness 3746) in paragraph at lines 1804--1804
 \OT1/cmr/m/n/12 text (plat-form
  []
 
 
-Underfull \hbox (badness 6461) in paragraph at lines 1961--1961
+Underfull \hbox (badness 6461) in paragraph at lines 1805--1805
 \OT1/cmr/m/n/12 (quo-ta-tion for
  []
 
 
-Underfull \hbox (badness 2662) in paragraph at lines 1961--1961
+Underfull \hbox (badness 2662) in paragraph at lines 1805--1805
 []|\OT1/cmr/m/n/12 4 URL ci-ta-tions (Paroles.net
  []
 
 
-Overfull \hbox (79.10085pt too wide) in paragraph at lines 1949--1966
+Overfull \hbox (79.10085pt too wide) in paragraph at lines 1793--1810
  [][] 
  []
 
 
 
-[63
+[64
+
 
 ]
 Overfull \vbox (14.6998pt too high) has occurred while \output is active []
 
 
 
-[64]
+[65]
 
-[65] (./myreport.aux)
+[66] (./myreport.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `myreport.out' has not changed.
-(rerunfilecheck)             Checksum: 4A48D3B9310165C749808F6F18ADA73E;8772.
+(rerunfilecheck)             Checksum: 7B2FC0CA9CC6629E09BC0A8796407F4C;8369.
  ) 
 Here is how much of TeX's memory you used:
- 41201 strings out of 474662
- 887461 string characters out of 5751110
- 1351778 words of memory out of 5000000
- 63349 multiletter control sequences out of 15000+600000
- 576850 words of font info for 102 fonts, out of 8000000 for 9000
+ 40974 strings out of 474662
+ 883778 string characters out of 5751110
+ 1366161 words of memory out of 5000000
+ 63150 multiletter control sequences out of 15000+600000
+ 576091 words of font info for 100 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  140i,25n,131p,1718b,2144s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on myreport.pdf (66 pages, 4975556 bytes).
+Output written on myreport.pdf (67 pages, 4965363 bytes).
 PDF statistics:
- 1155 PDF objects out of 1200 (max. 8388607)
- 990 compressed objects within 10 object streams
- 333 named destinations out of 1000 (max. 500000)
- 458 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1110 PDF objects out of 1200 (max. 8388607)
+ 944 compressed objects within 10 object streams
+ 307 named destinations out of 1000 (max. 500000)
+ 450 words of extra memory for PDF output out of 10000 (max. 10000000)
 

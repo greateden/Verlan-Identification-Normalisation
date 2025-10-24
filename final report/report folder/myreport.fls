@@ -458,21 +458,20 @@ INPUT ./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png
 INPUT ./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png
 INPUT ./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png
 INPUT ./figures/Artificial Analysis Intelligence Index (14 Oct '25) .png
+INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
+INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
+INPUT ./figures/aoraki.png
+INPUT ./figures/mistral_bert_umap.png
+INPUT ./figures/mistral_bert_umap.png
+INPUT ./figures/mistral_bert_umap.png
+INPUT ./figures/mistral_bert_umap.png
+INPUT ./figures/mistral_bert_umap.png
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
-INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
-INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
-INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
-INPUT ./figures/aoraki.png
-INPUT ./figures/aoraki.png
-INPUT ./figures/aoraki.png
-INPUT ./figures/aoraki.png
-INPUT ./figures/aoraki.png
-INPUT ./figures/mistral_bert_umap.png
-INPUT ./figures/mistral_bert_umap.png
-INPUT ./figures/mistral_bert_umap.png
-INPUT ./figures/mistral_bert_umap.png
-INPUT ./figures/mistral_bert_umap.png
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib8.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib6.tfm
@@ -519,7 +518,6 @@ INPUT ./figures/invented_relative_improvement.png
 INPUT ./figures/invented_relative_improvement.png
 INPUT ./figures/invented_relative_improvement.png
 INPUT ./figures/invented_relative_improvement.png
-INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 INPUT myreport.aux
 INPUT ./myreport.out
 INPUT ./myreport.out
