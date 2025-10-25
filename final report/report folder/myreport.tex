@@ -38,6 +38,14 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{etoolbox}
+\lstset{
+  basicstyle=\ttfamily\small,
+  frame=single,
+  xleftmargin=1.5em,
+  xrightmargin=1.5em,
+  breaklines=true,
+  breakatwhitespace=false
+}
 \usetikzlibrary{shapes,arrows,positioning,shapes.multipart,arrows.meta,fit,backgrounds,arrows.meta,calc,decorations.pathreplacing,external}
 \ifdefined\pdfshellescape
   \ifnum\pdfshellescape=1
@@ -95,26 +103,40 @@
 % Date, change the \today to a set date if you want to be precise
 \reportdate{\today}
 
-\pretocmd{\section}{\clearpage}{}{} % force each section to start on a new page
+\newcommand{\blankpage}{%
+  \clearpage
+  \thispagestyle{empty}
+  \null
+  \clearpage}
+
+\newif\ifskipsectionclear
+\skipsectionclearfalse
+\pretocmd{\section}{\ifskipsectionclear\skipsectionclearfalse\else\cleardoublepage\fi}{}{} % force each section to start on a new (odd) page unless skipped
 \makeatletter
 \@ifundefined{chapter}{}{
-  \pretocmd{\chapter}{\clearpage}{}{} % force each chapter (if defined) onto a new page
+  \pretocmd{\chapter}{\cleardoublepage}{}{} % force each chapter (if defined) onto a new (odd) page
 }
 \makeatother
 
 \begin{document}
-
-
+\pagenumbering{gobble}
 \maketitle
+
+\blankpage
 
 \begin{abstract}
 We take on the challenge of the automated identification of verlan, a French back-slang, which, if left unidentified, is disruptive to moderation, retrieval, and sociolinguistic analysis. Prior work in the area still relies on ``check the dictionary'' approaches or generalised slang detectors, which do not make very strong claims about verlan-specific coverage and typically say little about evaluation validity. Building on these contributions, we utilise a French-tuned Mistral embedding encoder with fast logistic and BERT-like classifiers, as well as constructing companion lexicons and sentence resources to enable supervised training. Our best supervised system scores in the mid-80s for accuracy and F1 on held-out verlan identification tasks, while zero-shot GPT-5 Codex is still better on invented forms, indicating that there is still a gap. Overall, the pipeline, datasets and comparative analysis provide a reproducible baseline for future work on the computational treatment of verlan and other back-slang.
 \end{abstract}
 
-\clearpage
+\blankpage
 \tableofcontents
+\thispagestyle{empty}
 
-\clearpage
+\cleardoublepage
+\skipsectioncleartrue
+\pagenumbering{roman}
+\setcounter{page}{1}
+
 \section*{Glossary of Abbreviations}
 \addcontentsline{toc}{section}{Glossary of Abbreviations}
 
@@ -143,7 +165,8 @@ We take on the challenge of the automated identification of verlan, a French bac
 \end{description}
 
 
-\clearpage
+\cleardoublepage
+\skipsectioncleartrue
 \section*{Preface}
 \addcontentsline{toc}{section}{Preface}
 
@@ -191,9 +214,10 @@ So why should I worry about myself?
 
 Since I wish to dedicate this report to all who seek to understand language through emotion\;---\;and the world through language\;---\;why should passion ever turn into anxiety?
 
-
-
-\newpage
+\cleardoublepage
+\skipsectioncleartrue
+\pagenumbering{arabic}
+\setcounter{page}{1}
 \section{Introduction}
 \subsection{Context and Motivation}
 
@@ -395,9 +419,9 @@ Therefore, regarding the history of verlan detection, this report first generali
 
 The background of traditional slang detection historically used approximate (fuzzy) string matching. Two most commonly referenced techniques are: Soundex\;---\;a phonetic string-based English indexing method, developed by Odell and Russell (1918)\;---\;and Levenshtein's (1966) edit distance. The \( \mathcal{O}(|s|\cdot|t|) \) time traditional dynamic-programming solution is described in Wagner and Fischer (1974). \cite{russell1918soundex,levenshtein1966,wagner1974string}
 
-\noindent\textbf{How these methods work (high level).} \textit{Soundex} translates an input token into an approximate phonetic key (first character + consonant class digits; consecutive duplicates folded; padded/truncated to fixed size). Two strings would match well if the keys match. It is biased toward matches with similar sounds even if there are minor differences in spelling, but it is extremely English-biased and would potentially have a high collision rate. \textit{Levenshtein edit distance} is the minimum number of single-character insertions, deletions, or substitutions to change one string into another; the naive algorithm employs dynamic programming in \( \mathcal{O}(|s|\cdot|t|) \) time. The distance is computed empirically by the Wagner-Fischer dynamic-programming algorithm in \( \mathcal{O}(|s|\cdot|t|) \) time. Small distance (less than some cutoff) indicates similarity; the cutoffs are either absolute or length-normalised. \cite{wagner1974string}
+\paragraph{How these methods work (high level).} \textit{Soundex} translates an input token into an approximate phonetic key (first character + consonant class digits; consecutive duplicates folded; padded/truncated to fixed size). Two strings would match well if the keys match. It is biased toward matches with similar sounds even if there are minor differences in spelling, but it is extremely English-biased and would potentially have a high collision rate. \textit{Levenshtein edit distance} is the minimum number of single-character insertions, deletions, or substitutions to change one string into another; the naive algorithm employs dynamic programming in \( \mathcal{O}(|s|\cdot|t|) \) time. The distance is computed empirically by the Wagner-Fischer dynamic-programming algorithm in \( \mathcal{O}(|s|\cdot|t|) \) time. Small distance (less than some cutoff) indicates similarity; the cutoffs are either absolute or length-normalised. \cite{wagner1974string}
 
-\noindent\textbf{Performance and weaknesses for verlan/slang.} Phonetic keys typically yield high recall on name-like tokens but lower precision due to key collisions, and language-dependent rules do poorly on French slang. Edit distance handles typo-like noise and OCR well, but is not pronunciation sensitive and considers transpositions/syllable flips as heavy edits; with very short slang tokens, thresholds miss true matches (low recall) or admit too many spurious ones. For verlan in particular, its most basic behaviour is syllable reversal, not local small substitutions, so these two alone are not adequate without further structure. Even using the Damerau-Levenshtein distance, which penalises an adjacent transposition as one step, verlan syllable reversal is not character substitution and is still inadequately modelled. Short strings triggering threshold sensitivity and false positives on fuzzy matching; see Navarro's survey for length-normalised threshold discussion. Cross-linguistic barriers and phonetic key collision rates are notorious, reviewed by Zobel and Dart. \cite{damerau1964,navarro2001approximate,zobel1996phonetic}
+\paragraph{Performance and weaknesses for verlan/slang.} Phonetic keys typically yield high recall on name-like tokens but lower precision due to key collisions, and language-dependent rules do poorly on French slang. Edit distance handles typo-like noise and OCR well, but is not pronunciation sensitive and considers transpositions/syllable flips as heavy edits; with very short slang tokens, thresholds miss true matches (low recall) or admit too many spurious ones. For verlan in particular, its most basic behaviour is syllable reversal, not local small substitutions, so these two alone are not adequate without further structure. Even using the Damerau-Levenshtein distance, which penalises an adjacent transposition as one step, verlan syllable reversal is not character substitution and is still inadequately modelled. Short strings triggering threshold sensitivity and false positives on fuzzy matching; see Navarro's survey for length-normalised threshold discussion. Cross-linguistic barriers and phonetic key collision rates are notorious, reviewed by Zobel and Dart. \cite{damerau1964,navarro2001approximate,zobel1996phonetic}
 
 \begin{table}[H]
 \centering
@@ -471,6 +495,7 @@ We summarise the dataset content here; the column-level schema diagram is moved 
 \begin{table}[H]
 \centering
 \caption{Dataset at a glance (snapshot as of September 2025).}
+\resizebox{0.95\linewidth}{!}{%
 \begin{tabular}{p{3.6cm} p{7.2cm} p{3.6cm}}
 \hline
 \textbf{Component} & \textbf{Purpose / Fields (high level)} & \textbf{Size / Notes} \\
@@ -478,7 +503,7 @@ We summarise the dataset content here; the column-level schema diagram is moved 
 \textit{GazetteerEntries} (lexicon) & Verlan$\rightarrow$standard French mapping for rule-based lookup; includes POS, phrase flag, origin notes, and evidence tier (E1/E2/E3). & 1,086 entries; provenance tracked; E1/E2/E3 evidence levels. \\
 \textit{Sentences} (corpus) & Sentence-level examples with \texttt{has\_verlan} for detection; includes text, reference/date, domain, and quality tier. & Balanced split; current snapshot: 5,684 examples. \\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:dataset-glance}
 \end{table}
 
@@ -498,7 +523,7 @@ Once we had created a lexicon, we fashioned a corpus of sentences based on attes
 
 \textbf{How we searched.} A manual search was conducted and we also employed OpenAI Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}. On July 2, 2025, we issued the following (template) prompt:
 
-\begin{lstlisting}[breaklines=true, breakatwhitespace=false]
+\begin{lstlisting}
 Find current, attested French sentences containing the verlan form "{verlan_form}".
 
 Return only sentences featuring the precise string. For each sentence, also provide:
@@ -512,7 +537,7 @@ Do not return translations, explanations, or any created examples.
 
 If we were unable to find an example of E1 in the previous budget, we used OpenAI o3 to construct the minimal sentence:
 
-\begin{lstlisting}[breaklines=true, breakatwhitespace=false]
+\begin{lstlisting}
 Write one short French sentence (<=12 words) that uses the verlan "{verlan_form}" naturally.
 
 Do not provide an explanation or include quotes. Provide only the sentence.
@@ -546,6 +571,7 @@ Evidence levels utilized in this report:
 \begin{table}[H]
 \centering
 \caption{Evidence levels applied across the verlan dataset.}
+\resizebox{1\linewidth}{!}{%
 \begin{tabular}{c|l|l}
 \hline
 \textbf{Level} & \textbf{Definition} & \textbf{Source} \\
@@ -554,7 +580,7 @@ E1 (Attested)   & Exact text from a public page; URL and date of access logged &
 E2 (Unverified) & Credible web sentence with incomplete/unstable source authority & Web text with no available reference \\
 E3 (Synthetic)  & LLM-generated for competency when no E1 authorized under budget & OpenAI o3 (template prompt) \\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:verlan_tiers}
 \end{table}
 
@@ -578,19 +604,19 @@ Other columns (e.g., \texttt{origin\_lang}, \texttt{note}, \texttt{accessed\_on}
 % chose Mistral and BERT
 \subsection{Mistral 7B\;---\;Why?}
 
-\begin{wrapfigure}[3]{r}{4.6cm}
-  \vspace{-30pt}
-  \begin{minipage}{0.49\linewidth}
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}{0.45\linewidth}
     \centering
     \includegraphics[width=2cm]{figures/CamemBERT.png}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.49\linewidth}
+  \begin{minipage}{0.45\linewidth}
     \centering
     \includegraphics[width=2cm]{figures/mistral-logo.png}
-  \end{minipage}\\[3pt]
-  {\captionsetup{font=scriptsize,skip=0pt}\caption*{CamemBERT and Mistral AI Logos}}
-\end{wrapfigure}
+  \end{minipage}
+  \caption*{\scriptsize CamemBERT and Mistral AI Logos}
+\end{figure}
 
 We chose \textbf{Mistral 7B}\footnote{\url{https://mistral.ai/news/announcing-mistral-7b}} (Mistral AI) as the base model for the experiments in this chapter \cite{jiang2023mistral7b}. In brief, we required a recent, open model that can be run end-to-end as an embedder on Aoraki without vendor APIs, so we selected Mistral 7B. (For our purposes, we treat a decoder-only transformer as a sentence encoder by mean-pooling the last-layer states.)
 
@@ -632,14 +658,6 @@ To achieve this, we established a simplification of our pipeline through prompt 
 \end{figure}
 
 The prompt we used is as follows:
-
-\lstset{
-  basicstyle=\ttfamily\small,
-  frame=single,
-  xleftmargin=2em,
-  xrightmargin=2em,
-  breaklines=true
-}
 
 \begin{lstlisting}
 System: You are a linguist who identifies verlan (French reversed-syllable slang).
@@ -690,7 +708,7 @@ This section introduces the methodology behind the training models. It first exp
 \subsubsection{The Pipelines}
 Here is a high-level flowchart that highlights only the key components. The complete flowcharts are provided in the appendix.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \begin{adjustwidth}{-2.0cm}{0cm}
   \centering
   \begin{tikzpicture}[
@@ -741,7 +759,7 @@ Here is a high-level flowchart that highlights only the key components. The comp
   \caption{\label{fig:pipeline-overview}A compact view of the four verlan identification pipelines.\footnotesize \\Exp~A: Frozen Encoder + Logistic Regression classifier\\Exp~B: End-to-End Encoder + Linear classifier\\Exp~C: Frozen Encoder + BERT-inspired classifier\\Exp~D: End-to-End Encoder + BERT-inspired classifier}
 \end{figure}
 
-\noindent Before any classifier is applied in all variants (see Fig.~\ref{fig:pipeline-overview}), mean pooling and \(\ell_{2}\) normalization are performed on the pooled sentence representation. ``\textbf{Logistic Regression classifier}'' denotes a scikit-learn logistic regression trained on frozen encoder outputs (no gradients are backpropagated to the encoder). The ``\textbf{Linear classifier}'' refers to the same model (a single linear logit) implemented in PyTorch and trained end-to-end with \texttt{BCEWithLogitsLoss}. The ``\textbf{BERT-inspired classifier}'' is a small non-linear module derived from the standard CLS classifier that ships with BERT; its architecture is
+\noindent Before any classifier is applied in all variants (see Fig.~\ref{fig:pipeline-overview}), mean pooling and \(\ell_{2}\) normalization are performed on the pooled sentence representation. ``Logistic Regression classifier'' denotes a scikit-learn logistic regression trained on frozen encoder outputs (no gradients are backpropagated to the encoder). The ``Linear classifier'' refers to the same model (a single linear logit) implemented in PyTorch and trained end-to-end with \texttt{BCEWithLogitsLoss}. The ``BERT-inspired classifier'' is a small non-linear module derived from the standard CLS classifier that ships with BERT; its architecture is
 \[
 \text{Dropout} \;\to\; \text{Linear}(4096\!\to\!4096) \;\to\; \tanh \;\to\; \text{Dropout} \;\to\; \text{Linear}(4096\!\to\!1).
 \]
@@ -826,7 +844,7 @@ Thus, it would be impractical to connect an entire BERT model after the Mistral 
 Therefore, we only reuse the compact CLS classifier architecture from BERT. This component is the familiar two-layer MLP that usually follows the \texttt{[CLS]} token in BERT, and in our setting it functions solely as a lightweight classifier on top of Mistral embeddings.
 
 %classical BERT
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \begin{adjustwidth}{-0.3cm}{0cm}
 \begin{minipage}{1\textwidth}
@@ -911,7 +929,7 @@ However, because we are performing model fusion\;---\;that is, blending layers f
 \end{enumerate}
 
 %BERT-style
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \begin{minipage}{1\textwidth}
 \begin{adjustwidth}{-2.5cm}{0cm} % shift entire figure 1cm to the left
@@ -1129,7 +1147,7 @@ t-Distributed Stochastic Neighbor Embedding (t-SNE)\footnote{\url{https://en.wik
 and Uniform Manifold Approximation and Projection (UMAP)\footnote{\url{https://umap-learn.readthedocs.io/en/latest/}}, 
 we found that UMAP generally produces the most effective visualisation \cite{pearson1901pca,maaten2008tsne,mcinnes2018umap}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/mistral_bert_umap.png}
     \caption{UMAP visualisations of the embedding space showing verlan tokens (orange) and standard French tokens (blue).}
@@ -1174,13 +1192,13 @@ As mentioned above, each model was run 20 times with 20 different random seeds t
 \paragraph{Metrics}
 We report accuracy and F1 scores derived from a binary confusion matrix where the positive class corresponds to verlan-present sentences. Accuracy is computed as $(TP + TN)/(TP + TN + FP + FN)$, and F1 is the harmonic mean of precision and recall. The matrix is summarised in Figure~\ref{fig:confusion-matrix-legend}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     {\setlength{\tabcolsep}{7pt}
         \renewcommand{\arraystretch}{1.3}%
         \begin{tabular}{>{\centering\arraybackslash}p{2.8cm} >{\centering\arraybackslash}p{3.0cm} >{\centering\arraybackslash}p{3.1cm} >{\centering\arraybackslash}p{3.1cm}}
-            \cellcolor{blue!12}\makecell{\textbf{Total population}\\[-0.2em] $\boldsymbol{= P + N}$} & & \multicolumn{2}{c}{\cellcolor{cyan!22}\textbf{Predicted label}} \\
-            \multirow{2}{*}{\rotatebox[origin=c]{90}{\cellcolor{yellow!28}\makecell{\textbf{Actual}\\\textbf{label}}}} & \cellcolor{yellow!15}\textbf{Positive (P, verlan)} & \cellcolor{green!20}\textbf{True positive (TP)} & \cellcolor{blue!18}\textbf{False negative (FN)} \\
-             & \cellcolor{yellow!10}\textbf{Negative (N, standard)} & \cellcolor{red!18}\textbf{False positive (FP)} & \cellcolor{green!30}\textbf{True negative (TN)} \\
+            \makecell{\textbf{Total population}\\[-0.2em] $\boldsymbol{= P + N}$} & & \multicolumn{2}{c}{\textbf{Predicted label}} \\
+            \multirow{2}{*}{\rotatebox[origin=c]{90}{\makecell{\textbf{Actual}\\\textbf{label}}}} & \textbf{Positive (P, verlan)} & \textbf{True positive (TP)} & \textbf{False negative (FN)} \\
+             & \textbf{Negative (N, standard)} & \textbf{False positive (FP)} & \textbf{True negative (TN)} \\
         \end{tabular}
     }
     \caption{Binary confusion matrix (positive = verlan sentence, negative = standard sentence).}
@@ -1195,13 +1213,11 @@ In this section, we first present the general result of the accuracy and the F1-
 
 Overall, all models produce positive detections\;---\;the accuracy across all models is above 50\%.
 
-\begin{figure}[H]
-  \begin{adjustwidth}{-2cm}{0cm}
+\begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{figures/Accuracy_distribution_4settings.png}
+  \includegraphics[width=0.9\textwidth]{figures/Accuracy_distribution_4settings.png}
   \caption{A general comparison of the F1 score and accuracy across models.}
   \label{fig:total-comparison}
-  \end{adjustwidth}
 \end{figure}
 
 The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7-16 percentage points and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure.
@@ -1212,7 +1228,7 @@ The supervised system that performed the weakest was E2E+LR, as fine-tuning both
 
 The figure below illustrates the performance of the six models on the \textit{Daily Verlan} testing set.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/historical_verlan_comparison.png}
     \caption{Models' performance in common verlan identification.}
@@ -1241,7 +1257,7 @@ Further experiments would be valuable to validate these findings and strengthen 
 
 \subsubsection{Invented Verlan Performance by Model}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/invented_verlan_comparison.png}
     \caption{Invented verlan performance by model.}
@@ -1254,7 +1270,7 @@ On average, there is a clear performance gap between the zero-shot models and th
 
 \subsubsection{Slang Controls Performance by Model}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/slang_controls_comparison.png}
     \caption{Slang control accuracy.}
@@ -1332,6 +1348,9 @@ Type~I and Type~II errors may still occur here.
 Our research presents three key findings. First, all groups demonstrated an increase in accuracy following supervised fine-tuning on the carefully constructed verlan corpus, though there remains a considerable gap from the GPT-5 Codex (High) zero-shot reference. Second, BERT-like classifiers consistently outperformed logistic regression; this indicates that non-linear decision boundaries may be advantageous despite being a frozen encoder. Finally, invented verlan is potentially the most difficult slice as all supervised variants and the zero-shot Mistral baseline fall well short of the reference model.
 
 There are many limitations to consider that drive these conclusions. First, the corpus is small and, by necessity, based on a manual data collection process. Therefore, there will be sparsity and annotation noise that informs what samples are included. Our training budget limited three epochs per run using a single 4-bit quantised encoder, and we intentionally limited the narrow range of hyperparameter sweeps (learning rate, temperature, prompt truncation). We attempted to reduce variance in validation by averaging over 20 seeds, but this will still create wide confidence intervals. The limitations outlined should all be noted in the interpretation of the reported improvements.
+
+\cleardoublepage
+\pagenumbering{gobble}
 %TC:ignore
 \begin{thebibliography}{9}
 
@@ -1629,6 +1648,10 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
 
 
 %TC:ignore
+\cleardoublepage
+\skipsectioncleartrue
+\pagenumbering{Roman}
+\setcounter{page}{1}
 \appendix
 
 \section{Appendix \thesection: Expanded Evaluation Artefacts}
@@ -1636,6 +1659,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
 \begin{table}[H]
     \centering
     \footnotesize
+    \resizebox{0.9\linewidth}{!}{%
     \begin{tabular}{lccccccccc}
         \hline
         Model & Test Acc & Test F1 & Test FP & Test FN & Slang Acc & Slang FP & Verlan Acc & Invented Acc \\
@@ -1645,7 +1669,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
         E2E+LR & $76.7\%\pm7.1$ & $72.9\%\pm7.5$ & 144.9 & 54.1 & 62.6\% & 18.7 & 74.5\% & 54.7\% \\
         E2E+BERT & $84.9\%\pm4.9$ & $80.5\%\pm5.1$ & 71.8 & 56.7 & 81.1\% & 9.4 & 77.0\% & 53.7\% \\
         \hline
-    \end{tabular}
+    \end{tabular}}
     \caption{Hold-out test aggregates (20 seeds) for trained detectors. Percentages report mean $\pm$ standard deviation across seeds; counts are means.}
     \label{tab:appendix-holdout-aggregates}
 \end{table}
@@ -1689,11 +1713,6 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
     \label{fig:invented-lift}
 \end{figure}
 
-
-
-
-% APPENDIX: Dataset schema figure
-
 \section{Appendix \thesection: Dataset schema (detailed)}
 
 \begin{figure}[H]
@@ -1727,6 +1746,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
   },
   connect/.style={-Latex, very thick, black!35}
 }
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=0.8cm]
 
 \node[header, minimum width=7.8cm] (ghead) {GazetteerEntries};
@@ -1776,20 +1796,23 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
   \node[draw=black!10, rounded corners=3pt, fit=(ghead) (gtable) (gnote) (shead) (stable) (snote) (legend), inner sep=6pt] {};
 \end{scope}
 \end{tikzpicture}
+}% end resizebox
 \caption{Detailed field-level schema for the dataset (columns, types, and relations between the lexicon and the sentence corpus).}
 \label{fig:dataset-schema-detailed}
 \end{figure}
 
-\clearpage
-\section*{Appendix \thesection: Source inventory and crawl logs}
+\cleardoublepage
+\skipsectioncleartrue
+\section{Appendix \thesection: Source inventory and crawl logs}
 
 \noindent \textbf{GazetteerEntries (lexicon).} The current extract of \texttt{GazetteerEntries.xlsx} contains 1{,}086 rows (1{,}041 \texttt{gold}, 45 \texttt{bronze}). Entries were normalised from community verlan dictionaries, primarily Dictionnaire de la Zone, Wiktionary/Wiktionnaire, and the Zlang Fandom list. Per-entry URL provenance is still being backfilled; the shipped spreadsheet therefore exposes only the structural fields listed in Section~3.2, while the crawl log in this appendix documents the seed sources.
 
 \noindent \textbf{Sentence corpus.} The \texttt{Sentences\_balanced.xlsx} file records source evidence in the \texttt{reference} field for 5{,}339 of 5{,}684 rows. Two crawl sessions (2~Jul and 6~Jul~2025) are captured in \texttt{accessed\_on}. Table~\ref{tab:source-inventory} summarises the concrete sources that appear in the dataset.
 
-\begin{table}[H]
+\begin{table}[h]
 \centering
 \caption{Source buckets referenced in \texttt{Sentences\_balanced.xlsx}. Counts come from the current spreadsheet (URLs and textual citations combined).}
+\resizebox{1\linewidth}{!}{%
 \begin{tabular}{p{4.4cm} p{2.8cm} p{5.8cm} p{1.8cm}}
 \hline
 \textbf{Source / bucket} & \textbf{Type / licence note} & \textbf{Evidence in dataset} & \textbf{Access window} \\
@@ -1805,7 +1828,7 @@ Social media posts (Twitter/X, TikTok, YouTube) & User-generated text (platform 
 Lyrics databases & Attested media (quotation for research) & 4 URL citations (Paroles.net and related sites) documenting song-based evidence. & 2~Jul \\
 Manual citations (songs, news articles, broadcast transcripts) & Offline / transcribed sources (fair dealing) & 5{,}042 textual references recorded directly in the spreadsheet for items without stable URLs (e.g.\ TF1 Info, Disiz la Peste 2000, Pub M6 Mobile 2011). & 2~Jul \\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:source-inventory}
 \end{table}
 
