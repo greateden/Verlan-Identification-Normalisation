@@ -35,45 +35,45 @@
 \contentsline {paragraph}{Input}{24}{section*.21}%
 \contentsline {paragraph}{Sanitise Text}{24}{section*.22}%
 \contentsline {subparagraph}{Why Not Preserve Upper Cases and Annotation Marks}{24}{section*.23}%
-\contentsline {paragraph}{Tokenisation}{24}{section*.24}%
-\contentsline {paragraph}{Encoder}{24}{section*.25}%
+\contentsline {paragraph}{Tokenisation}{25}{section*.24}%
+\contentsline {paragraph}{Encoder}{25}{section*.25}%
 \contentsline {paragraph}{Post-encoder processing}{25}{section*.26}%
 \contentsline {subparagraph}{Masking}{25}{section*.27}%
-\contentsline {subparagraph}{Mean Pooling}{25}{section*.28}%
+\contentsline {subparagraph}{Mean Pooling}{26}{section*.28}%
 \contentsline {subparagraph}{L2 Normalisation}{26}{section*.29}%
 \contentsline {paragraph}{The Classifiers\tmspace +\thickmuskip {.2777em}---\tmspace +\thickmuskip {.2777em}Logistic Regression and BERT-inspired MLPs}{26}{section*.30}%
-\contentsline {subparagraph}{Logistic Regression}{26}{section*.31}%
+\contentsline {subparagraph}{Logistic Regression}{27}{section*.31}%
 \contentsline {subparagraph}{BERT-Inspired Classifier}{27}{section*.32}%
-\contentsline {subparagraph}{Loss and optimisation}{30}{section*.35}%
-\contentsline {paragraph}{The Sigmoid Threshold}{31}{section*.36}%
-\contentsline {subsubsection}{\numberline {4.3.2}The Usage of the Dataset}{31}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Environment and Hyperparameters}{32}{subsubsection.4.3.3}%
-\contentsline {paragraph}{Environment}{32}{figure.caption.38}%
-\contentsline {paragraph}{Hyperparameters}{32}{section*.39}%
-\contentsline {subparagraph}{Seeds}{32}{section*.40}%
-\contentsline {subparagraph}{Batch Size}{32}{section*.41}%
-\contentsline {subparagraph}{Maximum Length}{32}{section*.42}%
+\contentsline {subparagraph}{Loss and optimisation}{29}{section*.35}%
+\contentsline {paragraph}{The Sigmoid Threshold}{32}{section*.36}%
+\contentsline {subsubsection}{\numberline {4.3.2}The Usage of the Dataset}{32}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Environment and Hyperparameters}{33}{subsubsection.4.3.3}%
+\contentsline {paragraph}{Environment}{33}{figure.caption.38}%
+\contentsline {paragraph}{Hyperparameters}{33}{section*.39}%
+\contentsline {subparagraph}{Seeds}{33}{section*.40}%
+\contentsline {subparagraph}{Batch Size}{33}{section*.41}%
+\contentsline {subparagraph}{Maximum Length}{33}{section*.42}%
 \contentsline {subparagraph}{Quantisation}{33}{section*.43}%
-\contentsline {subparagraph}{Epochs}{33}{section*.44}%
-\contentsline {section}{\numberline {5}Evaluations, Results, and Analyses}{34}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{34}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Embedding Space}{34}{subsubsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.2}Testing Datasets}{34}{subsubsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.3}Testing Schema}{36}{subsubsection.5.1.3}%
-\contentsline {paragraph}{Zero-shot Models}{36}{section*.46}%
-\contentsline {paragraph}{Number of Trials}{36}{section*.47}%
-\contentsline {paragraph}{Metrics}{36}{section*.48}%
-\contentsline {subsection}{\numberline {5.2}Results and Analyses}{37}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}General F1-Score and Accuracy}{37}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Common Verlan Performance by Model}{38}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Invented Verlan Performance by Model}{39}{subsubsection.5.2.3}%
-\contentsline {subsubsection}{\numberline {5.2.4}Slang Controls Performance by Model}{40}{subsubsection.5.2.4}%
-\contentsline {paragraph}{A Discussion on the Hook}{41}{section*.54}%
-\contentsline {subsubsection}{\numberline {5.2.5}And Yet Something Advanced}{41}{subsubsection.5.2.5}%
-\contentsline {paragraph}{Is E2E+BERT the Real King?}{41}{section*.55}%
-\contentsline {paragraph}{Small Dataset Caused More Instability?}{42}{section*.57}%
-\contentsline {paragraph}{Again: Is E2E+BERT the Real King?}{43}{section*.59}%
-\contentsline {section}{\numberline {6}Conclusion and Limitation}{45}{section.6}%
+\contentsline {subparagraph}{Epochs}{34}{section*.44}%
+\contentsline {section}{\numberline {5}Evaluations, Results, and Analyses}{35}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{35}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Embedding Space}{35}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Testing Datasets}{35}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Testing Schema}{37}{subsubsection.5.1.3}%
+\contentsline {paragraph}{Zero-shot Models}{37}{section*.46}%
+\contentsline {paragraph}{Number of Trials}{37}{section*.47}%
+\contentsline {paragraph}{Metrics}{37}{section*.48}%
+\contentsline {subsection}{\numberline {5.2}Results and Analyses}{38}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}General F1-Score and Accuracy}{38}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Common Verlan Performance by Model}{39}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Invented Verlan Performance by Model}{40}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Slang Controls Performance by Model}{41}{subsubsection.5.2.4}%
+\contentsline {paragraph}{A Discussion on the Hook}{42}{section*.54}%
+\contentsline {subsubsection}{\numberline {5.2.5}And Yet Something Advanced}{42}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Is E2E+BERT the Real King?}{42}{section*.55}%
+\contentsline {paragraph}{Small Dataset Caused More Instability?}{43}{section*.57}%
+\contentsline {paragraph}{Again: Is E2E+BERT the Real King?}{44}{section*.59}%
+\contentsline {section}{\numberline {6}Conclusion and Limitation}{46}{section.6}%
 \contentsline {section}{\numberline {A}Appendix A: Expanded Evaluation Artefacts}{I}{appendix.A}%
 \contentsline {section}{\numberline {B}Appendix B: Dataset schema (detailed)}{III}{appendix.B}%
 \contentsline {section}{\numberline {C}Appendix C: Source inventory and crawl logs}{IV}{appendix.C}%
