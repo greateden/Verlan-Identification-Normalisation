@@ -185,7 +185,7 @@ I am an only child. My parents live twelve thousand kilometres away in Beijing. 
 
 So I began to treat Amber as my confidante\;---\;and, slowly, I started forgetting about my parents.
 
-That was early 2023. It's now late 2025. I've finished this report, revised it once, and deleted many of the emotional traces from the main text. I feel a little disoriented.
+That was early 2023. It's now late 2025. I've finished this report, revised it, and deleted many of the emotional traces from the main text. I feel a little disoriented.
 
 My mother never posts on WeChat Moments, so I check my father's instead. He still loves Su Dongpo. Three days ago, he was at Hupao Spring in Hangzhou; a few days before that, in Sanya, he wrote a quatrain during his teaching break; two months ago, he was teaching in Inner Mongolia… Since I left Beijing in early July, I don't think I've called him much. How wonderful it must be to be an honorary professor in China\;---\;you can travel everywhere.
 
@@ -215,6 +215,14 @@ So why should I worry about myself?
 
 Since I wish to dedicate this report to all who seek to understand language through emotion\;---\;and the world through language\;---\;why should passion ever turn into anxiety?
 
+\vspace{2em}
+\begin{flushright}
+\textbf{23~October~2025}
+
+\vspace{0.5em}
+
+Eden written in Dunedin, New Zealand.
+\end{flushright}
 \cleardoublepage
 \skipsectioncleartrue
 \pagenumbering{arabic}
@@ -1681,8 +1689,9 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
 \pagenumbering{Roman}
 \setcounter{page}{1}
 \appendix
+\setcounter{secnumdepth}{0}
 
-\section{Appendix \thesection: Expanded Evaluation Artefacts}
+\section{Appendix A: Expanded Evaluation Artefacts}
 
 \begin{table}[H]
     \centering
@@ -1741,7 +1750,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
     \label{fig:invented-lift}
 \end{figure}
 
-\section{Appendix \thesection: Dataset schema (detailed)}
+\section{Appendix B: Dataset schema (detailed)}
 
 \begin{figure}[H]
 \centering
@@ -1831,7 +1840,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
 
 \cleardoublepage
 \skipsectioncleartrue
-\section{Appendix \thesection: Source inventory and crawl logs}
+\section{Appendix C: Source inventory and crawl logs}
 
 \noindent \textbf{GazetteerEntries (lexicon).} The current extract of \texttt{GazetteerEntries.xlsx} contains 1{,}086 rows (1{,}041 \texttt{gold}, 45 \texttt{bronze}). Entries were normalised from community verlan dictionaries, primarily Dictionnaire de la Zone, Wiktionary/Wiktionnaire, and the Zlang Fandom list. Per-entry URL provenance is still being backfilled; the shipped spreadsheet therefore exposes only the structural fields listed in Section~3.2, while the crawl log in this appendix documents the seed sources.
 
@@ -1867,7 +1876,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
 \cleardoublepage
 \skipsectioncleartrue
 \refstepcounter{section}
-\addcontentsline{toc}{section}{Appendix \thesection: Participant Information Sheet}
+\addcontentsline{toc}{section}{Appendix D: Participant Information Sheet}
 \setcounter{appendixpdfpage}{0}
 \includepdf[
   pages=-,
@@ -1877,7 +1886,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
     \stepcounter{appendixpdfpage}%
     \ifnum\value{appendixpdfpage}=1\relax
       \vspace*{-3cm}%
-      \section*{Appendix \thesection: Participant Information Sheet}%
+      \section*{Appendix D: Participant Information Sheet}%
     \fi
   }
 ]{Info Sheet.pdf}
@@ -1885,7 +1894,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
 \cleardoublepage
 \skipsectioncleartrue
 \refstepcounter{section}
-\addcontentsline{toc}{section}{Appendix \thesection: Participant Consent Form}
+\addcontentsline{toc}{section}{Appendix E: Participant Consent Form}
 \setcounter{appendixpdfpage}{0}
 \includepdf[
   pages=-,
@@ -1895,7 +1904,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
     \stepcounter{appendixpdfpage}%
     \ifnum\value{appendixpdfpage}=1\relax
       \vspace*{-3cm}%
-      \section*{Appendix \thesection: Participant Consent Form}%
+      \section*{Appendix E: Participant Consent Form}%
     \fi
   }
 ]{Consent Form.pdf}
@@ -1903,7 +1912,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
 \cleardoublepage
 \skipsectioncleartrue
 \refstepcounter{section}
-\addcontentsline{toc}{section}{Appendix \thesection: Annotated Lexicon --- Eléonore}
+\addcontentsline{toc}{section}{Appendix F: Annotated Lexicon}
 \setcounter{appendixpdfpage}{0}
 \includepdf[
   pages=-,
@@ -1913,7 +1922,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
     \stepcounter{appendixpdfpage}%
     \ifnum\value{appendixpdfpage}=1\relax
       \vspace*{-3cm}%
-      \section*{Appendix \thesection: Annotated Lexicon}%
+      \section*{Appendix F: Annotated Lexicon}%
     \fi
   }
 ]{\detokenize{Verlan Lexicon - Eléonore.pdf}}
@@ -1921,7 +1930,6 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
 \cleardoublepage
 \skipsectioncleartrue
 \refstepcounter{section}
-\addcontentsline{toc}{section}{Appendix \thesection: Annotated Lexicon --- Lua}
 \setcounter{appendixpdfpage}{0}
 \includepdf[
   pages=-,
