@@ -570,16 +570,17 @@ Here are the evidence levels we have used in this report:
 \begin{table}[H]
 \centering
 \caption{Evidence levels applied across the verlan dataset.}
-\resizebox{1\linewidth}{!}{%
-\begin{tabular}{c|l|l}
+\resizebox{0.9\linewidth}{!}{%
+\begin{tabular}{c|p{3.5cm}|p{3.5cm}|p{3.5cm}}
 \hline
-\textbf{Level} & \textbf{Definition} & \textbf{Source} \\
+\textbf{Level} & \textbf{E1 (Attested)} & \textbf{E2 (Unverified)} & \textbf{E3 (Synthetic)} \\
 \hline
-E1 (Attested)   & Exact text from a public page; URL and date of access logged & Publicly available reference (URL/citation if available; archive/screenshot when possible) \\
-E2 (Unverified) & Credible web sentence with incomplete/unstable source authority & Web text with no available reference \\
-E3 (Synthetic)  & LLM-generated for competency when no E1 authorised under budget & OpenAI o3 (template prompt) \\
+\textbf{Definition} & Exact text from a public page; URL and date of access logged & Credible web sentence with incomplete/unstable source authority & LLM-generated for competency when no E1 authorised under budget \\
 \hline
-\end{tabular}}
+\textbf{Source} & Publicly available reference (URL/citation if available; archive/screenshot when possible) & Web text with no available reference & OpenAI o3 (template prompt) \\
+\hline
+\end{tabular}%
+}
 \label{tab:verlan_tiers}
 \end{table}
 
@@ -614,7 +615,7 @@ Other columns (e.g., \texttt{origin\_lang}, \texttt{note}, \texttt{accessed\_on}
     \centering
     \includegraphics[width=2cm]{figures/mistral-logo.png}
   \end{minipage}
-  \caption*{\scriptsize CamemBERT and Mistral AI Logos}
+  \caption*{\small CamemBERT and Mistral AI Logos}
 \end{figure}
 
 We chose \textbf{Mistral 7B}\footnote{\url{https://mistral.ai/news/announcing-mistral-7b}} (Mistral AI) as the base model for the experiments in this chapter \cite{jiang2023mistral7b}. In brief, we required a recent, open model that can be run end-to-end as an embedder on the computing cluster without vendor APIs, so we selected Mistral 7B. (For our purposes, we treat a decoder-only transformer as a sentence encoder by mean-pooling the last-layer states.)
@@ -1678,7 +1679,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
 \begin{table}[H]
     \centering
     \footnotesize
-    \resizebox{0.9\linewidth}{!}{%
+    \resizebox{1\linewidth}{!}{%
     \begin{tabular}{lccccccccc}
         \hline
         Model & Test Acc & Test F1 & Test FP & Test FN & Slang Acc & Slang FP & Verlan Acc & Invented Acc \\
@@ -1836,7 +1837,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
 \hline
 \textbf{Source / bucket} & \textbf{Type / licence note} & \textbf{Evidence in dataset} & \textbf{Access window} \\
 \hline
-Dictionnaire de la Zone (\texttt{dictionnairedelazone.fr}) & Community dictionary (site terms reviewed) & 209 references (\(62\) full URLs, \(147\) bare domain notes) supporting lexicon entries and example sentences. & 2~Jul, 6~Jul \\
+Dictionnaire de la Zone & Community dictionary (site terms reviewed) & 209 references (\(62\) full URLs, \(147\) bare domain notes) supporting lexicon entries and example sentences. & 2~Jul, 6~Jul \\
 Wiktionary / Wiktionnaire & Lexicographic (CC BY-SA) & 28 cites: 22 page URLs plus 6 labelled quotations stored as textual references. & 2~Jul \\
 LangueFrancaise.net & Forum/dictionary hybrid (site terms) & 12 URL citations used for sense confirmation and usage notes. & 2~Jul \\
 Linternaute lexique & Lexicographic portal (open access) & 7 URL citations cross-checking definitions and variants. & 2~Jul \\
