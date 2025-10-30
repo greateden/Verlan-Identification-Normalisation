@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-✅ Deadline passed: -12 days, 13 hours, 28 minutes
+✅ Deadline passed: -13 days, 12 hours, 38 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -701,6 +701,11 @@ project-root/
 │   │   ├── translation.md
 │   │   └── verlanMla-LEVERLANOU-1991.pdf
 │   └── report folder/
+│       ├── Consent Form.pdf
+│       ├── EDITABLE info sheet and consent form.docx
+│       ├── Info Sheet.pdf
+│       ├── Verlan Lexicon - Eléonore.pdf
+│       ├── Verlan Lexicon - Lua.pdf
 │       ├── cosc4x0style.sty
 │       ├── figures/
 │       │   ├── Accuracy_distribution_4settings.png
@@ -723,12 +728,14 @@ project-root/
 │       ├── gkbib_unsrt.bst
 │       ├── myreport V0.pdf
 │       ├── myreport V1.1.pdf
+│       ├── myreport V1.2.1.pdf
+│       ├── myreport V1.2.pdf
+│       ├── myreport V1.3.pdf
 │       ├── myreport.aux
 │       ├── myreport.fdb_latexmk
 │       ├── myreport.fls
 │       ├── myreport.log
 │       ├── myreport.out
-│       ├── myreport.pdf
 │       ├── myreport.synctex.gz
 │       ├── myreport.tex
 │       ├── myreport.toc
@@ -769,6 +776,7 @@ project-root/
 ├── myreport.log
 ├── myreport.toc
 ├── myreport.xdv
+├── report_text.txt
 ├── scripts/
 │   ├── aoraki/
 │   │   ├── create_env.sh
