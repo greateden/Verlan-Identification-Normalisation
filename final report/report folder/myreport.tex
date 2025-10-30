@@ -762,14 +762,15 @@ Here is a high-level flowchart that highlights only the key components. The comp
 \begin{itemize}
   \item \textbf{Frozen+LR (Experiment A)} --- Frozen SFR-Embedding-Mistral encoder paired with a scikit-learn logistic-regression head.
   \item \textbf{E2E+LR (Experiment B)} --- Trainable SFR-Embedding-Mistral encoder with a jointly optimised single-logit linear head.
-  \item \textbf{Frozen+BERT (Experiment C)} --- Frozen encoder with the lightweight BERT-style multi-layer perceptron classifier.
-  \item \textbf{E2E+BERT (Experiment D)} --- Fully fine-tuned encoder plus the same BERT-inspired classifier.
+  \item \textbf{Frozen+BERT (Experiment C)} --- Frozen encoder with the lightweight BERT-style multi-layer perceptron classifier (no BERT Transformer layers are reused).
+  \item \textbf{E2E+BERT (Experiment D)} --- Fully fine-tuned encoder plus the same BERT-inspired classifier head.
 \end{itemize}
 
 \noindent Before any classifier is applied in all variants (see Fig.~\ref{fig:pipeline-overview}), mean pooling and \(\ell_{2}\) normalisation are performed on the pooled sentence representation. ``Logistic Regression classifier'' denotes a scikit-learn logistic regression trained on frozen encoder outputs (no gradients are backpropagated to the encoder). The ``Linear classifier'' refers to the same model (a single linear logit) implemented in PyTorch and trained end-to-end with \texttt{BCEWithLogitsLoss}. The ``BERT-inspired classifier'' is a small non-linear module derived from the standard CLS classifier that ships with BERT; its architecture is
 \[
 \text{Dropout} \;\to\; \text{Linear}(4096\!\to\!4096) \;\to\; \tanh \;\to\; \text{Dropout} \;\to\; \text{Linear}(4096\!\to\!1).
 \]
+It operates purely on the frozen Mistral embeddings. No BERT Transformer blocks are reused.
 The ``\texttt{Sigmoid 0.5}'' box is schematic: when using \texttt{BCEWithLogitsLoss}, a 0.5 decision boundary is implied at inference. We discuss frozen vs.\ trainable encoder settings later in this section; they are shown together here for compactness.
 
 
@@ -829,7 +830,7 @@ In short, mean pooling computes the average along the $T$ dimension and yields o
 Token vectors may vary in magnitude. In our application, we are only concerned with the direction, not the magnitude, so we L2-normalise the pooled sentence vector to unit length (to project it onto the unit hypersphere). This standard step ensures stable behaviour of cosine-style comparisons and comparability of scores across sentences. This numeric normalisation is separate from the earlier text sanitisation step; here we operate on the 4096-dimensional embedding produced by the encoder.
 
 \paragraph{The Classifiers\;---\;Logistic Regression and BERT-inspired MLPs}
-The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and a shallow BERT-inspired multi-layer perceptron, but also in the implementation framework, namely scikit-learn versus PyTorch.
+The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and a shallow BERT-inspired multi-layer perceptron (the BERT \texttt{[CLS]} head operating on frozen Mistral embeddings), but also in the implementation framework, namely scikit-learn versus PyTorch.
 
 \subparagraph{Logistic Regression}
 For the experiment using a frozen encoder with a Logistic Regression classifier, we chose to employ scikit-learn (sklearn)\footnote{\url{https://scikit-learn.org}}. 
@@ -1020,51 +1021,61 @@ We continue to refer to it as \textit{BERT}, but use the term \textit{BERT-style
 
 \subparagraph{Loss and optimisation}
 
-All PyTorch-trained classifiers (Linear and BERT-style) use \texttt{BCEWithLogitsLoss}, which combines the sigmoid activation and binary cross-entropy in a numerically stable form. 
+All PyTorch-trained classifiers (Linear and BERT-style) use \texttt{BCEWithLogitsLoss}, which combines the sigmoid activation and binary cross-entropy in a numerically stable form.
 We optimise them with AdamW \cite{paszke2019pytorch,loshchilov2019adamw}; no additional calibration or auxiliary losses are applied.
 
 This formulation prevents numerical underflow or overflow when the model becomes overconfident\;---\;that is, when the logit $z$ is very large or very small. In such cases, a direct computation of BCE might yield $0$ or $\infty$, causing the training to crash or the gradient to become \texttt{NaN}. Hence, \texttt{BCEWithLogitsLoss} is more numerically stable than the pure BCE function.
 
-\textit{Adaptive Moment Estimation (Adam)} is a self-adaptive learning rate optimisation algorithm \cite{kingma2014adam}. It elegantly integrates concepts from mathematics, physics, and computer science\;---\;it is based on the idea of momentum\footnote{\url{https://en.wikipedia.org/wiki/Momentum}} and takes into account both the first-order moment (the mean of gradients) and the second-order moment (the uncentred variance of gradients).
-
-For each iteration $t$, given the gradient $g_t = \nabla_\theta \mathcal{L}(\theta_t)$,  
-the Adam update rules are defined as follows:
-\begin{equation}
-\begin{aligned}
-m_t &= \beta_1 \, m_{t-1} + (1 - \beta_1) \, g_t \\
-v_t &= \beta_2 \, v_{t-1} + (1 - \beta_2) \, g_t^2 \\
-\hat{m}_t &= \frac{m_t}{1 - \beta_1^t} \\
-\hat{v}_t &= \frac{v_t}{1 - \beta_2^t} \\
-\theta_{t+1} &= \theta_t - \alpha \, \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
-\end{aligned}
-\end{equation}
-
-where:
-\begin{itemize}
-    \item $\beta_1, \beta_2$ are the exponential decay rates for the first and second moment estimates (commonly 0.9 and 0.999);
-    \item $\epsilon$ is a small constant for numerical stability;
-    \item $\alpha$ is the learning rate;
-    \item $m_t$ is the first moment estimate;
-    \item $v_t$ is the second moment estimate.
-\end{itemize}
 
 This split inevitably leaves the validation portion smaller than ideal; to mitigate that, each experiment runs with 20 independent seeds and we report aggregate metrics together with variance in the results discussion.
 
-\textit{Adam with Decoupled Weight Decay (AdamW)} further improves the optimisation process by decoupling the weight decay from the gradient update, thus correcting the regularisation deficiency in Adam \cite{loshchilov2019adamw}:
-\begin{equation}
-\begin{aligned}
-m_t &= \beta_1 \, m_{t-1} + (1 - \beta_1) \, g_t \\
-v_t &= \beta_2 \, v_{t-1} + (1 - \beta_2) \, g_t^2 \\
-\hat{m}_t &= \frac{m_t}{1 - \beta_1^t}, \quad
-\hat{v}_t = \frac{v_t}{1 - \beta_2^t} \\
-\theta_{t+1} &= \theta_t - \alpha \left( \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} + \lambda \theta_t \right)
-\end{aligned}
-\end{equation}
+% \subparagraph{Loss and optimisation}
 
-where $\lambda$ is the weight decay coefficient.  
-Unlike Adam, AdamW does not add the L2 regularisation term directly to the loss function; instead, it applies the decay explicitly to the weights. This modification ensures a consistent regularisation effect and often leads to better generalisation performance.
+% All PyTorch-trained classifiers (Linear and BERT-style) use \texttt{BCEWithLogitsLoss}, which combines the sigmoid activation and binary cross-entropy in a numerically stable form. 
+% We optimise them with AdamW \cite{paszke2019pytorch,loshchilov2019adamw}; no additional calibration or auxiliary losses are applied.
 
-By applying these two techniques\;---\;a numerically stable loss function and a decoupled regularisation optimiser\;---\;the model is expected to achieve improved convergence stability and higher predictive accuracy.
+% This formulation prevents numerical underflow or overflow when the model becomes overconfident\;---\;that is, when the logit $z$ is very large or very small. In such cases, a direct computation of BCE might yield $0$ or $\infty$, causing the training to crash or the gradient to become \texttt{NaN}. Hence, \texttt{BCEWithLogitsLoss} is more numerically stable than the pure BCE function.
+
+% \textit{Adaptive Moment Estimation (Adam)} is a self-adaptive learning rate optimisation algorithm \cite{kingma2014adam}. It elegantly integrates concepts from mathematics, physics, and computer science\;---\;it is based on the idea of momentum\footnote{\url{https://en.wikipedia.org/wiki/Momentum}} and takes into account both the first-order moment (the mean of gradients) and the second-order moment (the uncentred variance of gradients).
+
+% % For each iteration $t$, given the gradient $g_t = \nabla_\theta \mathcal{L}(\theta_t)$,  
+% % the Adam update rules are defined as follows:
+% % \begin{equation}
+% % \begin{aligned}
+% % m_t &= \beta_1 \, m_{t-1} + (1 - \beta_1) \, g_t \\
+% % v_t &= \beta_2 \, v_{t-1} + (1 - \beta_2) \, g_t^2 \\
+% % \hat{m}_t &= \frac{m_t}{1 - \beta_1^t} \\
+% % \hat{v}_t &= \frac{v_t}{1 - \beta_2^t} \\
+% % \theta_{t+1} &= \theta_t - \alpha \, \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
+% % \end{aligned}
+% % \end{equation}
+
+% % where:
+% % \begin{itemize}
+% %     \item $\beta_1, \beta_2$ are the exponential decay rates for the first and second moment estimates (commonly 0.9 and 0.999);
+% %     \item $\epsilon$ is a small constant for numerical stability;
+% %     \item $\alpha$ is the learning rate;
+% %     \item $m_t$ is the first moment estimate;
+% %     \item $v_t$ is the second moment estimate.
+% % \end{itemize}
+
+% This split inevitably leaves the validation portion smaller than ideal; to mitigate that, each experiment runs with 20 independent seeds and we report aggregate metrics together with variance in the results discussion.
+
+% \textit{Adam with Decoupled Weight Decay (AdamW)} further improves the optimisation process by decoupling the weight decay from the gradient update, thus correcting the regularisation deficiency in Adam \cite{loshchilov2019adamw}:
+% % \begin{equation}
+% % \begin{aligned}
+% % m_t &= \beta_1 \, m_{t-1} + (1 - \beta_1) \, g_t \\
+% % v_t &= \beta_2 \, v_{t-1} + (1 - \beta_2) \, g_t^2 \\
+% % \hat{m}_t &= \frac{m_t}{1 - \beta_1^t}, \quad
+% % \hat{v}_t = \frac{v_t}{1 - \beta_2^t} \\
+% % \theta_{t+1} &= \theta_t - \alpha \left( \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} + \lambda \theta_t \right)
+% % \end{aligned}
+% % \end{equation}
+
+% % where $\lambda$ is the weight decay coefficient.  
+% Unlike Adam, AdamW does not add the L2 regularisation term directly to the loss function; instead, it applies the decay explicitly to the weights. This modification ensures a consistent regularisation effect and often leads to better generalisation performance.
+
+% By applying these two techniques\;---\;a numerically stable loss function and a decoupled regularisation optimiser\;---\;the model is expected to achieve improved convergence stability and higher predictive accuracy.
 
 \paragraph{The Sigmoid Threshold}
 
@@ -1226,9 +1237,9 @@ Overall, all models produce positive detections\;---\;the accuracy across all mo
   \label{fig:total-comparison}
 \end{figure}
 
-The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7-16 percentage points and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure.
+The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7-16 percentage points and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers (the shallow \texttt{[CLS]} head on frozen Mistral embeddings) also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure.
 
-The supervised system that performed the weakest was E2E+LR (Experiment~B), as fine-tuning both the encoder, as well as a linear classifier, does introduce a level of variance to this small dataset that does not unlock any additional capacity compared to E2E, without the additional training. Conversely, E2E+BERT (Experiment~D) achieved the strongest supervised performance indicating access to the adapted encoder provides some benefit to the non-linear classifier. However, both BERT-based variants are still behind the zero-shot GPT-5 Codex (High) reference, which achieved 91.8\% accuracy without training on the task.
+The supervised system that performed the weakest was E2E+LR (Experiment~B), as fine-tuning both the encoder, as well as a linear classifier, does introduce a level of variance to this small dataset that does not unlock any additional capacity compared to E2E, without the additional training. Conversely, E2E+BERT (Experiment~D) achieved the strongest supervised performance indicating access to the adapted encoder provides some benefit to the non-linear classifier. However, both \texttt{[CLS]}-head variants are still behind the zero-shot GPT-5 Codex (High) reference, which achieved 91.8\% accuracy without training on the task.
 
 \subsubsection{Common Verlan Performance by Model}
 
@@ -1294,7 +1305,7 @@ The GPT-5 zero-shot model continues to perform as the overall best model.
 \paragraph{A Discussion on the Hook}
 Returning to the hook, the results of these two analyses seem to suggest something intriguing\;---\;the models may have learned to distinguish sentences that \textit{do not} contain verlan, yet they may not have fully learned to identify sentences that \textit{do}. 
 Since this is a binary classification task, model performance could appear to improve simply by recognising what is \textit{no} rather than what is \textit{yes}. 
-However, we argue that in cases where ``not no'' is not equivalent to ``yes\;---\;for instance, in a three-way classification setting\;---\;the model's performance would likely deteriorate significantly compared to this binary task.
+However, we argue that in cases where ``not no'' is not equivalent to ``yes''\;---\;for instance, in a three-way classification setting\;---\;the model's performance would likely deteriorate significantly compared to this binary task.
 
 \subsubsection{And Yet Something Advanced}
 
@@ -1362,35 +1373,35 @@ There are many limitations to consider that drive these conclusions. First, the 
 %TC:ignore
 \begin{thebibliography}{9}
 
-\bibitem{rajabov2025} 
+\bibitem{rajabov2025}
 Radjabov, Ruslan Rajabmurodovich. \textit{Understanding ``verlan'' in the French Language}. 
 Web of Scientist: International Scientific Research Journal, vol. 6, no. 3, 2025, pp. 368-372. 
 Available at: \url{https://webofjournals.com/index.php/3/article/view/3264}.
 
-\bibitem{bach2018} 
+\bibitem{bach2018}
 Bach, Xavier. \textit{Tracing the origins of verlan in an early nineteenth century text}. 
 Journal of French Language Studies, vol. 28, no. 1, 2018, pp. 1-18. 
 Cambridge University Press. DOI: 10.1017/S0959269516000221.
 
-\bibitem{evolutionverlan} 
+\bibitem{evolutionverlan}
 Olivier Sécardin. \textit{Évolution du verlan, marqueur social et identitaire, comme reflet de la langue et de la société françaises}. 
 Synergies Europe, no. 3, 2008, pp. 223-232. 
 Available at: \url{https://journal.lib.uoguelph.ca/index.php/synergies/article/download/1037/1859?inline=1}.
 
-\bibitem{rua2005} 
+\bibitem{rua2005}
 Rúa, Paula López. ``Shortening Devices in Text Messaging.'' 
 \textit{Journal of Computer-Mediated Communication}, vol. 10, no. 4, July 2005. 
 Wiley. DOI: 10.1111/j.1083-6101.2005.tb00268.x.
 
-\bibitem{hajiyeva2025}  
+\bibitem{hajiyeva2025}
 Hajiyeva, Bulbul. ``Translating Idioms and Slang: Problems, Strategies, and Cultural Implications.''  
 Acta Globalis Humanitatis et Linguarum, vol. 2, no. 2, 2025, pp. 284-293. DOI: 10.69760/aghel.025002123.  
 
-\bibitem{deepl2020} 
+\bibitem{deepl2020}
 DeepL. ``DeepL Translator translates texts using artificial neural networks. These networks are trained on many millions of translated texts.'' 
 \textit{DeepL Blog}, 2020. Available at: \url{https://www.deepl.com/en/blog/how-does-deepl-work}.
 
-\bibitem{wu2016} 
+\bibitem{wu2016}
 Wu, Yonghui, et al. ``Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.'' 
 arXiv preprint arXiv:1609.08144, 2016. Available at: \url{https://arxiv.org/abs/1609.08144}.
 
@@ -1402,25 +1413,25 @@ Michel, Paul, and Graham Neubig. ``MTNT: A Testbed for Machine Translation of No
 Zurbuchen, Lucas, and Rob Voigt.  
 \textit{A Computational Analysis and Exploration of Linguistic Borrowings in French Rap Lyrics}.  
 In *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics\;---\;Student Research Workshop (ACL SRW 2024)*, 2024, pp. 200-208.  
-DOI: 10.18653/v1/2024.acl-srw.27.  
+DOI: 10.18653/v1/2024.acl-srw.27.
 
 \bibitem{podhorna2020rapcor}
-Podhorná-Polická, Alena.  
+Podhorná-Polická, Alena.
 \textit{RapCor, Francophone Rap Songs Text Corpus}.  
 In *Proceedings of the Fourteenth Workshop on Recent Advances in Slavonic Natural Language Processing (RASLAN 2020)*, 2020, pp. 95-102.  
 Available at: \url{https://nlp.fi.muni.cz/raslan/raslan20.pdf#page=95}.  % (no DOI found)
 
 \bibitem{mekki2021tremolo}
-Mekki, Jade; Lecorvé, Gwénolé; Battistelli, Delphine; Béchet, Nicolas.  
+Mekki, Jade; Lecorvé, Gwénolé; Battistelli, Delphine; Béchet, Nicolas.
 \textit{TREMoLo-Tweets: A Multi-Label Corpus of French Tweets for Language Register Characterization}.  
 In *Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021)*, Held Online, INCOMA Ltd., Sep 1-3, 2021, pp. 950-958.  
-DOI: 10.26615/978-954-452-072-4\_108.  
+DOI: 10.26615/978-954-452-072-4\_108.
 
 \bibitem{panckhurst202088milsms}
-Panckhurst, Rachel; Lopez, Cédric; Roche, Mathieu.  
+Panckhurst, Rachel; Lopez, Cédric; Roche, Mathieu.
 \textit{A French text-message corpus: 88milSMS. Synthesis and usage}.  
 Corpus [En ligne], 20 | 2020 (mis en ligne le 28 janvier 2020).  
-DOI: 10.4000/corpus.4852.  
+DOI: 10.4000/corpus.4852.
 
 \bibitem{pei2019slang}
 Pei, Zhengqi, Zhewei Sun, and Yang Xu.  
@@ -1432,62 +1443,62 @@ Available at: \url{https://aclanthology.org/K19-1082/}.  % (ACL Anthology entry\
 Sun, Zhewei, Qian Hu, et al.  
 \textit{Toward Informal Language Processing: Knowledge of Slang in Large Language Models}.  
 In *Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL 2024)*, 2024.  
-DOI: 10.18653/v1/2024.naacl-long.94.  
+DOI: 10.18653/v1/2024.naacl-long.94.
 
 \bibitem{slangornot2024}
-Anonymous.  
+Anonymous.
 \textit{Slang or Not? Exploring NLP Techniques for Slang Detection Using the SlangTrack Dataset}.  
 ACL ARR (OpenReview) submission, December 2024 (ACL ARR 2024 December).  
 Available at: \url{https://openreview.net/forum?id=bISO3DD8sU}.
 
 \bibitem{dhuliawala2016slangnet}
-Dhuliawala, Shehzaad; Kanojia, Diptesh; Bhattacharyya, Pushpak.  
+Dhuliawala, Shehzaad; Kanojia, Diptesh; Bhattacharyya, Pushpak.
 \textit{SlangNet: A WordNet like Resource for Slang Words}.  
 In: Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC 2016).  
 Portorož, Slovenia (2016).  
 Available at: \url{https://www.cse.iitb.ac.in/~pb/papers/lrec16-slangnet.pdf}.
 
 \bibitem{wu2018slangsd}
-Wu, Tianyang; Morstatter, Fred; Liu, Huan; et al.  
+Wu, Tianyang; Morstatter, Fred; Liu, Huan; et al.
 \textit{SlangSD: Building, Expanding, and Using a Sentiment Dictionary of Slang Words for Short-Text Sentiment Classification}.  
 Language Resources and Evaluation (2018).  
-DOI: 10.1007/s10579-018-9416-0.  
+DOI: 10.1007/s10579-018-9416-0.
 
 \bibitem{gupta2019slangzy}
-Gupta, Vishal; Rani, Rekha; et al.  
+Gupta, Vishal; Rani, Rekha; et al.
 \textit{SLANGZY: A Slang Word Recognition System for Hindi-English Code-Mixed Social Media Text}.  
 In: Proceedings of the 6th Workshop on South and Southeast Asian Natural Language Processing (WSSANLP 2019).  
 Kolkata, India (2019).  
 Available at: \url{https://aclanthology.org/K19-1082.pdf}.
 
 \bibitem{dictionnaire2024chilleur}
-Parent, Philippe; Parent, André.  
-\textit{Dictionnaire du chilleur}.  
+Parent, Philippe; Parent, André.
+\textit{Dictionnaire du chilleur}.
 Éditions Somme toute (2024).  
-ISBN: 9782925124351.  
+ISBN: 9782925124351.
 
 \bibitem{mela1991verlan}
-Méla, Vivienne.  
+Méla, Vivienne.
 \textit{Le verlan ou le langage du miroir}.  
 Langages, No. 101, Les javanais (Mars 1991), pp. 73–94.  
 Published by Armand Colin.  
 Available at: \url{https://www.jstor.org/stable/23906698}.
 
 \bibitem{kaye1984syllabicite}
-Kaye, Jonathan D.; Lowenstamm, Jean.  
+Kaye, Jonathan D.; Lowenstamm, Jean.
 \textit{De la syllabicité}.  
 In: Dell, François; Hirst, Daniel; Vergnaud, Jean-Roger (eds.), \textit{Forme sonore du langage}.  
 Hermann, Paris (1984), pp. 123–159.  
 Available at: \url{https://archive.org/details/formesonoredulangage}.
 
 \bibitem{russell1918soundex}
-Russell, Robert C.; Odell, Margaret K.  
+Russell, Robert C.; Odell, Margaret K.
 \textit{Soundex system of indexing names}.  
 U.S. Patent 1,261,167, filed June 3, 1918, and issued April 2, 1918.  
 Available at: \url{https://patents.google.com/patent/US1261167A/en}.
 
 \bibitem{levenshtein1966}
-Levenshtein, Vladimir I.  
+Levenshtein, Vladimir I.
 \textit{Binary codes capable of correcting deletions, insertions, and reversals}.  
 Soviet Physics Doklady, vol. 10, no. 8, 1966, pp. 707-710.  
 Available at: \url{https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf}.
@@ -1558,22 +1569,22 @@ Jiang, Albert Q.; Sablayrolles, Alexandre; Mensch, Arthur; Bamford, Chris; Chapl
 DOI: 10.48550/arXiv.2310.06825.
 
 \bibitem{touvron2023llama}
-Touvron, Hugo; Lavril, Thibaut; Izacard, Gautier; Martinet, Xavier; Lachaux, Marie-Anne; Lacroix, Timothée; Rozière, Baptiste; Goyal, Naman; Hambro, Eric; Azhar, Faisal; Rodríguez, Aurélien; Joulin, Armand; Grave, Edouard; Lample, Guillaume.  
+Touvron, Hugo; Lavril, Thibaut; Izacard, Gautier; Martinet, Xavier; Lachaux, Marie-Anne; Lacroix, Timothée; Rozière, Baptiste; Goyal, Naman; Hambro, Eric; Azhar, Faisal; Rodríguez, Aurélien; Joulin, Armand; Grave, Edouard; Lample, Guillaume.
 \textit{LLaMA: Open and Efficient Foundation Language Models}.
 DOI: 10.48550/arXiv.2302.13971.
 
 \bibitem{touvron2023llama2}
-Touvron, Hugo; Martin, Louis; Stone, Kevin; Albert, Peter; Almahairi, Amjad; Babaei, Yasmine; Bashlykov, Nikolay; Batra, Soumya; Bhargava, Prajjwal; Bhosale, Shruti; Bikel, Dan; Blecher, Lukas; Canton-Ferrer, Cristian; Chen, Moya; Cucurull, Guillem; Esiobu, David; Fernandes, Jude; Fu, Jeremy; Fu, Wenyin; Fuller, Brian; Gao, Cynthia; Goswami, Vedanuj; Goyal, Naman; Hartshorn, Anthony; Hosseini, Saghar; Hou, Rui; Inan, Hakan; Kardas, Marcin; Kerkez, Viktor; Khabsa, Madian; Kloumann, Isabel; Korenev, Artem; Koura, Punit; Lachaux, Marie-Anne; Lavril, Thibaut; Lee, Jenya; Liskovich, Diana; Lu, Yinghai; Mao, Yuning; Martinet, Xavier; Mihaylov, Todor; Mishra, Pushkar; Molybog, Igor; Nie, Yixin; Poulton, Andrew; Reizenstein, Jeremy; Rungta, Rashi; Saladi, Kalyan; Schelten, Alan; Silva, Ruan; Smith, Eric Michael; Subramanian, Ranjan; Tan, Xiaoqing Ellen; Tang, Binh; Taylor, Ross; Williams, Adina; Xiang, Jian; Xu, Puxin; Yan, Zheng; Zarov, Iliyan; Zhang, Yuchen; Fan, Angela; Kambadur, Melanie; Narang, Sharan; Rodríguez, Aurélien; Stojnić, Robert; Edunov, Sergey; Scialom, Thomas.  
+Touvron, Hugo; Martin, Louis; Stone, Kevin; Albert, Peter; Almahairi, Amjad; Babaei, Yasmine; Bashlykov, Nikolay; Batra, Soumya; Bhargava, Prajjwal; Bhosale, Shruti; Bikel, Dan; Blecher, Lukas; Canton-Ferrer, Cristian; Chen, Moya; Cucurull, Guillem; Esiobu, David; Fernandes, Jude; Fu, Jeremy; Fu, Wenyin; Fuller, Brian; Gao, Cynthia; Goswami, Vedanuj; Goyal, Naman; Hartshorn, Anthony; Hosseini, Saghar; Hou, Rui; Inan, Hakan; Kardas, Marcin; Kerkez, Viktor; Khabsa, Madian; Kloumann, Isabel; Korenev, Artem; Koura, Punit; Lachaux, Marie-Anne; Lavril, Thibaut; Lee, Jenya; Liskovich, Diana; Lu, Yinghai; Mao, Yuning; Martinet, Xavier; Mihaylov, Todor; Mishra, Pushkar; Molybog, Igor; Nie, Yixin; Poulton, Andrew; Reizenstein, Jeremy; Rungta, Rashi; Saladi, Kalyan; Schelten, Alan; Silva, Ruan; Smith, Eric Michael; Subramanian, Ranjan; Tan, Xiaoqing Ellen; Tang, Binh; Taylor, Ross; Williams, Adina; Xiang, Jian; Xu, Puxin; Yan, Zheng; Zarov, Iliyan; Zhang, Yuchen; Fan, Angela; Kambadur, Melanie; Narang, Sharan; Rodríguez, Aurélien; Stojnić, Robert; Edunov, Sergey; Scialom, Thomas.
 \textit{Llama 2: Open Foundation and Fine-Tuned Chat Models}.
 DOI: 10.48550/arXiv.2307.09288.
 
 \bibitem{martin2019camembert}
-Martin, Louis; Muller, Benjamin; Ortiz Suárez, Pedro Javier; Dupont, Yoann; Romary, Laurent; Villemonte de la Clergerie, Éric; Seddah, Djamé; Sagot, Benoît.  
+Martin, Louis; Muller, Benjamin; Ortiz Suárez, Pedro Javier; Dupont, Yoann; Romary, Laurent; Villemonte de la Clergerie, Éric; Seddah, Djamé; Sagot, Benoît.
 \textit{CamemBERT: a Tasty French Language Model}.
 DOI: 10.48550/arXiv.1911.03894.
 
 \bibitem{du2025deepresearch}
-Du, Mingxuan; Xu, Benfeng; Zhu, Chiwei; Wang, Xiaorui; Mao, Zhendong.  
+Du, Mingxuan; Xu, Benfeng; Zhu, Chiwei; Wang, Xiaorui; Mao, Zhendong.
 \textit{DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents}.
 DOI: 10.48550/arXiv.2506.11763.
 
