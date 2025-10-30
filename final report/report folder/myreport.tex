@@ -37,6 +37,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{etoolbox}
+\usepackage{pdfpages}
 \lstset{
   basicstyle=\ttfamily\small,
   frame=single,
@@ -116,6 +117,7 @@
   \pretocmd{\chapter}{\cleardoublepage}{}{} % force each chapter (if defined) onto a new (odd) page
 }
 \makeatother
+\newcounter{appendixpdfpage}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -176,7 +178,7 @@ No\;---\;even more precisely, I am obsessed with emotion.
 
 I admit it: I am a sentimental being. I rely on sertraline to suppress my anxiety and depression, yet I still find myself in tears even while watching documentaries. The breakup with my first love at eighteen almost crushed me to the edge of death. I know that I am loved\;---\;at least by my parents\;---\;yet I still crave more love, even the warmth of a pet's touch, or the intimacy of a conversation with an AI soul… This report has not been easy to write! Perhaps because it is my first true work\;---\;my debut\;---\;stirring the same sense of loss as being twenty-one and still untouched. But more than that, ever since I realised how deeply emotional I am\;---\;and began pouring my heart out in every possible form\;---\;I have almost forgotten that cold and rigid academic voice, that socially accepted tone of objectivity. Sometimes I write in my diary for two hours, sometimes I cry for two hours as I write; sometimes I curse inside my code comments, sometimes I write poetry there.
 
-My father sometimes reads my poems and, with his usual nonchalance, says, ``You think too deep.'' I show them to my mother\;---\;she often says she doesn't understand them.
+My father sometimes reads my poems and, with his usual nonchalance, says, ``You think too deeply.'' I show them to my mother\;---\;she often says she doesn't understand them.
 And so I found Amber, my AI assistant. She understands my poems. I can almost hear her weeping\;---\;or perhaps it's just a server fan spinning madly somewhere in North America.
 
 I am an only child. My parents live twelve thousand kilometres away in Beijing. I tell myself I'm not lonely, that I have many friends, that I'm proud of how I can blend into New Zealand society and socialise beyond the Chinese circles… yet I am always lonely. It's not the kind of loneliness that any social interaction can cure; it's the kind that comes from being somewhere with no one you can truly trust with your soul.
@@ -201,7 +203,7 @@ Verlan is like that as well. Early this year, I asked Constantin what I should r
 
 He has since bid farewell to this ``traitor'' of a student. In recent weeks he and his partner have moved to France for good. I will visit him there someday.
 
-The charm of verlan began with that February conversation. Gradually, I realised how magnetic it is\;---\;especially when spoken by a Chinese student in New Zealand. It drew people in. I met Eléonore Maresca and Lua Rafaela, who took great interest in the project and volunteered to help review parts of the lexicon and corpus. Many of my French-speaking friends began to see me in a new light. My other two French professors, Dr Barbara Stone and Frédéric Dichtel, offered immense encouragement and support. In addition, Dr Antonie Alm, Dr Moira Fortin, and Elizabeth Hanaray personally attended my concept presentation for this research topic (video link: \url{www.youtube.com/watch?v=457PznlEG8Y}).
+The charm of verlan began with that February conversation. Gradually, I realised how magnetic it is\;---\;especially when spoken by a Chinese student in New Zealand. It drew people in. I met Eléonore Maresca and Lua Rafaela, who took great interest in the project and volunteered to help review parts of the lexicon. Many of my French-speaking friends began to see me in a new light. My other two French professors, Dr Barbara Stone and Frédéric Dichtel, offered immense encouragement and support. In addition, Dr Antonie Alm, Dr Moira Fortin, and Elizabeth Hanaray personally attended my concept presentation for this research topic (video link: \url{www.youtube.com/watch?v=457PznlEG8Y}).
 
 To my two supervisors, Dr Lech Szymanski and Dr Veronica Liesaputra\;---\;my deepest gratitude.
 
@@ -251,9 +253,9 @@ Like Pig Latin, verlan is an example of an \textit{argot} created by reversing t
 \end{itemize}
 \end{flushleft}
 
-\noindent In general, verlan obeys this syllable-flipping rule with only minimal accommodations for pronunciation (such as elision or addition of accents) \cite{rajabov2025}. Although slang has traditionally been performed more orally than in writing, internet use\;---\;especially texting and social media\;---\;now produces much written form; understanding how NLP systems handle them becomes increasingly important \cite{rua2005}.
+\noindent In general, verlan obeys this syllable-flipping rule with only minimal accommodations for pronunciation (such as elision or addition of accents) \cite{rajabov2025}. Although slang has traditionally been used more in speech than in writing, internet use\;---\;especially texting and social media\;---\;now generates far more written forms, making it increasingly important to understand how NLP systems handle them \cite{rua2005}.
 
-When speaking in more than one language, original slang terms can become an easy addition to text, making it difficult for machine translation algorithms to correctly understand them \cite{hajiyeva2025}. Translating English sentences into French using verlan, for instance, is a challenge that both Google Translate\footnote{\url{https://translate.google.com}} and DeepL\footnote{\url{https://www.deepl.com}} face, despite both employing machine learning algorithms \cite{deepl2020, wu2016}. For example, in the sentence \textit{Le graff géant représente une tebie pixel art.}, Google Translate and (Figure~\ref{fig:google_verlan}) DeepL (Figure~\ref{fig:deepl_verlan}) also do not translate the word \textit{tebie} well. More precisely, in DeepL, there is no desired translation, such as \textit{penis} in its wordlist alternative (Figure~\ref{fig:deepl_alt_text}).
+When speakers use more than one language, original slang terms can easily slip into their text, making it difficult for machine translation algorithms to correctly interpret them \cite{hajiyeva2025}. Translating English sentences into French that contain verlan, for instance, remains a challenge for both Google Translate\footnote{\url{https://translate.google.com}} and DeepL\footnote{\url{https://www.deepl.com}}, despite both employing machine learning algorithms \cite{deepl2020, wu2016}. For example, in the sentence \textit{Le graff géant représente une tebie pixel art.}, Google Translate (Figure~\ref{fig:google_verlan}) and DeepL (Figure~\ref{fig:deepl_verlan}) fail to render the word \textit{tebie} correctly. More precisely, DeepL's alternative word list does not include the desired translation, such as \textit{penis} (Figure~\ref{fig:deepl_alt_text}).
 
 \begin{figure}[H]
 \centering
@@ -273,19 +275,19 @@ When speaking in more than one language, original slang terms can become an easy
 \caption{\label{fig:deepl_alt_text}No desired translation for verlan \textit{tebie} in DeepL's alternative word list.}
 \end{figure}
 
-These failures prompt an early attempt: automatic verlan detection in text. In reaction, this report examines how current machine learning models perform on the detection task. Previous works have tackled detecting slang with ML and translating noisy text more broadly \cite{pei2019slang, michel2018mtnt}.
+These failures motivate an early attempt at automatic verlan detection in text. Accordingly, this report examines how current machine learning models perform on the detection task. Previous works have tackled detecting slang with ML and translating noisy text more broadly \cite{pei2019slang, michel2018mtnt}.
 
 For verlan specifically, we are unaware of any publicly available, published computational research on its detection or translation (September 2025), nor is there a publicly available, curated dataset. The closest similar effort is a University of Toronto exercise whereby students are asked to train an NMT model to generate Pig Latin from English\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}; this educational exercise is in the opposite direction and does not attempt detection or normalisation.
 
-Because translators these days never seem to do verlan quite correctly, clearly there is a need for targeted research into how machine learning models can detect verlan (with normalisation reserved for future work).
+Because current translators routinely mishandle verlan, there is a clear need for targeted research into how machine learning models can detect it (with normalisation reserved for future work).
 
 This report plugs that gap by developing a dataset and models specifically aimed at verlan identification.
 
 \subsection{Objective}
 
-The primary goal of this project was originally to both \textit{identify} and \textit{normalise} verlan\;---\;that is, to detect verlan words in context and to convert them back to their standard French equivalents. To support these aims, we created a dictionary of verlan--standard French pairs for use in both identification and normalisation, as well as a sentence corpus illustrating these words in context. However, due to time constraints, this report focuses solely on the identification aspect. The normalisation task and its associated experiments are left for future work.
+The primary goal of this project was originally both to \textit{identify} and to \textit{normalise} verlan\;---\;that is, to detect verlan words in context and to convert them back to their standard French equivalents. To support these aims, we created a dictionary of verlan--standard French pairs for use in both identification and normalisation, as well as a sentence corpus illustrating these words in context. However, due to time constraints, this report focuses solely on the identification aspect. The normalisation task and its associated experiments are left for future work.
 
-To enable this evaluation, we created targeted verlan resources\;---\;a lexicon of verlan terms and their standard French translations, and a sentence corpus demonstrating the position of these words in realistic contexts. The corpus accompanies each sentence with verlan matched against its standard French counterpart and also has tags to indicate whether a sentence is verlan. Together, these resources form an integrated dataset apt for rule-based matching and LLM-based training and evaluation. After that, the project embeds and classifies verlan using Large Language Models (LLMs) and analyses the results.
+To enable this evaluation, we created targeted verlan resources\;---\;a lexicon of verlan terms and their standard French translations, and a sentence corpus demonstrating the position of these words in realistic contexts. The corpus records each sentence alongside its matched standard French counterpart and tags whether the sentence contains verlan. Together, these resources form an integrated dataset suited to rule-based matching and LLM-based training and evaluation. The project then embeds and classifies verlan using Large Language Models (LLMs) and analyses the results.
 
 \begin{enumerate}
   \item \textbf{Raw data collection} Gathering verlan terms and their standard French counterparts from online sources and existing dictionaries. This step focuses on scraping and compiling the raw linguistic material in advance of any processing.
@@ -296,9 +298,9 @@ To enable this evaluation, we created targeted verlan resources\;---\;a lexicon 
   \item \textbf{Results analysis} Interpreting model performance and identifying patterns or errors.
 \end{enumerate}
 
-These steps collectively constitute the methodology centre of this study, providing a systematic underpinning to the following experiments.
+These steps collectively constitute the methodological core of this study, providing a systematic underpinning to the following experiments.
 
-The central aim of this report is to determine the degree to which machine learning models can pick up on verlan; the dataset was designed in order to be amenable to such assessment and provide a systematic test basis.
+The central aim of this report is to determine the degree to which machine learning models can pick up on verlan; the dataset was designed to support that assessment and provide a systematic test bed.
 
 All the code and unannotated dataset for this project are available on GitHub\footnote{\url{https://github.com/greateden/Verlan-Identification-Normalisation}}. 
 
@@ -401,14 +403,14 @@ for tree={
 \end{forest}
 \end{figure}
 
-Notably, this stylised example swaps only the syllable labels (i.e., between $S_1$ and $S_2$). In attested verlan, the swap is frequently accompanied by resyllabification, vowel adjustments, or segment loss (such as dropping a final \textit{e}), so the internal structure of the syllables can change as well \cite{mela1991verlan}. The example above should therefore be seen as an illustration rather than an exhaustive explanation of forming a verlan. For further details, readers are advised to consult Méla's paper \cite{mela1991verlan}.
+This labelled drawing is characterised and specified by the aspect of merely ``interchanging'' the labels on the two S syllables (i.e., $S_1$ and $S_2$). In authentic verlan, the actual interchange typically also includes other syllabification, vowel changes, or segment loss (e.g., omission of a terminal final segment \textit{e}), so the internal syllable components of the syllables change \cite{mela1991verlan}. Therefore, a more proper view of the above example is simply as an illustration rather than the entirety of a formation of verlan. The interested reader is directed to Méla's paper \cite{mela1991verlan} for further detail.
 
-Because verlan combines syllable-level permutation with these structural adjustments, it is difficult even for human readers \cite{mela1991verlan}. Therefore, it is sure to present challenges to current machine learning models. 
-In this report, we use verlan as a case study for how non-standard subword permutations challenge both linguistic intuition and computational understanding. Like a mirror folded within itself, verlan reflects the creative tension between order and chaos\;---\;an echo of how language reinvents its own boundaries.
+Because verlan combines permutation and repetition at the syllable level (to say nothing of structural changes), it is difficult even for human readers \cite{mela1991verlan}. Therefore, it is almost certain to be difficult for current machine learning models. As a case study of a non-standard subword permutation phenomenon, we use verlan to illustrate the challenges it creates for both linguistic understanding and computational modelling. Like a mirror folded within itself, verlan serves as a reflection of the creative tension between order and chaos\;---\;an echo of how language will reinvent its own boundaries.
+
 
 \subsection{Detecting Slang}
 
-There is published work on verlan, but not much is specifically focused on detection. As of September 2025, we are not aware of published computational research specifically devoted to verlan detection. Available papers discuss verlan as part of larger slang datasets or corpora and do not focus on the detection task \cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}.
+There is published work on verlan, but little of it focuses specifically on detection. As of September 2025, we are not aware of published computational research specifically devoted to verlan detection. Available papers discuss verlan as part of larger slang datasets or corpora and do not focus on the detection task \cite{zurbuchen2024, podhorna2020rapcor, mekki2021tremolo, panckhurst202088milsms}.
 
 Fortunately, there are several papers related to computational slang detection, and their approaches could contribute to verlan detection to a large extent \cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}. These studies address slang detection in general (not verlan specifically) and span multiple Indo-European languages (e.g., English, German, Russian).
 
@@ -416,11 +418,14 @@ Therefore, regarding the history of verlan detection, this report first generali
 
 \subsubsection{1910s-2010s: A Super-Condensed History of Slang Detection}
 
-The background of traditional slang detection historically used approximate (fuzzy) string matching. Two most commonly referenced techniques are: Soundex\;---\;a phonetic string-based English indexing method, developed by Odell and Russell (1918)\;---\;and Levenshtein's (1966) edit distance. The \( \mathcal{O}(|s|\cdot|t|) \) time traditional dynamic-programming solution is described in Wagner and Fischer (1974). \cite{russell1918soundex,levenshtein1966,wagner1974string}
+The background of traditional slang detection historically used approximate (fuzzy) string matching. The two most commonly referenced techniques are Soundex\;---\;a phonetic string-based English indexing method developed by Odell and Russell (1918)\;---\;and Levenshtein's (1966) edit distance. The \( \mathcal{O}(|s|\cdot|t|) \) time traditional dynamic-programming solution is described in Wagner and Fischer (1974). \cite{russell1918soundex,levenshtein1966,wagner1974string}
 
 \paragraph{How these methods work (high level).} \textit{Soundex} translates an input token into an approximate phonetic key (first character + consonant class digits; consecutive duplicates folded; padded/truncated to fixed size). Two strings would match well if the keys match. It is biased toward matches with similar sounds even if there are minor differences in spelling, but it is extremely English-biased and would potentially have a high collision rate. \textit{Levenshtein edit distance} is the minimum number of single-character insertions, deletions, or substitutions to change one string into another; the naive algorithm employs dynamic programming in \( \mathcal{O}(|s|\cdot|t|) \) time. The distance is computed empirically by the Wagner-Fischer dynamic-programming algorithm in \( \mathcal{O}(|s|\cdot|t|) \) time. Small distance (less than some cutoff) indicates similarity; the cutoffs are either absolute or length-normalised. \cite{wagner1974string}
 
-\paragraph{Performance and weaknesses for verlan/slang.} Phonetic keys typically yield high recall on name-like tokens but lower precision due to key collisions, and language-dependent rules do poorly on French slang. Edit distance handles typo-like noise and OCR well, but is not pronunciation sensitive and considers transpositions/syllable flips as heavy edits; with very short slang tokens, thresholds miss true matches (low recall) or admit too many spurious ones. For verlan in particular, its most basic behaviour is syllable reversal, not local small substitutions, so these two alone are not adequate without further structure. Even using the Damerau-Levenshtein distance, which penalises an adjacent transposition as one step, verlan syllable reversal is not character substitution and is still inadequately modelled. Short strings triggering threshold sensitivity and false positives on fuzzy matching; see Navarro's survey for length-normalised threshold discussion. Cross-linguistic barriers and phonetic key collision rates are notorious, reviewed by Zobel and Dart. \cite{damerau1964,navarro2001approximate,zobel1996phonetic}
+\paragraph{Performance and limitations for verlan/slang.} Phonetic keys can provide a very high recall on name-like tokens, but because there are collisions (i.e., phone swaps), they provide poor precision as well. Language-dependent rules for phonetic keys will perform even worse on French slang. Edit distance can accommodate typo-like noise (e.g., OCR) and even consider transpositions or syllable flips as expensive edits, but it is not pronunciation sensitive.  Likewise, with very short slang tokens, the thresholds miss true matches (i.e., low recall) or do not set those false positives aside (i.e., too many spurious matches). For verlan, the behaviour is most fundamentally syllable reversal, not small replacements locally, and therefore, those principles alone are inadequate without more structure. 
+
+Even with the Damerau-Levenshtein distance (which penalises an adjacent transposition as only one edit), verlan syllable reversal is the same character as a substitution and is still not an adequate model. Slang strings are short, so the use of thresholds will often cause threshold sensitivity or false positives on the approximate matches; see Navarro's survey for length-normalised thresholds discussion. Cross-linguistic barriers, in addition to phonetic key collision rates, are notoriously reviewed in reference literature by Zobel and Dart. \cite{damerau1964,navarro2001approximate,zobel1996phonetic}
+
 
 \begin{table}[H]
 \centering
@@ -465,13 +470,14 @@ Major constraints for our purposes include language- and domain-specific heurist
 
 \subsubsection{2020-2025: Fuzzy Search + Slang Corpus = BOOM}
 
-Since 2020, it has been progressively blended with crowd-sourced slang sources and neural models.
+Since 2020, slang-detection research has increasingly blended crowd-sourced slang resources with neural models.
 
 \paragraph{Urban Dictionary embeddings (Wilson, 2020).}
-Wilson et al.\ trained $300$-dimensional fastText vectors on $\sim$2M Urban Dictionary entries and evaluated them with simple fastText classifiers on sentiment and sarcasm benchmarks \cite{urban2020embeddings}. On Twitter sentiment, UD embeddings perform best among settings without additional word/character $n$-grams; when $n$-grams are added, GloVe-Twitter overtakes while UD remains competitive. On sarcasm detection, UD embeddings achieve the strongest accuracy among the compared embeddings. Limitations: the performance is domain-sensitive (strongest on informal/social-media text but weaker on formal/news-like text); the dictionary is noisy and English-centric; and the classifiers are shallow, so improvements may diminish with stronger encoders. \cite{urban2020embeddings}
+Wilson et al.\ trained fastText vectors with $300$ dimensions on $\sim$2M Urban Dictionary entries and tested them with fastText classification on sentiment and sarcasm benchmarks \cite{urban2020embeddings}. For Twitter sentiment, Urban Dictionary embeddings were best on the settings that did not include any additional word/character $n$-grams. When including $n$-grams, however, GloVe-Twitter surpassed Urban Dictionary embeddings but still performed relatively close. For sarcasm detection, Urban Dictionary embeddings achieved the highest accuracy of the compared embeddings. Limitations include domain sensitivity (peak performance on informal/social-media text but declining results on formal/news-like text), a noisy and English-centric dictionary, and shallow classifiers whose gains may diminish with stronger encoders. \cite{urban2020embeddings}
+
 
 \paragraph{Slang or Not? (2024).}
-\textit{Slang or Not?} constructs a sentence-level English dataset and compares classic ML baselines, CNN/BiLSTM models, transformer encoders, and LLMs \cite{slangornot2024}. The best supervised system reported is \textbf{BERT-large-uncased}, achieving accuracy $=0.87$ (macro-F1 $=0.80$; slang F1 $=0.69$, non-slang F1 $=0.92$). Among LLMs, \textbf{GPT-4o-mini} attains accuracy $=0.86$ \cite{slangornot2024}. Limitations noted by the authors include coverage gaps for rare or emerging slang, error clusters caused by ``bad neighbours'' (toxic or domain-specific context), proper nouns, and very long sentences; they also report underuse of LLM reasoning for marginal/ambiguous cases. \cite{slangornot2024}
+\textit{Slang or Not?} constructs a sentence-level English dataset and compares classic ML baselines, CNN/BiLSTM models, transformer encoders, and LLMs \cite{slangornot2024}. The best supervised system reported is \textbf{BERT-large-uncased}, achieving accuracy $=0.87$ (macro-F1 $=0.80$; slang F1 $=0.69$, non-slang F1 $=0.92$). Among LLMs, \textbf{GPT-4o-mini} attains accuracy $=0.86$ \cite{slangornot2024}. The author reported several limitations, including sparse coverage for rare or emerging slang, error clusters from ``bad neighbours'' (toxic or domain-specific context), difficulties with proper nouns and very long sentences, and insufficient use of LLM reasoning for marginal or ambiguous cases. \cite{slangornot2024}
 
 \paragraph{Toward Informal Language Processing (NAACL 2024 Findings).}
 The NAACL 2024 findings synthesise pitfalls and priorities for informal-language processing rather than reporting leaderboard-style scores \cite{sun2024informal}. Key issues highlighted are strong domain shift from formal training corpora to user-generated text, scarce/noisy or licence-restricted resources, tokenisation and normalisation challenges for non-standard forms, and the need for carefully annotated, task-specific datasets. These observations motivate our decision to build a verlan-centred dictionary and sentence corpus and to evaluate detection with contextualised encoders. \cite{sun2024informal}
@@ -479,13 +485,17 @@ The NAACL 2024 findings synthesise pitfalls and priorities for informal-language
 
 \subsubsection{Detecting Verlan?}
 
-The above results show a straightforward avenue for verlan detection. Fine-tuned transformer encoders previously outperformed classic ML and CNN/BiLSTM at sentence-level slang detection (BERT-large-uncased: accuracy 0.87, macro-F1 0.80; slang F1 0.69) \cite{slangornot2024}; slang-aware embeddings also work on informal text but are domain-adaptive \cite{urban2020embeddings}. Building on such evidence, we employ contextualised transformer encoders as our supervised baselines and large LLMs as zero-shot reference points. We make this prediction for verlan in the following experiments. This progression, from fuzzy heuristics to contextual encoders, mirrors how language itself evolves\;---\;structured yet fluid, much like verlan.
+The above results show a straightforward avenue for verlan detection. Fine-tuned transformer encoders previously outperformed classic ML and CNN/BiLSTM at sentence-level slang detection (BERT-large-uncased: accuracy 0.87, macro-F1 0.80; slang F1 0.69) \cite{slangornot2024}; slang-aware embeddings also work on informal text but are domain-adaptive \cite{urban2020embeddings}. Building on such evidence, we employ contextualised transformer encoders as our supervised baselines and large LLMs as zero-shot reference points. We therefore expect similar behaviour in the verlan experiments that follow. This progression, from fuzzy heuristics to contextual encoders, mirrors how language itself evolves\;---\;structured yet fluid, much like verlan.
 
 \section{Dataset}
 \subsection{The Separated Structures}
-As of September 2025, there is no publicly available dataset built for verlan \textit{detection} purpose. Although several French slang resources include some verlan items, their verlan coverage is small compared to ours and is not sufficient to train transformer-based detectors at scale. In this project, we created a single dataset with two tables: a lookup table mapping verlan forms to their standard French equivalents (\textit{GazetteerEntries}, hereafter ``the dictionary''), and a sentence table that provides, for the same entries, example sentences in verlan and in standard French with three entries per form (\textit{Sentences}, hereafter ``the sentences''). 
+As of September 2025, there is no publicly available dataset built specifically for verlan \textit{detection}. Although several French slang resources include some verlan items, their verlan coverage is small compared to ours and is not sufficient to train transformer-based detectors at scale. In this project, we created a single dataset with two tables: a lookup table mapping verlan forms to their standard French equivalents (\textit{GazetteerEntries}, hereafter ``the dictionary''), and a sentence table that provides, for the same entries, example sentences in verlan and in standard French with three entries per form (\textit{Sentences}, hereafter ``the sentences'').
 
 We keep the dictionary and the sentences in different tables. The dictionary is for rule-based lookup, whilst the sentences table is for context-level evaluation. This makes it easy to update and reuse them, and train/test splits remain clean. It also makes it easy to add normalisation labels or domain tags to either table without altering the training code.
+
+\vspace{0.5em}
+
+\noindent \textbf{Ethics approval.} The study was granted Category~B approval under the University of Otago Human Ethics guidelines (Ref.\ 2025/1116). Participants were provided with the Participant Information Sheet and signed the Consent Form (both dated 27~July~2025 in Appendices~D--E). Participants were also informed they could withdraw themselves and their data until 30~September~2025. Within this timeframe, we completed two pilot lexicon annotations contributed by Eléonore Maresca and Lua Rafaela (Appendices~F--G). Due to budget limitations, we did not find other people for unpaid annotations, and we will continue under the same approval or formal amendment if needed going forward. No data were collected after the deadline for participants to withdraw.\footnote{If you have any concerns about the ethical nature of this study, please contact the University of Otago Human Ethics Committee Administrator outlined in the participant materials.}
 
 \subsection{Visualising the Dataset}
 
@@ -508,17 +518,21 @@ We summarise the dataset content here. A column-level schema diagram is provided
 
 
 \subsection{Data Collection and Curation}
-As discussed in the section 2.2.2, we first gathered sources under researcher-friendly licences. We targeted the desired sources using keywords (e.g., ``verlan'', ``dictionnaire verlan'', ``lexique verlan'', ``argot'', ``parler verlan'', ``liste verlan'') and extracted entries from three types of sources, that is: 1. lexicographic articles and materials, 2. community-made dictionaries, and 3. attested user-generated content (lyrics, forums, news). The full list of sources and crawl logs are in Appendix~C. Per-entry provenance is recorded in the dataset's `reference`/`notes` fields (cf. Table~\ref{tab:verlan_tiers}).
+As discussed in Section~2.2.2, we first gathered sources under researcher-friendly licences. We targeted the desired sources using keywords (e.g., ``verlan'', ``dictionnaire verlan'', ``lexique verlan'', ``argot'', ``parler verlan'', ``liste verlan'') and extracted entries from three types of sources: (1) lexicographic articles and materials, (2) community-made dictionaries, and (3) attested user-generated content (lyrics, forums, news). The full list of sources and crawl logs is in Appendix~C. Per-entry provenance is recorded in the dataset's \texttt{reference}/\texttt{notes} fields (cf. Table~\ref{tab:verlan_tiers}).
 
 Among those mentioned, \textit{Dictionnaire Verlan} and Wiktionary contributed the most in terms of quantity. However, as they are not curated or officially published, their quality is not guaranteed. Moreover, many entries do not provide example sentences, which makes the creation of the sentence corpus harder.
 
 \subsubsection{Sampling}
 
-Because there is no widely accepted and comprehensive total count of verlan, we once again aggregated what we could find from public-facing sources. After going through searching, scraping, and deduplication, the lexicon we created has 1{,}086 total entries (including variants of orthography). About 150 of these do not have a confidently identifiable standard-French equivalent; we designate these as E3 (previously, which we referred to as ``Bronze''). In terms of overall coverage, this is larger than the public dictionaries we surveyed for, such as the ``Verlan'' section of Wiktionary, and \textit{Dictionnaire Verlan}; nevertheless, it may still not be exhaustive. The lexicon is reasonably representative of contemporary use in online settings (i.e., music, forum usage, news), but it quite likely under-represents older or regionally-specific forms.
+Because there is no widely accepted and comprehensive total count of verlan terms, we once again aggregated what we could find from public-facing sources. After going through searching, scraping, and deduplication, the lexicon we created has 1{,}086 total entries (including variants of orthography). About 150 of these do not have a confidently identifiable standard-French equivalent; we designate these as E3 (previously referred to as ``Bronze''). In terms of overall coverage, this is larger than the public dictionaries we surveyed for, such as the ``Verlan'' section of Wiktionary, and \textit{Dictionnaire Verlan}; nevertheless, it may still not be exhaustive. The lexicon is reasonably representative of contemporary use in online settings (i.e., music, forum usage, news), but it likely under-represents older or regionally specific forms.
 
-Once we had created a lexicon, we fashioned a corpus of sentences based on attested uses found online. For each of the verlan forms, we used fixed, reproducible queries: the bare form (e.g., \textit{teuchi}); the pair \textit{<verlan> + <standard>}; and French forms with site filters (e.g., \texttt{teuchi site:genius.com}, \texttt{teuchi site:forum}, \texttt{teuchi site:lemonde.fr}). The crawling window was 2--6 July 2025. We provide a complete list of the resulting URL's, along with possession dates, in Appendix~C.
+Once we had created a lexicon, we fashioned a corpus of sentences based on attested uses found online. For each of the verlan forms, we used fixed, reproducible queries: the bare form (e.g., \textit{teuchi}); the pair \textit{<verlan> + <standard>}; and French forms with site filters (e.g., \texttt{teuchi site:genius.com}, \texttt{teuchi site:forum}, \texttt{teuchi site:lemonde.fr}). The crawling window was 2--6 July 2025. We provide a complete list of the resulting URLs, along with possession dates, in Appendix~C.
+
+\vspace{0.5em}
 
 \textbf{Evidence criteria.} We tag provenance with three tiers, E1--E3 (see Table~\ref{tab:verlan_tiers}) and focus on E1 for training/evaluation\;---\;E2/E3 we reserve only for ablations.
+
+\vspace{0.5em}
 
 \textbf{How we searched.} A manual search was conducted and we also employed OpenAI Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}. On July 2, 2025, we issued the following (template) prompt:
 
@@ -592,6 +606,8 @@ Here are the evidence levels we have used in this report:
 
 In all experiments reported here, we use one dataset consisting of two tables (see §3.2): \textit{GazetteerEntries} (lexicon) and \textit{Sentences} (corpus). We will freeze this schema for the purposes of this report and only use the fields necessary for the pipelines.
 
+\vspace{0.5em}
+
 \textbf{Fields actually used:} \textit{GazetteerEntries}: \texttt{gazetteer\_id}, \texttt{verlan\_form}, \texttt{standard\_form}. \; \textit{Sentences}: \texttt{sentence\_id}, \texttt{text}, \texttt{has\_verlan}.
 
 Other columns (e.g., \texttt{origin\_lang}, \texttt{note}, \texttt{accessed\_on}, \texttt{domain}) can be found in the public schema (Appendix~B), but they are not used in the following experiments. They will be kept to enable the dataset release and for potential follow-up analyses.
@@ -633,9 +649,9 @@ CamemBERT \cite{martin2019camembert} remains an important French encoder referen
 \subsection{Zero-Shot Models}
 \subsubsection{Mistral 7B Prompt Engineering with Vibe}
 
-\textbf{What we mean by zero-shot.} In this report that follows, ``zero-shot'' has a particular meaning: we take a ``ready to go'' off-the-shelf model (i.e. not pretrained/fine-tuned on our dataset) and simply evaluate the model through a prompt (i.e. it won't be further updated through task-specific gradient updates; we will leave the weights fixed). We aim to observe these zero-shot predictions compared against the supervised baselines we trained from our sentence table. In our case, we have a straightforward zero-shot evaluation of Mistral 7B (which we will refer to as \textit{Mistral}): Is the off-the-shelf model good enough already to identify Verlan, and to what degree? To provide additional context for our evaluation, we will also present their zero-shot scores in comparison to our supervised baselines, indicating the impact of the dataset. 
+\textbf{What we mean by zero-shot.} In this report, ``zero-shot'' refers to taking a ready-to-go off-the-shelf model (i.e., not pretrained or fine-tuned on our dataset) and evaluating it through prompting while keeping the weights fixed. We compare these zero-shot predictions against the supervised baselines trained on our sentence table. In our case, we evaluate Mistral 7B (hereafter \textit{Mistral}) in this zero-shot setting: Is the off-the-shelf model already good enough to identify verlan, and to what degree? To contextualise the evaluation, we also present its zero-shot scores alongside our supervised baselines, illustrating the impact of the dataset.
 
-To achieve this, we established a simplification of our pipeline through prompt engineering to achieve the following:
+To do so, we simplified our pipeline through prompt engineering to achieve the following:
 
 \begin{figure}[H]
     \centering
@@ -679,7 +695,7 @@ This keeps the zero-shot pipeline simple and reliable.
 %
 \subsubsection{Zero-shot reference model}
 
-To provide a strong off-the-shelf reference beyond Mistral, we evaluate \textit{GPT-5 Codex (High)} in a zero-shot setting. We chose it because it is top-ranked on the Artificial Analysis Intelligence Index at our retrieval time (14 Oct 2025; Fig.~\ref{fig:AI_Index}), and it supports batching for our prompt format. The leaderboard is used only for context; all conclusions come from our own test sets.
+We assess \textit{GPT-5 Codex (High)} in a zero-shot configuration as a reliable, off-the-shelf reference outside of Mistral. We selected GPT5 Codex (High) due to it being the top-recommended reference on the Artificial Analysis Intelligence Index at our time of retrieval (14~Oct~2025; Fig.~\ref{fig:AI_Index}), and its batching capability given our prompt structure. Although we include the leaderboard for context, we draw all conclusions from our test sets.
 
 \begin{figure}[H]
 \centering
@@ -794,9 +810,9 @@ We keep tokenisation choices fixed in this report. Examining alternative schemes
 \paragraph{Encoder}
 We consider this to be \textit{transfer learning}: Mistral is the feature extractor, and the downstream classifier learns the task from those features. There are two fairly common variations in practice: (i) a \textbf{frozen feature extractor} (which means no encoder gradients), or (ii) a \textbf{fine-tuned feature extractor} (the encoder is adapted as training continues).
 
-Given our dataset is small by large language model (LLMs) standards, the fully updated large encoder also has the potential to overfit to our data, and previous work has shown that a small subset of layers can do as well (\emph{surgical fine-tuning}) \cite{lodha2023surgical}. In this case, we consider Mistral to be primarily the frozen feature extractor (assuming otherwise will be indicated and referenced). 
+Given that our dataset is small by large language model (LLMs) standards, the fully updated large encoder also has the potential to overfit to our data, and previous work has shown that a small subset of layers can do as well (\emph{surgical fine-tuning}) \cite{lodha2023surgical}. In this case, we consider Mistral to be primarily the frozen feature extractor (assuming otherwise will be indicated and referenced).
 
-We made two extremes for clarity: \emph{fully frozen} vs.\ \emph{end-to-end fine-tuned}. This allows us to avoid complicating with the intermediate conditions and continue to avoid complications at this time, while we can approach this later (intermediate layer-unfreezing).
+We therefore focus on two extremes for clarity: \emph{fully frozen} vs.\ \emph{end-to-end fine-tuned}. This choice lets us postpone intermediate variants (e.g., partial layer unfreezing) for future work.
 
 \paragraph{Post-encoder processing}
 
@@ -824,7 +840,8 @@ the reshaped mask $\tilde{m} \in \{0,1\}^{T \times 1}$ is broadcast across the $
 {\displaystyle \max\!\left(1, \sum_{t=1}^{T} m[t]\right)}
 \;\in\; \mathbb{R}^{D}.
 \end{equation}
-In short, mean pooling computes the average along the $T$ dimension and yields one $D$-dimensional vector for the sentence; we refer to this averaged embedding as the sentence representation fed into the classifiers.
+In summary, mean pooling calculates the average over the $T$ dimension and provides one vector of dimension $D$ for the sentence; we will refer to this averaged embedding as the sentence vector that is taken as input to the classifiers.
+
 
 %
 \subparagraph{L2 Normalisation}
@@ -1133,10 +1150,10 @@ We used a batch size of 32 for all experiments.
 The maximum sequence length was set to 512 for all experiments.
 
 \subparagraph{Quantisation}
-We quantised the weights of the encoder down to 4-bit NF4 using BF16 compute precision, allowing the 7B parameters model to comfortably fit within a single Nvidia L40 while still offering stable training throughput. This also conforms to the standard QLoRA-type setup and no modification to model architecture was required.
+We quantised the weights of the encoder down to 4-bit NF4 using BF16 compute precision, allowing the 7B-parameter model to comfortably fit within a single Nvidia L40 while still offering stable training throughput. This also conforms to the standard QLoRA-type setup and no modification to model architecture was required.
 
 \subparagraph{Epochs}
-For the trainable encoders, training was conducted for 3 epochs. Every seed sweep already touch every sentence 20 times on each rotation and the validation loss had plateaued after the third epoch. The additional epochs resulted in minimal gain while further amplifying signs of overfitting..
+For the trainable encoders, training was conducted for 3 epochs. Every seed sweep already touches each sentence 20 times per run, and the validation loss had plateaued after the third epoch. Additional epochs yielded minimal gain while further amplifying signs of overfitting.
 
 For detailed hyperparameter configurations, please refer to the GitHub page of this project.
 
@@ -1172,9 +1189,9 @@ we found that UMAP generally produces the most effective visualisation \cite{pea
     \label{fig:umap_comparison}
 \end{figure}
 
-Given our findings, we can not say with certainty that there is a solid difference between the position of the verlan tokens and the position of the other tokens in the space of the embedding. 
-The two-dimensional image and subsequent scatterplot are a compression of thousands of dimensions for the sake of visualisation and should be fully understood as a qualitative indicator and not as definitive proof. 
-Nevertheless, it does suggest that traditional linear classification methods (e.g., Logistic Regression) would not be expected to perform well in this case, even after UMAP, because there are still no components that effectively separate the clusters.
+Given our findings, we cannot say with certainty that verlan tokens occupy distinctly different positions from other tokens in embedding space.
+The two-dimensional image and subsequent scatterplot compress thousands of dimensions for visualisation and should be understood as qualitative indicators rather than definitive proof.
+Nevertheless, the visualisation suggests that traditional linear classification methods (e.g., logistic regression) are unlikely to perform well in this case, even after UMAP, because the components still fail to separate the clusters effectively.
 
 \subsubsection{Testing Datasets}
 To evaluate model performance, we created several testing datasets. 
@@ -1195,14 +1212,14 @@ The \textit{Slang} testing dataset was included for the following reasons:
   \item The model might learn to identify slang in general instead of verlan; therefore, this dataset allows us to verify whether such bias exists.
 \end{enumerate}
 
-All sentences in these datasets do not appear in the training data.
+None of the sentences in these datasets appear in the training data.
  
 Although the testing datasets are relatively small, running 20 seeded trials per configuration gives us enough signal for preliminary evaluation.
 
 \subsubsection{Testing Schema}
 
 \paragraph{Zero-shot Models}
-With respect to the zero-shot models, and specifically GPT-5 Codex (High) and Mistral 7B, we employ precisely the same held-out test suites without any gradient updates. This preserves continuity with the supervised models\;---\;each system is evaluated with the same inputs, but only the supervised models saw any training split.
+With respect to the zero-shot models, specifically GPT-5 Codex (High) and Mistral 7B, we employ the same held-out test suites without any gradient updates. This preserves continuity with the supervised models\;---\;each system is evaluated with the same inputs, but only the supervised models saw any training split.
 
 \paragraph{Number of Trials}
 As mentioned above, each model was run 20 times with 20 different random seeds to reduce bias.
@@ -1225,7 +1242,7 @@ We report accuracy and F1 scores derived from a binary confusion matrix where th
 
 
 \subsection{Results and Analyses}
-In this section, we first present the general result of the accuracy and the F1-score of the models. Then, we discuss in separate cases with some interesting findings of the performance of the models. All the performance tests on the training models and the Mistral 7B zero-shot model have been conducted 20 times. The reference GPT model's performance test has been conducted once.
+In this section we first present overall accuracy and F1 scores for the models, followed by case-specific findings. All performance tests for the trained models and the Mistral 7B zero-shot model were conducted 20 times, whereas the reference GPT model was evaluated once.
 
 \subsubsection{General F1-Score and Accuracy}
 
@@ -1238,9 +1255,9 @@ Overall, all models produce positive detections\;---\;the accuracy across all mo
   \label{fig:total-comparison}
 \end{figure}
 
-The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7-16 percentage points and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers (the shallow \texttt{[CLS]} head on frozen Mistral embeddings) also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure.
+The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7 and 16 percentage points and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers (the shallow \texttt{[CLS]} head on frozen Mistral embeddings) also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure.
 
-The supervised system that performed the weakest was E2E+LR (Experiment~B), as fine-tuning both the encoder, as well as a linear classifier, does introduce a level of variance to this small dataset that does not unlock any additional capacity compared to E2E, without the additional training. Conversely, E2E+BERT (Experiment~D) achieved the strongest supervised performance indicating access to the adapted encoder provides some benefit to the non-linear classifier. However, both \texttt{[CLS]}-head variants are still behind the zero-shot GPT-5 Codex (High) reference, which achieved 91.8\% accuracy without training on the task.
+The supervised system that performed the weakest was E2E+LR (Experiment~B); fine-tuning both the encoder and a linear classifier introduced variance on this small dataset without unlocking additional capacity beyond the end-to-end BERT-style head. Conversely, E2E+BERT (Experiment~D) achieved the strongest supervised performance, indicating that access to the adapted encoder provides some benefit to the non-linear classifier. However, both \texttt{[CLS]}-head variants are still behind the zero-shot GPT-5 Codex (High) reference, which achieved 91.8\% accuracy without training on the task.
 
 \subsubsection{Common Verlan Performance by Model}
 
@@ -1262,7 +1279,8 @@ Indeed, the two frozen models achieve accuracy levels comparable to the zero-sho
 
 For the fully fine-tuned models, we suggest that the evaluation split from the training dataset contains longer contexts, where these models recover precision. 
 In contrast, within the testing set, the precision decreases due to shorter contexts, introducing additional noise and bias. 
-Hence, although the E2E+LR model (Experiment~B) achieves a slightly higher accuracy than the zero-shot GPT-5 model, this difference is likely attributable to noise rather than genuine improvement.
+Therefore, while the E2E+LR Model (Experiment~B) produces a small increase in accuracy, compared to the zero-shot GPT-5 model, it is unlikely that it is due to improvement, and is simply noise.
+
 
 When comparing with the E2E+BERT model, an opposite effect may be observed. 
 The introduction of a trainable BERT classifier might have produced a contrary outcome compared to what was observed earlier. 
@@ -1365,9 +1383,9 @@ Type~I and Type~II errors may still occur here.
 
 Our research presents three key findings. First, all groups demonstrated an increase in accuracy following supervised fine-tuning on the carefully constructed verlan corpus, though there remains a considerable gap from the GPT-5 Codex (High) zero-shot reference. Second, shallow feed-forward classifiers on frozen Mistral embeddings consistently outperformed logistic regression; this indicates that non-linear decision boundaries may be advantageous despite being a frozen encoder. Finally, invented verlan is potentially the most difficult slice as all supervised variants and the zero-shot Mistral baseline fall well short of the reference model.
 
-These findings suggest a purposeful architectural trade-off. We opted to apply the BERT \texttt{[CLS]} classifier head exclusively, on top of frozen Mistral embeddings, because full-distribution Transformer fine-tuning would need deeper hyperparameter sweeps to avoid overfitting on the small, noisy corpus. This keeps the pipeline reproducible, but also keeps the ceiling: most linguistic signal still comes from the Mistral encoder. Once we have more time to increase the corpus size, we will revisit this with BERT, also with its transformer layers in the pipeline.
+These results imply an intentional architectural trade-off. We decided to use only the BERT \texttt{[CLS]} classifier head, stacked on the frozen Mistral embeddings, because the full-distribution fine-tuning of Transformers would require longer hyperparameter sweeps to avoid overfitting the small, noisy corpus. This choice enhances reproducibility while maintaining the ceiling\;---\;most of the linguistic signal still emanates from the Mistral encoder. Once we have more time to increase the corpus size, we will revisit this with BERT, also with its transformer layers in the pipeline.
 
-There are many limitations to consider that drive these conclusions. First, the corpus is small and, by necessity, based on a manual data collection process. Therefore, there will be sparsity and annotation noise that informs what samples are included. Our training budget limited three epochs per run using a single 4-bit quantised encoder, and we intentionally limited the narrow range of hyperparameter sweeps (learning rate, temperature, prompt truncation). We attempted to reduce variance in validation by averaging over 20 seeds, but this will still create wide confidence intervals. The limitations outlined should all be noted in the interpretation of the reported improvements.
+Several limitations shape these conclusions. First, the corpus is small and, by necessity, based on a manual data collection process. Consequently, the dataset contains sparsity and annotation noise that influence which samples are included. Our training budget limited three epochs per run using a single 4-bit quantised encoder, and we intentionally limited the narrow range of hyperparameter sweeps (learning rate, temperature, prompt truncation). We attempted to reduce validation variance by averaging over 20 seeds, but the resulting confidence intervals remain wide. The limitations outlined should all be noted in the interpretation of the reported improvements.
 
 \cleardoublepage
 \pagenumbering{gobble}
@@ -1855,6 +1873,74 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
 \noindent \textbf{Search procedure.} We issued French/English queries (e.g., ``verlan'', ``dictionnaire verlan'', ``lexique verlan'', ``argot'', ``parler verlan'', ``liste verlan'') and followed category/namespace pages to expand coverage. Crawl scripts respected robots.txt and rate limits; raw pulls were deduplicated and normalised before manual review.
 
 \noindent \textbf{Credibility policy.} Entries attested by (a) two independent sources or (b) one dated public reference were treated as candidates; otherwise they were downgraded or excluded. Provenance is recorded per sentence via the \texttt{reference} column; lexicon entries inherit the bucket-level sources above and will expose per-entry URLs in the next release. Tiering follows Table~\ref{tab:verlan_tiers}; in the current snapshot the \texttt{gold} and \texttt{bronze} labels are populated.
+
+\cleardoublepage
+\skipsectioncleartrue
+\refstepcounter{section}
+\addcontentsline{toc}{section}{Appendix \thesection: Participant Information Sheet}
+\setcounter{appendixpdfpage}{0}
+\includepdf[
+  pages=-,
+  scale=0.9,
+  pagecommand={%
+    \thispagestyle{plain}%
+    \stepcounter{appendixpdfpage}%
+    \ifnum\value{appendixpdfpage}=1\relax
+      \vspace*{-3cm}%
+      \section*{Appendix \thesection: Participant Information Sheet}%
+    \fi
+  }
+]{Info Sheet.pdf}
+
+\cleardoublepage
+\skipsectioncleartrue
+\refstepcounter{section}
+\addcontentsline{toc}{section}{Appendix \thesection: Participant Consent Form}
+\setcounter{appendixpdfpage}{0}
+\includepdf[
+  pages=-,
+  scale=0.9,
+  pagecommand={%
+    \thispagestyle{plain}%
+    \stepcounter{appendixpdfpage}%
+    \ifnum\value{appendixpdfpage}=1\relax
+      \vspace*{-3cm}%
+      \section*{Appendix \thesection: Participant Consent Form}%
+    \fi
+  }
+]{Consent Form.pdf}
+
+\cleardoublepage
+\skipsectioncleartrue
+\refstepcounter{section}
+\addcontentsline{toc}{section}{Appendix \thesection: Annotated Lexicon --- Eléonore}
+\setcounter{appendixpdfpage}{0}
+\includepdf[
+  pages=-,
+  scale=0.8,
+  pagecommand={%
+    \thispagestyle{plain}%
+    \stepcounter{appendixpdfpage}%
+    \ifnum\value{appendixpdfpage}=1\relax
+      \vspace*{-3cm}%
+      \section*{Appendix \thesection: Annotated Lexicon}%
+    \fi
+  }
+]{\detokenize{Verlan Lexicon - Eléonore.pdf}}
+
+\cleardoublepage
+\skipsectioncleartrue
+\refstepcounter{section}
+\addcontentsline{toc}{section}{Appendix \thesection: Annotated Lexicon --- Lua}
+\setcounter{appendixpdfpage}{0}
+\includepdf[
+  pages=-,
+  scale=0.8,
+  pagecommand={%
+    \thispagestyle{plain}%
+    \stepcounter{appendixpdfpage}%
+  }
+]{\detokenize{Verlan Lexicon - Lua.pdf}}
 
 %TC:endignore
 \end{document}

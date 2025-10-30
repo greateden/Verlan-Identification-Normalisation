@@ -313,6 +313,13 @@ INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdfpages/pppdftex.def
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdfpages/pppdftex.def
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdfpages/pppdftex.def
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
@@ -353,6 +360,12 @@ OUTPUT myreport.pdf
 INPUT ./myreport.out
 INPUT ./myreport.out
 OUTPUT myreport.out
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics/lscape.sty
+INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
@@ -512,6 +525,54 @@ INPUT ./figures/invented_relative_improvement.png
 INPUT ./figures/invented_relative_improvement.png
 INPUT ./figures/invented_relative_improvement.png
 INPUT ./figures/invented_relative_improvement.png
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Info Sheet.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Consent Form.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Eléonore.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
+INPUT ./Verlan Lexicon - Lua.pdf
 INPUT myreport.aux
 INPUT ./myreport.out
 INPUT ./myreport.out
