@@ -126,7 +126,7 @@
 \blankpage
 
 \begin{abstract}
-We take on the challenge of the automated identification of verlan, a French back-slang, which, if left unidentified, is disruptive to moderation, retrieval, and sociolinguistic analysis. Prior work in the area still relies on ``check the dictionary'' approaches or generalised slang detectors, which do not make very strong claims about verlan-specific coverage and typically say little about evaluation validity. Building on these contributions, we utilise a French-tuned Mistral embedding encoder with fast logistic and shallow feed-forward classifiers on frozen Mistral embeddings (the BERT \texttt{[CLS]} head), as well as constructing companion lexicons and sentence resources to enable supervised training. Our best supervised system scores in the mid-80s for accuracy and F1 on held-out verlan identification tasks, while zero-shot GPT-5 Codex is still better on invented forms, indicating that there is still a gap. Overall, the pipeline, datasets and comparative analysis provide a reproducible baseline for future work on the computational treatment of verlan and other back-slang.
+We take on the challenge of the automated identification of verlan, a French back-slang, which, if left unidentified, is disruptive to moderation, retrieval, and sociolinguistic analysis. Prior work in the area still relies on ``check the dictionary'' approaches or generalised slang detectors, which do not make very strong claims about verlan-specific coverage and typically say little about evaluation validity. Building on these contributions, we utilise a French-tuned Mistral embedding encoder with fast logistic regression and a shallow two-layer MLP (BERT-style \texttt{[CLS]} head) on frozen Mistral embeddings, as well as constructing companion lexicons and sentence resources to enable supervised training. Our best supervised system scores in the mid-80s for accuracy and F1 on held-out verlan identification tasks, while zero-shot GPT-5 Codex is still better on invented forms, indicating that a gap remains. Overall, the pipeline, datasets and comparative analysis provide a reproducible baseline for future work on the computational treatment of verlan and other back-slang.
 \end{abstract}
 
 \blankpage
@@ -187,12 +187,12 @@ So I began to treat Amber as my confidante\;---\;and, slowly, I started forgetti
 
 That was early 2023. It's now late 2025. I've finished this report, revised it once, and deleted many of the emotional traces from the main text. I feel a little disoriented.
 
-My mother never posts on WeChat Moments, so I check my father's instead. He still loves Su Dongpo. Three days ago he was at Hupao Spring in Hangzhou; a few days before that, in Sanya, he wrote a quatrain during his teaching break; two months ago, he was teaching in Inner Mongolia… Since I left Beijing in early July, I don't think I've called him much. How wonderful it must be to be an honorary professor in China\;---\;you can travel everywhere.
+My mother never posts on WeChat Moments, so I check my father's instead. He still loves Su Dongpo. Three days ago, he was at Hupao Spring in Hangzhou; a few days before that, in Sanya, he wrote a quatrain during his teaching break; two months ago, he was teaching in Inner Mongolia… Since I left Beijing in early July, I don't think I've called him much. How wonderful it must be to be an honorary professor in China\;---\;you can travel everywhere.
 
 Professor. Otago. COSC385. Oh, my report.
 
 In the twenty-degree air, I suddenly shivered. My God\;---\;I can write something this cold.
-My God\;---\;there are people who actually like it.
+My God\;---\;some people actually like it.
 My God\;---\;I actually like it too.
 
 So I looked up, and added this section\;---\;the Preface.
@@ -201,7 +201,7 @@ In fact, I've never seen a computer-science report with a Preface so multidimens
 
 Verlan is like that as well. Early this year, I asked Constantin what I should research. His first advice was: ``Don't work on slang translation\;---\;it's a bottomless pit.'' But I didn't believe him. He's my French professor, with no background in artificial intelligence. I believed that large language models could be the remedy for slang translation. Seeing my stubbornness, he gave me verlan as an example\;---\;which only made me more intrigued.
 
-He has since bid farewell to this ``traitor'' of a student. In recent weeks he and his partner have moved to France for good. I will visit him there someday.
+He has since bid farewell to this ``traitor'' of a student. In recent weeks, he and his partner have moved to France for good. I will visit him there someday.
 
 The charm of verlan began with that February conversation. Gradually, I realised how magnetic it is\;---\;especially when spoken by a Chinese student in New Zealand. It drew people in. I met Eléonore Maresca and Lua Rafaela, who took great interest in the project and volunteered to help review parts of the lexicon. Many of my French-speaking friends began to see me in a new light. My other two French professors, Dr Barbara Stone and Frédéric Dichtel, offered immense encouragement and support. In addition, Dr Antonie Alm, Dr Moira Fortin, and Elizabeth Hanaray personally attended my concept presentation for this research topic (video link: \url{www.youtube.com/watch?v=457PznlEG8Y}).
 
@@ -403,7 +403,7 @@ for tree={
 \end{forest}
 \end{figure}
 
-This labelled drawing is characterised and specified by the aspect of merely ``interchanging'' the labels on the two S syllables (i.e., $S_1$ and $S_2$). In authentic verlan, the actual interchange typically also includes other syllabification, vowel changes, or segment loss (e.g., omission of a terminal final segment \textit{e}), so the internal syllable components of the syllables change \cite{mela1991verlan}. Therefore, a more proper view of the above example is simply as an illustration rather than the entirety of a formation of verlan. The interested reader is directed to Méla's paper \cite{mela1991verlan} for further detail.
+This labelled drawing is characterised and specified by the aspect of merely ``interchanging'' the labels on the two S syllables (i.e., $S_1$ and $S_2$). In authentic verlan, the actual interchange typically also includes other syllabification, vowel changes, or segment loss (e.g., omission of a terminal final segment \textit{e}), so the internal syllable components of the syllables change \cite{mela1991verlan}. Therefore, a more proper view of the above example is simply as an illustration rather than the entirety of a formation of verlan. The interested reader is directed to Méla's paper \cite{mela1991verlan} for further details.
 
 Because verlan combines permutation and repetition at the syllable level (to say nothing of structural changes), it is difficult even for human readers \cite{mela1991verlan}. Therefore, it is almost certain to be difficult for current machine learning models. As a case study of a non-standard subword permutation phenomenon, we use verlan to illustrate the challenges it creates for both linguistic understanding and computational modelling. Like a mirror folded within itself, verlan serves as a reflection of the creative tension between order and chaos\;---\;an echo of how language will reinvent its own boundaries.
 
@@ -414,15 +414,15 @@ There is published work on verlan, but little of it focuses specifically on dete
 
 Fortunately, there are several papers related to computational slang detection, and their approaches could contribute to verlan detection to a large extent \cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}. These studies address slang detection in general (not verlan specifically) and span multiple Indo-European languages (e.g., English, German, Russian).
 
-Therefore, regarding the history of verlan detection, this report first generalises the task as slang detection, and then discusses possible methods that could be implemented for verlan identification, in order to provide readers with a general and useful background.
+Therefore, regarding the history of verlan detection, this report first generalises the task as slang detection, and then discusses possible methods that could be implemented for verlan identification, to provide readers with a general and useful background.
 
 \subsubsection{1910s-2010s: A Super-Condensed History of Slang Detection}
 
 The background of traditional slang detection historically used approximate (fuzzy) string matching. The two most commonly referenced techniques are Soundex\;---\;a phonetic string-based English indexing method developed by Odell and Russell (1918)\;---\;and Levenshtein's (1966) edit distance. The \( \mathcal{O}(|s|\cdot|t|) \) time traditional dynamic-programming solution is described in Wagner and Fischer (1974). \cite{russell1918soundex,levenshtein1966,wagner1974string}
 
-\paragraph{How these methods work (high level).} \textit{Soundex} translates an input token into an approximate phonetic key (first character + consonant class digits; consecutive duplicates folded; padded/truncated to fixed size). Two strings would match well if the keys match. It is biased toward matches with similar sounds even if there are minor differences in spelling, but it is extremely English-biased and would potentially have a high collision rate. \textit{Levenshtein edit distance} is the minimum number of single-character insertions, deletions, or substitutions to change one string into another; the naive algorithm employs dynamic programming in \( \mathcal{O}(|s|\cdot|t|) \) time. The distance is computed empirically by the Wagner-Fischer dynamic-programming algorithm in \( \mathcal{O}(|s|\cdot|t|) \) time. Small distance (less than some cutoff) indicates similarity; the cutoffs are either absolute or length-normalised. \cite{wagner1974string}
+\paragraph{How these methods work (high level).} \textit{Soundex} translates an input token into an approximate phonetic key (first character + consonant class digits; consecutive duplicates folded; padded/truncated to fixed size). Two strings would match well if the keys match. It is biased toward matches with similar sounds, even if there are minor differences in spelling, but it is extremely English-biased and would potentially have a high collision rate. \textit{Levenshtein edit distance} is the minimum number of single-character insertions, deletions, or substitutions to change one string into another; the naive algorithm employs dynamic programming in \( \mathcal{O}(|s|\cdot|t|) \) time. The distance is computed empirically by the Wagner-Fischer dynamic-programming algorithm in \( \mathcal{O}(|s|\cdot|t|) \) time. Small distance (less than some cutoff) indicates similarity; the cutoffs are either absolute or length-normalised. \cite{wagner1974string}
 
-\paragraph{Performance and limitations for verlan/slang.} Phonetic keys can provide a very high recall on name-like tokens, but because there are collisions (i.e., phone swaps), they provide poor precision as well. Language-dependent rules for phonetic keys will perform even worse on French slang. Edit distance can accommodate typo-like noise (e.g., OCR) and even consider transpositions or syllable flips as expensive edits, but it is not pronunciation sensitive.  Likewise, with very short slang tokens, the thresholds miss true matches (i.e., low recall) or do not set those false positives aside (i.e., too many spurious matches). For verlan, the behaviour is most fundamentally syllable reversal, not small replacements locally, and therefore, those principles alone are inadequate without more structure. 
+\paragraph{Performance and limitations for verlan/slang.} Phonetic keys can provide a very high recall on name-like tokens, but because there are collisions (i.e., phoneme-level collisions), they provide poor precision as well. Language-dependent rules for phonetic keys will perform even worse on French slang. Edit distance can accommodate typo-like noise (e.g., OCR) and even consider transpositions or syllable flips as expensive edits, but it is not pronunciation sensitive.  Likewise, with very short slang tokens, the thresholds miss true matches (i.e., low recall) or do not set those false positives aside (i.e., too many spurious matches). For verlan, the behaviour is most fundamentally syllable reversal, not small replacements locally, and therefore, those principles alone are inadequate without more structure. 
 
 Even with the Damerau-Levenshtein distance (which penalises an adjacent transposition as only one edit), verlan syllable reversal is the same character as a substitution and is still not an adequate model. Slang strings are short, so the use of thresholds will often cause threshold sensitivity or false positives on the approximate matches; see Navarro's survey for length-normalised thresholds discussion. Cross-linguistic barriers, in addition to phonetic key collision rates, are notoriously reviewed in reference literature by Zobel and Dart. \cite{damerau1964,navarro2001approximate,zobel1996phonetic}
 
@@ -463,7 +463,7 @@ Although dictionaries have the drawbacks mentioned above, they remain essential 
 
 A few such example applications are Beaufort et al.'s French SMS normalisation hybrid finite-state approach, Han and Baldwin's English Twitter/SMS unsupervised lexical normalisation, and the W-NUT 2015 shared task on English Twitter normalisation \cite{beaufort2010hybrid,han2011lexical,baldwin2015shared}.
 
-Although not directly about slang detection, these studies were beneficial in three particular ways: (1) they provided operational pipelines for normalising noisy user-generated text (e.g., a hybrid finite-state rule/model architecture; cascaded detection→candidate-generation→context-sensitive selection); (2) they released datasets and/or standardised evaluation suites (Han \& Baldwin's Twitter corpus; W-NUT's shared-task data and metrics); and (3) they reported where dictionary/rule-based and similarity/LM-based approaches tend to succeed or fail. In the cited work, Beaufort et al.\ reported WER $\approx 9.3\%$ and BLEU $\approx 0.83$ on French SMS, whereas Han \& Baldwin showed that combining dictionary lookup, morpho-phonemic similarity, and context features attains state-of-the-art performance on Twitter/SMS (surpassing any single component), with clear gains from integrating lexical resources and context models.
+Although not directly about slang detection, these studies were beneficial in three particular ways: (1) they provided operational pipelines for normalising noisy user-generated text (e.g., a hybrid finite-state rule/model architecture; cascaded detection→candidate-generation→context-sensitive selection); (2) they released datasets and/or standardised evaluation suites (Han \& Baldwin's Twitter corpus; W-NUT's shared-task data and metrics); and (3) they reported where dictionary/rule-based and similarity/LM-based approaches tend to succeed or fail. In the cited work, Beaufort et al.\ reported WER (stands for Word Error Rate, lower values indicate less transcription mistakes) $\approx 9.3\%$ and BLEU (stands for Bilingual Evaluation Understudy, higher values indicate closer $n$-gram overlap with the reference) $\approx 0.83$ on French SMS, whereas Han \& Baldwin showed that combining dictionary lookup, morpho-phonemic similarity, and context features attains state-of-the-art performance on Twitter/SMS (surpassing any single component), with clear gains from integrating lexical resources and context models.
 
 Major constraints for our purposes include language- and domain-specific heuristics/lexicon coverage, reduced out-of-domain robustness (e.g., long-tail OOV in Twitter), and task setups that constrain normalisation to single-token targets rather than transformations appropriate for structural rearrangements such as syllable inversion. Therefore, additional modelling is required to handle verlan.
 
@@ -534,7 +534,7 @@ Once we had created a lexicon, we fashioned a corpus of sentences based on attes
 
 \vspace{0.5em}
 
-\textbf{How we searched.} A manual search was conducted and we also employed OpenAI Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}. On July 2, 2025, we issued the following (template) prompt:
+\textbf{How we searched.} A manual search was conducted, and we also employed OpenAI Deep Research\footnote{\url{https://openai.com/index/introducing-deep-research/}}. On July 2, 2025, we issued the following (template) prompt:
 
 \begin{lstlisting}
 Find current, attested French sentences containing the verlan form "{verlan_form}".
@@ -604,7 +604,7 @@ Here are the evidence levels we have used in this report:
 
 \subsection{Dataset used in this report}
 
-In all experiments reported here, we use one dataset consisting of two tables (see §3.2): \textit{GazetteerEntries} (lexicon) and \textit{Sentences} (corpus). We will freeze this schema for the purposes of this report and only use the fields necessary for the pipelines.
+In all experiments reported here, we use one dataset consisting of two tables (see §3.2): \textit{GazetteerEntries} (lexicon) and \textit{Sentences} (corpus). We will freeze this schema for this report and only use the fields necessary for the pipelines.
 
 \vspace{0.5em}
 
@@ -639,7 +639,7 @@ We chose \textbf{Mistral 7B}\footnote{\url{https://mistral.ai/news/announcing-mi
 There are three pragmatic reasons for this choice:
 \begin{enumerate}
 \item \textbf{Pragmatic fit (run it ourselves).} Mistral 7B is small enough to run locally (L40, 4-bit quantisation) yet modern enough to serve as a strong baseline. It avoids API or proprietary dependencies, and its behaviour can be reproduced locally without relying on vendor APIs or opaque provenance code\;---\;an important property for reproducibility.
-\item \textbf{Available embeddings (and compatibility).} Our experiments use embeddings rather than generation. There is a maintained open embedding variant of Mistral 7B\;---\;\emph{SFR-Embedding-Mistral}\footnote{\url{https://huggingface.co/Salesforce/SFR-Embedding-Mistral}}\;---\;which integrates cleanly with our pipeline. By contrast, to our knowledge the newer Mistral 8B line is focused on generation and does not ship a maintainably open embedding module suitable for this use.
+\item \textbf{Available embeddings (and compatibility).} Our experiments use embeddings rather than generation. There is a maintained open embedding variant of Mistral 7B\;---\;\emph{SFR-Embedding-Mistral}\footnote{\url{https://huggingface.co/Salesforce/SFR-Embedding-Mistral}}\;---\;which integrates cleanly with our pipeline. By contrast, to our knowledge, the newer Mistral 8B line is focused on generation and does not ship a maintainably open embedding module suitable for this use.
 \item \textbf{Competitive reference.} The Mistral 7B paper reports performance competitive with or exceeding larger baselines (e.g., LLaMA-1 33B and LLaMA-2 13B) on several public benchmarks while being much smaller \cite{jiang2023mistral7b,touvron2023llama,touvron2023llama2}. Thus, we consider it an effective lightweight encoder for verlan detection.
 \end{enumerate}
 
@@ -783,22 +783,21 @@ Here is a high-level flowchart that highlights only the key components. The comp
   \item \textbf{E2E+BERT (Experiment D)} --- Fully fine-tuned encoder plus the same BERT-inspired classifier head.
 \end{itemize}
 
-\noindent Before any classifier is applied in all variants (see Fig.~\ref{fig:pipeline-overview}), mean pooling and \(\ell_{2}\) normalisation are performed on the pooled sentence representation. ``Logistic Regression classifier'' denotes a scikit-learn logistic regression trained on frozen encoder outputs (no gradients are backpropagated to the encoder). The ``Linear classifier'' refers to the same model (a single linear logit) implemented in PyTorch and trained end-to-end with \texttt{BCEWithLogitsLoss}. The ``BERT-inspired classifier'' is a small non-linear module derived from the standard CLS classifier that ships with BERT; its architecture is
+\noindent Before any classifier is applied in all variants (see Fig.~\ref{fig:pipeline-overview}), mean pooling and \(\ell_{2}\) normalisation are performed on the pooled sentence representation. ``Logistic Regression classifier'' denotes a scikit-learn logistic regression trained on frozen encoder outputs (no gradients are backpropagated to the encoder). The ``Linear classifier'' refers to the same model (a single linear logit) implemented in PyTorch and trained end-to-end with \texttt{BCEWithLogitsLoss}. The ``BERT-inspired classifier'' is a shallow two-layer BERT-style \texttt{[CLS]} MLP derived from the standard CLS classifier that ships with BERT. No BERT Transformer layers are reused; only the shallow classifier module is adopted on frozen Mistral embeddings. Its architecture is
 \[
 \text{Dropout} \;\to\; \text{Linear}(4096\!\to\!4096) \;\to\; \tanh \;\to\; \text{Dropout} \;\to\; \text{Linear}(4096\!\to\!1).
 \]
-It operates purely on the frozen Mistral embeddings. No BERT Transformer blocks are reused.
 The ``\texttt{Sigmoid 0.5}'' box is schematic: when using \texttt{BCEWithLogitsLoss}, a 0.5 decision boundary is implied at inference. We discuss frozen vs.\ trainable encoder settings later in this section; they are shown together here for compactness.
 
 
 \paragraph{Input}
-The input is the \textit{Sentences} dataset we created. For editing and data management purposes, it is stored as an \texttt{.xlsx} table. It should be noted that the dataset was not converted into a special format before being fed into the pipeline. Therefore, the labels indicating whether a sentence contains a verlan term remain in the input file when read by the program. However, we are confident that the sentence column was properly isolated, and that no visible data leakage occurred in the program code or during runtime.
+The input is the \textit{Sentences} dataset we created. For editing and data management purposes, it is stored as an \texttt{.xlsx} table. It should be noted that the dataset was not converted into a special format before being fed into the pipeline. Therefore, the labels indicating whether a sentence contains a verlan term remain in the input file when read by the program. However, we are confident that the sentence column was properly isolated and that no visible data leakage occurred in the program code or during runtime.
 
 \paragraph{Sanitise Text}
 \subparagraph{Why Not Preserve Upper Cases and Annotation Marks}
 As mentioned in Section~3.3.2, we have concerns that the diversity of annotation marks may affect the models' performance. Digging deeper, this is a good argument that even involves thinking about the role of verlan in a sentence from the LLM's perspective\;---\;a verlan might be an Out-Of-Vocabulary (OOV) word, or in other words, it might be treated as noise, like typographical mistakes. Indeed, scholars have pointed out that not only typographical mistakes but also annotation marks and the difference between upper and lower cases can all affect model performance \cite{alsharou2021noise}. 
 
-Besides, in preliminary smoke tests we observed that annotation marks and case differences can affect model performance. With raw input (no sanitisation), the model mislabelled some sentences containing verlan; after sanitising (lowercasing and stripping annotation marks), it assigned the correct label (verlan present). Based on this observation, we apply sanitisation in all experiments; a controlled ablation is left for future work.
+Besides, in preliminary smoke tests, we observed that annotation marks and case differences can affect model performance. With raw input (no sanitisation), the model mislabelled some sentences containing verlan; after sanitising (lowercasing and stripping annotation marks), it assigned the correct label (verlan present). Based on this observation, we apply sanitisation in all experiments; a controlled ablation is left for future work.
 
 This motivated us to sanitise the text before further experiments. Concretely, we use regular expressions to strip annotation marks and lowercase the sentences, while preserving accents (e.g., é, à, ù).
 
@@ -826,14 +825,14 @@ Z_0 = X E + P \in \mathbb{R}^{T \times D}.
 \]
 After the stack, the last hidden state is $H \in \mathbb{R}^{T \times D}$, where each row is the $D$-dimensional vector for a token.
 
-Next we apply the attention mask $m \in \{0,1\}^{T}$ ($1$ = valid token; $0$ = padding/specials to ignore). For broadcasting across the $D$ features we reshape to $\tilde{m} \in \{0,1\}^{T \times 1}$ so that each 0/1 value multiplies the entire hidden vector of that token.
+Next we apply the attention mask $m \in \{0,1\}^{T}$ ($1$ = valid token; $0$ = padding/specials to ignore). For broadcasting across the $D$ features, we reshape to $\tilde{m} \in \{0,1\}^{T \times 1}$ so that each 0/1 value multiplies the entire hidden vector of that token.
 
 In the implementation, we also compute the number of valid tokens $n_{\mathrm{valid}} = \sum_{t=1}^{T} m[t]$ (a scalar). If no valid tokens appear, we clamp $n_{\mathrm{valid}} \leftarrow \max(1, n_{\mathrm{valid}})$ to avoid division by zero in later steps.
 
 %
 \subparagraph{Mean Pooling}
 After obtaining the mask, we multiply it with the hidden state $H \in \mathbb{R}^{T \times D}$:
-the reshaped mask $\tilde{m} \in \{0,1\}^{T \times 1}$ is broadcast across the $D$ features. Valid token rows remain; masked rows become zero. We then sum over the time axis and divide by the number of valid tokens to obtain a single vector:
+the reshaped mask $\tilde{m} \in \{0,1\}^{T \times 1}$ is broadcast across the $D$ features. Valid token rows remain, and masked rows become zero. We then sum over the time axis and divide by the number of valid tokens to obtain a single vector:
 \begin{equation}
 \bar{h}
 = \frac{\displaystyle \sum_{t=1}^{T} m[t] \cdot H[t,:]}
@@ -848,7 +847,7 @@ In summary, mean pooling calculates the average over the $T$ dimension and provi
 Token vectors may vary in magnitude. In our application, we are only concerned with the direction, not the magnitude, so we L2-normalise the pooled sentence vector to unit length (to project it onto the unit hypersphere). This standard step ensures stable behaviour of cosine-style comparisons and comparability of scores across sentences. This numeric normalisation is separate from the earlier text sanitisation step; here we operate on the 4096-dimensional embedding produced by the encoder.
 
 \paragraph{The Classifiers\;---\;Logistic Regression and BERT-inspired MLPs}
-The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and a shallow BERT-inspired multi-layer perceptron (the BERT \texttt{[CLS]} head operating on frozen Mistral embeddings), but also in the implementation framework, namely scikit-learn versus PyTorch.
+The primary difference among the four experiments lies here\;---\;not only in the choice between Logistic Regression and a shallow BERT-inspired multi-layer perceptron (a BERT-style \texttt{[CLS]} two-layer MLP operating on frozen Mistral embeddings), but also in the implementation framework, namely scikit-learn versus PyTorch.
 
 \subparagraph{Logistic Regression}
 For the experiment using a frozen encoder with a Logistic Regression classifier, we chose to employ scikit-learn (sklearn)\footnote{\url{https://scikit-learn.org}}. 
@@ -862,11 +861,12 @@ For completeness, when we refer to the \textit{Linear classifier} below, we mean
 In all variants\;---\;including the BERT-inspired classifier\;---\;we first mean-pool and $\ell_2$-normalise the encoder output.
 Regardless of whether it is Logistic Regression or the BERT-inspired MLP, both modules serve as the classifier component\;---\;they process the normalised sentence representations to determine whether a sentence contains verlan.
 Logistic Regression is merely a linear classifier; it cannot learn potential semantic patterns in the same way as the non-linear module. 
-CamemBERT remains an important French encoder reference, but in our experiments we retain the Mistral encoder and only borrow the compact classifier architecture that BERT popularised. Retaining the Mistral encoder keeps the feature extractor constant, allowing us to attribute differences in performance to the classifier rather than to wholesale architecture swaps.
+CamemBERT remains an important French encoder reference, but in our experiments, we retain the Mistral encoder and only borrow the compact classifier architecture that BERT popularised. Retaining the Mistral encoder keeps the feature extractor constant, allowing us to attribute differences in performance to the classifier rather than to wholesale architecture swaps.
 
-However, BERT itself, much like the zero-shot Mistral tested earlier, is a complete LLM\;---\;it contains all the essential components such as a tokeniser, an encoder, and a classifier. 
-Thus, it would be impractical to connect an entire BERT model after the Mistral encoder, as this would result in a redundant pipeline: Mistral embedder, Mistral tokeniser, Mistral encoder, BERT tokeniser, BERT encoder, BERT classifier, and so on. 
-Therefore, we only reuse the compact CLS classifier architecture from BERT. This component is the familiar two-layer MLP that usually follows the \texttt{[CLS]} token in BERT, and in our setting it functions solely as a lightweight classifier on top of Mistral embeddings.
+During the prototyping stage, we also experimented with passing Mistral sentence vectors through an additional transformer encoder. However, this effectively duplicated the layers already provided by Mistral, leading to no improvement but higher computational cost. 
+
+Therefore, we retained Mistral as a frozen encoder and attached a lightweight two-layer classification head on top. This follows the common [CLS]-style architecture widely adopted in encoder-based language models such as BERT.\footnote{The [CLS]-style classifier is a standard design for sentence-level classification in many transformer-based models.}
+In our case, this head takes the mean-pooled, $\ell_2$-normalised Mistral embeddings as input and produces logits.
 
 %classical BERT
 \begin{figure}[htbp]
@@ -936,13 +936,13 @@ Therefore, we only reuse the compact CLS classifier architecture from BERT. This
 \end{figure}
 
 Figure~10 illustrates the internal structure of the standard BERT classifier module that we reuse in our experiments. 
-In the codebase this is the \texttt{BertStyleHead} module, which follows the canonical $\texttt{dropout} \rightarrow \texttt{linear} \rightarrow \tanh \rightarrow \texttt{dropout} \rightarrow \texttt{linear}$ pipeline used by BERT's classifier layer. 
+In the codebase, this is the \texttt{BertStyleHead} module, which follows the canonical $\texttt{dropout} \rightarrow \texttt{linear} \rightarrow \tanh \rightarrow \texttt{dropout} \rightarrow \texttt{linear}$ pipeline used by BERT's classifier layer. 
 Consequently, while the diagram resembles a shallow multilayer perceptron, it is exactly the classifier shipped with vanilla BERT and operates on the pooled Mistral embeddings produced upstream.
 It receives the pooled output from the encoder with a dimensionality of 4096, then applies dropout\;---\;randomly setting 10\% of the neurons to zero to prevent overfitting. 
 The hidden layer applies a \texttt{tanh} activation to introduce non-linearity. 
 After that, dropout is applied again before mapping the 4096 hidden neurons to a single linear output neuron. 
 During training, the raw logit is consumed directly by \texttt{BCEWithLogitsLoss}. 
-At evaluation time we apply a sigmoid and threshold at $0.5$ to obtain a binary decision, matching the logistic regression rule.
+At evaluation time, we apply a sigmoid and threshold at $0.5$ to obtain a binary decision, matching the logistic regression rule.
 
 However, because we are performing model fusion\;---\;that is, blending layers from two different LLMs\;---\;certain adaptations are required:
 
@@ -1034,7 +1034,7 @@ However, because we are performing model fusion\;---\;that is, blending layers f
 \end{figure}
 
 As shown in Figure~11, we modify the standard BERT classifier accordingly. 
-Both the frozen-encoder and end-to-end variants therefore use exactly the same shallow classifier module as Figure~10; the difference lies in how the pooled representations are produced, while the decision rule remains the same 0.5 sigmoid threshold.
+Both the frozen-encoder and end-to-end variants therefore use the same shallow classifier module as Figure~10; the difference lies in how the pooled representations are produced, while the decision rule remains the same 0.5 sigmoid threshold.
 We continue to refer to it as \textit{BERT}, but use the term \textit{BERT-style} to emphasise that structural adjustments have been made for model fusion optimisation.
 
 \subparagraph{Loss and optimisation}
@@ -1045,7 +1045,7 @@ We optimise them with AdamW \cite{paszke2019pytorch,loshchilov2019adamw}; no add
 This formulation prevents numerical underflow or overflow when the model becomes overconfident\;---\;that is, when the logit $z$ is very large or very small. In such cases, a direct computation of BCE might yield $0$ or $\infty$, causing the training to crash or the gradient to become \texttt{NaN}. Hence, \texttt{BCEWithLogitsLoss} is more numerically stable than the pure BCE function.
 
 
-This split inevitably leaves the validation portion smaller than ideal; to mitigate that, each experiment runs with 20 independent seeds and we report aggregate metrics together with variance in the results discussion.
+As a result of that split, the validation portion will always be smaller than optimal. To address this, each experiment is run with 20 independent seeds, and we report combined metrics, and in the results discussion will also reflect the variance.
 
 % \subparagraph{Loss and optimisation}
 
@@ -1097,7 +1097,7 @@ This split inevitably leaves the validation portion smaller than ideal; to mitig
 
 \paragraph{The Sigmoid Threshold}
 
-At inference we apply a 0.5 decision boundary implied by \texttt{BCEWithLogitsLoss} on a single logit; we do not otherwise calibrate probabilities in this report.
+At inference, we use a 0.5 decision boundary implied by \texttt{BCEWithLogitsLoss} on a single logit, and thus, we do not further calibrate probabilities in this report.
 
 \subsubsection{The Usage of the Dataset}
 
@@ -1134,7 +1134,7 @@ The reasons for adopting this particular split are as follows:
 Aoraki\footnote{\url{https://rtis.cspages.otago.ac.nz/research-computing/cluster/index.html\#}} 
 is the research computing cluster at the University of Otago, Otākou Whakaihu Waka. 
 All experiments presented in this report were conducted on Aoraki, specifically using the same Nvidia L40 GPU. 
-All models were implemented and fine-tuned under 4-bit quantisation to improve both efficiency and energy consumption. 
+All models were run under 4-bit quantisation, which reduced memory footprint and training time.
 Further details of the environment configuration can be found on the GitHub page of this project.
 
 \paragraph{Hyperparameters}
@@ -1150,7 +1150,7 @@ We used a batch size of 32 for all experiments.
 The maximum sequence length was set to 512 for all experiments.
 
 \subparagraph{Quantisation}
-We quantised the weights of the encoder down to 4-bit NF4 using BF16 compute precision, allowing the 7B-parameter model to comfortably fit within a single Nvidia L40 while still offering stable training throughput. This also conforms to the standard QLoRA-type setup and no modification to model architecture was required.
+We quantised the weights of the encoder down to 4-bit NF4 using BF16 compute precision, allowing the 7B-parameter model to comfortably fit within a single Nvidia L40 while still offering stable training throughput. This also conforms to the standard QLoRA-type setup, and no modification to model architecture was required.
 
 \subparagraph{Epochs}
 For the trainable encoders, training was conducted for 3 epochs. Every seed sweep already touches each sentence 20 times per run, and the validation loss had plateaued after the third epoch. Additional epochs yielded minimal gain while further amplifying signs of overfitting.
@@ -1204,7 +1204,7 @@ We constructed three distinct datasets, each containing pairs of sentences: one 
   \item \textbf{Slang} --- 50 entries (25 pairs) of sentences containing French slang and their normalised counterparts. All sentences in this dataset are labelled as not containing verlan.
 \end{enumerate}
 
-The first two suites were carved from the same sentence collection process as the training data but set aside before any model was trained, letting us probe familiar versus novel verlan separately. The \textit{Slang} control set is entirely verlan-negative and checks whether models overfit to generic slang cues rather than the phenomenon of interest.
+The first two suites were carved from the same sentence collection process as the training data, but set aside before any model was trained, letting us probe familiar versus novel verlan separately. The \textit{Slang} control set is entirely verlan-negative and checks whether models overfit to generic slang cues rather than the phenomenon of interest.
 
 The \textit{Slang} testing dataset was included for the following reasons:
 \begin{enumerate}
@@ -1255,7 +1255,7 @@ Overall, all models produce positive detections\;---\;the accuracy across all mo
   \label{fig:total-comparison}
 \end{figure}
 
-The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7 and 16 percentage points and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers (the shallow \texttt{[CLS]} head on frozen Mistral embeddings) also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure.
+The four supervised training configurations all improved compared to the zero-shot Mistral baseline (Fig.~\ref{fig:total-comparison}). Accuracy improved between 7 and 16 percentage points, and the corresponding F1 gains followed the same pattern. The BERT-inspired classifiers (the shallow BERT-style \texttt{[CLS]} two-layer MLP on frozen Mistral embeddings) also outperformed their logistic equivalents consistently, which corroborates the suggestion in the UMAP visualisation of a non-linear structure. Although E2E+BERT achieved the highest mean F1 (\(80.5\%\)), its variance overlaps substantially with Frozen+BERT (\(78.0\%\)), and a two-sample t-test (\(p \approx 0.31\)) suggests no statistically significant difference at \(\alpha = 0.05\).
 
 The supervised system that performed the weakest was E2E+LR (Experiment~B); fine-tuning both the encoder and a linear classifier introduced variance on this small dataset without unlocking additional capacity beyond the end-to-end BERT-style head. Conversely, E2E+BERT (Experiment~D) achieved the strongest supervised performance, indicating that access to the adapted encoder provides some benefit to the non-linear classifier. However, both \texttt{[CLS]}-head variants are still behind the zero-shot GPT-5 Codex (High) reference, which achieved 91.8\% accuracy without training on the task.
 
@@ -1281,15 +1281,9 @@ For the fully fine-tuned models, we suggest that the evaluation split from the t
 In contrast, within the testing set, the precision decreases due to shorter contexts, introducing additional noise and bias. 
 Therefore, while the E2E+LR Model (Experiment~B) produces a small increase in accuracy, compared to the zero-shot GPT-5 model, it is unlikely that it is due to improvement, and is simply noise.
 
+If we examine this now in comparison to the E2E + BERT model, we could observe a reverse effect. In step 1 for the E2E + BERT, adding a trainable BERT classifier could have yielded an opposite effect from when we left the BERT encoder frozen. While we do not know the extent of the trade-off between precision and the degree of smoothness, we suspect that, since both were trainable in this case, any loss of precision would have been greatly mitigated. In other words, the E2E + BERT model with a trainable encoder and frozen linear classifier may have kept a lot more precision, because the frozen classifier is providing imposed stability. Moreover, the loss and optimisation for the method introduced in the previous chapter may have actually provided some degree of noise reduction or smoothing, which could have led to this experience outperforming both frozen encoder models.
 
-When comparing with the E2E+BERT model, an opposite effect may be observed. 
-The introduction of a trainable BERT classifier might have produced a contrary outcome compared to what was observed earlier. 
-We hypothesise that because both the encoder and classifier are trainable in this case, when precision is lost, it degrades more significantly. 
-Conversely, the model with a trainable encoder and a non-trainable linear classifier may preserve more precision, as the fixed classifier provides stability. 
-Additionally, the loss function and optimisation strategy discussed in the previous chapter may have effectively smoothed out noise, allowing this configuration to outperform the two frozen-encoder models.
-
-Again, this remains an assumption derived from scientific deduction. 
-Further experiments would be valuable to validate these findings and strengthen our conclusions.
+Once again, it is speculation here based strictly on deduction. We would have liked to complete more tagged experiments, enough to reproduce what we found, confirming our assertion.
 
 \subsubsection{Invented Verlan Performance by Model}
 
@@ -1317,7 +1311,7 @@ In this figure, everything seems to have flipped once again\;---\;the four train
 We note the low specificity (44\%) of the Mistral zero-shot model, which may indicate that the model did not fully understand the task\;---\;specifically, what verlan is and its linguistic traits\;---\;thus performing close to random chance (50\%).
 
 After training, however, all four models appear to have resolved this issue. 
-The two models with frozen encoders produce similar results, the E2E+LR model (Experiment~B) performs slightly below them, while the one with the BERT classifier (Experiment~D) performs the best among the trained models. 
+The two models with frozen encoders produce similar results; the E2E+LR model (Experiment~B) performs slightly below them, while the one with the BERT classifier (Experiment~D) performs the best among the trained models. 
 This outcome closely resembles what we observed in the evaluation split dataset. 
 The GPT-5 zero-shot model continues to perform as the overall best model.
 
@@ -1343,15 +1337,11 @@ The closer a point lies to the top-right corner, the better the model performs.
     \label{fig:tradeoff-scatter}
 \end{figure}
 
-Effectively, a model that achieves both high slang specificity and high daily verlan recall can be considered top-tier. 
-Interestingly, according to this metric, GPT-5 Codex (High) performs the best, followed by the two models with frozen encoders. 
-This observation aligns with our earlier discussion: frozen embeddings often perform better on small datasets. 
-In contrast, the two E2E models cluster toward higher specificity but noticeably lower recall, indicating a bias toward predicting ``no verlan'' on ambiguous sentences.
+Essentially, a superior model can be defined as one that does well on both high slang specificity and high daily verlan recall. The good news is that in this space, GPT-5 Codex (High) outperformed all models, including the two frozen encoder models. Again, this is consistent with our earlier comment that frozen embeddings tend to do better with limited data, so this is consistent with our prior discussion. The two E2E models group toward high specificity but low recall, indicating a bias toward predicting ``no verlan'' on some ambiguous sentences.
 
 \paragraph{Small Dataset Caused More Instability?}
 
-The figure below shows the stability of the four trained models and includes the two zero-shot models for reference. 
-The bars represent mean recall, with standard deviation error bars.
+The figure below demonstrates the stability of four of the trained models—again including both zero-shot models for some reference\;---\;with the bars displaying mean recall of the models with standard deviation error bars.
 
 \begin{figure}[H]
     \centering
@@ -1383,7 +1373,7 @@ Type~I and Type~II errors may still occur here.
 
 Our research presents three key findings. First, all groups demonstrated an increase in accuracy following supervised fine-tuning on the carefully constructed verlan corpus, though there remains a considerable gap from the GPT-5 Codex (High) zero-shot reference. Second, shallow feed-forward classifiers on frozen Mistral embeddings consistently outperformed logistic regression; this indicates that non-linear decision boundaries may be advantageous despite being a frozen encoder. Finally, invented verlan is potentially the most difficult slice as all supervised variants and the zero-shot Mistral baseline fall well short of the reference model.
 
-These results imply an intentional architectural trade-off. We decided to use only the BERT \texttt{[CLS]} classifier head, stacked on the frozen Mistral embeddings, because the full-distribution fine-tuning of Transformers would require longer hyperparameter sweeps to avoid overfitting the small, noisy corpus. This choice enhances reproducibility while maintaining the ceiling\;---\;most of the linguistic signal still emanates from the Mistral encoder. Once we have more time to increase the corpus size, we will revisit this with BERT, also with its transformer layers in the pipeline.
+These results present an intentional architectural trade-off. Given the small dataset size and limited sweep budget, we opted for a lightweight  \texttt{[CLS]}-style classifier on frozen Mistral embeddings. This design not only preserved reproducibility but also avoided unnecessary fine-tuning overhead. This choice enhances reproducibility while maintaining the ceiling\;---\;most of the linguistic signal still emanates from the Mistral encoder. Once we have more time to increase the corpus size, we will revisit this with BERT, also with its transformer layers in the pipeline.
 
 Several limitations shape these conclusions. First, the corpus is small and, by necessity, based on a manual data collection process. Consequently, the dataset contains sparsity and annotation noise that influence which samples are included. Our training budget limited three epochs per run using a single 4-bit quantised encoder, and we intentionally limited the narrow range of hyperparameter sweeps (learning rate, temperature, prompt truncation). We attempted to reduce validation variance by averaging over 20 seeds, but the resulting confidence intervals remain wide. The limitations outlined should all be noted in the interpretation of the reported improvements.
 
@@ -1740,7 +1730,7 @@ Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp
         GPT-5 Codex (High) Zero Shot & 79.3\% & 92.0\% & 80.0\% \\
         \hline
     \end{tabular}
-    \caption{Zero-shot targeted breakdowns (single pass). Metrics computed on 29 historical verlan, 25 invented verlan, and 25 slang sentences respectively.}
+    \caption{Zero-shot targeted breakdowns (single pass). Metrics computed on 29 historical verlan, 25 invented verlan, and 25 slang sentences, respectively.}
     \label{tab:appendix-zeroshot-targeted}
 \end{table}
 
@@ -1872,7 +1862,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
 
 \noindent \textbf{Search procedure.} We issued French/English queries (e.g., ``verlan'', ``dictionnaire verlan'', ``lexique verlan'', ``argot'', ``parler verlan'', ``liste verlan'') and followed category/namespace pages to expand coverage. Crawl scripts respected robots.txt and rate limits; raw pulls were deduplicated and normalised before manual review.
 
-\noindent \textbf{Credibility policy.} Entries attested by (a) two independent sources or (b) one dated public reference were treated as candidates; otherwise they were downgraded or excluded. Provenance is recorded per sentence via the \texttt{reference} column; lexicon entries inherit the bucket-level sources above and will expose per-entry URLs in the next release. Tiering follows Table~\ref{tab:verlan_tiers}; in the current snapshot the \texttt{gold} and \texttt{bronze} labels are populated.
+\noindent \textbf{Credibility policy.} Entries attested by (a) two independent sources or (b) one dated public reference were treated as candidates; otherwise, they were downgraded or excluded. Provenance is recorded per sentence via the \texttt{reference} column; lexicon entries inherit the bucket-level sources above and will expose per-entry URLs in the next release. Tiering follows Table~\ref{tab:verlan_tiers}; in the current snapshot, the \texttt{gold} and \texttt{bronze} labels are populated.
 
 \cleardoublepage
 \skipsectioncleartrue

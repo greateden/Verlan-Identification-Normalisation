@@ -53,7 +53,7 @@
 \contentsline {subparagraph}{Seeds}{33}{section*.40}%
 \contentsline {subparagraph}{Batch Size}{33}{section*.41}%
 \contentsline {subparagraph}{Maximum Length}{33}{section*.42}%
-\contentsline {subparagraph}{Quantisation}{33}{section*.43}%
+\contentsline {subparagraph}{Quantisation}{34}{section*.43}%
 \contentsline {subparagraph}{Epochs}{34}{section*.44}%
 \contentsline {section}{\numberline {5}Evaluations, Results, and Analyses}{35}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{35}{subsection.5.1}%
@@ -68,12 +68,12 @@
 \contentsline {subsubsection}{\numberline {5.2.2}Common Verlan Performance by Model}{39}{subsubsection.5.2.2}%
 \contentsline {subsubsection}{\numberline {5.2.3}Invented Verlan Performance by Model}{40}{subsubsection.5.2.3}%
 \contentsline {subsubsection}{\numberline {5.2.4}Slang Controls Performance by Model}{41}{subsubsection.5.2.4}%
-\contentsline {paragraph}{A Discussion on the Hook}{41}{section*.54}%
+\contentsline {paragraph}{A Discussion on the Hook}{42}{section*.54}%
 \contentsline {subsubsection}{\numberline {5.2.5}And Yet Something Advanced}{42}{subsubsection.5.2.5}%
 \contentsline {paragraph}{Is E2E+BERT the Real King?}{42}{section*.55}%
 \contentsline {paragraph}{Small Dataset Caused More Instability?}{43}{section*.57}%
 \contentsline {paragraph}{Again: Is E2E+BERT the Real King?}{44}{section*.59}%
-\contentsline {section}{\numberline {6}Conclusion and Limitation}{45}{section.6}%
+\contentsline {section}{\numberline {6}Conclusion and Limitation}{46}{section.6}%
 \contentsline {section}{\numberline {A}Appendix A: Expanded Evaluation Artefacts}{I}{appendix.A}%
 \contentsline {section}{\numberline {B}Appendix B: Dataset schema (detailed)}{III}{appendix.B}%
 \contentsline {section}{\numberline {C}Appendix C: Source inventory and crawl logs}{IV}{appendix.C}%
