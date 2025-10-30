@@ -1,14 +1,16 @@
 # Fdb version 4
-["xdvipdfmx"] 0 "myreport.xdv" "myreport.pdf" "myreport" 0 -1
-  "myreport.xdv" 0 -1 0 "xelatex"
-  (generated)
-  "myreport.pdf"
-  (rewritten before read)
-["xelatex"] 0 "final report/report folder/myreport.tex" "myreport.xdv" "myreport" 0 -1
-  "final report/report folder/myreport.tex" 0 -1 0 ""
-  "myreport.aux" 0 -1 0 "xelatex"
+["pdflatex"] 1761782534.26763 "final report/report folder/myreport.tex" "myreport.pdf" "myreport" 1761782534.34251 2
+  "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/article.cls" 1738182759 20144 63d8bacaf52e5abf4db3bc322373e1d4 ""
+  "/usr/local/texlive/2025basic/texmf-dist/tex/latex/base/size12.clo" 1738182759 8449 ffe4ba2166a344827c3a832d1d5e0a91 ""
+  "/usr/local/texlive/2025basic/texmf-dist/web2c/texmf.cnf" 1739380943 42148 61becc7c670cd061bb319c643c27fdd4 ""
+  "/usr/local/texlive/2025basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1741448339 2663854 a6f6b8c904d47faabe5d94cfdac61310 ""
+  "/usr/local/texlive/2025basic/texmf.cnf" 1741448314 628 81d1ada0f601fb1ffa62f1323192d946 ""
+  "cosc4x0style.sty" 0 -1 0 ""
+  "final report/report folder/myreport.tex" 1761782524.51851 126954 833b72aa2165104b0c2f4979e5d38dd8 ""
+  "myreport.aux" 1761208842.79085 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "myreport.aux"
   "myreport.log"
-  "myreport.xdv"
+  "myreport.pdf"
   (rewritten before read)

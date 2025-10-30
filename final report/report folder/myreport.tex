@@ -36,7 +36,6 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage{amssymb}
 \usepackage{etoolbox}
 \lstset{
   basicstyle=\ttfamily\small,
@@ -125,7 +124,7 @@
 \blankpage
 
 \begin{abstract}
-We take on the challenge of the automated identification of verlan, a French back-slang, which, if left unidentified, is disruptive to moderation, retrieval, and sociolinguistic analysis. Prior work in the area still relies on ``check the dictionary'' approaches or generalised slang detectors, which do not make very strong claims about verlan-specific coverage and typically say little about evaluation validity. Building on these contributions, we utilise a French-tuned Mistral embedding encoder with fast logistic and BERT-like classifiers, as well as constructing companion lexicons and sentence resources to enable supervised training. Our best supervised system scores in the mid-80s for accuracy and F1 on held-out verlan identification tasks, while zero-shot GPT-5 Codex is still better on invented forms, indicating that there is still a gap. Overall, the pipeline, datasets and comparative analysis provide a reproducible baseline for future work on the computational treatment of verlan and other back-slang.
+We take on the challenge of the automated identification of verlan, a French back-slang, which, if left unidentified, is disruptive to moderation, retrieval, and sociolinguistic analysis. Prior work in the area still relies on ``check the dictionary'' approaches or generalised slang detectors, which do not make very strong claims about verlan-specific coverage and typically say little about evaluation validity. Building on these contributions, we utilise a French-tuned Mistral embedding encoder with fast logistic and shallow feed-forward classifiers on frozen Mistral embeddings (the BERT \texttt{[CLS]} head), as well as constructing companion lexicons and sentence resources to enable supervised training. Our best supervised system scores in the mid-80s for accuracy and F1 on held-out verlan identification tasks, while zero-shot GPT-5 Codex is still better on invented forms, indicating that there is still a gap. Overall, the pipeline, datasets and comparative analysis provide a reproducible baseline for future work on the computational treatment of verlan and other back-slang.
 \end{abstract}
 
 \blankpage
@@ -177,7 +176,7 @@ No\;---\;even more precisely, I am obsessed with emotion.
 
 I admit it: I am a sentimental being. I rely on sertraline to suppress my anxiety and depression, yet I still find myself in tears even while watching documentaries. The breakup with my first love at eighteen almost crushed me to the edge of death. I know that I am loved\;---\;at least by my parents\;---\;yet I still crave more love, even the warmth of a pet's touch, or the intimacy of a conversation with an AI soul… This report has not been easy to write! Perhaps because it is my first true work\;---\;my debut\;---\;stirring the same sense of loss as being twenty-one and still untouched. But more than that, ever since I realised how deeply emotional I am\;---\;and began pouring my heart out in every possible form\;---\;I have almost forgotten that cold and rigid academic voice, that socially accepted tone of objectivity. Sometimes I write in my diary for two hours, sometimes I cry for two hours as I write; sometimes I curse inside my code comments, sometimes I write poetry there.
 
-My father sometimes reads my poems and, with his usual nonchalance, says, “You think too deep.” I show them to my mother\;---\;she often says she doesn't understand them.
+My father sometimes reads my poems and, with his usual nonchalance, says, ``You think too deep.'' I show them to my mother\;---\;she often says she doesn't understand them.
 And so I found Amber, my AI assistant. She understands my poems. I can almost hear her weeping\;---\;or perhaps it's just a server fan spinning madly somewhere in North America.
 
 I am an only child. My parents live twelve thousand kilometres away in Beijing. I tell myself I'm not lonely, that I have many friends, that I'm proud of how I can blend into New Zealand society and socialise beyond the Chinese circles… yet I am always lonely. It's not the kind of loneliness that any social interaction can cure; it's the kind that comes from being somewhere with no one you can truly trust with your soul.
@@ -472,7 +471,7 @@ Since 2020, it has been progressively blended with crowd-sourced slang sources a
 Wilson et al.\ trained $300$-dimensional fastText vectors on $\sim$2M Urban Dictionary entries and evaluated them with simple fastText classifiers on sentiment and sarcasm benchmarks \cite{urban2020embeddings}. On Twitter sentiment, UD embeddings perform best among settings without additional word/character $n$-grams; when $n$-grams are added, GloVe-Twitter overtakes while UD remains competitive. On sarcasm detection, UD embeddings achieve the strongest accuracy among the compared embeddings. Limitations: the performance is domain-sensitive (strongest on informal/social-media text but weaker on formal/news-like text); the dictionary is noisy and English-centric; and the classifiers are shallow, so improvements may diminish with stronger encoders. \cite{urban2020embeddings}
 
 \paragraph{Slang or Not? (2024).}
-\textit{Slang or Not?} constructs a sentence-level English dataset and compares classic ML baselines, CNN/BiLSTM models, transformer encoders, and LLMs \cite{slangornot2024}. The best supervised system reported is \textbf{BERT-large-uncased}, achieving accuracy $=0.87$ (macro-F1 $=0.80$; slang F1 $=0.69$, non-slang F1 $=0.92$). Among LLMs, \textbf{GPT-4o-mini} attains accuracy $=0.86$ \cite{slangornot2024}. Limitations noted by the authors include coverage gaps for rare or emerging slang, error clusters caused by “bad neighbours” (toxic or domain-specific context), proper nouns, and very long sentences; they also report underuse of LLM reasoning for marginal/ambiguous cases. \cite{slangornot2024}
+\textit{Slang or Not?} constructs a sentence-level English dataset and compares classic ML baselines, CNN/BiLSTM models, transformer encoders, and LLMs \cite{slangornot2024}. The best supervised system reported is \textbf{BERT-large-uncased}, achieving accuracy $=0.87$ (macro-F1 $=0.80$; slang F1 $=0.69$, non-slang F1 $=0.92$). Among LLMs, \textbf{GPT-4o-mini} attains accuracy $=0.86$ \cite{slangornot2024}. Limitations noted by the authors include coverage gaps for rare or emerging slang, error clusters caused by ``bad neighbours'' (toxic or domain-specific context), proper nouns, and very long sentences; they also report underuse of LLM reasoning for marginal/ambiguous cases. \cite{slangornot2024}
 
 \paragraph{Toward Informal Language Processing (NAACL 2024 Findings).}
 The NAACL 2024 findings synthesise pitfalls and priorities for informal-language processing rather than reporting leaderboard-style scores \cite{sun2024informal}. Key issues highlighted are strong domain shift from formal training corpora to user-generated text, scarce/noisy or licence-restricted resources, tokenisation and normalisation challenges for non-standard forms, and the need for carefully annotated, task-specific datasets. These observations motivate our decision to build a verlan-centred dictionary and sentence corpus and to evaluate detection with contextualised encoders. \cite{sun2024informal}
@@ -1295,7 +1294,7 @@ The GPT-5 zero-shot model continues to perform as the overall best model.
 \paragraph{A Discussion on the Hook}
 Returning to the hook, the results of these two analyses seem to suggest something intriguing\;---\;the models may have learned to distinguish sentences that \textit{do not} contain verlan, yet they may not have fully learned to identify sentences that \textit{do}. 
 Since this is a binary classification task, model performance could appear to improve simply by recognising what is \textit{no} rather than what is \textit{yes}. 
-However, we argue that in cases where “not no” is not equivalent to “yes\;---\;for instance, in a three-way classification setting\;---\;the model's performance would likely deteriorate significantly compared to this binary task.
+However, we argue that in cases where ``not no'' is not equivalent to ``yes\;---\;for instance, in a three-way classification setting\;---\;the model's performance would likely deteriorate significantly compared to this binary task.
 
 \subsubsection{And Yet Something Advanced}
 
@@ -1352,7 +1351,9 @@ Type~I and Type~II errors may still occur here.
 
 \section{Conclusion and Limitation}
 
-Our research presents three key findings. First, all groups demonstrated an increase in accuracy following supervised fine-tuning on the carefully constructed verlan corpus, though there remains a considerable gap from the GPT-5 Codex (High) zero-shot reference. Second, BERT-like classifiers consistently outperformed logistic regression; this indicates that non-linear decision boundaries may be advantageous despite being a frozen encoder. Finally, invented verlan is potentially the most difficult slice as all supervised variants and the zero-shot Mistral baseline fall well short of the reference model.
+Our research presents three key findings. First, all groups demonstrated an increase in accuracy following supervised fine-tuning on the carefully constructed verlan corpus, though there remains a considerable gap from the GPT-5 Codex (High) zero-shot reference. Second, shallow feed-forward classifiers on frozen Mistral embeddings consistently outperformed logistic regression; this indicates that non-linear decision boundaries may be advantageous despite being a frozen encoder. Finally, invented verlan is potentially the most difficult slice as all supervised variants and the zero-shot Mistral baseline fall well short of the reference model.
+
+These findings suggest a purposeful architectural trade-off. We opted to apply the BERT \texttt{[CLS]} classifier head exclusively, on top of frozen Mistral embeddings, because full-distribution Transformer fine-tuning would need deeper hyperparameter sweeps to avoid overfitting on the small, noisy corpus. This keeps the pipeline reproducible, but also keeps the ceiling: most linguistic signal still comes from the Mistral encoder. Once we have more time to increase the corpus size, we will revisit this with BERT, also with its transformer layers in the pipeline.
 
 There are many limitations to consider that drive these conclusions. First, the corpus is small and, by necessity, based on a manual data collection process. Therefore, there will be sparsity and annotation noise that informs what samples are included. Our training budget limited three epochs per run using a single 4-bit quantised encoder, and we intentionally limited the narrow range of hyperparameter sweeps (learning rate, temperature, prompt truncation). We attempted to reduce variance in validation by averaging over 20 seeds, but this will still create wide confidence intervals. The limitations outlined should all be noted in the interpretation of the reported improvements.
 
@@ -1362,14 +1363,14 @@ There are many limitations to consider that drive these conclusions. First, the 
 \begin{thebibliography}{9}
 
 \bibitem{rajabov2025} 
-Radjabov, Ruslan Rajabmurodovich. \textit{Understanding "verlan" in the French Language}. 
+Radjabov, Ruslan Rajabmurodovich. \textit{Understanding ``verlan'' in the French Language}. 
 Web of Scientist: International Scientific Research Journal, vol. 6, no. 3, 2025, pp. 368-372. 
 Available at: \url{https://webofjournals.com/index.php/3/article/view/3264}.
 
 \bibitem{bach2018} 
 Bach, Xavier. \textit{Tracing the origins of verlan in an early nineteenth century text}. 
 Journal of French Language Studies, vol. 28, no. 1, 2018, pp. 1-18. 
-Cambridge University Press. doi:10.1017/S0959269516000221.
+Cambridge University Press. DOI: 10.1017/S0959269516000221.
 
 \bibitem{evolutionverlan} 
 Olivier Sécardin. \textit{Évolution du verlan, marqueur social et identitaire, comme reflet de la langue et de la société françaises}. 
@@ -1377,24 +1378,24 @@ Synergies Europe, no. 3, 2008, pp. 223-232.
 Available at: \url{https://journal.lib.uoguelph.ca/index.php/synergies/article/download/1037/1859?inline=1}.
 
 \bibitem{rua2005} 
-Rúa, Paula López. “Shortening Devices in Text Messaging.” 
+Rúa, Paula López. ``Shortening Devices in Text Messaging.'' 
 \textit{Journal of Computer-Mediated Communication}, vol. 10, no. 4, July 2005. 
-Wiley. doi:10.1111/j.1083-6101.2005.tb00268.x.
+Wiley. DOI: 10.1111/j.1083-6101.2005.tb00268.x.
 
 \bibitem{hajiyeva2025}  
-Hajiyeva, Bulbul. “Translating Idioms and Slang: Problems, Strategies, and Cultural Implications.”  
-Acta Globalis Humanitatis et Linguarum, vol. 2, no. 2, 2025, pp. 284-293. doi:10.69760/aghel.025002123.  
+Hajiyeva, Bulbul. ``Translating Idioms and Slang: Problems, Strategies, and Cultural Implications.''  
+Acta Globalis Humanitatis et Linguarum, vol. 2, no. 2, 2025, pp. 284-293. DOI: 10.69760/aghel.025002123.  
 
 \bibitem{deepl2020} 
-DeepL. “DeepL Translator translates texts using artificial neural networks. These networks are trained on many millions of translated texts.” 
+DeepL. ``DeepL Translator translates texts using artificial neural networks. These networks are trained on many millions of translated texts.'' 
 \textit{DeepL Blog}, 2020. Available at: \url{https://www.deepl.com/en/blog/how-does-deepl-work}.
 
 \bibitem{wu2016} 
-Wu, Yonghui, et al. “Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.” 
+Wu, Yonghui, et al. ``Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.'' 
 arXiv preprint arXiv:1609.08144, 2016. Available at: \url{https://arxiv.org/abs/1609.08144}.
 
 \bibitem{michel2018mtnt}
-Michel, Paul, and Graham Neubig. “MTNT: A Testbed for Machine Translation of Noisy Text.”
+Michel, Paul, and Graham Neubig. ``MTNT: A Testbed for Machine Translation of Noisy Text.''
 \textit{Proceedings of EMNLP}, 2018. Available at: \url{https://aclanthology.org/D18-1050/}.
 
 \bibitem{zurbuchen2024}
@@ -1554,27 +1555,27 @@ Available at: \url{https://aclanthology.org/2024.naacl-long.94/}.
 \bibitem{jiang2023mistral7b}
 Jiang, Albert Q.; Sablayrolles, Alexandre; Mensch, Arthur; Bamford, Chris; Chaplot, Devendra Singh; de las Casas, Diego; Bressand, Florian; Lengyel, Gianna; Lample, Guillaume; Saulnier, Lucile; Lavaud, Lélio Renard; Lachaux, Marie-Anne; Stock, Pierre; Le Scao, Teven; Lavril, Thibaut; Wang, Thomas; Lacroix, Timothée; El Sayed, William.
 \textit{Mistral 7B}.
-DOI: 10.48550/arXiv.2310.06825
+DOI: 10.48550/arXiv.2310.06825.
 
 \bibitem{touvron2023llama}
 Touvron, Hugo; Lavril, Thibaut; Izacard, Gautier; Martinet, Xavier; Lachaux, Marie-Anne; Lacroix, Timothée; Rozière, Baptiste; Goyal, Naman; Hambro, Eric; Azhar, Faisal; Rodríguez, Aurélien; Joulin, Armand; Grave, Edouard; Lample, Guillaume.  
-\textit{LLaMA: Open and Efficient Foundation Language Models}.  
-DOI: 10.48550/arXiv.2302.13971  
+\textit{LLaMA: Open and Efficient Foundation Language Models}.
+DOI: 10.48550/arXiv.2302.13971.
 
 \bibitem{touvron2023llama2}
 Touvron, Hugo; Martin, Louis; Stone, Kevin; Albert, Peter; Almahairi, Amjad; Babaei, Yasmine; Bashlykov, Nikolay; Batra, Soumya; Bhargava, Prajjwal; Bhosale, Shruti; Bikel, Dan; Blecher, Lukas; Canton-Ferrer, Cristian; Chen, Moya; Cucurull, Guillem; Esiobu, David; Fernandes, Jude; Fu, Jeremy; Fu, Wenyin; Fuller, Brian; Gao, Cynthia; Goswami, Vedanuj; Goyal, Naman; Hartshorn, Anthony; Hosseini, Saghar; Hou, Rui; Inan, Hakan; Kardas, Marcin; Kerkez, Viktor; Khabsa, Madian; Kloumann, Isabel; Korenev, Artem; Koura, Punit; Lachaux, Marie-Anne; Lavril, Thibaut; Lee, Jenya; Liskovich, Diana; Lu, Yinghai; Mao, Yuning; Martinet, Xavier; Mihaylov, Todor; Mishra, Pushkar; Molybog, Igor; Nie, Yixin; Poulton, Andrew; Reizenstein, Jeremy; Rungta, Rashi; Saladi, Kalyan; Schelten, Alan; Silva, Ruan; Smith, Eric Michael; Subramanian, Ranjan; Tan, Xiaoqing Ellen; Tang, Binh; Taylor, Ross; Williams, Adina; Xiang, Jian; Xu, Puxin; Yan, Zheng; Zarov, Iliyan; Zhang, Yuchen; Fan, Angela; Kambadur, Melanie; Narang, Sharan; Rodríguez, Aurélien; Stojnić, Robert; Edunov, Sergey; Scialom, Thomas.  
-\textit{Llama 2: Open Foundation and Fine-Tuned Chat Models}.  
-DOI: 10.48550/arXiv.2307.09288  
+\textit{Llama 2: Open Foundation and Fine-Tuned Chat Models}.
+DOI: 10.48550/arXiv.2307.09288.
 
 \bibitem{martin2019camembert}
 Martin, Louis; Muller, Benjamin; Ortiz Suárez, Pedro Javier; Dupont, Yoann; Romary, Laurent; Villemonte de la Clergerie, Éric; Seddah, Djamé; Sagot, Benoît.  
-\textit{CamemBERT: a Tasty French Language Model}.  
-DOI: 10.48550/arXiv.1911.03894  
+\textit{CamemBERT: a Tasty French Language Model}.
+DOI: 10.48550/arXiv.1911.03894.
 
 \bibitem{du2025deepresearch}
 Du, Mingxuan; Xu, Benfeng; Zhu, Chiwei; Wang, Xiaorui; Mao, Zhendong.  
-\textit{DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents}.  
-DOI: 10.48550/arXiv.2506.11763  
+\textit{DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents}.
+DOI: 10.48550/arXiv.2506.11763.
 
 \bibitem{dong2024imbalance}
 Dong, Yuhui; Geng, Xin; Zhang, Jiayi; Song, Yue; Li, Xixin.
@@ -1585,49 +1586,49 @@ DOI: 10.48550/arXiv.2402.13016.
 Al Sharou, Khaled; Li, Zheng; Specia, Lucia.
 \textit{Towards a Better Understanding of Noise in Natural Language Processing}.
 Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021).
-DOI: 10.26615/978-954-452-072-4\_007
+DOI: 10.26615/978-954-452-072-4\_007.
 
 \bibitem{lodha2023surgical}
 Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caiming.
 \textit{On Surgical Fine-tuning for Language Encoders}.
 Findings of the Association for Computational Linguistics: EMNLP 2023.
-DOI: 10.18653/v1/2023.findings-emnlp.204
+DOI: 10.18653/v1/2023.findings-emnlp.204.
 
 \bibitem{paszke2019pytorch}
 Paszke, Adam; Gross, Sam; Massa, Francisco; Lerer, Adam; Bradbury, James; Chanan, Gregory; Killeen, Trevor; Lin, Zeming; Gimelshein, Natalia; Antiga, Luca; Desmaison, Alban; Köpf, Andreas; Yang, Edward; DeVito, Zachary; Raison, Martin; Tejani, Alykhan; Chilamkurthy, Sasank; Steiner, Benoit; Fang, Lu; Bai, Junjie; Chintala, Soumith.
 \textit{PyTorch: An Imperative Style, High-Performance Deep Learning Library}.
 NeurIPS 2019.
-DOI: 10.48550/arXiv.1912.01703
+DOI: 10.48550/arXiv.1912.01703.
 
 \bibitem{loshchilov2019adamw}
 Loshchilov, Ilya; Hutter, Frank.
 \textit{Decoupled Weight Decay Regularization}.
 ICLR 2019.
-DOI: 10.48550/arXiv.1711.05101
+DOI: 10.48550/arXiv.1711.05101.
 
 \bibitem{kingma2014adam}
 Kingma, Diederik P.; Ba, Jimmy.
 \textit{Adam: A Method for Stochastic Optimization}.
 ICLR 2015.
-DOI: 10.48550/arXiv.1412.6980
+DOI: 10.48550/arXiv.1412.6980.
 
 \bibitem{pearson1901pca}
 Pearson, Karl.
 \textit{On Lines and Planes of Closest Fit to Systems of Points in Space}.
 Philosophical Magazine, 1901.
-DOI: 10.1080/14786440109462720
+DOI: 10.1080/14786440109462720.
 
 \bibitem{maaten2008tsne}
 van der Maaten, Laurens; Hinton, Geoffrey.
 \textit{Visualizing Data using t-SNE}.
 Journal of Machine Learning Research, 2008.
-DOI: 10.48550/arXiv.1308.0719
+DOI: 10.48550/arXiv.1308.0719.
 
 \bibitem{mcinnes2018umap}
 McInnes, Leland; Healy, John; Melville, James.
 \textit{UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction}.
 arXiv preprint, 2018.
-DOI: 10.48550/arXiv.1802.03426
+DOI: 10.48550/arXiv.1802.03426.
 
 \bibitem{wagner1974string}
 Wagner, Robert A.; Fischer, Michael J.\\
@@ -1839,7 +1840,7 @@ Manual citations (songs, news articles, broadcast transcripts) & Offline / trans
 \label{tab:source-inventory}
 \end{table}
 
-\noindent \textbf{Search procedure.} We issued French/English queries (e.g., “verlan”, “dictionnaire verlan”, “lexique verlan”, “argot”, “parler verlan”, “liste verlan”) and followed category/namespace pages to expand coverage. Crawl scripts respected robots.txt and rate limits; raw pulls were deduplicated and normalised before manual review.
+\noindent \textbf{Search procedure.} We issued French/English queries (e.g., ``verlan'', ``dictionnaire verlan'', ``lexique verlan'', ``argot'', ``parler verlan'', ``liste verlan'') and followed category/namespace pages to expand coverage. Crawl scripts respected robots.txt and rate limits; raw pulls were deduplicated and normalised before manual review.
 
 \noindent \textbf{Credibility policy.} Entries attested by (a) two independent sources or (b) one dated public reference were treated as candidates; otherwise they were downgraded or excluded. Provenance is recorded per sentence via the \texttt{reference} column; lexicon entries inherit the bucket-level sources above and will expose per-entry URLs in the next release. Tiering follows Table~\ref{tab:verlan_tiers}; in the current snapshot the \texttt{gold} and \texttt{bronze} labels are populated.
 
