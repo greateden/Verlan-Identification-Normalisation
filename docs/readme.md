@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-✅ Deadline passed: -12 days, 07 hours, 36 minutes
+✅ Deadline passed: -12 days, 13 hours, 20 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
@@ -722,6 +722,7 @@ project-root/
 │       │   └── slang_fp_vs_main_fp.png
 │       ├── gkbib_unsrt.bst
 │       ├── myreport V0.pdf
+│       ├── myreport V1.1.pdf
 │       ├── myreport.aux
 │       ├── myreport.fdb_latexmk
 │       ├── myreport.fls
