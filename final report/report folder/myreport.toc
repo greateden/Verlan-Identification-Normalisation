@@ -4,76 +4,76 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Context and Motivation}{1}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Objective}{3}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Background}{6}{section.2}%
-\contentsline {subsection}{\numberline {2.1}A Living Verlan}{6}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Detecting Slang}{7}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}1910s-2010s: A Super-Condensed History of Slang Detection}{8}{subsubsection.2.2.1}%
-\contentsline {paragraph}{How these methods work (high level).}{8}{section*.9}%
-\contentsline {paragraph}{Performance and limitations for verlan/slang.}{8}{section*.10}%
-\contentsline {subsubsection}{\numberline {2.2.2}2016-2019: Dictionary Search}{10}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Meanwhile, for Fuzzy Search}{11}{subsubsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.4}2020-2025: Fuzzy Search + Slang Corpus = BOOM}{11}{subsubsection.2.2.4}%
-\contentsline {paragraph}{Urban Dictionary embeddings (Wilson, 2020).}{11}{section*.12}%
-\contentsline {paragraph}{Slang or Not? (2024).}{12}{section*.13}%
-\contentsline {paragraph}{Toward Informal Language Processing (NAACL 2024 Findings).}{12}{section*.14}%
-\contentsline {subsubsection}{\numberline {2.2.5}Detecting Verlan?}{12}{subsubsection.2.2.5}%
-\contentsline {section}{\numberline {3}Dataset}{14}{section.3}%
-\contentsline {subsection}{\numberline {3.1}The Separated Structures}{14}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Visualising the Dataset}{14}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Data Collection and Curation}{15}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Sampling}{15}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Balancing the Training Dataset}{17}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Evidence Levels (Source)}{18}{subsubsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.4}Dataset used in this report}{18}{subsection.3.4}%
-\contentsline {section}{\numberline {4}Building the Pipelines --- Model Architectures and Specifications}{20}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Mistral 7B\tmspace +\thickmuskip {.2777em}---\tmspace +\thickmuskip {.2777em}Why?}{20}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Zero-Shot Models}{21}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Mistral 7B Prompt Engineering with Vibe}{21}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Zero-shot reference model}{22}{subsubsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.3}Training Models}{24}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}The Pipelines}{24}{subsubsection.4.3.1}%
-\contentsline {paragraph}{Input}{26}{section*.21}%
-\contentsline {paragraph}{Sanitise Text}{26}{section*.22}%
-\contentsline {subparagraph}{Why Not Preserve Upper Cases and Annotation Marks}{26}{section*.23}%
-\contentsline {paragraph}{Tokenisation}{27}{section*.24}%
-\contentsline {paragraph}{Encoder}{27}{section*.25}%
-\contentsline {paragraph}{Post-encoder processing}{27}{section*.26}%
-\contentsline {subparagraph}{Masking}{27}{section*.27}%
-\contentsline {subparagraph}{Mean Pooling}{28}{section*.28}%
-\contentsline {subparagraph}{L2 Normalisation}{28}{section*.29}%
-\contentsline {paragraph}{The Classifiers\tmspace +\thickmuskip {.2777em}---\tmspace +\thickmuskip {.2777em}Logistic Regression and BERT-inspired MLPs}{29}{section*.30}%
-\contentsline {subparagraph}{Logistic Regression}{29}{section*.31}%
-\contentsline {subparagraph}{BERT-Inspired Classifier}{29}{section*.32}%
-\contentsline {subparagraph}{Loss and optimisation}{32}{section*.35}%
-\contentsline {paragraph}{The Sigmoid Threshold}{32}{section*.36}%
-\contentsline {subsubsection}{\numberline {4.3.2}The Usage of the Dataset}{32}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Environment and Hyperparameters}{33}{subsubsection.4.3.3}%
-\contentsline {paragraph}{Environment}{33}{figure.caption.38}%
-\contentsline {paragraph}{Hyperparameters}{33}{section*.39}%
-\contentsline {subparagraph}{Seeds}{33}{section*.40}%
-\contentsline {subparagraph}{Batch Size}{33}{section*.41}%
-\contentsline {subparagraph}{Maximum Length}{33}{section*.42}%
-\contentsline {subparagraph}{Quantisation}{34}{section*.43}%
-\contentsline {subparagraph}{Epochs}{34}{section*.44}%
-\contentsline {section}{\numberline {5}Evaluations, Results, and Analyses}{35}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{35}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Embedding Space}{35}{subsubsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.2}Testing Datasets}{35}{subsubsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.3}Testing Schema}{37}{subsubsection.5.1.3}%
-\contentsline {paragraph}{Zero-shot Models}{37}{section*.46}%
-\contentsline {paragraph}{Number of Trials}{37}{section*.47}%
-\contentsline {paragraph}{Metrics}{37}{section*.48}%
-\contentsline {subsection}{\numberline {5.2}Results and Analyses}{37}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}General F1-Score and Accuracy}{38}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Common Verlan Performance by Model}{39}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Invented Verlan Performance by Model}{40}{subsubsection.5.2.3}%
-\contentsline {subsubsection}{\numberline {5.2.4}Slang Controls Performance by Model}{41}{subsubsection.5.2.4}%
-\contentsline {paragraph}{A Discussion on the Hook}{42}{section*.54}%
-\contentsline {subsubsection}{\numberline {5.2.5}And Yet Something Advanced}{42}{subsubsection.5.2.5}%
-\contentsline {paragraph}{Is E2E+BERT the Real King?}{42}{section*.55}%
-\contentsline {paragraph}{Small Dataset Caused More Instability?}{43}{section*.57}%
-\contentsline {paragraph}{Again: Is E2E+BERT the Real King?}{44}{section*.59}%
-\contentsline {section}{\numberline {6}Conclusion and Limitation}{46}{section.6}%
+\contentsline {section}{\numberline {2}Background}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}A Living Verlan}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Detecting Slang}{6}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}1910s-2010s: A Super-Condensed History of Slang Detection}{7}{subsubsection.2.2.1}%
+\contentsline {paragraph}{How these methods work (high level).}{7}{section*.9}%
+\contentsline {paragraph}{Performance and limitations for verlan/slang.}{7}{section*.10}%
+\contentsline {subsubsection}{\numberline {2.2.2}2016-2019: Dictionary Search}{9}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Meanwhile, for Fuzzy Search}{10}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}2020-2025: Fuzzy Search + Slang Corpus = BOOM}{10}{subsubsection.2.2.4}%
+\contentsline {paragraph}{Urban Dictionary embeddings (Wilson, 2020).}{10}{section*.12}%
+\contentsline {paragraph}{Slang or Not? (2024).}{11}{section*.13}%
+\contentsline {paragraph}{Toward Informal Language Processing (NAACL 2024 Findings).}{11}{section*.14}%
+\contentsline {subsubsection}{\numberline {2.2.5}Detecting Verlan?}{11}{subsubsection.2.2.5}%
+\contentsline {section}{\numberline {3}Dataset}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}The Separated Structures}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Visualising the Dataset}{13}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Data Collection and Curation}{14}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Sampling}{14}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Balancing the Training Dataset}{16}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Evidence Levels (Source)}{17}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Dataset used in this report}{17}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Building the Pipelines --- Model Architectures and Specifications}{19}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Mistral 7B\tmspace +\thickmuskip {.2777em}---\tmspace +\thickmuskip {.2777em}Why?}{19}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Zero-Shot Models}{20}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Mistral 7B Prompt Engineering with Vibe}{20}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Zero-shot reference model}{21}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}Training Models}{23}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}The Pipelines}{23}{subsubsection.4.3.1}%
+\contentsline {paragraph}{Input}{25}{section*.21}%
+\contentsline {paragraph}{Sanitise Text}{25}{section*.22}%
+\contentsline {subparagraph}{Why Not Preserve Upper Cases and Annotation Marks}{25}{section*.23}%
+\contentsline {paragraph}{Tokenisation}{26}{section*.24}%
+\contentsline {paragraph}{Encoder}{26}{section*.25}%
+\contentsline {paragraph}{Post-encoder processing}{26}{section*.26}%
+\contentsline {subparagraph}{Masking}{26}{section*.27}%
+\contentsline {subparagraph}{Mean Pooling}{27}{section*.28}%
+\contentsline {subparagraph}{L2 Normalisation}{27}{section*.29}%
+\contentsline {paragraph}{The Classifiers\tmspace +\thickmuskip {.2777em}---\tmspace +\thickmuskip {.2777em}Logistic Regression and BERT-inspired MLPs}{28}{section*.30}%
+\contentsline {subparagraph}{Logistic Regression}{28}{section*.31}%
+\contentsline {subparagraph}{BERT-Inspired Classifier}{28}{section*.32}%
+\contentsline {subparagraph}{Loss and optimisation}{31}{section*.35}%
+\contentsline {paragraph}{The Sigmoid Threshold}{31}{section*.36}%
+\contentsline {subsubsection}{\numberline {4.3.2}The Usage of the Dataset}{31}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Environment and Hyperparameters}{32}{subsubsection.4.3.3}%
+\contentsline {paragraph}{Environment}{32}{figure.caption.38}%
+\contentsline {paragraph}{Hyperparameters}{32}{section*.39}%
+\contentsline {subparagraph}{Seeds}{32}{section*.40}%
+\contentsline {subparagraph}{Batch Size}{32}{section*.41}%
+\contentsline {subparagraph}{Maximum Length}{32}{section*.42}%
+\contentsline {subparagraph}{Quantisation}{33}{section*.43}%
+\contentsline {subparagraph}{Epochs}{33}{section*.44}%
+\contentsline {section}{\numberline {5}Evaluations, Results, and Analyses}{34}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Evaluation Methodology}{34}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Embedding Space}{34}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Testing Datasets}{34}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Testing Schema}{36}{subsubsection.5.1.3}%
+\contentsline {paragraph}{Zero-shot Models}{36}{section*.46}%
+\contentsline {paragraph}{Number of Trials}{36}{section*.47}%
+\contentsline {paragraph}{Metrics}{36}{section*.48}%
+\contentsline {subsection}{\numberline {5.2}Results and Analyses}{36}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}General F1-Score and Accuracy}{37}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Common Verlan Performance by Model}{38}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Invented Verlan Performance by Model}{39}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Slang Controls Performance by Model}{40}{subsubsection.5.2.4}%
+\contentsline {paragraph}{A Discussion on the Hook}{41}{section*.54}%
+\contentsline {subsubsection}{\numberline {5.2.5}And Yet Something Advanced}{41}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Is E2E+BERT the Real King?}{41}{section*.55}%
+\contentsline {paragraph}{Small Dataset Caused More Instability?}{42}{section*.57}%
+\contentsline {paragraph}{Again: Is E2E+BERT the Real King?}{43}{section*.59}%
+\contentsline {section}{\numberline {6}Conclusion and Limitation}{45}{section.6}%
 \contentsline {section}{Appendix A: Expanded Evaluation Artefacts}{I}{section*.62}%
 \contentsline {section}{Appendix B: Dataset schema (detailed)}{III}{section*.67}%
 \contentsline {section}{Appendix C: Source inventory and crawl logs}{IV}{section*.69}%

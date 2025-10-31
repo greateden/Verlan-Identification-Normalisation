@@ -267,35 +267,35 @@ When speakers use more than one language, original slang terms can easily slip i
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/google_verlan.png}
+\includegraphics[width=0.76\textwidth]{figures/google_verlan.png}
 \caption{\label{fig:google_verlan}Google Translate cannot translate the verlan \textit{tebie} correctly.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/deepl_verlan.png}
+\includegraphics[width=0.75\textwidth]{figures/deepl_verlan.png}
 \caption{\label{fig:deepl_verlan}DeepL cannot translate the verlan \textit{tebie} correctly.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.3\textwidth]{figures/deepl_alt_text.png}
+\includegraphics[width=0.28\textwidth]{figures/deepl_alt_text.png}
 \caption{\label{fig:deepl_alt_text}No desired translation for verlan \textit{tebie} in DeepL's alternative word list.}
 \end{figure}
 
-These failures motivate an early attempt at automatic verlan detection in text. Accordingly, this report examines how current machine learning models perform on the detection task. Previous works have tackled detecting slang with ML and translating noisy text more broadly \cite{pei2019slang, michel2018mtnt}.
+These failures motivate an early attempt at automatic verlan detection in text. Accordingly, we examine how current machine learning models perform on the detection task. Previous works have tackled detecting slang with ML and translating noisy text more broadly \cite{pei2019slang, michel2018mtnt}.
 
-For verlan specifically, we are unaware of any publicly available, published computational research on its detection or translation (September 2025), nor is there a publicly available, curated dataset. The closest similar effort is a University of Toronto exercise whereby students are asked to train an NMT model to generate Pig Latin from English\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}; this educational exercise is in the opposite direction and does not attempt detection or normalisation.
+For verlan specifically, we are unaware of any publicly available, published computational research on its detection or translation (September 2025), nor is there a publicly available, curated dataset. The closest similar effort is a University of Toronto assignment whereby students are asked to train a Neural Machine Translation (NMT) model to generate Pig Latin from English\footnote{\url{https://uoft-csc413.github.io/2022/assets/assignments/PA03.pdf}}; this educational exercise is in the opposite direction and does not attempt detection or normalisation.
 
 Because current translators routinely mishandle verlan, there is a clear need for targeted research into how machine learning models can detect it (with normalisation reserved for future work).
 
-This report plugs that gap by developing a dataset and models specifically aimed at verlan identification.
+We plug that gap by developing a dataset and models specifically aimed at verlan identification.
 
 \subsection{Objective}
 
 The primary goal of this project was originally both to \textit{identify} and to \textit{normalise} verlan\;---\;that is, to detect verlan words in context and to convert them back to their standard French equivalents. To support these aims, we created a dictionary of verlan--standard French pairs for use in both identification and normalisation, as well as a sentence corpus illustrating these words in context. However, due to time constraints, this report focuses solely on the identification aspect. The normalisation task and its associated experiments are left for future work.
 
-To enable this evaluation, we created targeted verlan resources\;---\;a lexicon of verlan terms and their standard French translations, and a sentence corpus demonstrating the position of these words in realistic contexts. The corpus records each sentence alongside its matched standard French counterpart and tags whether the sentence contains verlan. Together, these resources form an integrated dataset suited to rule-based matching and LLM-based training and evaluation. The project then embeds and classifies verlan using Large Language Models (LLMs) and analyses the results.
+To enable this evaluation, we created targeted verlan resources\;---\;a lexicon of verlan terms and their standard French translations, and a sentence corpus demonstrating the position of these words in realistic contexts. The corpus records each sentence alongside its matched standard French counterpart and tags whether the sentence contains verlan. Together, these resources form an integrated dataset suited to rule-based matching and LLM-based training and evaluation. We then embed and classify verlan using Large Language Models (LLMs) and analyses the results.
 
 \begin{enumerate}
   \item \textbf{Raw data collection} Gathering verlan terms and their standard French counterparts from online sources and existing dictionaries. This step focuses on scraping and compiling the raw linguistic material in advance of any processing.
@@ -316,7 +316,7 @@ All the code and unannotated dataset for this project are available on GitHub\fo
 \section{Background}
 \subsection{A Living Verlan}
 
-Méla \cite{mela1991verlan} characterises verlan as a register inclined to seek opacity\;---\;used in contexts where speakers want to hide meaning. In order to maintain this opacity, speakers may use tactics such as \textit{reverlanisation} (reversing a form once it has become familiar) and truncation. Verlan is not, however, random: it remains rule-governed, the key process being syllabic reversal (see Introduction).
+Méla \cite{mela1991verlan} characterises verlan as a register inclined to seek opacity\;---\;used in contexts where speakers want to hide meaning. In order to maintain this opacity, speakers may use tactics such as \textit{reverlanisation} (reversing a verlan again once it has become familiar) and truncation. Verlan is not, however, random: it remains rule-governed, the key process being syllabic reversal (see Introduction).
 
 
 Méla drew on the analytic model proposed by Kaye and Lowenstamm, adopting their syllable decomposition \cite{kaye1984syllabicite}. The syllable can be disassembled into \textit{attaque} (onset), \textit{rime} (rhyme), \textit{noyau} (nucleus), and \textit{coda}. For example, here is a representation of the word \textit{garder}, IPA\footnote{International Phonetic Alphabet, \url{https://en.wikipedia.org/wiki/International_Phonetic_Alphabet}} [garde].
@@ -411,7 +411,7 @@ for tree={
 \end{forest}
 \end{figure}
 
-This labelled drawing is characterised and specified by the aspect of merely ``interchanging'' the labels on the two S syllables (i.e., $S_1$ and $S_2$). In authentic verlan, the actual interchange typically also includes other syllabification, vowel changes, or segment loss (e.g., omission of a terminal final segment \textit{e}), so the internal syllable components of the syllables change \cite{mela1991verlan}. Therefore, a more proper view of the above example is simply as an illustration rather than the entirety of a formation of verlan. The interested reader is directed to Méla's paper \cite{mela1991verlan} for further details.
+This labelled drawing is characterised and specified by the aspect of merely ``interchanging'' the labels on the two syllables, $S_1$ and $S_2$. In authentic verlan, the actual interchange typically also includes other syllabification, vowel changes, or segment loss (e.g., omission of a terminal final segment \textit{e}), so the internal syllable components of the syllables change \cite{mela1991verlan}. Therefore, a more proper view of the above example is simply as an illustration rather than the entirety of a formation of verlan. The interested reader is directed to Méla's paper \cite{mela1991verlan} for further details.
 
 Because verlan combines permutation and repetition at the syllable level (to say nothing of structural changes), it is difficult even for human readers \cite{mela1991verlan}. Therefore, it is almost certain to be difficult for current machine learning models. As a case study of a non-standard subword permutation phenomenon, we use verlan to illustrate the challenges it creates for both linguistic understanding and computational modelling. Like a mirror folded within itself, verlan serves as a reflection of the creative tension between order and chaos\;---\;an echo of how language will reinvent its own boundaries.
 
@@ -422,7 +422,7 @@ There is published work on verlan, but little of it focuses specifically on dete
 
 Fortunately, there are several papers related to computational slang detection, and their approaches could contribute to verlan detection to a large extent \cite{pei2019slang, sun2024informal, slangornot2024, wu2018slangsd}. These studies address slang detection in general (not verlan specifically) and span multiple Indo-European languages (e.g., English, German, Russian).
 
-Therefore, regarding the history of verlan detection, this report first generalises the task as slang detection, and then discusses possible methods that could be implemented for verlan identification, to provide readers with a general and useful background.
+Therefore, regarding the history of verlan detection, we first generalise the task as slang detection, and then discuss possible methods that could be implemented for verlan identification, to provide readers with a general and useful background.
 
 \subsubsection{1910s-2010s: A Super-Condensed History of Slang Detection}
 
@@ -430,7 +430,7 @@ The background of traditional slang detection historically used approximate (fuz
 
 \paragraph{How these methods work (high level).} \textit{Soundex} translates an input token into an approximate phonetic key (first character + consonant class digits; consecutive duplicates folded; padded/truncated to fixed size). Two strings would match well if the keys match. It is biased toward matches with similar sounds, even if there are minor differences in spelling, but it is extremely English-biased and would potentially have a high collision rate. \textit{Levenshtein edit distance} is the minimum number of single-character insertions, deletions, or substitutions to change one string into another; the naive algorithm employs dynamic programming in \( \mathcal{O}(|s|\cdot|t|) \) time. The distance is computed empirically by the Wagner-Fischer dynamic-programming algorithm in \( \mathcal{O}(|s|\cdot|t|) \) time. Small distance (less than some cutoff) indicates similarity; the cutoffs are either absolute or length-normalised. \cite{wagner1974string}
 
-\paragraph{Performance and limitations for verlan/slang.} Phonetic keys can provide a very high recall on name-like tokens, but because there are collisions (i.e., phoneme-level collisions), they provide poor precision as well. Language-dependent rules for phonetic keys will perform even worse on French slang. Edit distance can accommodate typo-like noise (e.g., OCR) and even consider transpositions or syllable flips as expensive edits, but it is not pronunciation sensitive.  Likewise, with very short slang tokens, the thresholds miss true matches (i.e., low recall) or do not set those false positives aside (i.e., too many spurious matches). For verlan, the behaviour is most fundamentally syllable reversal, not small replacements locally, and therefore, those principles alone are inadequate without more structure. 
+\paragraph{Performance and limitations for verlan/slang.} Phonetic keys can provide a very high recall on name-like tokens, but because there are phoneme-level collisions, they provide poor precision as well. Language-dependent rules for phonetic keys will perform even worse on French slang. Edit distance can accommodate typo-like noise (e.g., Optical Character Recognition (OCR)) and even consider transpositions or syllable flips as expensive edits, but it is not pronunciation sensitive.  Likewise, with very short slang tokens, the thresholds miss true matches (i.e., low recall) or do not set those false positives aside (i.e., too many spurious matches). For verlan, the behaviour is most fundamentally syllable reversal, not small replacements locally, and therefore, those principles alone are inadequate without more structure. 
 
 Even with the Damerau-Levenshtein distance (which penalises an adjacent transposition as only one edit), verlan syllable reversal is the same character as a substitution and is still not an adequate model. Slang strings are short, so the use of thresholds will often cause threshold sensitivity or false positives on the approximate matches; see Navarro's survey for length-normalised thresholds discussion. Cross-linguistic barriers, in addition to phonetic key collision rates, are notoriously reviewed in reference literature by Zobel and Dart. \cite{damerau1964,navarro2001approximate,zobel1996phonetic}
 
@@ -452,17 +452,17 @@ Hybrid (phonetic + edit) & Balances recall/precision; practical for lexicon look
 \label{tab:fuzzy_perf}
 \end{table}
 
-Afterwards, scholars introduced additional algorithms and surveys: Philips's Metaphone (1990) and Double Metaphone (2000), both primarily designed for English\;---\;Double Metaphone adds some cross-language rules but is not intended for French phonotactics; Kukich's (1992) survey of spelling-correction techniques; Sproat et al.'s (2001) systematisation of Non-Standard Word (NSW) normalisation; and Aw et al.'s (2006) phrase-based MT for SMS normalisation. \cite{philips1990metaphone,philips2000doublemetaphone,kukich1992techniques,sproat2001normalization,aw2006phrase} While these are not directly slang-detection research, their methodology increasingly informed later slang-focused work.
+Afterwards, scholars introduced additional algorithms and surveys: Philips's Metaphone (1990) and Double Metaphone (2000), both primarily designed for English\;---\;Double Metaphone adds some cross-language rules but is not intended for French phonotactics; Kukich's (1992) survey of spelling-correction techniques; Sproat et al.'s (2001) systematisation of Non-Standard Word (NSW) normalisation; and Aw et al.'s (2006) phrase-based Machine Translation (MT) for SMS normalisation. \cite{philips1990metaphone,philips2000doublemetaphone,kukich1992techniques,sproat2001normalization,aw2006phrase} While these are not directly slang-detection research, their methodology increasingly informed later slang-focused work.
 
 
 
 \subsubsection{2016-2019: Dictionary Search}
 
-The easiest way we can think of dealing with slang is to use a dictionary\;---\;just like how we look up a word that we do not know. The pros and cons are highly similar to consulting a dictionary. It is fast (if using a digital one) and accurate. On the other hand, because it is purely fixed data, it only works with existing words and thus cannot identify newly invented ones.
+The easiest way we can think of dealing with slang is to use a dictionary\;---\;just like how we look up a word that we do not know. The pros and cons are highly similar to looking up a dictionary. It is fast (if using a digital one) and accurate. On the other hand, because it is purely fixed data, it only works with existing words and thus cannot identify newly invented ones.
 
 Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY \cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur} \cite{dictionnaire2024chilleur}. Specifically for verlan, we identify several online dictionaries, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
 
-With these dictionaries on hand, the reuse of a lookup-type verlan identifier is feasible. However, two factors prevent direct reuse: breakdowns in coverage and erratic entries, and the fact that most resources are community-composed, not formally edited\;---\;so accuracy, updating policies, and quality control vary. In addition, licensing on some sources may restrict redistribution. Our own dictionary, too, is researcher-compiled; to minimise risk of quality, we keep track of provenance and employ the gold/silver/bronze levels of quality (Table~\ref{tab:verlan_tiers}), and we use it primarily as a seed dictionary and rule-based baseline.
+With these dictionaries on hand, the reuse of a lookup-type verlan identifier is feasible. However, two factors prevent direct reuse: breakdowns in coverage and erratic entries, and the fact that most resources are community-composed, not formally edited\;---\;so accuracy, updating policies, and quality control vary. In addition, licensing on some sources may restrict redistribution. Our own dictionary, too, is researcher-compiled; to minimise risk of quality, we keep track of provenance and employ the attested/unverified/synthetic levels of quality (Table~\ref{tab:verlan_tiers}), and we use it primarily as a seed dictionary and rule-based baseline.
 
 Although dictionaries have the drawbacks mentioned above, they remain essential resources for implementing LLM-based approaches, as discussed later. Consequently, new dictionaries continue to be produced.
 
@@ -471,9 +471,9 @@ Although dictionaries have the drawbacks mentioned above, they remain essential 
 
 A few such example applications are Beaufort et al.'s French SMS normalisation hybrid finite-state approach, Han and Baldwin's English Twitter/SMS unsupervised lexical normalisation, and the W-NUT 2015 shared task on English Twitter normalisation \cite{beaufort2010hybrid,han2011lexical,baldwin2015shared}.
 
-Although not directly about slang detection, these studies were beneficial in three particular ways: (1) they provided operational pipelines for normalising noisy user-generated text (e.g., a hybrid finite-state rule/model architecture; cascaded detection→candidate-generation→context-sensitive selection); (2) they released datasets and/or standardised evaluation suites (Han \& Baldwin's Twitter corpus; W-NUT's shared-task data and metrics); and (3) they reported where dictionary/rule-based and similarity/LM-based approaches tend to succeed or fail. In the cited work, Beaufort et al.\ reported WER (stands for Word Error Rate, lower values indicate less transcription mistakes) $\approx 9.3\%$ and BLEU (stands for Bilingual Evaluation Understudy, higher values indicate closer $n$-gram overlap with the reference) $\approx 0.83$ on French SMS, whereas Han \& Baldwin showed that combining dictionary lookup, morpho-phonemic similarity, and context features attains state-of-the-art performance on Twitter/SMS (surpassing any single component), with clear gains from integrating lexical resources and context models.
+Although not directly about slang detection, these studies were beneficial in three particular ways: (1) they provided operational pipelines for normalising noisy user-generated text (e.g., a hybrid finite-state rule/model architecture; cascaded detection→candidate-generation→context-sensitive selection); (2) they released datasets and/or standardised evaluation suites (Han \& Baldwin's Twitter corpus; W-NUT's shared-task data and metrics); and (3) they reported where dictionary/rule-based and similarity/LM(Language Model)-based approaches tend to succeed or fail. In the cited work, Beaufort et al.\ reported WER (Word Error Rate, lower values indicate less transcription mistakes) $\approx 9.3\%$ and BLEU (Bilingual Evaluation Understudy, higher values indicate closer $n$-gram overlap with the reference) $\approx 0.83$ on French SMS, whereas Han \& Baldwin showed that combining dictionary lookup, morpho-phonemic similarity, and context features attains state-of-the-art performance on Twitter/SMS (surpassing any single component), with clear gains from integrating lexical resources and context models.
 
-Major constraints for our purposes include language- and domain-specific heuristics/lexicon coverage, reduced out-of-domain robustness (e.g., long-tail OOV in Twitter), and task setups that constrain normalisation to single-token targets rather than transformations appropriate for structural rearrangements such as syllable inversion. Therefore, additional modelling is required to handle verlan.
+Major constraints for our purposes include language- and domain-specific heuristics/lexicon coverage, reduced out-of-domain robustness (e.g., long-tail Out-of-Vocabulary (OOV) in Twitter), and task setups that constrain normalisation to single-token targets rather than transformations appropriate for structural rearrangements such as syllable inversion. Therefore, additional modelling is required to handle verlan.
 
 
 \subsubsection{2020-2025: Fuzzy Search + Slang Corpus = BOOM}
@@ -485,7 +485,7 @@ Wilson et al.\ trained fastText vectors with $300$ dimensions on $\sim$2M Urban 
 
 
 \paragraph{Slang or Not? (2024).}
-\textit{Slang or Not?} constructs a sentence-level English dataset and compares classic ML baselines, CNN/BiLSTM models, transformer encoders, and LLMs \cite{slangornot2024}. The best supervised system reported is \textbf{BERT-large-uncased}, achieving accuracy $=0.87$ (macro-F1 $=0.80$; slang F1 $=0.69$, non-slang F1 $=0.92$). Among LLMs, \textbf{GPT-4o-mini} attains accuracy $=0.86$ \cite{slangornot2024}. The author reported several limitations, including sparse coverage for rare or emerging slang, error clusters from ``bad neighbours'' (toxic or domain-specific context), difficulties with proper nouns and very long sentences, and insufficient use of LLM reasoning for marginal or ambiguous cases. \cite{slangornot2024}
+\textit{Slang or Not?} constructs a sentence-level English dataset and compares classic ML baselines, CNN/BiLSTM (Convolutional Neural Networks or Bidirectional Long Short-Term Memory) models, transformer encoders, and LLMs \cite{slangornot2024}. The best supervised system reported is \textbf{BERT-large-uncased}, achieving accuracy $=0.87$ (macro-F1 $=0.80$; slang F1 $=0.69$, non-slang F1 $=0.92$). Among LLMs, \textbf{GPT-4o-mini} attains accuracy $=0.86$ \cite{slangornot2024}. The author reported several limitations, including sparse coverage for rare or emerging slang, error clusters from ``bad neighbours'' (toxic or domain-specific context), difficulties with proper nouns and very long sentences, and insufficient use of LLM reasoning for marginal or ambiguous cases. \cite{slangornot2024}
 
 \paragraph{Toward Informal Language Processing (NAACL 2024 Findings).}
 The NAACL 2024 findings synthesise pitfalls and priorities for informal-language processing rather than reporting leaderboard-style scores \cite{sun2024informal}. Key issues highlighted are strong domain shift from formal training corpora to user-generated text, scarce/noisy or licence-restricted resources, tokenisation and normalisation challenges for non-standard forms, and the need for carefully annotated, task-specific datasets. These observations motivate our decision to build a verlan-centred dictionary and sentence corpus and to evaluate detection with contextualised encoders. \cite{sun2024informal}
@@ -493,7 +493,7 @@ The NAACL 2024 findings synthesise pitfalls and priorities for informal-language
 
 \subsubsection{Detecting Verlan?}
 
-The above results show a straightforward avenue for verlan detection. Fine-tuned transformer encoders previously outperformed classic ML and CNN/BiLSTM at sentence-level slang detection (BERT-large-uncased: accuracy 0.87, macro-F1 0.80; slang F1 0.69) \cite{slangornot2024}; slang-aware embeddings also work on informal text but are domain-adaptive \cite{urban2020embeddings}. Building on such evidence, we employ contextualised transformer encoders as our supervised baselines and large LLMs as zero-shot reference points. We therefore expect similar behaviour in the verlan experiments that follow. This progression, from fuzzy heuristics to contextual encoders, mirrors how language itself evolves\;---\;structured yet fluid, much like verlan.
+The above results show a straightforward avenue for verlan detection. Fine-tuned transformer encoders previously outperformed classic Machine Learning (ML) and CNN/BiLSTM at sentence-level slang detection (BERT-large-uncased: accuracy 0.87, macro-F1 0.80; slang F1 0.69) \cite{slangornot2024}; slang-aware embeddings also work on informal text but are domain-adaptive \cite{urban2020embeddings}. Building on such evidence, we employ contextualised transformer encoders as our supervised baselines and large LLMs as zero-shot reference points. We therefore expect similar behaviour in the verlan experiments that follow. This progression, from fuzzy heuristics to contextual encoders, mirrors how language itself evolves\;---\;structured yet fluid, much like verlan.
 
 \section{Dataset}
 \subsection{The Separated Structures}
