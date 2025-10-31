@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  31 OCT 2025 17:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  31 OCT 2025 17:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1379,16 +1379,6 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
                    \relax 
 l.1445 \bibitem{chilleur2024}
                               [2]
-Underfull \hbox (badness 1990) in paragraph at lines 1452--1453
-[]\OT1/cmr/m/n/12 J. D. Kaye, ``De la syl-lab-icit^^Se,'' \OT1/cmr/m/it/12 www.academia.edu\OT1/cmr/m/n/12 , Dec. 2015,
- []
-
-
-Underfull \hbox (badness 1681) in paragraph at lines 1452--1453
-\OT1/cmr/m/n/12 [On-line]. Avail-able: [][]$\OT1/cmtt/m/n/12 https : / / www . academia . edu / 19601005 / De _ la _
- []
-
-
 Underfull \hbox (badness 1895) in paragraph at lines 1455--1456
 []\OT1/cmr/m/n/12 R. C. Rus-sell and M. K. Odell, ``Soundex sys-tem of in-dex-ing
  []
@@ -1443,8 +1433,13 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
                    \relax 
 l.1501 
         [4]
-Underfull \hbox (badness 1342) in paragraph at lines 1509--1510
+Underfull \hbox (badness 1342) in paragraph at lines 1503--1504
 \OT1/cmr/m/it/12 2023\OT1/cmr/m/n/12 , Dec. 2023, pp. 2772-2792, doi: 10.18653/v1/2023.findings-
+ []
+
+
+Underfull \hbox (badness 1412) in paragraph at lines 1527--1528
+\OT1/cmr/m/it/12 Com-put-ing Sur-veys\OT1/cmr/m/n/12 , vol. 33, no. 1, pp. 31-88, Mar. 2001, doi:
  []
 
 
@@ -1455,26 +1450,21 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
                    \relax 
 l.1531 
         [5]
-Underfull \hbox (badness 1412) in paragraph at lines 1533--1534
-\OT1/cmr/m/it/12 Com-put-ing Sur-veys\OT1/cmr/m/n/12 , vol. 33, no. 1, pp. 31-88, Mar. 2001, doi:
- []
-
-
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1548 \cleardoublepage
+l.1542 \cleardoublepage
                         [6]
-Overfull \hbox (0.65338pt too wide) in paragraph at lines 1595--1603
+Overfull \hbox (0.65338pt too wide) in paragraph at lines 1589--1597
  [][] 
  []
 
-<figures/invented_relative_improvement.png, id=890, 469.755pt x 303.534pt>
+<figures/invented_relative_improvement.png, id=886, 469.755pt x 303.534pt>
 File: figures/invented_relative_improvement.png Graphic file (type png)
 <use figures/invented_relative_improvement.png>
-Package pdftex.def Info: figures/invented_relative_improvement.png  used on input line 1609.
+Package pdftex.def Info: figures/invented_relative_improvement.png  used on input line 1603.
 (pdftex.def)             Requested size: 272.99881pt x 176.3972pt.
 
 
@@ -1487,152 +1477,152 @@ Package pdftex.def Info: figures/invented_relative_improvement.png  used on inpu
 [3
 
 ]
-Overfull \hbox (16.4907pt too wide) in paragraph at lines 1706--1707
+Overfull \hbox (16.4907pt too wide) in paragraph at lines 1700--1701
 \OT1/cmr/bx/n/12 GazetteerEntries (lex-i-con). \OT1/cmr/m/n/12 The cur-rent ex-tract of \OT1/cmtt/m/n/12 GazetteerEntries.xlsx
  []
 
 
-Overfull \hbox (31.1248pt too wide) in paragraph at lines 1706--1707
+Overfull \hbox (31.1248pt too wide) in paragraph at lines 1700--1701
 \OT1/cmr/m/n/12 com-mu-nity ver-lan dic-tio-nar-ies, pri-mar-ily Dic-tio-n-naire de la Zone, Wik-tionary/Wik-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/bx/n/12 Type / li-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/bx/n/12 Access
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Community
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 dic-tio-nary
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 (site terms
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 2 Jul,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Lexicographic
  []
 
 
-Overfull \hbox (11.55487pt too wide) in paragraph at lines 1729--1729
+Overfull \hbox (11.55487pt too wide) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Forum/dictionary
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 hy-brid (site
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Lexicographic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 por-tal (open
  []
 
 
-Underfull \hbox (badness 4621) in paragraph at lines 1729--1729
+Underfull \hbox (badness 4621) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Zlang Fan-dom Ver-lan
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Community-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Sentence
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 ag-gre-ga-tor
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 (pro-pri-etary;
  []
 
 
-Underfull \hbox (badness 7522) in paragraph at lines 1729--1729
+Underfull \hbox (badness 7522) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 User fo-rums (Red-dit,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 Jeuxvideo.com, Hi-Na-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 User-generated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 text (pub-lic
  []
 
 
-Underfull \hbox (badness 6380) in paragraph at lines 1729--1729
+Underfull \hbox (badness 6380) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 17 ref-er-ences (8 Red-dit, 5
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 Jeuxvideo.com, 4 Hi-Na-tive)
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 Social me-dia posts
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 (Twit-ter/X, Tik-Tok,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1729--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 User-generated
  []
 
 
-Underfull \hbox (badness 3746) in paragraph at lines 1729--1729
+Underfull \hbox (badness 3746) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 text (plat-form
  []
 
 
-Underfull \hbox (badness 6461) in paragraph at lines 1729--1729
+Underfull \hbox (badness 6461) in paragraph at lines 1723--1723
 \OT1/cmr/m/n/12 (quo-ta-tion for
  []
 
 
-Underfull \hbox (badness 2662) in paragraph at lines 1729--1729
+Underfull \hbox (badness 2662) in paragraph at lines 1723--1723
 []|\OT1/cmr/m/n/12 4 URL ci-ta-tions (Paroles.net
  []
 
@@ -1646,147 +1636,147 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ]
 
 [5]
-<Info Sheet.pdf, id=922, 597.23125pt x 845.1575pt>
+<Info Sheet.pdf, id=918, 597.23125pt x 845.1575pt>
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf>
-Package pdftex.def Info: Info Sheet.pdf  used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf  used on input line 1747.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-<Info Sheet.pdf, id=924, page=1, 597.23125pt x 845.1575pt>
+<Info Sheet.pdf, id=920, page=1, 597.23125pt x 845.1575pt>
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 1>
-Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1747.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 1>
-Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1747.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 1>
-Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1747.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 1>
-Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1747.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 
 
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 1>
-Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page1 used on input line 1747.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 [6
 
 
  <./Info Sheet.pdf>]
-<Info Sheet.pdf, id=969, page=2, 597.23125pt x 845.1575pt>
+<Info Sheet.pdf, id=965, page=2, 597.23125pt x 845.1575pt>
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 2>
-Package pdftex.def Info: Info Sheet.pdf , page2 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page2 used on input line 1747.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 2>
-Package pdftex.def Info: Info Sheet.pdf , page2 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page2 used on input line 1747.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 
 
 File: Info Sheet.pdf Graphic file (type pdf)
 <use Info Sheet.pdf, page 2>
-Package pdftex.def Info: Info Sheet.pdf , page2 used on input line 1753.
+Package pdftex.def Info: Info Sheet.pdf , page2 used on input line 1747.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 [7
 
  <./Info Sheet.pdf>]
-<Consent Form.pdf, id=979, 597.23125pt x 845.1575pt>
+<Consent Form.pdf, id=975, 597.23125pt x 845.1575pt>
 File: Consent Form.pdf Graphic file (type pdf)
 <use Consent Form.pdf>
-Package pdftex.def Info: Consent Form.pdf  used on input line 1771.
+Package pdftex.def Info: Consent Form.pdf  used on input line 1765.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-<Consent Form.pdf, id=981, page=1, 597.23125pt x 845.1575pt>
+<Consent Form.pdf, id=977, page=1, 597.23125pt x 845.1575pt>
 File: Consent Form.pdf Graphic file (type pdf)
 <use Consent Form.pdf, page 1>
-Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1771.
+Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1765.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: Consent Form.pdf Graphic file (type pdf)
 <use Consent Form.pdf, page 1>
-Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1771.
+Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1765.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 File: Consent Form.pdf Graphic file (type pdf)
 <use Consent Form.pdf, page 1>
-Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1771.
+Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1765.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 File: Consent Form.pdf Graphic file (type pdf)
 <use Consent Form.pdf, page 1>
-Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1771.
+Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1765.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 
 
 File: Consent Form.pdf Graphic file (type pdf)
 <use Consent Form.pdf, page 1>
-Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1771.
+Package pdftex.def Info: Consent Form.pdf , page1 used on input line 1765.
 (pdftex.def)             Requested size: 537.50316pt x 760.63474pt.
 [8
 
 
  <./Consent Form.pdf>]
-<Verlan Lexicon - Eléonore.pdf, id=1011, 845.1575pt x 1195.46625pt>
+<Verlan Lexicon - Eléonore.pdf, id=1007, 845.1575pt x 1195.46625pt>
 File: Verlan Lexicon - Eléonore.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Eléonore.pdf>
-Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf  used on input line 1789.
+Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf  used on input line 1783.
 (pdftex.def)             Requested size: 845.15544pt x 1195.46333pt.
-<Verlan Lexicon - Eléonore.pdf, id=1013, page=1, 845.1575pt x 1195.46625pt>
+<Verlan Lexicon - Eléonore.pdf, id=1009, page=1, 845.1575pt x 1195.46625pt>
 File: Verlan Lexicon - Eléonore.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Eléonore.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1789.
+Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1783.
 (pdftex.def)             Requested size: 845.15544pt x 1195.46333pt.
 File: Verlan Lexicon - Eléonore.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Eléonore.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1789.
+Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1783.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 File: Verlan Lexicon - Eléonore.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Eléonore.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1789.
+Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1783.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 File: Verlan Lexicon - Eléonore.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Eléonore.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1789.
+Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1783.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 
 
 File: Verlan Lexicon - Eléonore.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Eléonore.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1789.
+Package pdftex.def Info: Verlan Lexicon - Eléonore.pdf , page1 used on input line 1783.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 [9
 
 
  <./Verlan Lexicon - Eléonore.pdf>]
-<Verlan Lexicon - Lua.pdf, id=1037, 845.1575pt x 1195.46625pt>
+<Verlan Lexicon - Lua.pdf, id=1033, 845.1575pt x 1195.46625pt>
 File: Verlan Lexicon - Lua.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Lua.pdf>
-Package pdftex.def Info: Verlan Lexicon - Lua.pdf  used on input line 1802.
+Package pdftex.def Info: Verlan Lexicon - Lua.pdf  used on input line 1796.
 (pdftex.def)             Requested size: 845.15544pt x 1195.46333pt.
-<Verlan Lexicon - Lua.pdf, id=1039, page=1, 845.1575pt x 1195.46625pt>
+<Verlan Lexicon - Lua.pdf, id=1035, page=1, 845.1575pt x 1195.46625pt>
 File: Verlan Lexicon - Lua.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Lua.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1802.
+Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1796.
 (pdftex.def)             Requested size: 845.15544pt x 1195.46333pt.
 File: Verlan Lexicon - Lua.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Lua.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1802.
+Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1796.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 File: Verlan Lexicon - Lua.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Lua.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1802.
+Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1796.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 File: Verlan Lexicon - Lua.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Lua.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1802.
+Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1796.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 
 
 File: Verlan Lexicon - Lua.pdf Graphic file (type pdf)
 <use Verlan Lexicon - Lua.pdf, page 1>
-Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1802.
+Package pdftex.def Info: Verlan Lexicon - Lua.pdf , page1 used on input line 1796.
 (pdftex.def)             Requested size: 676.12692pt x 956.37431pt.
 [10
 
@@ -1800,18 +1790,18 @@ Package rerunfilecheck Info: File `myreport.out' has not changed.
 (rerunfilecheck)             Checksum: 329B7EB24587734AE8A61654F162BA16;9348.
  ) 
 Here is how much of TeX's memory you used:
- 41713 strings out of 474662
- 897936 string characters out of 5751110
- 1379075 words of memory out of 5000000
- 63875 multiletter control sequences out of 15000+600000
+ 41709 strings out of 474662
+ 897852 string characters out of 5751110
+ 1378994 words of memory out of 5000000
+ 63873 multiletter control sequences out of 15000+600000
  576091 words of font info for 100 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  140i,25n,131p,1718b,2144s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/liyitian/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on myreport.pdf (70 pages, 5203404 bytes).
+Output written on myreport.pdf (70 pages, 5202560 bytes).
 PDF statistics:
- 1235 PDF objects out of 1440 (max. 8388607)
- 1018 compressed objects within 11 object streams
- 306 named destinations out of 1000 (max. 500000)
+ 1231 PDF objects out of 1440 (max. 8388607)
+ 1014 compressed objects within 11 object streams
+ 304 named destinations out of 1000 (max. 500000)
  547 words of extra memory for PDF output out of 10000 (max. 10000000)
 
