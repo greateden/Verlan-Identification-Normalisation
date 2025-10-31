@@ -137,7 +137,7 @@ We take on the challenge of the automated identification of verlan, a French bac
 \skipsectioncleartrue
 \pagenumbering{roman}
 \setcounter{page}{1}
-
+%TC:ignore
 \section*{Glossary of Abbreviations}
 \addcontentsline{toc}{section}{Glossary of Abbreviations}
 
@@ -223,6 +223,7 @@ Since I wish to dedicate this report to all who seek to understand language thro
 
 Eden written in Dunedin, New Zealand.
 \end{flushright}
+%TC:endignore
 \cleardoublepage
 \skipsectioncleartrue
 \pagenumbering{arabic}
@@ -460,7 +461,7 @@ Afterwards, scholars introduced additional algorithms and surveys: Philips's Met
 
 The easiest way we can think of dealing with slang is to use a dictionary\;---\;just like how we look up a word that we do not know. The pros and cons are highly similar to looking up a dictionary. It is fast (if using a digital one) and accurate. On the other hand, because it is purely fixed data, it only works with existing words and thus cannot identify newly invented ones.
 
-Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY \cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur} \cite{dictionnaire2024chilleur}. Specifically for verlan, we identify several online dictionaries, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
+Examples of existing slang dictionaries include SlangNet, SlangSD, and SLANGZY \cite{dhuliawala2016slangnet, wu2018slangsd, gupta2019slangzy}. As for French slang dictionaries, we have, for example, \textit{Dictionnaire du chilleur} \cite{chilleur2024}. Specifically for verlan, we identify several online dictionaries, including \textit{Dictionnaire Interactif du Verlan}\footnote{\url{https://ecoleng.com/verlan-comprendre-argot-francais-parler/dictionnaire-interactif-du-verlan}}, Wiktionary\footnote{\url{https://en.wiktionary.org/wiki/Category\%3AVerlan}}, and \textit{Dictionnaire Verlan}\footnote{\url{https://zlang.fandom.com/fr/wiki/Dictionnaire_Verlan}}.
 
 With these dictionaries on hand, the reuse of a lookup-type verlan identifier is feasible. However, two factors prevent direct reuse: breakdowns in coverage and erratic entries, and the fact that most resources are community-composed, not formally edited\;---\;so accuracy, updating policies, and quality control vary. In addition, licensing on some sources may restrict redistribution. Our own dictionary, too, is researcher-compiled; to minimise risk of quality, we keep track of provenance and employ the attested/unverified/synthetic levels of quality (Table~\ref{tab:verlan_tiers}), and we use it primarily as a seed dictionary and rule-based baseline.
 
@@ -1385,297 +1386,160 @@ Several limitations shape these conclusions. First, the corpus is small and, by 
 \cleardoublepage
 \pagenumbering{gobble}
 %TC:ignore
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 
 \bibitem{rajabov2025}
-Radjabov, Ruslan Rajabmurodovich. \textit{Understanding ``verlan'' in the French Language}. 
-Web of Scientist: International Scientific Research Journal, vol. 6, no. 3, 2025, pp. 368-372. 
-Available at: \url{https://webofjournals.com/index.php/3/article/view/3264}.
+R. R. Rajabmurodovich, ``Understanding `verlan' in the French language,'' \textit{Web of Discoveries: Journal of Analysis and Inventions}, vol. 3, no. 2, pp. 76-79, Feb. 2025. [Online]. Available: https://webofjournals.com/index.php/3/article/view/3264
 
 \bibitem{bach2018}
-Bach, Xavier. \textit{Tracing the origins of verlan in an early nineteenth century text}. 
-Journal of French Language Studies, vol. 28, no. 1, 2018, pp. 1-18. 
-Cambridge University Press. DOI: 10.1017/S0959269516000221.
+X. Bach, ``Tracing the origins of verlan in an early nineteenth century text?,'' \textit{Journal of French Language Studies}, vol. 28, no. 1, pp. 67-84, May 2017, doi: 10.1017/S0959269517000060.
 
 \bibitem{evolutionverlan}
-Olivier Sécardin. \textit{Évolution du verlan, marqueur social et identitaire, comme reflet de la langue et de la société françaises}. 
-Synergies Europe, no. 3, 2008, pp. 223-232. 
-Available at: \url{https://journal.lib.uoguelph.ca/index.php/synergies/article/download/1037/1859?inline=1}.
+C. Black and L. Sloutsky, ``Évolution du verlan, marqueur social et identitaire, comme vu dans les films: \textit{La Haine} (1995) et \textit{L'Esquive} (2004),'' \textit{Synergies Canada}, no. 2, Nov. 2010, doi: 10.21083/synergies.v0i2.1037.
 
 \bibitem{rua2005}
-Rúa, Paula López. ``Shortening Devices in Text Messaging.'' 
-\textit{Journal of Computer-Mediated Communication}, vol. 10, no. 4, July 2005. 
-Wiley. DOI: 10.1111/j.1083-6101.2005.tb00268.x.
+P. L. Rúa, ``Shortening devices in text messaging: A multilingual approach,'' \textit{Neuphilologische Mitteilungen}, vol. 106, no. 2, pp. 139-155, 2005. [Online]. Available: http://www.jstor.org/stable/43344127
 
 \bibitem{hajiyeva2025}
-Hajiyeva, Bulbul. ``Translating Idioms and Slang: Problems, Strategies, and Cultural Implications.''  
-Acta Globalis Humanitatis et Linguarum, vol. 2, no. 2, 2025, pp. 284-293. DOI: 10.69760/aghel.025002123.  
+B. Hajiyeva, ``Translating idioms and slang: Problems, strategies, and cultural implications,'' \textit{Acta Globalis Humanitatis et Linguarum}, vol. 2, no. 2, pp. 284-293, Mar. 2025, doi: 10.69760/aghel.025002123.
 
 \bibitem{deepl2020}
-DeepL. ``DeepL Translator translates texts using artificial neural networks. These networks are trained on many millions of translated texts.'' 
-\textit{DeepL Blog}, 2020. Available at: \url{https://www.deepl.com/en/blog/how-does-deepl-work}.
+DeepL, ``How does DeepL work?,'' \textit{DeepL Blog}, Nov. 2021. [Online]. Available: https://www.deepl.com/en/blog/how-does-deepl-work
 
 \bibitem{wu2016}
-Wu, Yonghui, et al. ``Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation.'' 
-arXiv preprint arXiv:1609.08144, 2016. Available at: \url{https://arxiv.org/abs/1609.08144}.
+Y. Wu \textit{et al.}, ``Google's neural machine translation system: Bridging the gap between human and machine translation,'' \textit{arXiv preprint} arXiv:1609.08144, Sep. 2016, doi: 10.48550/arXiv.1609.08144.
 
 \bibitem{michel2018mtnt}
-Michel, Paul, and Graham Neubig. ``MTNT: A Testbed for Machine Translation of Noisy Text.''
-\textit{Proceedings of EMNLP}, 2018. Available at: \url{https://aclanthology.org/D18-1050/}.
+P. Michel and G. Neubig, ``MTNT: A testbed for machine translation of noisy text,'' in \textit{Proc. 2018 Conf. Empirical Methods in Natural Language Processing (EMNLP)}, 2018, pp. 543-553, doi: 10.18653/v1/D18-1050.
 
 \bibitem{zurbuchen2024}
-Zurbuchen, Lucas, and Rob Voigt.  
-\textit{A Computational Analysis and Exploration of Linguistic Borrowings in French Rap Lyrics}.  
-In *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics\;---\;Student Research Workshop (ACL SRW 2024)*, 2024, pp. 200-208.  
-DOI: 10.18653/v1/2024.acl-srw.27.
+L. Zurbuchen and R. Voigt, ``A computational analysis and exploration of linguistic borrowings in French rap lyrics,'' in \textit{Proc. 62nd Annu. Meeting Assoc. Comput. Linguistics—Student Research Workshop (ACL SRW 2024)}, 2024, pp. 200-208, doi: 10.18653/v1/2024.acl-srw.27.
 
 \bibitem{podhorna2020rapcor}
-Podhorná-Polická, Alena.
-\textit{RapCor, Francophone Rap Songs Text Corpus}.  
-In *Proceedings of the Fourteenth Workshop on Recent Advances in Slavonic Natural Language Processing (RASLAN 2020)*, 2020, pp. 95-102.  
-Available at: \url{https://nlp.fi.muni.cz/raslan/raslan20.pdf#page=95}.  % (no DOI found)
+A. Podhorná-Polická, ``RapCor, Francophone rap songs text corpus,'' in \textit{Proc. 14th Workshop Recent Advances in Slavonic NLP (RASLAN 2020)}, Dec. 2020, pp. 95-102. [Online]. Available: http://nlp.fi.muni.cz/raslan/2020/paper6.pdf
 
 \bibitem{mekki2021tremolo}
-Mekki, Jade; Lecorvé, Gwénolé; Battistelli, Delphine; Béchet, Nicolas.
-\textit{TREMoLo-Tweets: A Multi-Label Corpus of French Tweets for Language Register Characterization}.  
-In *Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021)*, Held Online, INCOMA Ltd., Sep 1-3, 2021, pp. 950-958.  
-DOI: 10.26615/978-954-452-072-4\_108.
+J. Mekki, G. Lecorvé, D. Battistelli, and N. Béchet, ``TREMoLo-Tweets: A multi-label corpus of French tweets for language register characterization,'' in \textit{Proc. Int. Conf. Recent Advances in Natural Language Processing (RANLP 2021)}, Sep. 2021, pp. 950-958, doi: 10.26615/978-954-452-072-4\_108.
 
 \bibitem{panckhurst202088milsms}
-Panckhurst, Rachel; Lopez, Cédric; Roche, Mathieu.
-\textit{A French text-message corpus: 88milSMS. Synthesis and usage}.  
-Corpus [En ligne], 20 | 2020 (mis en ligne le 28 janvier 2020).  
-DOI: 10.4000/corpus.4852.
+R. Panckhurst, C. Lopez, and M. Roche, ``A French text-message corpus: 88milSMS. Synthesis and usage,'' \textit{Corpus [En ligne]}, no. 20, Jan. 2020, doi: 10.4000/corpus.4852.
 
 \bibitem{pei2019slang}
-Pei, Zhengqi, Zhewei Sun, and Yang Xu.  
-\textit{Slang Detection and Identification}.  
-In *Proceedings of the 23rd Conference on Computational Natural Language Learning (CoNLL 2019)*, Hong Kong, China, 2019, pp. 881-889.  
-Available at: \url{https://aclanthology.org/K19-1082/}.  % (ACL Anthology entry\;---\;no DOI)
+Z. Pei, Z. Sun, and Y. Xu, ``Slang detection and identification,'' in \textit{Proc. 23rd Conf. Computational Natural Language Learning (CoNLL 2019)}, Nov. 2019, pp. 881-889. [Online]. Available: https://aclanthology.org/K19-1082/
 
 \bibitem{sun2024informal}
-Sun, Zhewei, Qian Hu, et al.  
-\textit{Toward Informal Language Processing: Knowledge of Slang in Large Language Models}.  
-In *Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL 2024)*, 2024.  
-DOI: 10.18653/v1/2024.naacl-long.94.
+Z. Sun, Q. Hu, \textit{et al.}, ``Toward informal language processing: Knowledge of slang in large language models,'' in \textit{Proc. 2024 Conf. North American Chapter Assoc. Comput. Linguistics (NAACL 2024)}, Jun. 2024, doi: 10.18653/v1/2024.naacl-long.94.
 
 \bibitem{slangornot2024}
-Anonymous.
-\textit{Slang or Not? Exploring NLP Techniques for Slang Detection Using the SlangTrack Dataset}.  
-ACL ARR (OpenReview) submission, December 2024 (ACL ARR 2024 December).  
-Available at: \url{https://openreview.net/forum?id=bISO3DD8sU}.
+Anonymous, ``Slang or not? Exploring NLP techniques for slang detection using the SlangTrack dataset,'' ACL ARR submission, Dec. 2024. [Online]. Available: https://openreview.net/forum?id=bISO3DD8sU
 
 \bibitem{dhuliawala2016slangnet}
-Dhuliawala, Shehzaad; Kanojia, Diptesh; Bhattacharyya, Pushpak.
-\textit{SlangNet: A WordNet like Resource for Slang Words}.  
-In: Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC 2016).  
-Portorož, Slovenia (2016).  
-Available at: \url{https://www.cse.iitb.ac.in/~pb/papers/lrec16-slangnet.pdf}.
+S. Dhuliawala, D. Kanojia, and P. Bhattacharyya, ``SlangNet: A WordNet-like resource for slang words,'' in \textit{Proc. 10th Int. Conf. Language Resources and Evaluation (LREC 2016)}, May 2016. [Online]. Available: https://www.cse.iitb.ac.in/~pb/papers/lrec16-slangnet.pdf
 
 \bibitem{wu2018slangsd}
-Wu, Tianyang; Morstatter, Fred; Liu, Huan; et al.
-\textit{SlangSD: Building, Expanding, and Using a Sentiment Dictionary of Slang Words for Short-Text Sentiment Classification}.  
-Language Resources and Evaluation (2018).  
-DOI: 10.1007/s10579-018-9416-0.
+L. Wu, F. Morstatter, and H. Liu, ``SlangSD: Building, expanding and using a sentiment dictionary of slang words for short-text sentiment classification,'' \textit{Language Resources and Evaluation}, vol. 52, no. 3, pp. 839-852, Sep. 2018, doi: 10.1007/s10579-018-9416-0.
 
 \bibitem{gupta2019slangzy}
-Gupta, Vishal; Rani, Rekha; et al.
-\textit{SLANGZY: A Slang Word Recognition System for Hindi-English Code-Mixed Social Media Text}.  
-In: Proceedings of the 6th Workshop on South and Southeast Asian Natural Language Processing (WSSANLP 2019).  
-Kolkata, India (2019).  
-Available at: \url{https://aclanthology.org/K19-1082.pdf}.
+A. Gupta, S. B. Taneja, G. Malik, S. Vij, D. K. Tayal, and A. Jain, ``SLANGZY: A fuzzy logic-based algorithm for English slang meaning selection,'' \textit{Progress in Artificial Intelligence}, vol. 8, no. 1, pp. 111-121, 2019, doi: 10.1007/s13748-018-0159-3.
 
-\bibitem{dictionnaire2024chilleur}
-Parent, Philippe; Parent, André.
-\textit{Dictionnaire du chilleur}.
-Éditions Somme toute (2024).  
-ISBN: 9782925124351.
+\bibitem{chilleur2024}
+J. 50, \textit{Dictionnaire du chilleur}. Montréal, QC, Canada: Le Robert Québec, Oct. 2024. ISBN: 9782321020271.
 
 \bibitem{mela1991verlan}
-Méla, Vivienne.
-\textit{Le verlan ou le langage du miroir}.  
-Langages, No. 101, Les javanais (Mars 1991), pp. 73–94.  
-Published by Armand Colin.  
-Available at: \url{https://www.jstor.org/stable/23906698}.
+V. Méla, ``Le verlan ou le langage du miroir,'' \textit{Langages}, no. 101, pp. 73-94, Mar. 1991, doi: 10.3406/lgge.1991.1802.
 
 \bibitem{kaye1984syllabicite}
-Kaye, Jonathan D.; Lowenstamm, Jean.
-\textit{De la syllabicité}.  
-In: Dell, François; Hirst, Daniel; Vergnaud, Jean-Roger (eds.), \textit{Forme sonore du langage}.  
-Hermann, Paris (1984), pp. 123–159.  
-Available at: \url{https://archive.org/details/formesonoredulangage}.
+J. D. Kaye, ``De la syllabicité,'' \textit{www.academia.edu}, Dec. 2015, [Online]. Available: https://www.academia.edu/19601005/De\_la\_syllabicit\%C3\%A9
 
 \bibitem{russell1918soundex}
-Russell, Robert C.; Odell, Margaret K.
-\textit{Soundex system of indexing names}.  
-U.S. Patent 1,261,167, filed June 3, 1918, and issued April 2, 1918.  
-Available at: \url{https://patents.google.com/patent/US1261167A/en}.
+R. C. Russell and M. K. Odell, ``Soundex system of indexing names,'' U.S. Patent 1,261,167, Apr. 2, 1918, [Online]. Available: https://patentimages.storage.googleapis.com/31/35/a1/f697a3ab85ced6/US1261167.pdf
 
 \bibitem{levenshtein1966}
-Levenshtein, Vladimir I.
-\textit{Binary codes capable of correcting deletions, insertions, and reversals}.  
-Soviet Physics Doklady, vol. 10, no. 8, 1966, pp. 707-710.  
-Available at: \url{https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf}.
+V. I. Levenshtein, ``Binary codes capable of correcting deletions, insertions, and reversals,'' \textit{Soviet Physics Doklady}, vol. 10, no. 8, pp. 707-710, Jan. 1966, [Online]. Available: https://ci.nii.ac.jp/naid/10020212767
 
 \bibitem{philips1990metaphone}
-Philips, Lawrence.
-\textit{Hanging on the Metaphone}.
-Computer Language (1990).
-Available at: \url{https://aspell.net/metaphone/}.
+L. Philips, ``Hanging on the Metaphone,'' \textit{Computer Language}, 1990. [Online]. Available: https://aspell.net/metaphone/
 
 \bibitem{philips2000doublemetaphone}
-Philips, Lawrence.
-\textit{The Double Metaphone Search Algorithm}.
-C/C++ Users Journal (June 2000).
-Available at: \url{https://xlinux.nist.gov/dads/HTML/doubleMetaphone.html}.
+L. Philips, ``The Double Metaphone search algorithm,'' \textit{C/C++ Users Journal}, Jun. 2000. [Online]. Available: https://xlinux.nist.gov/dads/HTML/doubleMetaphone.html
 
 \bibitem{kukich1992techniques}
-Kukich, Karen.
-\textit{Techniques for automatically correcting words in text}.
-ACM Computing Surveys (1992).
-DOI: 10.1145/146370.146380.
+K. Kukich, ``Techniques for automatically correcting words in text,'' \textit{ACM Computing Surveys}, vol. 24, no. 4, pp. 377-439, Dec. 1992, doi: 10.1145/146370.146380.
 
 \bibitem{sproat2001normalization}
-Sproat, Richard; Black, Alan W.; Chen, Stanley; Kumar, Shankar; Ostendorf, Mari; Richards, Christopher.
-\textit{Normalization of non-standard words}.
-Computer Speech \& Language, 15(3):287-333 (2001).
-DOI: 10.1006/csla.2001.0169.
+R. Sproat, A. W. Black, S. Chen, S. Kumar, M. Ostendorf, and C. Richards, ``Normalization of non-standard words,'' \textit{Computer Speech \& Language}, vol. 15, no. 3, pp. 287-333, 2001, doi: 10.1006/csla.2001.0169.
 
 \bibitem{aw2006phrase}
-Aw, AiTi; Zhang, Min; Xiao, Juan; Su, Jian.
-\textit{A Phrase-Based Statistical Model for SMS Text Normalization}.
-Proceedings of the COLING/ACL 2006 Main Conference Poster Sessions (2006), pages 33–40.
-Available at: \url{https://aclanthology.org/P06-2005/}.
+A. Aw, M. Zhang, J. Xiao, and J. Su, ``A phrase-based statistical model for SMS text normalization,'' in \textit{Proc. COLING/ACL 2006 Main Conf. Poster Sessions}, Jul. 2006, pp. 33-40. [Online]. Available: https://aclanthology.org/P06-2005/
 
 \bibitem{beaufort2010hybrid}
-Beaufort, Richard; Roekhaut, Sophie; Cougnon, Louise-Amélie; Fairon, Cédrick.
-\textit{A Hybrid Rule/Model-Based Finite-State Framework for Normalizing SMS Messages}.
-Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics (ACL 2010).
-Available at: \url{https://aclanthology.org/P10-1079.pdf}.
+R. Beaufort, S. Roekhaut, L.-A. Cougnon, and C. Fairon, ``A hybrid rule/model-based finite-state framework for normalizing SMS messages,'' in \textit{Proc. 48th Annu. Meeting Assoc. Comput. Linguistics (ACL 2010)}, Jul. 2010. [Online]. Available: https://aclanthology.org/P10-1079.pdf
 
 \bibitem{han2011lexical}
-Han, Bo; Baldwin, Timothy.
-\textit{Lexical Normalisation of Short Text Messages: Makn Sens a \#twitter}.
-Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies (ACL-HLT 2011), pages 368–378.
-Available at: \url{https://aclanthology.org/P11-1038/}
+B. Han and T. Baldwin, ``Lexical normalisation of short text messages: Makn sens a \#twitter,'' in \textit{Proc. 49th Annu. Meeting Assoc. Comput. Linguistics: Human Language Technologies (ACL-HLT 2011)}, Jun. 2011, pp. 368-378. [Online]. Available: https://aclanthology.org/P11-1038/
 
 \bibitem{baldwin2015shared}
-Baldwin, Timothy; de Marneffe, Marie Catherine; Han, Bo; Kim, Young-Bum; Ritter, Alan; Xu, Wei.
-\textit{Shared Tasks of the 2015 Workshop on Noisy User-generated Text: Twitter Lexical Normalization and Named Entity Recognition}.
-Proceedings of the Workshop on Noisy User-generated Text (W-NUT 2015).
-DOI: 10.18653/v1/W15-4319.
+T. Baldwin, M.-C. de Marneffe, B. Han, Y.-B. Kim, A. Ritter, and W. Xu, ``Shared tasks of the 2015 workshop on noisy user-generated text: Twitter lexical normalization and named entity recognition,'' in \textit{Proc. Workshop on Noisy User-generated Text (W-NUT 2015)}, 2015, doi: 10.18653/v1/W15-4319.
 
 \bibitem{urban2020embeddings}
-Urban Dictionary Embeddings.
-\textit{Urban Dictionary Embeddings for Slang NLP Applications}.
-LREC / ACL Anthology (2020).
-Available at: \url{https://aclanthology.org/2020.lrec-1.586/}.
-
-\bibitem{sun2024knowledge}
-Sun, X.; et al.
-\textit{Knowledge of Slang in Large Language Models}.
-Proceedings of the 2024 Annual Conference of the North American Chapter of the Association for Computational Linguistics (NAACL-Long 2024).
-Available at: \url{https://aclanthology.org/2024.naacl-long.94/}.
+S. R. Wilson, W. Magdy, B. McGillivray, K. Garimella, and G. Tyson, ``Urban Dictionary embeddings for slang NLP applications,'' in \textit{Proc. 12th Conf. Language Resources and Evaluation (LREC 2020)}, May 2020, pp. 4764-4773. [Online]. Available: https://aclanthology.org/2020.lrec-1.586/
 
 \bibitem{jiang2023mistral7b}
-Jiang, Albert Q.; Sablayrolles, Alexandre; Mensch, Arthur; Bamford, Chris; Chaplot, Devendra Singh; de las Casas, Diego; Bressand, Florian; Lengyel, Gianna; Lample, Guillaume; Saulnier, Lucile; Lavaud, Lélio Renard; Lachaux, Marie-Anne; Stock, Pierre; Le Scao, Teven; Lavril, Thibaut; Wang, Thomas; Lacroix, Timothée; El Sayed, William.
-\textit{Mistral 7B}.
-DOI: 10.48550/arXiv.2310.06825.
+A. Q. Jiang \textit{et al.}, ``Mistral 7B,'' \textit{arXiv preprint} arXiv:2310.06825, Oct. 2023, doi: 10.48550/arXiv.2310.06825.
 
 \bibitem{touvron2023llama}
-Touvron, Hugo; Lavril, Thibaut; Izacard, Gautier; Martinet, Xavier; Lachaux, Marie-Anne; Lacroix, Timothée; Rozière, Baptiste; Goyal, Naman; Hambro, Eric; Azhar, Faisal; Rodríguez, Aurélien; Joulin, Armand; Grave, Edouard; Lample, Guillaume.
-\textit{LLaMA: Open and Efficient Foundation Language Models}.
-DOI: 10.48550/arXiv.2302.13971.
+H. Touvron \textit{et al.}, ``LLaMA: Open and efficient foundation language models,'' \textit{arXiv preprint} arXiv:2302.13971, Feb. 2023, doi: 10.48550/arXiv.2302.13971.
 
 \bibitem{touvron2023llama2}
-Touvron, Hugo; Martin, Louis; Stone, Kevin; Albert, Peter; Almahairi, Amjad; Babaei, Yasmine; Bashlykov, Nikolay; Batra, Soumya; Bhargava, Prajjwal; Bhosale, Shruti; Bikel, Dan; Blecher, Lukas; Canton-Ferrer, Cristian; Chen, Moya; Cucurull, Guillem; Esiobu, David; Fernandes, Jude; Fu, Jeremy; Fu, Wenyin; Fuller, Brian; Gao, Cynthia; Goswami, Vedanuj; Goyal, Naman; Hartshorn, Anthony; Hosseini, Saghar; Hou, Rui; Inan, Hakan; Kardas, Marcin; Kerkez, Viktor; Khabsa, Madian; Kloumann, Isabel; Korenev, Artem; Koura, Punit; Lachaux, Marie-Anne; Lavril, Thibaut; Lee, Jenya; Liskovich, Diana; Lu, Yinghai; Mao, Yuning; Martinet, Xavier; Mihaylov, Todor; Mishra, Pushkar; Molybog, Igor; Nie, Yixin; Poulton, Andrew; Reizenstein, Jeremy; Rungta, Rashi; Saladi, Kalyan; Schelten, Alan; Silva, Ruan; Smith, Eric Michael; Subramanian, Ranjan; Tan, Xiaoqing Ellen; Tang, Binh; Taylor, Ross; Williams, Adina; Xiang, Jian; Xu, Puxin; Yan, Zheng; Zarov, Iliyan; Zhang, Yuchen; Fan, Angela; Kambadur, Melanie; Narang, Sharan; Rodríguez, Aurélien; Stojnić, Robert; Edunov, Sergey; Scialom, Thomas.
-\textit{Llama 2: Open Foundation and Fine-Tuned Chat Models}.
-DOI: 10.48550/arXiv.2307.09288.
+H. Touvron \textit{et al.}, ``Llama 2: Open foundation and fine-tuned chat models,'' \textit{arXiv preprint} arXiv:2307.09288, Jul. 2023, doi: 10.48550/arXiv.2307.09288.
 
 \bibitem{martin2019camembert}
-Martin, Louis; Muller, Benjamin; Ortiz Suárez, Pedro Javier; Dupont, Yoann; Romary, Laurent; Villemonte de la Clergerie, Éric; Seddah, Djamé; Sagot, Benoît.
-\textit{CamemBERT: a Tasty French Language Model}.
-DOI: 10.48550/arXiv.1911.03894.
+L. Martin \textit{et al.}, ``CamemBERT: A tasty French language model,'' \textit{arXiv preprint} arXiv:1911.03894, Nov. 2019, doi: 10.48550/arXiv.1911.03894.
 
 \bibitem{du2025deepresearch}
-Du, Mingxuan; Xu, Benfeng; Zhu, Chiwei; Wang, Xiaorui; Mao, Zhendong.
-\textit{DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents}.
-DOI: 10.48550/arXiv.2506.11763.
+M. Du, B. Xu, C. Zhu, X. Wang, and Z. Mao, ``DeepResearch Bench: A comprehensive benchmark for deep research agents,'' \textit{arXiv preprint} arXiv:2506.11763, Jun. 2025, doi: 10.48550/arXiv.2506.11763.
 
 \bibitem{dong2024imbalance}
-Dong, Yuhui; Geng, Xin; Zhang, Jiayi; Song, Yue; Li, Xixin.
-\textit{Understanding the Effects of Language-specific Class Imbalance}.
-DOI: 10.48550/arXiv.2402.13016.
+Y. Dong, X. Geng, J. Zhang, Y. Song, and X. Li, ``Understanding the effects of language-specific class imbalance,'' \textit{arXiv preprint} arXiv:2402.13016, Feb. 2024, doi: 10.48550/arXiv.2402.13016.
 
 \bibitem{alsharou2021noise}
-Al Sharou, Khaled; Li, Zheng; Specia, Lucia.
-\textit{Towards a Better Understanding of Noise in Natural Language Processing}.
-Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021).
-DOI: 10.26615/978-954-452-072-4\_007.
+K. Al Sharou, Z. Li, and L. Specia, ``Towards a better understanding of noise in natural language processing,'' in \textit{Proc. Int. Conf. Recent Advances in Natural Language Processing (RANLP 2021)}, Sep. 2021, pp. 52-60, doi: 10.26615/978-954-452-072-4\_007.
 
 \bibitem{lodha2023surgical}
-Lodha, Dhruv; Chen, Chiyu; Socher, Richard; Xiong, Caiming.
-\textit{On Surgical Fine-tuning for Language Encoders}.
-Findings of the Association for Computational Linguistics: EMNLP 2023.
-DOI: 10.18653/v1/2023.findings-emnlp.204.
+D. Lodha, C. Chen, R. Socher, and C. Xiong, ``On surgical fine-tuning for language encoders,'' in \textit{Findings Assoc. Comput. Linguistics: EMNLP 2023}, Dec. 2023, pp. 2772-2792, doi: 10.18653/v1/2023.findings-emnlp.204.
 
 \bibitem{paszke2019pytorch}
-Paszke, Adam; Gross, Sam; Massa, Francisco; Lerer, Adam; Bradbury, James; Chanan, Gregory; Killeen, Trevor; Lin, Zeming; Gimelshein, Natalia; Antiga, Luca; Desmaison, Alban; Köpf, Andreas; Yang, Edward; DeVito, Zachary; Raison, Martin; Tejani, Alykhan; Chilamkurthy, Sasank; Steiner, Benoit; Fang, Lu; Bai, Junjie; Chintala, Soumith.
-\textit{PyTorch: An Imperative Style, High-Performance Deep Learning Library}.
-NeurIPS 2019.
-DOI: 10.48550/arXiv.1912.01703.
+A. Paszke \textit{et al.}, ``PyTorch: An imperative style, high-performance deep learning library,'' in \textit{Proc. Adv. Neural Inform. Process. Syst. (NeurIPS 2019)}, Dec. 2019, doi: 10.48550/arXiv.1912.01703.
 
 \bibitem{loshchilov2019adamw}
-Loshchilov, Ilya; Hutter, Frank.
-\textit{Decoupled Weight Decay Regularization}.
-ICLR 2019.
-DOI: 10.48550/arXiv.1711.05101.
+I. Loshchilov and F. Hutter, ``Decoupled weight decay regularization,'' in \textit{Proc. Int. Conf. Learn. Represent. (ICLR 2019)}, May 2019, doi: 10.48550/arXiv.1711.05101.
 
 \bibitem{kingma2014adam}
-Kingma, Diederik P.; Ba, Jimmy.
-\textit{Adam: A Method for Stochastic Optimization}.
-ICLR 2015.
-DOI: 10.48550/arXiv.1412.6980.
+D. P. Kingma and J. Ba, ``Adam: A method for stochastic optimization,'' in \textit{Proc. Int. Conf. Learn. Represent. (ICLR 2015)}, May 2015, doi: 10.48550/arXiv.1412.6980.
 
 \bibitem{pearson1901pca}
-Pearson, Karl.
-\textit{On Lines and Planes of Closest Fit to Systems of Points in Space}.
-Philosophical Magazine, 1901.
-DOI: 10.1080/14786440109462720.
+K. Pearson, ``On lines and planes of closest fit to systems of points in space,'' \textit{Philosophical Magazine}, 1901, doi: 10.1080/14786440109462720.
 
 \bibitem{maaten2008tsne}
-van der Maaten, Laurens; Hinton, Geoffrey.
-\textit{Visualizing Data using t-SNE}.
-Journal of Machine Learning Research, 2008.
-DOI: 10.48550/arXiv.1308.0719.
+L. van der Maaten and G. Hinton, ``Visualizing data using t-SNE,'' \textit{Journal of Machine Learning Research}, vol. 9, no. 86, pp. 2579-2605, Nov. 2008, [Online]. Available: http://isplab.tudelft.nl/sites/default/files/vandermaaten08a.pdf
 
 \bibitem{mcinnes2018umap}
-McInnes, Leland; Healy, John; Melville, James.
-\textit{UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction}.
-arXiv preprint, 2018.
-DOI: 10.48550/arXiv.1802.03426.
+L. McInnes, J. Healy, and J. Melville, ``UMAP: Uniform manifold approximation and projection for dimension reduction,'' \textit{arXiv preprint} arXiv:1802.03426, Feb. 2018, doi: 10.48550/arXiv.1802.03426.
 
 \bibitem{wagner1974string}
-Wagner, Robert A.; Fischer, Michael J.\\
-\textit{The String-to-String Correction Problem}.\\
-Journal of the ACM, vol. 21, no. 1, 1974, pp. 168--173.
+R. A. Wagner and M. J. Fischer, ``The string-to-string correction problem,'' \textit{Journal of the ACM}, vol. 21, no. 1, pp. 168-173, Jan. 1974, doi: 10.1145/321796.321811.
 
 \bibitem{navarro2001approximate}
-Navarro, Gonzalo.\\
-\textit{A Guided Tour to Approximate String Matching}.\\
-ACM Computing Surveys, vol. 33, no. 1, 2001, pp. 31--88.
+G. Navarro, ``A guided tour to approximate string matching,'' \textit{ACM Computing Surveys}, vol. 33, no. 1, pp. 31-88, Mar. 2001, doi: 10.1145/375360.375365.
 
 \bibitem{damerau1964}
-Damerau, Frederick J.\\
-\textit{A Technique for Computer Detection and Correction of Spelling Errors}.\\
-Communications of the ACM, vol. 7, no. 3, 1964, pp. 171--176.
+F. J. Damerau, ``A technique for computer detection and correction of spelling errors,'' \textit{Communications of the ACM}, vol. 7, no. 3, pp. 171-176, Mar. 1964, doi: 10.1145/363958.363994.
 
 \bibitem{zobel1996phonetic}
-Zobel, Justin; Dart, Philip.\\
-\textit{Phonetic String Matching: Lessons from Information Retrieval}.\\
-Proceedings of the 19th Australasian Computer Science Conference (ACSC 1996), pp. 331--340.
+J. Zobel and P. Dart, ``Phonetic string matching,'' \textit{Proceedings of the 25th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval - SIGIR '02}, Jan. 1996, doi: 10.1145/243199.243258.
 
 \end{thebibliography}
+
 %TC:endignore
 
 
