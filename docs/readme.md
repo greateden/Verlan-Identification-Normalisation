@@ -4,7 +4,7 @@
 
 <!-- DUE:START -->
 ```text
-✅ Deadline passed: -366 days, 17 hours, 13 minutes
+✅ Deadline passed: -367 days, 01 hours, 46 minutes
 Deadline (NZT): 2025-10-18 00:00 NZDT
 Deadline (UTC): 2025-10-17 11:00 UTC
 ```
